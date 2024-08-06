@@ -16,29 +16,36 @@ class _AccountPageState extends State<AccountPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: Padding(
+          padding: const EdgeInsets.all(22.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(radius: 30,),
+              CircleAvatar(
+                radius: 30,
+              ),
+              SizedBox(
+                width: 20,
+              ),
               Container(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text('Girati Sukapat'),
-                      ],
-                    ),
-                    Text('giratisuktipat@gmail.com')
-                  ]
-                ),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('Girati Sukapat'),
+                        ],
+                      ),
+                      Text('giratisuktipat@gmail.com')
+                    ]),
               ),
             ],
           ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -47,9 +54,22 @@ class _AccountPageState extends State<AccountPage> {
               height: size.height * 0.02,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.01),
+              padding: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
               child: Row(
-                children: [Text('รายการสั่งซื้อสินค้า', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),)],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'รายการสั่งซื้อสินค้า',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.favorite_border_outlined), // เปลี่ยนเป็นไอคอนที่คุณต้องการ
+                    onPressed: () {
+                      // กำหนดการกระทำเมื่อไอคอนถูกกด
+                    },
+                  ),
+                ],
               ),
             ),
             Wrap(
@@ -68,9 +88,15 @@ class _AccountPageState extends State<AccountPage> {
               height: size.height * 0.01,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.01),
+              padding: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
               child: Row(
-                children: [Text('รายการนำเข้า', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),)],
+                children: [
+                  Text(
+                    'รายการนำเข้า',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  )
+                ],
               ),
             ),
             Wrap(
@@ -85,6 +111,45 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      Text('สมัครเป็นตัวแทน'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      Text('ติดต่อเรา'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      Text('ช่วยเหลือ'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      Text('แจ้งปัญหา'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(value: false, onChanged: (bool? value) {}),
+                      Text('ตั้งค่า'),
+                    ],
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
