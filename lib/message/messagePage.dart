@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/widgets/AboutQuestionWidget.dart';
 import 'package:cargoshipping/widgets/PictureSliderWidget.dart';

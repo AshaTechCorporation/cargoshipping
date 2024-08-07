@@ -1,6 +1,5 @@
 import 'package:cargoshipping/home/firstPage.dart';
-import 'package:cargoshipping/home/homePage.dart';
-import 'package:cargoshipping/regisPage.dart';
+import 'package:cargoshipping/register/regisPage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,11 +13,6 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    print('object');
-  }
   @override
   Widget build(BuildContext context) {
    return Scaffold(

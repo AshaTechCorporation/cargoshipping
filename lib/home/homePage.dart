@@ -1,7 +1,9 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/widgets/PictureSliderWidget.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +14,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<String> items = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+  ];
+
+  String? selectedValue;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -27,8 +38,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   height: size.height * 0.05,
-                  width: size.width * 0.75,
-                  margin: const EdgeInsets.all(15.0),
+                  width: size.width * 0.85,
+                  margin: const EdgeInsets.all(3.0),
                   padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
                       border: Border.all(
@@ -40,36 +51,90 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           width: size.width * 0.35,
                           child: TextFormField(
-                           decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Search'
-                           ),
+                            decoration: InputDecoration(
+                                border: InputBorder.none, hintText: 'Search'),
                           ),
                         ),
                         Icon(Icons.camera_alt_outlined),
                         VerticalDivider(
-                          color: Colors.black,
-                          thickness: 2,
+                          color: Colors.grey,
+                          thickness: 1,
                         ),
                         Container(
                           height: size.height * 0.05,
-                          width: size.width * 0.16,
+                          width: size.width * 0.23,
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton2<String>(
+                              isExpanded: true,
+                              hint: Align(
+                                alignment: Alignment
+                                    .centerLeft,
+                                child: Text(
+                                  'Taobao',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              items: items
+                                  .map(
+                                      (String item) => DropdownMenuItem<String>(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ))
+                                  .toList(),
+                              value: selectedValue,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  selectedValue = value;
+                                });
+                              },
+                              buttonStyleData: const ButtonStyleData(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                height: 40,
+                                width: 140,
+                              ),
+                              menuItemStyleData: const MenuItemStyleData(
+                                height: 40,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: size.width * 0.01,
+                        ),
+                        Container(
+                          height: size.height * 0.05,
+                          width: size.width * 0.14,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(15),
                               color: Colors.red),
-                          child: Center(child: Text('ค้นหา',style: TextStyle(color: Colors.white),)),
+                          child: Center(
+                              child: Text(
+                            'ค้นหา',
+                            style: TextStyle(color: Colors.white),
+                          )),
                         )
                       ],
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
+                GestureDetector(
+                  onTap: () {
+                    // ดำเนินการตามที่คุณต้องการเมื่อไอคอนถูกแตะ
+                    print("Icon tapped");
+                  },
+                  child: Icon(
                     Icons.favorite_border_outlined,
-                    size: 37,
-                  ),
-                ),
+                  ), // ไอคอนที่จะแสดง
+                )
               ],
             ),
             SizedBox(height: size.height * 0.01),
@@ -87,11 +152,10 @@ class _HomePageState extends State<HomePage> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ),
-                  
                 ],
               ),
             ),
-            
+
             Wrap(
               spacing: 15,
               runSpacing: 10,
@@ -128,6 +192,61 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: RichText(
+                        text: TextSpan(
+                            text: 'สินค้าแนะนำ',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                            children: <TextSpan>[
+                          TextSpan(
+                            text: ' จาก Taobao',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          )
+                        ])),
+                  ),
+                ],
+              ),
+            ),
+
+            ListView(
+              shrinkWrap: true,
+              // physics: ClampingScrollPhysics(),
+              children: [
+                GridView.count(
+                  crossAxisCount: 2, // จำนวนคอลัมน์ที่คุณต้องการในแต่ละแถว
+                  crossAxisSpacing: 10, // ระยะห่างระหว่างคอลัมน์
+                  mainAxisSpacing: 15, // ระยะห่างระหว่างแถว
+                  shrinkWrap: true,
+                  children: List.generate(
+                      reccomproduct.length,
+                      (index) => ouritem(
+                            size: size,
+                            price: 20,
+                            title: reccomproduct[index],
+                            press: () {},
+                          )
+                      //  ourrecomwidget(
+                      //   size: size,
+                      //   price: 20,
+                      //   title: reccomproduct[index],
+                      //   press: () {},
+                      // ),
+                      ),
+                ),
+              ],
+            ),
+            SizedBox(height: 80),
           ],
         ),
       ),

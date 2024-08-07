@@ -1,4 +1,4 @@
-import 'package:cargoshipping/loginPage.dart';
+import 'package:cargoshipping/login/loginPage.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,7 @@ class _registerpageState extends State<registerpage> {
 
   String? selectedValue;
 
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +70,49 @@ class _registerpageState extends State<registerpage> {
               SizedBox(
                 height: 10,
               ),
+              TextField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  hintText: 'ชื่อ',
+                  labelStyle: const TextStyle(), //textfield modifly
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _lastnameController,
+                decoration: InputDecoration(
+                  hintText: 'นามสกุล',
+                  labelStyle: const TextStyle(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
+                  ), //textfield modifly
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _companyController,
+                decoration: InputDecoration(
+                  hintText: 'ชื่อบริษัท หรือรหัสตัวแทน',
+                  labelStyle: const TextStyle(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
+                  ), //textfield modifly
+                ),
+              ),
+              TextField(
+                controller: _telController,
+                decoration: InputDecoration(
+                  hintText: 'เบอร์โทรติดต่อ',
+                  labelStyle: const TextStyle(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
+                  ), //textfield modifly
+                ),
+              ),
+              
               DropdownButtonFormField2<String>(
               isExpanded: true,
               decoration: InputDecoration(
@@ -82,7 +125,7 @@ class _registerpageState extends State<registerpage> {
                 // Add more decoration..
               ),
               hint: const Text(
-                'Select Your Gender',
+                'กรุงเทพมหานคร',
                 style: TextStyle(fontSize: 14),
               ),
               items: genderItems
@@ -127,48 +170,6 @@ class _registerpageState extends State<registerpage> {
                 padding: EdgeInsets.symmetric(horizontal: 16),
               ),
                   ),
-              TextField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  hintText: 'ชื่อ',
-                  labelStyle: const TextStyle(), //textfield modifly
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _lastnameController,
-                decoration: InputDecoration(
-                  hintText: 'นามสกุล',
-                  labelStyle: const TextStyle(),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
-                  ), //textfield modifly
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: _companyController,
-                decoration: InputDecoration(
-                  hintText: 'ชื่อบริษัท หรือรหัสตัวแทน',
-                  labelStyle: const TextStyle(),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
-                  ), //textfield modifly
-                ),
-              ),
-              TextField(
-                controller: _telController,
-                decoration: InputDecoration(
-                  hintText: 'เบอร์โทรติดต่อ',
-                  labelStyle: const TextStyle(),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0), // มุมโค้งของขอบ
-                  ), //textfield modifly
-                ),
-              ),
               const SizedBox(height: 20),
               TextField(
                 controller: _emailController,

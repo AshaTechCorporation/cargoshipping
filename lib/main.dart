@@ -1,4 +1,4 @@
-import 'package:cargoshipping/loginPage.dart';
+import 'package:cargoshipping/login/loginPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
