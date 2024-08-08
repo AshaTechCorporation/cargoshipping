@@ -224,9 +224,9 @@ class _HomePageState extends State<HomePage> {
               // physics: ClampingScrollPhysics(),
               children: [
                 GridView.count(
-                  crossAxisCount: 2, // จำนวนคอลัมน์ที่คุณต้องการในแต่ละแถว
-                  crossAxisSpacing: 10, // ระยะห่างระหว่างคอลัมน์
-                  mainAxisSpacing: 15, // ระยะห่างระหว่างแถว
+                  crossAxisCount: 2, 
+                  crossAxisSpacing: 10, 
+                  mainAxisSpacing: 15, 
                   shrinkWrap: true,
                   children: List.generate(
                       reccomproduct.length,
@@ -236,12 +236,6 @@ class _HomePageState extends State<HomePage> {
                             title: reccomproduct[index],
                             press: () {},
                           )
-                      //  ourrecomwidget(
-                      //   size: size,
-                      //   price: 20,
-                      //   title: reccomproduct[index],
-                      //   press: () {},
-                      // ),
                       ),
                 ),
               ],

@@ -64,8 +64,10 @@ class _AccountPageState extends State<AccountPage> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   IconButton(
-                    icon: Icon(Icons
-                        .favorite_border_outlined), // เปลี่ยนเป็นไอคอนที่คุณต้องการ
+                    icon: Icon(
+                      Icons.favorite_border_outlined,
+                      color: Colors.red,
+                    ), // เปลี่ยนเป็นไอคอนที่คุณต้องการ
                     onPressed: () {
                       // กำหนดการกระทำเมื่อไอคอนถูกกด
                     },
@@ -112,7 +114,9 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             Container(
               decoration: BoxDecoration(color: Colors.grey[300]),
               height: 45,
@@ -120,6 +124,7 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   CircleAvatar(
                     radius: 16,
+                    backgroundColor: Colors.grey,
                   ),
                   SizedBox(
                     width: 20,
@@ -140,6 +145,7 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   CircleAvatar(
                     radius: 16,
+                    backgroundColor: Colors.grey,
                   ),
                   SizedBox(
                     width: 20,
@@ -158,6 +164,7 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   CircleAvatar(
                     radius: 16,
+                    backgroundColor: Colors.grey,
                   ),
                   SizedBox(
                     width: 20,
@@ -178,6 +185,7 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   CircleAvatar(
                     radius: 16,
+                    backgroundColor: Colors.grey,
                   ),
                   SizedBox(
                     width: 20,
@@ -196,6 +204,7 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   CircleAvatar(
                     radius: 16,
+                    backgroundColor: Colors.grey,
                   ),
                   SizedBox(
                     width: 20,

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:flutter/material.dart';
 
 class ouritem extends StatelessWidget {
@@ -19,7 +20,17 @@ class ouritem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          //
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => itempage(
+                size: size,
+                title: title,
+                price: price,
+                press: press,
+              ),
+            ),
+          );
         },
         child: Container(
           width: double.infinity,
@@ -54,7 +65,12 @@ class ouritem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Center(child: Text('$title',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
+                        Center(
+                            child: Text(
+                          '$title',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -65,7 +81,11 @@ class ouritem extends StatelessWidget {
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text('ขายแล้ว40,000ชิ้น',style: TextStyle(fontWeight: FontWeight.w200,fontSize: 12),)
+                            Text(
+                              'ขายแล้ว40,000ชิ้น',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w200, fontSize: 12),
+                            )
                           ],
                         )
                       ],
