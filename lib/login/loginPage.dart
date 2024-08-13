@@ -10,20 +10,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextField(
-              controller: _usernameController,
+              controller: _emailController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.person_2_outlined),
                 labelText: 'Email',
@@ -34,9 +34,11 @@ class _LoginPageState extends State<LoginPage> {
             TextField(
               controller: _passwordController,
               decoration: InputDecoration(
+                labelText: 'Password', // Hint text
                 prefixIcon: Icon(Icons.lock_outline),
                 suffixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min, // Added to avoid overflow
                   children: [
                     IconButton(
                       onPressed: () {
@@ -45,17 +47,19 @@ class _LoginPageState extends State<LoginPage> {
                       icon: Icon(Icons.remove_red_eye_outlined),
                     ),
                     TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'ลืมรหัสผ่าน?',
-                          style: TextStyle(
-                              color: Colors.blue[500],
-                              fontWeight: FontWeight.bold),
-                        ))
+                      onPressed: () {
+                        // Your onPressed code here
+                      },
+                      child: Text(
+                        'ลืมรหัสผ่าน?',
+                        style: TextStyle(
+                          color: Colors.blue[500],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-                labelText: 'Password',
-                labelStyle: TextStyle(fontWeight: FontWeight.bold),
               ),
               obscureText: true,
             ),
@@ -101,9 +105,16 @@ class _LoginPageState extends State<LoginPage> {
                     fontSize: 20, color: Color.fromARGB(255, 255, 255, 255)),
               ),
             ),
-            SizedBox(height: 20,),
-            Text('หรือ',style: TextStyle(fontSize: 15),),
-            SizedBox(height: 35,),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'หรือ',
+              style: TextStyle(fontSize: 15),
+            ),
+            SizedBox(
+              height: 35,
+            ),
             ElevatedButton(
               onPressed: () {
                 // Navigator.push(
@@ -122,11 +133,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: const Text(
                 'ดำเนินต่อด้วยบัญชี Google',
-                style: TextStyle(
-                    fontSize: 15, color: Colors.black),
+                style: TextStyle(fontSize: 15, color: Colors.black),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             ElevatedButton(
               onPressed: () {
                 // Navigator.push(
@@ -145,11 +157,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: const Text(
                 'ดำเนินต่อด้วยบัญชี Facebook',
-                style: TextStyle(
-                    fontSize: 15, color: Colors.black),
+                style: TextStyle(fontSize: 15, color: Colors.black),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             ElevatedButton(
               onPressed: () {
                 // Navigator.push(
@@ -168,11 +181,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: const Text(
                 'ดำเนินต่อด้วยบัญชี Line',
-                style: TextStyle(
-                    fontSize: 15, color: Colors.black),
+                style: TextStyle(fontSize: 15, color: Colors.black),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             ElevatedButton(
               onPressed: () {
                 // Navigator.push(
@@ -191,14 +205,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: const Text(
                 'ดำเนินต่อด้วยบัญชี Apple',
-                style: TextStyle(
-                    fontSize: 15, color: Colors.black),
+                style: TextStyle(fontSize: 15, color: Colors.black),
               ),
             ),
           ],
         ),
       ),
     );
- 
   }
 }

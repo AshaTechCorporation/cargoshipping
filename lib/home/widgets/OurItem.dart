@@ -43,6 +43,7 @@ class ouritem extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width,
+                // width: 150,
                 height: 107,
                 child: Image.asset(
                   'assets/images/bear.jpg',
@@ -53,6 +54,7 @@ class ouritem extends StatelessWidget {
               ClipRRect(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
+                  // width: 150,
                   height: 75,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 243, 235, 235),

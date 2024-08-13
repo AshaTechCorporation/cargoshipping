@@ -9,6 +9,27 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  bool _isSelected = false;
+   final List<bool> _storeItemsSelection = [false, false];
+   final List<String> _storeNames = ['MakeMixue.store','MakeMixue.store2'];
+
+   void _selectAll(bool? value) {
+    setState(() {
+      _isSelected = value ?? false;
+      _storeItemsSelection.fillRange(0, _storeItemsSelection.length,_isSelected);
+    });
+  }
+
+  void _updateStoreSelection(int index, bool? value) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _storeItemsSelection[index] = value ?? false;
+        _isSelected = _storeItemsSelection.every((selected) => selected);
+      });
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -30,11 +51,15 @@ class _CartPageState extends State<CartPage> {
           )
         ],
       ),
-      body: ListView(
-        children: [
-          StoreItem(storeName: 'MakeMixue.store'),
-          StoreItem(storeName: 'MakeMixue.store2'),
-        ],
+     body: ListView.builder(
+        itemCount: _storeItemsSelection.length,
+        itemBuilder: (context, index) {
+          return StoreItem(
+            storeName: _storeNames[index],
+            isSelected: _storeItemsSelection[index],
+            onSelectionChanged: (isSelected) => _updateStoreSelection(index, isSelected),
+          );
+        },
       ),
       bottomNavigationBar: SizedBox(
         height: 50,
@@ -44,7 +69,15 @@ class _CartPageState extends State<CartPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('ทั้งหมด'),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _isSelected,
+                      onChanged: _selectAll,
+                    ),
+                    Text('ทั้งหมด'),
+                  ],
+                ),
                 ElevatedButton(
                   onPressed: () {},
                   child: Text('สั่งซื้อสินค้า'),
@@ -57,90 +90,3 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-
-// class StoreItem extends StatelessWidget {
-//   final String storeName;
-
-//   StoreItem({required this.storeName});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.all(8.0),
-//           child: Text(
-//             storeName,
-//             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//           ),
-//         ),
-//         for (int i = 0; i < 3; i++) ProductItem(),
-//       ],
-//     );
-//   }
-// }
-
-// class ProductItem extends StatefulWidget {
-//   @override
-//   _ProductItemState createState() => _ProductItemState();
-// }
-
-// class _ProductItemState extends State<ProductItem> {
-//   bool _isSelected = false;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: EdgeInsets.all(8.0),
-//       decoration: BoxDecoration(
-//         border: Border(
-//           bottom: BorderSide(color: Colors.grey[300]!),
-//         ),
-//       ),
-//       child: Row(
-//         children: [
-//           Checkbox(
-//             value: _isSelected,
-//             onChanged: (bool? value) {
-//               setState(() {
-//                 _isSelected = value ?? false;
-//               });
-//             },
-//           ),
-//           Placeholder(
-//               fallbackHeight: 60, fallbackWidth: 60), // Placeholder for image
-//           SizedBox(width: 10),
-//           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text('ตุ๊กตาหมี สีน้ำตาล ผูกโบว์'),
-//                 Text('ตัวเดียว'),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Text('Y 20'),
-//                     Row(
-//                       children: [
-//                         IconButton(
-//                           icon: Icon(Icons.remove),
-//                           onPressed: () {},
-//                         ),
-//                         Text('1'),
-//                         IconButton(
-//                           icon: Icon(Icons.add),
-//                           onPressed: () {},
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

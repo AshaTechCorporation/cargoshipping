@@ -56,13 +56,21 @@ class _registerpageState extends State<registerpage> {
                   Row(
                     children: [
                       Checkbox(value: false, onChanged: (bool? value) {}),
-                      Text('นิติบุคคล/ตัวแทน'),
+                      Text(
+                        'นิติบุคคล/ตัวแทน',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
                     ],
                   ),
                   Row(
                     children: [
                       Checkbox(value: false, onChanged: (bool? value) {}),
-                      Text('บุคคลทั่วไป'),
+                      Text(
+                        'บุคคลทั่วไป',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
                     ],
                   ),
                 ],
@@ -80,7 +88,9 @@ class _registerpageState extends State<registerpage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(
+                height: 5,
+              ),
               TextField(
                 controller: _lastnameController,
                 decoration: InputDecoration(
@@ -102,6 +112,9 @@ class _registerpageState extends State<registerpage> {
                   ), //textfield modifly
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
               TextField(
                 controller: _telController,
                 decoration: InputDecoration(
@@ -112,64 +125,66 @@ class _registerpageState extends State<registerpage> {
                   ), //textfield modifly
                 ),
               ),
-              
+              SizedBox(
+                height: 5,
+              ),
               DropdownButtonFormField2<String>(
-              isExpanded: true,
-              decoration: InputDecoration(
-                // Add Horizontal padding using menuItemStyleData.padding so it matches
-                // the menu padding when button's width is not specified.
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                // Add more decoration..
-              ),
-              hint: const Text(
-                'กรุงเทพมหานคร',
-                style: TextStyle(fontSize: 14),
-              ),
-              items: genderItems
-                  .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ))
-                  .toList(),
-                  validator: (value) {
-                if (value == null) {
-                  return 'Please select gender.';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                //Do something when selected item is changed.
-              },
-              onSaved: (value) {
-                selectedValue = value.toString();
-              },
-              buttonStyleData: const ButtonStyleData(
-                padding: EdgeInsets.only(right: 8),
-              ),
-              iconStyleData: const IconStyleData(
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.black45,
-                ),
-                iconSize: 24,
-              ),
-              dropdownStyleData: DropdownStyleData(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              menuItemStyleData: const MenuItemStyleData(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-              ),
+                isExpanded: true,
+                decoration: InputDecoration(
+                  // Add Horizontal padding using menuItemStyleData.padding so it matches
+                  // the menu padding when button's width is not specified.
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
                   ),
+                  // Add more decoration..
+                ),
+                hint: const Text(
+                  'กรุงเทพมหานคร',
+                  style: TextStyle(fontSize: 14),
+                ),
+                items: genderItems
+                    .map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
+                    .toList(),
+                validator: (value) {
+                  if (value == null) {
+                    return 'Please select gender.';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  //Do something when selected item is changed.
+                },
+                onSaved: (value) {
+                  selectedValue = value.toString();
+                },
+                buttonStyleData: const ButtonStyleData(
+                  padding: EdgeInsets.only(right: 8),
+                ),
+                iconStyleData: const IconStyleData(
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: 24,
+                ),
+                dropdownStyleData: DropdownStyleData(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                menuItemStyleData: const MenuItemStyleData(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                ),
+              ),
               const SizedBox(height: 20),
               TextField(
                 controller: _emailController,
@@ -180,7 +195,9 @@ class _registerpageState extends State<registerpage> {
                       borderRadius: BorderRadius.circular(15)),
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(
+                height: 5,
+              ),
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -194,7 +211,7 @@ class _registerpageState extends State<registerpage> {
                 obscureText: true,
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               TextField(
                 controller: _confirmPasswordController,

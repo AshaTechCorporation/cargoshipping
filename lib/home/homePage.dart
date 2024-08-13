@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   height: size.height * 0.05,
-                  width: size.width * 0.85,
+                  width: size.width * 0.9,
                   margin: const EdgeInsets.all(3.0),
                   padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
@@ -52,7 +52,11 @@ class _HomePageState extends State<HomePage> {
                           width: size.width * 0.35,
                           child: TextFormField(
                             decoration: InputDecoration(
-                                border: InputBorder.none, hintText: 'Search'),
+                              border: InputBorder.none,
+                              hintText: 'Search',
+                              contentPadding:
+                                  EdgeInsets.only(left: 15, bottom: 10),
+                            ),
                           ),
                         ),
                         Icon(Icons.camera_alt_outlined),
@@ -67,8 +71,7 @@ class _HomePageState extends State<HomePage> {
                             child: DropdownButton2<String>(
                               isExpanded: true,
                               hint: Align(
-                                alignment: Alignment
-                                    .centerLeft,
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Taobao',
                                   style: TextStyle(
@@ -112,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Container(
                           height: size.height * 0.05,
-                          width: size.width * 0.14,
+                          width: size.width * 0.193,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               color: Colors.red),
@@ -128,12 +131,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // ดำเนินการตามที่คุณต้องการเมื่อไอคอนถูกแตะ
-                    print("Icon tapped");
+                    //logic here
                   },
                   child: Icon(
                     Icons.favorite_border_outlined,
-                  ), // ไอคอนที่จะแสดง
+                  ),
                 )
               ],
             ),
@@ -142,7 +144,7 @@ class _HomePageState extends State<HomePage> {
             PictureSliderWidget(size: size),
             Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
+                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
                   Expanded(
@@ -170,7 +172,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
+                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
                   Text(
@@ -194,7 +196,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
+                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
                   Expanded(
@@ -218,29 +220,51 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
             ListView(
               shrinkWrap: true,
-              // physics: ClampingScrollPhysics(),
               children: [
-                GridView.count(
-                  crossAxisCount: 2, 
-                  crossAxisSpacing: 10, 
-                  mainAxisSpacing: 15, 
-                  shrinkWrap: true,
-                  children: List.generate(
+                Container(
+                  width: size.width * 1,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 1,
+                    mainAxisSpacing: 1,
+                    shrinkWrap: true,
+                    // physics: NeverScrollableScrollPhysics(),
+                    children: List.generate(
                       reccomproduct.length,
                       (index) => ouritem(
-                            size: size,
-                            price: 20,
-                            title: reccomproduct[index],
-                            press: () {},
-                          )
+                        size: size,
+                        price: 20,
+                        title: reccomproduct[index],
+                        press: () {},
                       ),
-                ),
+                    ),
+                  ),
+                )
               ],
-            ),
-            SizedBox(height: 80),
+            )
+            // ListView(
+            //   shrinkWrap: true,
+            //   // physics: ClampingScrollPhysics(),
+            //   children: [
+            //     GridView.count(
+            //       crossAxisCount: 2,
+            //       crossAxisSpacing: 1,
+            //       mainAxisSpacing: 1,
+            //       shrinkWrap: true,
+            //       children: List.generate(
+            //           reccomproduct.length,
+            //           (index) => ouritem(
+            //                 size: size,
+            //                 price: 20,
+            //                 title: reccomproduct[index],
+            //                 press: () {},
+            //               )),
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(height: 80),
           ],
         ),
       ),
