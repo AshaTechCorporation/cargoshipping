@@ -8,12 +8,14 @@ class itempage extends StatefulWidget {
       required this.size,
       required this.title,
       required this.price,
-      required this.press});
+      required this.press,
+      required this.products});
 
   final Size size;
   final String title;
-  final int price;
+  final double price;
   final VoidCallback press;
+  final Map<String, dynamic> products;
 
   @override
   State<itempage> createState() => _itempageState();
@@ -103,49 +105,33 @@ class _itempageState extends State<itempage> {
               ],
             ),
             SizedBox(height: 5),
-            Container(
-              height: 35,
-              child: Row(
-                children: [
-                  SizedBox(width: 10),
-                  Text(
-                    '${widget.price}',
-                    style: TextStyle(
-                        fontSize: 33,
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(width: 15),
-                  Text('(99.12 บาท)'),
-                  Spacer(),
-                  Text(
-                    'ขายแล้ว 40,000 ชิ้น',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(width: 8),
-                  Icon(
-                    Icons.favorite_border_outlined,
-                    color: Colors.red,
-                  )
-                ],
-              ),
+            Row(
+              children: [
+                Text(
+                  '${widget.products['price']} บาท',
+                  style: TextStyle(
+                      fontSize: 33,
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 15),
+                //Text('(${widget.products['price']} บาท)'),
+                Spacer(),
+                Text(
+                  'ขายแล้ว ${widget.products['sale']} ชิ้น',
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(width: 8),
+                Icon(
+                  Icons.favorite_border_outlined,
+                  color: Colors.red,
+                )
+              ],
             ),
             SizedBox(height: 1),
-            Container(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: widget.size.height * 0.005,
-                    horizontal: widget.size.width * 0.028),
-                child: Row(
-                  children: [
-                    Text(
-                      '${widget.title}',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 25),
-                    )
-                  ],
-                ),
-              ),
+            Text(
+              '${widget.products['detail']}',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),
             ),
             SizedBox(height: 1),
             Container(
@@ -323,5 +309,3 @@ class _itempageState extends State<itempage> {
     );
   }
 }
-
-

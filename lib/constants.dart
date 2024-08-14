@@ -17,7 +17,7 @@ const List<String> titleData = [
 
 const List<String> aboutQuestion = [
   'คำถามที่พบบ่อย',
-  'เกี่ยวกับเรา',
+  'เกี่ยวกับ TEG Cargo',
 ];
 const List<String> productOrderList = [
   'ที่ต้องชำระ',
@@ -34,8 +34,83 @@ const List<String> listImport = [
 ];
 
 const List<String> reccomproduct = [
-  'ตุ๊กตาหมีสีน้ำตาล',
-  'ตุ๊กตาหมีสีฟ้า',
+  'ชั้นวางพลาสติกในครัว, \nชั้นวางของในห้องน้ําแบบไม่มีรู...',
+  'กล่องเก็บผ้าฝ้ายและผ้าลินิน \nTianshan, ตะกร้าเก็บเสื้อผ้าในค',
   'ตุ๊กตาหมีสีเหลือง',
   'ตุ๊กตาหมีสีขาว'
+];
+List<String> Imgservice = [
+  'assets/icons/exportboktale.png',
+  'assets/icons/fcl.png',
+  'assets/icons/lcl.png',
+  'assets/icons/dellitohome.png',
+  'assets/icons/withlisecse.png',
+  'assets/icons/translater.png',
+  'assets/icons/calculator.png',
+  'assets/icons/priceimport.png',
+  'assets/icons/etc.png',
+];
+
+List<String> catagoryrecom = [
+  'เสื้อผ้า',
+  'เครื่องประดับ',
+  'อุปกรณ์กีฬา',
+  'สินค้าเด็ก',
+  'เครื่องใช้ในบ้าน', // เพิ่มคอมมาหลังจากรายการนี้
+  'อุปกรณ์สวนและสำนักงาน', // เพิ่มคอมมาหลังจากรายการนี้
+  'อาหาร',
+  'เครื่องสำอาง'
+];
+
+const List<String> catagoryimg = [
+  'assets/icons/cloth.png',
+  'assets/icons/accessory.png',
+  'assets/icons/sport.png',
+  'assets/icons/kids.png',
+  'assets/icons/hometools.png',
+  'assets/icons/garden.png',
+  'assets/icons/food.png',
+  'assets/icons/makeup.png',
+];
+
+
+const List<String> oderlist = [
+  'assets/icons/overdue.png',
+  'assets/icons/packing.png',
+  'assets/icons/deliverytime.png',
+  'assets/icons/orderhistory.png',
+];
+
+const List<String> importlist = [
+  'assets/icons/carimport.png',
+  'assets/icons/boatimport.png',
+  'assets/icons/pricerate.png',
+  'assets/icons/calprice.png',
+];
+
+const List<Map<String, dynamic>> listProducts = [
+  {
+    'id': 1,
+    'image': 'assets/icons/carimport.png',
+    'price': 55.60,
+    'detail': 'เสื้อเบลเซอร์สีกาแฟผู้หญิง 2023 ฤดูใบไม้ผลิและฤดูใบไม้ร่วงชายตัวน้อยทอดถนนแฟชั่นใหม่',
+    'send': '48 ชั่วโมง',
+    'sale': '2000+ ใน 30 วัน'
+  },
+  {
+    'id': 2,
+    'image': 'assets/icons/boatimport.png',
+    'price': 100.60,
+    'detail': 'เสื้อเบลเซอร์สีกาแฟผู้หญิง 2023 ฤดูใบไม้ผลิและฤดูใบไม้ร่วงชายตัวน้อยทอดถนนแฟชั่นใหม่',
+    'send': '48 ชั่วโมง',
+    'sale': '2000+ ใน 30 วัน'
+  } ,
+  {
+    'id': 3,
+    'image': 'assets/icons/boatimport.png',
+    'price': 200.60,
+    'detail': 'เสื้อเบลเซอร์สีกาแฟผู้หญิง 2023 ฤดูใบไม้ผลิและฤดูใบไม้ร่วงชายตัวน้อยทอดถนนแฟชั่นใหม่',
+    'send': '48 ชั่วโมง',
+    'sale': '2000+ ใน 30 วัน'
+  }    
 ];

@@ -43,39 +43,44 @@ class _FirstPageState extends State<FirstPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.grey,
+        unselectedItemColor: Colors.black,
         showSelectedLabels: true,
         currentIndex: selectedIndex,
         onTap: onItemSelect,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_work,
-                size: 30,
+              icon: Image.asset(
+                'assets/icons/Frame 61.png',
+                width: 24, // Adjust the width as needed
+                height: 27, // Adjust the height as needed
               ),
               label: 'หน้าหลัก'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.sms,
-                size: 30,
+              icon: Image.asset(
+                'assets/icons/group.png',
+                width: 29, // Adjust the width as needed
+                height: 30, // Adjust the height as needed
               ),
-              label: 'ข้อความ'),
+              label: 'หมวดสินค้า'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.local_shipping,
-                size: 30,
+              icon: Image.asset(
+                'assets/icons/truck.png',
+                width: 31, // Adjust the width as needed
+                height: 48, // Adjust the height as needed
               ),
               label: 'ติดตามสถานะ'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.shopping_cart,
-                size: 30,
+              icon: Image.asset(
+                'assets/icons/shipping.png',
+                width: 30, // Adjust the width as needed
+                height: 30, // Adjust the height as needed
               ),
               label: 'รถเข็น'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                size: 30,
+              icon: Image.asset(
+                'assets/icons/user.png',
+                width: 27, // Adjust the width as needed
+                height: 27, // Adjust the height as needed
               ),
               label: 'บัญชี'),
         ],

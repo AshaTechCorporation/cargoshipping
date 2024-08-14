@@ -1,4 +1,7 @@
+import 'package:cargoshipping/Itempage/widgets/iamgesitem.dart';
 import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
+import 'package:cargoshipping/account/widgets/importlist.dart';
+import 'package:cargoshipping/account/widgets/menulist.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -15,43 +18,71 @@ class _AccountPageState extends State<AccountPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.10),
-        child: Padding(
-          padding: const EdgeInsets.all(22.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 30,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
+          preferredSize: Size.fromHeight(160.0), // Set the height of the AppBar
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            ),
+            child: AppBar(
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.redAccent, Colors.red],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 40, left: 20), // Adjust padding as needed
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text('Girati Sukapat'),
+                          CircleAvatar(
+                            backgroundColor: Colors.grey[300],
+                            radius: 30,
+                            child: Icon(Icons.person, size: 30, color: Colors.grey[700]),
+                          ),
+                          SizedBox(width: 20),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Girati Sukapat",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "giratisukapat@gmail.com",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                      Text('giratisuktipat@gmail.com')
-                    ]),
+                    ],
+                  ),
+                ),
               ),
-            ],
+              backgroundColor: Colors.transparent, // Make the AppBar background transparent
+              elevation: 0, // Remove the shadow under the AppBar
+            ),
           ),
         ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: size.height * 0.02,
+              height: size.height * 0.0001,
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -84,6 +115,7 @@ class _AccountPageState extends State<AccountPage> {
                   size: size,
                   title: productOrderList[index],
                   press: () {},
+                  imagespath: oderlist[index],
                 ),
               ),
             ),
@@ -107,112 +139,18 @@ class _AccountPageState extends State<AccountPage> {
               runSpacing: 10,
               children: List.generate(
                 listImport.length,
-                (index) => CardlistWidget(
+                (index) => Importlist(
                   size: size,
                   title: listImport[index],
                   press: () {},
+                  imagespath: importlist[index],
                 ),
               ),
             ),
             SizedBox(
               height: 15,
             ),
-            Container(
-              decoration: BoxDecoration(color: Colors.grey[300]),
-              height: 45,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text('สมัครเป็นตัวแทน'),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 1,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-              ),
-              height: 45,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text('ติดต่อเรา'),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 1,
-            ),
-            Container(
-              decoration: BoxDecoration(color: Colors.grey[300]),
-              height: 45,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text('ช่วยเหลือ'),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 1,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-              ),
-              height: 45,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text('แจ้งปัญหา'),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 1,
-            ),
-            Container(
-              decoration: BoxDecoration(color: Colors.grey[300]),
-              height: 45,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text('ตั้งค่า'),
-                ],
-              ),
-            ),
+            MenuList(),
           ],
         ),
       ),

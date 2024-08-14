@@ -12,14 +12,14 @@ class AboutQuestionWidget extends StatelessWidget {
         height: size.height * 0.05,
         width: size.width * 0.45,
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 204, 200, 200),
+          color: Colors.red,
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(10.0), 
             bottomRight: Radius.circular(10.0), 
             topLeft: Radius.circular(10.0), 
             bottomLeft: Radius.circular(10.0)),
         ),
-        child: Center(child: Text(title, style: TextStyle(fontWeight: FontWeight.bold),)),       
+        child: Center(child: Text(title, style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),       
       );
   }
 }

@@ -22,6 +22,29 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: 20,),
+            Container(
+              height: 99,
+              width: 87,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/icons/Frame 61.png'),
+                  fit: BoxFit.fill, // ปรับแต่งการแสดงผลของภาพตามความต้องการ
+                ),
+              ),
+            ),
+            SizedBox(height: 30,),
+            Container(
+              height: 43.91,
+              width: 171.6,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/icons/Frame 76.png'),
+                  fit: BoxFit.fill, // ปรับแต่งการแสดงผลของภาพตามความต้องการ
+                ),
+              ),
+            ),
+            SizedBox(height: 40,),
             TextField(
               controller: _emailController,
               decoration: InputDecoration(

@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ProductCategories extends StatelessWidget {
-  ProductCategories({
-    super.key,
-    required this.size,
-    required this.title,
-    required this.press,
-    required this.imagespath
-
-  });
+class Importlist extends StatelessWidget {
+  Importlist({super.key, required this.size, required this.title, required this.press,required this.imagespath,});
 
   final Size size;
   final String title;
@@ -20,17 +13,15 @@ class ProductCategories extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: size.height * 0.1,
-            width: size.width * 0.21,
+            width: size.width * 0.2,
             decoration: BoxDecoration(
               // color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10.0), 
-                bottomRight: Radius.circular(10.0), 
-                topLeft: Radius.circular(10.0), 
-                bottomLeft: Radius.circular(10.0)),
+              borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0), topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),

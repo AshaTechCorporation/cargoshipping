@@ -1,3 +1,4 @@
+import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
@@ -20,7 +21,6 @@ class _HomePageState extends State<HomePage> {
     'Item3',
     'Item4',
   ];
-
   String? selectedValue;
 
   @override
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                               hint: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'Taobao',
+                                  '1688',
                                   style: TextStyle(
                                     fontSize: 11,
                                     color: Colors.red,
@@ -157,17 +157,67 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
-            Wrap(
-              spacing: 15,
-              runSpacing: 10,
-              children: List.generate(
-                titleData.length,
-                (index) => OurServicesWidget(
-                  size: size,
-                  title: titleData[index],
-                  press: () {},
-                ),
+            SizedBox(
+              height: 100, // กำหนดความสูงที่ต้องการ
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: titleData.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin:
+                        EdgeInsets.only(left: index == 0 ? 20 : 0, right: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: OurServicesWidget(
+                        size: size,
+                        title: titleData[index],
+                        press: () {},
+                        imagespath: Imgservice[index],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'อัตราเงินประจำวัน',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Divider(),
+                  ListTile(
+                    leading:
+                        Image.asset('assets/icons/cart-plus_svgrepo.com.png'),
+                    title: Text('อัตราการสั่งซื้อสินค้า'),
+                    trailing: Text('฿ 00.00'),
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Image.asset(
+                        'assets/icons/change-coins-cash-money_svgrepo.com.png'),
+                    title: Text('อัตราการโอนเงิน'),
+                    trailing: Text('฿ 00.00'),
+                  ),
+                  Divider(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      '*อัตราเงินอาจมีการเปลี่ยนแปลง บริษัทขอสงวนสิทธิ์ในการไม่แจ้งให้ทราบล่วงหน้า',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -178,7 +228,9 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'หมวดหมู่สินค้า',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  )
+                  ),
+                  Spacer(), // เว้นที่ระหว่างข้อความ
+                  Text('หมวดหมู่ทั้งหมด')
                 ],
               ),
             ),
@@ -186,11 +238,17 @@ class _HomePageState extends State<HomePage> {
               spacing: 15,
               runSpacing: 10,
               children: List.generate(
-                8,
-                (index) => ProductCategories(
-                  size: size,
-                  title: 'x',
-                  press: () {},
+                catagoryrecom.length,
+                (index) => ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: (size.width - 15 * 3) / 4,
+                  ),
+                  child: ProductCategories(
+                    size: size,
+                    title: catagoryrecom[index],
+                    press: () {},
+                    imagespath: catagoryimg[index],
+                  ),
                 ),
               ),
             ),
@@ -209,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 18),
                             children: <TextSpan>[
                           TextSpan(
-                            text: ' จาก Taobao',
+                            text: ' จาก 1668',
                             style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,
@@ -220,51 +278,56 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            ListView(
-              shrinkWrap: true,
-              children: [
-                Container(
-                  width: size.width * 1,
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 1,
-                    mainAxisSpacing: 1,
-                    shrinkWrap: true,
-                    // physics: NeverScrollableScrollPhysics(),
-                    children: List.generate(
-                      reccomproduct.length,
-                      (index) => ouritem(
+            Wrap(
+              spacing: 20,
+              runSpacing: 10,
+              children: List.generate(
+                  listProducts.length,
+                  (index) => Ouritem(
+                        image: listProducts[index]['image'],
+                        sale: listProducts[index]['sale'],
+                        send: listProducts[index]['send'],
                         size: size,
-                        price: 20,
-                        title: reccomproduct[index],
-                        press: () {},
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            )
-            // ListView(
-            //   shrinkWrap: true,
-            //   // physics: ClampingScrollPhysics(),
-            //   children: [
-            //     GridView.count(
-            //       crossAxisCount: 2,
-            //       crossAxisSpacing: 1,
-            //       mainAxisSpacing: 1,
-            //       shrinkWrap: true,
-            //       children: List.generate(
-            //           reccomproduct.length,
-            //           (index) => ouritem(
-            //                 size: size,
-            //                 price: 20,
-            //                 title: reccomproduct[index],
-            //                 press: () {},
-            //               )),
+                        price: listProducts[index]['price'],
+                        detail: listProducts[index]['detail'],
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => itempage(
+                                size: size,
+                                title: listProducts[index]['detail'],
+                                price: listProducts[index]['price'],
+                                products: listProducts[index],
+                                press: (){},
+                              ),
+                            ),
+                          );
+                        },
+                      )),
+            ),
+            // Container(
+            //   width: size.width * 0.95,
+            //   child: GridView.count(
+            //     crossAxisCount: 2,
+            //     crossAxisSpacing: 16,
+            //     //mainAxisSpacing: 16,
+            //     shrinkWrap: true,
+            //     // physics: NeverScrollableScrollPhysics(),
+            //     children: List.generate(
+            //       listProducts.length,
+            //       (index) => Ouritem(
+            //         image: listProducts[index]['image'],
+            //         sale: listProducts[index]['sale'],
+            //         send: listProducts[index]['send'],
+            //         size: size,
+            //         price: listProducts[index]['price'],
+            //         detail: listProducts[index]['detail'],
+            //         press: () {},
+            //       ),
             //     ),
-            //   ],
-            // ),
-            // SizedBox(height: 80),
+            //   ),
+            // )
           ],
         ),
       ),
