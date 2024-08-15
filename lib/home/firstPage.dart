@@ -1,3 +1,4 @@
+import 'package:cargoshipping/All_product_categories/allproduct.dart';
 import 'package:cargoshipping/account/accountPage.dart';
 import 'package:cargoshipping/cart/cartPage.dart';
 import 'package:cargoshipping/home/homePage.dart';
@@ -23,7 +24,7 @@ class _FirstPageState extends State<FirstPage> {
       if (selectedIndex == 0) {
         currentPage = HomePage();
       } else if (selectedIndex == 1) {
-        currentPage = MessagePage();
+        currentPage = Allproduct();
       } else if (selectedIndex == 2) {
         currentPage = TrackPage();
       } else if (selectedIndex == 3) {

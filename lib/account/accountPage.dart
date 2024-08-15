@@ -1,4 +1,3 @@
-import 'package:cargoshipping/Itempage/widgets/iamgesitem.dart';
 import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
 import 'package:cargoshipping/account/widgets/importlist.dart';
 import 'package:cargoshipping/account/widgets/menulist.dart';
@@ -18,7 +17,7 @@ class _AccountPageState extends State<AccountPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(160.0), // Set the height of the AppBar
+          preferredSize: Size.fromHeight(130.0), // Set the height of the AppBar
           child: ClipRRect(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30.0),
@@ -34,7 +33,7 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(top: 40, left: 20), // Adjust padding as needed
+                  padding: EdgeInsets.only( left: 20), // Adjust padding as needed
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,

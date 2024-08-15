@@ -1,7 +1,9 @@
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/searchPage.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
+import 'package:cargoshipping/home/widgets/Servicedetail.dart';
 import 'package:cargoshipping/widgets/PictureSliderWidget.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -28,117 +30,113 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        title: Container(
+          height: size.height * 0.05,
+          width: size.width * 0.9,
+          margin: const EdgeInsets.all(3.0),
+          padding: const EdgeInsets.all(3.0),
+          decoration: BoxDecoration(
+              border:
+                  Border.all(color: const Color.fromARGB(255, 122, 124, 126)),
+              borderRadius: BorderRadius.circular(15)),
+          child: IntrinsicHeight(
+            child: Row(
               children: [
-                Container(
-                  height: size.height * 0.05,
-                  width: size.width * 0.9,
-                  margin: const EdgeInsets.all(3.0),
-                  padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: const Color.fromARGB(255, 122, 124, 126)),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: size.width * 0.35,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Search',
-                              contentPadding:
-                                  EdgeInsets.only(left: 15, bottom: 10),
-                            ),
-                          ),
-                        ),
-                        Icon(Icons.camera_alt_outlined),
-                        VerticalDivider(
-                          color: Colors.grey,
-                          thickness: 1,
-                        ),
-                        Container(
-                          height: size.height * 0.05,
-                          width: size.width * 0.23,
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton2<String>(
-                              isExpanded: true,
-                              hint: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '1688',
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              items: items
-                                  .map(
-                                      (String item) => DropdownMenuItem<String>(
-                                            value: item,
-                                            child: Text(
-                                              item,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ))
-                                  .toList(),
-                              value: selectedValue,
-                              onChanged: (String? value) {
-                                setState(() {
-                                  selectedValue = value;
-                                });
-                              },
-                              buttonStyleData: const ButtonStyleData(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                height: 40,
-                                width: 140,
-                              ),
-                              menuItemStyleData: const MenuItemStyleData(
-                                height: 40,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.01,
-                        ),
-                        Container(
-                          height: size.height * 0.05,
-                          width: size.width * 0.193,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.red),
-                          child: Center(
-                              child: Text(
-                            'ค้นหา',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                        )
-                      ],
+                SizedBox(
+                  width: size.width * 0.35,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'ค้นหาสินค้า',
+                      contentPadding: EdgeInsets.only(left: 15, bottom: 10),
                     ),
                   ),
                 ),
+                Icon(Icons.camera_alt_outlined),
+                VerticalDivider(
+                  color: Colors.grey,
+                  thickness: 1,
+                ),
+                Container(
+                  height: size.height * 0.05,
+                  width: size.width * 0.23,
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton2<String>(
+                      isExpanded: true,
+                      hint: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '1688',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      items: items
+                          .map((String item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: selectedValue,
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedValue = value;
+                        });
+                      },
+                      buttonStyleData: const ButtonStyleData(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        height: 40,
+                        width: 140,
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        height: 40,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * 0.01,
+                ),
                 GestureDetector(
                   onTap: () {
-                    //logic here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Searchpage()), // แทนที่ NewPage() ด้วยหน้าที่คุณต้องการเปลี่ยนไป
+                    );
                   },
-                  child: Icon(
-                    Icons.favorite_border_outlined,
+                  child: Container(
+                    height: size.height * 0.05,
+                    width: size.width * 0.193,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.red,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'ค้นหา',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
                 )
               ],
             ),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
             SizedBox(height: size.height * 0.01),
             //แสดงภาพสไลด์
             PictureSliderWidget(size: size),
@@ -158,7 +156,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(
-              height: 100, // กำหนดความสูงที่ต้องการ
+              height: 100,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: titleData.length,
@@ -171,7 +169,16 @@ class _HomePageState extends State<HomePage> {
                       child: OurServicesWidget(
                         size: size,
                         title: titleData[index],
-                        press: () {},
+                        press: () {
+                          if (index == 0) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Servicedetail(
+                                          title: titleData[index],
+                                        )));
+                          }
+                        },
                         imagespath: Imgservice[index],
                       ),
                     ),
@@ -180,7 +187,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -192,11 +199,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  Divider(),
                   ListTile(
                     leading:
                         Image.asset('assets/icons/cart-plus_svgrepo.com.png'),
                     title: Text('อัตราการสั่งซื้อสินค้า'),
+                    trailing: Text('฿ 00.00'),
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Image.asset('assets/icons/alipay.png'),
+                    title: Text('อัตราการเติม Alipay'),
                     trailing: Text('฿ 00.00'),
                   ),
                   Divider(),
@@ -287,8 +299,8 @@ class _HomePageState extends State<HomePage> {
                         image: listProducts[index]['image'],
                         sale: listProducts[index]['sale'],
                         send: listProducts[index]['send'],
-                        size: size,
-                        price: listProducts[index]['price'],
+                        size: MediaQuery.of(context).size,
+                        price: (listProducts[index]['price'] as num).toDouble(),
                         detail: listProducts[index]['detail'],
                         press: () {
                           Navigator.push(
@@ -297,37 +309,16 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => itempage(
                                 size: size,
                                 title: listProducts[index]['detail'],
-                                price: listProducts[index]['price'],
+                                price: (listProducts[index]['price'] as num)
+                                    .toDouble(),
                                 products: listProducts[index],
-                                press: (){},
+                                press: () {},
                               ),
                             ),
                           );
                         },
                       )),
             ),
-            // Container(
-            //   width: size.width * 0.95,
-            //   child: GridView.count(
-            //     crossAxisCount: 2,
-            //     crossAxisSpacing: 16,
-            //     //mainAxisSpacing: 16,
-            //     shrinkWrap: true,
-            //     // physics: NeverScrollableScrollPhysics(),
-            //     children: List.generate(
-            //       listProducts.length,
-            //       (index) => Ouritem(
-            //         image: listProducts[index]['image'],
-            //         sale: listProducts[index]['sale'],
-            //         send: listProducts[index]['send'],
-            //         size: size,
-            //         price: listProducts[index]['price'],
-            //         detail: listProducts[index]['detail'],
-            //         press: () {},
-            //       ),
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

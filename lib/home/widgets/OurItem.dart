@@ -1,4 +1,3 @@
-import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:flutter/material.dart';
 
 class Ouritem extends StatelessWidget {
@@ -10,7 +9,7 @@ class Ouritem extends StatelessWidget {
       required this.price,
       required this.sale,
       required this.send,
-      required this.size});
+      required this.size,});
 
   final Size size;
   final String image;
@@ -44,71 +43,41 @@ class Ouritem extends StatelessWidget {
                 width: double.infinity,
               ),
             ),
-            Text('$detail', maxLines: 2, overflow: TextOverflow.ellipsis,),
+            Text(
+              '$detail',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w800
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('¥ ${price}'),
-                Text('จัดส่ง ${send}')
+                Text(
+                  '¥ ${price}',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red, // Set the text color to red
+                  ),
+                ),
+                Text('จัดส่ง ${send}',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.grey
+                ),)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text('ขายแล้ว ${sale}')
-              ],
+              children: [Text('ขายแล้ว ${sale} ใน 30 วัน',
+              style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.grey
+                ),)],
             ),
-
-            // SizedBox(
-            //   //width: MediaQuery.of(context).size.width,
-            //   // width: 150,
-            //   height: size.height * 0.12,
-            //   child: Image.asset(
-            //     'assets/images/bear.jpg',
-            //     fit: BoxFit.fill,
-            //     //scale: 5.5,
-            //   ),
-            // ),
-            // ClipRRect(
-            //   child: Container(
-            //     //width: MediaQuery.of(context).size.width,
-            //     // width: 150,
-            //     height: size.height * 0.12,
-            //     decoration: BoxDecoration(
-            //         color: const Color.fromARGB(255, 243, 235, 235),
-            //         borderRadius: BorderRadius.only(
-            //             bottomLeft: Radius.circular(16),
-            //             bottomRight: Radius.circular(16))),
-            //     child: Column(
-            //       children: [
-            //         Text('$detail')
-            //         // Center(
-            //         //     child: Text(
-            //         //   '$detail',
-            //         //   style: TextStyle(
-            //         //       fontWeight: FontWeight.bold, fontSize: 14),
-            //         // )),
-            //         // Row(
-            //         //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //         //   children: [
-            //         //     Text(
-            //         //       '$price',
-            //         //       style: TextStyle(
-            //         //           fontSize: 20,
-            //         //           color: Colors.red,
-            //         //           fontWeight: FontWeight.bold),
-            //         //     ),
-            //         //     Text(
-            //         //       'ขายแล้ว40,000ชิ้น',
-            //         //       style: TextStyle(
-            //         //           fontWeight: FontWeight.w200, fontSize: 12),
-            //         //     )
-            //         //   ],
-            //         // )
-            //       ],
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

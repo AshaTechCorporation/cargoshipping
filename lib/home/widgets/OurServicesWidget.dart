@@ -1,4 +1,3 @@
-import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,14 +19,7 @@ class OurServicesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Servicedetail(
-                      title: title,
-                    )));
-      },
+      onTap: press,
       child: Column(
         children: [
           Container(

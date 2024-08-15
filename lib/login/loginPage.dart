@@ -61,17 +61,17 @@ class _LoginPageState extends State<LoginPage> {
                 prefixIcon: Icon(Icons.lock_outline),
                 suffixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min, // Added to avoid overflow
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
                       onPressed: () {
-                        // Your onPressed code here
+
                       },
                       icon: Icon(Icons.remove_red_eye_outlined),
                     ),
                     TextButton(
                       onPressed: () {
-                        // Your onPressed code here
+                        
                       },
                       child: Text(
                         'ลืมรหัสผ่าน?',
@@ -140,10 +140,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => HomePage()),
-                // );
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -164,10 +161,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => HomePage()),
-                // );
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -188,10 +182,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => HomePage()),
-                // );
+               
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -212,10 +203,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => HomePage()),
-                // );
+                
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -223,7 +211,6 @@ class _LoginPageState extends State<LoginPage> {
                     horizontal: 105, vertical: 15), // การเว้นระยะในปุ่ม
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
-                  // มุมโค้งของปุ่ม
                 ),
               ),
               child: const Text(

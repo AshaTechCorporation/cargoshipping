@@ -1,3 +1,4 @@
+import 'package:cargoshipping/account/widgets/accsetting.dart';
 import 'package:flutter/material.dart';
 
 class MenuList extends StatelessWidget {
@@ -6,27 +7,38 @@ class MenuList extends StatelessWidget {
     MenuItem(imagePath: 'assets/icons/result.png', text: 'สรุปยอดขาย'),
     MenuItem(imagePath: 'assets/icons/guide.png', text: 'คู่มือการใช้งาน'),
     MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งเคลมสินค้า'),
-    MenuItem(imagePath: 'assets/icons/contact.png', text: 'ช่วยเหลือ'),
-    MenuItem(imagePath: 'assets/icons/setting.png', text: 'ติดต่อเรา'),
+    MenuItem(imagePath: 'assets/icons/help.png', text: 'ช่วยเหลือ'),
+    MenuItem(imagePath: 'assets/icons/contact.png', text: 'ติดต่อเรา'),
+    MenuItem(imagePath: 'assets/icons/setting.png', text: 'ตั้งค่า'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true, // ปรับขนาดตามจำนวนรายการ
-      physics: NeverScrollableScrollPhysics(), // ปิดการเลื่อนของ ListView
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: menuItems.length,
       itemBuilder: (context, index) {
         final item = menuItems[index];
         return ListTile(
           leading: Image.asset(
             item.imagePath,
-            width: 30, // ปรับขนาดภาพ
-            height: 30,
+            width: 20,
+            height: 20,
           ),
-          title: Text(item.text),
+          title: Text(
+            item.text,
+            style: TextStyle(fontSize: 13),
+          ),
           onTap: () {
-            // เพิ่มการทำงานเมื่อคลิกที่รายการ
+            if (index == 6) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Accsetting(
+                            title: item.text,
+                          )));
+            }
           },
         );
       },
