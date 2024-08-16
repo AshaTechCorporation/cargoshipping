@@ -37,6 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.6
   dropdown_button2: ^2.3.9
   fan_carousel_image_slider: ^1.0.1
+  collection: ^1.18.0
+
+  #สไลบราลี่ที่ใช้ในการติดต่อ เอพีไอ และสร้างโมเดลข้อมูล
+  build_runner: ^2.3.3
+  json_serializable: ^6.6.1
+  json_annotation: ^4.8.0
+  provider: ^6.0.3
 
 dev_dependencies:
   flutter_test:
