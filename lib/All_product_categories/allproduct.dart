@@ -1,3 +1,4 @@
+import 'package:cargoshipping/All_product_categories/widget/eachcatagory.dart';
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
@@ -136,7 +137,9 @@ class _AllproductState extends State<Allproduct> {
                 )
               ],
             ),
-            SizedBox(height: size.height * 0.01,),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
             Wrap(
               spacing: 15,
               runSpacing: 10,
@@ -149,7 +152,17 @@ class _AllproductState extends State<Allproduct> {
                   child: ProductCategories(
                     size: size,
                     title: catagoryrecom[index],
-                    press: () {},
+                    press: () {
+                      if (index == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                EachCategory(category: 'เสื้อผ้าลดราคา'),
+                          ),
+                        );
+                      }
+                    },
                     imagespath: catagoryimg[index],
                   ),
                 ),
@@ -211,7 +224,6 @@ class _AllproductState extends State<Allproduct> {
                       )),
             ),
           ],
-          
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/account/widgets/userinfo.dart';
 import 'package:flutter/material.dart';
 
 class Accsetting extends StatefulWidget {
@@ -20,6 +21,18 @@ class _AccsettingState extends State<Accsetting> {
         color: Colors.grey[300], // เปลี่ยนสีพื้นหลังของ body
         child: Column(
           children: [
+            ListTile(
+              title: Text('data'),
+              trailing: Icon(Icons.arrow_forward),
+              dense: true,
+              onTap: () {
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Userinfo()));
+
+              },
+            ),
+            Divider(),
+
             Container(
               color: Colors.grey[300],
               height: 50,
@@ -27,19 +40,37 @@ class _AccsettingState extends State<Accsetting> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 child: Text(
-                  'ข้อมูลด้านการติดต่อ',
+                  'ตั้งค่าบัญชีผู้ใช้',
                   style: TextStyle(fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Userinfo()));
+                },
+                child: Row(
+                  children: [
+                    Text('ชื่อผู้ใช้'),
+                    Spacer(),
+                    Icon(Icons.arrow_forward)
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Row(
                 children: [
-                  Text('ชื่อผู้ใช้'),
+                  Text('ที่อยู่ของฉัน'),
                   Spacer(),
-                  Text('Girati Sukapat'),
+                  Icon(Icons.arrow_forward)
                 ],
               ),
             ),
@@ -49,21 +80,9 @@ class _AccsettingState extends State<Accsetting> {
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Row(
                 children: [
-                  Text('หมายเลขโทรศัพท์'),
+                  Text('ข้อมูลบัตร/บัญชีธนาคาร'),
                   Spacer(),
-                  Text('********22'),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Text('อีเมล'),
-                  Spacer(),
-                  Text('g********@gmail.com'),
+                  Icon(Icons.arrow_forward)
                 ],
               ),
             ),
@@ -75,12 +94,73 @@ class _AccsettingState extends State<Accsetting> {
                 children: [
                   Text('เปลี่ยนรหัสผ่าน'),
                   Spacer(),
-                  Text('********'),
+                  Icon(Icons.arrow_forward)
                 ],
               ),
             ),
             SizedBox(height: 10),
             Divider(),
+            Container(
+              color: Colors.grey[300],
+              height: 50,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10),
+                child: Text(
+                  'ช่วยเหลือ',
+                  style: TextStyle(fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
+                ),
+              ),
+            ),
+            SizedBox(height: 1),
+            
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Row(
+                children: [
+                  Text('ข้อตกลงและเงื่อไขการให้บริการ'),
+                  Spacer(),
+                  Icon(Icons.arrow_forward)
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Row(
+                children: [
+                  Text('เวอร์ชัน'),
+                  Spacer(),
+                  Icon(Icons.arrow_forward)
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Row(
+                children: [
+                  Text('เกี่ยวกับเรา'),
+                  Spacer(),
+                  Icon(Icons.arrow_forward)
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Row(
+                children: [
+                  Text('คำร้องขอลบบัญชีผู้ใช้'),
+                  Spacer(),
+                  Icon(Icons.arrow_forward)
+                ],
+              ),
+            ),
           ],
         ),
       ),

@@ -194,7 +194,7 @@ class Servicedetail extends StatelessWidget {
                       ),
                       SizedBox(height: 20,),
                       Container(
-                          height: 35,
+                          height: 45,
                           width: 306,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),

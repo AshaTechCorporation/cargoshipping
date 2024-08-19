@@ -162,3 +162,27 @@ const List<Map<String, dynamic>> listProducts = [
   },
   
 ];
+
+const List<String> fistpagewidget = [
+  'นำเข้าถูกต้อง',
+  'นำเข้าเหมาภาษี',
+];
+
+const List<Map<String, dynamic>> shirtproductimg =[
+  {
+    'id' : 1,
+    'images' : 'assets/images/t_shirt.png',
+    'title' : 'เสื้อยืด'
+  },
+  {
+    'id' : 2,
+    'images' : 'assets/images/shirt.png',
+    'title' : 'เสื้อเชิ้ต'
+  },
+  {
+    'id' : 3,
+    'images' : 'assets/images/sweater.png',
+    'title' : 'เสื้อสเวตเตอร์'
+  }
+];
+

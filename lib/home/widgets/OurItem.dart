@@ -25,9 +25,9 @@ class Ouritem extends StatelessWidget {
       onTap: press,
       child: Container(
         width: size.width * 0.44,
-        height: size.height * 0.28,
+        height: size.height * 0.25,
         decoration: BoxDecoration(
-          //color: Colors.blue,
+          color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
         child: Column(

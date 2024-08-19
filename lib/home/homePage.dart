@@ -1,9 +1,18 @@
+import 'dart:developer';
+
+import 'package:cargoshipping/All_product_categories/widget/eachcatagory.dart';
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/detailproduct.dart';
 import 'package:cargoshipping/home/searchPage.dart';
+import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
+import 'package:cargoshipping/home/widgets/importrate.dart';
+import 'package:cargoshipping/home/widgets/importwidget.dart';
+import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/widgets/PictureSliderWidget.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -17,6 +26,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Categories> categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getlistCategories();
+    });
+  }
+   //ดึงข้อมูล api Category
+  Future<void> getlistCategories() async {
+    try {
+      LoadingDialog.open(context);
+      final _categories = await HomeApi.getCategories();
+      if (!mounted) return;
+
+      setState(() {
+        categories = _categories;
+      });
+      inspect(categories);
+      LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
   final List<String> items = [
     'Item1',
     'Item2',
@@ -31,7 +68,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          height: size.height * 0.05,
+          height: size.height * 0.045,
           width: size.width * 0.9,
           margin: const EdgeInsets.all(3.0),
           padding: const EdgeInsets.all(3.0),
@@ -109,9 +146,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Searchpage()), // แทนที่ NewPage() ด้วยหน้าที่คุณต้องการเปลี่ยนไป
+                      MaterialPageRoute(builder: (context) => Searchpage()),
                     );
                   },
                   child: Container(
@@ -140,6 +175,16 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: size.height * 0.01),
             //แสดงภาพสไลด์
             PictureSliderWidget(size: size),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(
+                  fistpagewidget.length,
+                  (index) => Importwidget(
+                      size: size, title: fistpagewidget[index], press: () {})),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: size.height * 0.02, horizontal: size.width * 0.035),
@@ -155,35 +200,73 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 100,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: titleData.length,
-                itemBuilder: (context, index) {
+            // SizedBox(
+            //   height: 100,
+            //   child: ListView.builder(
+            //     scrollDirection: Axis.horizontal,
+            //     itemCount: titleData.length,
+            //     itemBuilder: (context, index) {
+            //       return Container(
+            //         margin:
+            //             EdgeInsets.only(left: index == 0 ? 20 : 0, right: 10),
+            //         child: Padding(
+            //           padding: const EdgeInsets.only(right: 15),
+            //           child: OurServicesWidget(
+            //             size: size,
+            //             title: titleData[index],
+            //             press: () {
+            //               if (index == 0) {
+            //                 Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                         builder: (context) => Servicedetail(
+            //                               title: titleData[index],
+            //                             )));
+            //               }
+            //             },
+            //             imagespath: Imgservice[index],
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
+            Wrap(
+              spacing: 15,
+              runSpacing: 15,
+              children: List.generate(
+                titleData.length,
+                (index) {
                   return Container(
-                    margin:
-                        EdgeInsets.only(left: index == 0 ? 20 : 0, right: 10),
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 15),
-                      child: OurServicesWidget(
-                        size: size,
+                    width: size.width * 0.2,
+                    child: OurServicesWidget(
+                      size: size,
                         title: titleData[index],
                         press: () {
                           if (index == 0) {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Servicedetail(
-                                          title: titleData[index],
-                                        )));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Servicedetail(
+                                  title: titleData[index],
+                                ),
+                              ),
+                            );
+                          }
+                          if(index == 7){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Importrate(
+                                ),
+                              ),
+                            );
                           }
                         },
                         imagespath: Imgservice[index],
-                      ),
                     ),
                   );
-                },
+                } 
               ),
             ),
             Padding(
@@ -246,24 +329,56 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Wrap(
-              spacing: 15,
-              runSpacing: 10,
-              children: List.generate(
-                catagoryrecom.length,
-                (index) => ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: (size.width - 15 * 3) / 4,
+            categories.isEmpty
+                ? SizedBox()
+                : Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: List.generate(
+                      categories.length,
+                      (index) => ProductCategories(
+                        size: size,
+                        title: categories[index].name!,
+                        press: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Detailproduct(
+                                        productid: categories[index],
+                                      )));
+                        },
+                        imagespath: 'assets/images/noimages.jpg',
+                      ),
+                    ),
                   ),
-                  child: ProductCategories(
-                    size: size,
-                    title: catagoryrecom[index],
-                    press: () {},
-                    imagespath: catagoryimg[index],
-                  ),
-                ),
-              ),
-            ),
+            // Wrap(
+            //   spacing: 15,
+            //   runSpacing: 10,
+            //   children: List.generate(
+            //     catagoryrecom.length,
+            //     (index) => ConstrainedBox(
+            //       constraints: BoxConstraints(
+            //         maxWidth: (size.width - 15 * 3) / 4,
+            //       ),
+            //       child: ProductCategories(
+            //         size: size,
+            //         title: catagoryrecom[index],
+            //         press: () {
+            //           if (index == 0) {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                 builder: (context) =>
+            //                     EachCategory(category: 'เสื้อผ้าลดราคา'),
+            //               ),
+            //             );
+            //           }
+            //         },
+            //         imagespath: catagoryimg[index],
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: size.height * 0.02, horizontal: size.width * 0.035),
