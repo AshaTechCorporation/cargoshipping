@@ -11,6 +11,8 @@ import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
+import 'package:cargoshipping/home/widgets/payment.dart';
+import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/widgets/PictureSliderWidget.dart';
@@ -35,7 +37,8 @@ class _HomePageState extends State<HomePage> {
       await getlistCategories();
     });
   }
-   //ดึงข้อมูล api Category
+
+  //ดึงข้อมูล api Category
   Future<void> getlistCategories() async {
     try {
       LoadingDialog.open(context);
@@ -234,40 +237,44 @@ class _HomePageState extends State<HomePage> {
             Wrap(
               spacing: 15,
               runSpacing: 15,
-              children: List.generate(
-                titleData.length,
-                (index) {
-                  return Container(
-                    width: size.width * 0.2,
-                    child: OurServicesWidget(
-                      size: size,
-                        title: titleData[index],
-                        press: () {
-                          if (index == 0) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Servicedetail(
-                                  title: titleData[index],
-                                ),
-                              ),
-                            );
-                          }
-                          if(index == 7){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Importrate(
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                        imagespath: Imgservice[index],
-                    ),
-                  );
-                } 
-              ),
+              children: List.generate(titleData.length, (index) {
+                return Container(
+                  width: size.width * 0.2,
+                  child: OurServicesWidget(
+                    size: size,
+                    title: titleData[index],
+                    press: () {
+                      if (index == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Servicedetail(
+                              title: titleData[index],
+                            ),
+                          ),
+                        );
+                      }
+                      if (index == 6) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Shippingcalpage(),
+                          ),
+                        );
+                      }
+                      if (index == 7) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Importrate(),
+                          ),
+                        );
+                      }
+                    },
+                    imagespath: Imgservice[index],
+                  ),
+                );
+              }),
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
@@ -282,26 +289,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  ListTile(
-                    leading:
-                        Image.asset('assets/icons/cart-plus_svgrepo.com.png'),
-                    title: Text('อัตราการสั่งซื้อสินค้า'),
-                    trailing: Text('฿ 00.00'),
+                  Row(
+                    children: List.generate(
+                        payment.length,
+                        (index) => Payment(
+                              size: size,
+                              press: () {},
+                              imagespath: payment[index],
+                            )),
                   ),
-                  Divider(),
-                  ListTile(
-                    leading: Image.asset('assets/icons/alipay.png'),
-                    title: Text('อัตราการเติม Alipay'),
-                    trailing: Text('฿ 00.00'),
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Image.asset(
-                        'assets/icons/change-coins-cash-money_svgrepo.com.png'),
-                    title: Text('อัตราการโอนเงิน'),
-                    trailing: Text('฿ 00.00'),
-                  ),
-                  Divider(),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
@@ -329,28 +325,62 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            // categories.isEmpty
+            //     ? SizedBox()
+            //     : Wrap(
+            //         spacing: 10,
+            //         runSpacing: 10,
+            //         children: List.generate(
+            //           categories.length,
+            //           (index) => ProductCategories(
+            //             size: size,
+            //             title: categories[index].name!,
+            //             press: () {
+            //               Navigator.push(
+            //                   context,
+            //                   MaterialPageRoute(
+            //                       builder: (context) => Detailproduct(
+            //                             productid: categories[index],
+            //                           )));
+            //             },
+            //             imagespath: 'assets/images/noimages.jpg',
+            //           ),
+            //         ),
+            //       ),
             categories.isEmpty
                 ? SizedBox()
-                : Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: List.generate(
-                      categories.length,
-                      (index) => ProductCategories(
-                        size: size,
-                        title: categories[index].name!,
-                        press: () {
-                          Navigator.push(
+                : SizedBox(
+                    // height: 265, // ความสูงที่ต้องการ
+                    height: size.height * 0.31,
+                    child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 1.0,
+                      ),
+                      itemCount: categories.length,
+                      itemBuilder: (context, index) {
+                        return ProductCategories(
+                          size: size,
+                          title: categories[index].name!,
+                          press: () {
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Detailproduct(
-                                        productid: categories[index],
-                                      )));
-                        },
-                        imagespath: 'assets/images/noimages.jpg',
-                      ),
+                                builder: (context) => Detailproduct(
+                                  productid: categories[index],
+                                ),
+                              ),
+                            );
+                          },
+                          imagespath: 'assets/images/noimages.jpg',
+                        );
+                      },
                     ),
                   ),
+
             // Wrap(
             //   spacing: 15,
             //   runSpacing: 10,

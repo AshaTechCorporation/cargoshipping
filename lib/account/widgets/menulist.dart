@@ -1,6 +1,8 @@
 import 'package:cargoshipping/account/widgets/accsetting.dart';
+import 'package:cargoshipping/account/widgets/summarysale.dart';
 import 'package:cargoshipping/account/widgets/wecargo.dart';
 import 'package:cargoshipping/message/messagePage.dart';
+import 'package:cargoshipping/message/widgets/question.dart';
 import 'package:flutter/material.dart';
 
 class MenuList extends StatelessWidget {
@@ -33,13 +35,29 @@ class MenuList extends StatelessWidget {
             style: TextStyle(fontSize: 13),
           ),
           onTap: () {
+            if (index == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Question(),
+                ),
+              );
+            }
+            if(index == 1){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Summarysale(),
+                ),
+              );
+            }
             if (index == 4) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => MessagePage()));
             }
             if (index == 5) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Wecargo()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Wecargo()));
             }
             if (index == 6) {
               Navigator.push(

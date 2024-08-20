@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+Color color1 = Color(int.parse('0xffcd7f32'));
+Color color2 = Color(int.parse('0xfffbbc80'));
+Color red1 = Color(0xffde1e26);
+
+
 const kBackgroundColor = Color(0xff1B58B1);
 const kSecondTextColor = Color(0xff7B7B7B);
 const kConkgroundColor = Color(0xffFFFFFF);
@@ -13,6 +18,11 @@ const List<String> titleData = [
   'ล่าม ไกด์ทัวร์\nตั๋วเครื่องบิน',
   'การคำนวน\nค่าขนส่ง',
   'เรทราคานำเข้า'
+];
+
+const List<String> topup =[
+  'เติมเงิน',
+  'ถอนเงิน'
 ];
 
 const List<String> aboutQuestion = [
@@ -81,19 +91,21 @@ const List<String> oderlist = [
 ];
 
 const List<String> importlist = [
-  'assets/icons/carimport.png',
-  'assets/icons/boatimport.png',
-  'assets/icons/pricerate.png',
-  'assets/icons/calprice.png',
+  'assets/images/car.png',
+  'assets/images/ship.png',
+  'assets/images/import.png',
+  'assets/images/fcl.png',
+  'assets/images/tour.png',
+  'assets/images/shippingrate.png',
 ];
 
 const List<Map<String, dynamic>> listProducts = [
   {
     'id': 1,
     'image': 'assets/images/shelf.png',
-    'imagedetail1':'assets/images/images23.png',
-    'imagedetail2':'assets/images/images25.png',
-    'imagedetail3':'assets/images/images26.png',
+    'imagedetail1': 'assets/images/images23.png',
+    'imagedetail2': 'assets/images/images25.png',
+    'imagedetail3': 'assets/images/images26.png',
     'price': 4.88,
     'detail':
         'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มีรูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา, กล่องเก็บของ',
@@ -103,9 +115,9 @@ const List<Map<String, dynamic>> listProducts = [
   {
     'id': 2,
     'image': 'assets/images/box.png',
-    'imagedetail1':'assets/images/images23.png',
-    'imagedetail2':'assets/images/images25.png',
-    'imagedetail3':'assets/images/images26.png',
+    'imagedetail1': 'assets/images/images23.png',
+    'imagedetail2': 'assets/images/images25.png',
+    'imagedetail3': 'assets/images/images26.png',
     'price': 11.19,
     'detail':
         'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
@@ -115,9 +127,9 @@ const List<Map<String, dynamic>> listProducts = [
   {
     'id': 3,
     'image': 'assets/images/pant.png',
-    'imagedetail1':'assets/images/images23.png',
-    'imagedetail2':'assets/images/images25.png',
-    'imagedetail3':'assets/images/images26.png',
+    'imagedetail1': 'assets/images/images23.png',
+    'imagedetail2': 'assets/images/images25.png',
+    'imagedetail3': 'assets/images/images26.png',
     'price': 9.40,
     'detail':
         'กางเกงขาสั้นผู้ชาย, กางเกงขาสั้นลําลอง, กางเกงใหญ่ผู้ชาย, ฤดูร้อนผู้ชาย, วัยรุ่น, วัยกลางคนและผู้สูงอายุ',
@@ -127,21 +139,20 @@ const List<Map<String, dynamic>> listProducts = [
   {
     'id': 4,
     'image': 'assets/images/headband.png',
-    'imagedetail1':'assets/images/images23.png',
-    'imagedetail2':'assets/images/images25.png',
-    'imagedetail3':'assets/images/images26.png',
+    'imagedetail1': 'assets/images/images23.png',
+    'imagedetail2': 'assets/images/images25.png',
+    'imagedetail3': 'assets/images/images26.png',
     'price': 3,
-    'detail':
-        'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
+    'detail': 'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
     'send': '48 ชั่วโมง',
     'sale': '3000+ '
   },
   {
     'id': 5,
     'image': 'assets/images/bellser.png',
-    'imagedetail1':'assets/images/images23.png',
-    'imagedetail2':'assets/images/images25.png',
-    'imagedetail3':'assets/images/images26.png',
+    'imagedetail1': 'assets/images/images23.png',
+    'imagedetail2': 'assets/images/images25.png',
+    'imagedetail3': 'assets/images/images26.png',
     'price': 55.60,
     'detail':
         'เสื้อเบลเซอร์สีกาแฟผู้หญิง 2023 ฤดูใบไม้ผลิและฤดูใบไม้ร่วงชายตัวน้อยทอดถนนแฟชั่นใหม่',
@@ -151,16 +162,15 @@ const List<Map<String, dynamic>> listProducts = [
   {
     'id': 6,
     'image': 'assets/images/cardigan.png',
-    'imagedetail1':'assets/images/images23.png',
-    'imagedetail2':'assets/images/images25.png',
-    'imagedetail3':'assets/images/images26.png',
+    'imagedetail1': 'assets/images/images23.png',
+    'imagedetail2': 'assets/images/images25.png',
+    'imagedetail3': 'assets/images/images26.png',
     'price': 23,
     'detail':
         'เสื้อคาร์ดิแกนเสื้อถักทับแจ็คเก็ตผู้หญิงรุ่นเกาหลีของฤดูใบไม้ร่วง',
     'send': '48 ชั่วโมง',
     'sale': '1000+ '
   },
-  
 ];
 
 const List<String> fistpagewidget = [
@@ -168,21 +178,22 @@ const List<String> fistpagewidget = [
   'นำเข้าเหมาภาษี',
 ];
 
-const List<Map<String, dynamic>> shirtproductimg =[
-  {
-    'id' : 1,
-    'images' : 'assets/images/t_shirt.png',
-    'title' : 'เสื้อยืด'
-  },
-  {
-    'id' : 2,
-    'images' : 'assets/images/shirt.png',
-    'title' : 'เสื้อเชิ้ต'
-  },
-  {
-    'id' : 3,
-    'images' : 'assets/images/sweater.png',
-    'title' : 'เสื้อสเวตเตอร์'
-  }
+const List<Map<String, dynamic>> shirtproductimg = [
+  {'id': 1, 'images': 'assets/images/t_shirt.png', 'title': 'เสื้อยืด'},
+  {'id': 2, 'images': 'assets/images/shirt.png', 'title': 'เสื้อเชิ้ต'},
+  {'id': 3, 'images': 'assets/images/sweater.png', 'title': 'เสื้อสเวตเตอร์'}
 ];
 
+List<String> payment = [
+  'assets/images/leaveorder.png',
+  'assets/images/alipay.png',
+  'assets/images/paymentcomp.png',
+];
+
+List<String> howto = [
+  'HOW TO นำเข้าได้เอกสารถูกต้อง ผ่านพิธีการศุลกากร',
+  'HOW TO ชำระค่าขนส่งจีน-ไทย',
+  'HOW TO ฝากโอนชำระค่าสินค้าจีน',
+  'HOW TO ค้นหาสินค้าจาก 1688 TAOBAO',
+  'HOW TO สมัครเป็นตัวแทน'
+];

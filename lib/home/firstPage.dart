@@ -32,7 +32,6 @@ class _FirstPageState extends State<FirstPage> {
       } else if (selectedIndex == 4) {
         currentPage = AccountPage();
       }
-      
     });
   }
 
@@ -43,50 +42,124 @@ class _FirstPageState extends State<FirstPage> {
       body: SafeArea(
         child: PageStorage(bucket: bucket, child: currentPage),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.black,
-        showSelectedLabels: true,
-        currentIndex: selectedIndex,
-        onTap: onItemSelect,
-        items: [
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/icons/Frame 61.png',
-                width: 24, // Adjust the width as needed
-                height: 27, // Adjust the height as needed
-              ),
-              label: 'หน้าหลัก'),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/icons/group.png',
-                width: 29, // Adjust the width as needed
-                height: 30, // Adjust the height as needed
-              ),
-              label: 'หมวดสินค้า'),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/icons/truck.png',
-                width: 31, // Adjust the width as needed
-                height: 48, // Adjust the height as needed
-              ),
-              label: 'ติดตามสถานะ'),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/icons/shipping.png',
-                width: 30, // Adjust the width as needed
-                height: 30, // Adjust the height as needed
-              ),
-              label: 'รถเข็น'),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/icons/user.png',
-                width: 27, // Adjust the width as needed
-                height: 27, // Adjust the height as needed
-              ),
-              label: 'บัญชี'),
-        ],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Transform.translate(
+        offset: Offset(0, 20), // ปรับค่า Y เพื่อเลื่อนลง
+        child: FloatingActionButton.large(
+          backgroundColor: Colors.red,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(60),
+          ),
+          onPressed: () {
+            onItemSelect(2);
+          },
+          elevation: 0.0,
+          child: Image.asset(
+            'assets/icons/truck.png',
+            width: 50,
+            height: 48,
+          ),
+        ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  onItemSelect(0);
+                },
+                child: Image.asset(
+                  'assets/icons/Frame 61.png',
+                  width: 24,
+                  height: 27,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  onItemSelect(1);
+                },
+                child: Image.asset(
+                  'assets/icons/group.png',
+                  width: 29, // Adjust the width as needed
+                  height: 30, // Adjust the height as needed
+                ),
+              ),
+              SizedBox(
+                width: 50,
+              ),
+              GestureDetector(
+                onTap: () {
+                  onItemSelect(3);
+                },
+                child: Image.asset(
+                  'assets/icons/shipping.png',
+                  width: 30, // Adjust the width as needed
+                  height: 30, // Adjust the height as needed
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  onItemSelect(4);
+                },
+                child: Image.asset(
+                  'assets/icons/user.png',
+                  width: 27, // Adjust the width as needed
+                  height: 27, // Adjust the height as needed
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   selectedItemColor: Colors.red,
+      //   unselectedItemColor: Colors.black,
+      //   showSelectedLabels: true,
+      //   currentIndex: selectedIndex,
+      //   onTap: onItemSelect,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //         icon: Image.asset(
+      //           'assets/icons/Frame 61.png',
+      //           width: 24, // Adjust the width as needed
+      //           height: 27, // Adjust the height as needed
+      //         ),
+      //         label: 'หน้าหลัก'),
+      //     BottomNavigationBarItem(
+      //         icon: Image.asset(
+      //           'assets/icons/group.png',
+      //           width: 29, // Adjust the width as needed
+      //           height: 30, // Adjust the height as needed
+      //         ),
+      //         label: 'หมวดสินค้า'),
+      //     // BottomNavigationBarItem(
+      //     //     icon: Image.asset(
+      //     //       'assets/icons/truck.png',
+      //     //       width: 31, // Adjust the width as needed
+      //     //       height: 48, // Adjust the height as needed
+      //     //     ),
+      //     //     label: 'ติดตามสถานะ'),
+      //     BottomNavigationBarItem(
+      //         icon: Image.asset(
+      //           'assets/icons/shipping.png',
+      //           width: 30, // Adjust the width as needed
+      //           height: 30, // Adjust the height as needed
+      //         ),
+      //         label: 'รถเข็น'),
+      //     BottomNavigationBarItem(
+      //         icon: Image.asset(
+      //           'assets/icons/user.png',
+      //           width: 27, // Adjust the width as needed
+      //           height: 27, // Adjust the height as needed
+      //         ),
+      //         label: 'บัญชี'),
+      //   ],
+      // ),
     );
   }
 }

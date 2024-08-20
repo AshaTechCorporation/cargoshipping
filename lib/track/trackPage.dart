@@ -8,6 +8,8 @@ class TrackPage extends StatefulWidget {
 }
 
 class _TrackPageState extends State<TrackPage> {
+  int selectedIndex = 0;
+  List<String> options = ['Option 1', 'Option 2', 'Option 3'];
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -52,6 +54,25 @@ class _TrackPageState extends State<TrackPage> {
           ],
         ),
         toolbarHeight: 130,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              children: List.generate(options.length, (int index) {
+                return ChoiceChip(
+                  label: Text(options[index]),
+                  selected: selectedIndex == index,
+                  onSelected: (bool selected) {
+                    setState(() {
+                      selectedIndex = (selected ? index : null)!;
+                    });
+                  },
+                );
+              }),
+            )
+          ],
+        ),
       ),
     );
   }

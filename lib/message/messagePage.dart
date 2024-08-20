@@ -1,6 +1,7 @@
-
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/widgets/AboutQuestionWidget.dart';
+import 'package:cargoshipping/message/widgets/promotionpage.dart';
+import 'package:cargoshipping/message/widgets/question.dart';
 import 'package:cargoshipping/widgets/PictureSliderWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,16 @@ class _MessagePageState extends State<MessagePage> {
               children: [Text('ข่าวสารทั้งหมด')],
             ),
             //แสดงภาพสไลด์
-            PictureSliderWidget(size: size),
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Promotionpage(),
+                    ),
+                  );
+                },
+                child: PictureSliderWidget(size: size)),
             SizedBox(
               height: size.height * 0.02,
             ),
@@ -38,7 +48,16 @@ class _MessagePageState extends State<MessagePage> {
                   (index) => AboutQuestionWidget(
                         size: size,
                         title: aboutQuestion[index],
-                        press: () {},
+                        press: () {
+                          if (index == 0) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Question(),
+                              ),
+                            );
+                          }
+                        },
                       )),
             ),
             SizedBox(
@@ -196,7 +215,6 @@ class _MessagePageState extends State<MessagePage> {
                 ],
               ),
             ),
-            
           ],
         ),
       ),
