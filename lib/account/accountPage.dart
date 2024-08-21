@@ -1,8 +1,10 @@
+import 'package:cargoshipping/account/topuppage.dart';
 import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
 import 'package:cargoshipping/account/widgets/howto.dart';
 import 'package:cargoshipping/account/widgets/importlist.dart';
 import 'package:cargoshipping/account/widgets/menulist.dart';
 import 'package:cargoshipping/account/widgets/topupwidget.dart';
+import 'package:cargoshipping/account/widgets/withdrawpage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -62,10 +64,7 @@ class _AccountPageState extends State<AccountPage> {
                           height: 60,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [
-                                color1,
-                                color2
-                              ], // ใช้ตัวแปรสีที่คุณกำหนด
+                              colors: [color1, color2],
                               begin: Alignment.centerRight,
                               end: Alignment.centerLeft,
                               stops: [0.3, 0.7],
@@ -76,16 +75,14 @@ class _AccountPageState extends State<AccountPage> {
                             ),
                           ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .center, // จัดตำแหน่งเนื้อหาใน Row ให้กลาง
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 'Bronze',
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors
-                                        .white), // ปรับขนาดและน้ำหนักของข้อความตามต้องการ
+                                    color: Colors.white),
                               ),
                               SizedBox(
                                   width:
@@ -135,19 +132,37 @@ class _AccountPageState extends State<AccountPage> {
                             )
                           ],
                         ),
-                        
                       ],
                     ),
-                    SizedBox(height: size.height * 0.01,),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
                     Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: List.generate(
-                              fistpagewidget.length,
-                              (index) => Topupwidget(
-                                  size: size,
-                                  title: topup[index],
-                                  press: () {})),
-                        ),
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                          fistpagewidget.length,
+                          (index) => Topupwidget(
+                              size: size,
+                              title: topup[index],
+                              press: () {
+                                if (index == 0) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Topuppage()
+                                    ),
+                                  );
+                                }
+                                if (index == 1) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Withdrawpage()
+                                    ),
+                                  );
+                                }
+                              })),
+                    ),
                   ],
                 ),
               ),
@@ -221,7 +236,7 @@ class _AccountPageState extends State<AccountPage> {
                 crossAxisCount: 3,
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
-                childAspectRatio: 1, // กำหนดอัตราส่วนของแต่ละไอเท็ม (กว้าง:สูง)
+                childAspectRatio: 1,
               ),
               itemBuilder: (context, index) {
                 return Importlist(
@@ -252,14 +267,14 @@ class _AccountPageState extends State<AccountPage> {
               height: 15,
             ),
             Column(
-                    children: List.generate(
-                        howto.length,
-                        (index) => Howto(
-                              size: size,
-                              press: () {},
-                              title: howto[index],
-                            )),
-                  ),
+              children: List.generate(
+                  howto.length,
+                  (index) => Howto(
+                        size: size,
+                        press: () {},
+                        title: howto[index],
+                      )),
+            ),
             MenuList(),
           ],
         ),

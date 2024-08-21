@@ -19,21 +19,30 @@ class _TopupwidgetState extends State<Topupwidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.057,
-      width: size.width * 0.43,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
+    return GestureDetector(
+      onTap: widget.press,
+      child: Container(
+        height: size.height * 0.057,
+        width: size.width * 0.43,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
             topRight: Radius.circular(10.0),
             bottomRight: Radius.circular(10.0),
             topLeft: Radius.circular(10.0),
-            bottomLeft: Radius.circular(10.0)),
+            bottomLeft: Radius.circular(10.0),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            widget.title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
-      child: Center(
-          child: Text(widget.title,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
     );
   }
 }

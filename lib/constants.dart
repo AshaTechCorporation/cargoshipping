@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 Color color1 = Color(int.parse('0xffcd7f32'));
 Color color2 = Color(int.parse('0xfffbbc80'));
 Color red1 = Color(0xffde1e26);
+Color arrowcolor = Color(0xffd9d9d9);
+
+
 
 
 const kBackgroundColor = Color(0xff1B58B1);

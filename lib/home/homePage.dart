@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cargoshipping/All_product_categories/widget/eachcatagory.dart';
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
@@ -70,104 +69,112 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          height: size.height * 0.045,
-          width: size.width * 0.9,
-          margin: const EdgeInsets.all(3.0),
-          padding: const EdgeInsets.all(3.0),
-          decoration: BoxDecoration(
+        backgroundColor: red1,
+        toolbarHeight: size.height * 0.099,
+        title: PreferredSize(
+          preferredSize:
+              Size.fromHeight(size.height * 0.08),
+          child: Container(
+            height: size.height * 0.045,
+            width: size.width * 0.9,
+            margin: const EdgeInsets.all(3.0),
+            padding: const EdgeInsets.all(3.0),
+            decoration: BoxDecoration(
               border:
                   Border.all(color: const Color.fromARGB(255, 122, 124, 126)),
-              borderRadius: BorderRadius.circular(15)),
-          child: IntrinsicHeight(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: size.width * 0.35,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'ค้นหาสินค้า',
-                      contentPadding: EdgeInsets.only(left: 15, bottom: 10),
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.white
+            ),
+            child: IntrinsicHeight(
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: size.width * 0.35,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'ค้นหาสินค้า',
+                        contentPadding: EdgeInsets.only(left: 15, bottom: 10),
+                      ),
                     ),
                   ),
-                ),
-                Icon(Icons.camera_alt_outlined),
-                VerticalDivider(
-                  color: Colors.grey,
-                  thickness: 1,
-                ),
-                Container(
-                  height: size.height * 0.05,
-                  width: size.width * 0.23,
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2<String>(
-                      isExpanded: true,
-                      hint: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '1688',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
+                  Icon(Icons.camera_alt_outlined),
+                  VerticalDivider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                  Container(
+                    height: size.height * 0.05,
+                    width: size.width * 0.23,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2<String>(
+                        isExpanded: true,
+                        hint: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '1688',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      items: items
-                          .map((String item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                        items: items
+                            .map((String item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
                                   ),
-                                ),
-                              ))
-                          .toList(),
-                      value: selectedValue,
-                      onChanged: (String? value) {
-                        setState(() {
-                          selectedValue = value;
-                        });
-                      },
-                      buttonStyleData: const ButtonStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        height: 40,
-                        width: 140,
-                      ),
-                      menuItemStyleData: const MenuItemStyleData(
-                        height: 40,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: size.width * 0.01,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Searchpage()),
-                    );
-                  },
-                  child: Container(
-                    height: size.height * 0.05,
-                    width: size.width * 0.193,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.red,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'ค้นหา',
-                        style: TextStyle(color: Colors.white),
+                                ))
+                            .toList(),
+                        value: selectedValue,
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedValue = value;
+                          });
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: 40,
+                          width: 140,
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          height: 40,
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
+                  SizedBox(
+                    width: size.width * 0.01,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Searchpage()),
+                      );
+                    },
+                    child: Container(
+                      height: size.height * 0.05,
+                      width: size.width * 0.193,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.red,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'ค้นหา',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
