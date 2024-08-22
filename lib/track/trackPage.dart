@@ -1,4 +1,5 @@
 import 'package:cargoshipping/track/purchase.dart';
+import 'package:cargoshipping/track/selldetail.dart';
 import 'package:cargoshipping/widgets/compete.dart';
 import 'package:cargoshipping/widgets/itemclose.dart';
 import 'package:cargoshipping/widgets/packing.dart';
@@ -59,8 +60,7 @@ class _TrackPageState extends State<TrackPage> {
                   ),
                   Expanded(
                       child: GestureDetector(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -69,7 +69,7 @@ class _TrackPageState extends State<TrackPage> {
                       child: Center(
                         child: Text(
                           'ค้นหา',
-                          style: TextStyle(color: Colors.white,fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                       ),
                     ),
@@ -83,8 +83,7 @@ class _TrackPageState extends State<TrackPage> {
               child: Row(
                 children: List.generate(options.length, (int index) {
                   return Padding(
-                    padding: const EdgeInsets.only(
-                        right: 8.0),
+                    padding: const EdgeInsets.only(right: 8.0),
                     child: ChoiceChip(
                       label: Text(options[index]),
                       selected: selectedIndex == index,
@@ -105,7 +104,7 @@ class _TrackPageState extends State<TrackPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            waitsum(size: size),
+            Waitsum(size: size),
             SizedBox(
               height: size.height * 0.01,
             ),
@@ -136,5 +135,3 @@ class _TrackPageState extends State<TrackPage> {
     );
   }
 }
-
-

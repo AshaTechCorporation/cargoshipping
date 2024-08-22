@@ -173,7 +173,7 @@ class compete extends StatelessWidget {
               height: 21,
               child: Row(
                 children: [
-                  Text('ประเภท สินค้าสั่งซื้อ '),
+                  Text('ประเภท สินค้าสั่งซื้อ ', style: TextStyle(fontWeight: FontWeight.bold),),
                   Spacer(),
                   Text('สั่งซื้อเมื่อ 28 ก.ค.  67')
                 ],

@@ -377,7 +377,7 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Detailproduct(
-                                  productid: categories[index],
+                                  categories: categories[index],
                                 ),
                               ),
                             );

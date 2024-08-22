@@ -1,3 +1,4 @@
+import 'package:cargoshipping/account/widgets/addresspage.dart';
 import 'package:cargoshipping/account/widgets/userinfo.dart';
 import 'package:flutter/material.dart';
 
@@ -21,18 +22,6 @@ class _AccsettingState extends State<Accsetting> {
         color: Colors.grey[300], // เปลี่ยนสีพื้นหลังของ body
         child: Column(
           children: [
-            ListTile(
-              title: Text('data'),
-              trailing: Icon(Icons.arrow_forward),
-              dense: true,
-              onTap: () {
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Userinfo()));
-
-              },
-            ),
-            Divider(),
-
             Container(
               color: Colors.grey[300],
               height: 50,
@@ -41,17 +30,18 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 child: Text(
                   'ตั้งค่าบัญชีผู้ใช้',
-                  style: TextStyle(fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
                 ),
               ),
             ),
             SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Userinfo()));
+                      MaterialPageRoute(builder: (context) => Userinfo()));
                 },
                 child: Row(
                   children: [
@@ -66,24 +56,35 @@ class _AccsettingState extends State<Accsetting> {
             Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Text('ที่อยู่ของฉัน'),
-                  Spacer(),
-                  Icon(Icons.arrow_forward)
-                ],
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Addresspage()));
+                },
+                child: Row(
+                  children: [
+                    Text('ที่อยู่ของฉัน'),
+                    Spacer(),
+                    Icon(Icons.arrow_forward)
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 10),
             Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Text('ข้อมูลบัตร/บัญชีธนาคาร'),
-                  Spacer(),
-                  Icon(Icons.arrow_forward)
-                ],
+              child: InkWell(
+                onTap: () {
+                  
+                },
+                child: Row(
+                  children: [
+                    Text('ข้อมูลบัตร/บัญชีธนาคาร'),
+                    Spacer(),
+                    Icon(Icons.arrow_forward)
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -108,12 +109,12 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 child: Text(
                   'ช่วยเหลือ',
-                  style: TextStyle(fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
                 ),
               ),
             ),
             SizedBox(height: 1),
-            
             Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
