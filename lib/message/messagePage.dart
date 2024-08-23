@@ -18,16 +18,12 @@ class _MessagePageState extends State<MessagePage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('ข้อความ'),
+        title: Text('ข้อความ',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 18),),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [Text('ข่าวสารทั้งหมด')],
-            ),
-            //แสดงภาพสไลด์
+            
             GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -65,7 +61,7 @@ class _MessagePageState extends State<MessagePage> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
+                  vertical: size.height * 0.02, horizontal: size.width * 0.03),
               child: Row(
                 children: [
                   Text(
@@ -76,17 +72,17 @@ class _MessagePageState extends State<MessagePage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               color: Colors.white,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
                     'assets/icons/Frame 61.png',
-                    width: 18,
-                    height: 20,
+                    width: 30,
+                    height: 30,
                   ),
-                  SizedBox(width: 8.0), // ระยะห่างระหว่างรูปภาพกับกล่องสีเทา
+                  SizedBox(width: 20.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -95,41 +91,39 @@ class _MessagePageState extends State<MessagePage> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.red[200],
                         ),
-                        width: 220, // กำหนดความกว้างของกล่อง
-                        height: 60, // กำหนดความสูงของกล่อง
+                        width: 220,
+                        height: 60,
                         child: Center(
-                          // จัดตำแหน่งข้อความให้อยู่กลางกล่อง
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 7),
+                            padding:
+                              const EdgeInsets.only(left: 15, right: 7, top: 8),
                             child: Text(
                               'สวัสดีครับ (username)TEG Cargo ยินดีให้บริการครับ',
                               style: TextStyle(
-                                color: Colors.black, // กำหนดสีของข้อความ
-                                fontSize: 13, // ขนาดของข้อความ
-                              ),
+                                  color: Colors.black,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 8.0), // ระยะห่างระหว่างกล่อง
+                      SizedBox(height: 8.0),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.red[200],
                         ),
-                        width: 200, // กำหนดความกว้างของกล่อง
-                        height: 70, // กำหนดความสูงของกล่อง
+                        width: 240,
+                        height: 70,
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 7,
-                              right: 7,
-                              top: 7), // เพิ่ม padding ด้านบน
+                          padding:
+                              const EdgeInsets.only(left: 15, right: 7, top: 15),
                           child: Text(
                             'ท่านสามารถเลือกคำถามจากปุ่มตัวเลือก หรือพิมพ์คำถามในช่องแชทได้เลยครับ',
                             style: TextStyle(
-                              color: Colors.black, // กำหนดสีของข้อความ
-                              fontSize: 13, // ขนาดของข้อความ
-                            ),
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       )
@@ -145,72 +139,78 @@ class _MessagePageState extends State<MessagePage> {
               padding: EdgeInsets.all(8.0),
               color: Colors.white,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end, // จัดตำแหน่งไปที่ขวา
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.end, // จัดตำแหน่งให้ถูกต้องในแนวตั้ง
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[200],
-                        ),
-                        width: 200,
-                        height: 50,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 7, right: 7, top: 7),
-                          child: Text(
-                            'การรับส่งของแต่ละครั้งมีจำนวนขั้นต่ำไหม',
-                            style: TextStyle(
-                              color: Colors.black, // กำหนดสีของข้อความ
-                              fontSize: 13, // ขนาดของข้อความ
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                          ),
+                          width: 200,
+                          height: 60,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 7, right: 10, top: 10),
+                            child: Text(
+                              'การรับส่งของแต่ละครั้งมีจำนวนขั้นต่ำไหม',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 5.0),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[200],
-                        ),
-                        width: 200,
-                        height: 50,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 7, right: 7, top: 7),
-                          child: Text(
-                            'ต้องการทราบราคาค่าขนส่งสินค้า ทั้งทาง รถ และทางเรือ',
-                            style: TextStyle(
-                              color: Colors.black, // กำหนดสีของข้อความ
-                              fontSize: 13, // ขนาดของข้อความ
+                        SizedBox(height: 10.0),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                          ),
+                          width: 200,
+                          height: 60,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 7, right: 10, top: 10),
+                            child: Text(
+                              'ต้องการทราบราคาค่าขนส่งสินค้า ทั้งทาง รถ และทางเรือ',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 5.0),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[200],
-                        ),
-                        width: 200,
-                        height: 50,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 7, right: 7, top: 7),
-                          child: Text(
-                            'วิธีการคิดค่าขนส่งจากราคาที่คิดเป็น CBM',
-                            style: TextStyle(
-                              color: Colors.black, // กำหนดสีของข้อความ
-                              fontSize: 13, // ขนาดของข้อความ
+                        SizedBox(height: 10.0),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                          ),
+                          width: 200,
+                          height: 60,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 7, right: 10, top: 10),
+                            child: Text(
+                              'วิธีการคิดค่าขนส่งจากราคาที่คิดเป็น CBM',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -241,7 +241,8 @@ class _MessagePageState extends State<MessagePage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      hintText: 'พิมข้อความเพื่อพูดคุย',
+                      hintText: 'พิมข้อความเพื่อพูดคุย' ,
+                      hintStyle: TextStyle(fontSize: 13)
                     ),
                   ),
                 ),

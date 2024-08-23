@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Topupwidget extends StatefulWidget {
@@ -38,7 +39,8 @@ class _TopupwidgetState extends State<Topupwidget> {
             widget.title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: red1,
+              fontSize: 15
             ),
           ),
         ),

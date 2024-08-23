@@ -23,7 +23,7 @@ class _Promotion2pageState extends State<Promotion2page> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
-                width: 358,
+                width: 380,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment
                       .start, // เพิ่ม crossAxisAlignment ให้กับ Column
@@ -55,11 +55,15 @@ class _Promotion2pageState extends State<Promotion2page> {
                         style: TextStyle(fontSize: 11),
                       ),
                     ),
-                    Text(
-                      'THC Charge ย่อมาจาก Terminal Handling Charge หมายถึง ค่าธรรมเนียมที่เรียกเก็บจากผู้นำเข้าหรือผู้ส่งออกสินค้า สำหรับบริการจัดการสินค้าที่ท่าเรือ เช่น การยกตู้คอนเทนเนอร์ ขึ้นลงเรือ การเคลื่อนย้ายตู้คอนเทนเนอร์ภายในท่าเรือ การจัดเก็บตู้คอนเทนเนอร์ในลาน และบริการอื่น ๆ ที่เกี่ยวข้อง',
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: 5,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'THC Charge ย่อมาจาก Terminal Handling Charge หมายถึง ค่าธรรมเนียมที่เรียกเก็บจากผู้นำเข้าหรือผู้ส่งออกสินค้า สำหรับบริการจัดการสินค้าที่ท่าเรือ เช่น การยกตู้คอนเทนเนอร์ ขึ้นลงเรือ การเคลื่อนย้ายตู้คอนเทนเนอร์ภายในท่าเรือ การจัดเก็บตู้คอนเทนเนอร์ในลาน และบริการอื่น ๆ ที่เกี่ยวข้อง',
+                            textAlign: TextAlign.left,
+                          ),
+                          SizedBox(height: 5,),
                     Align(
                       alignment: Alignment.centerLeft, // จัดข้อความให้ชิดซ้าย
                       child: Text(
@@ -67,6 +71,10 @@ class _Promotion2pageState extends State<Promotion2page> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
+                        ],
+                      ),
+                    ),
+                    
                     Text(' - จำนวนเงิน: ขึ้นอยู่กับขนาด ประเภท ',textAlign: TextAlign.left,),
                     Text('   และน้ำหนักของตู้คอนเทนเนอร์',textAlign: TextAlign.left,),
                     Text(' การเรียกเก็บ:',textAlign: TextAlign.left,),

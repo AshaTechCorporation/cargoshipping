@@ -23,7 +23,9 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 height: 99,
                 width: 87,
@@ -34,7 +36,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Container(
                 height: 43.91,
                 width: 171.6,
@@ -45,7 +49,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -65,15 +71,11 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        onPressed: () {
-        
-                        },
+                        onPressed: () {},
                         icon: Icon(Icons.remove_red_eye_outlined),
                       ),
                       TextButton(
-                        onPressed: () {
-                          
-                        },
+                        onPressed: () {},
                         child: Text(
                           'ลืมรหัสผ่าน?',
                           style: TextStyle(
@@ -87,26 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 obscureText: true,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => registerpage()),
-                    );
-                  },
-                  child: Text(
-                    'ลงทะเบียนผู้ใช้ใหม่',
-                    style: TextStyle(
-                      color: Colors.blue[500],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
+              SizedBox(height: 20,),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(
@@ -117,16 +100,46 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 219, 18, 4),
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 135, vertical: 15), // การเว้นระยะในปุ่ม
+                      horizontal: 135, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    // มุมโค้งของปุ่ม
+                  
                   ),
                 ),
                 child: const Text(
                   'เข้าสู่ระบบ',
                   style: TextStyle(
                       fontSize: 20, color: Color.fromARGB(255, 255, 255, 255)),
+                ),
+              ),
+              const SizedBox(height: 15),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor:
+                      Color.fromARGB(255, 219, 18, 4), // สีของข้อความ
+                  backgroundColor: Colors.white, // สีพื้นหลังของปุ่ม
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 135, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    side: BorderSide(
+                      color: Color.fromARGB(255, 219, 18, 4), // สีของขอบ
+                      width: 2,
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => registerpage()),
+                  );
+                },
+                child: const Text(
+                  'ลงทะเบียนผู้ใช้ใหม่',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 219, 18, 4), // สีของข้อความ
+                  ),
                 ),
               ),
               SizedBox(
@@ -140,16 +153,13 @@ class _LoginPageState extends State<LoginPage> {
                 height: 35,
               ),
               ElevatedButton(
-                onPressed: () {
-        
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 100, vertical: 15), // การเว้นระยะในปุ่ม
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
-                    // มุมโค้งของปุ่ม
                   ),
                 ),
                 child: const Text(
@@ -161,9 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               ElevatedButton(
-                onPressed: () {
-        
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
@@ -182,9 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               ElevatedButton(
-                onPressed: () {
-                 
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
@@ -203,9 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               ElevatedButton(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Userinfo extends StatefulWidget {
@@ -79,13 +80,17 @@ class _UserinfoState extends State<Userinfo> {
               ),
             ),
             SizedBox(
+              height: size.height * 0.01,
+            ),
+            Divider(),
+            SizedBox(
               height: size.height * 0.07,
             ),
             Container(
               width: 358,
               height: 45,
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: red1,
                 borderRadius: BorderRadius.circular(15)
               ),
               child: Center(child: Text('ยืนยัน',style: TextStyle(fontSize: 15,color: Colors.white),)),

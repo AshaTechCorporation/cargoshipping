@@ -81,34 +81,38 @@ class OurServicesWidget extends StatelessWidget {
       onTap: press,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: size.width * 0.4, // กำหนดความกว้างสูงสุด
+          maxWidth: size.width * 0.2, 
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 70, // ปรับความสูงของภาพ
+              height: 60,
+              width: 80,
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: AspectRatio(
-                  aspectRatio: 1, // ใช้อัตราส่วน 1:1 เพื่อให้ภาพไม่บิดเบี้ยว
-                  child: Image.asset(
-                    imagespath,
-                    fit: BoxFit.cover,
+                child: Center(
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Image.asset(
+                      imagespath,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8), // ช่องว่างระหว่างภาพและข้อความ
-            Text(
-              title,
-              style: TextStyle(fontSize: 14), // ขนาดข้อความ
-              maxLines: 2, // จำกัดจำนวนบรรทัด
-              overflow: TextOverflow.ellipsis, // ตัดข้อความที่ยาวเกินไป
+            SizedBox(height: 8),
+            Center(
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 14,
+                fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),

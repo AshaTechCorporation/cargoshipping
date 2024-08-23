@@ -31,7 +31,7 @@ class _AccountPageState extends State<AccountPage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.redAccent, Colors.red],
+                  colors: [Colors.redAccent, red1],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -49,12 +49,12 @@ class _AccountPageState extends State<AccountPage> {
                             Text(
                               'A123456',
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                                  TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'Name Surname',
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.white),
+                                  TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -86,7 +86,7 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                               SizedBox(
                                   width:
-                                      10), // กำหนดระยะห่างระหว่าง Text และ CircleAvatar
+                                      10),
                               CircleAvatar(
                                 backgroundColor: Colors.grey[300],
                                 radius: 20,
@@ -101,6 +101,7 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                       ],
                     ),
+                    SizedBox(height: size.height * 0.009,),
                     Row(
                       children: [
                         Column(
@@ -108,12 +109,12 @@ class _AccountPageState extends State<AccountPage> {
                             Text(
                               'TEG+ Point ',
                               style:
-                                  TextStyle(color: Colors.yellow, fontSize: 12),
+                                  TextStyle(color: Colors.yellow[500], fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               '150 คะแนน ',
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
+                                  TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -123,12 +124,12 @@ class _AccountPageState extends State<AccountPage> {
                             Text(
                               'Wallet ',
                               style:
-                                  TextStyle(color: Colors.yellow, fontSize: 12),
+                                  TextStyle(color: Colors.yellow, fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'คงเหลือ 1025 บาท',
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
+                                  TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -167,9 +168,6 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ),
-            // backgroundColor:
-            //     Colors.transparent, // Make the AppBar background transparent
-            // elevation: 0,
           ),
         ),
       ),
@@ -192,18 +190,17 @@ class _AccountPageState extends State<AccountPage> {
                   IconButton(
                     icon: Icon(
                       Icons.favorite_border_outlined,
-                      color: Colors.red,
-                    ), // เปลี่ยนเป็นไอคอนที่คุณต้องการ
+                      color:red1,
+                    ),
                     onPressed: () {
-                      // กำหนดการกระทำเมื่อไอคอนถูกกด
                     },
                   ),
                 ],
               ),
             ),
             Wrap(
-              spacing: 15,
-              runSpacing: 10,
+              spacing: 8,
+              runSpacing: 8,
               children: List.generate(
                 productOrderList.length,
                 (index) => CardlistWidget(
@@ -232,6 +229,7 @@ class _AccountPageState extends State<AccountPage> {
             GridView.builder(
               shrinkWrap: true,
               itemCount: importlist.length,
+              physics: ClampingScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 5,

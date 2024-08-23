@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Question extends StatefulWidget {
@@ -15,7 +16,7 @@ class _QuestionState extends State<Question> {
         title: Text('คำถามที่พบบ่อย'),
       ),
       body: Container(
-        color: Colors.grey[300],
+        color:background,
         child: Column(
           children: [
             SizedBox(

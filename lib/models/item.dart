@@ -1,4 +1,3 @@
-import 'package:cargoshipping/models/subcategories.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'item.g.dart';

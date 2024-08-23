@@ -16,60 +16,70 @@ class MenuList extends StatelessWidget {
     MenuItem(imagePath: 'assets/icons/setting.png', text: 'ตั้งค่า'),
   ];
 
+  MenuList({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: menuItems.length,
-      itemBuilder: (context, index) {
-        final item = menuItems[index];
-        return ListTile(
-          leading: Image.asset(
-            item.imagePath,
-            width: 20,
-            height: 20,
-          ),
-          title: Text(
-            item.text,
-            style: TextStyle(fontSize: 13),
-          ),
-          onTap: () {
-            if (index == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Question(),
-                ),
-              );
-            }
-            if(index == 1){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Summarysale(),
-                ),
-              );
-            }
-            if (index == 4) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MessagePage()));
-            }
-            if (index == 5) {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Wecargo()));
-            }
-            if (index == 6) {
-              Navigator.push(
+      children: ListTile.divideTiles(
+        context: context,
+        tiles: menuItems.map((item) {
+          int index = menuItems.indexOf(item);
+          return ListTile(
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: 16, vertical: 0), // ลด vertical padding ให้เหลือ 0
+            leading: Image.asset(
+              item.imagePath,
+              width: 25,
+              height: 25,
+            ),
+            title: Text(
+              item.text,
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+            ),
+            onTap: () {
+              if (index == 0) {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Accsetting(
-                            title: item.text,
-                          )));
-            }
-          },
-        );
-      },
+                    builder: (context) => Question(),
+                  ),
+                );
+              }
+              if (index == 1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Summarysale(),
+                  ),
+                );
+              }
+              if (index == 3) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MessagePage()));
+              }
+              if (index == 4) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MessagePage()));
+              }
+              if (index == 5) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Wecargo()));
+              }
+              if (index == 6) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Accsetting(
+                              title: item.text,
+                            )));
+              }
+            },
+          );
+        }).toList(),
+      ).toList(),
     );
   }
 }

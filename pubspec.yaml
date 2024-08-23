@@ -38,6 +38,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   fan_carousel_image_slider: ^1.0.1
   collection: ^1.18.0
+  cached_network_image: ^3.3.1
 
   #สไลบราลี่ที่ใช้ในการติดต่อ เอพีไอ และสร้างโมเดลข้อมูล
   build_runner: ^2.3.3

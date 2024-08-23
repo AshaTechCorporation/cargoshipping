@@ -1,4 +1,5 @@
 import 'package:cargoshipping/cart/widget/storeitem.dart';
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -10,13 +11,14 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   bool _isSelected = false;
-   final List<bool> _storeItemsSelection = [false, false];
-   final List<String> _storeNames = ['MakeMixue.store','MakeMixue.store2'];
+  final List<bool> _storeItemsSelection = [false, false];
+  final List<String> _storeNames = ['MakeMixue.store', 'MakeMixue.store2'];
 
-   void _selectAll(bool? value) {
+  void _selectAll(bool? value) {
     setState(() {
       _isSelected = value ?? false;
-      _storeItemsSelection.fillRange(0, _storeItemsSelection.length,_isSelected);
+      _storeItemsSelection.fillRange(
+          0, _storeItemsSelection.length, _isSelected);
     });
   }
 
@@ -29,13 +31,15 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('สินค้าในรถเข็น'),
+        title: Text(
+          'รถเข็น',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.symmetric(
@@ -51,13 +55,14 @@ class _CartPageState extends State<CartPage> {
           )
         ],
       ),
-     body: ListView.builder(
+      body: ListView.builder(
         itemCount: _storeItemsSelection.length,
         itemBuilder: (context, index) {
           return StoreItem(
             storeName: _storeNames[index],
             isSelected: _storeItemsSelection[index],
-            onSelectionChanged: (isSelected) => _updateStoreSelection(index, isSelected),
+            onSelectionChanged: (isSelected) =>
+                _updateStoreSelection(index, isSelected),
           );
         },
       ),
@@ -80,8 +85,12 @@ class _CartPageState extends State<CartPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: red1, // สีของตัวอักษร
+                  ),
                   child: Text('สั่งซื้อสินค้า'),
-                ),
+                )
               ],
             ),
           ),

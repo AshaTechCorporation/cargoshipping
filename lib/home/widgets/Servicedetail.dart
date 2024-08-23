@@ -16,14 +16,14 @@ class Servicedetail extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Align(
-          alignment: Alignment.topCenter, // จัดตำแหน่งที่ด้านบนกลาง
+          alignment: Alignment.topCenter,
           child: Container(
             width: 358,
             child: Column(
               children: [
                 Container(
                   margin: const EdgeInsets.only(
-                      top: 16.0), // เพิ่มระยะห่างจากด้านบน
+                      top: 16.0),
                   height: 130,
                   width: 358,
                   decoration: BoxDecoration(
