@@ -1,21 +1,14 @@
 import 'package:cargoshipping/account/widgets/accsetting.dart';
+import 'package:cargoshipping/account/widgets/itemfav.dart';
+import 'package:cargoshipping/account/widgets/ordersumpage.dart';
 import 'package:cargoshipping/account/widgets/summarysale.dart';
 import 'package:cargoshipping/account/widgets/wecargo.dart';
+import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/messagePage.dart';
 import 'package:cargoshipping/message/widgets/question.dart';
 import 'package:flutter/material.dart';
 
 class MenuList extends StatelessWidget {
-  final List<MenuItem> menuItems = [
-    MenuItem(imagePath: 'assets/icons/result.png', text: 'สมัครเป็นตัวแทน'),
-    MenuItem(imagePath: 'assets/icons/result.png', text: 'สรุปยอดขาย'),
-    MenuItem(imagePath: 'assets/icons/guide.png', text: 'คู่มือการใช้งาน'),
-    MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งเคลมสินค้า'),
-    MenuItem(imagePath: 'assets/icons/help.png', text: 'ช่วยเหลือ'),
-    MenuItem(imagePath: 'assets/icons/contact.png', text: 'ติดต่อเรา'),
-    MenuItem(imagePath: 'assets/icons/setting.png', text: 'ตั้งค่า'),
-  ];
-
   MenuList({super.key});
 
   @override
@@ -28,8 +21,7 @@ class MenuList extends StatelessWidget {
         tiles: menuItems.map((item) {
           int index = menuItems.indexOf(item);
           return ListTile(
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: 16, vertical: 0), // ลด vertical padding ให้เหลือ 0
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
             leading: Image.asset(
               item.imagePath,
               width: 25,
@@ -41,14 +33,18 @@ class MenuList extends StatelessWidget {
             ),
             onTap: () {
               if (index == 0) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Ordersumpage()));
+              }
+              if (index == 2) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Question(),
+                    builder: (context) => Itemfav(),
                   ),
                 );
               }
-              if (index == 1) {
+              if (index == 3) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -56,19 +52,19 @@ class MenuList extends StatelessWidget {
                   ),
                 );
               }
-              if (index == 3) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MessagePage()));
-              }
-              if (index == 4) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MessagePage()));
-              }
               if (index == 5) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MessagePage()));
+              }
+              if (index == 6) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MessagePage()));
+              }
+              if (index == 7) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Wecargo()));
               }
-              if (index == 6) {
+              if (index == 8) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

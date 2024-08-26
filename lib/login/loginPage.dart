@@ -89,21 +89,21 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 obscureText: true,
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
+                  Navigator.of(context, rootNavigator: true).pushReplacement(
                     MaterialPageRoute(builder: (context) => FirstPage()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 219, 18, 4),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 135, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 135, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                  
                   ),
                 ),
                 child: const Text(

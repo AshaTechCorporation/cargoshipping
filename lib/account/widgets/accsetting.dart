@@ -1,6 +1,7 @@
 import 'package:cargoshipping/account/widgets/addresspage.dart';
 import 'package:cargoshipping/account/widgets/userinfo.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/login/loginPage.dart';
 import 'package:flutter/material.dart';
 
 class Accsetting extends StatefulWidget {
@@ -167,9 +168,40 @@ class _AccsettingState extends State<Accsetting> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'ออกจากระบบ',
-                    style: TextStyle(fontWeight: FontWeight.bold, color: red1),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('ยืนยันการออกจากระบบ'),
+                              content: Text('คุณต้องการออกจากระบบใช่ไหม?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('ยกเลิก'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()),
+                                  (route) => false);
+                                  },
+                                  child: Text('ตกลง'),
+                                )
+                              ],
+                            );
+                          });
+                    },
+                    child: Text(
+                      'ออกจากระบบ',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, color: red1),
+                    ),
                   )
                 ],
               ),

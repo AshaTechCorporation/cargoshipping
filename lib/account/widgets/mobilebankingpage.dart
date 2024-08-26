@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Mobilebankingpage extends StatefulWidget {
@@ -29,7 +30,10 @@ class _MobilebankingpageState extends State<Mobilebankingpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('โอนเงินผ่านแอป Mobile Banking'),
+        title: Text('โอนเงินผ่านแอป Mobile Banking',style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black
+        ),),
       ),
       body: Column(
         children: [
@@ -41,7 +45,8 @@ class _MobilebankingpageState extends State<Mobilebankingpage> {
           SizedBox(height: 10),
           _buildDivider(),
           SizedBox(height: 15),
-          _buildRow('assets/icons/bay.png', 'Krungsri Mobile App', 2, isChecked3),
+          _buildRow(
+              'assets/icons/bay.png', 'Krungsri Mobile App', 2, isChecked3),
           SizedBox(height: 10),
           _buildDivider(),
           SizedBox(height: 15),
@@ -49,24 +54,26 @@ class _MobilebankingpageState extends State<Mobilebankingpage> {
           SizedBox(height: 10),
           _buildDivider(),
           SizedBox(height: 15),
-          _buildRow('assets/icons/bbl.png', 'Bangkok Bank Mobile Banking', 4, isChecked5),
+          _buildRow('assets/icons/bbl.png', 'Bangkok Bank Mobile Banking', 4,
+              isChecked5),
           SizedBox(height: 10),
           _buildDivider(),
           SizedBox(height: 15),
           SizedBox(
-              height: 320,
-            ),
-            Container(
-              height: 45,
-              width: 306,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), color: Colors.red),
-              child: Center(
-                  child: Text(
-                'ยืนยันช่องทางการเติมเงิน',
-                style: TextStyle(color: Colors.white),
-              )),
-            ),
+            height: 320,
+          ),
+          Container(
+            height: 45,
+            width: 306,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15), color: red1),
+            child: Center(
+                child: Text(
+              'ยืนยันช่องทางการเติมเงิน',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            )),
+          ),
         ],
       ),
     );

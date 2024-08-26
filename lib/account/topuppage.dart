@@ -1,4 +1,6 @@
+import 'package:cargoshipping/account/cerditcardpage.dart';
 import 'package:cargoshipping/account/widgets/mobilebankingpage.dart';
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Topuppage extends StatefulWidget {
@@ -14,7 +16,10 @@ class _TopuppageState extends State<Topuppage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ช่องทางการเติมเงิน'),
+        title: Text(
+          'ช่องทางการเติมเงิน',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -66,18 +71,28 @@ class _TopuppageState extends State<Topuppage> {
                   ),
                 );
               },
-              child: Row(
-                children: [
-                  SizedBox(width: 20),
-                  Image.asset('assets/icons/mobilebank.png'),
-                  Text(
-                    'โอนเงินผ่านแอป Mobile Banking',
-                    style: TextStyle(fontSize: 13),
-                  ),
-                  Spacer(),
-                  Image.asset('assets/icons/rightarrow.png'),
-                  SizedBox(width: 20),
-                ],
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Mobilebankingpage(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Image.asset('assets/icons/mobilebank.png'),
+                    Text(
+                      'โอนเงินผ่านแอป Mobile Banking',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                    Spacer(),
+                    Image.asset('assets/icons/rightarrow.png'),
+                    SizedBox(width: 20),
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -91,22 +106,32 @@ class _TopuppageState extends State<Topuppage> {
             SizedBox(
               height: 15,
             ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Image.asset('assets/icons/creditcard.png'),
-                Text(
-                  'บัตรเครดิต/บัตรเดบิต',
-                  style: TextStyle(fontSize: 13),
-                ),
-                Spacer(),
-                Image.asset('assets/icons/rightarrow.png'),
-                SizedBox(
-                  width: 20,
-                )
-              ],
+            InkWell(
+              onTap: () {
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Cerditcardpage(),
+                    ),
+                  );
+              },
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Image.asset('assets/icons/creditcard.png'),
+                  Text(
+                    'บัตรเครดิต/บัตรเดบิต',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                  Spacer(),
+                  Image.asset('assets/icons/rightarrow.png'),
+                  SizedBox(
+                    width: 20,
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: 15,
@@ -123,11 +148,12 @@ class _TopuppageState extends State<Topuppage> {
               height: 45,
               width: 306,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), color: Colors.red),
+                  borderRadius: BorderRadius.circular(15), color: red1),
               child: Center(
                   child: Text(
                 'ยืนยันช่องทางการเติมเงิน',
-                style: TextStyle(color: Colors.white),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               )),
             ),
           ],

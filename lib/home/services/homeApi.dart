@@ -7,8 +7,8 @@ class HomeApi {
   const HomeApi();
 
   //เรียกดูข้อมูล Category
-  static Future<List<Categories>> getCategories() async {
-    final url = Uri.https('api.atphosting24.com', '/category/api.php',{"folder": 'taobao'});
+  static Future<List<Categories>> getCategories({required String name}) async {
+    final url = Uri.https('api.atphosting24.com', '/category/api.php',{"folder": '$name'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,

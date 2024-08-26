@@ -17,6 +17,7 @@ import 'package:cargoshipping/widgets/PictureSliderWidget.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,15 +33,15 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getlistCategories();
+      await getlistCategories(name: items[0]);
     });
   }
 
   //ดึงข้อมูล api Category
-  Future<void> getlistCategories() async {
+  Future<void> getlistCategories({required String name}) async {
     try {
       LoadingDialog.open(context);
-      final _categories = await HomeApi.getCategories();
+      final _categories = await HomeApi.getCategories(name: name);
       if (!mounted) return;
 
       setState(() {
@@ -56,12 +57,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
+    'taobao',
+    '1688',
   ];
-  String? selectedValue;
+  String selectedValue = 'taobao';
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +79,8 @@ class _HomePageState extends State<HomePage> {
                 width: size.width * 0.85,
                 padding: const EdgeInsets.all(4.0),
                 decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color.fromARGB(255, 122, 124, 126)),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 122, 124, 126)),
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.white),
                 child: IntrinsicHeight(
@@ -93,7 +92,8 @@ class _HomePageState extends State<HomePage> {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'ค้นหาสินค้า',
-                            contentPadding: EdgeInsets.only(left: 15, bottom: 10),
+                            contentPadding:
+                                EdgeInsets.only(left: 15, bottom: 10),
                           ),
                         ),
                       ),
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                             hint: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                '1688',
+                                'เลือกสินค้า',
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: Colors.red,
@@ -133,8 +133,9 @@ class _HomePageState extends State<HomePage> {
                             value: selectedValue,
                             onChanged: (String? value) {
                               setState(() {
-                                selectedValue = value;
+                                selectedValue = value!;
                               });
+                              getlistCategories(name: selectedValue);
                             },
                             buttonStyleData: const ButtonStyleData(
                               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -154,7 +155,8 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Searchpage()),
+                            MaterialPageRoute(
+                                builder: (context) => Searchpage()),
                           );
                         },
                         child: Container(
@@ -172,13 +174,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      
-                      
                     ],
                   ),
                 ),
               ),
-              
               Icon(Icons.favorite_border_outlined),
             ],
           ),
@@ -318,6 +317,170 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 12,
                         color: Colors.grey,
                       ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              // color: red1,
+              width: size.width * 0.93,
+              height: size.height * 0.42,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('ที่อยู่รับพัสดุ'),
+                  Container(
+                    height: size.height * 0.19,
+                    width: size.width * 0.93,
+                    // color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                            text: TextSpan(
+                                text: 'คลังกวางโจว :',
+                                style: TextStyle(
+                                    color: red1,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15),
+                                children: <TextSpan>[
+                              TextSpan(
+                                text:
+                                    ' TEG CARGO仓 广东省广州市白云区唐阁上村中街28号3栋105A仓 邮编510450',
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),
+                              )
+                            ])),
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
+                        RichText(
+                            text: TextSpan(
+                                text: 'เบอร์โทรศัพท์ :',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15),
+                                children: <TextSpan>[
+                              TextSpan(
+                                text: ' 18520290139啊苏',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),
+                              )
+                            ])),
+                        SizedBox(
+                          height: size.height * 0.018,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            height: size.height * 0.042,
+                            width: size.width * 0.4,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: red1,
+                                side: BorderSide(color: red1, width: 1),
+                              ),
+                              onPressed: () {
+                                Clipboard.setData(
+                                  ClipboardData(
+                                      text: 'ที่อยู่ที่ต้องการคัดลอก'),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content:
+                                          Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
+                                );
+                              },
+                              child: Text(
+                                'คัดลอกที่อยู่',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.01,),
+                  Container(
+                    height: size.height * 0.19,
+                    width: size.width * 0.93,
+                    // color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                            text: TextSpan(
+                                text: 'คลังอี้อู :',
+                                style: TextStyle(
+                                    color: red1,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15),
+                                children: <TextSpan>[
+                              TextSpan(
+                                text:
+                                    ' TEG CARGO仓 浙江省义乌市稠城街道江北下朱货运市场一栋231-232号 邮编322023',
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),
+                              )
+                            ])),
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
+                        RichText(
+                            text: TextSpan(
+                                text: 'เบอร์โทรศัพท์ :',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15),
+                                children: <TextSpan>[
+                              TextSpan(
+                                text: ' 18520290139',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15),
+                              )
+                            ])),
+                        SizedBox(
+                          height: size.height * 0.018,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            height: size.height * 0.042,
+                            width: size.width * 0.4,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: red1,
+                                side: BorderSide(color: red1, width: 1),
+                              ),
+                              onPressed: () {
+                                Clipboard.setData(
+                                  ClipboardData(
+                                      text: 'ที่อยู่ที่ต้องการคัดลอก'),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content:
+                                          Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
+                                );
+                              },
+                              child: Text(
+                                'คัดลอกที่อยู่',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/account/widgets/menulist.dart';
 import 'package:flutter/material.dart';
 
 Color color1 = Color(int.parse('0xffcd7f32'));
@@ -196,9 +197,24 @@ List<String> payment = [
 ];
 
 List<String> howto = [
-  'HOW TO นำเข้าได้เอกสารถูกต้อง ผ่านพิธีการศุลกากร',
   'HOW TO ชำระค่าขนส่งจีน-ไทย',
   'HOW TO ฝากโอนชำระค่าสินค้าจีน',
   'HOW TO ค้นหาสินค้าจาก 1688 TAOBAO',
-  'HOW TO สมัครเป็นตัวแทน'
+  'HOW TO สมัครเป็นตัวแทน',
+  'ที่อยู่โกดังจีน',
+  'ที่อยู่โกดังไทย',
+  'ระเบียบการเข้าคลัง TEG Cargo'
 ];
+
+
+List<MenuItem> menuItems = [
+    MenuItem(imagePath: 'assets/icons/cart-plus_svgrepo.com.png', text: 'สรุปการสั่งการสั่งซื้อ'),
+    MenuItem(imagePath: 'assets/icons/yellotruck.png', text: 'สรุปการขนส่ง'),
+    MenuItem(imagePath: 'assets/icons/fav.png', text: 'รายการโปรด'),
+    MenuItem(imagePath: 'assets/icons/guide.png', text: 'บทความ'),
+    MenuItem(imagePath: 'assets/icons/guide.png', text: 'คู่มือการใช้งาน'),
+    MenuItem(imagePath: 'assets/icons/help.png', text: 'ช่วยเหลือ'),
+    MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งปัญหา'),
+    MenuItem(imagePath: 'assets/icons/contact.png', text: 'ติดต่อเรา'),
+    MenuItem(imagePath: 'assets/icons/setting.png', text: 'ตั้งค่า'),
+  ];

@@ -27,16 +27,19 @@ class _SearchpageState extends State<Searchpage> {
       appBar: AppBar(
         backgroundColor: red1,
         toolbarHeight: size.height * 0.099,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new_outlined),
+        ),
         title: PreferredSize(
           preferredSize: Size.fromHeight(size.height * 0.08),
           child: Container(
             height: size.height * 0.045,
-            width: size.width * 0.9,
-            margin: const EdgeInsets.symmetric(
-                horizontal: 1.0,
-                vertical: 3.0),
-            padding: const EdgeInsets.symmetric(
-                horizontal: 1.0),
+            width: size.width * 0.98,
+            margin: const EdgeInsets.symmetric(horizontal: 0.1, vertical: 3.0),
+            padding: EdgeInsets.symmetric(horizontal: 0.1),
             decoration: BoxDecoration(
                 border:
                     Border.all(color: const Color.fromARGB(255, 122, 124, 126)),
@@ -46,7 +49,7 @@ class _SearchpageState extends State<Searchpage> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: size.width * 0.35,
+                    width: size.width * 0.28,
                     child: TextFormField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -60,7 +63,7 @@ class _SearchpageState extends State<Searchpage> {
                     color: Colors.grey,
                     thickness: 1,
                   ),
-                  Container(
+                  SizedBox(
                     height: size.height * 0.05,
                     width: size.width * 0.23,
                     child: DropdownButtonHideUnderline(
@@ -97,7 +100,7 @@ class _SearchpageState extends State<Searchpage> {
                         buttonStyleData: const ButtonStyleData(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           height: 40,
-                          width: 140,
+                          width: 130,
                         ),
                         menuItemStyleData: const MenuItemStyleData(
                           height: 40,
@@ -105,19 +108,19 @@ class _SearchpageState extends State<Searchpage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: size.width * 0.01,
-                  ),
+                  // SizedBox(
+                  //   width: size.width * 0.01,
+                  // ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Searchpage()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => Searchpage()),
+                      // );
                     },
                     child: Container(
                       height: size.height * 0.05,
-                      width: size.width * 0.193,
+                      width: size.width * 0.172,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.red,

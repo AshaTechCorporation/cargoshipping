@@ -1,4 +1,3 @@
-import 'package:cargoshipping/account/widgets/mobilebankingpage.dart';
 import 'package:cargoshipping/account/widgets/withdrawmobile.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,10 @@ class _WithdrawpageState extends State<Withdrawpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ช่องทางการถอนเงิน'),
+        title: Text('ช่องทางการถอนเงิน',style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black
+        ),),
       ),
       body: SingleChildScrollView(
         child: Column(
