@@ -3,14 +3,14 @@ import 'package:cargoshipping/login/loginPage.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
-class registerpage extends StatefulWidget {
-  const registerpage({super.key});
+class Legalpersonpage extends StatefulWidget {
+  const Legalpersonpage({super.key});
 
   @override
-  State<registerpage> createState() => _registerpageState();
+  State<Legalpersonpage> createState() => _LegalpersonpageState();
 }
 
-class _registerpageState extends State<registerpage> {
+class _LegalpersonpageState extends State<Legalpersonpage> {
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -18,14 +18,47 @@ class _registerpageState extends State<registerpage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _reccomController = TextEditingController();
   final TextEditingController _telController = TextEditingController();
-  final TextEditingController _importercodeController = TextEditingController();
+  final TextEditingController _companyController = TextEditingController();
   final TextEditingController _birthController = TextEditingController();
+  final TextEditingController _importercodeController = TextEditingController();
+  final TextEditingController _taxController = TextEditingController();
+  final TextEditingController _hometelController = TextEditingController();
+
 // dropdown
+final List<String> provice = [
+    '9',
+    '4',
+  ];
+
+  final List<String> district = [
+    '1',
+    '2',
+  ];
+
   final List<String> subdistrict = [
     '1',
     '2',
   ];
   final List<String> zipcode = [
+    '3',
+    '4',
+  ];
+
+final List<String> comprovice = [
+    '5',
+    '1',
+  ];
+
+  final List<String> comdistrict = [
+    '1',
+    '2',
+  ];
+
+  final List<String> comsubdistrict = [
+    '1',
+    '2',
+  ];
+  final List<String> comzipcode = [
     '3',
     '4',
   ];
@@ -54,10 +87,21 @@ class _registerpageState extends State<registerpage> {
     '8',
     '6',
   ];
+  String? selectedprovice;
+
+  String? selecteddistrict;
 
   String? selectedsubdistrict;
 
   String? selectedzipcode;
+
+  String? selectedcomprovice;
+
+  String? selectedcomdistrict;
+
+  String? selectedcomsubdistrict;
+
+  String? selectedcomzipcode;
 
   String? selectedtotalsend;
 
@@ -83,7 +127,7 @@ class _registerpageState extends State<registerpage> {
         title: Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            'ลงทะเบียนผู้ใช้งาน',
+            'ลงทะเบียนนิติบุคคล',
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
@@ -284,6 +328,286 @@ class _registerpageState extends State<registerpage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
+                Container(
+                  height: size.height * 0.058,
+                  color: white,
+                  child: TextField(
+                    controller: _companyController,
+                    decoration: InputDecoration(
+                      hintText: 'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน',
+                      labelStyle: TextStyle(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                Container(
+                  height: size.height * 0.058,
+                  color: white,
+                  child: TextField(
+                    controller: _taxController,
+                    decoration: InputDecoration(
+                      hintText: 'เลขที่ผู้เสียภาษี',
+                      labelStyle: TextStyle(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ที่อยู่บริษัทฯ ',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w200,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: size.height * 0.01),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    // Add more decoration..
+                  ),
+                  hint: const Text(
+                    'จังหวัด',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: comprovice
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'please select distict';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {},
+                  onSaved: (value) {
+                    selectedcomprovice = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    // Add more decoration..
+                  ),
+                  hint: const Text(
+                    'อำเภอ',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: comdistrict
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'please select distict';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {},
+                  onSaved: (value) {
+                    selectedcomdistrict = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    // Add more decoration..
+                  ),
+                  hint: const Text(
+                    'ตำบล',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: comdistrict
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'please select distict';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {},
+                  onSaved: (value) {
+                    selectedcomsubdistrict = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    // Add Horizontal padding using menuItemStyleData.padding so it matches
+                    // the menu padding when button's width is not specified.
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    // Add more decoration..
+                  ),
+                  hint: const Text(
+                    'รหัสไปรษณีย์',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: comdistrict
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please select zipcode.';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    //Do something when selected item is changed.
+                  },
+                  onSaved: (value) {
+                    selectedcomzipcode = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                Container(
+                  height: size.height * 0.058,
+                  color: white,
+                  child: TextField(
+                    controller: _hometelController,
+                    decoration: InputDecoration(
+                      hintText: 'เบอร์โทรศัพท์',
+                      labelStyle: TextStyle(),
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(15.0), // มุมโค้งของขอบ
+                      ), //textfield modifly
+                    ),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,6 +620,122 @@ class _registerpageState extends State<registerpage> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(height: size.height * 0.01),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    // Add Horizontal padding using menuItemStyleData.padding so it matches
+                    // the menu padding when button's width is not specified.
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    // Add more decoration..
+                  ),
+                  hint: const Text(
+                    'จังหวัด',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: provice
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please select zipcode.';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    //Do something when selected item is changed.
+                  },
+                  onSaved: (value) {
+                    selectedprovice = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    // Add Horizontal padding using menuItemStyleData.padding so it matches
+                    // the menu padding when button's width is not specified.
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    // Add more decoration..
+                  ),
+                  hint: const Text(
+                    'อำเภอ',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: district
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please select zipcode.';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    //Do something when selected item is changed.
+                  },
+                  onSaved: (value) {
+                    selecteddistrict = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
                 ),
                 SizedBox(height: size.height * 0.01),
                 DropdownButtonFormField2<String>(
@@ -409,6 +849,7 @@ class _registerpageState extends State<registerpage> {
                     padding: EdgeInsets.symmetric(horizontal: 16),
                   ),
                 ),
+                SizedBox(height: size.height * 0.01),
                 SizedBox(height: size.height * 0.01),
                 Container(
                     height: size.height * 0.058,

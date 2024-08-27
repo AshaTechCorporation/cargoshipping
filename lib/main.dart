@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
               titleTextStyle:
                   TextStyle(fontFamily: 'SukhumvitSet', fontSize: 16)),
           fontFamily: 'SukhumvitSet'),
-      home: LoginPage(),
+      home: FirstPage(),
     );
   }
 }

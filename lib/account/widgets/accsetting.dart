@@ -19,7 +19,10 @@ class _AccsettingState extends State<Accsetting> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('ตั้งค่า',style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black
+        ),),
       ),
       body: Container(
         color: Colors.grey[300], // เปลี่ยนสีพื้นหลังของ body
