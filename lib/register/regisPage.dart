@@ -13,8 +13,7 @@ class registerpage extends StatefulWidget {
 class _registerpageState extends State<registerpage> {
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _reccomController = TextEditingController();
   final TextEditingController _telController = TextEditingController();
@@ -100,16 +99,20 @@ class _registerpageState extends State<registerpage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                SizedBox(height: size.height * 0.02,),
                 Image.asset(
                   'assets/images/logofull.png',
                   width: size.width * 0.59,
                 ),
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: size.height * 0.04,
                 ),
-                Container(
-                  height: size.height * 0.058,
+                 Container(
+                  height: size.height * 0.052,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: white,
+                  ),
                   child: TextField(
                     controller: _nameController,
                     decoration: InputDecoration(
@@ -124,9 +127,12 @@ class _registerpageState extends State<registerpage> {
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                Container(
-                  height: size.height * 0.058,
+                 Container(
+                  height: size.height * 0.052,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: white,
+                  ),
                   child: TextField(
                     controller: _lastnameController,
                     decoration: InputDecoration(
@@ -140,8 +146,11 @@ class _registerpageState extends State<registerpage> {
                 ),
                 SizedBox(height: size.height * 0.01),
                 Container(
-                  height: size.height * 0.058,
+                  height: size.height * 0.052,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: white,
+                  ),
                   child: TextField(
                     controller: _telController,
                     decoration: InputDecoration(
@@ -149,15 +158,18 @@ class _registerpageState extends State<registerpage> {
                       labelStyle: TextStyle(),
                       border: OutlineInputBorder(
                         borderRadius:
-                            BorderRadius.circular(15.0), // มุมโค้งของขอบ
-                      ), //textfield modifly
+                            BorderRadius.circular(15.0), 
+                      ), 
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                Container(
-                  height: size.height * 0.058,
+                 Container(
+                  height: size.height * 0.052,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: white,
+                  ),
                   child: TextField(
                     controller: _birthController,
                     decoration: InputDecoration(
@@ -220,7 +232,7 @@ class _registerpageState extends State<registerpage> {
                   ],
                 ),
                 Container(
-                  height: size.height * 0.058,
+                  height: size.height * 0.052,
                   color: white,
                   child: TextField(
                     controller: _importercodeController,
@@ -229,15 +241,18 @@ class _registerpageState extends State<registerpage> {
                       labelStyle: const TextStyle(),
                       border: OutlineInputBorder(
                         borderRadius:
-                            BorderRadius.circular(15.0), // มุมโค้งของขอบ
-                      ), //textfield modifly
+                            BorderRadius.circular(15.0), 
+                      ), 
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                Container(
-                  height: size.height * 0.058,
+                 Container(
+                  height: size.height * 0.052,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: white,
+                  ),
                   child: TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
@@ -246,15 +261,18 @@ class _registerpageState extends State<registerpage> {
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'รหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      //textfield modifly
+                      
                     ),
                     obscureText: true,
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                Container(
-                  height: size.height * 0.058,
+                 Container(
+                  height: size.height * 0.052,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: white,
+                  ),
                   child: TextField(
                     controller: _confirmPasswordController,
                     decoration: InputDecoration(
@@ -263,7 +281,7 @@ class _registerpageState extends State<registerpage> {
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'ยืนยันรหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      //textfield modifly
+                      
                     ),
                     obscureText: true,
                   ),
@@ -271,8 +289,11 @@ class _registerpageState extends State<registerpage> {
                 SizedBox(height: size.height * 0.01),
                 const SizedBox(height: 20),
                 Container(
-                  height: size.height * 0.058,
+                  height: size.height * 0.052,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: white,
+                  ),
                   child: TextField(
                     controller: _reccomController,
                     decoration: InputDecoration(
@@ -283,7 +304,7 @@ class _registerpageState extends State<registerpage> {
                     ),
                   ),
                 ),
-                SizedBox(height: size.height * 0.01),
+                SizedBox(height: size.height * 0.02),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,13 +312,13 @@ class _registerpageState extends State<registerpage> {
                     Text(
                       'ที่อยู่การจัดส่งในไทย',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 13,
                         fontWeight: FontWeight.w200,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: size.height * 0.01),
+                SizedBox(height: size.height * 0.02),
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
@@ -305,7 +326,7 @@ class _registerpageState extends State<registerpage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    // Add more decoration..
+                    
                   ),
                   hint: const Text(
                     'ตำบล',
@@ -355,13 +376,10 @@ class _registerpageState extends State<registerpage> {
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    // Add Horizontal padding using menuItemStyleData.padding so it matches
-                    // the menu padding when button's width is not specified.
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    // Add more decoration..
                   ),
                   hint: const Text(
                     'รหัสไปรษณีย์',
@@ -385,7 +403,7 @@ class _registerpageState extends State<registerpage> {
                     return null;
                   },
                   onChanged: (value) {
-                    //Do something when selected item is changed.
+                    //
                   },
                   onSaved: (value) {
                     selectedzipcode = value.toString();
@@ -410,39 +428,43 @@ class _registerpageState extends State<registerpage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                Container(
-                    height: size.height * 0.058,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all()),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: size.width * 0.02,
-                        ),
-                        Image.asset('assets/icons/pin.png'),
-                        SizedBox(
-                          width: size.width * 0.02,
-                        ),
-                        Text(
-                          'พิกัด Google map',
-                          style: TextStyle(
-                            fontSize: 15,
+                InkWell(
+                  onTap: () {
+                    print('map');
+                  },
+                  child: Container(
+                      height: size.height * 0.068,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all()),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: size.width * 0.02,
                           ),
-                        )
-                      ],
-                    )),
-                SizedBox(height: size.height * 0.05),
+                          Image.asset('assets/icons/pin.png'),
+                          SizedBox(
+                            width: size.width * 0.02,
+                          ),
+                          Text(
+                            'พิกัด Google map',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          )
+                        ],
+                      )),
+                ),
+                SizedBox(height: size.height * 0.035),
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    // Add Horizontal padding using menuItemStyleData.padding so it matches
-                    // the menu padding when button's width is not specified.
+                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    // Add more decoration..
+                    
                   ),
                   hint: const Text(
                     'รูปแบบส่งต่อ(ในไทย)',
@@ -466,7 +488,7 @@ class _registerpageState extends State<registerpage> {
                     return null;
                   },
                   onChanged: (value) {
-                    //Do something when selected item is changed.
+                    //
                   },
                   onSaved: (value) {
                     selectedformatsent = value.toString();
@@ -554,7 +576,7 @@ class _registerpageState extends State<registerpage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    // Add more decoration..
+                    
                   ),
                   hint: const Text(
                     'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
@@ -608,7 +630,7 @@ class _registerpageState extends State<registerpage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    // Add more decoration..
+                    
                   ),
                   hint: const Text(
                     'ท่านนำเข้าบ่อยหรือไม่ ',
@@ -662,7 +684,7 @@ class _registerpageState extends State<registerpage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    // Add more decoration..
+                    
                   ),
                   hint: const Text(
                     'ต้องการนำเข้าแบบใด ',
@@ -716,7 +738,7 @@ class _registerpageState extends State<registerpage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    // Add more decoration..
+                    
                   ),
                   hint: const Text(
                     'สิ่งที่ท่านต้องการ ',
@@ -781,7 +803,7 @@ class _registerpageState extends State<registerpage> {
                     boxShadow: [
                       BoxShadow(
                         color:
-                            Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                            Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -817,7 +839,7 @@ class _registerpageState extends State<registerpage> {
                     boxShadow: [
                       BoxShadow(
                         color:
-                            Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                            Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -853,7 +875,7 @@ class _registerpageState extends State<registerpage> {
                     boxShadow: [
                       BoxShadow(
                         color:
-                            Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                            Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -889,7 +911,7 @@ class _registerpageState extends State<registerpage> {
                     boxShadow: [
                       BoxShadow(
                         color:
-                            Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                            Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),

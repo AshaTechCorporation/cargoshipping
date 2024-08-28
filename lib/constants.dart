@@ -7,6 +7,7 @@ Color red1 = Color(0xffde1e26);
 Color arrowcolor = Color(0xffd9d9d9);
 Color background = Color(0xfff5f5f5);
 Color white = Color(0xffffffff);
+Color headingtext = Color(0xff606060);
 
 
 

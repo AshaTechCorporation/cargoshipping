@@ -67,119 +67,128 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.1),
-        child: AppBar(
-          backgroundColor: red1,
-          toolbarHeight: size.height * 0.099,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: size.height * 0.045,
-                width: size.width * 0.85,
-                padding: const EdgeInsets.all(4.0),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 122, 124, 126)),
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white),
-                child: IntrinsicHeight(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: size.width * 0.35,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'ค้นหาสินค้า',
-                            contentPadding:
-                                EdgeInsets.only(left: 15, bottom: 10),
+        preferredSize: Size.fromHeight(size.height * 0.11),
+        child: ClipRRect(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(30),
+          ),
+          child: AppBar(
+            backgroundColor: red1,
+            toolbarHeight: size.height * 0.099,
+            title: Padding(
+              padding: const EdgeInsets.only(top: 35),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: size.height * 0.045,
+                    width: size.width * 0.85,
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 122, 124, 126)),
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white),
+                    child: IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: size.width * 0.35,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'ค้นหาสินค้า',
+                                contentPadding:
+                                    EdgeInsets.only(left: 15, bottom: 10),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Icon(Icons.camera_alt_outlined),
-                      VerticalDivider(
-                        color: Colors.grey,
-                        thickness: 1,
-                      ),
-                      SizedBox(
-                        height: size.height * 0.05,
-                        width: size.width * 0.2,
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2<String>(
-                            isExpanded: true,
-                            hint: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'เลือกสินค้า',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
+                          Icon(Icons.camera_alt_outlined),
+                          VerticalDivider(
+                            color: Colors.grey,
+                            thickness: 1,
+                          ),
+                          SizedBox(
+                            height: size.height * 0.05,
+                            width: size.width * 0.2,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2<String>(
+                                isExpanded: true,
+                                hint: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'เลือกสินค้า',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                items: items
+                                    .map(
+                                        (String item) => DropdownMenuItem<String>(
+                                              value: item,
+                                              child: Text(
+                                                item,
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ))
+                                    .toList(),
+                                value: selectedValue,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    selectedValue = value!;
+                                  });
+                                  getlistCategories(name: selectedValue);
+                                },
+                                buttonStyleData: const ButtonStyleData(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  height: 40,
+                                  width: 140,
+                                ),
+                                menuItemStyleData: const MenuItemStyleData(
+                                  height: 40,
                                 ),
                               ),
                             ),
-                            items: items
-                                .map((String item) => DropdownMenuItem<String>(
-                                      value: item,
-                                      child: Text(
-                                        item,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                            value: selectedValue,
-                            onChanged: (String? value) {
-                              setState(() {
-                                selectedValue = value!;
-                              });
-                              getlistCategories(name: selectedValue);
+                          ),
+                          SizedBox(
+                            width: size.width * 0.001,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Searchpage()),
+                              );
                             },
-                            buttonStyleData: const ButtonStyleData(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: 40,
-                              width: 140,
-                            ),
-                            menuItemStyleData: const MenuItemStyleData(
-                              height: 40,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: size.width * 0.001,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Searchpage()),
-                          );
-                        },
-                        child: Container(
-                          height: size.height * 0.05,
-                          width: size.width * 0.17,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.red,
-                          ),
-                          child: Center(
-                            child: Text(
-                              'ค้นหา',
-                              style: TextStyle(color: Colors.white),
+                            child: Container(
+                              height: size.height * 0.05,
+                              width: size.width * 0.17,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.red,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'ค้นหา',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  Icon(Icons.favorite_border_outlined),
+                ],
               ),
-              Icon(Icons.favorite_border_outlined),
-            ],
+            ),
           ),
         ),
       ),
@@ -214,42 +223,11 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            // SizedBox(
-            //   height: 100,
-            //   child: ListView.builder(
-            //     scrollDirection: Axis.horizontal,
-            //     itemCount: titleData.length,
-            //     itemBuilder: (context, index) {
-            //       return Container(
-            //         margin:
-            //             EdgeInsets.only(left: index == 0 ? 20 : 0, right: 10),
-            //         child: Padding(
-            //           padding: const EdgeInsets.only(right: 15),
-            //           child: OurServicesWidget(
-            //             size: size,
-            //             title: titleData[index],
-            //             press: () {
-            //               if (index == 0) {
-            //                 Navigator.push(
-            //                     context,
-            //                     MaterialPageRoute(
-            //                         builder: (context) => Servicedetail(
-            //                               title: titleData[index],
-            //                             )));
-            //               }
-            //             },
-            //             imagespath: Imgservice[index],
-            //           ),
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: List.generate(titleData.length, (index) {
-                return Container(
+                return SizedBox(
                   width: size.width * 0.21,
                   child: OurServicesWidget(
                     size: size,
@@ -329,8 +307,15 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('ที่อยู่รับพัสดุ'),
-                  Container(
+                  Text('ที่อยู่รับพัสดุ',style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black
+                  ),),
+                  SizedBox(
+                    height: size.height *0.005,
+                  ),
+                  SizedBox(
                     height: size.height * 0.19,
                     width: size.width * 0.93,
                     // color: Colors.white,
@@ -406,7 +391,9 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: size.height * 0.01,),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
                   Container(
                     height: size.height * 0.19,
                     width: size.width * 0.93,

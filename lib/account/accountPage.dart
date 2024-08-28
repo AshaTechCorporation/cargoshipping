@@ -226,23 +226,26 @@ class _AccountPageState extends State<AccountPage> {
                 ],
               ),
             ),
-            GridView.builder(
-              shrinkWrap: true,
-              itemCount: importlist.length,
-              physics: ClampingScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-                childAspectRatio: 1,
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                itemCount: importlist.length,
+                physics: ClampingScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
+                  childAspectRatio: 1,
+                ),
+                itemBuilder: (context, index) {
+                  return Importlist(
+                    size: size,
+                    press: () {},
+                    imagespath: importlist[index],
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                return Importlist(
-                  size: size,
-                  press: () {},
-                  imagespath: importlist[index],
-                );
-              },
             ),
             SizedBox(
               height: size.height * 0.001,

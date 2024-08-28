@@ -11,21 +11,34 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('คำถามที่พบบ่อย'),
+        backgroundColor: background,
+        title: Text(
+          'คำถามที่พบบ่อย',
+          style: TextStyle(
+              fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
       ),
       body: Container(
-        color:background,
+        color: background,
         child: Column(
           children: [
             SizedBox(
-              height: 15,
+              height: size.height * 0.023,
             ),
             Center(
               child: Container(
-                width: 358,
-                height: 48,
+                width: size.width * 0.89,
+                height: size.height * 0.054,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
@@ -33,7 +46,13 @@ class _QuestionState extends State<Question> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('ติดต่อของที่จีนต้องติดต่ออย่างไร'),
+                      child: Text(
+                        'ติดต่อของที่จีนต้องติดต่ออย่างไร',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Spacer(),
                     Icon(Icons.arrow_drop_down_outlined)
@@ -42,12 +61,12 @@ class _QuestionState extends State<Question> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: size.height * 0.01,
             ),
             Center(
               child: Container(
-                width: 358,
-                height: 48,
+                width: size.width * 0.89,
+                height: size.height * 0.054,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
@@ -55,7 +74,13 @@ class _QuestionState extends State<Question> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('ติดต่อของที่จีนต้องติดต่ออย่างไร'),
+                      child: Text(
+                        'ติดต่อของที่จีนต้องติดต่ออย่างไร',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Spacer(),
                     Icon(Icons.arrow_drop_down_outlined)
@@ -64,12 +89,12 @@ class _QuestionState extends State<Question> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: size.height * 0.01,
             ),
             Center(
               child: Container(
-                width: 358,
-                height: 48,
+                width: size.width * 0.89,
+                height: size.height * 0.054,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
@@ -77,7 +102,13 @@ class _QuestionState extends State<Question> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('ติดต่อของที่จีนต้องติดต่ออย่างไร'),
+                      child: Text(
+                        'ติดต่อของที่จีนต้องติดต่ออย่างไร',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Spacer(),
                     Icon(Icons.arrow_drop_down_outlined)
@@ -86,12 +117,12 @@ class _QuestionState extends State<Question> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: size.height * 0.01,
             ),
             Center(
               child: Container(
-                width: 358,
-                height: 48,
+                width: size.width * 0.89,
+                height: size.height * 0.054,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10)),
@@ -99,7 +130,13 @@ class _QuestionState extends State<Question> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('ติดต่อของที่จีนต้องติดต่ออย่างไร'),
+                      child: Text(
+                        'ติดต่อของที่จีนต้องติดต่ออย่างไร',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Spacer(),
                     Icon(Icons.arrow_drop_down_outlined)

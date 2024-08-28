@@ -20,6 +20,22 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: background,
+      appBar: AppBar(
+        backgroundColor: background,
+        title: Text(
+          'เข้าสู่ระบบ',
+          style: TextStyle(
+              fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -28,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: size.height * 0.05,
+                height: size.height * 0.001,
               ),
               Container(
                 height: size.height * 0.12,
@@ -36,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/icons/Frame 61.png'),
-                    fit: BoxFit.fill, // ปรับแต่งการแสดงผลของภาพตามความต้องการ
+                    fit: BoxFit.fill, 
                   ),
                 ),
               ),
@@ -53,34 +69,45 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: size.height * 0.027),
-              TextField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  prefixIcon: Image.asset('assets/images/userlogin.png'),
-                  labelText: 'รหัสผู้นำเข้า',
+              SizedBox(height: size.height * 0.02),
+              SizedBox(
+                height: size.height *0.06,
+                child: TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    prefixIcon: Image.asset('assets/images/userlogin.png'),
+                    labelText: 'รหัสผู้นำเข้า',
+                    labelStyle: TextStyle(
+                      fontSize: 15
+                    )
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'รหัสผ่าน',
-                  prefixIcon: Image.asset(
-                    'assets/icons/password.png',
-                    height: size.height * 0.001,
+              SizedBox(height: size.height * 0.02),
+              SizedBox(
+                height: size.height *0.06,
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'รหัสผ่าน',labelStyle: TextStyle(
+                      fontSize: 15
+                    ),
+                    prefixIcon: Image.asset(
+                      'assets/icons/password.png',
+                      height: size.height * 0.001,
+                    ),
+                    suffixIcon: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GestureDetector(
+                            onTap: () {},
+                            child: Image.asset('assets/icons/eyepass.png'))
+                      ],
+                    ),
                   ),
-                  suffixIcon: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      GestureDetector(
-                          onTap: () {},
-                          child: Image.asset('assets/icons/eyepass.png'))
-                    ],
-                  ),
+                  obscureText: true,
                 ),
-                obscureText: true,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -101,35 +128,38 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: size.height * 0.005,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true).pushReplacement(
-                    MaterialPageRoute(builder: (context) => FirstPage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 219, 18, 4),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 135, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+              SizedBox(
+                height: size.height * 0.059,
+                width: size.width * 0.87,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pushReplacement(
+                      MaterialPageRoute(builder: (context) => FirstPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 219, 18, 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 135, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'เข้าสู่ระบบ',
+                    style: TextStyle(
+                        fontSize: 17, color: Colors.white,fontWeight: FontWeight.bold),
                   ),
                 ),
-                child: const Text(
-                  'เข้าสู่ระบบ',
-                  style: TextStyle(
-                      fontSize: 20, color: Color.fromARGB(255, 255, 255, 255)),
-                ),
               ),
-              SizedBox(height: size.height * 0.02),
+              SizedBox(height: size.height * 0.01),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  foregroundColor:
-                      Color.fromARGB(255, 219, 18, 4), // สีของข้อความ
-                  backgroundColor: Colors.white, // สีพื้นหลังของปุ่ม
-                  padding: EdgeInsets.symmetric(horizontal: 120, vertical: 16),
+                  foregroundColor: Color.fromARGB(255, 219, 18, 4),
+                  backgroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 120, vertical: 12),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   side: BorderSide(
                     color: Color.fromARGB(255, 219, 18, 4), // สีของขอบ
@@ -142,21 +172,21 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text(
                   'ลงทะเบียนผู้ใช้ใหม่',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 219, 18, 4),
                   ),
                 ),
               ),
               SizedBox(
-                height: size.height * 0.015,
+                height: size.height * 0.018,
               ),
               Text(
                 'หรือ',
                 style: TextStyle(fontSize: 15),
               ),
               SizedBox(
-                height: size.height * 0.012,
+                height: size.height * 0.020,
               ),
               Container(
                 height: size.height * 0.06,
@@ -167,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                   boxShadow: [
                     BoxShadow(
                       color:
-                          Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                          Colors.black.withOpacity(0.1), 
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
@@ -178,7 +208,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/icons/google.png'),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Image.asset('assets/icons/google.png'),
+                      ),
                       SizedBox(
                         width: size.width * 0.03,
                       ),
@@ -191,9 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: size.height * 0.01),
               Container(
                 height: size.height * 0.06,
                 width: size.width * 0.91,
@@ -203,33 +234,36 @@ class _LoginPageState extends State<LoginPage> {
                   boxShadow: [
                     BoxShadow(
                       color:
-                          Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                          Colors.black.withOpacity(0.1), 
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
                     ),
                   ],
                 ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/icons/facebook.png'),
-                      SizedBox(
-                        width: size.width * 0.03,
-                      ),
-                      Text(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: Image.asset('assets/icons/facebook.png'),
+                    ),
+                    // SizedBox(
+                    //   width: size.width * 0.03,
+                    // ),
+                    Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: Text(
                         'ดำเนินการต่อด้วยบัญชี Facebook',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: size.height * 0.01),
               Container(
                 height: size.height * 0.06,
                 width: size.width * 0.91,
@@ -239,7 +273,7 @@ class _LoginPageState extends State<LoginPage> {
                   boxShadow: [
                     BoxShadow(
                       color:
-                          Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                          Colors.black.withOpacity(0.1), 
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
@@ -250,10 +284,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/icons/line.png'),
-                      SizedBox(
-                        width: size.width * 0.03,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 50),
+                        child: Image.asset('assets/icons/line.png'),
                       ),
+                      // SizedBox(
+                      //   width: size.width * 0.03,
+                      // ),
                       Text(
                         'ดำเนินการต่อด้วยบัญชี Line',
                         style: TextStyle(
@@ -263,9 +300,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: size.height * 0.01),
               Container(
                 height: size.height * 0.06,
                 width: size.width * 0.91,
@@ -275,7 +310,7 @@ class _LoginPageState extends State<LoginPage> {
                   boxShadow: [
                     BoxShadow(
                       color:
-                          Colors.black.withOpacity(0.1), // สีของเงาและความทึบ
+                          Colors.black.withOpacity(0.1), 
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
@@ -286,10 +321,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/icons/apple.png'),
-                      SizedBox(
-                        width: size.width * 0.03,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 38),
+                        child: Image.asset('assets/icons/apple.png'),
                       ),
+                      // SizedBox(
+                      //   width: size.width * 0.03,
+                      // ),
                       Text(
                         'ดำเนินการต่อด้วยบัญชี Apple',
                         style: TextStyle(
@@ -308,29 +346,28 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 void _showSelectionDialog(BuildContext context) {
-  final size = MediaQuery.of(context).size;
   showDialog(
     context: context,
-    barrierDismissible: true, // อนุญาตให้ปิด dialog โดยการกดที่ว่าง
+    barrierDismissible: true,
     builder: (BuildContext context) {
       return AlertDialog(
-        contentPadding: EdgeInsets.all(16), // เพิ่ม Padding รอบๆ ขอบของ Dialog
+        contentPadding: EdgeInsets.all(16),
         title: Text(
           'ท่านลงทะเบียนผู้ใช้ใหม่ในฐานะ ..',
           style: TextStyle(
               fontSize: 18,
-              fontWeight: FontWeight.bold), // ปรับขนาดฟอนต์ของ Title
+              fontWeight: FontWeight.bold),
         ),
         content: SizedBox(
-          width: 300, // กำหนดความกว้างของ Dialog
+          width: 300,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildOption(
                 context,
                 'บุคคลทั่วไป',
                 () {
-                  // ปิด AlertDialog ก่อนที่จะ push ไปยังหน้าใหม่
                   Navigator.of(context).pop();
                   Navigator.push(
                     context,
@@ -342,7 +379,6 @@ void _showSelectionDialog(BuildContext context) {
                 context,
                 'นิติบุคคล',
                 () {
-                  // ปิด AlertDialog ก่อนที่จะ push ไปยังหน้าใหม่
                   Navigator.of(context).pop();
                   Navigator.push(
                     context,
@@ -354,7 +390,6 @@ void _showSelectionDialog(BuildContext context) {
                 context,
                 'ตัวแทน (Agent)',
                 () {
-                  // ปิด AlertDialog ก่อนที่จะ push ไปยังหน้าใหม่
                   Navigator.of(context).pop();
                   Navigator.push(
                     context,
@@ -369,8 +404,6 @@ void _showSelectionDialog(BuildContext context) {
     },
   );
 }
-
-
 
 Widget _buildOption(BuildContext context, String title, VoidCallback onTap) {
   final size = MediaQuery.of(context).size;
@@ -387,7 +420,10 @@ Widget _buildOption(BuildContext context, String title, VoidCallback onTap) {
         title: Center(
           child: Text(
             title,
-            style: TextStyle(fontSize: 16,color: red1,fontWeight: FontWeight.bold), // ปรับขนาดฟอนต์ของตัวเลือก
+            style: TextStyle(
+                fontSize: 16,
+                color: red1,
+                fontWeight: FontWeight.bold),
           ),
         ),
         onTap: onTap,

@@ -19,146 +19,217 @@ class _AccsettingState extends State<Accsetting> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: background,
         title: Text('ตั้งค่า',style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.black
         ),),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
       ),
       body: Container(
-        color: Colors.grey[300], // เปลี่ยนสีพื้นหลังของ body
+        color: background, // เปลี่ยนสีพื้นหลังของ body
         child: Column(
           children: [
             Container(
-              color: Colors.grey[300],
-              height: 50,
+              color: background,
+              height: size.height * 0.06,
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.only(left: 10, top: 10),
+                padding: const EdgeInsets.only(left: 10, top: 17),
                 child: Text(
                   'ตั้งค่าบัญชีผู้ใช้',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
+                      fontWeight: FontWeight.bold,
+                      color: headingtext),
                 ),
               ),
             ),
-            SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Userinfo()));
-                },
-                child: Row(
-                  children: [
-                    Text('ข้อมูลเกี่ยวกับบัญชี'),
-                    Spacer(),
-                    Icon(Icons.arrow_forward)
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Addresspage()));
-                },
-                child: Row(
-                  children: [
-                    Text('ที่อยู่ของฉัน'),
-                    Spacer(),
-                    Icon(Icons.arrow_forward)
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: InkWell(
-                onTap: () {},
-                child: Row(
-                  children: [
-                    Text('ข้อมูลบัตร/บัญชีธนาคาร'),
-                    Spacer(),
-                    Icon(Icons.arrow_forward)
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Divider(),
+            SizedBox(height: size.height * 0.001),
             Container(
-              color: Colors.grey[300],
-              height: 50,
+              color: white,
+              height: size.height * 0.05,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Userinfo()));
+                  },
+                  child: Row(
+                    children: [
+                      Text('ข้อมูลเกี่ยวกับบัญชี',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 13
+                      ),),
+                      Spacer(),
+                      Image.asset('assets/icons/rightarrow.png')
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: size.height * 0.005,
+            ),
+            Container(
+              height: size.height * 0.05,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Addresspage()));
+                  },
+                  child: Row(
+                    children: [
+                      Text('ที่อยู่ของฉัน',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 13
+                      ),),
+                      Spacer(),
+                      Image.asset('assets/icons/rightarrow.png')
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: size.height * 0.005,
+            ),
+            Container(
+              height: size.height * 0.05,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: InkWell(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      Text('ข้อมูลบัตร/บัญชีธนาคาร',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 13
+                      ),),
+                      Spacer(),
+                      Image.asset('assets/icons/rightarrow.png')
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: size.height * 0.005,
+            ),
+            Container(
+              color: background,
+              height: size.height * 0.055,
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.only(left: 10, top: 10),
+                padding: const EdgeInsets.only(left: 10, top: 17),
                 child: Text(
                   'ช่วยเหลือ',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
+                      fontWeight: FontWeight.bold,
+                      color: headingtext),
                 ),
               ),
             ),
-            SizedBox(height: 1),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Text('ข้อตกลงและเงื่อไขการให้บริการ'),
-                  Spacer(),
-                  Icon(Icons.arrow_forward)
-                ],
+            SizedBox(height: size.height * 0.001),
+            Container(
+              height: size.height * 0.05,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Row(
+                  children: [
+                    Text('ข้อตกลงและเงื่อไขการให้บริการ',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 13
+                      ),),
+                    Spacer(),
+                    Image.asset('assets/icons/rightarrow.png')
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 10),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Text('เวอร์ชัน'),
-                  Spacer(),
-                  Icon(Icons.arrow_forward)
-                ],
+            Divider(
+              height: size.height * 0.005,
+            ),
+            Container(
+              height: size.height * 0.05,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Row(
+                  children: [
+                    Text('เวอร์ชัน',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 13
+                      ),),
+                    Spacer(),
+                    Image.asset('assets/icons/rightarrow.png')
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 10),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Text('เกี่ยวกับเรา'),
-                  Spacer(),
-                  Icon(Icons.arrow_forward)
-                ],
+            Divider(
+              height: size.height * 0.005,
+            ),
+            Container(
+              height: size.height * 0.05,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Row(
+                  children: [
+                    Text('เกี่ยวกับเรา',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 13
+                      ),),
+                    Spacer(),
+                    Image.asset('assets/icons/rightarrow.png')
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 10),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: Row(
-                children: [
-                  Text('คำร้องขอลบบัญชีผู้ใช้'),
-                  Spacer(),
-                  Icon(Icons.arrow_forward),
-                ],
+            Divider(
+              height: size.height * 0.005,
+            ),
+            Container(
+              height: size.height * 0.05,
+              color: white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Row(
+                  children: [
+                    Text('คำร้องขอลบบัญชีผู้ใช้',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 13
+                      ),),
+                    Spacer(),
+                    Image.asset('assets/icons/rightarrow.png'),
+                  ],
+                ),
               ),
+            ),
+            Divider(
+              height: size.height * 0.005,
             ),
             SizedBox(
-              height: 10,
-            ),
-            Divider(),
-            SizedBox(
-              height: 190,
+              height: size.height * 0.32,
             ),
             Container(
               height: 50,
@@ -203,7 +274,7 @@ class _AccsettingState extends State<Accsetting> {
                     child: Text(
                       'ออกจากระบบ',
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, color: red1),
+                          TextStyle(fontWeight: FontWeight.bold, color: red1,fontSize: 17),
                     ),
                   )
                 ],

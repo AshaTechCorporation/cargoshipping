@@ -12,125 +12,169 @@ class Addresspage extends StatefulWidget {
 class _AddresspageState extends State<Addresspage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
+        backgroundColor: background,
         title: Text(
           'ที่อยู่ของฉัน',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(4.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
       ),
-      body: ListView(
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text('ที่อยู่'),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Container(
-                        width: 380,
-                        height: 120,
-                        padding: EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                            ),
-                          ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: size.height * 0.05,
+              width: double.infinity,
+              color: background,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: size.width * 0.04,
+                  ),
+                  Text(
+                    'ที่อยู่',
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: headingtext),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              height: size.height * 0.179,
+              width: double.infinity,
+              color: white,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          height: size.height * 0.06,
                         ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text('ค่าเริ่มต้น'),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Girati Sukapat',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text('097 123 4567'),
-                                  Spacer(),
-                                  Text(
-                                    'แก้ไข',
-                                    style: TextStyle(
-                                        color: red1,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text('111/222 หมู่บ้าน กรุงเทพมหานคครม 10222')
-                            ])),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: 380,
-                      height: 25,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 9),
+                          child: Text(
+                            'ค่าเริ่มต้น',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold),
                           ),
-                        ],
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Addnewaddresspage()));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'เพิ่มที่อยู่ใหม่',
-                              style: TextStyle(
-                                  color: red1, fontWeight: FontWeight.bold),
-                            )
-                          ],
                         ),
-                      ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 9),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Girati Sukapat',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 13),
+                        ),
+                        SizedBox(
+                          width: size.width * 0.04,
+                        ),
+                        Text(
+                          '097 123 4567',
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: headingtext,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 9),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          height: size.height * 0.075,
+                          width: size.width * 0.6,
+                          child: Text(
+                              '111/222 หมู่บ้าน กขค ถนน กขคม แขวง กขคม แขวง กขค, กรุงเทพมหานคครม 10222',style: TextStyle(
+                                color: headingtext
+                              ),),
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 9, bottom: 25),
+                              child: InkWell(
+                                onTap: () {
+                                  print('object');
+                                },
+                                child: Text(
+                                  'แก้ไข',
+                                  style: TextStyle(
+                                    color: red1,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.001,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Addnewaddresspage()));
+              },
+              child: Container(
+                height: size.height * 0.04,
+                width: double.infinity,
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'เพิ่มที่อยู่ใหม่',
+                      style:
+                          TextStyle(color: red1, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
               ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -60,7 +60,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
                               )
                             ])),
                         Spacer(),
-                        Icon(Icons.arrow_right_alt_outlined)
+                        Image.asset('assets/icons/rightredarrow.png')
                       ],
                     ),
                     SizedBox(
@@ -108,7 +108,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
                               )
                             ])),
                         Spacer(),
-                        Icon(Icons.arrow_right_alt_outlined)
+                        Image.asset('assets/icons/rightredarrow.png')
                       ],
                     ),
                     SizedBox(
@@ -156,7 +156,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
                               )
                             ])),
                         Spacer(),
-                        Icon(Icons.arrow_right_alt_outlined)
+                        Image.asset('assets/icons/rightredarrow.png')
                       ],
                     ),
                     SizedBox(
@@ -204,7 +204,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
                               )
                             ])),
                         Spacer(),
-                        Icon(Icons.arrow_right_alt_outlined)
+                        Image.asset('assets/icons/rightredarrow.png')
                       ],
                     ),
                     SizedBox(
@@ -252,7 +252,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
                               )
                             ])),
                         Spacer(),
-                        Icon(Icons.arrow_right_alt_outlined)
+                        Image.asset('assets/icons/rightredarrow.png')
                       ],
                     ),
                     SizedBox(
@@ -300,7 +300,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
                               )
                             ])),
                         Spacer(),
-                        Icon(Icons.arrow_right_alt_outlined)
+                        Image.asset('assets/icons/rightredarrow.png')
                       ],
                     ),
                     SizedBox(
@@ -348,7 +348,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
                               )
                             ])),
                         Spacer(),
-                        Icon(Icons.arrow_right_alt_outlined)
+                        Image.asset('assets/icons/rightredarrow.png')
                       ],
                     ),
                     SizedBox(
