@@ -1,15 +1,15 @@
-import 'package:cargoshipping/account/widgets/ordersumwidget.dart';
+import 'package:cargoshipping/account/widgets/transportwidget.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class Ordersumpage extends StatefulWidget {
-  const Ordersumpage({super.key});
+class Transportpage extends StatefulWidget {
+  const Transportpage({super.key});
 
   @override
-  State<Ordersumpage> createState() => _OrdersumpageState();
+  State<Transportpage> createState() => _TransportpageState();
 }
 
-class _OrdersumpageState extends State<Ordersumpage> {
+class _TransportpageState extends State<Transportpage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -18,7 +18,7 @@ class _OrdersumpageState extends State<Ordersumpage> {
       appBar: AppBar(
         backgroundColor: background,
         title: Text(
-          'สรุปการสั่งซื้อ',
+          'สรุปการขนส่ง',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ),
@@ -29,14 +29,14 @@ class _OrdersumpageState extends State<Ordersumpage> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text('รายการสั่งซื้อ'),
+                  Text('รายการขนส่งนำเข้า'),
                   Spacer(),
-                  Text('2567'),
+                  Text(' 2567'),
                   Icon(Icons.arrow_drop_down_outlined)
                 ],
               ),
             ),
-            OrderSum()
+            Transportwidget(),
           ],
         ),
       ),

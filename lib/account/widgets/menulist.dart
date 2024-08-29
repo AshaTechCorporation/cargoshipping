@@ -2,6 +2,7 @@ import 'package:cargoshipping/account/widgets/accsetting.dart';
 import 'package:cargoshipping/account/widgets/itemfav.dart';
 import 'package:cargoshipping/account/widgets/ordersumpage.dart';
 import 'package:cargoshipping/account/widgets/summarysale.dart';
+import 'package:cargoshipping/account/widgets/transportpage.dart';
 import 'package:cargoshipping/account/widgets/wecargo.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/messagePage.dart';
@@ -34,6 +35,10 @@ class MenuList extends StatelessWidget {
               if (index == 0) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Ordersumpage()));
+              }
+              if (index == 1) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Transportpage()));
               }
               if (index == 2) {
                 Navigator.push(

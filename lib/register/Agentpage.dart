@@ -134,6 +134,13 @@ class _AgentpageState extends State<Agentpage> {
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
@@ -159,16 +166,27 @@ class _AgentpageState extends State<Agentpage> {
                 Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _nameController,
                     decoration: InputDecoration(
                       hintText: 'ชื่อ',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -176,19 +194,30 @@ class _AgentpageState extends State<Agentpage> {
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _lastnameController,
                     decoration: InputDecoration(
                       hintText: 'นามสกุล',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -197,35 +226,56 @@ class _AgentpageState extends State<Agentpage> {
                 Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _telController,
                     decoration: InputDecoration(
                       hintText: 'เบอร์มือถือ',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _birthController,
                     decoration: InputDecoration(
                       hintText: 'วันเกิด',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -260,7 +310,7 @@ class _AgentpageState extends State<Agentpage> {
                         Text('ชาย', style: TextStyle(fontSize: 16)),
                       ],
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: size.width * 0.02),
                     Row(
                       children: [
                         Checkbox(
@@ -280,114 +330,180 @@ class _AgentpageState extends State<Agentpage> {
                     ),
                   ],
                 ),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _importercodeController,
                     decoration: InputDecoration(
                       hintText: 'รหัสผู้นำเข้า',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0),
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'รหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      
                     ),
                     obscureText: true,
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _confirmPasswordController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'ยืนยันรหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      
                     ),
                     obscureText: true,
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
                 const SizedBox(height: 20),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _reccomController,
                     decoration: InputDecoration(
                       hintText: 'ผู้แนะนำ',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _companyController,
                     decoration: InputDecoration(
                       hintText: 'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _taxController,
                     decoration: InputDecoration(
                       hintText: 'เลขที่ผู้เสียภาษี',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -411,10 +527,20 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'จังหวัด',
@@ -465,10 +591,20 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'อำเภอ',
@@ -519,8 +655,19 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -571,12 +718,21 @@ class _AgentpageState extends State<Agentpage> {
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'รหัสไปรษณีย์',
@@ -625,58 +781,88 @@ class _AgentpageState extends State<Agentpage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _hometelController,
                     decoration: InputDecoration(
                       hintText: 'เบอร์โทรศัพท์',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0), 
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _cargonameController,
                     decoration: InputDecoration(
                       hintText: 'ชื่อคาร์โก้ของท่าน',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0), 
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _cargowebController,
                     decoration: InputDecoration(
                       hintText: 'เว็บไซต์คาร์โก้ของท่าน',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -730,8 +916,19 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -785,10 +982,20 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'อำเภอ',
@@ -841,10 +1048,20 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ตำบล',
@@ -894,10 +1111,20 @@ class _AgentpageState extends State<Agentpage> {
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -947,12 +1174,14 @@ class _AgentpageState extends State<Agentpage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                SizedBox(height: size.height * 0.01),
                 Container(
-                    height: size.height * 0.058,
+                    height: size.height * 0.055,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all()),
+                        border: Border.all(
+                          color: Colors.grey, // เปลี่ยนสีของขอบตามต้องการ
+                          width: 0.5,
+                        )),
                     child: Row(
                       children: [
                         SizedBox(
@@ -974,10 +1203,20 @@ class _AgentpageState extends State<Agentpage> {
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -1087,8 +1326,19 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -1140,8 +1390,19 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -1193,10 +1454,20 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ต้องการนำเข้าแบบใด ',
@@ -1247,10 +1518,20 @@ class _AgentpageState extends State<Agentpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'สิ่งที่ท่านต้องการ ',
@@ -1314,8 +1595,7 @@ class _AgentpageState extends State<Agentpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -1350,8 +1630,7 @@ class _AgentpageState extends State<Agentpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -1386,8 +1665,7 @@ class _AgentpageState extends State<Agentpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -1422,8 +1700,7 @@ class _AgentpageState extends State<Agentpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),

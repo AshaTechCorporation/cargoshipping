@@ -14,78 +14,102 @@ class _UserinfoState extends State<Userinfo> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text('ตั้งค่าบัญชี'),
+          title: Text('ตั้งค่าบัญชี',style: TextStyle(
+            fontSize: 17,color: Colors.black,fontWeight: FontWeight.bold
+          ),),
         ),
         body: Container(
-          color: Colors.grey[300],
+          color: background,
           child: Column(
             children: [
               Container(
-                color: Colors.grey[300],
-                height: 50,
+                color: background,
+                height: size.height *0.06,
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
+                  padding: const EdgeInsets.only(left: 10, top: 25),
                   child: Text(
-                    'ตั้งค่าบัญชีผู้ใช้',
+                    'ข้อมูลทางติดต่อ',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold), // เพิ่มความหนาของข้อความ
+                      color: greyuserinfo
+                        ),
                   ),
                 ),
               ),
-              SizedBox(height: 5),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Row(
-                  children: [
-                    Text('ชื่อผู้ใช้'),
-                    Spacer(),
-                    Text('Girati Sukapat')
-                  ],
+              Container(
+                height: size.height * 0.048,
+                color: white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: Row(
+                    children: [
+                      Text('ชื่อผู้ใช้',style: TextStyle(fontSize: 13),),
+                      Spacer(),
+                      Text('Girati Sukapat',style: TextStyle(fontSize: 13),)
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 10),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Row(
-                  children: [
-                    Text('หมายเลขโทรศัพท์'),
-                    Spacer(),
-                    Text('********22')
-                  ],
+              Container(
+                height: size.height * 0.001,
+                color: arrowcolor,
+              ),
+              Container(
+                height: size.height * 0.048,
+                color: white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: Row(
+                    children: [
+                      Text('หมายเลขโทรศัพท์',style: TextStyle(fontSize: 13),),
+                      Spacer(),
+                      Text('******778',style: TextStyle(fontSize: 13),)
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 10),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Row(
-                  children: [
-                    Text('อีเมล'),
-                    Spacer(),
-                    Text('g********@gmail.com')
-                  ],
+              Container(
+                height: size.height * 0.001,
+                color: arrowcolor,
+              ),
+              Container(
+                height: size.height * 0.048,
+                color: white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: Row(
+                    children: [
+                      Text('อีเมล',style: TextStyle(fontSize: 13),),
+                      Spacer(),
+                      Text('g******@gmail.com',style: TextStyle(fontSize: 13),)
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 10),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Row(
-                  children: [
-                    Text('เปลี่ยนรหัสผ่าน'),
-                    Spacer(),
-                    Text('g********@gmail.com')
-                  ],
+              Container(
+                height: size.height * 0.001,
+                color: arrowcolor,
+              ),
+              Container(
+                height: size.height * 0.048,
+                color: white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: Row(
+                    children: [
+                      Text('เปลี่ยนรหัสผ่าน',style: TextStyle(fontSize: 13),),
+                      Spacer(),
+                      Text('************',style: TextStyle(fontSize: 13),)
+                    ],
+                  ),
                 ),
+              ),
+              Container(
+                height: size.height * 0.001,
+                color: arrowcolor,
               ),
               SizedBox(
-                height: size.height * 0.01,
-              ),
-              Divider(),
-              SizedBox(
-                height: size.height * 0.07,
+                height: size.height *0.089,
               ),
               GestureDetector(
                 onTap: () {
@@ -133,10 +157,10 @@ class _UserinfoState extends State<Userinfo> {
                       });
                 },
                 child: Container(
-                  width: 358,
-                  height: 45,
+                  width: size.width * 0.94,
+                  height: size.height * 0.055,
                   decoration: BoxDecoration(
-                      color: red1, borderRadius: BorderRadius.circular(15)),
+                      color: arrowcolor, borderRadius: BorderRadius.circular(15)),
                   child: Center(
                       child: Text(
                     'ยืนยัน',

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/message/widgets/promotion2page.dart';
 import 'package:flutter/material.dart';
 
 class Summarysale extends StatefulWidget {
@@ -12,80 +13,54 @@ class _SummarysaleState extends State<Summarysale> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('สรุปยอดขาย'),
+        title: Text('บทความ',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: Container(
-              width: 358,
-              height: 48,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('เดือนกรกฎาคม 2567'),
-                  ),
-                  Spacer(),
-                  Icon(Icons.arrow_drop_down_outlined)
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: Container(
-              width: 358,
-              height: 48,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('เดือนมิถุนายน 2567'),
-                  ),
-                  Spacer(),
-                  Icon(Icons.arrow_drop_down_outlined)
-                ],
-              ),
-            ),
-          ),
-          Spacer(),
-          Container(
-            color: Colors.white,
-            height: 100,
-            width: double.infinity,
+      body: Container(
+        color: Colors.grey[300],
+        height: double.infinity,
+        width: double.infinity,
+        child: SingleChildScrollView(
+          child: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end, // จัดข้อความให้ชิดขวา
               children: [
-                Text(
-                  'ยอดขายในเดือนนี้ ฿ 24,000',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(fontSize: 12),
+                SizedBox(
+                  height: 20,
                 ),
-                Divider(),
-                Text(
-                  'ยอดขายทั้งหมด',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(fontSize: 12),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Promotion2page(),
+                    ),
+                  );
+                  },
+                  child: Image.asset(
+                    'assets/images/pro1.png',
+                    height: 221,
+                    width: 358,
+                  ),
                 ),
-                Text(
-                  '฿ 48,000',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(fontSize: 17, color: Colors.red),
+                SizedBox(
+                  height: 7,
                 ),
+                Image.asset(
+                  'assets/images/pro2.png',
+                  height: 221,
+                  width: 358,
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                Image.asset(
+                  'assets/images/pro3.png',
+                  height: 221,
+                  width: 358,
+                )
               ],
             ),
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

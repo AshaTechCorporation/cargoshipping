@@ -13,7 +13,8 @@ class registerpage extends StatefulWidget {
 class _registerpageState extends State<registerpage> {
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _reccomController = TextEditingController();
   final TextEditingController _telController = TextEditingController();
@@ -87,6 +88,13 @@ class _registerpageState extends State<registerpage> {
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
@@ -99,7 +107,9 @@ class _registerpageState extends State<registerpage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: size.height * 0.02,),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
                 Image.asset(
                   'assets/images/logofull.png',
                   width: size.width * 0.59,
@@ -107,19 +117,30 @@ class _registerpageState extends State<registerpage> {
                 SizedBox(
                   height: size.height * 0.04,
                 ),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _nameController,
                     decoration: InputDecoration(
                       hintText: 'ชื่อ',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -127,19 +148,30 @@ class _registerpageState extends State<registerpage> {
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _lastnameController,
                     decoration: InputDecoration(
                       hintText: 'นามสกุล',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -148,35 +180,56 @@ class _registerpageState extends State<registerpage> {
                 Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _telController,
                     decoration: InputDecoration(
                       hintText: 'เบอร์มือถือ',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0), 
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _birthController,
                     decoration: InputDecoration(
                       hintText: 'วันเกิด',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -211,7 +264,7 @@ class _registerpageState extends State<registerpage> {
                         Text('ชาย', style: TextStyle(fontSize: 16)),
                       ],
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: size.width * 0.02),
                     Row(
                       children: [
                         Checkbox(
@@ -239,49 +292,81 @@ class _registerpageState extends State<registerpage> {
                     decoration: InputDecoration(
                       hintText: 'รหัสผู้นำเข้า',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0), 
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'รหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      
                     ),
                     obscureText: true,
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _confirmPasswordController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'ยืนยันรหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      
                     ),
                     obscureText: true,
                   ),
@@ -291,16 +376,28 @@ class _registerpageState extends State<registerpage> {
                 Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _reccomController,
                     decoration: InputDecoration(
                       hintText: 'ผู้แนะนำ',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -323,10 +420,20 @@ class _registerpageState extends State<registerpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ตำบล',
@@ -377,8 +484,19 @@ class _registerpageState extends State<registerpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -433,10 +551,13 @@ class _registerpageState extends State<registerpage> {
                     print('map');
                   },
                   child: Container(
-                      height: size.height * 0.068,
+                      height: size.height * 0.055,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all()),
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 0.5,
+                          )),
                       child: Row(
                         children: [
                           SizedBox(
@@ -459,12 +580,21 @@ class _registerpageState extends State<registerpage> {
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'รูปแบบส่งต่อ(ในไทย)',
@@ -573,10 +703,20 @@ class _registerpageState extends State<registerpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
@@ -627,10 +767,20 @@ class _registerpageState extends State<registerpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ท่านนำเข้าบ่อยหรือไม่ ',
@@ -681,10 +831,20 @@ class _registerpageState extends State<registerpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ต้องการนำเข้าแบบใด ',
@@ -735,10 +895,20 @@ class _registerpageState extends State<registerpage> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'สิ่งที่ท่านต้องการ ',
@@ -802,8 +972,7 @@ class _registerpageState extends State<registerpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1),
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -838,8 +1007,7 @@ class _registerpageState extends State<registerpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1),
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -874,8 +1042,7 @@ class _registerpageState extends State<registerpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1),
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -910,8 +1077,7 @@ class _registerpageState extends State<registerpage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1),
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),

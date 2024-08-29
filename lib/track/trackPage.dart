@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/purchase.dart';
 import 'package:cargoshipping/track/selldetail.dart';
 import 'package:cargoshipping/widgets/compete.dart';
@@ -30,14 +31,16 @@ class _TrackPageState extends State<TrackPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: white,
       appBar: AppBar(
+        backgroundColor: white,
         title: Column(
           crossAxisAlignment:
               CrossAxisAlignment.start, // จัดตำแหน่งให้ชิดด้านซ้าย
           children: [
             Text(
               'ติดตามสถานะ',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black),
             ),
             SizedBox(height: 8),
             Container(

@@ -13,7 +13,7 @@ class _PromotionpageState extends State<Promotionpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ข่าวสาร/โปรโมชั่น'),
+        title: Text('บทความ',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
       ),
       body: Container(
         color: Colors.grey[300],

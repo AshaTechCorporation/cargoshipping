@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Itemfav extends StatefulWidget {
@@ -11,58 +12,69 @@ class _ItemfavState extends State<Itemfav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: background,
         appBar: AppBar(
           title: Text(
             'รายการโปรด',
             style: TextStyle(color: Colors.black),
           ),
         ),
-        body: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          elevation: 4,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: ListView(
+          padding: const EdgeInsets.all(16.0),
+          children: [
+            Card(
+              color: white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '1688严选店',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'ลบ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          decoration: TextDecoration.underline,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '1688严选店',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    )
+                        TextButton(
+                          onPressed: () {
+                            // Implement delete action
+                          },
+                          child: Text(
+                            'ลบ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Divider(),
+                    ProductItem(
+                      imageUrl: 'https://via.placeholder.com/150',
+                      title: 'ชั้นวางพลาสติกในครัว, ชั้นวางของใ...',
+                      price: '¥4.88',
+                    ),
+                    Divider(),
+                    ProductItem(
+                      imageUrl: 'https://via.placeholder.com/150',
+                      title: 'ชั้นวางพลาสติกในครัว, ชั้นวางของใ...',
+                      price: '¥4.88',
+                    ),
                   ],
                 ),
-                Divider(),
-                ProductItem(
-                  imageUrl: 'https://via.placeholder.com/150',
-                  title: 'ชั้นวางพลาสติกในครัว, ชั้นวางของใ...',
-                  price: '¥4.88',
-                ),
-                Divider(),
-                ProductItem(
-                  imageUrl: 'https://via.placeholder.com/150',
-                  title: 'ชั้นวางพลาสติกในครัว, ชั้นวางของใ...',
-                  price: '¥4.88',
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
         bottomNavigationBar: BottomAppBar(
           child: Container(
@@ -89,8 +101,7 @@ class _ItemfavState extends State<Itemfav> {
               ],
             ),
           ),
-        )
-        );
+        ));
   }
 }
 
@@ -144,7 +155,13 @@ class ProductItem extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.shopping_cart, color: Colors.red),
           onPressed: () {
-            // Add to cart action
+            //
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.delete, color: Colors.red),
+          onPressed: () {
+            //
           },
         ),
       ],

@@ -24,7 +24,7 @@ class _LegalpersonpageState extends State<Legalpersonpage> {
   final TextEditingController _hometelController = TextEditingController();
 
 // dropdown
-final List<String> provice = [
+  final List<String> provice = [
     '9',
     '4',
   ];
@@ -43,7 +43,7 @@ final List<String> provice = [
     '4',
   ];
 
-final List<String> comprovice = [
+  final List<String> comprovice = [
     '5',
     '1',
   ];
@@ -131,6 +131,13 @@ final List<String> comprovice = [
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
@@ -143,7 +150,9 @@ final List<String> comprovice = [
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: size.height * 0.02,),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
                 Image.asset(
                   'assets/images/logofull.png',
                   width: size.width * 0.59,
@@ -151,19 +160,30 @@ final List<String> comprovice = [
                 SizedBox(
                   height: size.height * 0.04,
                 ),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _nameController,
                     decoration: InputDecoration(
                       hintText: 'ชื่อ',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -171,56 +191,88 @@ final List<String> comprovice = [
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-               Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _lastnameController,
                     decoration: InputDecoration(
                       hintText: 'นามสกุล',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _telController,
                     decoration: InputDecoration(
                       hintText: 'เบอร์มือถือ',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0), 
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _birthController,
                     decoration: InputDecoration(
                       hintText: 'วันเกิด',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -255,7 +307,7 @@ final List<String> comprovice = [
                         Text('ชาย', style: TextStyle(fontSize: 16)),
                       ],
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: size.width * 0.02),
                     Row(
                       children: [
                         Checkbox(
@@ -278,53 +330,86 @@ final List<String> comprovice = [
                 Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _importercodeController,
                     decoration: InputDecoration(
                       hintText: 'รหัสผู้นำเข้า',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0), 
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'รหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      
                     ),
                     obscureText: true,
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _confirmPasswordController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'ยืนยันรหัสผ่าน',
                       labelStyle: const TextStyle(),
@@ -334,19 +419,31 @@ final List<String> comprovice = [
                 ),
                 SizedBox(height: size.height * 0.01),
                 const SizedBox(height: 20),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _reccomController,
                     decoration: InputDecoration(
                       hintText: 'ผู้แนะนำ',
                       labelStyle: const TextStyle(),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -354,34 +451,56 @@ final List<String> comprovice = [
                 Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _companyController,
                     decoration: InputDecoration(
                       hintText: 'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                 Container(
+                Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _taxController,
                     decoration: InputDecoration(
                       hintText: 'เลขที่ผู้เสียภาษี',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -405,8 +524,19 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -458,8 +588,19 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
                   ),
                   hint: const Text(
@@ -511,10 +652,20 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ตำบล',
@@ -564,12 +715,21 @@ final List<String> comprovice = [
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'รหัสไปรษณีย์',
@@ -621,18 +781,28 @@ final List<String> comprovice = [
                 Container(
                   height: size.height * 0.052,
                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: white,
+                    borderRadius: BorderRadius.circular(15),
+                    color: white,
                   ),
                   child: TextField(
                     controller: _hometelController,
                     decoration: InputDecoration(
                       hintText: 'เบอร์โทรศัพท์',
                       labelStyle: TextStyle(),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15.0), 
-                      ), 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -655,10 +825,20 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'จังหวัด',
@@ -710,12 +890,21 @@ final List<String> comprovice = [
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'อำเภอ',
@@ -768,10 +957,20 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ตำบล',
@@ -821,12 +1020,21 @@ final List<String> comprovice = [
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'รหัสไปรษณีย์',
@@ -875,12 +1083,14 @@ final List<String> comprovice = [
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                SizedBox(height: size.height * 0.01),
                 Container(
-                    height: size.height * 0.058,
+                    height: size.height * 0.055,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all()),
+                        border: Border.all(
+                          color: Colors.grey, // เปลี่ยนสีของขอบตามต้องการ
+                          width: 0.5,
+                        )),
                     child: Row(
                       children: [
                         SizedBox(
@@ -902,12 +1112,21 @@ final List<String> comprovice = [
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
-                    
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'รูปแบบส่งต่อ(ในไทย)',
@@ -1016,10 +1235,20 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
@@ -1070,10 +1299,20 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ท่านนำเข้าบ่อยหรือไม่ ',
@@ -1124,10 +1363,20 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'ต้องการนำเข้าแบบใด ',
@@ -1178,10 +1427,20 @@ final List<String> comprovice = [
                   isExpanded: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
                     ),
-                    
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
                   ),
                   hint: const Text(
                     'สิ่งที่ท่านต้องการ ',
@@ -1245,8 +1504,7 @@ final List<String> comprovice = [
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -1281,8 +1539,7 @@ final List<String> comprovice = [
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -1317,8 +1574,7 @@ final List<String> comprovice = [
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
@@ -1353,8 +1609,7 @@ final List<String> comprovice = [
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.black.withOpacity(0.1), 
+                        color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),

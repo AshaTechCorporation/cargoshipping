@@ -53,6 +53,13 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
         ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(4.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -60,11 +67,11 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
           child: Column(
             children: [
               Container(
-                color: Colors.grey[300],
+                color: background,
                 height: size.height * 0.055,
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
+                  padding: const EdgeInsets.only(left: 10, top: 20),
                   child: Text(
                     'ข้อมูลทางติดต่อ',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -85,7 +92,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                         EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: arrowcolor,
                       ),
                     ),
                   ),
@@ -333,7 +340,10 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                     children: [
                       Text(
                         'เลือกเป็นที่อยู่ตั้งต้น',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
                       ),
                       Theme(
                         data: Theme.of(context).copyWith(
@@ -383,10 +393,19 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                      color: arrowcolor,
-                      borderRadius: BorderRadius.circular(10)),
-                  width: size.width * 0.8,
-                  height: size.height * 0.06,
+                    color: arrowcolor,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: Offset(0, 2), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  width: size.width * 0.91,
+                  height: size.height * 0.056,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

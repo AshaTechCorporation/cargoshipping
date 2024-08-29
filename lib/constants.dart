@@ -8,8 +8,9 @@ Color arrowcolor = Color(0xffd9d9d9);
 Color background = Color(0xfff5f5f5);
 Color white = Color(0xffffffff);
 Color headingtext = Color(0xff606060);
-
-
+Color pinkmess = Color(0xfff8d2d4);
+Color greymess= Color(0xffe5e5ea);
+Color greyuserinfo = Color(0xff606060);
 
 const kBackgroundColor = Color(0xff1B58B1);
 const kSecondTextColor = Color(0xff7B7B7B);
@@ -220,3 +221,54 @@ List<MenuItem> menuItems = [
     MenuItem(imagePath: 'assets/icons/contact.png', text: 'ติดต่อเรา'),
     MenuItem(imagePath: 'assets/icons/setting.png', text: 'ตั้งค่า'),
   ];
+
+
+  const List<Map<String, dynamic>> ordersum= [
+  {
+    'id': 1,
+    'month': 'สิงหาคม 2567',
+    'amount': '00,000 บาท',
+    'detailLink': 'ดูรายละเอียด',
+    'images' : 'assets/icons/ordermont.png'
+  },
+   {
+    'id': 2,
+    'month': 'กรกฎาคม 2567',
+    'amount': '00,000 บาท',
+    'detailLink': 'ดูรายละเอียด',
+    'images' : 'assets/icons/ordermont.png'
+  },
+  {
+    'id': 3,
+    'month': 'มิถุนายน 2567',
+    'amount': '00,000 บาท',
+    'detailLink': 'ดูรายละเอียด',
+    'images' : 'assets/icons/ordermont.png'
+  }
+];
+
+
+const List<Map<String, dynamic>> transport= [
+  {
+    'id': 1,
+    'month': 'สิงหาคม 2567',
+    'amount': '00,000 บาท',
+    'detailLink': 'ดูรายละเอียด',
+    'images' : 'assets/icons/ordermont.png'
+  },
+   {
+    'id': 2,
+    'month': 'กรกฎาคม 2567',
+    'amount': '00,000 บาท',
+    'detailLink': 'ดูรายละเอียด',
+    'images' : 'assets/icons/ordermont.png'
+  },
+  {
+    'id': 3,
+    'month': 'มิถุนายน 2567',
+    'amount': '00,000 บาท',
+    'detailLink': 'ดูรายละเอียด',
+    'images' : 'assets/icons/ordermont.png'
+  }
+];
+

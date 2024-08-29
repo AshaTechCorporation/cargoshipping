@@ -20,6 +20,7 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(200.0),
         child: ClipRRect(
@@ -48,13 +49,17 @@ class _AccountPageState extends State<AccountPage> {
                           children: [
                             Text(
                               'A123456',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'Name Surname',
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -84,9 +89,7 @@ class _AccountPageState extends State<AccountPage> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
-                              SizedBox(
-                                  width:
-                                      10),
+                              SizedBox(width: 10),
                               CircleAvatar(
                                 backgroundColor: Colors.grey[300],
                                 radius: 20,
@@ -101,20 +104,26 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: size.height * 0.009,),
+                    SizedBox(
+                      height: size.height * 0.009,
+                    ),
                     Row(
                       children: [
                         Column(
                           children: [
                             Text(
                               'TEG+ Point ',
-                              style:
-                                  TextStyle(color: Colors.yellow[500], fontSize: 14, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.yellow[500],
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               '150 คะแนน ',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -123,13 +132,17 @@ class _AccountPageState extends State<AccountPage> {
                           children: [
                             Text(
                               'Wallet ',
-                              style:
-                                  TextStyle(color: Colors.yellow, fontSize: 12, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'คงเหลือ 1025 บาท',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -150,16 +163,14 @@ class _AccountPageState extends State<AccountPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Topuppage()
-                                    ),
+                                        builder: (context) => Topuppage()),
                                   );
                                 }
                                 if (index == 1) {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Withdrawpage()
-                                    ),
+                                        builder: (context) => Withdrawpage()),
                                   );
                                 }
                               })),
@@ -190,10 +201,9 @@ class _AccountPageState extends State<AccountPage> {
                   IconButton(
                     icon: Icon(
                       Icons.favorite_border_outlined,
-                      color:red1,
+                      color: red1,
                     ),
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -214,24 +224,34 @@ class _AccountPageState extends State<AccountPage> {
             SizedBox(
               height: size.height * 0.01,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
-              child: Row(
-                children: [
-                  Text(
-                    'รายการนำเข้า',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  )
-                ],
+            SizedBox(
+              height: size.height * 0.05,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: size.height * 0.01,
+                    horizontal: size.width * 0.01),
+                child: Row(
+                  children: [
+                    Text(
+                      'รายการนำเข้า',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(6.0),
+              padding: EdgeInsets.only(
+                top: 5.0,
+                left: 10.0,
+                right: 10.0,
+                bottom: 10.0,
+              ),
               child: GridView.builder(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: importlist.length,
-                physics: ClampingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 5,
@@ -247,6 +267,7 @@ class _AccountPageState extends State<AccountPage> {
                 },
               ),
             ),
+
             SizedBox(
               height: size.height * 0.001,
             ),

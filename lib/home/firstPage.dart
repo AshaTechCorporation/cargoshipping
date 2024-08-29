@@ -20,6 +20,7 @@ class _FirstPageState extends State<FirstPage> {
   void onItemSelect(int index) {
     setState(() {
       selectedIndex = index;
+      print(selectedIndex);
       if (selectedIndex == 0) {
         currentPage = HomePage();
       } else if (selectedIndex == 1) {
@@ -36,14 +37,17 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       extendBody: true,
       body: SafeArea(
         child: PageStorage(bucket: bucket, child: currentPage),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Transform.translate(
-        offset: Offset(0, 20), // ปรับค่า Y เพื่อเลื่อนลง
+      floatingActionButton: isKeyboardVisible
+      ? null
+      :Transform.translate(
+        offset: Offset(0, 20),
         child: FloatingActionButton.large(
           backgroundColor: Colors.red,
           shape: RoundedRectangleBorder(
@@ -72,8 +76,14 @@ class _FirstPageState extends State<FirstPage> {
                 onTap: () {
                   onItemSelect(0);
                 },
-                child: Image.asset(
+                child: selectedIndex == 0
+                ?Image.asset(
                   'assets/icons/Frame 61.png',
+                  width: 24,
+                  height: 27,
+                )
+                :Image.asset(
+                  'assets/icons/greymain.png',
                   width: 24,
                   height: 27,
                 ),
@@ -95,21 +105,33 @@ class _FirstPageState extends State<FirstPage> {
                 onTap: () {
                   onItemSelect(3);
                 },
-                child: Image.asset(
+                child: selectedIndex == 3
+                ?Image.asset(
+                  'assets/icons/redcart.png',
+                  width: 30, // Adjust the width as needed
+                  height: 30, // Adjust the height as needed
+                )
+                :Image.asset(
                   'assets/icons/shipping.png',
                   width: 30, // Adjust the width as needed
                   height: 30, // Adjust the height as needed
-                ),
+                )
               ),
               GestureDetector(
                 onTap: () {
                   onItemSelect(4);
                 },
-                child: Image.asset(
+                child: selectedIndex == 4
+                ?Image.asset(
+                  'assets/icons/reduser.png',
+                  width: 27, // Adjust the width as needed
+                  height: 27, // Adjust the height as needed
+                )
+                :Image.asset(
                   'assets/icons/user.png',
                   width: 27, // Adjust the width as needed
                   height: 27, // Adjust the height as needed
-                ),
+                )
               ),
             ],
           ),

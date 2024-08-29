@@ -146,8 +146,9 @@ class _AddresspageState extends State<Addresspage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: size.height * 0.001,
+            Container(
+              color: arrowcolor,
+              height: size.height *0.001,
             ),
             GestureDetector(
               onTap: () {

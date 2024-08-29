@@ -22,7 +22,7 @@ class AboutQuestionWidget extends StatelessWidget {
               topLeft: Radius.circular(10.0), 
               bottomLeft: Radius.circular(10.0)),
           ),
-          child: Center(child: Text(title, style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white))),       
+          child: Center(child: Text(title, style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 14))),       
         ),
     );
   }

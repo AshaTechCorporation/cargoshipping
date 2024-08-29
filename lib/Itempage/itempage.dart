@@ -1,3 +1,4 @@
+import 'package:cargoshipping/Itempage/confirmorderpage.dart';
 import 'package:cargoshipping/Itempage/widgets/iamgesitem.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
@@ -38,7 +39,10 @@ class _itempageState extends State<itempage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('สั่งซื้อสินค้า'),
+        title: Text(
+          'สั่งซื้อสินค้า',
+          style: TextStyle(color: Colors.black),
+        ),
         // backgroundColor: Colors.grey,
         actions: <Widget>[
           IconButton(
@@ -445,26 +449,179 @@ class _itempageState extends State<itempage> {
                 ),
               ),
               Expanded(
-                flex: 2, // Increase the size of this button
+                flex: 2,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.red[700],
-                    borderRadius: BorderRadius.circular(
-                        20), // Adjust the radius as needed
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: TextButton(
-                    onPressed: () => _onItemTapped(2),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20),
+                          ),
+                        ),
+                        builder: (BuildContext context) {
+                          final size = MediaQuery.of(context).size;
+                          return DraggableScrollableSheet(
+                            expand: false,
+                            initialChildSize:
+                                0.8, // ความสูงเริ่มต้นที่ 80% ของหน้าจอ
+                            minChildSize: 0.4, // ความสูงต่ำสุดที่ 40% ของหน้าจอ
+                            maxChildSize: 0.9, // ความสูงสูงสุดที่ 90% ของหน้าจอ
+                            builder: (context, scrollController) {
+                              return SingleChildScrollView(
+                                controller: scrollController,
+                                child: Padding(
+                                  padding: EdgeInsets.all(16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // ส่วนแสดงภาพและราคา
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: size.height * 0.08,
+                                            width: size.height * 0.1,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              color: Colors.grey[200],
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: Image.asset(
+                                                widget.products['image'],
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: size.width * 0.04),
+                                          Text(
+                                            '¥ ${widget.products['price']}',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 16),
+
+                                      // ส่วนเลือกสี
+                                      Text(
+                                        'สี',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 8),
+                                      Wrap(
+                                        spacing: 8,
+                                        runSpacing: 8,
+                                        children: [
+                                          _buildColorOption('สีธูปแดง'),
+                                          _buildColorOption('สีขาวมวล'),
+                                          _buildColorOption('สีน้ำตาลอ่อน'),
+                                          _buildColorOption('สีเทาอ่อน'),
+                                          _buildColorOption('สีนอร์ดิกบลู'),
+                                        ],
+                                      ),
+                                      SizedBox(height: 16),
+
+                                      // ตัวเลือกข้อมูล
+                                      _buildOptionRow('ตัวเลือก', 'ข้อมูล'),
+                                      _buildOptionRow('ตัวเลือก', 'ข้อมูล'),
+                                      SizedBox(height: 16),
+
+                                      // ส่วนเลือกจำนวนสินค้า
+                                      _buildQuantitySelector(size),
+                                      SizedBox(height: 16),
+
+                                      // บริการเสริม
+                                      Text(
+                                        'บริการเสริม',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 8),
+                                      Wrap(
+                                        spacing: 8,
+                                        runSpacing: 8,
+                                        children: [
+                                          _buildServiceOption(
+                                              'ตีลังไม้', 'เริ่มต้น ¥500/CBM'),
+                                          _buildServiceOption('พันห่อด้วยเทป',
+                                              'เริ่มต้น ¥50/CBM'),
+                                          _buildServiceOption(
+                                              'ตรวจ QC สินค้า', '¥25/กล่อง'),
+                                        ],
+                                      ),
+                                      SizedBox(height: 16),
+
+                                      // รายละเอียดราคา
+                                      _buildPriceDetails(),
+                                      SizedBox(
+                                        height: size.height * 0.06,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Confirmorderpage()));
+                                        },
+                                        child: Center(
+                                          child: Container(
+                                            height: size.height * 0.067,
+                                            width: size.width * 0.8,
+                                            decoration: BoxDecoration(
+                                                color: red1,
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'ซื้อสินค้า',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: white,
+                                                      fontSize: 16),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
                     child: Center(
                       child: Text(
-                        'ซื้อสินค้า',
+                        'ซื้อสินค้า', // ข้อความบนปุ่ม
                         style: TextStyle(
-                          color: _selectedIndex == 2
-                              ? Colors.black
-                              : const Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 20,
+                          color: Colors.white,
+                          fontSize: 18,
                         ),
                       ),
                     ),
@@ -477,4 +634,87 @@ class _itempageState extends State<itempage> {
       ),
     );
   }
+}
+
+Widget _buildColorOption(String colorName) {
+  return Column(
+    children: [
+      Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      SizedBox(height: 4),
+      Text(colorName, style: TextStyle(fontSize: 12)),
+    ],
+  );
+}
+
+Widget _buildOptionRow(String title, String value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title, style: TextStyle(fontSize: 16)),
+        Text(value, style: TextStyle(fontSize: 16)),
+      ],
+    ),
+  );
+}
+
+Widget _buildQuantitySelector(Size size) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text('จำนวน'),
+      Row(
+        children: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.remove),
+          ),
+          Text(
+            '50',
+            style: TextStyle(fontSize: 16),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.add),
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+Widget _buildServiceOption(String title, String price) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(color: Colors.red),
+    ),
+    child: Column(
+      children: [
+        Text(title, style: TextStyle(fontSize: 14, color: Colors.red)),
+        SizedBox(height: 4),
+        Text(price, style: TextStyle(fontSize: 12, color: Colors.grey)),
+      ],
+    ),
+  );
+}
+
+Widget _buildPriceDetails() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text('จำนวนสินค้า 50 ชิ้น', style: TextStyle(fontSize: 16)),
+      Text('¥11.19 (~฿55.56)',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+    ],
+  );
 }
