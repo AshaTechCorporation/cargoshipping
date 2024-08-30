@@ -469,10 +469,9 @@ class _itempageState extends State<itempage> {
                           final size = MediaQuery.of(context).size;
                           return DraggableScrollableSheet(
                             expand: false,
-                            initialChildSize:
-                                0.8, // ความสูงเริ่มต้นที่ 80% ของหน้าจอ
-                            minChildSize: 0.4, // ความสูงต่ำสุดที่ 40% ของหน้าจอ
-                            maxChildSize: 0.9, // ความสูงสูงสุดที่ 90% ของหน้าจอ
+                            initialChildSize: 0.8,
+                            minChildSize: 0.4,
+                            maxChildSize: 0.9,
                             builder: (context, scrollController) {
                               return SingleChildScrollView(
                                 controller: scrollController,

@@ -10,6 +10,7 @@ import 'package:cargoshipping/home/widgets/Servicedetail.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
 import 'package:cargoshipping/home/widgets/payment.dart';
+import 'package:cargoshipping/home/widgets/reportpage.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
@@ -126,16 +127,16 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 items: items
-                                    .map(
-                                        (String item) => DropdownMenuItem<String>(
-                                              value: item,
-                                              child: Text(
-                                                item,
-                                                style: const TextStyle(
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
+                                    .map((String item) =>
+                                        DropdownMenuItem<String>(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ))
                                     .toList(),
                                 value: selectedValue,
                                 onChanged: (String? value) {
@@ -243,6 +244,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       }
+                      if (index == 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ReportProblemPage()),
+                        );
+                      }
                       if (index == 6) {
                         Navigator.push(
                           context,
@@ -307,13 +315,15 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('ที่อยู่รับพัสดุ',style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black
-                  ),),
+                  Text(
+                    'ที่อยู่รับพัสดุ',
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
                   SizedBox(
-                    height: size.height *0.005,
+                    height: size.height * 0.005,
                   ),
                   SizedBox(
                     height: size.height * 0.19,

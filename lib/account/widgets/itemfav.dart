@@ -11,158 +11,146 @@ class Itemfav extends StatefulWidget {
 class _ItemfavState extends State<Itemfav> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: background,
-        appBar: AppBar(
-          title: Text(
-            'รายการโปรด',
-            style: TextStyle(color: Colors.black),
-          ),
+      backgroundColor: background,
+      appBar: AppBar(
+        title: Text(
+          'รายการโปรด',
+          style: TextStyle(color: Colors.black),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            Card(
-              color: white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '1688严选店',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Implement delete action
-                          },
-                          child: Text(
-                            'ลบ',
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              height: size.height * 0.27,
+              child: Card(
+                color: white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            '1688严选店',
                             style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                    Divider(),
-                    ProductItem(
-                      imageUrl: 'https://via.placeholder.com/150',
-                      title: 'ชั้นวางพลาสติกในครัว, ชั้นวางของใ...',
-                      price: '¥4.88',
-                    ),
-                    Divider(),
-                    ProductItem(
-                      imageUrl: 'https://via.placeholder.com/150',
-                      title: 'ชั้นวางพลาสติกในครัว, ชั้นวางของใ...',
-                      price: '¥4.88',
-                    ),
-                  ],
+                          Spacer(),
+                          Text('ลบ',style: TextStyle(
+                            color: greyuserinfo
+                          ),)
+                        ],
+                      ),
+                      Divider(), // เส้นแบ่งระหว่างชื่อร้านและรายการสินค้า
+                      _buildProductItem(
+                        context,
+                        'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
+                        '¥4.88',
+                      ),
+                      Divider(), // เส้นแบ่งระหว่างสินค้าชิ้นแรกและชิ้นที่สอง
+                      _buildProductItem(
+                        context,
+                        'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
+                        '¥4.88',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ],
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Container(
-            height: 60,
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'ทั้งหมด 7 รายการ ยอดรวมทั้งหมด',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  '฿ 00,000',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+          ),
+          SizedBox(
+            height: size.height * 0.5,
+          ),
+          Center(
+            child: Container(
+              height: size.height * 0.057,
+              width: size.width * 0.95,
+              decoration: BoxDecoration(
+                  color: red1, borderRadius: BorderRadius.circular(15)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'เพิ่มสินค้าที่เลือกไปยังรถเข็น',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: white,
+                        fontSize: 16),
+                  )
+                ],
+              ),
             ),
           ),
-        ));
+        ],
+      ),
+    );
   }
-}
 
-class ProductItem extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String price;
-
-  const ProductItem({
-    Key? key,
-    required this.imageUrl,
-    required this.title,
-    required this.price,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildProductItem(BuildContext context, String title, String price) {
+    final size = MediaQuery.of(context).size;
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
-          child: Image.network(
-            imageUrl,
-            width: 80,
-            height: 80,
-            fit: BoxFit.cover,
+          child: Container(
+            height: 60,
+            width: 60,
+            color: Colors.grey[300], // เปลี่ยนภาพเป็น Container สีเทา
           ),
         ),
-        SizedBox(width: 10),
+        SizedBox(width: 16),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                maxLines: 2,
+                style: TextStyle(fontSize: 14),
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 8),
               Text(
                 price,
                 style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
               ),
             ],
           ),
         ),
-        IconButton(
-          icon: Icon(Icons.shopping_cart, color: Colors.red),
-          onPressed: () {
-            //
-          },
-        ),
-        IconButton(
-          icon: Icon(Icons.delete, color: Colors.red),
-          onPressed: () {
-            //
-          },
+        SizedBox(width: 16),
+        Column(
+          children: [
+            Text(
+              'ลบ',
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Image.asset(
+              'assets/icons/shoppingbutton.png',
+              width: size.width * 0.12,
+              height: size.height * 0.044,
+              fit: BoxFit.fill,
+            ),
+          ],
         ),
       ],
     );

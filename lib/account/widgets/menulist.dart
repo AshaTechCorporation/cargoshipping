@@ -1,11 +1,13 @@
 import 'package:cargoshipping/account/widgets/accsetting.dart';
+import 'package:cargoshipping/account/widgets/guidepage.dart';
 import 'package:cargoshipping/account/widgets/itemfav.dart';
 import 'package:cargoshipping/account/widgets/ordersumpage.dart';
-import 'package:cargoshipping/account/widgets/summarysale.dart';
+import 'package:cargoshipping/account/widgets/tagpage.dart';
 import 'package:cargoshipping/account/widgets/transportpage.dart';
 import 'package:cargoshipping/account/widgets/wecargo.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/messagePage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MenuList extends StatelessWidget {
@@ -52,7 +54,19 @@ class MenuList extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Summarysale(),
+                    builder: (context) => TagsPage(
+
+                    ),
+                  ),
+                );
+              }
+              if (index == 4) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Guidepage(
+
+                    ),
                   ),
                 );
               }

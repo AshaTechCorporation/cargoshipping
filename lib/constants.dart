@@ -11,6 +11,9 @@ Color headingtext = Color(0xff606060);
 Color pinkmess = Color(0xfff8d2d4);
 Color greymess= Color(0xffe5e5ea);
 Color greyuserinfo = Color(0xff606060);
+Color skyorange = Color(0xffffe7d1);
+Color oldred = Color(0xff8a1015);
+
 
 const kBackgroundColor = Color(0xff1B58B1);
 const kSecondTextColor = Color(0xff7B7B7B);
