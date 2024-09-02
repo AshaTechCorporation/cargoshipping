@@ -12,48 +12,127 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   bool _isSelected = false;
   final List<bool> _storeItemsSelection = [false, false];
-  final List<String> _storeNames = ['MakeMixue.store', 'MakeMixue.store2'];
+  final List<String> _storeNames = ['1688严选店', '1688严选店2'];
+  final List<List<bool>> _productItemsSelection = [
+    [false, false],
+    [false, false]
+  ]; // บันทึกการเลือกสินค้าแต่ละตัว
 
   void _selectAll(bool? value) {
     setState(() {
       _isSelected = value ?? false;
       _storeItemsSelection.fillRange(
           0, _storeItemsSelection.length, _isSelected);
+      for (int i = 0; i < _productItemsSelection.length; i++) {
+        _productItemsSelection[i]
+            .fillRange(0, _productItemsSelection[i].length, _isSelected);
+      }
     });
   }
 
   void _updateStoreSelection(int index, bool? value) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        _storeItemsSelection[index] = value ?? false;
-        _isSelected = _storeItemsSelection.every((selected) => selected);
-      });
+    setState(() {
+      _storeItemsSelection[index] = value ?? false;
+      _productItemsSelection[index].fillRange(
+          0, _productItemsSelection[index].length, _storeItemsSelection[index]);
+      _isSelected = _storeItemsSelection.every((selected) => selected);
     });
+  }
+
+  void _updateProductSelection(int storeIndex, int productIndex, bool? value) {
+    setState(() {
+      _productItemsSelection[storeIndex][productIndex] = value ?? false;
+      // Update store selection based on product selections
+      _storeItemsSelection[storeIndex] =
+          !_productItemsSelection[storeIndex].contains(false);
+      _isSelected = _storeItemsSelection.every((selected) => selected);
+    });
+  }
+
+  void _deleteStore(int storeIndex) {
+    setState(() {
+      _storeNames.removeAt(storeIndex);
+      _storeItemsSelection.removeAt(storeIndex);
+      _productItemsSelection.removeAt(storeIndex);
+      _isSelected = _storeItemsSelection.every((selected) => selected);
+    });
+  }
+
+  void _deleteProduct(int storeIndex, int productIndex) {
+    setState(() {
+      _productItemsSelection[storeIndex].removeAt(productIndex);
+      if (_productItemsSelection[storeIndex].isEmpty) {
+        _deleteStore(storeIndex);
+      } else {
+        _storeItemsSelection[storeIndex] =
+            !_productItemsSelection[storeIndex].contains(false);
+        _isSelected = _storeItemsSelection.every((selected) => selected);
+      }
+    });
+  }
+
+  Widget _buildCheckbox(String label, bool value, ValueChanged<bool?> onChanged) {
+    return Row(
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: onChanged,
+        ),
+        Text(
+          label,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBottomBar(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return SizedBox(
+      height: size.height * 0.075,
+      child: BottomAppBar(
+        color: white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildCheckbox('ทั้งหมด', _isSelected, _selectAll),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: red1,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+              ),
+              child: const Text(
+                'สั่งซื้อสินค้า',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
-        title: Text(
+        backgroundColor: background,
+        title: const Text(
           'รถเข็น',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: size.height * 0.02,
-            ),
-            child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.favorite_rounded,
-                  size: 30,
-                  color: Colors.red,
-                )),
-          )
-        ],
       ),
       body: ListView.builder(
         itemCount: _storeItemsSelection.length,
@@ -63,39 +142,17 @@ class _CartPageState extends State<CartPage> {
             isSelected: _storeItemsSelection[index],
             onSelectionChanged: (isSelected) =>
                 _updateStoreSelection(index, isSelected),
+            productItemsSelection: _productItemsSelection[index],
+            onProductSelectionChanged: (productIndex, isSelected) =>
+                _updateProductSelection(index, productIndex, isSelected),
+            onDeleteStore: () => _deleteStore(index),
+            onDeleteProduct: (productIndex) =>
+                _deleteProduct(index, productIndex),
           );
         },
       ),
-      bottomNavigationBar: SizedBox(
-        height: 50,
-        child: BottomAppBar(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                      value: _isSelected,
-                      onChanged: _selectAll,
-                    ),
-                    Text('ทั้งหมด'),
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: red1, // สีของตัวอักษร
-                  ),
-                  child: Text('สั่งซื้อสินค้า'),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+      bottomNavigationBar: _buildBottomBar(context),
     );
   }
 }
+

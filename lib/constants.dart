@@ -13,6 +13,8 @@ Color greymess= Color(0xffe5e5ea);
 Color greyuserinfo = Color(0xff606060);
 Color skyorange = Color(0xffffe7d1);
 Color oldred = Color(0xff8a1015);
+Color youngpink = Color(0xffffe6e7);
+
 
 
 const kBackgroundColor = Color(0xff1B58B1);
@@ -112,6 +114,7 @@ const List<String> importlist = [
 ];
 
 const List<Map<String, dynamic>> listProducts = [
+  
   {
     'id': 1,
     'image': 'assets/images/shelf.png',
@@ -272,6 +275,38 @@ const List<Map<String, dynamic>> transport= [
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
     'images' : 'assets/icons/ordermont.png'
+  }
+];
+
+const List<Map<String, dynamic>> listallProducts = [
+  {
+    'category': 'เสื้อ',
+    'products': [
+      {'name': 'เสื้อยืด', 'image': 'assets/images/t_shirt.png'},
+      {'name': 'เสื้อเชิ้ต', 'image': 'assets/images/shirt.png'},
+      {'name': 'เสื้อสเวตเตอร์', 'image': 'assets/images/sweater.png'},
+      {'name': 'เสื้อโปโล', 'image': 'assets/images/t_shirt.png'},
+      {'name': 'เสื้อกล้าม', 'image': 'assets/images/shirt.png'},
+      {'name': 'เสื้อฮอก', 'image': 'assets/images/sweater.png'},
+    ]
+  },
+  {
+    'category': 'กางเกง/กระโปรง',
+    'products': [
+      {'name': 'กางเกงขาสั้น', 'image': 'assets/images/t_shirt.png'},
+      {'name': 'กางเกงขายาว', 'image': 'assets/images/shirt.png'},
+      {'name': 'กระโปรงสั้น', 'image': 'assets/images/sweater.png'},
+      {'name': 'กระโปรงยาว', 'image': 'assets/images/shirt.png'},
+      {'name': 'เดรส', 'image': 'assets/images/t_shirt.png'},
+    ]
+  },
+  {
+    'category': 'รองเท้า',
+    'products': [
+      {'name': 'รองเท้าแตะ', 'image': 'assets/images/t_shirt.png'},
+      {'name': 'รองเท้าผ้าใบ', 'image': 'assets/images/shirt.png'},
+      {'name': 'รองเท้าส้นสูง', 'image': 'assets/images/sweater.png'},
+    ]
   }
 ];
 

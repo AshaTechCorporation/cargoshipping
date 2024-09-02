@@ -20,15 +20,15 @@ class _AccsettingState extends State<Accsetting> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: background,
-        title: Text('ตั้งค่า',style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black
-        ),),
+        title: Text(
+          'ตั้งค่า',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
           child: Container(
-            color: Colors.grey,
-            height: 1.0,
+            color: Colors.grey[300],
+            height: size.height * 0.001,
           ),
         ),
       ),
@@ -45,8 +45,7 @@ class _AccsettingState extends State<Accsetting> {
                 child: Text(
                   'ตั้งค่าบัญชีผู้ใช้',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: headingtext),
+                      fontWeight: FontWeight.bold, color: headingtext),
                 ),
               ),
             ),
@@ -63,11 +62,13 @@ class _AccsettingState extends State<Accsetting> {
                   },
                   child: Row(
                     children: [
-                      Text('ข้อมูลเกี่ยวกับบัญชี',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 13
-                      ),),
+                      Text(
+                        'ข้อมูลเกี่ยวกับบัญชี',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 13),
+                      ),
                       Spacer(),
                       Image.asset('assets/icons/rightarrow.png')
                     ],
@@ -75,8 +76,9 @@ class _AccsettingState extends State<Accsetting> {
                 ),
               ),
             ),
-            Divider(
-              height: size.height * 0.005,
+            Container(
+              color: Colors.grey[300],
+              height: size.height * 0.001,
             ),
             Container(
               height: size.height * 0.05,
@@ -90,11 +92,13 @@ class _AccsettingState extends State<Accsetting> {
                   },
                   child: Row(
                     children: [
-                      Text('ที่อยู่ของฉัน',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 13
-                      ),),
+                      Text(
+                        'ที่อยู่ของฉัน',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 13),
+                      ),
                       Spacer(),
                       Image.asset('assets/icons/rightarrow.png')
                     ],
@@ -102,9 +106,10 @@ class _AccsettingState extends State<Accsetting> {
                 ),
               ),
             ),
-            Divider(
-              height: size.height * 0.005,
-            ),
+            Container(
+            color: Colors.grey[300],
+            height: size.height * 0.001,
+          ),
             Container(
               height: size.height * 0.05,
               color: white,
@@ -114,11 +119,13 @@ class _AccsettingState extends State<Accsetting> {
                   onTap: () {},
                   child: Row(
                     children: [
-                      Text('ข้อมูลบัตร/บัญชีธนาคาร',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 13
-                      ),),
+                      Text(
+                        'ข้อมูลบัตร/บัญชีธนาคาร',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 13),
+                      ),
                       Spacer(),
                       Image.asset('assets/icons/rightarrow.png')
                     ],
@@ -126,9 +133,10 @@ class _AccsettingState extends State<Accsetting> {
                 ),
               ),
             ),
-            Divider(
-              height: size.height * 0.005,
-            ),
+           Container(
+            color: Colors.grey[300],
+            height: size.height * 0.001,
+          ),
             Container(
               color: background,
               height: size.height * 0.055,
@@ -138,8 +146,7 @@ class _AccsettingState extends State<Accsetting> {
                 child: Text(
                   'ช่วยเหลือ',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: headingtext),
+                      fontWeight: FontWeight.bold, color: headingtext),
                 ),
               ),
             ),
@@ -151,20 +158,23 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Row(
                   children: [
-                    Text('ข้อตกลงและเงื่อไขการให้บริการ',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 13
-                      ),),
+                    Text(
+                      'ข้อตกลงและเงื่อไขการให้บริการ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 13),
+                    ),
                     Spacer(),
                     Image.asset('assets/icons/rightarrow.png')
                   ],
                 ),
               ),
             ),
-            Divider(
-              height: size.height * 0.005,
-            ),
+            Container(
+            color: Colors.grey[300],
+            height: size.height * 0.001,
+          ),
             Container(
               height: size.height * 0.05,
               color: white,
@@ -172,20 +182,23 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Row(
                   children: [
-                    Text('เวอร์ชัน',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 13
-                      ),),
+                    Text(
+                      'เวอร์ชัน',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 13),
+                    ),
                     Spacer(),
                     Image.asset('assets/icons/rightarrow.png')
                   ],
                 ),
               ),
             ),
-            Divider(
-              height: size.height * 0.005,
-            ),
+            Container(
+            color: Colors.grey[300],
+            height: size.height * 0.001,
+          ),
             Container(
               height: size.height * 0.05,
               color: white,
@@ -193,20 +206,23 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Row(
                   children: [
-                    Text('เกี่ยวกับเรา',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 13
-                      ),),
+                    Text(
+                      'เกี่ยวกับเรา',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 13),
+                    ),
                     Spacer(),
                     Image.asset('assets/icons/rightarrow.png')
                   ],
                 ),
               ),
             ),
-            Divider(
-              height: size.height * 0.005,
-            ),
+            Container(
+            color: Colors.grey[300],
+            height: size.height * 0.001,
+          ),
             Container(
               height: size.height * 0.05,
               color: white,
@@ -214,20 +230,23 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Row(
                   children: [
-                    Text('คำร้องขอลบบัญชีผู้ใช้',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 13
-                      ),),
+                    Text(
+                      'คำร้องขอลบบัญชีผู้ใช้',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 13),
+                    ),
                     Spacer(),
                     Image.asset('assets/icons/rightarrow.png'),
                   ],
                 ),
               ),
             ),
-            Divider(
-              height: size.height * 0.005,
-            ),
+            Container(
+            color: Colors.grey[300],
+            height: size.height * 0.001,
+          ),
             SizedBox(
               height: size.height * 0.32,
             ),
@@ -260,10 +279,10 @@ class _AccsettingState extends State<Accsetting> {
                                 TextButton(
                                   onPressed: () {
                                     Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                  (route) => false);
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()),
+                                        (route) => false);
                                   },
                                   child: Text('ตกลง'),
                                 )
@@ -273,8 +292,10 @@ class _AccsettingState extends State<Accsetting> {
                     },
                     child: Text(
                       'ออกจากระบบ',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, color: red1,fontSize: 17),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: red1,
+                          fontSize: 17),
                     ),
                   )
                 ],

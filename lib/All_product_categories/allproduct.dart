@@ -1,227 +1,166 @@
-import 'package:cargoshipping/All_product_categories/widget/eachcatagory.dart';
-import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
-import 'package:cargoshipping/home/widgets/OurItem.dart';
-import 'package:cargoshipping/home/widgets/ProductCategories.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 class Allproduct extends StatefulWidget {
-  const Allproduct({super.key});
-
   @override
-  State<Allproduct> createState() => _AllproductState();
+  _AllproductState createState() => _AllproductState();
 }
 
-class _AllproductState extends State<Allproduct> {
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-  ];
-  String? selectedValue;
+class _AllproductState extends State<Allproduct>
+    with SingleTickerProviderStateMixin {
+  int selectedIndex = 0;
+
+  void onTabTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
-        title: Text('หมวดหมู่สินค้าทั้งหมด'),
+        backgroundColor: background,
+        title: Text(
+          'หมวดหมู่สินค้าทั้งหมด',
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Row(
+        children: [
+          // Custom TabBar on the left
+          Container(
+            width: size.width * 0.29,
+            color: Colors.white,
+            child: ListView(
               children: [
-                Container(
-                  height: size.height * 0.05,
-                  width: size.width * 0.9,
-                  margin: const EdgeInsets.all(3.0),
-                  padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: const Color.fromARGB(255, 122, 124, 126)),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: size.width * 0.35,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'ค้นหาสินค้า',
-                              contentPadding:
-                                  EdgeInsets.only(left: 15, bottom: 10),
-                            ),
-                          ),
-                        ),
-                        Icon(Icons.camera_alt_outlined),
-                        VerticalDivider(
-                          color: Colors.grey,
-                          thickness: 1,
-                        ),
-                        Container(
-                          height: size.height * 0.05,
-                          width: size.width * 0.23,
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton2<String>(
-                              isExpanded: true,
-                              hint: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '1688',
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              items: items
-                                  .map(
-                                      (String item) => DropdownMenuItem<String>(
-                                            value: item,
-                                            child: Text(
-                                              item,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ))
-                                  .toList(),
-                              value: selectedValue,
-                              onChanged: (String? value) {
-                                setState(() {
-                                  selectedValue = value;
-                                });
-                              },
-                              buttonStyleData: const ButtonStyleData(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                height: 40,
-                                width: 140,
-                              ),
-                              menuItemStyleData: const MenuItemStyleData(
-                                height: 40,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.01,
-                        ),
-                        Container(
-                          height: size.height * 0.05,
-                          width: size.width * 0.193,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.red),
-                          child: Center(
-                              child: Text(
-                            'ค้นหา',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    //logic here
-                  },
-                  child: Icon(
-                    Icons.favorite_border_outlined,
-                  ),
-                )
+                _buildTabItem('เสื้อผ้า', 'assets/icons/clothmock.png', 0),
+                _buildTabItem('เครื่องประดับ', 'assets/icons/bagmock.png', 1),
+                _buildTabItem('อุปกรณ์กีฬา', 'assets/icons/bagmock.png', 2),
+                _buildTabItem('สินค้าคู่เด็ก', 'assets/icons/bagmock.png', 3),
               ],
             ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            Wrap(
-              spacing: 15,
-              runSpacing: 10,
-              children: List.generate(
-                catagoryrecom.length,
-                (index) => ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: (size.width - 15 * 3) / 4,
-                  ),
-                  child: ProductCategories(
-                    size: size,
-                    title: catagoryrecom[index],
-                    press: () {
-                      if (index == 0) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                EachCategory(category: 'เสื้อผ้าลดราคา'),
-                          ),
-                        );
-                      }
-                    },
-                    imagespath: catagoryimg[index],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
-              child: Row(
+          ),
+
+          // Main Content for each tab
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IndexedStack(
+                index: selectedIndex,
                 children: [
-                  Expanded(
-                    child: RichText(
-                        text: TextSpan(
-                            text: 'สินค้าแนะนำ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                            children: <TextSpan>[
-                          TextSpan(
-                            text: ' จาก 1668',
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          )
-                        ])),
-                  ),
+                  _buildClothingSection(),
+                  Center(child: Text('เครื่องประดับ')),
+                  Center(child: Text('อุปกรณ์กีฬา')),
+                  Center(child: Text('สินค้าคู่เด็ก')),
                 ],
               ),
             ),
-            Wrap(
-              spacing: 20,
-              runSpacing: 10,
-              children: List.generate(
-                  listProducts.length,
-                  (index) => Ouritem(
-                        image: listProducts[index]['image'],
-                        sale: listProducts[index]['sale'],
-                        send: listProducts[index]['send'],
-                        size: MediaQuery.of(context).size,
-                        price: (listProducts[index]['price'] as num).toDouble(),
-                        detail: listProducts[index]['detail'],
-                        press: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => itempage(
-                                size: size,
-                                title: listProducts[index]['detail'],
-                                price: (listProducts[index]['price'] as num)
-                                    .toDouble(),
-                                products: listProducts[index],
-                                press: () {},
-                              ),
-                            ),
-                          );
-                        },
-                      )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabItem(String title, String imagePath, int index) {
+    bool isSelected = selectedIndex == index;
+    return GestureDetector(
+      onTap: () => onTabTapped(index),
+      child: Container(
+        color: isSelected ? background : Colors.transparent,
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        child: Column(
+          children: [
+            Image.asset(
+              imagePath,
+              width: 40,
+              height: 40,
+              fit: BoxFit.fill,
+            ),
+            SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.black,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildClothingSection() {
+    return ListView(
+      children: listallProducts.map((section) {
+        return _buildSection(
+          section['category'],
+          section['products'],
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildSection(String title, List<Map<String, String>> items) {
+    final size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        margin: const EdgeInsets.only(left: 10.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6.0,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              physics: NeverScrollableScrollPhysics(),
+              children: items.map((item) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // แสดงภาพจาก assets
+                    Image.asset(
+                      item['image']!, // ดึงภาพจากแผนที่ตามชื่อ item
+                      width: size.width * 0.9, // กำหนดขนาดภาพ
+                      height: size.height * 0.063,
+                    ),
+                    SizedBox(
+                        height: size.height *
+                            0.006), // ระยะห่างระหว่างรูปกับข้อความ
+                    // แสดงข้อความใต้ภาพ
+                    Text(
+                      item['name']!,
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
+              }).toList(),
             ),
           ],
         ),

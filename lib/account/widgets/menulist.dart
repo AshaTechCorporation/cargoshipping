@@ -7,7 +7,6 @@ import 'package:cargoshipping/account/widgets/transportpage.dart';
 import 'package:cargoshipping/account/widgets/wecargo.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/messagePage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MenuList extends StatelessWidget {
