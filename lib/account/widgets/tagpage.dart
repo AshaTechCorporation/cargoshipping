@@ -44,7 +44,6 @@ class _TagsPageState extends State<TagsPage>
           'บทความ',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        centerTitle: true,
       ),
       body: Column(
         children: [

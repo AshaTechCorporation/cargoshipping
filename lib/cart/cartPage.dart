@@ -1,3 +1,4 @@
+import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/cart/widget/storeitem.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
@@ -71,13 +72,14 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  Widget _buildCheckbox(String label, bool value, ValueChanged<bool?> onChanged) {
+   Widget _buildCheckbox(String label, bool value, ValueChanged<bool?> onChanged) {
     return Row(
       children: [
-        Checkbox(
+        CustomCheckbox(  // ใช้ CustomCheckbox ที่คุณสร้างขึ้น
           value: value,
           onChanged: onChanged,
         ),
+        const SizedBox(width: 8), // เพิ่มช่องว่างระหว่าง checkbox และ label
         Text(
           label,
           style: const TextStyle(
@@ -87,7 +89,6 @@ class _CartPageState extends State<CartPage> {
       ],
     );
   }
-
   Widget _buildBottomBar(BuildContext context) {
     final size = MediaQuery.of(context).size;
 

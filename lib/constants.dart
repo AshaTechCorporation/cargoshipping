@@ -14,6 +14,10 @@ Color greyuserinfo = Color(0xff606060);
 Color skyorange = Color(0xffffe7d1);
 Color oldred = Color(0xff8a1015);
 Color youngpink = Color(0xffffe6e7);
+Color green = Color(0xff3ace01);
+Color blue= Color(0xff3c5a9a);
+Color pinkser= Color(0xffffefe0);
+
 
 
 
@@ -309,4 +313,37 @@ const List<Map<String, dynamic>> listallProducts = [
     ]
   }
 ];
+
+const List<Map<String, dynamic>> itemfav = [
+    {
+      'storeName': '1688严选店',
+      'storeItems': [
+        {
+          'id': 1,
+          'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
+          'imageAssetPath': 'assets/images/shelf.png',
+        },
+        {
+          'id': 2,
+          'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
+          'imageAssetPath': 'assets/images/shelf.png',
+        },
+      ],
+    },
+    {
+      'storeName': 'taobao严选店',
+      'storeItems': [
+        {
+          'id': 1,
+          'name': 'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
+          'imageAssetPath': 'assets/images/box.png',
+        },
+        {
+          'id': 2,
+          'name': 'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
+          'imageAssetPath': 'assets/images/headband.png',
+        },
+      ],
+    },
+  ];
 

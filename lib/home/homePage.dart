@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: background,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.11),
         child: ClipRRect(
@@ -74,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             top: Radius.circular(30),
           ),
           child: AppBar(
-            backgroundColor: red1,
+            backgroundColor: Colors.red,
             toolbarHeight: size.height * 0.099,
             title: Padding(
               padding: const EdgeInsets.only(top: 35),
@@ -161,11 +162,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Searchpage()),
-                              );
+                              // Implement navigation to Search page here
                             },
                             child: Container(
                               height: size.height * 0.05,
@@ -196,33 +193,39 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: size.height * 0.01),
-            //แสดงภาพสไลด์
-            PictureSliderWidget(size: size),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                  fistpagewidget.length,
-                  (index) => Importwidget(
-                      size: size, title: fistpagewidget[index], press: () {})),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'บริการของเรา',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            Stack(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(height: size.height * 0.01),
+                    // แสดงภาพสไลด์
+                    PictureSliderWidget(size: size),
+                    SizedBox(
+                      height: size.height *
+                          0.07, // เว้นพื้นที่สำหรับ Widget ที่ทับอยู่ด้านบน
                     ),
-                  ),
-                ],
-              ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                  ],
+                ),
+                Positioned(
+                    bottom: size.height *
+                        0.03,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                        fistpagewidget.length,
+                        (index) => Importwidget(
+                          size: size,
+                          title: fistpagewidget[index],
+                          press: () {},
+                        ),
+                      ),
+                    ))
+              ],
             ),
             Wrap(
               spacing: 8,
@@ -308,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               // color: red1,
               width: size.width * 0.93,
               height: size.height * 0.42,
@@ -374,7 +377,7 @@ class _HomePageState extends State<HomePage> {
                         Center(
                           child: SizedBox(
                             height: size.height * 0.042,
-                            width: size.width * 0.4,
+                            width: size.width * 0.3,
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 foregroundColor: red1,
@@ -453,7 +456,7 @@ class _HomePageState extends State<HomePage> {
                         Center(
                           child: SizedBox(
                             height: size.height * 0.042,
-                            width: size.width * 0.4,
+                            width: size.width * 0.3,
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 foregroundColor: red1,

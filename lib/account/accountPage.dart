@@ -3,6 +3,8 @@ import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
 import 'package:cargoshipping/account/widgets/howto.dart';
 import 'package:cargoshipping/account/widgets/importlist.dart';
 import 'package:cargoshipping/account/widgets/menulist.dart';
+import 'package:cargoshipping/account/widgets/ordersumpage.dart';
+import 'package:cargoshipping/account/widgets/tagunlimited.dart';
 import 'package:cargoshipping/account/widgets/topupwidget.dart';
 import 'package:cargoshipping/account/widgets/withdrawpage.dart';
 import 'package:cargoshipping/constants.dart';
@@ -20,287 +22,547 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(200.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
-          ),
-          child: AppBar(
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.redAccent, red1],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+        backgroundColor: white,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(200.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            ),
+            child: AppBar(
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.redAccent, red1],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              'A123456',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Name Surname',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        Spacer(),
-                        Container(
-                          width: 150,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [color1, color2],
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
-                              stops: [0.3, 0.7],
-                            ),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              bottomLeft: Radius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Column(
                             children: [
                               Text(
-                                'Bronze',
+                                'A123456',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(width: 10),
-                              CircleAvatar(
-                                backgroundColor: Colors.grey[300],
-                                radius: 20,
-                                child: Icon(
-                                  Icons.person,
-                                  size: 20,
-                                  color: Colors.grey[700],
-                                ),
-                              ),
+                              Text(
+                                'Name Surname',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: size.height * 0.009,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              'TEG+ Point ',
-                              style: TextStyle(
-                                  color: Colors.yellow[500],
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
+                          Spacer(),
+                          Container(
+                            width: 150,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [color1, color2],
+                                begin: Alignment.centerRight,
+                                end: Alignment.centerLeft,
+                                stops: [0.3, 0.7],
+                              ),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                bottomLeft: Radius.circular(30),
+                              ),
                             ),
-                            Text(
-                              '150 คะแนน ',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        Spacer(),
-                        Column(
-                          children: [
-                            Text(
-                              'Wallet ',
-                              style: TextStyle(
-                                  color: Colors.yellow,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Bronze',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(width: 10),
+                                CircleAvatar(
+                                  backgroundColor: Colors.grey[300],
+                                  radius: 20,
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 20,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              'คงเหลือ 1025 บาท',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: size.height * 0.01,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(
-                          fistpagewidget.length,
-                          (index) => Topupwidget(
-                              size: size,
-                              title: topup[index],
-                              press: () {
-                                if (index == 0) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Topuppage()),
-                                  );
-                                }
-                                if (index == 1) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Withdrawpage()),
-                                  );
-                                }
-                              })),
-                    ),
-                  ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: size.height * 0.009,
+                      ),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                'TEG+ Point ',
+                                style: TextStyle(
+                                    color: Colors.yellow[500],
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '150 คะแนน ',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          Spacer(),
+                          Column(
+                            children: [
+                              Text(
+                                'Wallet ',
+                                style: TextStyle(
+                                    color: Colors.yellow,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'คงเหลือ 1025 บาท',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: size.height * 0.01,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: List.generate(
+                            fistpagewidget.length,
+                            (index) => Topupwidget(
+                                size: size,
+                                title: topup[index],
+                                press: () {
+                                  if (index == 0) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Topuppage()),
+                                    );
+                                  }
+                                  if (index == 1) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Withdrawpage()),
+                                    );
+                                  }
+                                })),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.0001,
+        body: SingleChildScrollView(
+            child: Column(children: [
+          SizedBox(
+            height: size.height * 0.02,
+          ),
+          Container(
+            height: size.height * 0.09,
+            width: size.width * 0.9,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(
+                color: Colors.grey.shade300,
+                width: 1.5,
+              ),
             ),
-            Padding(
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Tagunlimited()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Image.asset('assets/images/freetour.png'),
+                    SizedBox(
+                      width: size.width * 0.04,
+                    ),
+                    SizedBox(
+                      height: size.height * 0.064,
+                      width: size.width * 0.5,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: size.width * 0.3,
+                          ),
+                          Text(
+                            'TEG UNLIMITED',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: red1,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.001,
+                          ),
+                          Text(
+                            'รับส่วนลดทุกบริการ TEG CARGO สิทธิประโยชน์พิเศษ และอีกมากมาย',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: greyuserinfo,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.099,
+                    ),
+                    Image.asset('assets/icons/rightredarrow.png')
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: size.height * 0.02, horizontal: size.width * 0.01),
+            child: Row(
+              children: [
+                Text(
+                  'รายการสั่งซื้อสินค้า',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Ordersumpage()));
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        'ประวัติสรุปการสั่งซื้อ',
+                        style: TextStyle(fontSize: 12, color: greyuserinfo),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.015,
+                      ),
+                      Image.asset('assets/icons/history.png'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: List.generate(
+              productOrderList.length,
+              (index) => CardlistWidget(
+                size: size,
+                title: productOrderList[index],
+                press: () {},
+                imagespath: oderlist[index],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.01,
+          ),
+          SizedBox(
+            height: size.height * 0.05,
+            child: Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.01),
+                  vertical: size.height * 0.01, horizontal: size.width * 0.01),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'รายการสั่งซื้อสินค้า',
+                    'รายการนำเข้า',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.favorite_border_outlined,
-                      color: red1,
-                    ),
-                    onPressed: () {},
-                  ),
+                  )
                 ],
               ),
             ),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: List.generate(
-                productOrderList.length,
-                (index) => CardlistWidget(
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: 5.0,
+              left: 10.0,
+              right: 10.0,
+              bottom: 10.0,
+            ),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: importlist.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 5,
+                crossAxisSpacing: 5,
+                childAspectRatio: 1,
+              ),
+              itemBuilder: (context, index) {
+                return Importlist(
                   size: size,
-                  title: productOrderList[index],
                   press: () {},
-                  imagespath: oderlist[index],
-                ),
-              ),
+                  imagespath: importlist[index],
+                );
+              },
             ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            SizedBox(
-              height: size.height * 0.05,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: size.height * 0.01,
-                    horizontal: size.width * 0.01),
-                child: Row(
-                  children: [
-                    Text(
-                      'รายการนำเข้า',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: 5.0,
-                left: 10.0,
-                right: 10.0,
-                bottom: 10.0,
-              ),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: importlist.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 5,
-                  childAspectRatio: 1,
-                ),
-                itemBuilder: (context, index) {
-                  return Importlist(
-                    size: size,
-                    press: () {},
-                    imagespath: importlist[index],
-                  );
-                },
-              ),
-            ),
+          ),
 
-            SizedBox(
-              height: size.height * 0.001,
-            ),
-            Image.asset('assets/images/freight.png'),
+          SizedBox(
+            height: size.height * 0.001,
+          ),
+          Image.asset('assets/images/freight.png'),
 
-            // Wrap(
-            //   spacing: 15,
-            //   runSpacing: 10,
-            //   children: List.generate(
-            //     importlist.length,
-            //     (index) => Importlist(
-            //       size: size,
-            //       press: () {},
-            //       imagespath: importlist[index],
-            //     ),
-            //   ),
-            // ),
-            SizedBox(
-              height: 15,
+          // Wrap(
+          //   spacing: 15,
+          //   runSpacing: 10,
+          //   children: List.generate(
+          //     importlist.length,
+          //     (index) => Importlist(
+          //       size: size,
+          //       press: () {},
+          //       imagespath: importlist[index],
+          //     ),
+          //   ),
+          // ),
+          SizedBox(
+            height: 15,
+          ),
+          Column(
+            children: List.generate(
+                howto.length,
+                (index) => Howto(
+                      size: size,
+                      press: () {},
+                      title: howto[index],
+                    )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Container(
+                  width: size.width * 0.9,
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: greymess,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'ที่อยู่โกดัง กวางโจว ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'ที่อยู่โกดัง อิ๋ว',
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                      Divider(color: Colors.grey.shade300),
+                      _buildInfoRow(
+                          '收货人', '阿苏 (AAAA)', Icons.copy, Colors.grey),
+                      _buildInfoRow('详细地址', 'TEG CARGO仓广东省广州市白云区唐自头村105A仓28号3栋',
+                          Icons.copy, Colors.grey),
+                      _buildInfoRow('邮编', '510450', Icons.copy, Colors.grey),
+                      _buildInfoRow(
+                          '手机', '18520290139', Icons.copy, Colors.grey),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: greymess,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'ที่อยู่โกดังไทย ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'TEGCARGO',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                      Divider(color: Colors.grey.shade300),
+                      Container(
+                        width: double
+                            .infinity, // ทำให้ Container กว้างเท่ากับพื้นที่ที่มี
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.0), // เพิ่ม padding ด้านบนและล่าง
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '12 6 ตำบลคลองข่อย อำเภอปากเกร็ด\nจังหวัดนนทบุรี 11120',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.copy,
+                                  color: Colors.grey,
+                                  size: 25,
+                                ),
+                                Text(
+                                  'คัดลอก',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      _buildInfoRow('เบอร์โทรศัพท์', '061-996-6663', Icons.copy,
+                          Colors.grey),
+                      _buildInfoRow(
+                          'Google Maps',
+                          'https://maps.app.goo.gl/gmk7B6pgrATazqb167g_st=ic',
+                          Icons.copy,
+                          Colors.grey),
+                      SizedBox(height: 16),
+                      Text(
+                        'ระเบียบการเข้าคลัง TEG CARGO',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                      Text(
+                        '1. ก่อนเข้ารับกรุณาโทรนัดหมายก่อนล่วงหน้า อย่างน้อย 2 ชั่วโมง\n2. กรณีรับพัสดุจำนวนมากรบกวนแจ้งรหัสสินค้าที่จะนำออกให้ครบเพื่อความสะดวก\n3. ไม่อนุญาตให้นำสัตว์เลี้ยงหรือเด็กเข้าคลัง',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                MenuList(),
+              ],
             ),
-            Column(
-              children: List.generate(
-                  howto.length,
-                  (index) => Howto(
-                        size: size,
-                        press: () {},
-                        title: howto[index],
-                      )),
+          ),
+        ])));
+  }
+}
+
+Widget _buildInfoRow(
+    String title, String detail, IconData icon, Color iconColor) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 2, // ลด flex ของ title เพื่อลดช่องว่าง
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.bold,
             ),
-            MenuList(),
+          ),
+        ),
+        Expanded(
+          flex: 4, // เพิ่ม flex ของ detail เพื่อใช้พื้นที่ที่มากขึ้น
+          child: Text(
+            detail,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            Icon(icon, color: iconColor),
+            SizedBox(width: 2), // เพิ่มระยะห่างเล็กน้อยระหว่างไอคอนและข้อความ
+            Text(
+              'คัดลอก',
+              style: TextStyle(
+                color: iconColor, // ใช้สีเดียวกับไอคอน
+                fontSize: 12, // ขนาดฟอนต์ที่เล็กกว่าเพื่อให้สอดคล้องกับไอคอน
+              ),
+            ),
           ],
         ),
-      ),
-    );
-  }
+      ],
+    ),
+  );
 }

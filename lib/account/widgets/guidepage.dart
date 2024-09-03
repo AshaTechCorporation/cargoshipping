@@ -15,6 +15,7 @@ class Guidepage extends StatelessWidget {
           fontWeight: FontWeight.bold
         ),),
       ),
+      
     );
   }
 }

@@ -120,7 +120,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                 ),
               ),
               Container(
-                color: Colors.grey[300],
+                color: background,
                 height: size.height * 0.07,
                 width: double.infinity,
                 child: Padding(

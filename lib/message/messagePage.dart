@@ -169,94 +169,99 @@ class _MessagePageState extends State<MessagePage> {
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.03,
+                    height: size.height * 0.085,
                   ),
-                  Container(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.09),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: greymess,
-                                ),
-                                width: size.width * 0.5,
-                                height: size.height * 0.07,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: size.width * 0.03,
-                                    right: size.width * 0.03,
-                                    top: size.height * 0.015,
+                  GestureDetector(
+                    onTap: () {
+                      
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.09),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: greymess,
                                   ),
-                                  child: Text(
-                                    'การรับส่งของแต่ละครั้งมีจำนวนขั้นต่ำไหม',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
+                                  width: size.width * 0.5,
+                                  height: size.height * 0.07,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: size.width * 0.03,
+                                      right: size.width * 0.03,
+                                      top: size.height * 0.015,
+                                    ),
+                                    child: Text(
+                                      'การรับส่งของแต่ละครั้งมีจำนวนขั้นต่ำไหม',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: size.height * 0.01),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: greymess,
-                                ),
-                                width: size.width * 0.5,
-                                height: size.height * 0.07,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: size.width * 0.03,
-                                    right: size.width * 0.03,
-                                    top: size.height * 0.015,
+                                SizedBox(height: size.height * 0.01),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: greymess,
                                   ),
-                                  child: Text(
-                                    'ต้องการทราบราคาค่าขนส่งสินค้า ทั้งทาง รถ และทางเรือ',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
+                                  width: size.width * 0.5,
+                                  height: size.height * 0.07,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: size.width * 0.03,
+                                      right: size.width * 0.03,
+                                      top: size.height * 0.015,
+                                    ),
+                                    child: Text(
+                                      'ต้องการทราบราคาค่าขนส่งสินค้า ทั้งทาง รถ และทางเรือ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: size.height * 0.01),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: greymess,
-                                ),
-                                width: size.width * 0.5,
-                                height: size.height * 0.07,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: size.width * 0.03,
-                                    right: size.width * 0.03,
-                                    top: size.height * 0.015,
+                                SizedBox(height: size.height * 0.01),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: greymess,
                                   ),
-                                  child: Text(
-                                    'วิธีการคิดค่าขนส่งจากราคาที่คิดเป็น CBM',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
+                                  width: size.width * 0.5,
+                                  height: size.height * 0.07,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: size.width * 0.03,
+                                      right: size.width * 0.03,
+                                      top: size.height * 0.015,
+                                    ),
+                                    child: Text(
+                                      'วิธีการคิดค่าขนส่งจากราคาที่คิดเป็น CBM',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Importwidget extends StatelessWidget {
@@ -16,13 +17,20 @@ class Importwidget extends StatelessWidget {
       height: size.height * 0.067,
       width: size.width * 0.43,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10.0),
-            bottomRight: Radius.circular(10.0),
-            topLeft: Radius.circular(10.0),
-            bottomLeft: Radius.circular(10.0)),
-      ),
+          color: white,
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(10.0),
+              bottomRight: Radius.circular(10.0),
+              topLeft: Radius.circular(10.0),
+              bottomLeft: Radius.circular(10.0)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: Offset(0, 2),
+            )
+          ]),
       child: Center(
           child: Text(title,
               style:

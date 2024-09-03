@@ -1,3 +1,5 @@
+import 'package:cargoshipping/cart/widget/customcheck.dart';
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class StoreItem extends StatelessWidget {
@@ -28,16 +30,19 @@ class StoreItem extends StatelessWidget {
     required bool isSelected,
     required ValueChanged<bool?> onSelectionChanged,
     required VoidCallback onDelete,
-    String dropdownValue = 'สีขาวมุก', // ค่าเริ่มต้นของ Dropdown
+    String dropdownValue = 'สีขาวมุก',
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 1.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Checkbox(
+          CustomCheckbox(
             value: isSelected,
             onChanged: onSelectionChanged,
+          ),
+          SizedBox(
+            width: 7,
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
@@ -75,37 +80,44 @@ class StoreItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                // เรียง name, dropdown และ price ในแนวตั้ง
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      height: 30,
+                      width: 100,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 4.0),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(4.0),
+                        color: background,
+                        borderRadius: BorderRadius.circular(4.0), // ขอบมน
                       ),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           value: dropdownValue,
-                          icon: const Icon(Icons.arrow_drop_down),
-                          iconSize: 20,  // ลดขนาดของไอคอน
+                          icon: const Icon(Icons.arrow_drop_down,
+                              color: Colors.grey), // ไอคอนสีเทาเข้ม
+                          iconSize: 20,
                           elevation: 16,
                           style: const TextStyle(
                             color: Colors.black,
-                            fontSize: 12,  // ลดขนาดฟอนต์ของ Dropdown
+                            fontSize: 12,
                           ),
                           onChanged: (String? newValue) {
-                            // อัปเดตค่า dropdownValue เมื่อมีการเปลี่ยนแปลง
+                            // ฟังก์ชันเปลี่ยนค่า dropdown
                           },
-                          items: <String>['สีขาวมุก', 'สีแดง', 'สีน้ำเงิน', 'สีเขียว']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: <String>[
+                            'สีขาวมุก',
+                            'สีแดง',
+                            'สีน้ำเงิน',
+                            'สีเขียว'
+                          ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
                             );
                           }).toList(),
-                          isDense: true,  // ลดความสูงของ DropdownButton
+                          isDense: true,
                         ),
                       ),
                     ),
@@ -151,6 +163,7 @@ class StoreItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Card(
@@ -166,9 +179,12 @@ class StoreItem extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Checkbox(
+                  CustomCheckbox(
                     value: isSelected,
                     onChanged: onSelectionChanged,
+                  ),
+                  SizedBox(
+                    width: size.width * 0.03,
                   ),
                   Text(
                     storeName,
