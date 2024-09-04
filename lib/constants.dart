@@ -9,17 +9,14 @@ Color background = Color(0xfff5f5f5);
 Color white = Color(0xffffffff);
 Color headingtext = Color(0xff606060);
 Color pinkmess = Color(0xfff8d2d4);
-Color greymess= Color(0xffe5e5ea);
+Color greymess = Color(0xffe5e5ea);
 Color greyuserinfo = Color(0xff606060);
 Color skyorange = Color(0xffffe7d1);
 Color oldred = Color(0xff8a1015);
 Color youngpink = Color(0xffffe6e7);
 Color green = Color(0xff3ace01);
-Color blue= Color(0xff3c5a9a);
-Color pinkser= Color(0xffffefe0);
-
-
-
+Color blue = Color(0xff3c5a9a);
+Color pinkser = Color(0xffffefe0);
 
 const kBackgroundColor = Color(0xff1B58B1);
 const kSecondTextColor = Color(0xff7B7B7B);
@@ -36,21 +33,17 @@ const List<String> titleData = [
   'เรทราคานำเข้า'
 ];
 
-const List<String> topup =[
-  'เติมเงิน',
-  'ถอนเงิน'
-];
+const List<String> topup = ['เติมเงิน', 'ถอนเงิน'];
 
 const List<String> aboutQuestion = [
   'คำถามที่พบบ่อย',
   'เกี่ยวกับ TEG Cargo',
 ];
-const List<String> productOrderList = [
-  'ที่ต้องชำระ',
-  'ที่ต้องจัดส่ง',
-  'ระหว่างขนส่ง',
-  'ถึงโกดังไทย',
-  'ประวัติทั้งหมด'
+const List<Map<String, dynamic>> myorder = [
+  {'id': 1, 'name': 'สั่งซื้อสินค้า', 'images': 'assets/icons/overdue.png'},
+  {'id': 2, 'name': 'ถึงโกดังจีน', 'images': 'assets/icons/Chinesehouse.png'},
+  {'id': 3, 'name': 'ระหว่างขนส่ง', 'images': 'assets/icons/deliverytime.png'},
+  {'id': 4, 'name': 'ถึงโกดังไทย', 'images': 'assets/icons/orderhistory.png'},
 ];
 
 const List<String> listImport = [
@@ -100,14 +93,6 @@ const List<String> catagoryimg = [
   'assets/icons/makeup.png',
 ];
 
-const List<String> oderlist = [
-  'assets/icons/overdue.png',
-  'assets/icons/packing.png',
-  'assets/icons/deliverytime.png',
-  'assets/icons/orderhistory.png',
-  'assets/icons/showhis.png'
-];
-
 const List<String> importlist = [
   'assets/images/car.png',
   'assets/images/ship.png',
@@ -118,7 +103,6 @@ const List<String> importlist = [
 ];
 
 const List<Map<String, dynamic>> listProducts = [
-  
   {
     'id': 1,
     'image': 'assets/images/shelf.png',
@@ -197,6 +181,20 @@ const List<String> fistpagewidget = [
   'นำเข้าเหมาภาษี',
 ];
 
+const List<Map<String, dynamic>> importwidget= [
+  {
+    'id': 1,
+    'name': 'นำเข้าถูกต้อง',
+    'images': 'assets/icons/correctimport.png',
+  },
+  {
+    'id': 2,
+    'name': 'นำเข้าเหมาภาษี',
+    'images': 'assets/icons/importtax.png',
+  },
+];
+
+
 const List<Map<String, dynamic>> shirtproductimg = [
   {'id': 1, 'images': 'assets/images/t_shirt.png', 'title': 'เสื้อยืด'},
   {'id': 2, 'images': 'assets/images/shirt.png', 'title': 'เสื้อเชิ้ต'},
@@ -219,66 +217,64 @@ List<String> howto = [
   'ระเบียบการเข้าคลัง TEG Cargo'
 ];
 
-
 List<MenuItem> menuItems = [
-    MenuItem(imagePath: 'assets/icons/cart-plus_svgrepo.com.png', text: 'สรุปการสั่งการสั่งซื้อ'),
-    MenuItem(imagePath: 'assets/icons/yellotruck.png', text: 'สรุปการขนส่ง'),
-    MenuItem(imagePath: 'assets/icons/fav.png', text: 'รายการโปรด'),
-    MenuItem(imagePath: 'assets/icons/guide.png', text: 'บทความ'),
-    MenuItem(imagePath: 'assets/icons/guide.png', text: 'คู่มือการใช้งาน'),
-    MenuItem(imagePath: 'assets/icons/help.png', text: 'ช่วยเหลือ'),
-    MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งปัญหา'),
-    MenuItem(imagePath: 'assets/icons/contact.png', text: 'ติดต่อเรา'),
-    MenuItem(imagePath: 'assets/icons/setting.png', text: 'ตั้งค่า'),
-  ];
+  // MenuItem(imagePath: 'assets/icons/cart-plus_svgrepo.com.png', text: 'การขนส่ง'),
+  MenuItem(imagePath: 'assets/icons/redcar.png', text: 'สรุปการขนส่ง'),
+  MenuItem(imagePath: 'assets/icons/fav.png', text: 'รายการโปรด'),
+  MenuItem(imagePath: 'assets/images/article.png', text: 'บทความ'),
+  MenuItem(imagePath: 'assets/icons/guide.png', text: 'คู่มือการใช้งาน'),
+  MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งเคลมสินค้า'),
+  MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งปัญหา'),
+  MenuItem(imagePath: 'assets/icons/help.png', text: 'ช่วยเหลือ'),
+  MenuItem(imagePath: 'assets/icons/contact.png', text: 'ติดต่อเรา'),
+  MenuItem(imagePath: 'assets/icons/setting.png', text: 'ตั้งค่า'),
+];
 
-
-  const List<Map<String, dynamic>> ordersum= [
+const List<Map<String, dynamic>> ordersum = [
   {
     'id': 1,
     'month': 'สิงหาคม 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images' : 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png'
   },
-   {
+  {
     'id': 2,
     'month': 'กรกฎาคม 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images' : 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png'
   },
   {
     'id': 3,
     'month': 'มิถุนายน 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images' : 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png'
   }
 ];
 
-
-const List<Map<String, dynamic>> transport= [
+const List<Map<String, dynamic>> transport = [
   {
     'id': 1,
     'month': 'สิงหาคม 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images' : 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png'
   },
-   {
+  {
     'id': 2,
     'month': 'กรกฎาคม 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images' : 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png'
   },
   {
     'id': 3,
     'month': 'มิถุนายน 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images' : 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png'
   }
 ];
 
@@ -315,35 +311,45 @@ const List<Map<String, dynamic>> listallProducts = [
 ];
 
 const List<Map<String, dynamic>> itemfav = [
-    {
-      'storeName': '1688严选店',
-      'storeItems': [
-        {
-          'id': 1,
-          'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
-          'imageAssetPath': 'assets/images/shelf.png',
-        },
-        {
-          'id': 2,
-          'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
-          'imageAssetPath': 'assets/images/shelf.png',
-        },
-      ],
-    },
-    {
-      'storeName': 'taobao严选店',
-      'storeItems': [
-        {
-          'id': 1,
-          'name': 'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
-          'imageAssetPath': 'assets/images/box.png',
-        },
-        {
-          'id': 2,
-          'name': 'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
-          'imageAssetPath': 'assets/images/headband.png',
-        },
-      ],
-    },
-  ];
+  {
+    'storeName': '1688严选店',
+    'storeItems': [
+      {
+        'id': 1,
+        'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
+        'imageAssetPath': 'assets/images/shelf.png',
+      },
+      {
+        'id': 2,
+        'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
+        'imageAssetPath': 'assets/images/shelf.png',
+      },
+    ],
+  },
+  {
+    'storeName': 'taobao严选店',
+    'storeItems': [
+      {
+        'id': 1,
+        'name':
+            'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
+        'imageAssetPath': 'assets/images/box.png',
+      },
+      {
+        'id': 2,
+        'name':
+            'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
+        'imageAssetPath': 'assets/images/headband.png',
+      },
+    ],
+  },
+];
 
+const List<Map<String, dynamic>> importcard = [
+  {
+    'id': 1,
+    'Importercode': 'AAAA',
+    'Sendbycar': 'AAAA/EK',
+    'Sendbyboat': 'AAAA/SEA',
+  },
+];

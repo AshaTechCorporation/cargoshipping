@@ -1,3 +1,4 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class Howto extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HowtoState extends State<Howto> {
           height: size.height * 0.067,
           width: size.width * 0.9,
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: greymess,
             borderRadius: BorderRadius.circular(5.0),
           ),
           child: Center(

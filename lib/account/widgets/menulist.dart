@@ -6,6 +6,7 @@ import 'package:cargoshipping/account/widgets/tagpage.dart';
 import 'package:cargoshipping/account/widgets/transportpage.dart';
 import 'package:cargoshipping/account/widgets/wecargo.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/widgets/reportpage.dart';
 import 'package:cargoshipping/message/messagePage.dart';
 import 'package:flutter/material.dart';
 
@@ -35,17 +36,17 @@ class MenuList extends StatelessWidget {
             onTap: () {
               if (index == 0) {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Ordersumpage()));
+                    MaterialPageRoute(builder: (context) => Transportpage()));
               }
               if (index == 1) {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Transportpage()));
+                    MaterialPageRoute(builder: (context) => Itemfav()));
               }
               if (index == 2) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Itemfav(),
+                    builder: (context) => TagsPage(),
                   ),
                 );
               }
@@ -53,25 +54,23 @@ class MenuList extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TagsPage(
-
-                    ),
+                    builder: (context) => Guidepage(),
                   ),
                 );
               }
               if (index == 4) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Guidepage(
-
-                    ),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => Guidepage(),
+                //   ),
+                // );
               }
               if (index == 5) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MessagePage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReportProblemPage()),
+                );
               }
               if (index == 6) {
                 Navigator.push(context,

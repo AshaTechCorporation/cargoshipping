@@ -1,5 +1,7 @@
 import 'package:cargoshipping/account/topuppage.dart';
 import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
+import 'package:cargoshipping/account/widgets/firsttopup.dart';
+import 'package:cargoshipping/account/widgets/firstwithdrown.dart';
 import 'package:cargoshipping/account/widgets/howto.dart';
 import 'package:cargoshipping/account/widgets/importlist.dart';
 import 'package:cargoshipping/account/widgets/menulist.dart';
@@ -34,9 +36,13 @@ class _AccountPageState extends State<AccountPage> {
               flexibleSpace: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.redAccent, red1],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFcd8032),
+                      Color(0xFFecc49d),
+                    ],
+                    begin: Alignment.center,
+                    end: Alignment
+                        .bottomCenter,
                   ),
                 ),
                 child: Padding(
@@ -165,14 +171,15 @@ class _AccountPageState extends State<AccountPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Topuppage()),
+                                          builder: (context) => Firsttopup()),
                                     );
                                   }
                                   if (index == 1) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Withdrawpage()),
+                                          builder: (context) =>
+                                              Firstwithdrawpage()),
                                     );
                                   }
                                 })),
@@ -251,9 +258,11 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
           ),
+          SizedBox(
+            height: size.height * 0.015,
+          ),
           Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: size.height * 0.02, horizontal: size.width * 0.01),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               children: [
                 Text(
@@ -285,35 +294,31 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 35,
+            runSpacing: 35,
             children: List.generate(
-              productOrderList.length,
+              myorder.length,
               (index) => CardlistWidget(
                 size: size,
-                title: productOrderList[index],
+                title: myorder[index]['name'],
                 press: () {},
-                imagespath: oderlist[index],
+                imagespath: myorder[index]['images'],
               ),
             ),
           ),
           SizedBox(
             height: size.height * 0.01,
           ),
-          SizedBox(
-            height: size.height * 0.05,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.01, horizontal: size.width * 0.01),
-              child: Row(
-                children: [
-                  Text(
-                    'รายการนำเข้า',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  )
-                ],
-              ),
-            ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  'รายการนำเข้า',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+              )
+            ],
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -330,7 +335,7 @@ class _AccountPageState extends State<AccountPage> {
                 crossAxisCount: 3,
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
-                childAspectRatio: 1,
+                childAspectRatio: 1.2,
               ),
               itemBuilder: (context, index) {
                 return Importlist(
@@ -341,11 +346,9 @@ class _AccountPageState extends State<AccountPage> {
               },
             ),
           ),
-
           SizedBox(
-            height: size.height * 0.001,
-          ),
-          Image.asset('assets/images/freight.png'),
+              width: size.width * 0.95,
+              child: Image.asset('assets/images/freight.png')),
 
           // Wrap(
           //   spacing: 15,
@@ -360,7 +363,7 @@ class _AccountPageState extends State<AccountPage> {
           //   ),
           // ),
           SizedBox(
-            height: 15,
+            height: size.height * 0.01,
           ),
           Column(
             children: List.generate(
@@ -379,7 +382,7 @@ class _AccountPageState extends State<AccountPage> {
                   width: size.width * 0.9,
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: greymess,
+                    color: background,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: Colors.grey.shade300,
@@ -423,7 +426,7 @@ class _AccountPageState extends State<AccountPage> {
                 Container(
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: greymess,
+                    color: background,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: Colors.grey.shade300,
@@ -453,10 +456,8 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       Divider(color: Colors.grey.shade300),
                       Container(
-                        width: double
-                            .infinity, // ทำให้ Container กว้างเท่ากับพื้นที่ที่มี
-                        padding: EdgeInsets.symmetric(
-                            vertical: 8.0), // เพิ่ม padding ด้านบนและล่าง
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -503,14 +504,13 @@ class _AccountPageState extends State<AccountPage> {
                         'ระเบียบการเข้าคลัง TEG CARGO',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                          color: red1,
                         ),
                       ),
                       Text(
                         '1. ก่อนเข้ารับกรุณาโทรนัดหมายก่อนล่วงหน้า อย่างน้อย 2 ชั่วโมง\n2. กรณีรับพัสดุจำนวนมากรบกวนแจ้งรหัสสินค้าที่จะนำออกให้ครบเพื่อความสะดวก\n3. ไม่อนุญาตให้นำสัตว์เลี้ยงหรือเด็กเข้าคลัง',
                         style: TextStyle(
-                          color: Colors.black,
-                        ),
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -531,7 +531,7 @@ Widget _buildInfoRow(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          flex: 2, // ลด flex ของ title เพื่อลดช่องว่าง
+          flex: 2,
           child: Text(
             title,
             style: TextStyle(
@@ -541,12 +541,10 @@ Widget _buildInfoRow(
           ),
         ),
         Expanded(
-          flex: 4, // เพิ่ม flex ของ detail เพื่อใช้พื้นที่ที่มากขึ้น
+          flex: 4,
           child: Text(
             detail,
-            style: TextStyle(
-              color: Colors.black,
-            ),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
         Row(

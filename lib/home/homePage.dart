@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: background,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.11),
@@ -75,10 +76,9 @@ class _HomePageState extends State<HomePage> {
             top: Radius.circular(30),
           ),
           child: AppBar(
-            backgroundColor: Colors.red,
-            toolbarHeight: size.height * 0.099,
+            backgroundColor: Colors.transparent,
             title: Padding(
-              padding: const EdgeInsets.only(top: 35),
+              padding: const EdgeInsets.only(top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                         border: Border.all(
                             color: const Color.fromARGB(255, 122, 124, 126)),
                         borderRadius: BorderRadius.circular(15),
-                        color: Colors.white),
+                        ),
                     child: IntrinsicHeight(
                       child: Row(
                         children: [
@@ -105,14 +105,10 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          Icon(Icons.camera_alt_outlined),
-                          VerticalDivider(
-                            color: Colors.grey,
-                            thickness: 1,
-                          ),
+                          Image.asset('assets/icons/cam.png'),
                           SizedBox(
                             height: size.height * 0.05,
-                            width: size.width * 0.2,
+                            width: size.width * 0.24,
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton2<String>(
                                 isExpanded: true,
@@ -122,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                     'เลือกสินค้า',
                                     style: TextStyle(
                                       fontSize: 11,
-                                      color: Colors.red,
+                                      color: red1,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -133,9 +129,8 @@ class _HomePageState extends State<HomePage> {
                                           value: item,
                                           child: Text(
                                             item,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
+                                            style: TextStyle(
+                                                fontSize: 14, color: red1),
                                           ),
                                         ))
                                     .toList(),
@@ -166,10 +161,10 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Container(
                               height: size.height * 0.05,
-                              width: size.width * 0.17,
+                              width: size.width * 0.164,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                                color: red1,
                               ),
                               child: Center(
                                 child: Text(
@@ -193,39 +188,122 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(height: size.height * 0.01),
-                    // แสดงภาพสไลด์
-                    PictureSliderWidget(size: size),
-                    SizedBox(
-                      height: size.height *
-                          0.07, // เว้นพื้นที่สำหรับ Widget ที่ทับอยู่ด้านบน
+            SizedBox(
+              height:
+                  200, // กำหนดขนาดความสูงของ Stack หรือ Container รวมทั้งหมด
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // Image.asset สำหรับภาพพื้นหลัง
+                  Positioned.fill(
+                    child: Image.asset(
+                      'assets/images/messageimages.png', // ใส่รูปภาพของคุณ
+                      fit: BoxFit.cover, // ขยายรูปให้เต็ม
                     ),
-                    SizedBox(
-                      height: size.height * 0.01,
-                    ),
-                  ],
-                ),
-                Positioned(
-                    bottom: size.height *
-                        0.03,
+                  ),
+                  // Container ที่ซ้อนทับอยู่บนภาพ
+                  Positioned(
+                    bottom: -30, // ตำแหน่งที่ด้านล่างของ Stack
                     left: 0,
                     right: 0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(
-                        fistpagewidget.length,
-                        (index) => Importwidget(
-                          size: size,
-                          title: fistpagewidget[index],
-                          press: () {},
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ...List.generate(
+                            importwidget.length,
+                            (index) => Importwidget(
+                              size: size,
+                              title: importwidget[index]
+                                  ['name'],
+                              imagePath: importwidget[index]
+                                  ['images'],
+                              press: () {},
+                            ),
+                          ),
+                        ],
                       ),
-                    ))
+                    ),
+                  )
+                ],
+              ),
+            ),
+
+            // Stack(
+            //   children: [
+            //     Positioned(
+            //       top: 0,
+            //       left: 0,
+            //       right: 0,
+            //       child: Container(
+            //         height: 100, // ความสูงของ container
+            //         decoration: BoxDecoration(
+            //           color: Colors.blue.withOpacity(
+            //               0.5), // กำหนดสีพื้นหลังให้มีความโปร่งใสบ้าง
+            //           borderRadius: BorderRadius.only(
+            //             bottomLeft: Radius.circular(20),
+            //             bottomRight: Radius.circular(20),
+            //           ),
+            //         ),
+            //         child: Center(
+            //           child: Text(
+            //             'Container ซ้อน AppBar',
+            //             style: TextStyle(fontSize: 20, color: Colors.white),
+            //           ),
+            //         ),
+            //       ),
+            //       // Column(
+            //       //   children: [
+            //       //     SizedBox(height: size.height * 0.01),
+            //       //     // แสดงภาพสไลด์
+            //       //     PictureSliderWidget(size: size),
+            //       //     SizedBox(
+            //       //       height: size.height *
+            //       //           0.07, // เว้นพื้นที่สำหรับ Widget ที่ทับอยู่ด้านบน
+            //       //     ),
+            //       //     SizedBox(
+            //       //       height: size.height * 0.01,
+            //       //     ),
+            //       //   ],
+            //       // ),
+            //     ),
+            //     // Positioned(
+            //     //     bottom: size.height * 0.03,
+            //     //     left: 0,
+            //     //     right: 0,
+            //     //     child: Row(
+            //     //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //     //       children: List.generate(
+            //     //         fistpagewidget.length,
+            //     //         (index) => Importwidget(
+            //     //           size: size,
+            //     //           title: fistpagewidget[index],
+            //     //           press: () {},
+            //     //         ),
+            //     //       ),
+            //     //     ))
+            //   ],
+            // ),
+            SizedBox(
+              height: size.height * 0.06,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    'บริการของเรา',
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
+            ),
+            SizedBox(
+              height: size.height * 0.015,
             ),
             Wrap(
               spacing: 8,
@@ -247,18 +325,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       }
-                      if (index == 1) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ReportProblemPage()),
-                        );
-                      }
+                      if (index == 1) {}
                       if (index == 6) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Shippingcalpage(),
+                            builder: (context) => ShippingCalculatorPage(),
                           ),
                         );
                       }
@@ -310,6 +382,101 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+            ),
+            Container(
+              height: size.height * 0.1,
+              width: size.width * 0.8,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xfffed2cb),
+                    Color(0xfffb4a30),
+                  ],
+                  begin: Alignment.topCenter, // เริ่มจากด้านบน
+                  end: Alignment.bottomCenter, // จบที่ด้านล่าง
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'รหัสผู้นำเข้า: ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${importcard[0]['Importercode']}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'ส่งทางรถ: ',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: '${importcard[0]['Sendbycar']}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'ส่งทางเรือ: ',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: '${importcard[0]['Sendbyboat']}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+
+            SizedBox(
+              height: size.height * 0.02,
             ),
             SizedBox(
               // color: red1,

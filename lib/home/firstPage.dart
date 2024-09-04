@@ -1,6 +1,7 @@
 import 'package:cargoshipping/All_product_categories/allproduct.dart';
 import 'package:cargoshipping/account/accountPage.dart';
 import 'package:cargoshipping/cart/cartPage.dart';
+import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/homePage.dart';
 import 'package:cargoshipping/track/trackPage.dart';
 import 'package:flutter/material.dart';
@@ -77,15 +78,32 @@ class _FirstPageState extends State<FirstPage> {
                   onItemSelect(0);
                 },
                 child: selectedIndex == 0
-                ?Image.asset(
-                  'assets/icons/Frame 61.png',
-                  width: 24,
-                  height: 27,
+                ?Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/icons/Frame 61.png',
+                      width: 24,
+                      height: 27,
+                    ),
+                    Text('หน้าหลัก',style: TextStyle(
+                        fontSize: 12,color: red1
+                      ),)
+                  ],
                 )
-                :Image.asset(
-                  'assets/icons/greymain.png',
-                  width: 24,
-                  height: 27,
+                :Center(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/icons/greymain.png',
+                        width: 24,
+                        height: 27,
+                      ),
+                      Text('หน้าหลัก',style: TextStyle(
+                        fontSize: 12
+                      ),)
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(
@@ -106,15 +124,25 @@ class _FirstPageState extends State<FirstPage> {
                   onItemSelect(3);
                 },
                 child: selectedIndex == 3
-                ?Image.asset(
-                  'assets/icons/redcart.png',
-                  width: 30, // Adjust the width as needed
-                  height: 30, // Adjust the height as needed
+                ?Column(
+                  children: [
+                    Image.asset(
+                      'assets/icons/redcart.png',
+                      width: 30, // Adjust the width as needed
+                      height: 30, // Adjust the height as needed
+                    ),
+                    Text('รถเข็น',style: TextStyle(color: red1),)
+                  ],
                 )
-                :Image.asset(
-                  'assets/icons/shipping.png',
-                  width: 30, // Adjust the width as needed
-                  height: 30, // Adjust the height as needed
+                :Column(
+                  children: [
+                    Image.asset(
+                      'assets/icons/shipping.png',
+                      width: 30, // Adjust the width as needed
+                      height: 30, // Adjust the height as needed
+                    ),
+                    Text('รถเข็น',style: TextStyle(),)
+                  ],
                 )
               ),
               GestureDetector(
@@ -122,15 +150,25 @@ class _FirstPageState extends State<FirstPage> {
                   onItemSelect(4);
                 },
                 child: selectedIndex == 4
-                ?Image.asset(
-                  'assets/icons/reduser.png',
-                  width: 27, // Adjust the width as needed
-                  height: 27, // Adjust the height as needed
+                ?Column(
+                  children: [
+                    Image.asset(
+                      'assets/icons/reduser.png',
+                      width: 27, // Adjust the width as needed
+                      height: 27, // Adjust the height as needed
+                    ),
+                    Text('บัญชี',style: TextStyle(color: red1),)
+                  ],
                 )
-                :Image.asset(
-                  'assets/icons/user.png',
-                  width: 27, // Adjust the width as needed
-                  height: 27, // Adjust the height as needed
+                :Column(
+                  children: [
+                    Image.asset(
+                      'assets/icons/user.png',
+                      width: 27, // Adjust the width as needed
+                      height: 27, // Adjust the height as needed
+                    ),
+                    Text('บัญชี')
+                  ],
                 )
               ),
             ],

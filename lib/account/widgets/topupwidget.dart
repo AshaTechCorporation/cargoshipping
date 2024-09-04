@@ -39,7 +39,7 @@ class _TopupwidgetState extends State<Topupwidget> {
             widget.title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: red1,
+              color:  Color(0xFF8e4b09),
               fontSize: 15
             ),
           ),
