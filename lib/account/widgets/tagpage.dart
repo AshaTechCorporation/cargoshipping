@@ -8,8 +8,7 @@ class TagsPage extends StatefulWidget {
   _TagsPageState createState() => _TagsPageState();
 }
 
-class _TagsPageState extends State<TagsPage>
-    with SingleTickerProviderStateMixin {
+class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -33,7 +32,7 @@ class _TagsPageState extends State<TagsPage>
       appBar: AppBar(
         backgroundColor: background,
         elevation: 0,
-         bottom: PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
           child: Container(
             color: Colors.grey[300],
@@ -42,7 +41,7 @@ class _TagsPageState extends State<TagsPage>
         ),
         title: Text(
           'บทความ',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: Column(
@@ -98,7 +97,7 @@ class _TagsPageState extends State<TagsPage>
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                    fontSize: 15,
                   ),
                 ),
                 SizedBox(
@@ -127,10 +126,17 @@ class _TagsPageState extends State<TagsPage>
         width: size.width * 0.29,
         padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         decoration: BoxDecoration(
-          color: isSelected ? red1 : Colors.white,
-          borderRadius: BorderRadius.circular(25.0),
-          border: Border.all(color: Colors.grey),
-        ),
+            color: isSelected ? red1 : Colors.white,
+            borderRadius: BorderRadius.circular(15.0),
+            //border: Border.all(color: Colors.grey),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 1),
+              ),
+            ]),
         child: Center(
           child: Text(
             title,
@@ -202,35 +208,47 @@ class _TagsPageState extends State<TagsPage>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.horizontal(left: Radius.circular(15)),
-            child: Image.asset(
-              imagePath,
-              height: size.height * 0.1,
-              width: size.height * 0.1,
-              fit: BoxFit.cover,
+          Expanded(
+            flex: 3,
+            child: ClipRRect(
+              borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
+              child: Image.asset(
+                imagePath,
+                height: size.height * 0.11,
+                width: size.height * 0.1,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Expanded(
+            flex: 10,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.012),
               child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
+                    maxLines: 2,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 8),
-                  Text(
-                    date,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        date,
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -50,9 +50,9 @@ class _ItemfavState extends State<Itemfav> {
       backgroundColor: background,
       appBar: AppBar(
         backgroundColor: background,
-        title: const Text(
+        title: Text(
           'รายการโปรด',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: ListView.builder(
@@ -126,9 +126,9 @@ class _ItemfavState extends State<Itemfav> {
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           width: size.width,
-          height: size.height * 0.8,
+          height: size.height * 0.7,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: red1,
@@ -139,7 +139,7 @@ class _ItemfavState extends State<Itemfav> {
             onPressed: () {
               // เพิ่มสินค้าที่เลือกไปยังรถเข็น
             },
-            child: const Text(
+            child: Text(
               'เพิ่มสินค้าที่เลือกไปยังรถเข็น',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
