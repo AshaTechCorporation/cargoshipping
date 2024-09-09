@@ -24,7 +24,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
         backgroundColor: background,
         title: Text(
           'แบบฟอร์มแจ้งปัญหา',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
         ),
       ),
       body: Padding(
@@ -58,6 +58,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                         ),
                         SizedBox(height: size.height * 0.015),
                         DropdownButtonFormField<String>(
+                          icon: Icon(Icons.keyboard_arrow_down),
                           decoration: InputDecoration(
                             isDense:
                                 true,

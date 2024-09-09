@@ -28,6 +28,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
+            fontSize: 18
           ),
         ),
         bottom: PreferredSize(
@@ -232,6 +233,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
           },
           child: Card(
             color: Colors.white,
+            elevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
