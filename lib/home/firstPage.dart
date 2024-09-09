@@ -46,25 +46,25 @@ class _FirstPageState extends State<FirstPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: isKeyboardVisible
-      ? null
-      :Transform.translate(
-        offset: Offset(0, 20),
-        child: FloatingActionButton.large(
-          backgroundColor: Colors.red,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(60),
-          ),
-          onPressed: () {
-            onItemSelect(2);
-          },
-          elevation: 0.0,
-          child: Image.asset(
-            'assets/icons/truck.png',
-            width: 50,
-            height: 48,
-          ),
-        ),
-      ),
+          ? null
+          : Transform.translate(
+              offset: Offset(0, 22),
+              child: FloatingActionButton.large(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(60),
+                ),
+                onPressed: () {
+                  onItemSelect(2);
+                },
+                elevation: 0.0,
+                child: Image.asset(
+                  'assets/icons/truck.png',
+                  width: 45,
+                  height: 45,
+                ),
+              ),
+            ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         child: Padding(
@@ -78,99 +78,156 @@ class _FirstPageState extends State<FirstPage> {
                   onItemSelect(0);
                 },
                 child: selectedIndex == 0
-                ?Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/Frame 61.png',
-                      width: 24,
-                      height: 27,
-                    ),
-                    Text('หน้าหลัก',style: TextStyle(
-                        fontSize: 12,color: red1
-                      ),)
-                  ],
-                )
-                :Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/icons/greymain.png',
-                        width: 24,
-                        height: 27,
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/Frame 61.png',
+                            width: 24,
+                            height: 27,
+                          ),
+                          Text(
+                            'หน้าหลัก',
+                            style: TextStyle(fontSize: 12, color: red1),
+                          )
+                        ],
+                      )
+                    : Center(
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/greymain.png',
+                              width: 24,
+                              height: 27,
+                            ),
+                            Text(
+                              'หน้าหลัก',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
                       ),
-                      Text('หน้าหลัก',style: TextStyle(
-                        fontSize: 12
-                      ),)
-                    ],
-                  ),
-                ),
               ),
-              GestureDetector(
-                onTap: () {
-                  onItemSelect(1);
-                },
-                child: Image.asset(
-                  'assets/icons/group.png',
-                  width: 29, // Adjust the width as needed
-                  height: 30, // Adjust the height as needed
-                ),
+              SizedBox(
+                width: 10,
+              ),
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      onItemSelect(1);
+                    },
+                    child: Image.asset(
+                      'assets/icons/group.png',
+                      width: 29, // Adjust the width as needed
+                      height: 30, // Adjust the height as needed
+                    ),
+                  ),
+                  Text(
+                    'หมวดสินค้า',
+                    style: TextStyle(fontSize: 12),
+                  )
+                ],
               ),
               SizedBox(
                 width: 50,
               ),
               GestureDetector(
-                onTap: () {
-                  onItemSelect(3);
-                },
-                child: selectedIndex == 3
-                ?Column(
-                  children: [
-                    Image.asset(
-                      'assets/icons/redcart.png',
-                      width: 30, // Adjust the width as needed
-                      height: 30, // Adjust the height as needed
-                    ),
-                    Text('รถเข็น',style: TextStyle(color: red1),)
-                  ],
-                )
-                :Column(
-                  children: [
-                    Image.asset(
-                      'assets/icons/shipping.png',
-                      width: 30, // Adjust the width as needed
-                      height: 30, // Adjust the height as needed
-                    ),
-                    Text('รถเข็น',style: TextStyle(),)
-                  ],
-                )
+                  onTap: () {
+                    onItemSelect(3);
+                  },
+                  child: selectedIndex == 3
+                      ? Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/redcart.png',
+                              width: 30, // Adjust the width as needed
+                              height: 30, // Adjust the height as needed
+                            ),
+                            // Text(
+                            //   'รถเข็น',
+                            //   style: TextStyle(color: red1),
+                            // )
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/shipping.png',
+                              width: 30, // Adjust the width as needed
+                              height: 30, // Adjust the height as needed
+                            ),
+                            // Text(
+                            //   'รถเข็น',
+                            //   style: TextStyle(),
+                            // )
+                          ],
+                        )),
+              SizedBox(
+                width: 10,
               ),
               GestureDetector(
-                onTap: () {
-                  onItemSelect(4);
-                },
-                child: selectedIndex == 4
-                ?Column(
-                  children: [
-                    Image.asset(
-                      'assets/icons/reduser.png',
-                      width: 27, // Adjust the width as needed
-                      height: 27, // Adjust the height as needed
-                    ),
-                    Text('บัญชี',style: TextStyle(color: red1),)
-                  ],
-                )
-                :Column(
-                  children: [
-                    Image.asset(
-                      'assets/icons/user.png',
-                      width: 27, // Adjust the width as needed
-                      height: 27, // Adjust the height as needed
-                    ),
-                    Text('บัญชี')
-                  ],
-                )
+                  onTap: () {
+                    onItemSelect(3);
+                  },
+                  child: selectedIndex == 3
+                      ? Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/redcart.png',
+                              width: 30, // Adjust the width as needed
+                              height: 30, // Adjust the height as needed
+                            ),
+                            Text(
+                              'รถเข็น',
+                              style: TextStyle(color: red1),
+                            )
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/shipping.png',
+                              width: 30, // Adjust the width as needed
+                              height: 30, // Adjust the height as needed
+                            ),
+                            Text(
+                              'รถเข็น',
+                              style: TextStyle(),
+                            )
+                          ],
+                        )),
+              SizedBox(
+                width: 30,
               ),
+              GestureDetector(
+                  onTap: () {
+                    onItemSelect(4);
+                  },
+                  child: selectedIndex == 4
+                      ? Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/reduser.png',
+                              width: 27, // Adjust the width as needed
+                              height: 27, // Adjust the height as needed
+                            ),
+                            Text(
+                              'บัญชี',
+                              style: TextStyle(color: red1),
+                            )
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/user.png',
+                              width: 27, // Adjust the width as needed
+                              height: 27, // Adjust the height as needed
+                            ),
+                            Text('บัญชี')
+                          ],
+                        )),
             ],
           ),
         ),
