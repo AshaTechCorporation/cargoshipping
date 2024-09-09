@@ -1,8 +1,8 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class CardlistWidget extends StatelessWidget {
-  CardlistWidget({
+class Orderlist extends StatelessWidget {
+  Orderlist({
     super.key,
     required this.size,
     required this.title,
@@ -52,8 +52,7 @@ class CardlistWidget extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  textAlign:
-                      TextAlign.center,
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

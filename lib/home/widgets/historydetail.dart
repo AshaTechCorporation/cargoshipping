@@ -13,7 +13,6 @@ class HistoryDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('ประวัติการแก้ไขปัญหา'),
         backgroundColor: background,
-        
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
         titleTextStyle: TextStyle(
@@ -79,7 +78,9 @@ class HistoryDetailPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: size.width * 0.04,),
+                  SizedBox(
+                    width: size.width * 0.04,
+                  ),
                   Container(
                     width: 35,
                     height: 35,

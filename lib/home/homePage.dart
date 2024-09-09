@@ -2,19 +2,17 @@ import 'dart:developer';
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/detailproduct.dart';
-import 'package:cargoshipping/home/searchPage.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
+import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
 import 'package:cargoshipping/home/widgets/payment.dart';
-import 'package:cargoshipping/home/widgets/reportpage.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
-import 'package:cargoshipping/widgets/PictureSliderWidget.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -87,10 +85,10 @@ class _HomePageState extends State<HomePage> {
                     width: size.width * 0.85,
                     padding: const EdgeInsets.all(4.0),
                     decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 122, 124, 126)),
-                        borderRadius: BorderRadius.circular(15),
-                        ),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 122, 124, 126)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                     child: IntrinsicHeight(
                       child: Row(
                         children: [
@@ -189,21 +187,18 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(
-              height:
-                  200, // กำหนดขนาดความสูงของ Stack หรือ Container รวมทั้งหมด
+              height: size.height * 0.2,
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  // Image.asset สำหรับภาพพื้นหลัง
                   Positioned.fill(
                     child: Image.asset(
-                      'assets/images/messageimages.png', // ใส่รูปภาพของคุณ
-                      fit: BoxFit.cover, // ขยายรูปให้เต็ม
+                      'assets/images/messageimages.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  // Container ที่ซ้อนทับอยู่บนภาพ
                   Positioned(
-                    bottom: -30, // ตำแหน่งที่ด้านล่างของ Stack
+                    bottom: -30,
                     left: 0,
                     right: 0,
                     child: Padding(
@@ -215,11 +210,26 @@ class _HomePageState extends State<HomePage> {
                             importwidget.length,
                             (index) => Importwidget(
                               size: size,
-                              title: importwidget[index]
-                                  ['name'],
-                              imagePath: importwidget[index]
-                                  ['images'],
-                              press: () {},
+                              title: importwidget[index]['name'],
+                              imagePath: importwidget[index]['images'],
+                              press: () {
+                                if (index == 0) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Correctimportpage(),
+                                    ),
+                                  );
+                                }
+                                // if (index == 1) {
+                                //   Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => Correctimportpage(),
+                                //     ),
+                                //   );
+                                // }
+                              },
                             ),
                           ),
                         ],
@@ -229,7 +239,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
             // Stack(
             //   children: [
             //     Positioned(

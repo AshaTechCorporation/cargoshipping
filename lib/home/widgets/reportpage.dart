@@ -18,7 +18,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
     final size = MediaQuery.of(context).size;
     String appBarTitle =
         _selectedChoice == 0 ? 'แจ้งปัญหา' : 'ประวัติการแก้ไขปัญหา';
-       
+
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
@@ -68,10 +68,9 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
         child: Text(
           label,
           style: TextStyle(
-            color: _selectedChoice == value ? Colors.white : greyuserinfo,
-            fontSize: 13,
-            fontWeight: FontWeight.bold
-          ),
+              color: _selectedChoice == value ? Colors.white : greyuserinfo,
+              fontSize: 13,
+              fontWeight: FontWeight.bold),
         ),
       ),
       selected: _selectedChoice == value,
@@ -94,128 +93,129 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
   }
 
   Widget _buildNewProblemTab() {
-  return ListView(
-    padding: EdgeInsets.all(16.0),
-    children: [
-      _buildProblemCard(
-        imagePath: 'assets/icons/bills.png', // ใส่พาธของรูปภาพแทน
-        title: 'ติดตามสถานะบิลสั่งซื้อ และสินค้า',
-        options: [
-          'ติดตามการสั่งซื้อ',
-          'ติดตามการจัดส่งสินค้า',
-          'ติดตามการรับเงินจากร้านค้า',
-          'ตรวจสอบยอดรวมที่ไม่ถูกต้อง',
-        ],
-      ),
-      _buildProblemCard(
-        imagePath: 'assets/icons/importproblem.png',
-        title: 'ปัญหาด้านการขนส่ง',
-        options: [
-          'ติดตามการจัดส่งสินค้าในไทย',
-          'ขออัปเดตสินค้าไปยังสถานที่จัดส่ง',
-          'เปลี่ยนเส้นทางการจัดส่ง',
-          'ปัญหาสินค้าหาย / ปริมาณไม่ถูกต้อง',
-          'แจ้งสินค้าเสียหายที่เกิดขึ้นในไทย',
-        ],
-      ),
-      _buildProblemCard(
-        imagePath: 'assets/icons/moneyproblem.png',
-        title: 'ปัญหาด้านการเงิน',
-        options: [
-          'เพิ่มเงิน / คืนเงิน / ถอนเงิน',
-          'ติดตามการรับเงินจากร้านของขวัญ',
-          'สอบถามการเปลี่ยนแปลง / ใบกำกับภาษี',
-          'ค่าธรรมเนียมที่ไม่ได้ถูกต้อง',
-        ],
-      ),
-    ],
-  );
-}
+    return ListView(
+      padding: EdgeInsets.all(16.0),
+      children: [
+        _buildProblemCard(
+          imagePath: 'assets/icons/bills.png',
+          title: 'ติดตามสถานะบิลสั่งซื้อ และสินค้า',
+          options: [
+            'ติดตามการสั่งซื้อ',
+            'ติดตามการจัดส่งสินค้า',
+            'ติดตามการรับเงินจากร้านค้า',
+            'ตรวจสอบยอดรวมที่ไม่ถูกต้อง',
+          ],
+        ),
+        _buildProblemCard(
+          imagePath: 'assets/icons/importproblem.png',
+          title: 'ปัญหาด้านการขนส่ง',
+          options: [
+            'ติดตามการจัดส่งสินค้าในไทย',
+            'ขออัปเดตสินค้าไปยังสถานที่จัดส่ง',
+            'เปลี่ยนเส้นทางการจัดส่ง',
+            'ปัญหาสินค้าหาย / ปริมาณไม่ถูกต้อง',
+            'แจ้งสินค้าเสียหายที่เกิดขึ้นในไทย',
+          ],
+        ),
+        _buildProblemCard(
+          imagePath: 'assets/icons/moneyproblem.png',
+          title: 'ปัญหาด้านการเงิน',
+          options: [
+            'เพิ่มเงิน / คืนเงิน / ถอนเงิน',
+            'ติดตามการรับเงินจากร้านของขวัญ',
+            'สอบถามการเปลี่ยนแปลง / ใบกำกับภาษี',
+            'ค่าธรรมเนียมที่ไม่ได้ถูกต้อง',
+          ],
+        ),
+      ],
+    );
+  }
 
-Widget _buildProblemCard({
-  required String imagePath,
-  required String title,
-  required List<String> options,
-}) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ReportFormPage()),
-                        );
-    },
-    child: Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      margin: EdgeInsets.symmetric(vertical: 8.0),
-      elevation: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: youngpink,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  imagePath,
-                  width: 24,
-                  height: 24, 
+  Widget _buildProblemCard({
+    required String imagePath,
+    required String title,
+    required List<String> options,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ReportFormPage()),
+        );
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: EdgeInsets.symmetric(vertical: 8.0),
+        elevation: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: youngpink,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
                 ),
-                SizedBox(width: 8),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    imagePath,
+                    width: 24,
+                    height: 24,
                   ),
-                ),
-              ],
-            ),
-          ),
-          // Container สำหรับ options
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10),
+                  SizedBox(width: 8),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ...options.map((option) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: Text(
-                      '• $option',
-                      style: TextStyle(fontSize: 14, color: Colors.black,fontWeight: FontWeight.bold),
-                    ),
-                  );
-                }).toList(),
-              ],
+            // Container สำหรับ options
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...options.map((option) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: Text(
+                        '• $option',
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    );
+                  }).toList(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   Widget _buildHistoryTab() {
     // Tab ประวัติการแก้ไขปัญหา
@@ -226,10 +226,9 @@ Widget _buildProblemCard({
         return GestureDetector(
           onTap: () {
             Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HistoryDetailPage()),
-                        );
+              context,
+              MaterialPageRoute(builder: (context) => HistoryDetailPage()),
+            );
           },
           child: Card(
             color: Colors.white,
@@ -279,5 +278,3 @@ Widget _buildProblemCard({
     );
   }
 }
-
-

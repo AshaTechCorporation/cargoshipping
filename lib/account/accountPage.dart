@@ -4,12 +4,15 @@ import 'package:cargoshipping/account/widgets/firsttopup.dart';
 import 'package:cargoshipping/account/widgets/firstwithdrown.dart';
 import 'package:cargoshipping/account/widgets/howto.dart';
 import 'package:cargoshipping/account/widgets/importlist.dart';
+import 'package:cargoshipping/account/widgets/listimportcorrectwidget.dart';
 import 'package:cargoshipping/account/widgets/menulist.dart';
+import 'package:cargoshipping/account/widgets/orderlistwidget.dart';
 import 'package:cargoshipping/account/widgets/ordersumpage.dart';
 import 'package:cargoshipping/account/widgets/tagunlimited.dart';
 import 'package:cargoshipping/account/widgets/topupwidget.dart';
 import 'package:cargoshipping/account/widgets/withdrawpage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatefulWidget {
@@ -41,8 +44,7 @@ class _AccountPageState extends State<AccountPage> {
                       Color(0xFFecc49d),
                     ],
                     begin: Alignment.center,
-                    end: Alignment
-                        .bottomCenter,
+                    end: Alignment.bottomCenter,
                   ),
                 ),
                 child: Padding(
@@ -266,7 +268,7 @@ class _AccountPageState extends State<AccountPage> {
             child: Row(
               children: [
                 Text(
-                  'รายการสั่งซื้อสินค้า',
+                  'คำสั่งซื้อของฉัน',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 Spacer(),
@@ -294,8 +296,8 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
           Wrap(
-            spacing: 35,
-            runSpacing: 35,
+            spacing: 5,
+            runSpacing: 5,
             children: List.generate(
               myorder.length,
               (index) => CardlistWidget(
@@ -303,6 +305,111 @@ class _AccountPageState extends State<AccountPage> {
                 title: myorder[index]['name'],
                 press: () {},
                 imagespath: myorder[index]['images'],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.015,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                Text(
+                  'รายการขนส่ง',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Ordersumpage()));
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        'ประวัติสรุปการสั่งซื้อ',
+                        style: TextStyle(fontSize: 12, color: greyuserinfo),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.015,
+                      ),
+                      Image.asset('assets/icons/history.png'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            children: List.generate(
+              orderlist.length,
+              (index) => Orderlist(
+                size: size,
+                title: orderlist[index]['name'],
+                press: () {},
+                imagespath: orderlist[index]['images'],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.015,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                Text(
+                  'รายการนำเข้าถูกต้อง',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Ordersumpage()));
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        'ประวัติสรุปการสั่งซื้อ',
+                        style: TextStyle(fontSize: 12, color: greyuserinfo),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.015,
+                      ),
+                      Image.asset('assets/icons/history.png'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            children: List.generate(
+              listimportcorrect.length,
+              (index) => Listimportcorrectwidget(
+                size: size,
+                title: listimportcorrect[index]['name'],
+                press: () {
+                  if (index == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Correctimportpage(),
+                      ),
+                    );
+                  }
+                },
+                imagespath: listimportcorrect[index]['images'],
               ),
             ),
           ),

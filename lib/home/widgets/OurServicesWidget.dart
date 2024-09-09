@@ -17,6 +17,7 @@ class OurServicesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: press,
       child: Container(
@@ -27,8 +28,8 @@ class OurServicesWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 60,
-              width: 80,
+              height: size.height * 0.066,
+              width: size.width * 0.19,
               decoration: BoxDecoration(
                 color: pinkser,
                 borderRadius: BorderRadius.circular(10.0),
@@ -40,13 +41,13 @@ class OurServicesWidget extends StatelessWidget {
                     aspectRatio: 1,
                     child: Image.asset(
                       imagespath,
-                      fit: BoxFit.cover,
+                      // fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: size.height * 0.01),
             Center(
               child: Text(
                 title,

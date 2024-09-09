@@ -40,10 +40,27 @@ const List<String> aboutQuestion = [
   'เกี่ยวกับ TEG Cargo',
 ];
 const List<Map<String, dynamic>> myorder = [
-  {'id': 1, 'name': 'สั่งซื้อสินค้า', 'images': 'assets/icons/overdue.png'},
-  {'id': 2, 'name': 'ถึงโกดังจีน', 'images': 'assets/icons/Chinesehouse.png'},
-  {'id': 3, 'name': 'ระหว่างขนส่ง', 'images': 'assets/icons/deliverytime.png'},
-  {'id': 4, 'name': 'ถึงโกดังไทย', 'images': 'assets/icons/orderhistory.png'},
+  {'id': 1, 'name': 'รอตรวจสอบคำสั่งซื้อ', 'images': 'assets/images/ordercheck.png'},
+  {'id': 2, 'name': 'รอชำระคำสั่งซื้อ', 'images': 'assets/images/watingpayment.png'},
+  {'id': 3, 'name': 'ร้านค้าเตรียมจัดส่ง', 'images': 'assets/images/shoppacking.png'},
+  {'id': 4, 'name': 'จัดส่งสินค้าแล้ว', 'images': 'assets/images/deliordersucces.png'},
+  {'id': 5, 'name': 'ยกเลิก', 'images': 'assets/images/cancelorder.png'},
+];
+
+const List<Map<String, dynamic>> orderlist = [
+  {'id': 1, 'name': 'ถึงโกดัง', 'images': 'assets/images/warehousechinese.png'},
+  {'id': 2, 'name': 'อยู่ระหว่างการขนส่ง', 'images': 'assets/images/shipprocess.png'},
+  {'id': 3, 'name': 'ถึงโกดังไทย', 'images': 'assets/images/thaiwerehouse.png'},
+  {'id': 4, 'name': 'รอชำระค่าขนส่ง', 'images': 'assets/images/waitingpayment.png'},
+  {'id': 5, 'name': 'จัดส่งสำเร็จ', 'images': 'assets/images/ordersucces.png'},
+];
+
+const List<Map<String, dynamic>> listimportcorrect = [
+  {'id': 1, 'name': 'นำเข้าถูกต้อง', 'images': 'assets/images/correctimport.png'},
+  {'id': 2, 'name': 'รอตรวจสอบเอกสาร', 'images': 'assets/images/waitforverifi.png'},
+  {'id': 3, 'name': 'รอชำระภาษี', 'images': 'assets/images/taxpayment.png'},
+  {'id': 4, 'name': 'อยู่ระหว่างดำเนินการ', 'images': 'assets/images/duringprocess.png'},
+  {'id': 5, 'name': 'เสร็จสิน', 'images': 'assets/images/finish.png'},
 ];
 
 const List<String> listImport = [
@@ -94,11 +111,14 @@ const List<String> catagoryimg = [
 ];
 
 const List<String> importlist = [
-  'assets/images/car.png',
-  'assets/images/ship.png',
+  'assets/images/shipping.png',
   'assets/images/import.png',
   'assets/images/fcl.png',
   'assets/images/tour.png',
+  'assets/images/payment.png',
+  'assets/images/supplyfactory.png',
+  'assets/images/car.png',
+  'assets/images/ship.png',
   'assets/images/shippingrate.png',
 ];
 
@@ -181,7 +201,7 @@ const List<String> fistpagewidget = [
   'นำเข้าเหมาภาษี',
 ];
 
-const List<Map<String, dynamic>> importwidget= [
+const List<Map<String, dynamic>> importwidget = [
   {
     'id': 1,
     'name': 'นำเข้าถูกต้อง',
@@ -193,7 +213,6 @@ const List<Map<String, dynamic>> importwidget= [
     'images': 'assets/icons/importtax.png',
   },
 ];
-
 
 const List<Map<String, dynamic>> shirtproductimg = [
   {'id': 1, 'images': 'assets/images/t_shirt.png', 'title': 'เสื้อยืด'},

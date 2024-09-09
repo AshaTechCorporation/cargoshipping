@@ -70,6 +70,9 @@ class Tagunlimited extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
                 Row(
                   children: [
                     Image.asset('assets/icons/freevax.png'),
@@ -83,6 +86,9 @@ class Tagunlimited extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
                 Row(
                   children: [
                     Image.asset('assets/icons/freeopening.png'),
@@ -95,6 +101,9 @@ class Tagunlimited extends StatelessWidget {
                           TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: size.height * 0.02,
                 ),
                 Row(
                   children: [
@@ -113,7 +122,7 @@ class Tagunlimited extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: size.height * 0.02,
+                  height: size.height * 0.03,
                 ),
                 Container(
                   height: size.height * 0.14,
@@ -160,7 +169,7 @@ class Tagunlimited extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: size.height * 0.019), // ระยะห่างระหว่างสองแถว
+                      SizedBox(height: size.height * 0.019),
                       Row(
                         children: [
                           Image.asset('assets/images/greencheck.png'),
@@ -178,7 +187,7 @@ class Tagunlimited extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: size.height * 0.2,
+                  height: size.height * 0.134,
                 ),
                 Container(
                   height: size.height * 0.07,

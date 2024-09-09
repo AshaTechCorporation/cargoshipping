@@ -15,6 +15,7 @@ class ProductCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: press,
       child: Column(
@@ -22,17 +23,17 @@ class ProductCategories extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 150, // กำหนดความกว้างที่ชัดเจน
-            height: 80, // กำหนดความสูงที่ชัดเจน
+            width: size.width * 0.3,
+            height: size.height * 0.095,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(5.0),
               image: DecorationImage(
                 image: AssetImage(imagespath),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          SizedBox(height: 5),
+          SizedBox(height: size.height * 0.01),
           Text(
             title,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),

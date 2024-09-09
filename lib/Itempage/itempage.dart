@@ -41,7 +41,7 @@ class _itempageState extends State<itempage> {
       appBar: AppBar(
         title: Text(
           'สั่งซื้อสินค้า',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
         // backgroundColor: Colors.grey,
         actions: <Widget>[

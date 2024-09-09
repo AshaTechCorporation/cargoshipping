@@ -60,7 +60,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                         DropdownButtonFormField<String>(
                           decoration: InputDecoration(
                             isDense:
-                                true, // ทำให้ InputCompact ลดขนาดของตัว DropdownButtonFormField
+                                true,
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.0, horizontal: 12.0),
                             border: OutlineInputBorder(
@@ -70,7 +70,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                           hint: Text(
                             'เลือกปัญหาที่พบในด้านนี้',
                             style: TextStyle(
-                                fontSize: 14), // ปรับขนาดฟอนต์ให้เล็กลง
+                                fontSize: 14),
                           ),
                           value: _selectedIssue,
                           onChanged: (newValue) {
@@ -104,14 +104,14 @@ class _ReportFormPageState extends State<ReportFormPage> {
                             hintText: '... กรอกหัวข้อเรื่อง',
                             hintStyle: TextStyle(
                                 fontSize:
-                                    14), // ปรับขนาดฟอนต์ของ hint ให้เล็กลง
+                                    14),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
                           style: TextStyle(
                               fontSize:
-                                  14), // ปรับขนาดฟอนต์ของข้อความที่กรอกให้เล็กลง
+                                  14),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'กรุณากรอกหัวข้อเรื่อง';
