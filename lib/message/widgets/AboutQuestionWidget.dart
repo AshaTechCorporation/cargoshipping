@@ -12,7 +12,7 @@ class AboutQuestionWidget extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-          height: size.height * 0.05,
+          height: size.height * 0.055,
           width: size.width * 0.45,
           decoration: BoxDecoration(
             color: red1,

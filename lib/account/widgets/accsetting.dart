@@ -22,7 +22,7 @@ class _AccsettingState extends State<Accsetting> {
         backgroundColor: background,
         title: Text(
           'ตั้งค่า',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),

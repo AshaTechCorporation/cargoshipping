@@ -191,7 +191,7 @@ class _MessagePageState extends State<MessagePage> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: greymess,
                                   ),
-                                  width: size.width * 0.5,
+                                  width: size.width * 0.6,
                                   height: size.height * 0.07,
                                   child: Padding(
                                     padding: EdgeInsets.only(
@@ -215,7 +215,7 @@ class _MessagePageState extends State<MessagePage> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: greymess,
                                   ),
-                                  width: size.width * 0.5,
+                                  width: size.width * 0.6,
                                   height: size.height * 0.07,
                                   child: Padding(
                                     padding: EdgeInsets.only(
@@ -239,7 +239,7 @@ class _MessagePageState extends State<MessagePage> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: greymess,
                                   ),
-                                  width: size.width * 0.5,
+                                  width: size.width * 0.6,
                                   height: size.height * 0.07,
                                   child: Padding(
                                     padding: EdgeInsets.only(
@@ -279,11 +279,12 @@ class _MessagePageState extends State<MessagePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(2.0),
                 child: Image.asset(
                   'assets/icons/plus.png',
-                  width: 30,
-                  height: 30,
+                  width: size.width * 0.08,
+                  height: size.height * 0.08,
+                  fit: BoxFit.fill,
                 ),
               ),
               Expanded(
@@ -293,7 +294,7 @@ class _MessagePageState extends State<MessagePage> {
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(8.0),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                         hintText: 'พิมข้อความเพื่อพูดคุย',
                         hintStyle: TextStyle(fontSize: 13)),
@@ -301,11 +302,12 @@ class _MessagePageState extends State<MessagePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Image.asset(
                   'assets/icons/vecterup.png',
-                  width: 30,
-                  height: 30,
+                  width: size.width * 0.08,
+                  height: size.height * 0.08,
+                  fit: BoxFit.fill,
                 ),
               ),
             ],
