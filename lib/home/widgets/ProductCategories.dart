@@ -24,7 +24,7 @@ class ProductCategories extends StatelessWidget {
         children: [
           Container(
             width: size.width * 0.3,
-            height: size.height * 0.095,
+            height: size.height * 0.092,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               image: DecorationImage(

@@ -816,6 +816,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       )),
             ),
+            SizedBox(height: size.height * 0.05,),
           ],
         ),
       ),

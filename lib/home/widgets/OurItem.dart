@@ -27,7 +27,7 @@ class Ouritem extends StatelessWidget {
       onTap: press,
       child: Container(
         width: size.width * 0.44,
-        height: size.height * 0.25,
+        height: size.height * 0.258,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -54,12 +54,12 @@ class Ouritem extends StatelessWidget {
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
                     '¥ $price',
                     style: TextStyle(
                       fontSize: 20,
@@ -67,27 +67,30 @@ class Ouritem extends StatelessWidget {
                       color: Colors.red, // Set the text color to red
                     ),
                   ),
-                ),
-                Text(
-                  'จัดส่ง $send',
-                  style: TextStyle(
-                      fontSize: 11,
-                      color: greyuserinfo,
-                      fontWeight: FontWeight.bold),
-                )
-              ],
+                  Text(
+                    'จัดส่ง $send',
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: greyuserinfo,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'ขายแล้ว $sale ใน 30 วัน',
-                  style: TextStyle(
-                      fontSize: 11,
-                      color: greyuserinfo,
-                      fontWeight: FontWeight.bold),
-                )
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'ขายแล้ว $sale ใน 30 วัน',
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: greyuserinfo,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
             ),
           ],
         ),
