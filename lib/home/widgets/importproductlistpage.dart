@@ -25,12 +25,19 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
           ),
         ),
         backgroundColor: Colors.white,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: size.height * 0.001,
+              height: size.height * 0.009,
             ),
             Center(
               child: Container(
@@ -120,209 +127,287 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
                         topRight: Radius.circular(15),
                       ),
                     ),
-                    child: Column(
+                    child: Row(
                       children: [
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: size.width * 0.6,
-                              height: size.height * 0.03,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: size.height * 0.01,
+                                ),
+                                Text(
                                   '1. ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: size.width * 0.6,
-                              height: size.height * 0.02,
-                              child: Text(
-                                'สีแดงอิฐ',
-                                style: TextStyle(
-                                    color: greyuserinfo,
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.right,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                  width: size.width * 0.6,
-                                  height: size.height * 0.03,
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: 'ประเภท ',
+                                SizedBox(
+                                  height: size.height * 0.01,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'สีแดงอิฐ',
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                            text: 'A',
-                                            style:
-                                                TextStyle(color: greyuserinfo)),
-                                      ],
+                                        color: greyuserinfo,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.right,
                                     ),
-                                  )),
-                            ],
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.0001,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'ประเภท ',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'A',
+                                        style: TextStyle(
+                                          color: greyuserinfo,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.006,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'Shop Tracking ',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: '  xxxxxx',
+                                        style: TextStyle(
+                                          color: greyuserinfo,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                  width: size.width * 0.6,
-                                  height: size.height * 0.03,
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: 'Shop Tracking ',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                            text: '  xxxxxx',
-                                            style:
-                                                TextStyle(color: greyuserinfo)),
-                                      ],
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: size.height * 0.096,
+                            width: size.width * 0.1,
+                            margin: const EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'โกดัง ',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
                                     ),
-                                  )),
-                            ],
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'กวางโจว',
+                                        style: TextStyle(
+                                            color: greyuserinfo, fontSize: 13),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.003,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'โดย ',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'EK',
+                                        style: TextStyle(
+                                            color: greyuserinfo, fontSize: 13),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.003,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'unit ',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'กล่องลังจำนวน1',
+                                        style: TextStyle(
+                                          color: greyuserinfo,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      height: size.height * 0.09,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: white,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(
-                                height: size.height * 0.022,
-                                width: size.width * 0.29,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'น้ำหนัก',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.05,
-                                    ),
-                                    Text(
-                                      '2.5 กก.',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: greyuserinfo),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: size.width * 0.02,
-                              ),
-                              Row(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Row(
                                 children: [
-                                  SizedBox(
-                                    height: size.height * 0.022,
-                                    width: size.width * 0.25,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'จำนวน',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 13),
-                                        ),
-                                        SizedBox(
-                                          width: size.width * 0.05,
-                                        ),
-                                        Text(
-                                          '0000',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: greyuserinfo),
-                                        )
-                                      ],
+                                  Text(
+                                    'น้ำหนัก',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
                                     ),
-                                  )
+                                  ),
+                                  SizedBox(width: size.width * 0.02),
+                                  Text(
+                                    '2.5 กก.',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: greyuserinfo,
+                                    ),
+                                  ),
                                 ],
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: size.height * 0.015,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                height: size.height * 0.02,
-                                width: size.width * 0.12,
-                                child: Text(
-                                  'ขนาด',
-                                  style: TextStyle(
+                              ),
+                            ),
+                            Expanded(
+                              flex: 8,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'จำนวน',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  SizedBox(width: size.width * 0.02),
+                                  Text(
+                                    '000',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: greyuserinfo,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: size.height * 0.01),
+                        // Row ที่ 2: ขนาด และ Container สีเทาทางขวา
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 7,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'ขนาด',
+                                    style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(width: size.width * 0.02),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'ยาว 50 x สูง 60 x กว้าง 40 cm',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                            color: greyuserinfo,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          '(30 CBM)',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                            color: greyuserinfo,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                height: size.height * 0.06,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              SizedBox(
-                                height: size.height * 0.05,
-                                width: size.width * 0.48,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'ยาว 50 x  สูง 60 x กว้าง 40 cm (30 CBM)',
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold,
-                                          color: greyuserinfo),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -334,7 +419,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    'เลือกรายการนำเข้า',
+                    'ชื่อผู้นำเข้า',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.black,
@@ -360,7 +445,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
                       ),
                       hint: Text(
                         'เลือกชื่อบริษัทนิติบุคคล',
-                        style: TextStyle(color: Colors.grey,fontSize: 12),
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                       icon: Icon(Icons.arrow_drop_down),
                       iconSize: 20,
@@ -391,7 +476,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
               children: [
                 Image.asset('assets/icons/checktook.png'),
                 SizedBox(
-                  width: size.width * 0.03,
+                  width: size.width * 0.02,
                 ),
                 Text(
                   'ขึ้นทะเบียน Paperless แล้ว',
@@ -524,7 +609,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
               color: greyuserinfo,
             ),
             SizedBox(
-              height: size.height * 0.28,
+              height: size.height * 0.3,
               width: size.width * 0.9,
               child: Padding(
                 padding: EdgeInsets.all(10.0),
@@ -550,8 +635,9 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
                     ),
                     SizedBox(height: size.height * 0.005),
                     _buildServiceItem('1. ค่าธรรมเนียมศุลกากร', '3,000 บาท'),
+                    SizedBox(height: size.height * 0.01,),
                     _buildServiceItem('2. ค่าเอกสาร FORM E', '2,000 บาท'),
-                    SizedBox(height: 15),
+                    SizedBox(height: size.height * 0.01),
 
                     // ค่าบริการส่วนที่ 2
                     Text(
@@ -563,7 +649,9 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
                     ),
                     SizedBox(height: size.height * 0.01),
                     _buildServiceItem('3. ค่าภาษีมูลค่าเพิ่ม', '0 บาท'),
+                    SizedBox(height: size.height * 0.01,),
                     _buildServiceItem('4. ค่าจัดการค่าเข้า', '0 บาท'),
+                    SizedBox(height: size.height * 0.01,),
                     _buildServiceItem('5. ค่าธรรมเนียมจดทะเบียน', '0 บาท'),
                     SizedBox(height: size.height * 0.004),
                     Divider(),
@@ -575,9 +663,8 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
               width: size.width * 0.9,
               height: size.height * 0.04,
               decoration: BoxDecoration(
-                color: Color(0xfffff0f0),
-                borderRadius: BorderRadius.circular(5)
-              ),
+                  color: Color(0xfffff0f0),
+                  borderRadius: BorderRadius.circular(5)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
@@ -602,13 +689,13 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
               ),
             ),
             SizedBox(
-              height: size.height * 0.01,
+              height: size.height * 0.02,
             ),
             Container(
               padding: EdgeInsets.all(10),
               width: size.width * 0.9,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: background,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
@@ -633,18 +720,24 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 13,
                           ),
                         ),
                         SizedBox(height: size.height * 0.005),
                         Text(
                           '•  ค่าภาษีมูลค่าเพิ่ม และค่าอากรค่าเข้าจะแจ้งให้ท่านทราบเพื่อ ยืนยันยอดชำระอีกครั้งในภายหลังจัดทำเอกสารตามไฟล์แนบ ทั้ง 2 ฉบับด้านบนเรียบร้อยแล้ว',
-                          style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: size.height * 0.005),
                         Text(
                           '•  ระยะเวลาดำเนินการ 10-20 วัน ยังไม่รวมระยะเวลาขึ้นทะเบียน Paperless',
-                          style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -659,6 +752,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: white,
         elevation: 10,
         child: Padding(
           padding: const EdgeInsets.all(8.0),

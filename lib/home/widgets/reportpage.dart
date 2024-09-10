@@ -1,5 +1,6 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/historydetail.dart';
+import 'package:cargoshipping/home/widgets/problemcard.dart';
 import 'package:cargoshipping/home/widgets/reportformpage.dart';
 import 'package:flutter/material.dart';
 
@@ -26,10 +27,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
         title: Text(
           appBarTitle,
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 18
-          ),
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
@@ -95,126 +93,15 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
 
   Widget _buildNewProblemTab() {
     return ListView(
-      padding: EdgeInsets.all(16.0),
-      children: [
-        _buildProblemCard(
-          imagePath: 'assets/icons/bills.png',
-          title: 'ติดตามสถานะบิลสั่งซื้อ และสินค้า',
-          options: [
-            'ติดตามการสั่งซื้อ',
-            'ติดตามการจัดส่งสินค้า',
-            'ติดตามการรับเงินจากร้านค้า',
-            'ตรวจสอบยอดรวมที่ไม่ถูกต้อง',
-          ],
-        ),
-        _buildProblemCard(
-          imagePath: 'assets/icons/importproblem.png',
-          title: 'ปัญหาด้านการขนส่ง',
-          options: [
-            'ติดตามการจัดส่งสินค้าในไทย',
-            'ขออัปเดตสินค้าไปยังสถานที่จัดส่ง',
-            'เปลี่ยนเส้นทางการจัดส่ง',
-            'ปัญหาสินค้าหาย / ปริมาณไม่ถูกต้อง',
-            'แจ้งสินค้าเสียหายที่เกิดขึ้นในไทย',
-          ],
-        ),
-        _buildProblemCard(
-          imagePath: 'assets/icons/moneyproblem.png',
-          title: 'ปัญหาด้านการเงิน',
-          options: [
-            'เพิ่มเงิน / คืนเงิน / ถอนเงิน',
-            'ติดตามการรับเงินจากร้านของขวัญ',
-            'สอบถามการเปลี่ยนแปลง / ใบกำกับภาษี',
-            'ค่าธรรมเนียมที่ไม่ได้ถูกต้อง',
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildProblemCard({
-    required String imagePath,
-    required String title,
-    required List<String> options,
-  }) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ReportFormPage()),
+      padding: const EdgeInsets.all(16.0),
+      children: problemData.map((problem) {
+        // แทนที่การเรียก _buildProblemCard ด้วยการสร้าง ProblemCardPage
+        return ProblemCardPage(
+          imagePath: problem['imagePath'],
+          title: problem['title'],
+          options: List<String>.from(problem['options']),
         );
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        margin: EdgeInsets.symmetric(vertical: 8.0),
-        elevation: 2,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: youngpink,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    imagePath,
-                    width: 24,
-                    height: 24,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Container สำหรับ options
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...options.map((option) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
-                      child: Text(
-                        '• $option',
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    );
-                  }).toList(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      }).toList(),
     );
   }
 

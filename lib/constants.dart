@@ -40,26 +40,62 @@ const List<String> aboutQuestion = [
   'เกี่ยวกับ TEG Cargo',
 ];
 const List<Map<String, dynamic>> myorder = [
-  {'id': 1, 'name': 'รอตรวจสอบคำสั่งซื้อ', 'images': 'assets/images/ordercheck.png'},
-  {'id': 2, 'name': 'รอชำระคำสั่งซื้อ', 'images': 'assets/images/watingpayment.png'},
-  {'id': 3, 'name': 'ร้านค้าเตรียมจัดส่ง', 'images': 'assets/images/shoppacking.png'},
-  {'id': 4, 'name': 'จัดส่งสินค้าแล้ว', 'images': 'assets/images/deliordersucces.png'},
+  {
+    'id': 1,
+    'name': 'รอตรวจสอบคำสั่งซื้อ',
+    'images': 'assets/images/ordercheck.png'
+  },
+  {
+    'id': 2,
+    'name': 'รอชำระคำสั่งซื้อ',
+    'images': 'assets/images/watingpayment.png'
+  },
+  {
+    'id': 3,
+    'name': 'ร้านค้าเตรียมจัดส่ง',
+    'images': 'assets/images/shoppacking.png'
+  },
+  {
+    'id': 4,
+    'name': 'จัดส่งสินค้าแล้ว',
+    'images': 'assets/images/deliordersucces.png'
+  },
   {'id': 5, 'name': 'ยกเลิก', 'images': 'assets/images/cancelorder.png'},
 ];
 
 const List<Map<String, dynamic>> orderlist = [
   {'id': 1, 'name': 'ถึงโกดัง', 'images': 'assets/images/warehousechinese.png'},
-  {'id': 2, 'name': 'อยู่ระหว่างการขนส่ง', 'images': 'assets/images/shipprocess.png'},
+  {
+    'id': 2,
+    'name': 'อยู่ระหว่างการขนส่ง',
+    'images': 'assets/images/shipprocess.png'
+  },
   {'id': 3, 'name': 'ถึงโกดังไทย', 'images': 'assets/images/thaiwerehouse.png'},
-  {'id': 4, 'name': 'รอชำระค่าขนส่ง', 'images': 'assets/images/waitingpayment.png'},
+  {
+    'id': 4,
+    'name': 'รอชำระค่าขนส่ง',
+    'images': 'assets/images/waitingpayment.png'
+  },
   {'id': 5, 'name': 'จัดส่งสำเร็จ', 'images': 'assets/images/ordersucces.png'},
 ];
 
 const List<Map<String, dynamic>> listimportcorrect = [
-  {'id': 1, 'name': 'นำเข้าถูกต้อง', 'images': 'assets/images/correctimport.png'},
-  {'id': 2, 'name': 'รอตรวจสอบเอกสาร', 'images': 'assets/images/waitforverifi.png'},
+  {
+    'id': 1,
+    'name': 'นำเข้าถูกต้อง',
+    'images': 'assets/images/correctimport.png'
+  },
+  {
+    'id': 2,
+    'name': 'รอตรวจสอบเอกสาร',
+    'images': 'assets/images/waitforverifi.png'
+  },
   {'id': 3, 'name': 'รอชำระภาษี', 'images': 'assets/images/taxpayment.png'},
-  {'id': 4, 'name': 'อยู่ระหว่างดำเนินการ', 'images': 'assets/images/duringprocess.png'},
+  {
+    'id': 4,
+    'name': 'อยู่ระหว่างดำเนินการ',
+    'images': 'assets/images/duringprocess.png'
+  },
   {'id': 5, 'name': 'เสร็จสิน', 'images': 'assets/images/finish.png'},
 ];
 
@@ -370,5 +406,62 @@ const List<Map<String, dynamic>> importcard = [
     'Importercode': 'AAAA',
     'Sendbycar': 'AAAA/EK',
     'Sendbyboat': 'AAAA/SEA',
+  },
+];
+
+List<Map<String, dynamic>> problemData = [
+  {
+    'id': 1,
+    'imagePath': 'assets/icons/bills.png',
+    'title': 'ติดตามสถานะบิลสั่งซื้อ และสินค้า',
+    'options': [
+      'ติดตามการสั่งซื้อ',
+      'ติดตามการจัดส่งสินค้า',
+      'ติดตามการรับเงินจากร้านค้า',
+      'ตรวจสอบยอดรวมที่ไม่ถูกต้อง',
+    ],
+  },
+  {
+    'id': 2,
+    'imagePath': 'assets/icons/importproblem.png',
+    'title': 'ปัญหาด้านการขนส่ง',
+    'options': [
+      'ติดตามการจัดส่งสินค้าในไทย',
+      'ขออัปเดตสินค้าไปยังสถานที่จัดส่ง',
+      'เปลี่ยนเส้นทางการจัดส่ง',
+      'ปัญหาสินค้าหาย / ปริมาณไม่ถูกต้อง',
+      'แจ้งสินค้าเสียหายที่เกิดขึ้นในไทย',
+    ],
+  },
+  {
+    'id': 3,
+    'imagePath': 'assets/icons/moneyproblem.png',
+    'title': 'ปัญหาด้านการเงิน',
+    'options': [
+      'เพิ่มเงิน / คืนเงิน / ถอนเงิน',
+      'ติดตามการรับเงินจากร้านของขวัญ',
+      'สอบถามการเปลี่ยนแปลง / ใบกำกับภาษี',
+      'ค่าธรรมเนียมที่ไม่ได้ถูกต้อง',
+    ],
+  },
+  {
+    'id': 4,
+    'imagePath': 'assets/icons/bills.png', //no images
+    'title': 'การบริการหลังการขาย',
+    'options': [
+      'แจ้งตรวจสอบค่าขนส่งในจีน/ค่าสินค้า',
+      'แจ้งตรวจสอบสินค้าไม่ครบ/สูญหาย',
+      'แจ้งตรวจสอบได้รับสินค้าผิดแบบ/ผิดสี/ผิดไซส์',
+      'แจ้งตรวจสอบปัญหาด้านคุณภาพสินค้า/สินค้าใช้งานไม่ได้',
+    ],
+  },
+  {
+    'id': 5,
+    'imagePath': 'assets/icons/bills.png', //no images
+    'title': 'การติดต่อสื่อสาร',
+    'options': [
+      'ติดต่อเจ้าหน้าที่ Call Center',
+      'ระบบโทรศัพท์ขัดข้อง',
+    ],
   },
 ];

@@ -52,7 +52,8 @@ class _ItemfavState extends State<Itemfav> {
         backgroundColor: background,
         title: Text(
           'รายการโปรด',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: ListView.builder(
@@ -125,26 +126,23 @@ class _ItemfavState extends State<Itemfav> {
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          width: size.width,
-          height: size.height * 0.7,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: red1,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
+        child: Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: 1.0,vertical: 5),
+          child: Container(
+            height: size.height * 0.1,
+            decoration: BoxDecoration(
+              color: red1,
+              borderRadius: BorderRadius.circular(10),
             ),
-            onPressed: () {
-              // เพิ่มสินค้าที่เลือกไปยังรถเข็น
-            },
-            child: Text(
-              'เพิ่มสินค้าที่เลือกไปยังรถเข็น',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 16,
+            child: Center(
+              child: Text(
+                'เพิ่มสินค้าที่เลือกไปยังรถเข็น',
+                style: TextStyle(
+                  fontSize: 17,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

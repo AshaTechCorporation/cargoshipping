@@ -6,6 +6,7 @@ import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
+import 'package:cargoshipping/home/widgets/ShippingCardwidget.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
@@ -662,6 +663,8 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            
+
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: size.height * 0.02, horizontal: size.width * 0.035),

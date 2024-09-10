@@ -152,7 +152,7 @@ class StoreItem extends StatelessWidget {
           onPressed: () {},
           icon: Image.asset('assets/icons/dec.png'),
         ),
-        Text(quantity, style: const TextStyle(fontSize: 14)),
+        Text(quantity, style: const TextStyle(fontSize: 12)),
         IconButton(
           onPressed: () {},
           icon: Image.asset('assets/icons/inc.png'),

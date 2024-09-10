@@ -72,10 +72,12 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-   Widget _buildCheckbox(String label, bool value, ValueChanged<bool?> onChanged) {
+  Widget _buildCheckbox(
+      String label, bool value, ValueChanged<bool?> onChanged) {
     return Row(
       children: [
-        CustomCheckbox(  // ใช้ CustomCheckbox ที่คุณสร้างขึ้น
+        CustomCheckbox(
+          // ใช้ CustomCheckbox ที่คุณสร้างขึ้น
           value: value,
           onChanged: onChanged,
         ),
@@ -89,6 +91,7 @@ class _CartPageState extends State<CartPage> {
       ],
     );
   }
+
   Widget _buildBottomBar(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
@@ -107,7 +110,11 @@ class _CartPageState extends State<CartPage> {
                 backgroundColor: red1,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
-                  vertical: 12,
+                  vertical: 10,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(10), 
                 ),
               ),
               child: const Text(
@@ -156,4 +163,3 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-

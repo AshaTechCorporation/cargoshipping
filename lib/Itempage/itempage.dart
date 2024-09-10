@@ -37,13 +37,15 @@ class _itempageState extends State<itempage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
         title: Text(
           'สั่งซื้อสินค้า',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        // backgroundColor: Colors.grey,
+        backgroundColor: white,
         actions: <Widget>[
           IconButton(
             icon: Image.asset(
@@ -71,254 +73,480 @@ class _itempageState extends State<itempage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            ImagesItem(
-              products: widget.products,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: widget.size.height * 0.005,
-                  horizontal: widget.size.width * 0.01),
-              child: Row(
+            Container(
+              color: white,
+              child: Column(
                 children: [
-                  Text('3 ตัวเลือกสินค้า'),
+                  ImagesItem(
+                    products: widget.products,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: widget.size.height * 0.005,
+                        horizontal: widget.size.width * 0.01),
+                    child: Row(
+                      children: [
+                        Text('3 ตัวเลือกสินค้า'),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: widget.size.width * 0.028),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: Image.asset(
+                          widget
+                              .products['image'], // ใช้ภาพเดียวกันจาก products
+                          width: 70,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(width: size.width * 0.02),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: Image.asset(
+                          widget
+                              .products['image'], // ใช้ภาพเดียวกันจาก products
+                          width: 70,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(width: size.width * 0.02),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: Image.asset(
+                          widget
+                              .products['image'], // ใช้ภาพเดียวกันจาก products
+                          width: 70,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.01),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 9.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          '${widget.products['price']} บาท',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        //Text('(${widget.products['price']} บาท)'),
+                        Spacer(),
+                        Text(
+                          'ขายแล้ว ${widget.products['sale']} ชิ้น',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        SizedBox(width: size.width * 0.01),
+                        Icon(
+                          Icons.favorite_border_outlined,
+                          color: Colors.red,
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.01),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 9.0),
+                    child: Text(
+                      '${widget.products['detail']}',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.001),
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: widget.size.height * 0.001,
+                          horizontal: widget.size.width * 0.028),
+                      child: Row(
+                        children: [
+                          Text(
+                            'MakeMixue.store',
+                            style: TextStyle(
+                                fontSize: 15, color: Colors.grey[900]),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.001),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: widget.size.height * 0.001,
+                        horizontal: widget.size.width * 0.028),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Text(
+                                'รับประกันการจัดส่ง 48 ชั่วโมง',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Spacer(),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Text(
+                                '5.0 คะแนนสินค้า',
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.005),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: widget.size.height * 0.001,
+                        horizontal: widget.size.width * 0.028),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Text(
+                                'กลับมาซื้อซ้ำแล้ว 90%',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: greyuserinfo,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                'จำนวนสินค้าที่จำหน่ายได้${widget.products['sale']}',
+                                style: TextStyle(
+                                    color: greyuserinfo,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 5),
-            Row(
-              children: <Widget>[
-                SizedBox(width: widget.size.width * 0.028),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16.0),
-                  child: Image.asset(
-                    widget.products['image'], // ใช้ภาพเดียวกันจาก products
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(width: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16.0),
-                  child: Image.asset(
-                    widget.products['image'], // ใช้ภาพเดียวกันจาก products
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(width: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16.0),
-                  child: Image.asset(
-                    widget.products['image'], // ใช้ภาพเดียวกันจาก products
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 5),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 9.0),
-              child: Row(
+            SizedBox(height: size.height * 0.01,),
+            Container(
+              height: size.height * 0.40,
+              width: size.width * 0.95,
+              decoration: BoxDecoration(
+                  color: white, borderRadius: BorderRadius.circular(25)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
                   Text(
-                    '${widget.products['price']} บาท',
+                    'อัตราแลกเปลี่ยน ณ วันที่ 00 ส.ค. 00 (00:00:00)',
                     style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold),
+                        color: Colors.blue[800], fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(width: 15),
-                  //Text('(${widget.products['price']} บาท)'),
-                  Spacer(),
                   Text(
-                    'ขายแล้ว ${widget.products['sale']} ชิ้น',
-                    style: TextStyle(fontSize: 16),
+                    '4.8851 หยวนจีนต่อบาทไทย',
+                    style: TextStyle(
+                        color: Colors.blue[800], fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(width: 8),
-                  Icon(
-                    Icons.favorite_border_outlined,
-                    color: Colors.red,
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  Container(
+                    height: size.height * 0.08,
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: skyorange,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'ราคาสินค้าอาจคลาดเคลื่อนกับเว็บไซต์ต้นทาง',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: red1,
+                              fontSize: 13),
+                        ),
+                        Text(
+                          'ระบบจะแสดงราคาสินค้าที่ต้องชำระหลังออเดอร์ตรวจสอบแล้ว',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: red1,
+                              fontSize: 13),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'ขั้นตอนการชำระ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              _buildIconWithLine(
+                                  size, 'assets/icons/step1.png'),
+                              _buildDividerLine(size),
+                              _buildIconWithLine(
+                                  size, 'assets/icons/step2.png'),
+                              _buildDividerLine(size),
+                              _buildIconWithLine(
+                                  size, 'assets/icons/step3.png'),
+                            ],
+                          ),
+                          SizedBox(width: size.width * 0.02),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: size.height * 0.005),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: _buildStepText(
+                                    'รอเจ้าหน้าที่ตรวจสอบหลังจากทำการสั่งซื้อ',
+                                  ),
+                                ),
+                                SizedBox(height: size.height * 0.044),
+                                Align(
+                                  alignment: Alignment
+                                      .centerLeft, // จัดข้อความให้อยู่ทางซ้าย
+                                  child: _buildStepText(
+                                    'ชำระค่าขนส่งในจีน และค่าสินค้าแก่ Supplier',
+                                  ),
+                                ),
+                                SizedBox(height: size.height * 0.042),
+                                Align(
+                                  alignment: Alignment
+                                      .centerLeft, // จัดข้อความให้อยู่ทางซ้าย
+                                  child: _buildStepText(
+                                    'ชำระค่าขนส่งจากจีนถึงไทย และการจัดส่งในไทย',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),
             ),
-            SizedBox(height: 1),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 9.0),
-              child: Text(
-                '${widget.products['detail']}',
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-              ),
+            SizedBox(
+              height: size.height * 0.02,
             ),
-            SizedBox(height: 1),
             Container(
+              width: size.width * 0.95,
+              height: size.height * 0.27,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25), color: pinkmess),
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: widget.size.height * 0.001,
-                    horizontal: widget.size.width * 0.028),
-                child: Row(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
                   children: [
+                    Row(
+                      children: [
+                        Image.asset('assets/icons/hello.png'),
+                        SizedBox(
+                          width: size.width * 0.03,
+                        ),
+                        Text(
+                          'ข้อจำกัดการรับผิดชอบ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: oldred),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: size.height * 0.015,
+                    ),
                     Text(
-                      'MakeMixue.store',
-                      style: TextStyle(fontSize: 15, color: Colors.grey[900]),
+                      'TEG Cargo เป็นเพียงผู้ช่วยในการสั่งซื้อสินค้ากับร้านค้าจีนตามราย การสินค้าที่ลูกค้าเปิดออเดอร์สั่งซื้อมาเท่านั้นในกรณีที่สินค้ามีปัญหา เช่น ด้านคุณภาพสินค้า สินค้าผิดสเปก หรือปัญหาใน ด้านอื่นๆ ทาง TEG Cargo จะช่วยประสานงานกับทางร้านค้าจีนเพื่อเจรจาให้ ร้านค้า จีนรับผิดชอบต่อความเสียหายต่างๆที่เกิดขึ้น เนื่องจาก TEG Cargo เป็นเพียงผู้ช่วยสั่งซื้อสินค้าเท่านั้น และไม่สามารถรับผิดชอบต่อความ เสียหายต่างๆ ที่เกิดขึ้นจากร้านค้าจีนได้',
+                      style:
+                          TextStyle(color: oldred, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
               ),
             ),
-            SizedBox(height: widget.size.height * 0.007),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: widget.size.height * 0.001,
-                  horizontal: widget.size.width * 0.028),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Text(
-                          'รับประกันการจัดส่ง',
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Text(
-                          '5.0 คะแนนสินค้า',
-                          style: TextStyle(color: Colors.grey),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 5),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: widget.size.height * 0.001,
-                  horizontal: widget.size.width * 0.028),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Text(
-                          'ข้อมูลเฉพาะ',
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          'ยี่ห้อ, วัสดุ, น้ำหนัก,...',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        Icon(Icons.arrow_forward_sharp)
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            SizedBox(
+              height: size.height * 0.02,
             ),
             Container(
-              alignment: Alignment.centerLeft, // จัดตำแหน่งให้ชิดซ้าย
-              padding: EdgeInsets.all(16.0), // เพิ่ม padding ถ้าต้องการ
+              color: white,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // จัดตำแหน่งให้ชิดซ้าย
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    children: [
+                      Text(
+                        'รายละเอียดสินค้า',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: greyuserinfo,
+                            fontWeight: FontWeight.w800),
+                      ),
+                      Spacer(),
+                      Text(
+                        'ยี่ห้อ, วัสดุ, ฟังก์ชั่น, ...',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w900),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.01,
+                      ),
+                      Image.asset('assets/icons/rightarrow.png')
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
                   Text(
                     'เงื่อนไขการใช้งาน',
-                    style: TextStyle(fontSize: 13),
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: greyuserinfo,
+                        fontWeight: FontWeight.w800),
                   ),
-                  SizedBox(height: 8), // เพิ่มระยะห่างระหว่างข้อความ
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Adjust alignment as needed
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'การขนส่ง',
-                        style: TextStyle(fontSize: 13),
+                      Row(
+                        children: [
+                          Text(
+                            'การขนส่ง',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Align(
+                              child: SizedBox(
+                                height: size.height * 0.045,
+                                width: size.width * 0.55,
+                                child: Text(
+                                  'จาก Quzhou, Zhejiang ถึง รับประกันการจัดส่ง 48 ชั่วโมง ',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios,
+                              size: 16, color: Colors.grey),
+                        ],
                       ),
-                      Text(
-                        'จาก Quzhou, Zhejiang ถึง',
-                        style: TextStyle(fontSize: 13),
+                      SizedBox(height: size.height * 0.01),
+                      Row(
+                        children: [
+                          Text(
+                            'บริการ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(width: size.width * 0.05),
+                          Expanded(
+                            child: Align(
+                              child: SizedBox(
+                                height: size.height * 0.045,
+                                width: size.width * 0.55,
+                                child: Text(
+                                  'คืนสินค้าใน 7 วัน, ได้รับการชดเชยหากจัดส่งล่าช้า, คืนเงินไว',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios,
+                              size: 16, color: Colors.grey),
+                        ],
                       ),
-                      Image.asset(
-                        'assets/icons/Vector.png',
-                        height: 15,
-                        width: 9,
+                      SizedBox(height: size.height * 0.01),
+                      Row(
+                        children: [
+                          Text(
+                            'การขนส่ง',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(width: size.width * 0.099),
+                          Expanded(
+                            child: Text(
+                              'มีให้เลือก 10 สี',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios,
+                              size: 16, color: Colors.grey),
+                        ],
                       ),
                     ],
                   ),
-                  Center(
-                    child: Text(
-                      'รับประกันการจัดส่ง 48 ชั่วโมง',
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  ),
                   SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Adjust alignment as needed
-                    children: [
-                      Text(
-                        'บริการ',
-                        style: TextStyle(fontSize: 13),
-                      ),
-                      Text(
-                        'คืนสินค้าใน 7 วัน',
-                        style: TextStyle(fontSize: 13),
-                      ),
-                      Image.asset(
-                        'assets/icons/Vector.png',
-                        height: 15,
-                        width: 9,
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: Text('ได้รับการชดเชยหากจัดส่งล่าช้า, คืนเงินไว'),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Adjust alignment as needed
-                    children: [
-                      Text(
-                        'ข้อมูลจำเพาะ',
-                        style: TextStyle(fontSize: 13),
-                      ),
-                      Text(
-                        'มีให้เลือก 10 สี',
-                        style: TextStyle(fontSize: 13),
-                      ),
-                      Image.asset(
-                        'assets/icons/Vector.png',
-                        height: 15,
-                        width: 9,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
+                    height: size.height * 0.015,
                   ),
                   Image.asset('assets/images/Frame 100.png'),
                   Divider(),
@@ -332,50 +560,51 @@ class _itempageState extends State<itempage> {
                       Image.asset('assets/icons/downarrow.png')
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 13),
-                    child: Text(
-                      'สินค้าที่เยี่ยมชมล่าสุด',
-                      style:
-                          TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Wrap(
-                    spacing: 12,
-                    runSpacing: 10,
-                    children: List.generate(
-                        listProducts.length,
-                        (index) => Ouritem(
-                              image: listProducts[index]['image'],
-                              sale: listProducts[index]['sale'],
-                              send: listProducts[index]['send'],
-                              size: MediaQuery.of(context).size,
-                              price: (listProducts[index]['price'] as num)
-                                  .toDouble(),
-                              detail: listProducts[index]['detail'],
-                              press: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => itempage(
-                                      size: MediaQuery.of(context).size,
-                                      title: listProducts[index]['detail'],
-                                      price:
-                                          (listProducts[index]['price'] as num)
-                                              .toDouble(),
-                                      products: listProducts[index],
-                                      press: () {},
-                                    ),
-                                  ),
-                                );
-                              },
-                            )),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 13),
+              child: Row(
+                children: [
+                  Text(
+                    'สินค้าที่เยี่ยมชมล่าสุด',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Wrap(
+              spacing: 12,
+              runSpacing: 10,
+              children: List.generate(
+                  listProducts.length,
+                  (index) => Ouritem(
+                        image: listProducts[index]['image'],
+                        sale: listProducts[index]['sale'],
+                        send: listProducts[index]['send'],
+                        size: MediaQuery.of(context).size,
+                        price: (listProducts[index]['price'] as num).toDouble(),
+                        detail: listProducts[index]['detail'],
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => itempage(
+                                size: MediaQuery.of(context).size,
+                                title: listProducts[index]['detail'],
+                                price: (listProducts[index]['price'] as num)
+                                    .toDouble(),
+                                products: listProducts[index],
+                                press: () {},
+                              ),
+                            ),
+                          );
+                        },
+                      )),
             ),
           ],
         ),
@@ -715,5 +944,32 @@ Widget _buildPriceDetails() {
       Text('¥11.19 (~฿55.56)',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
     ],
+  );
+}
+
+Widget _buildIconWithLine(Size size, String imagePath) {
+  return Center(
+    child: Image.asset(
+      imagePath,
+      width: size.width * 0.08,
+      height: size.height * 0.04,
+      color: Colors.orange,
+    ),
+  );
+}
+
+Widget _buildDividerLine(Size size) {
+  return Container(
+    width: 2,
+    height: size.height * 0.02,
+    color: Colors.orange,
+  );
+}
+
+Widget _buildStepText(String text) {
+  return Text(
+    text,
+    style: TextStyle(
+        fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
   );
 }

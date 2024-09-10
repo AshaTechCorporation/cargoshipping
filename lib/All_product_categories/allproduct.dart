@@ -31,7 +31,6 @@ class _AllproductState extends State<Allproduct>
       ),
       body: Row(
         children: [
-          // Custom TabBar on the left
           Container(
             width: size.width * 0.29,
             color: Colors.white,
@@ -66,34 +65,69 @@ class _AllproductState extends State<Allproduct>
   }
 
   Widget _buildTabItem(String title, String imagePath, int index) {
-    bool isSelected = selectedIndex == index;
-    return GestureDetector(
-      onTap: () => onTabTapped(index),
-      child: Container(
-        color: isSelected ? background : Colors.transparent,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-        child: Column(
-          children: [
-            Image.asset(
-              imagePath,
-              width: 40,
-              height: 40,
-              fit: BoxFit.fill,
-            ),
-            SizedBox(height: 8),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.black,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+  bool isSelected = selectedIndex == index;
+  return GestureDetector(
+    onTap: () => onTabTapped(index),
+    child: Container(
+      height: 120,
+      child: Stack(
+        children: [
+          if (!isSelected)
+            Positioned.fill(
+              child: Container(
+                color: Colors.white,
               ),
             ),
-          ],
-        ),
+          if (isSelected)
+            Positioned.fill(
+              child: Container(
+                color: background,
+              ),
+            ),
+          if (isSelected)
+            Positioned(
+              left: 0,
+              right: 101,
+              bottom: 0,
+              top: 0,
+              child: FractionallySizedBox(
+                widthFactor: 0.2,
+                child: Container(
+                  color: red1,
+                ),
+              ),
+            ),
+          Positioned.fill(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+              child: Column(
+                children: [
+                  Image.asset(
+                    imagePath,
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.fill,
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.black,
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
+
 
   Widget _buildClothingSection() {
     return ListView(

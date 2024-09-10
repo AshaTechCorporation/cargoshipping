@@ -90,7 +90,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                                 value,
                                 style: TextStyle(
                                     fontSize:
-                                        14), // ปรับขนาดฟอนต์ของตัวเลือกให้เล็กลง
+                                        14),
                               ),
                             );
                           }).toList(),
@@ -140,16 +140,17 @@ class _ReportFormPageState extends State<ReportFormPage> {
                         ),
                         SizedBox(height: size.height * 0.015),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Expanded(
-                              child: Center(
-                                child: Text(
-                                  'รูปภาพประกอบ',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
+                            Text(
+                              'รูปภาพประกอบ',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold
                               ),
+                            ),
+                            SizedBox(
+                              width: size.width* 0.05,
                             ),
                             ElevatedButton(
                               onPressed: () {

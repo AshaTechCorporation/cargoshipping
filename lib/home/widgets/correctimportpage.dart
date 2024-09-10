@@ -10,7 +10,9 @@ class Correctimportpage extends StatefulWidget {
 }
 
 class _CorrectimportpageState extends State<Correctimportpage> {
-  String selectedValue = 'เลขที่ PO';
+  bool _isExpanded = false;
+  String selectedValue = 'เลขที่ PO'; // ค่าเริ่มต้นที่เลือก
+  List<String> items = ['เลขที่ PO', 'PO1234', 'PO5678', 'PO9101'];
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -36,7 +38,7 @@ class _CorrectimportpageState extends State<Correctimportpage> {
           ),
           Center(
             child: Container(
-              height: size.height * 0.08,
+              height: size.height * 0.33,
               width: size.width * 0.93,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -50,48 +52,57 @@ class _CorrectimportpageState extends State<Correctimportpage> {
                   ),
                 ],
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Column(
                 children: [
-                  Text(
-                    'เลือกรายการนำเข้า',
-                    style: TextStyle(
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'เลือกรายการนำเข้า',
+                      style: TextStyle(
                         fontSize: 13,
                         color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: size.width * 0.6,
-                    height: size.height * 0.04,
-                    child: DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 0.5,
-                          ),
-                        ),
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        fontWeight: FontWeight.bold,
                       ),
-                      value: selectedValue,
-                      icon: Icon(Icons.arrow_drop_down),
-                      iconSize: 20,
-                      elevation: 10,
-                      style: TextStyle(color: Colors.black),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedValue = newValue!;
-                        });
-                      },
-                      items: <String>['เลขที่ PO', 'PO1234', 'PO5678', 'PO9101']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+                    ),
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: ExpansionPanelList(
+                        elevation: 2,
+                        expandedHeaderPadding: EdgeInsets.all(0),
+                        expansionCallback: (int index, bool isExpanded) {
+                          setState(() {
+                            _isExpanded = !_isExpanded;
+                          });
+                        },
+                        children: [
+                          ExpansionPanel(
+                            headerBuilder:
+                                (BuildContext context, bool isExpanded) {
+                              return ListTile(
+                                title: Text(
+                                    selectedValue), // แสดงค่าที่เลือกเป็นหัวข้อ
+                              );
+                            },
+                            body: Column(
+                              children: items.map((String value) {
+                                return ListTile(
+                                  title: Text(value),
+                                  onTap: () {
+                                    setState(() {
+                                      selectedValue =
+                                          value; // เปลี่ยนค่าที่เลือก
+                                      _isExpanded =
+                                          false; // ปิด panel หลังจากเลือกค่าแล้ว
+                                    });
+                                  },
+                                );
+                              }).toList(),
+                            ),
+                            isExpanded: _isExpanded, // เช็คสถานะการขยาย
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -99,7 +110,7 @@ class _CorrectimportpageState extends State<Correctimportpage> {
             ),
           ),
           SizedBox(
-            height: size.height * 0.02,
+            height: size.height * 0.01,
           ),
           GestureDetector(
             onTap: () {
@@ -133,7 +144,7 @@ class _CorrectimportpageState extends State<Correctimportpage> {
               ),
             ),
           ),
-          SizedBox(height: size.height * 0.677),
+          SizedBox(height: size.height * 0.4),
           Container(
             height: size.height * 0.06,
             width: size.width * 0.93,
@@ -150,7 +161,7 @@ class _CorrectimportpageState extends State<Correctimportpage> {
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
