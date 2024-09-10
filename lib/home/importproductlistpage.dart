@@ -99,7 +99,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
             ),
             CardImportProductWidget(size: size),
             Container(
-              height: size.height * 0.08,
+              height: size.height * 0.07,
               width: size.width * 0.9,
               // color: red1,
               child: Row(
@@ -442,7 +442,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
         color: white,
         elevation: 10,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           child: SizedBox(
             width: double.infinity,
             height: 50, // ความสูงของปุ่ม
@@ -459,7 +459,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
               child: Text(
                 'ชำระค่าบริการ',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
