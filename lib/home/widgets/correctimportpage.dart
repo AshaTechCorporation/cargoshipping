@@ -1,5 +1,5 @@
 import 'package:cargoshipping/constants.dart';
-import 'package:cargoshipping/home/widgets/importproductlistpage.dart';
+import 'package:cargoshipping/home/importproductlistpage.dart';
 import 'package:flutter/material.dart';
 
 class Correctimportpage extends StatefulWidget {

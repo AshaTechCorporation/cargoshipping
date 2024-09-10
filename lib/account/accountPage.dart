@@ -295,16 +295,19 @@ class _AccountPageState extends State<AccountPage> {
               ],
             ),
           ),
-          Wrap(
-            spacing: 5,
-            runSpacing: 5,
-            children: List.generate(
-              myorder.length,
-              (index) => CardlistWidget(
-                size: size,
-                title: myorder[index]['name'],
-                press: () {},
-                imagespath: myorder[index]['images'],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Wrap(
+              spacing: 3,
+              runSpacing: 3,
+              children: List.generate(
+                myorder.length,
+                (index) => CardlistWidget(
+                  size: size,
+                  title: myorder[index]['name'],
+                  press: () {},
+                  imagespath: myorder[index]['images'],
+                ),
               ),
             ),
           ),
@@ -391,25 +394,28 @@ class _AccountPageState extends State<AccountPage> {
               ],
             ),
           ),
-          Wrap(
-            spacing: 5,
-            runSpacing: 5,
-            children: List.generate(
-              listimportcorrect.length,
-              (index) => Listimportcorrectwidget(
-                size: size,
-                title: listimportcorrect[index]['name'],
-                press: () {
-                  if (index == 0) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Correctimportpage(),
-                      ),
-                    );
-                  }
-                },
-                imagespath: listimportcorrect[index]['images'],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.2),
+            child: Wrap(
+              spacing: 3,
+              runSpacing: 3,
+              children: List.generate(
+                listimportcorrect.length,
+                (index) => Listimportcorrectwidget(
+                  size: size,
+                  title: listimportcorrect[index]['name'],
+                  press: () {
+                    if (index == 0) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Correctimportpage(),
+                        ),
+                      );
+                    }
+                  },
+                  imagespath: listimportcorrect[index]['images'],
+                ),
               ),
             ),
           ),

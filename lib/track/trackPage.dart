@@ -131,7 +131,8 @@ class _TrackPageState extends State<TrackPage> {
             SizedBox(
               height: size.height * 0.01,
             ),
-            compete(size: size)
+            compete(size: size),
+            SizedBox(height: size.height * 0.04),
           ],
         ),
       ),
