@@ -59,17 +59,11 @@ class _AccountPageState extends State<AccountPage> {
                             children: [
                               Text(
                                 'A123456',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 'Name Surname',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -94,10 +88,7 @@ class _AccountPageState extends State<AccountPage> {
                               children: [
                                 Text(
                                   'Bronze',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                                 ),
                                 SizedBox(width: 10),
                                 CircleAvatar(
@@ -123,17 +114,11 @@ class _AccountPageState extends State<AccountPage> {
                             children: [
                               Text(
                                 'TEG+ Point ',
-                                style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: white, fontSize: 14, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 '150 คะแนน ',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -144,18 +129,12 @@ class _AccountPageState extends State<AccountPage> {
                                 padding: const EdgeInsets.only(left: 90),
                                 child: Text(
                                   'Wallet ',
-                                  style: TextStyle(
-                                      color: white,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: white, fontSize: 13, fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Text(
                                 'คงเหลือ 1025 บาท',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -175,16 +154,13 @@ class _AccountPageState extends State<AccountPage> {
                                   if (index == 0) {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Firsttopup()),
+                                      MaterialPageRoute(builder: (context) => Firsttopup()),
                                     );
                                   }
                                   if (index == 1) {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Firstwithdrawpage()),
+                                      MaterialPageRoute(builder: (context) => Firstwithdrawpage()),
                                     );
                                   }
                                 })),
@@ -213,8 +189,7 @@ class _AccountPageState extends State<AccountPage> {
             ),
             child: InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Tagunlimited()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Tagunlimited()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -236,20 +211,14 @@ class _AccountPageState extends State<AccountPage> {
                           ),
                           Text(
                             'TEG UNLIMITED',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: red1,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 13, color: red1, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: size.height * 0.001,
                           ),
                           Text(
                             'รับส่วนลดทุกบริการ TEG CARGO สิทธิประโยชน์พิเศษ และอีกมากมาย',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 12, color: greyuserinfo, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -277,10 +246,7 @@ class _AccountPageState extends State<AccountPage> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Ordersumpage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Ordersumpage()));
                   },
                   child: Row(
                     children: [
@@ -328,10 +294,7 @@ class _AccountPageState extends State<AccountPage> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Ordersumpage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Ordersumpage()));
                   },
                   child: Row(
                     children: [
@@ -376,10 +339,7 @@ class _AccountPageState extends State<AccountPage> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Ordersumpage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Ordersumpage()));
                   },
                   child: Row(
                     children: [
@@ -436,6 +396,15 @@ class _AccountPageState extends State<AccountPage> {
               )
             ],
           ),
+          // Wrap(
+          //   children: List.generate(
+          //       importlist.length,
+          //       (index) => Importlist(
+          //             size: size,
+          //             press: () {},
+          //             imagespath: importlist[index],
+          //           )),
+          // ),
           Padding(
             padding: EdgeInsets.only(
               top: 5.0,
@@ -450,7 +419,7 @@ class _AccountPageState extends State<AccountPage> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 // mainAxisSpacing: 5,
-                // crossAxisSpacing: 5,
+                crossAxisSpacing: 5,
                 childAspectRatio: 1.33,
               ),
               itemBuilder: (context, index) {
@@ -462,9 +431,7 @@ class _AccountPageState extends State<AccountPage> {
               },
             ),
           ),
-          SizedBox(
-              width: size.width * 0.95,
-              child: Image.asset('assets/images/freight.png')),
+          SizedBox(width: size.width * 0.95, child: Image.asset('assets/images/freight.png')),
 
           // Wrap(
           //   spacing: 15,
@@ -526,9 +493,7 @@ class _AccountPageState extends State<AccountPage> {
                                       ),
                                     )
                                   : null, // ไม่มีเส้นใต้ถ้าไม่ได้เลือก
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      3.0),
+                              padding: EdgeInsets.only(bottom: 3.0),
                               child: RichText(
                                 text: TextSpan(
                                   children: [
@@ -536,18 +501,14 @@ class _AccountPageState extends State<AccountPage> {
                                       text: 'ที่อยู่โกดัง ',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: isGuangzhouSelected
-                                            ? Colors.black
-                                            : Colors.grey,
+                                        color: isGuangzhouSelected ? Colors.black : Colors.grey,
                                       ),
                                     ),
                                     TextSpan(
                                       text: 'กวางโจว',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: isGuangzhouSelected
-                                            ? Colors.red
-                                            : Colors.grey,
+                                        color: isGuangzhouSelected ? Colors.red : Colors.grey,
                                       ),
                                     ),
                                   ],
@@ -573,9 +534,7 @@ class _AccountPageState extends State<AccountPage> {
                                         ),
                                       ),
                                     ),
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      3.0), // ระยะห่างระหว่างข้อความกับเส้นใต้
+                              padding: EdgeInsets.only(bottom: 3.0), // ระยะห่างระหว่างข้อความกับเส้นใต้
                               child: RichText(
                                 text: TextSpan(
                                   children: [
@@ -583,18 +542,14 @@ class _AccountPageState extends State<AccountPage> {
                                       text: 'ที่อยู่โกดัง ',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: !isGuangzhouSelected
-                                            ? Colors.black
-                                            : Colors.grey,
+                                        color: !isGuangzhouSelected ? Colors.black : Colors.grey,
                                       ),
                                     ),
                                     TextSpan(
                                       text: 'อี้อู',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: !isGuangzhouSelected
-                                            ? Colors.red
-                                            : Colors.grey,
+                                        color: !isGuangzhouSelected ? Colors.red : Colors.grey,
                                       ),
                                     ),
                                   ],
@@ -608,14 +563,10 @@ class _AccountPageState extends State<AccountPage> {
                       SizedBox(
                         height: size.height * 0.01,
                       ),
-                      _buildInfoRow(
-                          '收货人', selectedInfo['收货人']!, Icons.copy, Colors.grey),
-                      _buildInfoRow('详细地址', selectedInfo['详细地址']!, Icons.copy,
-                          Colors.grey),
-                      _buildInfoRow(
-                          '邮编', selectedInfo['邮编']!, Icons.copy, Colors.grey),
-                      _buildInfoRow(
-                          '手机', selectedInfo['手机']!, Icons.copy, Colors.grey),
+                      _buildInfoRow('收货人', selectedInfo['收货人']!, Icons.copy, Colors.grey),
+                      _buildInfoRow('详细地址', selectedInfo['详细地址']!, Icons.copy, Colors.grey),
+                      _buildInfoRow('邮编', selectedInfo['邮编']!, Icons.copy, Colors.grey),
+                      _buildInfoRow('手机', selectedInfo['手机']!, Icons.copy, Colors.grey),
                     ],
                   ),
                 ),
@@ -664,11 +615,7 @@ class _AccountPageState extends State<AccountPage> {
                                 '12 6 ตำบลคลองข่อย อำเภอปากเกร็ด\nจังหวัดนนทบุรี 11120',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold
-                                ),
+                                style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
                               ),
                             ),
                             SizedBox(width: 8),
@@ -691,13 +638,8 @@ class _AccountPageState extends State<AccountPage> {
                           ],
                         ),
                       ),
-                      _buildInfoRow('เบอร์โทรศัพท์', '061-996-6663', Icons.copy,
-                          Colors.grey),
-                      _buildInfoRow(
-                          'Google Maps',
-                          'https://maps.app.goo.gl/gmk7B6pgrATazqb167g_st=ic',
-                          Icons.copy,
-                          Colors.grey),
+                      _buildInfoRow('เบอร์โทรศัพท์', '061-996-6663', Icons.copy, Colors.grey),
+                      _buildInfoRow('Google Maps', 'https://maps.app.goo.gl/gmk7B6pgrATazqb167g_st=ic', Icons.copy, Colors.grey),
                       SizedBox(height: 16),
                       Text(
                         'ระเบียบการเข้าคลัง TEG CARGO',
@@ -708,8 +650,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       Text(
                         '1. ก่อนเข้ารับกรุณาโทรนัดหมายก่อนล่วงหน้า อย่างน้อย 2 ชั่วโมง\n2. กรณีรับพัสดุจำนวนมากรบกวนแจ้งรหัสสินค้าที่จะนำออกให้ครบเพื่อความสะดวก\n3. ไม่อนุญาตให้นำสัตว์เลี้ยงหรือเด็กเข้าคลัง',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
+                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -722,8 +663,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 }
 
-Widget _buildInfoRow(
-    String title, String detail, IconData icon, Color iconColor) {
+Widget _buildInfoRow(String title, String detail, IconData icon, Color iconColor) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 4.0),
     child: Row(
