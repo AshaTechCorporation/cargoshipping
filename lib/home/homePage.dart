@@ -16,7 +16,6 @@ import 'package:cargoshipping/home/widgets/shippingimportrate.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Container(
                     height: size.height * 0.045,
-                    width: size.width * 0.85,
+                    width: size.width * 0.83,
                     padding: const EdgeInsets.all(4.0),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -96,9 +95,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: IntrinsicHeight(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: size.width * 0.35,
+                            width: size.width * 0.33,
                             child: TextFormField(
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                           Image.asset('assets/icons/cam.png'),
                           SizedBox(
                             height: size.height * 0.05,
-                            width: size.width * 0.24,
+                            width: size.width * 0.225,
                             child: DropdownButtonHideUnderline(
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                                     },
                                     buttonStyleData: const ButtonStyleData(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 16),
+                                          EdgeInsets.symmetric(horizontal: 10),
                                       height: 40,
                                       width: 140,
                                     ),
@@ -211,8 +211,8 @@ class _HomePageState extends State<HomePage> {
                   //     );
                   //   },
                   //   child: Image.asset('assets/icons/thai.png',height: 27,))
-                  Positioned(
-                    right: 10,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.003),
                     child: GestureDetector(
                       onTapDown: (TapDownDetails details) {
                         showMenu(
