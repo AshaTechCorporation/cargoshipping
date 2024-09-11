@@ -12,8 +12,8 @@ class Importlist extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: size.height * 0.11,
@@ -26,12 +26,9 @@ class Importlist extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
               child: AspectRatio(
                 aspectRatio: 5,
-                child: Container(
-                  height: 50,
-                  child: Image.asset(
-                    imagespath,
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.asset(
+                  imagespath,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

@@ -449,9 +449,9 @@ class _AccountPageState extends State<AccountPage> {
               itemCount: importlist.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-                childAspectRatio: 1.2,
+                // mainAxisSpacing: 5,
+                // crossAxisSpacing: 5,
+                childAspectRatio: 1.33,
               ),
               itemBuilder: (context, index) {
                 return Importlist(
