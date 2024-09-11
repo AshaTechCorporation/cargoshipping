@@ -29,10 +29,14 @@ class _TransportpageState extends State<Transportpage> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text('รายการขนส่งนำเข้า'),
+                  Text('รายการขนส่งนำเข้า',style: TextStyle(fontSize: 13,color: headingtext,fontWeight: FontWeight.bold),),
                   Spacer(),
-                  Text(' 2567'),
-                  Icon(Icons.arrow_drop_down_outlined)
+                  Text('2567',style: TextStyle(fontSize: 13,color: headingtext,fontWeight: FontWeight.bold),),
+                  SizedBox(width: size.width * 0.024,),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Image.asset('assets/icons/downarrow.png'),
+                  )
                 ],
               ),
             ),

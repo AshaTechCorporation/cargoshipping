@@ -53,8 +53,7 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 13,
-                  color: greyuserinfo,
-                  fontWeight: FontWeight.bold),
+                  color: headingtext),
             ),
             SizedBox(height: size.height * 0.02),
             SizedBox(
@@ -63,7 +62,7 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: 'ระบุจำนวนเงินขั้นต่ำ 50 บาท',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
+                  hintStyle: TextStyle(color: arrowcolor, fontSize: 13),
                   prefixIcon: Padding(
                     padding:
                         const EdgeInsets.all(12.0), // ปรับ padding ของไอคอน
@@ -73,7 +72,7 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
                       color: Colors.grey,
-                      width: 1,
+                      width: 0.5,
                     ),
                   ),
                   filled: true,
@@ -82,14 +81,14 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
                       color: Colors.grey,
-                      width: 1,
+                      width: 0.5,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
                       color: Colors.grey,
-                      width: 1,
+                      width: 0.5,
                     ),
                   ),
                   contentPadding: EdgeInsets.only(
@@ -144,19 +143,22 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
         });
       },
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.04,
-        width: MediaQuery.of(context).size.width * 0.25,
+        height: MediaQuery.of(context).size.height * 0.035,
+        width: MediaQuery.of(context).size.width * 0.26,
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
           color: isSelected ? Colors.red : Colors.white,
           borderRadius: BorderRadius.circular(12.0),
-          border: Border.all(color: Colors.grey),
+          border: Border.all(
+            color: Colors.grey,
+            width: 0.6,
+          ),
         ),
         alignment: Alignment.center,
         child: Text(
           amount,
           style: TextStyle(
-              fontSize: 16.0,
+              fontSize: 13.0,
               color: isSelected ? Colors.white : Colors.black,
               fontWeight: FontWeight.bold),
         ),

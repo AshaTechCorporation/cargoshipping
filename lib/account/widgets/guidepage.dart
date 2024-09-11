@@ -1,163 +1,273 @@
 import 'package:cargoshipping/constants.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
-class Guidepage extends StatelessWidget {
+class Guidepage extends StatefulWidget {
   const Guidepage({super.key});
+
+  @override
+  _GuidepageState createState() => _GuidepageState();
+}
+
+class _GuidepageState extends State<Guidepage> {
+  bool isExpanded = false; // สถานะของ Container
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: background,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.11),
-        child: ClipRRect(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(30),
-          ),
-          child: AppBar(
-            backgroundColor: Colors.transparent,  
-            title: Padding(
-              padding: const EdgeInsets.only(top: 35),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: size.height * 0.045,
-                    width: size.width * 0.85,
-                    padding: const EdgeInsets.all(4.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 122, 124, 126)),
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white),
-                    child: IntrinsicHeight(
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: size.width * 0.35,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'ค้นหาสินค้า',
-                                contentPadding:
-                                    EdgeInsets.only(left: 15, bottom: 10),
-                              ),
-                            ),
-                          ),
-                          Icon(Icons.camera_alt_outlined),
-                          VerticalDivider(
-                            color: Colors.grey,
-                            thickness: 1,
-                          ),
-                          // SizedBox(
-                          //   height: size.height * 0.05,
-                          //   width: size.width * 0.2,
-                          //   child: DropdownButtonHideUnderline(
-                          //     child: DropdownButton2<String>(
-                          //       isExpanded: true,
-                          //       hint: Align(
-                          //         alignment: Alignment.centerLeft,
-                          //         child: Text(
-                          //           'เลือกสินค้า',
-                          //           style: TextStyle(
-                          //             fontSize: 11,
-                          //             color: Colors.red,
-                          //             fontWeight: FontWeight.bold,
-                          //           ),
-                          //         ),
-                          //       ),
-                          //       items: items
-                          //           .map((String item) =>
-                          //               DropdownMenuItem<String>(
-                          //                 value: item,
-                          //                 child: Text(
-                          //                   item,
-                          //                   style: const TextStyle(
-                          //                     fontSize: 14,
-                          //                   ),
-                          //                 ),
-                          //               ))
-                          //           .toList(),
-                          //       value: selectedValue,
-                          //       onChanged: (String? value) {
-                          //         setState(() {
-                          //           selectedValue = value!;
-                          //         });
-                          //         getlistCategories(name: selectedValue);
-                          //       },
-                          //       buttonStyleData: const ButtonStyleData(
-                          //         padding: EdgeInsets.symmetric(horizontal: 16),
-                          //         height: 40,
-                          //         width: 140,
-                          //       ),
-                          //       menuItemStyleData: const MenuItemStyleData(
-                          //         height: 40,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                          SizedBox(
-                            width: size.width * 0.001,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // Implement navigation to Search page here
-                            },
-                            child: Container(
-                              height: size.height * 0.05,
-                              width: size.width * 0.17,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.red,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'ค้นหา',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.favorite_border_outlined),
-                ],
-              ),
-            ),
-          ),
+      appBar: AppBar(
+        title: Text(
+          'Test',
+          style: TextStyle(color: Colors.black),
         ),
       ),
       body: Stack(
         children: [
-          Positioned(
-            top: -50, // กำหนดให้ container เริ่มจากตำแหน่งด้านบน
+          // Container ด้านบน
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 300),
+            top: 0,
             left: 0,
             right: 0,
+            height: isExpanded ? 0 : size.height * 0.5, // ซ่อนเมื่อขยาย
             child: Container(
-              height: 200, // ความสูงของ container
-              decoration: BoxDecoration(
-                color: Colors.blue
-                    .withOpacity(0.5), // กำหนดสีพื้นหลังให้มีความโปร่งใสบ้าง
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
+              color: Colors.blue,
               child: Center(
                 child: Text(
-                  'Container ซ้อน AppBar',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  'Container ด้านบน',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
                 ),
               ),
             ),
           ),
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 300),
+            top: isExpanded ? 0 : size.height * 0.25, // ขยายเต็มหน้าจอเมื่อกด
+            left: 0,
+            right: 0,
+            height: isExpanded ? size.height : size.height * 0.5,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  isExpanded = !isExpanded; // เปลี่ยนสถานะเมื่อกด
+                });
+              },
+              child: Container(
+                color: white,
+                child: Column(
+                  children: [
+                    Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'ข้อความ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    fontFamily: 'SukhumvitSet'),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isExpanded =
+                                        !isExpanded;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(10),
+                                  color: Colors.red,
+                                  child: Icon(
+                                    isExpanded
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.keyboard_arrow_up,
+                                    color: Colors.white,
+                                    size: 10,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.04),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                'assets/icons/Frame 61.png',
+                                width: 30,
+                                height: 30,
+                              ),
+                              SizedBox(width: size.width * 0.04),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: pinkmess,
+                                    ),
+                                    width: size.width * 0.55,
+                                    height: size.height * 0.07,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15, right: 7, top: 8),
+                                        child: Text(
+                                          'สวัสดีครับ (username)TEG Cargo ยินดีให้บริการครับ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: size.height * 0.01),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: pinkmess,
+                                    ),
+                                    width: size.width * 0.66,
+                                    height: size.height * 0.08,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          left: size.width * 0.04,
+                                          top: size.height * 0.02),
+                                      child: Text(
+                                        'ท่านสามารถเลือกคำถามจากปุ่มตัวเลือก หรือพิมพ์คำถามในช่องแชทได้เลยครับ',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.025,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: size.width * 0.07),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: greymess,
+                                                  ),
+                                                  width: size.width * 0.6,
+                                                  height: size.height * 0.07,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                      top: size.height * 0.015,
+                                                    ),
+                                                    child: Text(
+                                                      'การรับส่งของแต่ละครั้งมีจำนวนขั้นต่ำไหม',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    height: size.height * 0.01),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: greymess,
+                                                  ),
+                                                  width: size.width * 0.6,
+                                                  height: size.height * 0.07,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                      top: size.height * 0.015,
+                                                    ),
+                                                    child: Text(
+                                                      'ต้องการทราบราคาค่าขนส่งสินค้า ทั้งทาง รถ และทางเรือ',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    height: size.height * 0.01),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: greymess,
+                                                  ),
+                                                  width: size.width * 0.6,
+                                                  height: size.height * 0.07,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                      top: size.height * 0.015,
+                                                    ),
+                                                    child: Text(
+                                                      'วิธีการคิดค่าขนส่งจากราคาที่คิดเป็น CBM',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                  ],
+                )
+              ),
+            ),
+          ),
         ],
-      ),
+      )
     );
   }
 }

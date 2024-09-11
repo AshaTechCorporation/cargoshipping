@@ -6,15 +6,17 @@ import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
-import 'package:cargoshipping/home/widgets/ShippingCardwidget.dart';
+import 'package:cargoshipping/home/widgets/carimportrate.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
 import 'package:cargoshipping/home/widgets/payment.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
+import 'package:cargoshipping/home/widgets/shippingimportrate.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,6 +63,8 @@ class _HomePageState extends State<HomePage> {
     '1688',
   ];
   String selectedValue = 'taobao';
+  // Country? _selectedCountry;
+  String selectedLanguage = 'ไทย';
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +73,7 @@ class _HomePageState extends State<HomePage> {
       extendBodyBehindAppBar: true,
       backgroundColor: background,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.11),
+        preferredSize: Size.fromHeight(size.height * 0.065),
         child: ClipRRect(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(30),
@@ -99,6 +103,7 @@ class _HomePageState extends State<HomePage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'ค้นหาสินค้า',
+                                hintStyle: TextStyle(fontWeight: FontWeight.bold),
                                 contentPadding:
                                     EdgeInsets.only(left: 15, bottom: 10),
                               ),
@@ -109,44 +114,59 @@ class _HomePageState extends State<HomePage> {
                             height: size.height * 0.05,
                             width: size.width * 0.24,
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton2<String>(
-                                isExpanded: true,
-                                hint: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'เลือกสินค้า',
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      color: red1,
-                                      fontWeight: FontWeight.bold,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.white,
+                                      width: 2),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 0),
+                                  child: DropdownButton2<String>(
+                                    isExpanded: true,
+                                    hint: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'เลือกสินค้า',
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: red1,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    items: items
+                                        .map((String item) =>
+                                            DropdownMenuItem<String>(
+                                              value: item,
+                                              child: Text(
+                                                item,
+                                                style: TextStyle(
+                                                    fontSize: 14, color: red1),
+                                              ),
+                                            ))
+                                        .toList(),
+                                    value: selectedValue,
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        selectedValue = value!;
+                                      });
+                                      getlistCategories(name: selectedValue);
+                                    },
+                                    buttonStyleData: const ButtonStyleData(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      height: 40,
+                                      width: 140,
+                                    ),
+                                    menuItemStyleData: const MenuItemStyleData(
+                                      height: 40,
                                     ),
                                   ),
-                                ),
-                                items: items
-                                    .map((String item) =>
-                                        DropdownMenuItem<String>(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: TextStyle(
-                                                fontSize: 14, color: red1),
-                                          ),
-                                        ))
-                                    .toList(),
-                                value: selectedValue,
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    selectedValue = value!;
-                                  });
-                                  getlistCategories(name: selectedValue);
-                                },
-                                buttonStyleData: const ButtonStyleData(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  height: 40,
-                                  width: 140,
-                                ),
-                                menuItemStyleData: const MenuItemStyleData(
-                                  height: 40,
                                 ),
                               ),
                             ),
@@ -177,7 +197,89 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Icon(Icons.favorite_border_outlined),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     showCountryPicker(
+                  //       context: context,
+                  //       showPhoneCode: false, // ซ่อนรหัสโทรศัพท์
+                  //       onSelect: (Country country) {
+                  //         setState(() {
+                  //           _selectedCountry = country; // อัปเดตประเทศที่เลือก
+                  //         });
+                  //         print('Selected country: ${country.displayName}');
+                  //       },
+                  //     );
+                  //   },
+                  //   child: Image.asset('assets/icons/thai.png',height: 27,))
+                  Positioned(
+                    right: 10,
+                    child: GestureDetector(
+                      onTapDown: (TapDownDetails details) {
+                        showMenu(
+                          context: context,
+                          position: RelativeRect.fromLTRB(
+                            details.globalPosition.dx,
+                            details.globalPosition.dy + 25,
+                            MediaQuery.of(context).size.width -
+                                details.globalPosition.dx -
+                                10,
+                            0,
+                          ),
+                          items: <PopupMenuEntry<String>>[
+                            PopupMenuItem<String>(
+                              value: 'ไทย',
+                              child: Container(
+                                width: 80,
+                                child: Row(
+                                  children: [
+                                    Image.asset('assets/icons/thai.png',
+                                        height: 20), // ธงไทย
+                                    SizedBox(width: 10),
+                                    Text('ไทย'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'English',
+                              child: Container(
+                                width: 80,
+                                child: Row(
+                                  children: [
+                                    // Image.asset('assets/icons/usa.png', height: 20), ธงสหรัฐ
+                                    SizedBox(width: 10),
+                                    Text('English'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              value: '汉语',
+                              child: Container(
+                                width: 80,
+                                child: Row(
+                                  children: [
+                                    // Image.asset('assets/icons/china.png', height: 20), ธงจีน
+                                    SizedBox(width: 10),
+                                    Text('汉语'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                          elevation: 8.0,
+                        ).then((value) {
+                          if (value != null) {
+                            setState(() {
+                              selectedLanguage = value;
+                            });
+                          }
+                        });
+                      },
+                      child: Image.asset('assets/icons/thai.png',
+                          height: 27), //ไอคอนธงชาติไทย
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -363,14 +465,21 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'อัตราเงินประจำวัน',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        'อัตราเงินประจำวันที่...',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: headingtext
+                        ),
+                      ),
+                      SizedBox(width: size.width * 0.04,),
+                      Text('22 สิงหาคม 2567',style: TextStyle(color: red1, fontSize: 13, fontWeight: FontWeight.bold),)
+                    ],
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: size.height * 0.01),
                   Row(
                     children: List.generate(
                         payment.length,
@@ -385,8 +494,9 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       '*อัตราเงินอาจมีการเปลี่ยนแปลง บริษัทขอสงวนสิทธิ์ในการไม่แจ้งให้ทราบล่วงหน้า',
                       style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
+                        fontSize: 10,
+                        color: headingtext,
+                        fontWeight: FontWeight.bold
                       ),
                     ),
                   ),
@@ -498,9 +608,10 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'ที่อยู่รับพัสดุ',
                     style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: headingtext,
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.005,
@@ -523,10 +634,8 @@ class _HomePageState extends State<HomePage> {
                               TextSpan(
                                 text:
                                     ' TEG CARGO仓 广东省广州市白云区唐阁上村中街28号3栋105A仓 邮编510450',
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 15),
+                                style:
+                                    TextStyle(color: headingtext, fontSize: 15),
                               )
                             ])),
                         SizedBox(
@@ -557,9 +666,10 @@ class _HomePageState extends State<HomePage> {
                             width: size.width * 0.3,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                foregroundColor: red1,
-                                side: BorderSide(color: red1, width: 1),
-                              ),
+                                  foregroundColor: red1,
+                                  side: BorderSide(color: red1, width: 1.8),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
                                 Clipboard.setData(
                                   ClipboardData(
@@ -602,10 +712,8 @@ class _HomePageState extends State<HomePage> {
                               TextSpan(
                                 text:
                                     ' TEG CARGO仓 浙江省义乌市稠城街道江北下朱货运市场一栋231-232号 邮编322023',
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 15),
+                                style:
+                                    TextStyle(color: headingtext, fontSize: 15),
                               )
                             ])),
                         SizedBox(
@@ -636,9 +744,10 @@ class _HomePageState extends State<HomePage> {
                             width: size.width * 0.3,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                foregroundColor: red1,
-                                side: BorderSide(color: red1, width: 1),
-                              ),
+                                  foregroundColor: red1,
+                                  side: BorderSide(color: red1, width: 1.8),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
                                 Clipboard.setData(
                                   ClipboardData(
@@ -663,8 +772,11 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            
-
+            Carimportratewidget(size: size),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            Shippingimportratewidget(size: size),
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: size.height * 0.02, horizontal: size.width * 0.035),
@@ -675,7 +787,11 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   Spacer(), // เว้นที่ระหว่างข้อความ
-                  Text('หมวดหมู่ทั้งหมด')
+                  Text(
+                    'หมวดหมู่ทั้งหมด',
+                    style: TextStyle(
+                        fontSize: 12, color: red1, fontWeight: FontWeight.w700),
+                  )
                 ],
               ),
             ),
@@ -778,7 +894,7 @@ class _HomePageState extends State<HomePage> {
                           TextSpan(
                             text: ' จาก 1668',
                             style: TextStyle(
-                                color: Colors.red,
+                                color: red1,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                           )
@@ -816,10 +932,41 @@ class _HomePageState extends State<HomePage> {
                         },
                       )),
             ),
-            SizedBox(height: size.height * 0.05,),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildMenuItem(String language, String flag) {
+  return Row(
+    children: [
+      Text(flag, style: TextStyle(fontSize: 20)), // ใช้ emoji ธงชาติ
+      SizedBox(width: 10),
+      Text(language),
+    ],
+  );
+}
+
+// ฟังก์ชันแสดงธงชาติที่เลือก
+Widget _buildFlagIcon(String language) {
+  String flag;
+  switch (language) {
+    case 'ไทย':
+      flag = '🇹🇭'; // ธงไทย
+      break;
+    case 'English':
+      flag = '🇺🇸'; // ธงสหรัฐ
+      break;
+    case '汉语':
+      flag = '🇨🇳'; // ธงจีน
+      break;
+    default:
+      flag = '🇹🇭'; // ค่าเริ่มต้น (ธงไทย)
+  }
+  return Text(flag, style: TextStyle(fontSize: 30));
 }

@@ -1,4 +1,3 @@
-import 'package:cargoshipping/account/topuppage.dart';
 import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
 import 'package:cargoshipping/account/widgets/firsttopup.dart';
 import 'package:cargoshipping/account/widgets/firstwithdrown.dart';
@@ -10,7 +9,6 @@ import 'package:cargoshipping/account/widgets/orderlistwidget.dart';
 import 'package:cargoshipping/account/widgets/ordersumpage.dart';
 import 'package:cargoshipping/account/widgets/tagunlimited.dart';
 import 'package:cargoshipping/account/widgets/topupwidget.dart';
-import 'package:cargoshipping/account/widgets/withdrawpage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +21,10 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  bool isGuangzhouSelected = true;
   @override
   Widget build(BuildContext context) {
+    final selectedInfo = isGuangzhouSelected ? guangzhouInfo : yiwuInfo;
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: white,
@@ -124,7 +124,7 @@ class _AccountPageState extends State<AccountPage> {
                               Text(
                                 'TEG+ Point ',
                                 style: TextStyle(
-                                    color: Colors.yellow[500],
+                                    color: white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -140,12 +140,15 @@ class _AccountPageState extends State<AccountPage> {
                           Spacer(),
                           Column(
                             children: [
-                              Text(
-                                'Wallet ',
-                                style: TextStyle(
-                                    color: Colors.yellow,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 90),
+                                child: Text(
+                                  'Wallet ',
+                                  style: TextStyle(
+                                      color: white,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                               Text(
                                 'คงเหลือ 1025 บาท',
@@ -506,30 +509,113 @@ class _AccountPageState extends State<AccountPage> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            'ที่อยู่โกดัง กวางโจว ',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isGuangzhouSelected = true;
+                              });
+                            },
+                            child: Container(
+                              decoration: isGuangzhouSelected
+                                  ? BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: Colors.red, // สีของเส้นใต้
+                                          width: 2.0, // ความหนาของเส้นใต้
+                                        ),
+                                      ),
+                                    )
+                                  : null, // ไม่มีเส้นใต้ถ้าไม่ได้เลือก
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      3.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'ที่อยู่โกดัง ',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: isGuangzhouSelected
+                                            ? Colors.black
+                                            : Colors.grey,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'กวางโจว',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: isGuangzhouSelected
+                                            ? Colors.red
+                                            : Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                          Text(
-                            'ที่อยู่โกดัง อิ๋ว',
-                            style: TextStyle(
-                              color: Colors.grey,
+                          SizedBox(width: 8.0),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isGuangzhouSelected = false;
+                              });
+                            },
+                            child: Container(
+                              decoration: isGuangzhouSelected
+                                  ? null
+                                  : BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: Colors.red, // สีของเส้นใต้
+                                          width: 2.0, // ความหนาของเส้นใต้
+                                        ),
+                                      ),
+                                    ),
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      3.0), // ระยะห่างระหว่างข้อความกับเส้นใต้
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'ที่อยู่โกดัง ',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: !isGuangzhouSelected
+                                            ? Colors.black
+                                            : Colors.grey,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'อี้อู',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: !isGuangzhouSelected
+                                            ? Colors.red
+                                            : Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                           Spacer(),
                         ],
                       ),
-                      Divider(color: Colors.grey.shade300),
+                      SizedBox(
+                        height: size.height * 0.01,
+                      ),
                       _buildInfoRow(
-                          '收货人', '阿苏 (AAAA)', Icons.copy, Colors.grey),
-                      _buildInfoRow('详细地址', 'TEG CARGO仓广东省广州市白云区唐自头村105A仓28号3栋',
-                          Icons.copy, Colors.grey),
-                      _buildInfoRow('邮编', '510450', Icons.copy, Colors.grey),
+                          '收货人', selectedInfo['收货人']!, Icons.copy, Colors.grey),
+                      _buildInfoRow('详细地址', selectedInfo['详细地址']!, Icons.copy,
+                          Colors.grey),
                       _buildInfoRow(
-                          '手机', '18520290139', Icons.copy, Colors.grey),
+                          '邮编', selectedInfo['邮编']!, Icons.copy, Colors.grey),
+                      _buildInfoRow(
+                          '手机', selectedInfo['手机']!, Icons.copy, Colors.grey),
                     ],
                   ),
                 ),
@@ -567,7 +653,6 @@ class _AccountPageState extends State<AccountPage> {
                           Spacer(),
                         ],
                       ),
-                      Divider(color: Colors.grey.shade300),
                       Container(
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -582,6 +667,7 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
+                                  fontWeight: FontWeight.bold
                                 ),
                               ),
                             ),
@@ -663,12 +749,12 @@ Widget _buildInfoRow(
         Row(
           children: [
             Icon(icon, color: iconColor),
-            SizedBox(width: 2), // เพิ่มระยะห่างเล็กน้อยระหว่างไอคอนและข้อความ
+            SizedBox(width: 2),
             Text(
               'คัดลอก',
               style: TextStyle(
-                color: iconColor, // ใช้สีเดียวกับไอคอน
-                fontSize: 12, // ขนาดฟอนต์ที่เล็กกว่าเพื่อให้สอดคล้องกับไอคอน
+                color: iconColor,
+                fontSize: 12,
               ),
             ),
           ],

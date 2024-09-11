@@ -13,6 +13,7 @@ class MessagePage extends StatefulWidget {
 }
 
 class _MessagePageState extends State<MessagePage> {
+  bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -32,243 +33,278 @@ class _MessagePageState extends State<MessagePage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.003,
-            ),
-            Container(
-              color: background,
-              height: size.height * 0.27,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Promotionpage(),
-                        ),
-                      );
-                    },
-                    child: PictureSliderWidget(size: size),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.02,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: List.generate(
-                      aboutQuestion.length,
-                      (index) => AboutQuestionWidget(
-                        size: size,
-                        title: aboutQuestion[index],
-                        press: () {
-                          if (index == 0) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Question(),
-                              ),
-                            );
-                          }
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: size.height * 0.003,
+                ),
+                Container(
+                  color: background,
+                  height: size.height * 0.27,
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Promotionpage(),
+                            ),
+                          );
                         },
+                        child: PictureSliderWidget(size: size),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: size.height * 0.562,
-              decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15))),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: size.height * 0.02,
-                        horizontal: size.width * 0.03),
-                    child: Row(
-                      children: [
-                        Text(
-                          'ข้อความ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              fontFamily: 'SukhumvitSet'),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/icons/Frame 61.png',
-                          width: 30,
-                          height: 30,
-                        ),
-                        SizedBox(width: size.width * 0.04),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: pinkmess,
-                              ),
-                              width: size.width * 0.55,
-                              height: size.height * 0.07,
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 7, top: 8),
-                                  child: Text(
-                                    'สวัสดีครับ (username)TEG Cargo ยินดีให้บริการครับ',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: List.generate(
+                          aboutQuestion.length,
+                          (index) => AboutQuestionWidget(
+                            size: size,
+                            title: aboutQuestion[index],
+                            press: () {
+                              if (index == 0) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Question(),
                                   ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: size.height * 0.01),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: pinkmess,
-                              ),
-                              width: size.width * 0.66,
-                              height: size.height * 0.08,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: size.width * 0.04,
-                                    top: size.height * 0.02),
-                                child: Text(
-                                  'ท่านสามารถเลือกคำถามจากปุ่มตัวเลือก หรือพิมพ์คำถามในช่องแชทได้เลยครับ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.085,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: size.width * 0.09),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: greymess,
-                                  ),
-                                  width: size.width * 0.6,
-                                  height: size.height * 0.07,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: size.width * 0.03,
-                                      right: size.width * 0.03,
-                                      top: size.height * 0.015,
-                                    ),
-                                    child: Text(
-                                      'การรับส่งของแต่ละครั้งมีจำนวนขั้นต่ำไหม',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: size.height * 0.01),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: greymess,
-                                  ),
-                                  width: size.width * 0.6,
-                                  height: size.height * 0.07,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: size.width * 0.03,
-                                      right: size.width * 0.03,
-                                      top: size.height * 0.015,
-                                    ),
-                                    child: Text(
-                                      'ต้องการทราบราคาค่าขนส่งสินค้า ทั้งทาง รถ และทางเรือ',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: size.height * 0.01),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: greymess,
-                                  ),
-                                  width: size.width * 0.6,
-                                  height: size.height * 0.07,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: size.width * 0.03,
-                                      right: size.width * 0.03,
-                                      top: size.height * 0.015,
-                                    ),
-                                    child: Text(
-                                      'วิธีการคิดค่าขนส่งจากราคาที่คิดเป็น CBM',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                                );
+                              }
+                            },
                           ),
-                        ],
+                        ),
                       ),
+                    ],
+                  ),
+                ),
+                Positioned.fill(
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    color: Colors.white,
+                    height: isExpanded
+                        ? size.height
+                        : size.height * 0.57,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'ข้อความ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    fontFamily: 'SukhumvitSet'),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isExpanded =
+                                        !isExpanded;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(10),
+                                  color: Colors.red,
+                                  child: Icon(
+                                    isExpanded
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.keyboard_arrow_up,
+                                    color: Colors.white,
+                                    size: 10,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.04),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                'assets/icons/Frame 61.png',
+                                width: 30,
+                                height: 30,
+                              ),
+                              SizedBox(width: size.width * 0.04),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: pinkmess,
+                                    ),
+                                    width: size.width * 0.55,
+                                    height: size.height * 0.07,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15, right: 7, top: 8),
+                                        child: Text(
+                                          'สวัสดีครับ (username)TEG Cargo ยินดีให้บริการครับ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: size.height * 0.01),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: pinkmess,
+                                    ),
+                                    width: size.width * 0.66,
+                                    height: size.height * 0.08,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          left: size.width * 0.04,
+                                          top: size.height * 0.02),
+                                      child: Text(
+                                        'ท่านสามารถเลือกคำถามจากปุ่มตัวเลือก หรือพิมพ์คำถามในช่องแชทได้เลยครับ',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.085,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: size.width * 0.07),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: greymess,
+                                                  ),
+                                                  width: size.width * 0.6,
+                                                  height: size.height * 0.07,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                      top: size.height * 0.015,
+                                                    ),
+                                                    child: Text(
+                                                      'การรับส่งของแต่ละครั้งมีจำนวนขั้นต่ำไหม',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    height: size.height * 0.01),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: greymess,
+                                                  ),
+                                                  width: size.width * 0.6,
+                                                  height: size.height * 0.07,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                      top: size.height * 0.015,
+                                                    ),
+                                                    child: Text(
+                                                      'ต้องการทราบราคาค่าขนส่งสินค้า ทั้งทาง รถ และทางเรือ',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    height: size.height * 0.01),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: greymess,
+                                                  ),
+                                                  width: size.width * 0.6,
+                                                  height: size.height * 0.07,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                      top: size.height * 0.015,
+                                                    ),
+                                                    child: Text(
+                                                      'วิธีการคิดค่าขนส่งจากราคาที่คิดเป็น CBM',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: Container(
         height: size.height * 0.073,

@@ -26,7 +26,7 @@ class _OrderSumState extends State<OrderSum> {
       itemBuilder: (context, index) {
         final item = ordersum[index];
         return Container(
-          height: size.height *0.07,
+          height: size.height *0.074,
           margin: EdgeInsets.symmetric(vertical: marginVertical, horizontal: marginHorizontal),
           padding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: paddingHorizontal),
           decoration: BoxDecoration(

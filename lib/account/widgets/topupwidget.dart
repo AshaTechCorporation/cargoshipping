@@ -23,16 +23,11 @@ class _TopupwidgetState extends State<Topupwidget> {
     return GestureDetector(
       onTap: widget.press,
       child: Container(
-        height: size.height * 0.057,
+        height: size.height * 0.054,
         width: size.width * 0.43,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10.0),
-            bottomRight: Radius.circular(10.0),
-            topLeft: Radius.circular(10.0),
-            bottomLeft: Radius.circular(10.0),
-          ),
+          borderRadius: BorderRadius.circular(13)
         ),
         child: Center(
           child: Text(
