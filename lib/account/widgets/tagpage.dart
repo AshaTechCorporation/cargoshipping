@@ -47,7 +47,7 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.01),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -83,7 +83,7 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(size.height * 0.01),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -124,7 +124,7 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
       child: Container(
         height: size.height * 0.04,
         width: size.width * 0.29,
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        padding: EdgeInsets.symmetric(vertical: size.height * 0.01, horizontal: size.width * 0.01),
         decoration: BoxDecoration(
             color: isSelected ? red1 : Colors.white,
             borderRadius: BorderRadius.circular(15.0),
@@ -152,7 +152,7 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
 
   Widget _buildTagContent(Size size) {
     return ListView(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(size.height * 0.009),
       children: [
         _buildCard(
           size,

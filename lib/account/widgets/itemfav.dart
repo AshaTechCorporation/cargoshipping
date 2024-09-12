@@ -128,7 +128,7 @@ class _ItemfavState extends State<Itemfav> {
         elevation: 0,
         child: Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: 1.0,vertical: 5),
+              EdgeInsets.symmetric(horizontal: size.width * 0.01,vertical: size.height * 0.006),
           child: Container(
             height: size.height * 0.1,
             decoration: BoxDecoration(

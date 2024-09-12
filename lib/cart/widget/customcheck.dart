@@ -13,13 +13,14 @@ class CustomCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         onChanged(!value);
       },
       child: Container(
-        width: 24.0,
-        height: 24.0,
+        width: size.width * 0.065,
+        height: size.height * 0.03,
         decoration: BoxDecoration(
           color: value ? greymess : greymess, // สีพื้นหลัง
           borderRadius: BorderRadius.circular(6.0), // ขอบมน
@@ -31,7 +32,7 @@ class CustomCheckbox extends StatelessWidget {
         child: value
             ?  Icon(
                 Icons.check,
-                size: 21.0,
+                size: size.height * 0.025,
                 color: red1,
                 
               )

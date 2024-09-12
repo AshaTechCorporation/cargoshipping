@@ -17,7 +17,7 @@ class Shippingimportratewidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            height: size.height * 0.4,
+            height: size.height * 0.35,
             width: size.width * 0.35,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -104,7 +104,7 @@ class Shippingimportratewidget extends StatelessWidget {
             ),
           ),
           Container(
-            height: size.height * 0.4,
+            height: size.height * 0.35,
             width: size.width * 0.22,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -132,11 +132,18 @@ class Shippingimportratewidget extends StatelessWidget {
                             color: white, fontWeight: FontWeight.bold),
                       ))),
                 ),
+                Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.03),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
               ],
             ),
           ),
           Container(
-            height: size.height * 0.4,
+            height: size.height * 0.35,
             width: size.width * 0.22,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -164,6 +171,13 @@ class Shippingimportratewidget extends StatelessWidget {
                             color: white, fontWeight: FontWeight.bold),
                       ))),
                 ),
+                Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.03),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
               ],
             ),
           ),

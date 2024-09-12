@@ -72,25 +72,24 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  Widget _buildCheckbox(
-      String label, bool value, ValueChanged<bool?> onChanged) {
-    return Row(
-      children: [
-        CustomCheckbox(
-          // ใช้ CustomCheckbox ที่คุณสร้างขึ้น
-          value: value,
-          onChanged: onChanged,
-        ),
-        const SizedBox(width: 8), // เพิ่มช่องว่างระหว่าง checkbox และ label
-        Text(
-          label,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    );
-  }
+  Widget _buildCheckbox(String label, bool value, ValueChanged<bool?> onChanged) {
+  final size = MediaQuery.of(context).size; // ประกาศ size ที่นี่
+
+  return Row(
+    children: [
+      CustomCheckbox(
+        value: value,
+        onChanged: onChanged,
+      ),
+      SizedBox(width: size.width * 0.02), 
+      Text(
+        label,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+    ],
+  );
+}
+
 
   Widget _buildBottomBar(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -108,9 +107,9 @@ class _CartPageState extends State<CartPage> {
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: red1,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 10,
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.05,
+                  vertical: size.height * 0.007,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius:
@@ -130,6 +129,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(

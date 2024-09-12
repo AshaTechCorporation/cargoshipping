@@ -38,11 +38,11 @@ class Importwidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(size.height * 0.007),
                 child: Image.asset(
                   imagePath,
-                  height: 30,
-                  width: 30,
+                  height: size.height *0.05,
+                  width: size.width * 0.07,
                 ),
               ),
               Text(

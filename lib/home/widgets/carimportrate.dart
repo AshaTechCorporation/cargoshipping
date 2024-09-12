@@ -12,14 +12,14 @@ class Carimportratewidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: size.height * 0.015),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 7,
             child: Container(
-              height: size.height * 0.4,
+              height: size.height * 0.35,
               width: size.width * 0.35,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -34,7 +34,7 @@ class Carimportratewidget extends StatelessWidget {
                 children: [
                   // หัวข้อ "ทางรถ EK"
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(size.height * 0.015),
                     child: Container(
                       height: size.height * 0.025,
                       width: size.width * 0.19,
@@ -69,7 +69,7 @@ class Carimportratewidget extends StatelessWidget {
                           ),
                         ),
                         Text('สินค้าทั่วไป',style: TextStyle(fontWeight: FontWeight.bold),),
-                        SizedBox(height: 8),
+                        SizedBox(height: size.height * 0.01),
                          RichText(
                           text: TextSpan(
                             text: 'ประเภท ',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
@@ -81,7 +81,7 @@ class Carimportratewidget extends StatelessWidget {
                           ),
                         ),
                         Text('สินค้ามาตรฐาน',style: TextStyle(fontWeight: FontWeight.bold),),
-                        SizedBox(height: 8),
+                        SizedBox(height: size.height * 0.01),
                          RichText(
                           text: TextSpan(
                             text: 'ประเภท ',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
@@ -93,7 +93,7 @@ class Carimportratewidget extends StatelessWidget {
                           ),
                         ),
                         Text('สินค้ามาตรฐาน',style: TextStyle(fontWeight: FontWeight.bold),),
-                        SizedBox(height: 8),
+                        SizedBox(height: size.height * 0.01),
                          RichText(
                           text: TextSpan(
                             text: 'ประเภท ',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
@@ -118,7 +118,7 @@ class Carimportratewidget extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Container(
-              height: size.height * 0.4,
+              height: size.height * 0.35,
               width: size.width * 0.22,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -132,7 +132,7 @@ class Carimportratewidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(size.height * 0.015),
                     child: Container(
                         height: size.height * 0.025,
                         width: size.width * 0.19,
@@ -146,10 +146,13 @@ class Carimportratewidget extends StatelessWidget {
                               color: white, fontWeight: FontWeight.bold),
                         ))),
                   ),
-                  Center(child: Text('00')),
-                  Center(child: Text('00')),
-                  Center(child: Text('00')),
-                  Center(child: Text('00')),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.03),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
                 ],
               ),
             ),
@@ -160,7 +163,7 @@ class Carimportratewidget extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Container(
-              height: size.height * 0.4,
+              height: size.height * 0.35,
               width: size.width * 0.22,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -174,7 +177,7 @@ class Carimportratewidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(size.height * 0.015),
                     child: Container(
                         height: size.height * 0.025,
                         width: size.width * 0.19,
@@ -188,6 +191,13 @@ class Carimportratewidget extends StatelessWidget {
                               color: white, fontWeight: FontWeight.bold),
                         ))),
                   ),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.03),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
+                  SizedBox(height: size.height * 0.02),
+                  Center(child: Text('00',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),)),
                 ],
               ),
             ),

@@ -1,7 +1,6 @@
 import 'package:cargoshipping/account/widgets/accsetting.dart';
 import 'package:cargoshipping/account/widgets/guidepage.dart';
 import 'package:cargoshipping/account/widgets/itemfav.dart';
-import 'package:cargoshipping/account/widgets/ordersumpage.dart';
 import 'package:cargoshipping/account/widgets/tagpage.dart';
 import 'package:cargoshipping/account/widgets/transportpage.dart';
 import 'package:cargoshipping/account/widgets/wecargo.dart';
@@ -15,6 +14,7 @@ class MenuList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return ListView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -23,11 +23,11 @@ class MenuList extends StatelessWidget {
         tiles: menuItems.map((item) {
           int index = menuItems.indexOf(item);
           return ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+            contentPadding: EdgeInsets.symmetric(horizontal: size.width * 0.02, vertical: 0),
             leading: Image.asset(
               item.imagePath,
-              width: 25,
-              height: 25,
+              width: 20,
+              height: 20,
             ),
             title: Text(
               item.text,

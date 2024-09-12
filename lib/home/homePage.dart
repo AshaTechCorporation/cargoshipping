@@ -80,14 +80,14 @@ class _HomePageState extends State<HomePage> {
           child: AppBar(
             backgroundColor: Colors.transparent,
             title: Padding(
-              padding: const EdgeInsets.only(top: 5),
+              padding:  EdgeInsets.only(top: size.height * 0.01),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     height: size.height * 0.045,
                     width: size.width * 0.83,
-                    padding: const EdgeInsets.all(4.0),
+                    padding:  EdgeInsets.all(size.height * 0.005),
                     decoration: BoxDecoration(
                       border: Border.all(
                           color: const Color.fromARGB(255, 122, 124, 126)),
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                                 hintText: 'ค้นหาสินค้า',
                                 hintStyle: TextStyle(fontWeight: FontWeight.bold),
                                 contentPadding:
-                                    EdgeInsets.only(left: 15, bottom: 10),
+                                    EdgeInsets.only(left: size.width * 0.02, bottom: size.height * 0.01),
                               ),
                             ),
                           ),
@@ -157,14 +157,13 @@ class _HomePageState extends State<HomePage> {
                                       });
                                       getlistCategories(name: selectedValue);
                                     },
-                                    buttonStyleData: const ButtonStyleData(
+                                    buttonStyleData:  ButtonStyleData(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 10),
-                                      height: 40,
-                                      width: 140,
+                                          EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                                      width: size.width * 0.1,
                                     ),
-                                    menuItemStyleData: const MenuItemStyleData(
-                                      height: 40,
+                                    menuItemStyleData: MenuItemStyleData(
+                                      height: size.height * 0.1,
                                     ),
                                   ),
                                 ),
@@ -228,42 +227,36 @@ class _HomePageState extends State<HomePage> {
                           items: <PopupMenuEntry<String>>[
                             PopupMenuItem<String>(
                               value: 'ไทย',
-                              child: Container(
-                                width: 80,
+                              child: SizedBox(
+                                width: size.width*0.099,
                                 child: Row(
                                   children: [
-                                    Image.asset('assets/icons/thai.png',
-                                        height: 20), // ธงไทย
-                                    SizedBox(width: 10),
-                                    Text('ไทย'),
+                                    // Image.asset('assets/icons/thai.png',
+                                    //     height: 20),
+                                    SizedBox(width: size.width * 0.01),
+                                    Text('ไทย',style: TextStyle(fontSize: 13),),
                                   ],
                                 ),
                               ),
                             ),
                             PopupMenuItem<String>(
                               value: 'English',
-                              child: Container(
-                                width: 80,
-                                child: Row(
-                                  children: [
-                                    // Image.asset('assets/icons/usa.png', height: 20), ธงสหรัฐ
-                                    SizedBox(width: 10),
-                                    Text('English'),
-                                  ],
-                                ),
+                              child: Row(
+                                children: [
+                                  // Image.asset('assets/icons/usa.png', height: 20), ธงสหรัฐ
+                                  // SizedBox(width: size.width * 0.01),
+                                  Text('English',style: TextStyle(fontSize: 13),),
+                                ],
                               ),
                             ),
                             PopupMenuItem<String>(
                               value: '汉语',
-                              child: Container(
-                                width: 80,
-                                child: Row(
-                                  children: [
-                                    // Image.asset('assets/icons/china.png', height: 20), ธงจีน
-                                    SizedBox(width: 10),
-                                    Text('汉语'),
-                                  ],
-                                ),
+                              child: Row(
+                                children: [
+                                  // Image.asset('assets/icons/china.png', height: 20), ธงจีน
+                                  // SizedBox(width: size.width * 0.01),
+                                  Text('汉语',style: TextStyle(fontSize: 13),),
+                                ],
                               ),
                             ),
                           ],
@@ -277,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       child: Image.asset('assets/icons/thai.png',
-                          height: 27), //ไอคอนธงชาติไทย
+                          height: size.height *0.032),
                     ),
                   ),
                 ],
@@ -301,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Positioned(
-                    bottom: -30,
+                    bottom: MediaQuery.of(context).size.height * (-30 / 800),
                     left: 0,
                     right: 0,
                     child: Padding(
@@ -403,7 +396,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: size.width *0.07),
                   child: Text(
                     'บริการของเรา',
                     style: TextStyle(
@@ -461,7 +454,7 @@ class _HomePageState extends State<HomePage> {
               }),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(size.height * 0.021),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -513,15 +506,15 @@ class _HomePageState extends State<HomePage> {
                     Color(0xfffed2cb),
                     Color(0xfffb4a30),
                   ],
-                  begin: Alignment.topCenter, // เริ่มจากด้านบน
-                  end: Alignment.bottomCenter, // จบที่ด้านล่าง
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
                     child: Text.rich(
                       TextSpan(
                         children: [
@@ -594,12 +587,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
             SizedBox(
               height: size.height * 0.02,
             ),
             SizedBox(
-              // color: red1,
               width: size.width * 0.93,
               height: size.height * 0.42,
               child: Column(
@@ -667,7 +658,7 @@ class _HomePageState extends State<HomePage> {
                             child: TextButton(
                               style: TextButton.styleFrom(
                                   foregroundColor: red1,
-                                  side: BorderSide(color: red1, width: 1.8),
+                                  side: BorderSide(color: red1, width: size.width *0.004),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
@@ -745,7 +736,7 @@ class _HomePageState extends State<HomePage> {
                             child: TextButton(
                               style: TextButton.styleFrom(
                                   foregroundColor: red1,
-                                  side: BorderSide(color: red1, width: 1.8),
+                                  side: BorderSide(color: red1, width: size.width *0.004),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
@@ -941,16 +932,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+// Widget _buildMenuItem(String language, String flag) {
+//   return Row(
+//     children: [
+//       Text(flag, style: TextStyle(fontSize: 20)), // ใช้ emoji ธงชาติ
+//       SizedBox(width: 10),
+//       Text(language),
+//     ],
+//   );
+// }
 
-Widget _buildMenuItem(String language, String flag) {
-  return Row(
-    children: [
-      Text(flag, style: TextStyle(fontSize: 20)), // ใช้ emoji ธงชาติ
-      SizedBox(width: 10),
-      Text(language),
-    ],
-  );
-}
 
 // ฟังก์ชันแสดงธงชาติที่เลือก
 Widget _buildFlagIcon(String language) {

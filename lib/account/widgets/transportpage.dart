@@ -26,7 +26,7 @@ class _TransportpageState extends State<Transportpage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(size.height * 0.014),
               child: Row(
                 children: [
                   Text('รายการขนส่งนำเข้า',style: TextStyle(fontSize: 13,color: headingtext,fontWeight: FontWeight.bold),),
@@ -34,7 +34,7 @@ class _TransportpageState extends State<Transportpage> {
                   Text('2567',style: TextStyle(fontSize: 13,color: headingtext,fontWeight: FontWeight.bold),),
                   SizedBox(width: size.width * 0.024,),
                   Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: EdgeInsets.only(right: size.width * 0.025),
                     child: Image.asset('assets/icons/downarrow.png'),
                   )
                 ],

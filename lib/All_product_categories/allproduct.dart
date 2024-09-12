@@ -65,69 +65,71 @@ class _AllproductState extends State<Allproduct>
   }
 
   Widget _buildTabItem(String title, String imagePath, int index) {
-  bool isSelected = selectedIndex == index;
-  return GestureDetector(
-    onTap: () => onTabTapped(index),
-    child: Container(
-      height: 120,
-      child: Stack(
-        children: [
-          if (!isSelected)
-            Positioned.fill(
-              child: Container(
-                color: Colors.white,
-              ),
-            ),
-          if (isSelected)
-            Positioned.fill(
-              child: Container(
-                color: background,
-              ),
-            ),
-          if (isSelected)
-            Positioned(
-              left: 0,
-              right: 101,
-              bottom: 0,
-              top: 0,
-              child: FractionallySizedBox(
-                widthFactor: 0.2,
+    bool isSelected = selectedIndex == index;
+    final size = MediaQuery.of(context).size;
+    return GestureDetector(
+      onTap: () => onTabTapped(index),
+      child: Container(
+        height: size.height *0.13,
+        child: Stack(
+          children: [
+            if (!isSelected)
+              Positioned.fill(
                 child: Container(
-                  color: red1,
+                  color: Colors.white,
+                ),
+              ),
+            if (isSelected)
+              Positioned.fill(
+                child: Container(
+                  color: background,
+                ),
+              ),
+            if (isSelected)
+              Positioned(
+                left: 0,
+                right: MediaQuery.of(context).size.width *
+                    (101 /
+                        400),
+                bottom: 0,
+                top: 0,
+                child: FractionallySizedBox(
+                  widthFactor: 0.2,
+                  child: Container(
+                    color: red1,
+                  ),
+                ),
+              ),
+            Positioned.fill(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      imagePath,
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.fill,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.black,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          Positioned.fill(
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-              child: Column(
-                children: [
-                  Image.asset(
-                    imagePath,
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.fill,
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.black,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
-
+    );
+  }
 
   Widget _buildClothingSection() {
     return ListView(
@@ -143,10 +145,10 @@ class _AllproductState extends State<Allproduct>
   Widget _buildSection(String title, List<Map<String, String>> items) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
       child: Container(
-        padding: const EdgeInsets.all(12.0),
-        margin: const EdgeInsets.only(left: 10.0),
+        padding: EdgeInsets.all(size.height * 0.01),
+        margin: EdgeInsets.only(left: size.width * 0.01),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12.0),
@@ -165,7 +167,7 @@ class _AllproductState extends State<Allproduct>
               title,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: size.height * 0.02),
             GridView.count(
               crossAxisCount: 3,
               shrinkWrap: true,
@@ -178,14 +180,11 @@ class _AllproductState extends State<Allproduct>
                   children: [
                     // แสดงภาพจาก assets
                     Image.asset(
-                      item['image']!, // ดึงภาพจากแผนที่ตามชื่อ item
-                      width: size.width * 0.9, // กำหนดขนาดภาพ
+                      item['image']!,
+                      width: size.width * 0.9,
                       height: size.height * 0.063,
                     ),
-                    SizedBox(
-                        height: size.height *
-                            0.006), // ระยะห่างระหว่างรูปกับข้อความ
-                    // แสดงข้อความใต้ภาพ
+                    SizedBox(height: size.height * 0.006),
                     Text(
                       item['name']!,
                       style:
