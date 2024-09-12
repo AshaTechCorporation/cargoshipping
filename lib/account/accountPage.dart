@@ -12,6 +12,7 @@ import 'package:cargoshipping/account/widgets/topupwidget.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -610,13 +611,13 @@ class _AccountPageState extends State<AccountPage> {
                         height: size.height * 0.01,
                       ),
                       _buildInfoRow(context, '收货人', selectedInfo['收货人']!,
-                          Icons.copy, Colors.grey),
+                          Icons.copy, Colors.grey,'(ชื่อผู้รับสินค้า)'),
                       _buildInfoRow(context, '详细地址', selectedInfo['详细地址']!,
-                          Icons.copy, Colors.grey),
+                          Icons.copy, Colors.grey,'(รายละเอียดที่อยู่)'),
                       _buildInfoRow(context, '邮编', selectedInfo['邮编']!,
-                          Icons.copy, Colors.grey),
+                          Icons.copy, Colors.grey,'(เลขที่ไปรษณีย์)'),
                       _buildInfoRow(context, '手机', selectedInfo['手机']!,
-                          Icons.copy, Colors.grey),
+                          Icons.copy, Colors.grey,'(เบอร์โทรศัพท์)'),
                     ],
                   ),
                 ),
@@ -724,13 +725,13 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                       ),
                       _buildInfoRow(context, 'เบอร์โทรศัพท์', '061-996-6663',
-                          Icons.copy, Colors.grey),
+                          Icons.copy, Colors.grey,''),
                       _buildInfoRow(
                           context,
                           'Google Maps',
                           'https://maps.app.goo.gl/gmk7B6pgrATazqb167g_st=ic',
                           Icons.copy,
-                          Colors.grey),
+                          Colors.grey,''),
                       SizedBox(height: size.height * 0.01),
                       Text(
                         'ระเบียบการเข้าคลัง TEG CARGO',
@@ -742,7 +743,7 @@ class _AccountPageState extends State<AccountPage> {
                       Text(
                         '1. ก่อนเข้ารับกรุณาโทรนัดหมายก่อนล่วงหน้า อย่างน้อย 2 ชั่วโมง\n2. กรณีรับพัสดุจำนวนมากรบกวนแจ้งรหัสสินค้าที่จะนำออกให้ครบเพื่อความสะดวก\n3. ไม่อนุญาตให้นำสัตว์เลี้ยงหรือเด็กเข้าคลัง',
                         style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
+                            color: Colors.black, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -756,7 +757,7 @@ class _AccountPageState extends State<AccountPage> {
 }
 
 Widget _buildInfoRow(BuildContext context, String title, String detail,
-    IconData icon, Color iconColor) {
+    IconData icon, Color iconColor, String subtitle) {
   final size = MediaQuery.of(context).size; // ใช้ context ที่ส่งเข้ามา
 
   return Padding(
@@ -769,16 +770,23 @@ Widget _buildInfoRow(BuildContext context, String title, String detail,
       children: [
         Expanded(
           flex: 2,
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Colors.grey,
-              fontWeight: FontWeight.bold,
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text("${subtitle}",style: TextStyle(fontSize: 13,color: headingtext),) //stringsubtitles
+            ],
           ),
         ),
         Expanded(
-          flex: 4,
+          flex: 3,
           child: Text(
             detail,
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
