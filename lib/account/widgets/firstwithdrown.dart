@@ -24,7 +24,7 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(size.height * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -116,7 +116,7 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: red1,
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.015),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -145,7 +145,7 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.035,
         width: MediaQuery.of(context).size.width * 0.26,
-        margin: EdgeInsets.symmetric(horizontal: 5.0),
+        margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01),
         decoration: BoxDecoration(
           color: isSelected ? Colors.red : Colors.white,
           borderRadius: BorderRadius.circular(12.0),

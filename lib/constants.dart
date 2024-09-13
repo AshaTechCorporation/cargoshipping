@@ -147,14 +147,14 @@ const List<String> catagoryimg = [
 ];
 
 const List<String> importlist = [
-  'assets/images/shipping.png',
-  'assets/images/import.png',
+  'assets/images/importcorrect.png',
+  'assets/images/customclear.png',
   'assets/images/fcl.png',
-  'assets/images/tour.png',
+  'assets/images/tourprivate.png',
+  'assets/images/werehouse.png',
   'assets/images/payment.png',
-  'assets/images/supplyfactory.png',
-  'assets/images/car.png',
-  'assets/images/ship.png',
+  'assets/images/export.png',
+  'assets/images/freight.png',
   'assets/images/shippingrate.png',
 ];
 
@@ -273,12 +273,10 @@ List<String> howto = [
 ];
 
 List<MenuItem> menuItems = [
-  // MenuItem(imagePath: 'assets/icons/cart-plus_svgrepo.com.png', text: 'การขนส่ง'),
   MenuItem(imagePath: 'assets/icons/redcar.png', text: 'สรุปการขนส่ง'),
   MenuItem(imagePath: 'assets/icons/fav.png', text: 'รายการโปรด'),
   MenuItem(imagePath: 'assets/images/article.png', text: 'บทความ'),
   MenuItem(imagePath: 'assets/icons/guide.png', text: 'คู่มือการใช้งาน'),
-  MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งเคลมสินค้า'),
   MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งปัญหา'),
   MenuItem(imagePath: 'assets/icons/help.png', text: 'ช่วยเหลือ'),
   MenuItem(imagePath: 'assets/icons/contact.png', text: 'ติดต่อเรา'),
@@ -507,15 +505,29 @@ List<Map<String, dynamic>> problemData = [
 ];
 
 final Map<String, String> guangzhouInfo = {
-    '收货人': '阿苏 (AAAA)',
-    '详细地址': 'TEG CARGO仓广东省广州市白云区唐自头村105A仓28号3栋',
-    '邮编': '510450',
-    '手机': '18520290139',
-  };
+  '收货人': '阿苏 (AAAA)',
+  '详细地址': 'TEG CARGO仓广东省广州市白云区唐自头村105A仓28号3栋',
+  '邮编': '510450',
+  '手机': '18520290139',
+};
 
-  final Map<String, String> yiwuInfo = {
-    '收货人': '王五 (AAAA)',
-    '详细地址': 'TEG CARGO仓浙江省义乌市佛堂镇 105B仓22号1栋',
-    '邮编': '322000',
-    '手机': '18520290139',
-  };
+final Map<String, String> yiwuInfo = {
+  '收货人': '王五 (AAAA)',
+  '详细地址': 'TEG CARGO仓浙江省义乌市佛堂镇 105B仓22号1栋',
+  '邮编': '322000',
+  '手机': '18520290139',
+};
+
+List<Map<String, dynamic>> guidelist= [
+  {
+    'image': 'assets/images/tag1.png',
+    'title': 'วิธี ...',
+    'subtitle': '',
+  },
+  {
+    'image': 'assets/images/tag1.png',
+    'title': 'วิธี ...',
+    'subtitle': '',
+  },
+  // เพิ่มรายการอื่น ๆ ตามต้องการ
+];

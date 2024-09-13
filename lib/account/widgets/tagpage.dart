@@ -115,6 +115,7 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
   Widget _buildTabItem(int index, String title) {
     final size = MediaQuery.of(context).size;
     bool isSelected = _tabController.index == index;
+    
     return GestureDetector(
       onTap: () {
         setState(() {

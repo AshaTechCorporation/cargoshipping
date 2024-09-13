@@ -81,7 +81,7 @@ class _CorrectimportpageState extends State<Correctimportpage> {
                                 (BuildContext context, bool isExpanded) {
                               return ListTile(
                                 title: Text(
-                                    selectedValue), // แสดงค่าที่เลือกเป็นหัวข้อ
+                                    selectedValue),
                               );
                             },
                             body: Column(
@@ -91,7 +91,7 @@ class _CorrectimportpageState extends State<Correctimportpage> {
                                   onTap: () {
                                     setState(() {
                                       selectedValue =
-                                          value; // เปลี่ยนค่าที่เลือก
+                                          value;
                                       _isExpanded =
                                           false; // ปิด panel หลังจากเลือกค่าแล้ว
                                     });
@@ -113,14 +113,14 @@ class _CorrectimportpageState extends State<Correctimportpage> {
             height: size.height * 0.01,
           ),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Importproductlistpage(),
-                ),
-              );
-            },
+            // onTap: () {
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) => Importproductlistpage(),
+            //     ),
+            //   );
+            // },
             child: Container(
               height: size.height * 0.04,
               width: size.width * 0.93,
@@ -145,21 +145,33 @@ class _CorrectimportpageState extends State<Correctimportpage> {
             ),
           ),
           SizedBox(height: size.height * 0.4),
-          Container(
-            height: size.height * 0.06,
-            width: size.width * 0.93,
-            decoration: BoxDecoration(
-                color: red1, borderRadius: BorderRadius.circular(15)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'ส่งเอกสาร',
-                  style: TextStyle(
-                      fontSize: 17, color: white, fontWeight: FontWeight.bold),
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Importproductlistpage(),
+                ),
+              );
+            },
+            child: Container(
+              height: size.height * 0.06,
+              width: size.width * 0.93,
+              decoration: BoxDecoration(
+                  color: red1, borderRadius: BorderRadius.circular(15)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'ส่งเอกสาร',
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: white,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
             ),
           ),
         ],

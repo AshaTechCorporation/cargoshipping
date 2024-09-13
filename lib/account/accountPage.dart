@@ -10,7 +10,9 @@ import 'package:cargoshipping/account/widgets/ordersumpage.dart';
 import 'package:cargoshipping/account/widgets/tagunlimited.dart';
 import 'package:cargoshipping/account/widgets/topupwidget.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/importproductlistpage.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
+import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -301,7 +303,7 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
             child: Wrap(
               spacing: 3,
               runSpacing: 3,
@@ -414,7 +416,7 @@ class _AccountPageState extends State<AccountPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Correctimportpage(),
+                          builder: (context) => Correctimportpage(),//Correctimportpage
                         ),
                       );
                     }
@@ -458,15 +460,22 @@ class _AccountPageState extends State<AccountPage> {
               itemBuilder: (context, index) {
                 return Importlist(
                   size: size,
-                  press: () {},
+                  press: () {
+                    if (index == 8) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ShippingCalculatorPage(),
+                          ),
+                        );
+                      }
+                  },
                   imagespath: importlist[index],
                 );
               },
             ),
           ),
-          SizedBox(
-              width: size.width * 0.95,
-              child: Image.asset('assets/images/freight.png')),
+          
 
           // Wrap(
           //   spacing: 15,
@@ -522,13 +531,13 @@ class _AccountPageState extends State<AccountPage> {
                                   ? BoxDecoration(
                                       border: Border(
                                         bottom: BorderSide(
-                                          color: Colors.red, // สีของเส้นใต้
+                                          color: Colors.red,
                                           width: size.width *
-                                              0.006, // ความหนาของเส้นใต้
+                                              0.006,
                                         ),
                                       ),
                                     )
-                                  : null, // ไม่มีเส้นใต้ถ้าไม่ได้เลือก
+                                  : null,
                               padding: EdgeInsets.only(bottom: 3.0),
                               child: RichText(
                                 text: TextSpan(
@@ -569,15 +578,15 @@ class _AccountPageState extends State<AccountPage> {
                                   : BoxDecoration(
                                       border: Border(
                                         bottom: BorderSide(
-                                          color: Colors.red, // สีของเส้นใต้
+                                          color: Colors.red,
                                           width: size.width *
-                                              0.006, // ความหนาของเส้นใต้
+                                              0.006,
                                         ),
                                       ),
                                     ),
                               padding: EdgeInsets.only(
                                   bottom:
-                                      3.0), // ระยะห่างระหว่างข้อความกับเส้นใต้
+                                      3.0),
                               child: RichText(
                                 text: TextSpan(
                                   children: [

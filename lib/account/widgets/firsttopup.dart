@@ -10,7 +10,7 @@ class Firsttopup extends StatefulWidget {
 }
 
 class _FirsttopupState extends State<Firsttopup> {
-  String selectedAmount = ''; // สถานะเก็บจำนวนเงินที่เลือก
+  String selectedAmount = '';
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _FirsttopupState extends State<Firsttopup> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(size.height * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -40,7 +40,7 @@ class _FirsttopupState extends State<Firsttopup> {
               'เลือกจำนวนเงิน (บาท)',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: size.height * 0.015),
             Center(
               child: Wrap(
                 spacing: 10.0,
@@ -59,9 +59,9 @@ class _FirsttopupState extends State<Firsttopup> {
             Text(
               'หรือระบุ',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13,color: headingtext),
+              style: TextStyle(fontSize: 13, color: headingtext),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: size.height * 0.025),
             SizedBox(
               height: size.height * 0.045,
               child: TextField(
@@ -70,8 +70,7 @@ class _FirsttopupState extends State<Firsttopup> {
                   hintText: 'ระบุจำนวนเงินขั้นต่ำ 50 บาท',
                   hintStyle: TextStyle(color: arrowcolor, fontSize: 13),
                   prefixIcon: Padding(
-                    padding:
-                        const EdgeInsets.all(12.0), // ปรับ padding ของไอคอน
+                    padding: const EdgeInsets.all(12.0),
                     child: Image.asset('assets/icons/writemoney.png'),
                   ),
                   border: OutlineInputBorder(
@@ -97,11 +96,6 @@ class _FirsttopupState extends State<Firsttopup> {
                       width: 0.5,
                     ),
                   ),
-                  contentPadding: EdgeInsets.only(
-                    top: 12.0,
-                    bottom: 12.0,
-                    right: 20.0, // เพิ่มระยะห่างจากขอบขวา
-                  ),
                 ),
                 textAlign: TextAlign.right,
                 onChanged: (value) {
@@ -122,7 +116,7 @@ class _FirsttopupState extends State<Firsttopup> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: red1,
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.015),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -151,7 +145,7 @@ class _FirsttopupState extends State<Firsttopup> {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.035,
         width: MediaQuery.of(context).size.width * 0.26,
-        margin: EdgeInsets.symmetric(horizontal: 5.0),
+        margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01),
         decoration: BoxDecoration(
           color: isSelected ? Colors.red : Colors.white,
           borderRadius: BorderRadius.circular(12.0),

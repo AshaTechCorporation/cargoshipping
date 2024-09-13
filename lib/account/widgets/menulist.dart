@@ -59,28 +59,20 @@ class MenuList extends StatelessWidget {
                 );
               }
               if (index == 4) {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => Guidepage(),
-                //   ),
-                // );
-              }
-              if (index == 5) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ReportProblemPage()),
                 );
               }
-              if (index == 6) {
+              if (index == 5) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => MessagePage()));
               }
-              if (index == 7) {
+              if (index == 6) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Wecargo()));
               }
-              if (index == 8) {
+              if (index == 7) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
