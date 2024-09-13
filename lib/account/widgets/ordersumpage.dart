@@ -40,7 +40,8 @@ class _OrdersumpageState extends State<Ordersumpage> {
                 ],
               ),
             ),
-            OrderSum()
+            OrderSum(),
+            
           ],
         ),
       ),
