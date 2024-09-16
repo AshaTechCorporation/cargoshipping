@@ -1,8 +1,8 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class Importrate extends StatelessWidget {
-  const Importrate({super.key});
+class Exportabroadpage extends StatelessWidget {
+  const Exportabroadpage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class Importrate extends StatelessWidget {
       backgroundColor: background,
       appBar: AppBar(
         title: Text(
-          'เรทราคานำเข้า',
+          'บริการนำส่งออกต่างประเทศ',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -42,49 +42,39 @@ class Importrate extends StatelessWidget {
                     SizedBox(
                       height: size.height * 0.01,
                     ),
-                    Text(
-                      'เรทราคานำเข้า',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: red1,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.01,
-                    ),
+                    Text('บริการนำส่งออกต่างประเทศ',style: TextStyle(
+                      fontSize: 16, color: red1, fontWeight: FontWeight.w600
+                    ),),
+                    SizedBox(height: size.height *0.01,),
                     Container(
-                      height: size.height * 0.75,
+                      height: size.height *0.75,
                       width: size.width * 0.85,
-                      decoration: BoxDecoration(color: background),
+                      decoration: BoxDecoration(
+                        color: background
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Content',
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          )
+                          Text('Content',style: TextStyle(
+                            fontSize: 17,color: Colors.black,fontWeight: FontWeight.bold
+                          ),)
                         ],
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.04,
+                      height:size.height * 0.04,
                     ),
                     Container(
                       height: size.height * 0.05,
                       width: size.width * 0.85,
                       decoration: BoxDecoration(
-                          color: red1, borderRadius: BorderRadius.circular(10)),
+                        color: red1,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
                       child: Center(
-                        child: Text(
-                          'สนใจใช้บริการนี้',
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: white,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        child: Text('สนใจใช้บริการนี้',style: TextStyle(
+                          fontSize: 17,color: white,fontWeight: FontWeight.bold
+                        ),),
                       ),
                     )
                   ],

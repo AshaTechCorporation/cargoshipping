@@ -13,8 +13,9 @@ class _WecargoState extends State<Wecargo> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: white,
       appBar: AppBar(
-        backgroundColor: background,
+        backgroundColor: white,
         title: Text(
           'เกี่ยวกับเรา',
           style: TextStyle(

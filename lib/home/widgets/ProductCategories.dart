@@ -29,6 +29,7 @@ class ProductCategories extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.0),
               image: DecorationImage(
                 image: AssetImage(imagespath),
+                //image: NetworkImage(imagespath),
                 fit: BoxFit.cover,
               ),
             ),

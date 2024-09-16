@@ -16,18 +16,13 @@ class Detailordersumpage extends StatelessWidget {
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
-              itemCount: 1,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Detailordersumwidget();
-              },
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: 5,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return Detailordersumwidget();
+        },
+        
       ),
     );
   }

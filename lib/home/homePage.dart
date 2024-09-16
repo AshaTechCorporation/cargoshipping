@@ -30,6 +30,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Categories> categories = [];
+  final ScrollController _scrollController = ScrollController();
+  double appBarOpacity = 0.0;
 
   @override
   void initState() {
@@ -37,6 +39,24 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getlistCategories(name: items[0]);
     });
+    // เพิ่ม Listener เพื่อตรวจจับการเลื่อน
+    _scrollController.addListener(() {
+      double offset = _scrollController.offset;
+      double newOpacity =
+          (offset / 150).clamp(0.0, 1.0); // ปรับค่า 150 ตามต้องการ
+
+      if (newOpacity != appBarOpacity) {
+        setState(() {
+          appBarOpacity = newOpacity;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   //ดึงข้อมูล api Category
@@ -73,22 +93,26 @@ class _HomePageState extends State<HomePage> {
       extendBodyBehindAppBar: true,
       backgroundColor: background,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.065),
+        preferredSize: Size.fromHeight(size.height * 0.072),
         child: ClipRRect(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(30),
           ),
           child: AppBar(
-            backgroundColor: Colors.transparent,
+            backgroundColor:
+                Colors.red.withOpacity(appBarOpacity), // เปลี่ยนสีตาม opacity
+            elevation: appBarOpacity > 0.5
+                ? 4.0
+                : 0.0, // เพิ่มเงาเมื่อ opacity สูงกว่า 0.5
             title: Padding(
-              padding:  EdgeInsets.only(top: size.height * 0.01),
+              padding: EdgeInsets.only(top: size.height * 0.01),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     height: size.height * 0.045,
                     width: size.width * 0.83,
-                    padding:  EdgeInsets.all(size.height * 0.005),
+                    padding: EdgeInsets.all(size.height * 0.005),
                     decoration: BoxDecoration(
                       border: Border.all(
                           color: const Color.fromARGB(255, 122, 124, 126)),
@@ -104,9 +128,11 @@ class _HomePageState extends State<HomePage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'ค้นหาสินค้า',
-                                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                                contentPadding:
-                                    EdgeInsets.only(left: size.width * 0.02, bottom: size.height * 0.01),
+                                hintStyle:
+                                    TextStyle(fontWeight: FontWeight.bold),
+                                contentPadding: EdgeInsets.only(
+                                    left: size.width * 0.02,
+                                    bottom: size.height * 0.01),
                               ),
                             ),
                           ),
@@ -118,15 +144,13 @@ class _HomePageState extends State<HomePage> {
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.circular(8),
-                                  border: Border.all(
-                                      color: Colors.white,
-                                      width: 2),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 0),
                                   child: DropdownButton2<String>(
                                     isExpanded: true,
                                     hint: Align(
@@ -158,9 +182,9 @@ class _HomePageState extends State<HomePage> {
                                       });
                                       getlistCategories(name: selectedValue);
                                     },
-                                    buttonStyleData:  ButtonStyleData(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                                    buttonStyleData: ButtonStyleData(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: size.width * 0.02),
                                       width: size.width * 0.1,
                                     ),
                                     menuItemStyleData: MenuItemStyleData(
@@ -197,22 +221,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     showCountryPicker(
-                  //       context: context,
-                  //       showPhoneCode: false, // ซ่อนรหัสโทรศัพท์
-                  //       onSelect: (Country country) {
-                  //         setState(() {
-                  //           _selectedCountry = country; // อัปเดตประเทศที่เลือก
-                  //         });
-                  //         print('Selected country: ${country.displayName}');
-                  //       },
-                  //     );
-                  //   },
-                  //   child: Image.asset('assets/icons/thai.png',height: 27,))
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.003),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.003),
                     child: GestureDetector(
                       onTapDown: (TapDownDetails details) {
                         showMenu(
@@ -229,13 +240,16 @@ class _HomePageState extends State<HomePage> {
                             PopupMenuItem<String>(
                               value: 'ไทย',
                               child: SizedBox(
-                                width: size.width*0.099,
+                                width: size.width * 0.099,
                                 child: Row(
                                   children: [
                                     // Image.asset('assets/icons/thai.png',
                                     //     height: 20),
                                     SizedBox(width: size.width * 0.01),
-                                    Text('ไทย',style: TextStyle(fontSize: 13),),
+                                    Text(
+                                      'ไทย',
+                                      style: TextStyle(fontSize: 13),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -246,7 +260,10 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   // Image.asset('assets/icons/usa.png', height: 20), ธงสหรัฐ
                                   // SizedBox(width: size.width * 0.01),
-                                  Text('English',style: TextStyle(fontSize: 13),),
+                                  Text(
+                                    'English',
+                                    style: TextStyle(fontSize: 13),
+                                  ),
                                 ],
                               ),
                             ),
@@ -256,7 +273,10 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   // Image.asset('assets/icons/china.png', height: 20), ธงจีน
                                   // SizedBox(width: size.width * 0.01),
-                                  Text('汉语',style: TextStyle(fontSize: 13),),
+                                  Text(
+                                    '汉语',
+                                    style: TextStyle(fontSize: 13),
+                                  ),
                                 ],
                               ),
                             ),
@@ -271,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       child: Image.asset('assets/icons/thai.png',
-                          height: size.height *0.032),
+                          height: size.height * 0.032),
                     ),
                   ),
                 ],
@@ -281,6 +301,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: SingleChildScrollView(
+         controller: _scrollController,
         child: Column(
           children: [
             SizedBox(
@@ -314,7 +335,8 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Importproductlistpage(),//Correctimportpage
+                                      builder: (context) =>
+                                          Importproductlistpage(), //Correctimportpage
                                     ),
                                   );
                                 }
@@ -397,7 +419,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width *0.07),
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
                   child: Text(
                     'บริการของเรา',
                     style: TextStyle(
@@ -464,13 +486,20 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         'อัตราเงินประจำวันที่...',
                         style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: headingtext
-                        ),
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: headingtext),
                       ),
-                      SizedBox(width: size.width * 0.04,),
-                      Text('22 สิงหาคม 2567',style: TextStyle(color: red1, fontSize: 13, fontWeight: FontWeight.bold),)
+                      SizedBox(
+                        width: size.width * 0.04,
+                      ),
+                      Text(
+                        '22 สิงหาคม 2567',
+                        style: TextStyle(
+                            color: red1,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold),
+                      )
                     ],
                   ),
                   SizedBox(height: size.height * 0.01),
@@ -488,10 +517,9 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       '*อัตราเงินอาจมีการเปลี่ยนแปลง บริษัทขอสงวนสิทธิ์ในการไม่แจ้งให้ทราบล่วงหน้า',
                       style: TextStyle(
-                        fontSize: 10,
-                        color: headingtext,
-                        fontWeight: FontWeight.bold
-                      ),
+                          fontSize: 10,
+                          color: headingtext,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -659,7 +687,8 @@ class _HomePageState extends State<HomePage> {
                             child: TextButton(
                               style: TextButton.styleFrom(
                                   foregroundColor: red1,
-                                  side: BorderSide(color: red1, width: size.width *0.004),
+                                  side: BorderSide(
+                                      color: red1, width: size.width * 0.004),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
@@ -737,7 +766,8 @@ class _HomePageState extends State<HomePage> {
                             child: TextButton(
                               style: TextButton.styleFrom(
                                   foregroundColor: red1,
-                                  side: BorderSide(color: red1, width: size.width *0.004),
+                                  side: BorderSide(
+                                      color: red1, width: size.width * 0.004),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
@@ -826,15 +856,16 @@ class _HomePageState extends State<HomePage> {
                         return ProductCategories(
                           size: size,
                           title: categories[index].name!,
+                          
                           press: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => Detailproduct(
-                            //       categories: categories[index],
-                            //     ),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Detailproduct(
+                                  categories: categories[index],
+                                ),
+                              ),
+                            );
                           },
                           imagespath: 'assets/images/noimages.jpg',
                         );
@@ -942,7 +973,6 @@ class _HomePageState extends State<HomePage> {
 //     ],
 //   );
 // }
-
 
 // ฟังก์ชันแสดงธงชาติที่เลือก
 Widget _buildFlagIcon(String language) {

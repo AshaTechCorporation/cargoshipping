@@ -1,13 +1,9 @@
 import 'package:cargoshipping/constants.dart';
-import 'package:cargoshipping/track/purchase.dart';
-import 'package:cargoshipping/track/selldetail.dart';
-import 'package:cargoshipping/widgets/compete.dart';
-import 'package:cargoshipping/widgets/itemclose.dart';
-import 'package:cargoshipping/widgets/packing.dart';
-import 'package:cargoshipping/widgets/prepare.dart';
-import 'package:cargoshipping/widgets/thaiprepare.dart';
-import 'package:cargoshipping/widgets/waitsum.dart';
+import 'package:cargoshipping/track/correctimportpage.dart';
+import 'package:cargoshipping/track/transportpage.dart';
 import 'package:flutter/material.dart';
+import 'package:cargoshipping/track/allhistorypage.dart';
+import 'package:cargoshipping/track/palceanorderpage.dart';
 
 class TrackPage extends StatefulWidget {
   const TrackPage({super.key});
@@ -16,124 +12,164 @@ class TrackPage extends StatefulWidget {
   State<TrackPage> createState() => _TrackPageState();
 }
 
-List<IconData> icons = [
-  Icons.home,
-  Icons.local_shipping,
-  Icons.store,
-  Icons.payment,
-  Icons.check_circle
-];
-
-class _TrackPageState extends State<TrackPage> {
+class _TrackPageState extends State<TrackPage>
+    with SingleTickerProviderStateMixin {
   int selectedIndex = 0;
-  List<String> options = ['ทั้งหมด', 'ฝากสั่ง', 'นำเข้าโดยรถ', 'นำเข้าโดยเรือ'];
+  TabController? _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // ตรวจสอบว่า _tabController ไม่เป็น null
+    if (_tabController == null) {
+      return Scaffold(
+        backgroundColor: background,
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: white,
-        title: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start, // จัดตำแหน่งให้ชิดด้านซ้าย
-          children: [
-            Text(
-              'ติดตามสถานะ',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black),
-            ),
-            SizedBox(height: 8),
-            Container(
-              height: 30,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: size.width * 0.75,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: 'ค้นหาสินค้า',
-                        contentPadding: EdgeInsets.only(left: 15, bottom: 10),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                      child: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'ค้นหา',
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+        title: Text(
+          'ติดตามสถานะ',
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        toolbarHeight: size.height * 0.1,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(90.0),
+          child: Column(
+            children: [
+              Container(
+                width: size.width * 0.95,
+                height: size.height * 0.04,
+                decoration: BoxDecoration(
+                    color: white, borderRadius: BorderRadius.circular(13),
+                    border: Border.all(
+                      color: greyuserinfo,
+                      width: 0.5
+                    )),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 8,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'ค้นหาเลข Tracking, Order, Container ',
+                          hintStyle: TextStyle(fontSize: 13,color: greyuserinfo,fontWeight: FontWeight.bold),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(
+                            bottom: size.height * 0.018,
+                            left: size.width * 0.03
+                          ),
                         ),
                       ),
                     ),
-                  ))
-                ],
-              ),
-            ),
-            SizedBox(height: 4),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(options.length, (int index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: ChoiceChip(
-                      label: Text(options[index]),
-                      selected: selectedIndex == index,
-                      onSelected: (bool selected) {
-                        setState(() {
-                          selectedIndex = (selected ? index : null)!;
-                        });
-                      },
+                    Expanded(
+                      flex: 2,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: size.height * 0.035,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: red1,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'ค้นหา',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  );
-                }),
+                  ],
+                ),
               ),
-            )
-          ],
+              SizedBox(
+                height: size.height * 0.025,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: size.height * 0.01),
+                  child: Row(
+                    children: [
+                      buildTabItem(0, 'ฝากส่ง'),
+                      buildTabItem(1, 'ขนส่ง'),
+                      buildTabItem(2, 'นำเข้าถูกต้อง'),
+                      Container(
+                        height: size.height * 0.03,
+                        width: size.width * 0.0015,
+                        color: greyuserinfo,
+                      ),
+                      buildTabItem(3, 'ประวัติทั้งหมด'),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        toolbarHeight: 130,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Waitsum(size: size),
-            SizedBox(
-              height: size.height * 0.01,
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          Palceanorderpage(),
+          Transporttrackpage(),
+          Correctimporttrackpage(),
+          Allhistorypage(),
+        ],
+      ),
+    );
+  }
+
+  Widget buildTabItem(int index, String title) {
+    final size = MediaQuery.of(context).size;
+    bool isSelected = selectedIndex == index;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedIndex = index;
+          _tabController?.animateTo(index); // เลื่อนไปยังแท็บที่เลือก
+        });
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: size.height * 0.01),
+        padding: EdgeInsets.symmetric(
+            horizontal: size.width * 0.05, vertical: size.height * 0.008),
+        decoration: BoxDecoration(
+          color: isSelected ? red1 : Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: greymess),
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: isSelected ? Colors.white : headingtext,
+              fontWeight: FontWeight.bold,
             ),
-            purchase(size: size),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            preparetosend(size: size),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            packing(size: size),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            thaiprepare(size: size),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            itemclosetoyou(size: size),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            compete(size: size),
-            SizedBox(height: size.height * 0.04),
-          ],
+          ),
         ),
       ),
     );

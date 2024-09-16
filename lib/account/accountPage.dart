@@ -1,17 +1,24 @@
 import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
+import 'package:cargoshipping/account/widgets/bookingtourpage.dart';
+import 'package:cargoshipping/account/widgets/exportabroadpage.dart';
+import 'package:cargoshipping/account/widgets/fclpage.dart';
 import 'package:cargoshipping/account/widgets/firsttopup.dart';
 import 'package:cargoshipping/account/widgets/firstwithdrown.dart';
 import 'package:cargoshipping/account/widgets/howto.dart';
 import 'package:cargoshipping/account/widgets/importlist.dart';
+import 'package:cargoshipping/account/widgets/importtaxpage.dart';
 import 'package:cargoshipping/account/widgets/listimportcorrectwidget.dart';
 import 'package:cargoshipping/account/widgets/menulist.dart';
 import 'package:cargoshipping/account/widgets/orderlistwidget.dart';
 import 'package:cargoshipping/account/widgets/ordersumpage.dart';
+import 'package:cargoshipping/account/widgets/paymentpage.dart';
 import 'package:cargoshipping/account/widgets/tagunlimited.dart';
 import 'package:cargoshipping/account/widgets/topupwidget.dart';
+import 'package:cargoshipping/account/widgets/werehousepage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/importproductlistpage.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
+import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -416,7 +423,8 @@ class _AccountPageState extends State<AccountPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Correctimportpage(),//Correctimportpage
+                          builder: (context) =>
+                              Correctimportpage(), //Correctimportpage
                         ),
                       );
                     }
@@ -434,7 +442,7 @@ class _AccountPageState extends State<AccountPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.height * 0.02),
                 child: Text(
-                  'รายการนำเข้า',
+                  'รายการบริการ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               )
@@ -461,21 +469,84 @@ class _AccountPageState extends State<AccountPage> {
                 return Importlist(
                   size: size,
                   press: () {
+                    if (index == 0) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Importtaxpage(),
+                        ),
+                      );
+                    }
+                    if (index == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Correctimportpage(),
+                        ),
+                      );
+                    }
+                    if (index == 2) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Fclpage(),
+                        ),
+                      );
+                    }
+                    if (index == 3) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Bookingtourpage(),
+                        ),
+                      );
+                    }
+                    if (index == 4) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Werehousepage(),
+                        ),
+                      );
+                    }
+                    if (index == 5) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Paymentpage(),
+                        ),
+                      );
+                    }
+                    if (index == 6) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Exportabroadpage(),
+                        ),
+                      );
+                    }
+                    if (index == 7) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ShippingCalculatorPage(),
+                        ),
+                      );
+                    }
                     if (index == 8) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ShippingCalculatorPage(),
-                          ),
-                        );
-                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Importrate(),
+                        ),
+                      );
+                    }
                   },
                   imagespath: importlist[index],
                 );
               },
             ),
           ),
-          
 
           // Wrap(
           //   spacing: 15,
@@ -502,7 +573,7 @@ class _AccountPageState extends State<AccountPage> {
                     )),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(size.height * 0.02),
             child: Column(
               children: [
                 Container(
@@ -532,8 +603,7 @@ class _AccountPageState extends State<AccountPage> {
                                       border: Border(
                                         bottom: BorderSide(
                                           color: Colors.red,
-                                          width: size.width *
-                                              0.006,
+                                          width: size.width * 0.006,
                                         ),
                                       ),
                                     )
@@ -579,14 +649,11 @@ class _AccountPageState extends State<AccountPage> {
                                       border: Border(
                                         bottom: BorderSide(
                                           color: Colors.red,
-                                          width: size.width *
-                                              0.006,
+                                          width: size.width * 0.006,
                                         ),
                                       ),
                                     ),
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      3.0),
+                              padding: EdgeInsets.only(bottom: 3.0),
                               child: RichText(
                                 text: TextSpan(
                                   children: [
@@ -620,13 +687,13 @@ class _AccountPageState extends State<AccountPage> {
                         height: size.height * 0.01,
                       ),
                       _buildInfoRow(context, '收货人', selectedInfo['收货人']!,
-                          Icons.copy, Colors.grey,'(ชื่อผู้รับสินค้า)'),
+                          Icons.copy, Colors.grey, '(ชื่อผู้รับสินค้า)'),
                       _buildInfoRow(context, '详细地址', selectedInfo['详细地址']!,
-                          Icons.copy, Colors.grey,'(รายละเอียดที่อยู่)'),
+                          Icons.copy, Colors.grey, '(รายละเอียดที่อยู่)'),
                       _buildInfoRow(context, '邮编', selectedInfo['邮编']!,
-                          Icons.copy, Colors.grey,'(เลขที่ไปรษณีย์)'),
+                          Icons.copy, Colors.grey, '(เลขที่ไปรษณีย์)'),
                       _buildInfoRow(context, '手机', selectedInfo['手机']!,
-                          Icons.copy, Colors.grey,'(เบอร์โทรศัพท์)'),
+                          Icons.copy, Colors.grey, '(เบอร์โทรศัพท์)'),
                     ],
                   ),
                 ),
@@ -734,13 +801,14 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                       ),
                       _buildInfoRow(context, 'เบอร์โทรศัพท์', '061-996-6663',
-                          Icons.copy, Colors.grey,''),
+                          Icons.copy, Colors.grey, ''),
                       _buildInfoRow(
                           context,
                           'Google Maps',
                           'https://maps.app.goo.gl/gmk7B6pgrATazqb167g_st=ic',
                           Icons.copy,
-                          Colors.grey,''),
+                          Colors.grey,
+                          ''),
                       SizedBox(height: size.height * 0.01),
                       Text(
                         'ระเบียบการเข้าคลัง TEG CARGO',
@@ -790,7 +858,10 @@ Widget _buildInfoRow(BuildContext context, String title, String detail,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text("${subtitle}",style: TextStyle(fontSize: 13,color: headingtext),) //stringsubtitles
+              Text(
+                subtitle,
+                style: TextStyle(fontSize: 13, color: headingtext),
+              ) //stringsubtitles
             ],
           ),
         ),

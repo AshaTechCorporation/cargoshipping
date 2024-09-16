@@ -531,3 +531,108 @@ List<Map<String, dynamic>> guidelist= [
   },
   // เพิ่มรายการอื่น ๆ ตามต้องการ
 ];
+
+const List<Map<String, dynamic>> palceanorder = [
+  {
+    'id': 1,
+    'images': 'assets/icons/waitsum.png',
+    'title': 'รอสรุปยอด',
+    'process': 'x',
+  },
+  {
+    'id': 2,
+    'images': 'assets/icons/waitingorderpayment.png',
+    'title': 'รอชำระคำสั่งซื้อ',
+    'process': 'x',
+  },
+  {
+    'id': 3,
+    'images': 'assets/icons/orderpending.png',
+    'title': 'อยู่ระหว่างการสั่งซื้อ',
+    'process': 'x',
+  },
+  {
+    'id': 4,
+    'images': 'assets/icons/packingtrack.png',
+    'title': 'อยู่ระหว่างการสั่งซื้อ',
+    'process': 'x',
+  },
+  {
+    'id': 5,
+    'images': 'assets/icons/delivery.png',
+    'title': 'จัดส่งสินค้าแล้ว',
+    'process': 'x',
+  },
+  {
+    'id': 6,
+    'images': 'assets/icons/cancle.png',
+    'title': 'ยกเลิก/ล้มเหลว',
+    'process': 'x',
+  },
+];
+
+const List<Map<String, dynamic>> tracktransport = [
+  {
+    'id': 1,
+    'images': 'assets/icons/atwerehousechinese.png',
+    'title': 'ถึงโกดังจีน',
+    'process': 'x',
+  },
+  {
+    'id': 2,
+    'images': 'assets/icons/duringimport.png',
+    'title': 'อยู่ระหว่างการขนส่ง',
+    'process': 'x',
+  },
+  {
+    'id': 3,
+    'images': 'assets/icons/waitingorderpayment.png',
+    'title': 'รอชำระคำขนส่ง',
+    'process': 'x',
+  },
+  {
+    'id': 4,
+    'images': 'assets/icons/atwerehousethai.png',
+    'title': 'ถึงโกดังไทย',
+    'process': 'x',
+  },
+  {
+    'id': 5,
+    'images': 'assets/icons/delivery.png',
+    'title': 'จัดส่งสำเร็จ',
+    'process': 'x',
+  },
+];
+
+const List<Map<String, dynamic>> correctimporttrack = [
+  {
+    'id': 1,
+    'images': 'assets/icons/docsimport.png',
+    'title': 'นำเข้าเอกสาร',
+    'process': 'x',
+  },
+  {
+    'id': 2,
+    'images': 'assets/icons/duringprogress.png',
+    'title': 'รอตรวจสอบเอกสาร',
+    'process': 'x',
+  },
+  {
+    'id': 3,
+    'images': 'assets/icons/waitingorderpayment.png',
+    'title': 'รอชำระคำภาษี',
+    'process': 'x',
+  },
+  {
+    'id': 4,
+    'images': 'assets/icons/waitdocs.png',
+    'title': 'อยู่ระหว่างดำเนินการ',
+    'process': 'x',
+  },
+  {
+    'id': 5,
+    'images': 'assets/icons/delivery.png',
+    'title': 'จัดส่งสำเร็จ',
+    'process': 'x',
+  },
+];
