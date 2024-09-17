@@ -1,4 +1,5 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/track/waitsumcard.dart';
 import 'package:flutter/material.dart';
 
 class Palceanorderpage extends StatelessWidget {
@@ -41,7 +42,17 @@ class Palceanorderpage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final order = palceanorder[index];
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        if (index == 0) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Waitsumcard(), //Correctimportpage
+                                    ),
+                                  );
+                                }
+                      },
                       child: Container(
                         margin:
                             EdgeInsets.symmetric(vertical: size.height * 0.01),

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/Itempage/confirmorderpage.dart';
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/cart/widget/storeitem.dart';
 import 'package:cargoshipping/constants.dart';
@@ -72,24 +73,24 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  Widget _buildCheckbox(String label, bool value, ValueChanged<bool?> onChanged) {
-  final size = MediaQuery.of(context).size; // ประกาศ size ที่นี่
+  Widget _buildCheckbox(
+      String label, bool value, ValueChanged<bool?> onChanged) {
+    final size = MediaQuery.of(context).size; // ประกาศ size ที่นี่
 
-  return Row(
-    children: [
-      CustomCheckbox(
-        value: value,
-        onChanged: onChanged,
-      ),
-      SizedBox(width: size.width * 0.02), 
-      Text(
-        label,
-        style: const TextStyle(fontWeight: FontWeight.bold),
-      ),
-    ],
-  );
-}
-
+    return Row(
+      children: [
+        CustomCheckbox(
+          value: value,
+          onChanged: onChanged,
+        ),
+        SizedBox(width: size.width * 0.02),
+        Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
 
   Widget _buildBottomBar(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -103,7 +104,12 @@ class _CartPageState extends State<CartPage> {
           children: [
             _buildCheckbox('ทั้งหมด', _isSelected, _selectAll),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Confirmorderpage()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: red1,
@@ -112,8 +118,7 @@ class _CartPageState extends State<CartPage> {
                   vertical: size.height * 0.007,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(10), 
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
               child: const Text(

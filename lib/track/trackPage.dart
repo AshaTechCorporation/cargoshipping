@@ -150,7 +150,7 @@ class _TrackPageState extends State<TrackPage>
       onTap: () {
         setState(() {
           selectedIndex = index;
-          _tabController?.animateTo(index); // เลื่อนไปยังแท็บที่เลือก
+          _tabController?.animateTo(index);
         });
       },
       child: Container(

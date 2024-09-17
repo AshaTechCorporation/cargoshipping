@@ -10,6 +10,7 @@ class Detailordersumpage extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        backgroundColor: background,
         title: Text(
           'สรุปการสั่งซื้อ',
           style: TextStyle(

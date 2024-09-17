@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                 Colors.red.withOpacity(appBarOpacity), // เปลี่ยนสีตาม opacity
             elevation: appBarOpacity > 0.5
                 ? 4.0
-                : 0.0, // เพิ่มเงาเมื่อ opacity สูงกว่า 0.5
+                : 0.0,
             title: Padding(
               padding: EdgeInsets.only(top: size.height * 0.01),
               child: Row(
