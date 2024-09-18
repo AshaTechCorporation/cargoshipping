@@ -1,3 +1,4 @@
+import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
   final TextEditingController _addressnameController = TextEditingController();
   final TextEditingController _addresstelController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _subtelController = TextEditingController();
 
   final List<String> newaddressprovice = [
     '5',
@@ -39,7 +41,9 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
 
   String? selectednewaddresszipcode;
 
-  bool _isChecked = false;
+  int _selectedLoacation = 0;
+  int _selectedtime = 0;
+  bool _isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                 height: size.height * 0.055,
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 20),
+                  padding: EdgeInsets.only(left: size.width * 0.03, top: size.height * 0.02),
                   child: Text(
                     'ข้อมูลทางติดต่อ',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -89,12 +93,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       fontSize: 13,
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: arrowcolor,
-                      ),
-                    ),
+                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
                   ),
                 ),
               ),
@@ -110,7 +109,28 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       fontSize: 13,
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: size.height * 0.004),
+              Container(
+                height: size.height * 0.05,
+                color: white,
+                child: TextField(
+                  controller: _subtelController,
+                  decoration: InputDecoration(
+                    hintText: 'หมายเลขโทรศัพท์สำรอง(ถ้ามี)',
+                    hintStyle: TextStyle(
+                      fontSize: 13,
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey,
@@ -124,7 +144,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                 height: size.height * 0.07,
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
+                  padding: EdgeInsets.only(left: size.width * 0.03, top: size.height * 0.02),
                   child: Row(
                     children: [
                       Text(
@@ -165,13 +185,13 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                         selectednewaddressprovice = value;
                       });
                     },
-                    buttonStyleData: const ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      height: 40,
-                      width: 140,
+                   buttonStyleData: ButtonStyleData(
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                      height: size.height * 0.045,
+                      width: size.width * 0.02,
                     ),
-                    menuItemStyleData: const MenuItemStyleData(
-                      height: 40,
+                    menuItemStyleData: MenuItemStyleData(
+                      height: size.height * 0.02,
                     ),
                   ),
                 ),
@@ -209,13 +229,13 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                         selectednewaddressdistrict = value;
                       });
                     },
-                    buttonStyleData: const ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      height: 40,
-                      width: 140,
+                    buttonStyleData: ButtonStyleData(
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                      height: size.height * 0.045,
+                      width: size.width * 0.02,
                     ),
-                    menuItemStyleData: const MenuItemStyleData(
-                      height: 40,
+                    menuItemStyleData: MenuItemStyleData(
+                      height: size.height * 0.02,
                     ),
                   ),
                 ),
@@ -253,13 +273,13 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                         selectednewaddressdistrict = value;
                       });
                     },
-                    buttonStyleData: const ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      height: 40,
-                      width: 140,
+                    buttonStyleData: ButtonStyleData(
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                      height: size.height * 0.045,
+                      width: size.width * 0.02,
                     ),
-                    menuItemStyleData: const MenuItemStyleData(
-                      height: 40,
+                    menuItemStyleData: MenuItemStyleData(
+                      height: size.height * 0.02,
                     ),
                   ),
                 ),
@@ -296,14 +316,14 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       setState(() {
                         selectednewaddresszipcode = value;
                       });
-                    },
-                    buttonStyleData: const ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      height: 40,
-                      width: 140,
+                    }, //พี่เดลเก่งอ่า
+                    buttonStyleData: ButtonStyleData(
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                      height: size.height * 0.045,
+                      width: size.width * 0.02,
                     ),
-                    menuItemStyleData: const MenuItemStyleData(
-                      height: 40,
+                    menuItemStyleData: MenuItemStyleData(
+                      height: size.height * 0.02,
                     ),
                   ),
                 ),
@@ -322,12 +342,120 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       fontSize: 13,
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
                   ),
                 ),
               ),
               SizedBox(
                 height: size.height * 0.02,
+              ),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: size.height * 0.03,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Text ด้านซ้าย
+                      Text(
+                        'สถานที่',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        children: [
+                          ChoiceChip(
+                            label: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'สำนักงาน',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                            selected: _selectedLoacation == 0,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                _selectedLoacation = selected ? 0 : -1;
+                              });
+                            },
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            selectedColor: Colors.red,
+                            labelStyle: TextStyle(
+                              color: _selectedLoacation == 0
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: _selectedLoacation == 0
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                            backgroundColor: Colors.white,
+                            showCheckmark: false,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: size.height * 0.013),
+                            labelPadding: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.001),
+                          ),
+                          SizedBox(width: size.width * 0.02),
+                          ChoiceChip(
+                            label: Text(
+                              'บ้าน',
+                            ),
+                            selected: _selectedLoacation == 1,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                _selectedLoacation = selected ? 1 : -1;
+                              });
+                            },
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            selectedColor: Colors.red,
+                            labelStyle: TextStyle(
+                              color: _selectedLoacation == 1
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: _selectedLoacation == 1
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                            backgroundColor: Colors.white,
+                            showCheckmark: false,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: size.height * 0.013),
+                            labelPadding: EdgeInsets.symmetric(
+                                horizontal: size.height * 0.008),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.0001,
+              ),
+              Container(
+                height: size.height * 0.001,
+                color: Colors.grey[150],
               ),
               Container(
                 height: size.height * 0.05,
@@ -345,34 +473,129 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold),
                       ),
-                      Theme(
-                        data: Theme.of(context).copyWith(
-                            checkboxTheme: CheckboxThemeData(
-                          side: BorderSide(
-                            color: red1,
-                            width: 1.0,
+                      Switch(
+                        value: _isSwitched,
+                        onChanged: (value) {
+                          setState(() {
+                            _isSwitched = value;
+                          });
+                        },
+                        activeTrackColor: Colors.red[100],
+                        activeColor: Colors.red,
+                        inactiveTrackColor: white,
+                        inactiveThumbColor:
+                            Color(0xffd9d9d9),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: size.height * 0.03,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Text ด้านซ้าย
+                      Text(
+                        'เวลาที่สะดวกรับ',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        children: [
+                          ChoiceChip(
+                            label: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'เฉพาะ จ.-ศ. เวลาราชการ',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                            selected: _selectedtime == 0,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                _selectedtime = selected ? 0 : -1;
+                              });
+                            },
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            selectedColor: Colors.red,
+                            labelStyle: TextStyle(
+                              color: _selectedtime == 0
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: _selectedtime == 0
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                            backgroundColor: Colors.white,
+                            showCheckmark: false,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: size.height * 0.013),
+                            labelPadding: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.001),
                           ),
-                        )),
-                        child: Checkbox(
-                          value: _isChecked,
-                          onChanged: (bool? newValue) {
-                            setState(() {
-                              _isChecked = newValue ?? false;
-                            });
-                            if (_isChecked) {
-                              print('Checkbox ถูกเลือก');
-                            } else {
-                              print('Checkbox ถูกยกเลิก');
-                            }
-                          },
-                        ),
+                          SizedBox(width: size.width * 0.02),
+                          ChoiceChip(
+                            label: Text(
+                              'ทุกเวลา',
+                            ),
+                            selected: _selectedtime == 1,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                _selectedtime = selected ? 1 : -1;
+                              });
+                            },
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            selectedColor: Colors.red,
+                            labelStyle: TextStyle(
+                              color: _selectedtime == 1
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: _selectedtime == 1
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                            backgroundColor: Colors.white,
+                            showCheckmark: false,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: size.height * 0.013),
+                            labelPadding: EdgeInsets.symmetric(
+                                horizontal: size.height * 0.008),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ),
               SizedBox(
-                height: size.height * 0.09,
+                height: size.height * 0.07,
               ),
               GestureDetector(
                 onTap: () {

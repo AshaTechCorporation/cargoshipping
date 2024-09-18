@@ -6,12 +6,12 @@ class ProductCategories extends StatelessWidget {
   final String imagespath;
 
   const ProductCategories({
-    Key? key,
+    super.key,
     required this.size,
     required this.title,
     required this.press,
     required this.imagespath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

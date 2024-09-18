@@ -245,7 +245,7 @@ const List<Map<String, dynamic>> importwidget = [
   },
   {
     'id': 2,
-    'name': 'นำเข้าเหมาภาษี',
+    'name': 'ฝากสั่ง',
     'images': 'assets/icons/importtax.png',
   },
 ];

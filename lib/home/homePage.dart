@@ -99,11 +99,8 @@ class _HomePageState extends State<HomePage> {
             top: Radius.circular(30),
           ),
           child: AppBar(
-            backgroundColor:
-                Colors.red.withOpacity(appBarOpacity), // เปลี่ยนสีตาม opacity
-            elevation: appBarOpacity > 0.5
-                ? 4.0
-                : 0.0,
+            backgroundColor: Colors.red.withOpacity(appBarOpacity),
+            elevation: appBarOpacity > 0.5 ? 4.0 : 0.0,
             title: Padding(
               padding: EdgeInsets.only(top: size.height * 0.01),
               child: Row(
@@ -301,7 +298,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: SingleChildScrollView(
-         controller: _scrollController,
+        controller: _scrollController,
         child: Column(
           children: [
             SizedBox(
@@ -358,61 +355,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            // Stack(
-            //   children: [
-            //     Positioned(
-            //       top: 0,
-            //       left: 0,
-            //       right: 0,
-            //       child: Container(
-            //         height: 100, // ความสูงของ container
-            //         decoration: BoxDecoration(
-            //           color: Colors.blue.withOpacity(
-            //               0.5), // กำหนดสีพื้นหลังให้มีความโปร่งใสบ้าง
-            //           borderRadius: BorderRadius.only(
-            //             bottomLeft: Radius.circular(20),
-            //             bottomRight: Radius.circular(20),
-            //           ),
-            //         ),
-            //         child: Center(
-            //           child: Text(
-            //             'Container ซ้อน AppBar',
-            //             style: TextStyle(fontSize: 20, color: Colors.white),
-            //           ),
-            //         ),
-            //       ),
-            //       // Column(
-            //       //   children: [
-            //       //     SizedBox(height: size.height * 0.01),
-            //       //     // แสดงภาพสไลด์
-            //       //     PictureSliderWidget(size: size),
-            //       //     SizedBox(
-            //       //       height: size.height *
-            //       //           0.07, // เว้นพื้นที่สำหรับ Widget ที่ทับอยู่ด้านบน
-            //       //     ),
-            //       //     SizedBox(
-            //       //       height: size.height * 0.01,
-            //       //     ),
-            //       //   ],
-            //       // ),
-            //     ),
-            //     // Positioned(
-            //     //     bottom: size.height * 0.03,
-            //     //     left: 0,
-            //     //     right: 0,
-            //     //     child: Row(
-            //     //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //     //       children: List.generate(
-            //     //         fistpagewidget.length,
-            //     //         (index) => Importwidget(
-            //     //           size: size,
-            //     //           title: fistpagewidget[index],
-            //     //           press: () {},
-            //     //         ),
-            //     //       ),
-            //     //     ))
-            //   ],
-            // ),
             SizedBox(
               height: size.height * 0.06,
             ),
@@ -856,7 +798,6 @@ class _HomePageState extends State<HomePage> {
                         return ProductCategories(
                           size: size,
                           title: categories[index].name!,
-                          
                           press: () {
                             Navigator.push(
                               context,

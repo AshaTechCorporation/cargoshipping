@@ -106,41 +106,6 @@ class _TopuppageState extends State<Topuppage> {
             SizedBox(
               height: 15,
             ),
-            InkWell(
-              onTap: () {
-                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Cerditcardpage(),
-                    ),
-                  );
-              },
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Image.asset('assets/icons/creditcard.png'),
-                  Text(
-                    'บัตรเครดิต/บัตรเดบิต',
-                    style: TextStyle(fontSize: 13),
-                  ),
-                  Spacer(),
-                  Image.asset('assets/icons/rightarrow.png'),
-                  SizedBox(
-                    width: 20,
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: 380,
-              height: 1,
-              color: Colors.black,
-            ),
             SizedBox(
               height: 500,
             ),
