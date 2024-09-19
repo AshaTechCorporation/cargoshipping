@@ -613,14 +613,14 @@ class _itempageState extends State<itempage> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: 90,
+        height: size.height * 0.105,
         child: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 15),
+                  padding: EdgeInsets.only(right: size.width * 0.01),
                   child: TextButton(
                     onPressed: () => _onItemTapped(0),
                     child: Column(
@@ -650,14 +650,22 @@ class _itempageState extends State<itempage> {
                   ),
                 ),
               ),
-              VerticalDivider(
+              // VerticalDivider(
+              //   color: Colors.grey,
+              //   thickness: 1,
+              // ),
+              Container(
+                height: size.height * 0.10,
+                width: size.width * 0.001,
                 color: Colors.grey,
-                thickness: 1,
+              ),
+              SizedBox(
+                width: size.width * 0.01,
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      right: 10.0), // ขยับไปทางขวา 10 หน่วย
+                  padding: EdgeInsets.only(
+                      right: size.width * 0.01), // ขยับไปทางขวา 10 หน่วย
                   child: TextButton(
                     onPressed: () {
                       showModalBottomSheet(
@@ -670,30 +678,46 @@ class _itempageState extends State<itempage> {
                         ),
                         builder: (BuildContext context) {
                           return ProductDetailsBottomSheet(
-                            product: widget.products, // ส่งข้อมูลสินค้า
-                            buttonLabel:
-                                'เพิ่มลงรถเข็น', // แสดงข้อความปุ่มเป็น "เพิ่มลงรถเข็น"
+                            product: widget.products,
+                            buttonLabel: 'เพิ่มลงรถเข็น',
                             onButtonPress: () {
-                              // แสดง Pop-up เมื่อกดปุ่ม
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('เพิ่มลงรถเข็น'),
-                                    content: Text(
-                                        'สินค้าได้ถูกเพิ่มลงรถเข็นเรียบร้อยแล้ว'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('ตกลง'),
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pop(); // ปิด Pop-up
-                                        },
-                                      ),
-                                    ],
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          20), // กำหนดขอบมนให้กับ Dialog
+                                    ),
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 24),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Image.asset(
+                                          'assets/icons/addcart.png',
+                                          height: 60,
+                                        ),
+                                        SizedBox(height: size.height * 0.01),
+                                        Text(
+                                          'เพิ่มสินค้าในรถเข็น\nเรียบร้อยแล้ว',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   );
                                 },
                               );
+
+                              // ปิด Pop-up หลังจาก 1 วินาที และปิด BottomSheet
+                              Future.delayed(Duration(seconds: 1), () {
+                                Navigator.of(context).pop(); // ปิด Pop-up
+                                Navigator.of(context).pop(); // ปิด BottomSheet
+                              });
                             },
                           );
                         },

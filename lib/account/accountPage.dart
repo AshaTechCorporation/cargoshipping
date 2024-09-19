@@ -19,6 +19,7 @@ import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/importproductlistpage.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
+import 'package:cargoshipping/home/widgets/paperless.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -481,7 +482,7 @@ class _AccountPageState extends State<AccountPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Correctimportpage(),
+                          builder: (context) => Paperless(),
                         ),
                       );
                     }

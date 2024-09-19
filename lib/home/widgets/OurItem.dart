@@ -37,7 +37,7 @@ class Ouritem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
               child: Image.asset(
                 image,
                 fit: BoxFit.fill,

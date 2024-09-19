@@ -11,7 +11,9 @@ import 'package:cargoshipping/home/widgets/carimportrate.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
+import 'package:cargoshipping/home/widgets/paperless.dart';
 import 'package:cargoshipping/home/widgets/payment.dart';
+import 'package:cargoshipping/home/widgets/searchshowpage.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:cargoshipping/home/widgets/shippingimportrate.dart';
 import 'package:cargoshipping/models/categories.dart';
@@ -32,6 +34,9 @@ class _HomePageState extends State<HomePage> {
   List<Categories> categories = [];
   final ScrollController _scrollController = ScrollController();
   double appBarOpacity = 0.0;
+  Color searchBarColor = Colors.transparent;
+
+  
 
   @override
   void initState() {
@@ -51,6 +56,7 @@ class _HomePageState extends State<HomePage> {
         });
       }
     });
+    
   }
 
   @override
@@ -112,14 +118,16 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(size.height * 0.005),
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: const Color.fromARGB(255, 122, 124, 126)),
+                          color: Colors.grey,
+                          width: size.width * 0.001),
                       borderRadius: BorderRadius.circular(15),
+                      color: Color.lerp(Colors.transparent, Colors.white, appBarOpacity),
                     ),
                     child: IntrinsicHeight(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
+                          Container(
                             width: size.width * 0.33,
                             child: TextFormField(
                               decoration: InputDecoration(
@@ -147,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(horizontal: 0),
+                                     EdgeInsets.symmetric(horizontal: size.width * 0.01),
                                   child: DropdownButton2<String>(
                                     isExpanded: true,
                                     hint: Align(
@@ -197,7 +205,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Implement navigation to Search page here
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Searchshowpage()));
                             },
                             child: Container(
                               height: size.height * 0.05,
@@ -333,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          Importproductlistpage(), //Correctimportpage
+                                          Paperless(), 
                                     ),
                                   );
                                 }

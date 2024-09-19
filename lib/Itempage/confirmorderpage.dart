@@ -1,3 +1,5 @@
+import 'package:cargoshipping/Itempage/widgets/conditionstransport.dart';
+import 'package:cargoshipping/cart/widget/Custonredchechkbox.dart';
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
   bool carSelected = false;
   bool boatSelected = false;
 
-   void handleCheckboxChanged(String type) {
+  void handleCheckboxChanged(String type) {
     setState(() {
       if (type == 'car') {
         carSelected = true;
@@ -26,6 +28,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -137,13 +140,15 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(left: size.width * 0.07),
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.07),
                                 child: Text('ขนส่งทางรถ'),
                               ),
                               Spacer(),
-                              CustomCheckbox(
-                                value: carSelected,
-                                onChanged: (bool? value) {
+                              Customredchechkbox(
+                                isSelected:
+                                    carSelected, // ใช้ 'isSelected' แทน 'value'
+                                onChanged: () {
                                   setState(() {
                                     handleCheckboxChanged('car');
                                   });
@@ -160,39 +165,56 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                           child: Row(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(left: size.width * 0.07),
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.07),
                                 child: Text('ขนส่งทางเรือ'),
                               ),
                               Spacer(),
-                              CustomCheckbox(
-                                value: boatSelected,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    handleCheckboxChanged('boat');
-                                  });
-                                },
+                              Customredchechkbox(
+                               isSelected: boatSelected,
+                               onChanged: () {
+                                 setState(() {
+                                   handleCheckboxChanged('boat');
+                                 });
+                               },
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: size.height * 0.0001),
-                        Row(
-                          children: [
-                            Text('เงื่อนไขการขนส่ง'),
-                            Spacer(),
-                            TextButton(
-                              onPressed: () {
-                                // Handle the press action here
-                              },
-                              child: Text(
+                        SizedBox(height: size.height * 0.02),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Conditionstransport()));
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                'เงื่อนไขการขนส่ง',
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Spacer(),
+                              Text(
                                 'เลือกเงื่อนไขการขนส่ง',
                                 style: TextStyle(
                                     color: red1, fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            Image.asset('assets/icons/rightarrow.png'),
-                          ],
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                              Image.asset('assets/icons/rightarrow.png'),
+                            ],
+                          ),
                         ),
+                        SizedBox(
+                          height: size.height * 0.01,
+                        )
                       ],
                     ),
                   ),
@@ -696,7 +718,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: size.height *0.08,
+        height: size.height * 0.08,
         child: BottomAppBar(
           color: white,
           child: Row(
@@ -708,8 +730,8 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                   print("ปุ่มส่งรายการสั่งซื้อถูกคลิก");
                 },
                 child: Container(
-                 height: size.height *0.06,
-                 width: size.width * 0.5,
+                  height: size.height * 0.06,
+                  width: size.width * 0.5,
                   decoration: BoxDecoration(
                     color: red1,
                     borderRadius: BorderRadius.circular(15),

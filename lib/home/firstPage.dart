@@ -111,23 +111,40 @@ class _FirstPageState extends State<FirstPage> {
               SizedBox(
                 width: 10,
               ),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      onItemSelect(1);
-                    },
-                    child: Image.asset(
-                      'assets/icons/group.png',
-                      width: 29, // Adjust the width as needed
-                      height: 30, // Adjust the height as needed
-                    ),
-                  ),
-                  Text(
-                    'หมวดสินค้า',
-                    style: TextStyle(fontSize: 12),
-                  )
-                ],
+              GestureDetector(
+                onTap: () {
+                  onItemSelect(1);
+                },
+                child: selectedIndex == 1
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/redgroup.png',
+                            width: 30,
+                            height: 30,
+                          ),
+                          Text(
+                            'หมวดหมู่สินค้า',
+                            style: TextStyle(fontSize: 12, color: red1),
+                          )
+                        ],
+                      )
+                    : Center(
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/icons/group.png',
+                              width: 30,
+                              height: 30,
+                            ),
+                            Text(
+                              'หมวดหมู่สินค้า',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                      ),
               ),
               SizedBox(
                 width: 50,
