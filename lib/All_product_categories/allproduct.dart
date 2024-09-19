@@ -1,4 +1,8 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/services/homeApi.dart';
+import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/models/item.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 
 class Allproduct extends StatefulWidget {
@@ -6,15 +10,69 @@ class Allproduct extends StatefulWidget {
   _AllproductState createState() => _AllproductState();
 }
 
-class _AllproductState extends State<Allproduct>
-    with SingleTickerProviderStateMixin {
+class _AllproductState extends State<Allproduct> with SingleTickerProviderStateMixin {
   int selectedIndex = 0;
+  final List<String> items = [
+    'taobao',
+    '1688',
+  ];
+  List<Categories> categories = [];
+  List<Item> item = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      //await getlistCategories(name: items[0]);
+    });
+  }
 
   void onTabTapped(int index) {
     setState(() {
       selectedIndex = index;
     });
   }
+
+  //ดึงข้อมูล api Category
+  Future<void> getlistCategories({required String name}) async {
+    try {
+      LoadingDialog.open(context);
+      final _categories = await HomeApi.getCategories(name: name);
+      if (!mounted) return;
+      setState(() {
+        categories = _categories;
+      });      
+      getlistCategoriesByName(categories_name: categories[0].name!);
+      //inspect(categories);
+      LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
+  //ดูข้อมูลสินค้าตาม Category Name
+  Future<void> getlistCategoriesByName({required String categories_name}) async {
+    try {
+      LoadingDialog.open(context);
+      final _item = await HomeApi.getItemCategories(
+          categories_name: categories_name);
+
+      if (!mounted) return;
+
+      setState(() {
+        item = _item;
+      });
+      //inspect(item);
+      LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +83,7 @@ class _AllproductState extends State<Allproduct>
         backgroundColor: background,
         title: Text(
           'หมวดหมู่สินค้าทั้งหมด',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: Row(
@@ -70,7 +127,7 @@ class _AllproductState extends State<Allproduct>
     return GestureDetector(
       onTap: () => onTabTapped(index),
       child: Container(
-        height: size.height *0.13,
+        height: size.height * 0.13,
         child: Stack(
           children: [
             if (!isSelected)
@@ -88,9 +145,7 @@ class _AllproductState extends State<Allproduct>
             if (isSelected)
               Positioned(
                 left: 0,
-                right: MediaQuery.of(context).size.width *
-                    (101 /
-                        400),
+                right: MediaQuery.of(context).size.width * (101 / 400),
                 bottom: 0,
                 top: 0,
                 child: FractionallySizedBox(
@@ -117,8 +172,7 @@ class _AllproductState extends State<Allproduct>
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.black,
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
                     ),
                   ],
@@ -187,8 +241,7 @@ class _AllproductState extends State<Allproduct>
                     SizedBox(height: size.height * 0.006),
                     Text(
                       item['name']!,
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ],
