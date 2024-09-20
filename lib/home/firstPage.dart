@@ -50,7 +50,7 @@ class _FirstPageState extends State<FirstPage> {
           : Transform.translate(
               offset: Offset(0, 22),
               child: FloatingActionButton.large(
-                backgroundColor: Colors.red,
+                backgroundColor: red1,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(60),
                 ),
@@ -73,78 +73,84 @@ class _FirstPageState extends State<FirstPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                onTap: () {
-                  onItemSelect(0);
-                },
-                child: selectedIndex == 0
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/icons/Frame 61.png',
-                            width: 24,
-                            height: 27,
-                          ),
-                          Text(
-                            'หน้าหลัก',
-                            style: TextStyle(fontSize: 12, color: red1),
-                          )
-                        ],
-                      )
-                    : Center(
-                        child: Column(
+              Padding(
+                padding: const EdgeInsets.only(top: 9,left:1 ),
+                child: GestureDetector(
+                  onTap: () {
+                    onItemSelect(0);
+                  },
+                  child: selectedIndex == 0
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/icons/greymain.png',
+                              'assets/icons/Frame 61.png',
                               width: 24,
                               height: 27,
                             ),
                             Text(
                               'หน้าหลัก',
-                              style: TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12, color: red1),
                             )
                           ],
+                        )
+                      : Center(
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/icons/greymain.png',
+                                width: 24,
+                                height: 27,
+                              ),
+                              Text(
+                                'หน้าหลัก',
+                                style: TextStyle(fontSize: 12),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
+                ),
               ),
               SizedBox(
-                width: 10,
+                width: 1,
               ),
-              GestureDetector(
-                onTap: () {
-                  onItemSelect(1);
-                },
-                child: selectedIndex == 1
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/icons/redgroup.png',
-                            width: 30,
-                            height: 30,
-                          ),
-                          Text(
-                            'หมวดหมู่สินค้า',
-                            style: TextStyle(fontSize: 12, color: red1),
-                          )
-                        ],
-                      )
-                    : Center(
-                        child: Column(
+              Padding(
+                padding: const EdgeInsets.only(top: 9),
+                child: GestureDetector(
+                  onTap: () {
+                    onItemSelect(1);
+                  },
+                  child: selectedIndex == 1
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/icons/group.png',
+                              'assets/icons/redgroup.png',
                               width: 30,
                               height: 30,
                             ),
                             Text(
                               'หมวดหมู่สินค้า',
-                              style: TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12, color: red1),
                             )
                           ],
+                        )
+                      : Center(
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/icons/group.png',
+                                width: 30,
+                                height: 30,
+                              ),
+                              Text(
+                                'หมวดหมู่สินค้า',
+                                style: TextStyle(fontSize: 12),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
+                ),
               ),
               SizedBox(
                 width: 50,

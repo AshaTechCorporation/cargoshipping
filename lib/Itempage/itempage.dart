@@ -687,7 +687,7 @@ class _itempageState extends State<itempage> {
                                   return AlertDialog(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
-                                          20), // กำหนดขอบมนให้กับ Dialog
+                                          20),
                                     ),
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 24),
@@ -713,10 +713,9 @@ class _itempageState extends State<itempage> {
                                 },
                               );
 
-                              // ปิด Pop-up หลังจาก 1 วินาที และปิด BottomSheet
                               Future.delayed(Duration(seconds: 1), () {
-                                Navigator.of(context).pop(); // ปิด Pop-up
-                                Navigator.of(context).pop(); // ปิด BottomSheet
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
                               });
                             },
                           );

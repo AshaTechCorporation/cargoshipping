@@ -1,6 +1,8 @@
+import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/login/loginPage.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class Agentpage extends StatefulWidget {
@@ -120,6 +122,8 @@ class _AgentpageState extends State<Agentpage> {
 
   String? _selecteduseto;
 
+  bool _agreement = false;
+
   // final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -174,6 +178,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'ชื่อ',
                       labelStyle: const TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -205,6 +211,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'นามสกุล',
                       labelStyle: const TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -234,6 +242,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'เบอร์มือถือ',
                       labelStyle: TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -263,6 +273,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'วันเกิด',
                       labelStyle: TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -281,54 +293,124 @@ class _AgentpageState extends State<Agentpage> {
                   ),
                 ),
                 SizedBox(
-                  height: size.height * 0.01,
+                  height: size.height * 0.02,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(
-                          'เพศ',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey),
+                        Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.01),
+                          child: Text(
+                            'เพศ',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey),
+                          ),
                         ),
-                        Checkbox(
-                          value: _selectedGender == 'Male',
-                          onChanged: (bool? value) {
+                        SizedBox(
+                          width: size.width * 0.4,
+                        ),
+                        GestureDetector(
+                          onTap: () {
                             setState(() {
-                              if (value == true) {
-                                _selectedGender = 'Male';
-                              } else {
+                              if (_selectedGender == 'Male') {
                                 _selectedGender = null;
+                              } else {
+                                _selectedGender = 'Male';
                               }
                             });
                           },
-                        ),
-                        Text('ชาย', style: TextStyle(fontSize: 16)),
+                          child: Container(
+                            height: size.height * 0.043,
+                            width: size.width * 0.2,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: Colors.grey,
+                                    width: size.width * 0.001)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomCheckbox(
+                                  value: _selectedGender == 'Male',
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      if (value == true) {
+                                        _selectedGender = 'Male';
+                                      } else {
+                                        _selectedGender = null;
+                                      }
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.02,
+                                ),
+                                Text(
+                                  'ชาย',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       ],
                     ),
                     SizedBox(width: size.width * 0.02),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _selectedGender == 'Female',
-                          onChanged: (bool? value) {
-                            setState(() {
-                              if (value == true) {
-                                _selectedGender = 'Female';
-                              } else {
-                                _selectedGender = null;
-                              }
-                            });
-                          },
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (_selectedGender == 'Female') {
+                            _selectedGender = null;
+                          } else {
+                            _selectedGender = 'Female';
+                          }
+                        });
+                      },
+                      child: Container(
+                        height: size.height * 0.043,
+                        width: size.width * 0.2,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.grey, width: size.width * 0.001)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomCheckbox(
+                              value: _selectedGender == 'Female',
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  if (value == true) {
+                                    _selectedGender = 'Female';
+                                  } else {
+                                    _selectedGender = null;
+                                  }
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: size.width * 0.02,
+                            ),
+                            Text(
+                              'หญิง',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            ),
+                          ],
                         ),
-                        Text('หญิง', style: TextStyle(fontSize: 16)),
-                      ],
-                    ),
+                      ),
+                    )
                   ],
+                ),
+                SizedBox(
+                  height: size.height * 0.025,
                 ),
                 Container(
                   height: size.height * 0.052,
@@ -341,6 +423,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'รหัสผู้นำเข้า',
                       labelStyle: const TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -385,6 +469,8 @@ class _AgentpageState extends State<Agentpage> {
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'รหัสผ่าน',
                       labelStyle: const TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                     ),
                     obscureText: true,
                   ),
@@ -416,6 +502,8 @@ class _AgentpageState extends State<Agentpage> {
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'ยืนยันรหัสผ่าน',
                       labelStyle: const TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                     ),
                     obscureText: true,
                   ),
@@ -433,6 +521,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'ผู้แนะนำ',
                       labelStyle: const TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -462,6 +552,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน',
                       labelStyle: TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -491,6 +583,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'เลขที่ผู้เสียภาษี',
                       labelStyle: TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -541,6 +635,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'จังหวัด',
@@ -605,6 +701,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'อำเภอ',
@@ -669,6 +767,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'ตำบล',
@@ -733,6 +833,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'รหัสไปรษณีย์',
@@ -792,6 +894,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'เบอร์โทรศัพท์',
                       labelStyle: TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -821,6 +925,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'ชื่อคาร์โก้ของท่าน',
                       labelStyle: TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -850,6 +956,8 @@ class _AgentpageState extends State<Agentpage> {
                     decoration: InputDecoration(
                       hintText: 'เว็บไซต์คาร์โก้ของท่าน',
                       labelStyle: TextStyle(),
+                      contentPadding: EdgeInsets.only(
+                          top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -930,6 +1038,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'จังหวัด',
@@ -996,6 +1106,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'อำเภอ',
@@ -1062,6 +1174,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'ตำบล',
@@ -1126,6 +1240,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'รหัสไปรษณีย์',
@@ -1175,9 +1291,10 @@ class _AgentpageState extends State<Agentpage> {
                 ),
                 SizedBox(height: size.height * 0.01),
                 Container(
-                    height: size.height * 0.055,
+                    height: size.height * 0.056,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
+                        color: white,
                         border: Border.all(
                           color: Colors.grey, // เปลี่ยนสีของขอบตามต้องการ
                           width: 0.5,
@@ -1199,7 +1316,7 @@ class _AgentpageState extends State<Agentpage> {
                         )
                       ],
                     )),
-                SizedBox(height: size.height * 0.05),
+                SizedBox(height: size.height * 0.01),
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
@@ -1218,6 +1335,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'รูปแบบส่งต่อ(ในไทย)',
@@ -1281,43 +1400,118 @@ class _AgentpageState extends State<Agentpage> {
                     ),
                   ],
                 ),
-                Row(
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _selecteduseto == 'เคย',
-                          onChanged: (bool? value) {
-                            setState(() {
-                              if (value == true) {
-                                _selecteduseto = 'เคย';
-                              } else {
-                                _selecteduseto = null;
-                              }
-                            });
-                          },
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (_selecteduseto == 'เคย') {
+                            _selecteduseto = null;
+                          } else {
+                            _selecteduseto = 'เคย';
+                          }
+                        });
+                      },
+                      child: Container(
+                        height: size.height * 0.06,
+                        width: size.width * 0.45,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: size.width * 0.001,
+                          ),
                         ),
-                        Text('เคย', style: TextStyle(fontSize: 16)),
-                      ],
+                        child: Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.05),
+                          child: Row(
+                            children: [
+                              CustomCheckbox(
+                                value: _selecteduseto == 'เคย',
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    if (value == true) {
+                                      _selecteduseto = 'เคย';
+                                    } else {
+                                      _selecteduseto = null;
+                                    }
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: size.width * 0.04,
+                              ),
+                              Text(
+                                'เคย',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                    SizedBox(width: 20),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _selecteduseto == 'ไม่เคย',
-                          onChanged: (bool? value) {
-                            setState(() {
-                              if (value == true) {
-                                _selecteduseto = 'ไม่เคย';
-                              } else {
-                                _selecteduseto = null;
-                              }
-                            });
-                          },
+                    SizedBox(width: size.width * 0.01),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (_selecteduseto == 'ไม่เคย') {
+                            _selecteduseto = null;
+                          } else {
+                            _selecteduseto = 'ไม่เคย';
+                          }
+                        });
+                      },
+                      child: Container(
+                        height: size.height * 0.06,
+                        width: size.width * 0.45,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: size.width * 0.001,
+                          ),
                         ),
-                        Text('ไม่เคย', style: TextStyle(fontSize: 16)),
-                      ],
+                        child: Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.05),
+                          child: Row(
+                            children: [
+                              CustomCheckbox(
+                                value: _selecteduseto == 'ไม่เคย',
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    if (value == true) {
+                                      _selecteduseto = 'ไม่เคย';
+                                    } else {
+                                      _selecteduseto = null;
+                                    }
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: size.width * 0.04,
+                              ),
+                              Text(
+                                'ไม่เคย',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -1340,6 +1534,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
@@ -1404,6 +1600,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'ท่านนำเข้าบ่อยหรือไม่ ',
@@ -1468,6 +1666,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'ต้องการนำเข้าแบบใด ',
@@ -1532,6 +1732,8 @@ class _AgentpageState extends State<Agentpage> {
                         width: 0.5,
                       ),
                     ),
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                   hint: const Text(
                     'สิ่งที่ท่านต้องการ ',
@@ -1580,6 +1782,59 @@ class _AgentpageState extends State<Agentpage> {
                 SizedBox(
                   height: size.height * 0.015,
                 ),
+                Row(
+                  children: [
+                    CustomCheckbox(
+                      value: _agreement,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _agreement = value!;
+                        });
+                      },
+                    ),
+                    SizedBox(
+                      width: size.width * 0.02,
+                    ),
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'ยอมรับ ',
+                          style: TextStyle(color: Colors.black, fontSize: 12),
+                          children: [
+                            TextSpan(
+                              text: 'ข้อกำหนด เงื่อนไข',
+                              style: TextStyle(color: red1, fontSize: 12),
+                              // Add onTap event to TextSpan
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // Handle the tap on 'ข้อกำหนด เงื่อนไขการสั่งซื้อและส่งตามนโยบายของบริษัทฯ'
+                                  print('Tapped on ข้อกำหนด เงื่อนไข');
+                                },
+                            ),
+                            TextSpan(
+                              text:
+                                  ' การสั่งซื้อและส่งตามนโยบายของ บริษัทฯและ ',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 12),
+                            ),
+                            TextSpan(
+                              text: 'นโยบายความเป็นส่วนตัว',
+                              style: TextStyle(color: red1, fontSize: 12),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // Handle the tap on 'นโยบายความเป็นส่วนตัว'
+                                  print('Tapped on นโยบายความเป็นส่วนตัว');
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: size.height * 0.015,
+                ),
                 Text(
                   'หรือ',
                   style: TextStyle(fontSize: 15),
@@ -1587,142 +1842,106 @@ class _AgentpageState extends State<Agentpage> {
                 SizedBox(
                   height: size.height * 0.012,
                 ),
-                Container(
-                  height: size.height * 0.06,
-                  width: size.width * 0.91,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(0, 1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: size.height * 0.05,
+                      width: size.width * 0.2,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/icons/google.png'),
-                        SizedBox(
-                          width: size.width * 0.03,
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/icons/google.png'),
+                          ],
                         ),
-                        Text(
-                          'ดำเนินการต่อด้วยบัญชี Google',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: size.height * 0.06,
-                  width: size.width * 0.91,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(0, 1),
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/icons/facebook.png'),
-                        SizedBox(
-                          width: size.width * 0.03,
-                        ),
-                        Text(
-                          'ดำเนินการต่อด้วยบัญชี Facebook',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        )
-                      ],
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: size.height * 0.06,
-                  width: size.width * 0.91,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(0, 1),
+                    Container(
+                      height: size.height * 0.05,
+                      width: size.width * 0.2,
+                      decoration: BoxDecoration(
+                        color: Color(0xff3c5a9a),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/icons/line.png'),
-                        SizedBox(
-                          width: size.width * 0.03,
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/icons/facebook.png'),
+                          ],
                         ),
-                        Text(
-                          'ดำเนินการต่อด้วยบัญชี Line',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: size.height * 0.06,
-                  width: size.width * 0.91,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(0, 1),
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/icons/apple.png'),
-                        SizedBox(
-                          width: size.width * 0.03,
-                        ),
-                        Text(
-                          'ดำเนินการต่อด้วยบัญชี Apple',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        )
-                      ],
                     ),
-                  ),
+                    Container(
+                      height: size.height * 0.05,
+                      width: size.width * 0.2,
+                      decoration: BoxDecoration(
+                        color: Color(0xff00b900),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/icons/line.png'),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: size.height * 0.05,
+                      width: size.width * 0.2,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/icons/apple.png'),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

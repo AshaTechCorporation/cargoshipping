@@ -110,29 +110,6 @@ class _AccsettingState extends State<Accsetting> {
             color: Colors.grey[300],
             height: size.height * 0.001,
           ),
-            Container(
-              height: size.height * 0.05,
-              color: white,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: InkWell(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      Text(
-                        'ข้อมูลบัตร/บัญชีธนาคาร',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 13),
-                      ),
-                      Spacer(),
-                      Image.asset('assets/icons/rightarrow.png')
-                    ],
-                  ),
-                ),
-              ),
-            ),
            Container(
             color: Colors.grey[300],
             height: size.height * 0.001,

@@ -7,12 +7,14 @@ class Importwidget extends StatelessWidget {
     required this.title,
     required this.imagePath,
     required this.press,
+    required this.id, // เพิ่มตัวแปร id เพื่อใช้ในการตรวจสอบเงื่อนไข
   });
 
   final Size size;
   final String title;
   final String imagePath;
   final VoidCallback press;
+  final int id; // เพิ่มตัวแปร id
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class Importwidget extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               offset: Offset(0, 2),
-            )
+            ),
           ],
         ),
         child: Center(
@@ -41,8 +43,8 @@ class Importwidget extends StatelessWidget {
                 padding: EdgeInsets.all(size.height * 0.007),
                 child: Image.asset(
                   imagePath,
-                  height: size.height *0.05,
-                  width: size.width * 0.07,
+                  height: id == 2 ? size.height * 0.07 : size.height * 0.05, // ปรับขนาดตาม id
+                  width: id == 2 ? size.width * 0.15 : size.width * 0.07, // ปรับขนาดตาม id
                 ),
               ),
               Text(
@@ -59,3 +61,4 @@ class Importwidget extends StatelessWidget {
     );
   }
 }
+

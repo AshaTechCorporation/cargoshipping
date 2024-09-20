@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/icons/Frame 61.png'),
-                    fit: BoxFit.fill, 
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
@@ -71,27 +71,23 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: size.height * 0.02),
               SizedBox(
-                height: size.height *0.06,
+                height: size.height * 0.06,
                 child: TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    prefixIcon: Image.asset('assets/images/userlogin.png'),
-                    labelText: 'รหัสผู้นำเข้า',
-                    labelStyle: TextStyle(
-                      fontSize: 15
-                    )
-                  ),
+                      prefixIcon: Image.asset('assets/images/userlogin.png'),
+                      labelText: 'รหัสผู้นำเข้า',
+                      labelStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
                 ),
               ),
               SizedBox(height: size.height * 0.02),
               SizedBox(
-                height: size.height *0.06,
+                height: size.height * 0.06,
                 child: TextField(
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    labelText: 'รหัสผ่าน',labelStyle: TextStyle(
-                      fontSize: 15
-                    ),
+                    labelText: 'รหัสผ่าน',
+                    labelStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),
                     prefixIcon: Image.asset(
                       'assets/icons/password.png',
                       height: size.height * 0.001,
@@ -139,8 +135,8 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 219, 18, 4),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 135, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 135, vertical: 8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -148,7 +144,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text(
                     'เข้าสู่ระบบ',
                     style: TextStyle(
-                        fontSize: 17, color: Colors.white,fontWeight: FontWeight.bold),
+                        fontSize: 17,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -163,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   side: BorderSide(
                     color: Color.fromARGB(255, 219, 18, 4), // สีของขอบ
-                    width: 2,
+                    width: 1,
                   ),
                 ),
                 onPressed: () {
@@ -196,8 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color:
-                          Colors.black.withOpacity(0.1), 
+                      color: Colors.black.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
@@ -233,8 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color:
-                          Colors.black.withOpacity(0.1), 
+                      color: Colors.black.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
@@ -272,8 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color:
-                          Colors.black.withOpacity(0.1), 
+                      color: Colors.black.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
@@ -286,7 +281,10 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 50),
-                        child: Image.asset('assets/icons/line.png'),
+                        child: Image.asset(
+                          'assets/icons/linelogin.png',
+                          height: size.height * 0.03,
+                        ),
                       ),
                       // SizedBox(
                       //   width: size.width * 0.03,
@@ -309,8 +307,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color:
-                          Colors.black.withOpacity(0.1), 
+                      color: Colors.black.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: Offset(0, 1),
@@ -323,7 +320,10 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 38),
-                        child: Image.asset('assets/icons/apple.png'),
+                        child: Image.asset(
+                          'assets/icons/applelogin.png',
+                          height: size.height * 0.03,
+                        ),
                       ),
                       // SizedBox(
                       //   width: size.width * 0.03,
@@ -351,54 +351,54 @@ void _showSelectionDialog(BuildContext context) {
     barrierDismissible: true,
     builder: (BuildContext context) {
       return AlertDialog(
-        contentPadding: EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
         title: Text(
           'ท่านลงทะเบียนผู้ใช้ใหม่ในฐานะ ..',
           style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold),
-        ),
-        content: SizedBox(
-          width: 300,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildOption(
-                context,
-                'บุคคลทั่วไป',
-                () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => registerpage()),
-                  );
-                },
-              ),
-              _buildOption(
-                context,
-                'นิติบุคคล',
-                () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Legalpersonpage()),
-                  );
-                },
-              ),
-              _buildOption(
-                context,
-                'ตัวแทน (Agent)',
-                () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Agentpage()),
-                  );
-                },
-              ),
-            ],
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
+          textAlign: TextAlign.center,
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildOption(
+              context,
+              'บุคคลทั่วไป',
+              () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => registerpage()),
+                );
+              },
+            ),
+            _buildOption(
+              context,
+              'นิติบุคคล',
+              () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Legalpersonpage()),
+                );
+              },
+            ),
+            _buildOption(
+              context,
+              'ตัวแทน (Agent)',
+              () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Agentpage()),
+                );
+              },
+            ),
+          ],
         ),
       );
     },
@@ -406,28 +406,25 @@ void _showSelectionDialog(BuildContext context) {
 }
 
 Widget _buildOption(BuildContext context, String title, VoidCallback onTap) {
-  final size = MediaQuery.of(context).size;
   return Container(
-    width: size.width * 0.9,
-    height: size.height * 0.07,
     margin: const EdgeInsets.symmetric(vertical: 8),
     decoration: BoxDecoration(
-      border: Border.all(color: Colors.red, width: 2),
+      border: Border.all(color: red1, width: 1),
       borderRadius: BorderRadius.circular(15),
     ),
-    child: Center(
-      child: ListTile(
-        title: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-                fontSize: 16,
-                color: red1,
-                fontWeight: FontWeight.bold),
+    child: ListTile(
+      title: Center(
+        child: Text(
+          title,
+          style: TextStyle(
+            fontSize: 16,
+            color: red1, // กำหนดสีตัวหนังสือให้เป็นสีแดง
+            fontWeight: FontWeight.bold,
           ),
         ),
-        onTap: onTap,
       ),
+      onTap: onTap,
     ),
   );
 }
+

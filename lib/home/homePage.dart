@@ -16,6 +16,7 @@ import 'package:cargoshipping/home/widgets/payment.dart';
 import 'package:cargoshipping/home/widgets/searchshowpage.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:cargoshipping/home/widgets/shippingimportrate.dart';
+import 'package:cargoshipping/home/widgets/tegmallpage.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
@@ -36,8 +37,6 @@ class _HomePageState extends State<HomePage> {
   double appBarOpacity = 0.0;
   Color searchBarColor = Colors.transparent;
 
-  
-
   @override
   void initState() {
     super.initState();
@@ -56,7 +55,6 @@ class _HomePageState extends State<HomePage> {
         });
       }
     });
-    
   }
 
   @override
@@ -118,10 +116,10 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(size.height * 0.005),
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: Colors.grey,
-                          width: size.width * 0.001),
+                          color: Colors.grey, width: size.width * 0.001),
                       borderRadius: BorderRadius.circular(15),
-                      color: Color.lerp(Colors.transparent, Colors.white, appBarOpacity),
+                      color: Color.lerp(
+                          Colors.transparent, Colors.white, appBarOpacity),
                     ),
                     child: IntrinsicHeight(
                       child: Row(
@@ -154,8 +152,8 @@ class _HomePageState extends State<HomePage> {
                                       Border.all(color: Colors.white, width: 2),
                                 ),
                                 child: Padding(
-                                  padding:
-                                     EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: size.width * 0.01),
                                   child: DropdownButton2<String>(
                                     isExpanded: true,
                                     hint: Align(
@@ -338,24 +336,24 @@ class _HomePageState extends State<HomePage> {
                               size: size,
                               title: importwidget[index]['name'],
                               imagePath: importwidget[index]['images'],
+                              id: importwidget[index]['id'],
                               press: () {
                                 if (index == 0) {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          Paperless(), 
+                                      builder: (context) => Paperless(),
                                     ),
                                   );
                                 }
-                                // if (index == 1) {
-                                //   Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => Correctimportpage(),
-                                //     ),
-                                //   );
-                                // }
+                                if (index == 1) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Tegmallpage(),
+                                    ),
+                                  );
+                                }
                               },
                             ),
                           ),
