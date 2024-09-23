@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                                 border: InputBorder.none,
                                 hintText: 'ค้นหาสินค้า',
                                 hintStyle:
-                                    TextStyle(fontWeight: FontWeight.bold),
+                                    TextStyle(),
                                 contentPadding: EdgeInsets.only(
                                     left: size.width * 0.02,
                                     bottom: size.height * 0.01),

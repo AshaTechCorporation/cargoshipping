@@ -21,6 +21,7 @@ class _WaitsumcardState extends State<Waitsumcard> {
           children: [
             compete(size: MediaQuery.of(context).size),
             preparetosend(size: MediaQuery.of(context).size),
+            
           ],
         ),
       ),

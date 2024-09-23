@@ -4,7 +4,6 @@ import 'package:cargoshipping/Itempage/widgets/iamgesitem.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class itempage extends StatefulWidget {
   const itempage(
@@ -165,7 +164,7 @@ class _itempageState extends State<itempage> {
                     ),
                   ),
                   SizedBox(height: size.height * 0.001),
-                  Container(
+                  SizedBox(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: widget.size.height * 0.001,
@@ -615,6 +614,7 @@ class _itempageState extends State<itempage> {
       bottomNavigationBar: SizedBox(
         height: size.height * 0.105,
         child: BottomAppBar(
+          color: white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[

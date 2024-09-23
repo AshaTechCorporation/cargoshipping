@@ -13,6 +13,7 @@ class _ItemfavState extends State<Itemfav> {
   // เก็บสถานะการเลือกของแต่ละร้านค้าและสินค้าภายในร้านค้า
   List<bool> storeSelections = [false];
   late List<List<bool>> storeItemSelections;
+  List<List<int>> quantities = [];
 
   @override
   void initState() {
@@ -23,6 +24,11 @@ class _ItemfavState extends State<Itemfav> {
     storeItemSelections = itemfav
         .map<List<bool>>(
             (store) => List.generate(store['storeItems'].length, (_) => false))
+        .toList();
+          // Initialize quantities with default value of 1 for each item
+    quantities = itemfav
+        .map<List<int>>(
+            (store) => List.generate(store['storeItems'].length, (_) => 1))
         .toList();
   }
 
@@ -40,6 +46,31 @@ class _ItemfavState extends State<Itemfav> {
       storeItemSelections[storeIndex][itemIndex] = isSelected ?? false;
       storeSelections[storeIndex] =
           storeItemSelections[storeIndex].every((item) => item);
+    });
+  }
+
+  void _deleteStore(int storeIndex) {
+    setState(() {
+      itemfav = List<Map<String, dynamic>>.from(itemfav);
+      itemfav.removeAt(storeIndex);
+      storeSelections.removeAt(storeIndex);
+      storeItemSelections.removeAt(storeIndex);
+    });
+  }
+
+  void _deleteStoreItem(int storeIndex, int itemIndex) {
+    setState(() {
+     itemfav = List<Map<String, dynamic>>.from(itemfav);
+    itemfav[storeIndex]['storeItems'] = List<Map<String, dynamic>>.from(itemfav[storeIndex]['storeItems']);
+    itemfav[storeIndex]['storeItems'].removeAt(itemIndex);
+    storeItemSelections[storeIndex].removeAt(itemIndex);
+
+    if (itemfav[storeIndex]['storeItems'].isEmpty) {
+      _deleteStore(storeIndex);
+    } else {
+      storeSelections[storeIndex] =
+          storeItemSelections[storeIndex].every((item) => item);
+    }
     });
   }
 
@@ -92,7 +123,7 @@ class _ItemfavState extends State<Itemfav> {
                         ),
                         const Spacer(),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () => _deleteStore(storeIndex),
                           child: Text(
                             'ลบ',
                             style: TextStyle(color: greyuserinfo),
@@ -127,8 +158,8 @@ class _ItemfavState extends State<Itemfav> {
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
         child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: size.width * 0.01,vertical: size.height * 0.006),
+          padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.01, vertical: size.height * 0.006),
           child: Container(
             height: size.height * 0.1,
             decoration: BoxDecoration(
@@ -202,11 +233,14 @@ class _ItemfavState extends State<Itemfav> {
         ),
         Column(
           children: [
-            const Text(
-              'ลบ',
-              style: TextStyle(
-                color: Colors.grey,
-                fontWeight: FontWeight.bold,
+            InkWell(
+              onTap: () => _deleteStoreItem(storeIndex, itemIndex),
+              child: const Text(
+                'ลบ',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 8),

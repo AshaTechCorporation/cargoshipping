@@ -363,7 +363,7 @@ const List<Map<String, dynamic>> listallProducts = [
   }
 ];
 
-const List<Map<String, dynamic>> itemfav = [
+ List<Map<String, dynamic>> itemfav = [
   {
     'storeName': '1688严选店',
     'storeItems': [
@@ -636,3 +636,11 @@ const List<Map<String, dynamic>> correctimporttrack = [
     'process': 'x',
   },
 ];
+
+ final List<String> imgList = [
+    'https://via.placeholder.com/600x200.png?text=Image+1',
+    'https://via.placeholder.com/600x200.png?text=Image+2',
+    'https://via.placeholder.com/600x200.png?text=Image+3',
+    'https://via.placeholder.com/600x200.png?text=Image+4',
+    'https://via.placeholder.com/600x200.png?text=Image+5',
+  ];

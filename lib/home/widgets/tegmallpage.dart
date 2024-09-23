@@ -1,10 +1,14 @@
 import 'dart:developer';
 
+import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/detailproduct.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
-import 'package:cargoshipping/home/widgets/searchshowpage.dart';
+import 'package:cargoshipping/home/widgets/OurItem.dart';
+import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +21,7 @@ class Tegmallpage extends StatefulWidget {
 
 class _TegmallpageState extends State<Tegmallpage> {
   List<Categories> categories = [];
-
+  int _currentIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -181,11 +185,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Searchshowpage()));
+                                 //เมื่อกด ค้นหา จะแสดงสินค้า ไม่ได้ไปหน้าอื่น
                                 },
                                 child: Container(
                                   height: size.height * 0.05,
@@ -285,6 +285,164 @@ class _TegmallpageState extends State<Tegmallpage> {
               ),
             ),
           )),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CarouselSlider(
+              options: CarouselOptions(
+                height: size.height * 0.15,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+              items: imgList
+                  .map((item) => Center(
+                        child:
+                            Image.network(item, fit: BoxFit.cover, width: 1000),
+                      ))
+                  .toList(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imgList.asMap().entries.map((entry) {
+                return GestureDetector(
+                  onTap: () => _onDotTapped(entry.key),
+                  child: Container(
+                    width: size.width * 0.015,
+                    height: size.height * 0.01,
+                    margin:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black)
+                          .withOpacity(_currentIndex == entry.key ? 0.9 : 0.4),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+            Image.asset('assets/images/tegmall.png'),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
+              child: Row(
+                children: [
+                  Text(
+                    'หมวดหมู่สินค้าแนะนำ',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Spacer(), // เว้นที่ระหว่างข้อความ
+                  Text(
+                    'หมวดหมู่ทั้งหมด',
+                    style: TextStyle(
+                        fontSize: 12, color: red1, fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+            ),
+            categories.isEmpty
+                ? SizedBox()
+                : SizedBox(
+                    height: size.height * 0.31,
+                    child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 1.0,
+                      ),
+                      itemCount: categories.length,
+                      itemBuilder: (context, index) {
+                        return ProductCategories(
+                          size: size,
+                          title: categories[index].name!,
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Detailproduct(
+                                  categories: categories[index],
+                                ),
+                              ),
+                            );
+                          },
+                          imagespath: 'assets/images/noimages.jpg',
+                        );
+                      },
+                    ),
+                  ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: RichText(
+                        text: TextSpan(
+                            text: 'สินค้าแนะนำ',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                            children: <TextSpan>[
+                          TextSpan(
+                            text: ' จาก 1668',
+                            style: TextStyle(
+                                color: red1,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          )
+                        ])),
+                  ),
+                ],
+              ),
+            ),
+            Wrap(
+              spacing: 20,
+              runSpacing: 10,
+              children: List.generate(
+                  listProducts.length,
+                  (index) => Ouritem(
+                        image: listProducts[index]['image'],
+                        sale: listProducts[index]['sale'],
+                        send: listProducts[index]['send'],
+                        size: MediaQuery.of(context).size,
+                        price: (listProducts[index]['price'] as num).toDouble(),
+                        detail: listProducts[index]['detail'],
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => itempage(
+                                size: size,
+                                title: listProducts[index]['detail'],
+                                price: (listProducts[index]['price'] as num)
+                                    .toDouble(),
+                                products: listProducts[index],
+                                press: () {},
+                              ),
+                            ),
+                          );
+                        },
+                      )),
+            ),
+          ],
+        ),
+      ),
     );
+  }
+
+  void _onDotTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }

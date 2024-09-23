@@ -2,7 +2,7 @@ import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class StoreItem extends StatelessWidget {
+class StoreItem extends StatefulWidget {
   const StoreItem({
     super.key,
     required this.storeName,
@@ -22,15 +22,44 @@ class StoreItem extends StatelessWidget {
   final VoidCallback onDeleteStore;
   final void Function(int) onDeleteProduct;
 
+  @override
+  State<StoreItem> createState() => _StoreItemState();
+}
+
+class _StoreItemState extends State<StoreItem> {
+  List<int> quantities = []; // สร้างตัวแปรเก็บจำนวนสินค้าแต่ละรายการ
+
+  @override
+  void initState() {
+    super.initState();
+    // ตั้งค่าเริ่มต้นจำนวนสินค้าสำหรับแต่ละรายการ
+    quantities = List<int>.filled(widget.productItemsSelection.length, 1);
+  }
+
+  void _incrementQuantity(int index) {
+    setState(() {
+      quantities[index]++;
+    });
+  }
+
+  void _decrementQuantity(int index) {
+    setState(() {
+      if (quantities[index] > 1) {
+        quantities[index]--;
+      }
+    });
+  }
+
   Widget _buildProductItem({
     required String image,
     required String name,
     required String price,
-    required String quantity,
+    required int quantity, // เปลี่ยนเป็น int
     required bool isSelected,
     required ValueChanged<bool?> onSelectionChanged,
     required VoidCallback onDelete,
-    String dropdownValue = 'สีขาวมุก',
+    required int index, // รับ index โดยตรง
+    String dropdownValue = 'สีขาวมุก', required ValueKey<int> key,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 1.0),
@@ -41,7 +70,7 @@ class StoreItem extends StatelessWidget {
             value: isSelected,
             onChanged: onSelectionChanged,
           ),
-          SizedBox(
+          const SizedBox(
             width: 7,
           ),
           ClipRRect(
@@ -90,13 +119,13 @@ class StoreItem extends StatelessWidget {
                           horizontal: 10.0, vertical: 4.0),
                       decoration: BoxDecoration(
                         color: background,
-                        borderRadius: BorderRadius.circular(4.0), // ขอบมน
+                        borderRadius: BorderRadius.circular(4.0),
                       ),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           value: dropdownValue,
                           icon: const Icon(Icons.arrow_drop_down,
-                              color: Colors.grey), // ไอคอนสีเทาเข้ม
+                              color: Colors.grey),
                           iconSize: 20,
                           elevation: 16,
                           style: const TextStyle(
@@ -127,14 +156,14 @@ class StoreItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      price,
+                      '¥${(double.parse(price) * quantity).toStringAsFixed(2)}',
                       style: const TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
                     ),
-                    _buildQuantitySelector(quantity),
+                    _buildQuantitySelector(quantity, index),
                   ],
                 ),
               ],
@@ -145,16 +174,16 @@ class StoreItem extends StatelessWidget {
     );
   }
 
-  Widget _buildQuantitySelector(String quantity) {
+  Widget _buildQuantitySelector(int quantity, int index) {
     return Row(
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: () => _decrementQuantity(index),
           icon: Image.asset('assets/icons/dec.png'),
         ),
-        Text(quantity, style: const TextStyle(fontSize: 12)),
+        Text(quantity.toString(), style: const TextStyle(fontSize: 12)),
         IconButton(
-          onPressed: () {},
+          onPressed: () => _incrementQuantity(index),
           icon: Image.asset('assets/icons/inc.png'),
         ),
       ],
@@ -180,14 +209,14 @@ class StoreItem extends StatelessWidget {
               Row(
                 children: [
                   CustomCheckbox(
-                    value: isSelected,
-                    onChanged: onSelectionChanged,
+                    value: widget.isSelected,
+                    onChanged: widget.onSelectionChanged,
                   ),
                   SizedBox(
                     width: size.width * 0.03,
                   ),
                   Text(
-                    storeName,
+                    widget.storeName,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -195,7 +224,7 @@ class StoreItem extends StatelessWidget {
                   ),
                   const Spacer(),
                   TextButton(
-                    onPressed: onDeleteStore,
+                    onPressed: widget.onDeleteStore,
                     child: const Text(
                       'ลบ',
                       style: TextStyle(
@@ -207,16 +236,18 @@ class StoreItem extends StatelessWidget {
                 ],
               ),
               const Divider(),
-              for (int i = 0; i < productItemsSelection.length; i++)
+              for (int i = 0; i < widget.productItemsSelection.length; i++)
                 _buildProductItem(
+                  key: ValueKey(i), // เพิ่ม Key เพื่อเพิ่มประสิทธิภาพ
                   image: 'assets/images/shelf.png',
                   name: 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ำ...',
-                  price: '¥4.88',
-                  quantity: '50',
-                  isSelected: productItemsSelection[i],
+                  price: '4.88',
+                  quantity: quantities[i], // ส่งเป็น int
+                  isSelected: widget.productItemsSelection[i],
                   onSelectionChanged: (isSelected) =>
-                      onProductSelectionChanged(i, isSelected),
-                  onDelete: () => onDeleteProduct(i),
+                      widget.onProductSelectionChanged(i, isSelected),
+                  onDelete: () => widget.onDeleteProduct(i),
+                  index: i, // ส่งค่า index โดยตรง
                   dropdownValue: i == 0 ? 'สีขาวมุก' : 'สีแดง',
                 ),
             ],
