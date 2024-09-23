@@ -39,6 +39,7 @@ class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
       body: SafeArea(
@@ -50,7 +51,7 @@ class _FirstPageState extends State<FirstPage> {
           : Transform.translate(
               offset: Offset(0, 22),
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   onItemSelect(2);
                 },
                 child: Container(
@@ -88,89 +89,84 @@ class _FirstPageState extends State<FirstPage> {
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 9, left: 1),
-                child: GestureDetector(
-                  onTap: () {
-                    onItemSelect(0);
-                  },
-                  child: selectedIndex == 0
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+              GestureDetector(
+                onTap: () {
+                  onItemSelect(0);
+                },
+                child: selectedIndex == 0
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/Frame 61.png',
+                            width: 24,
+                            height: 27,
+                          ),
+                          Text(
+                            'หน้าหลัก',
+                            style: TextStyle(fontSize: 14, color: red1),
+                          )
+                        ],
+                      )
+                    : Center(
+                        child: Column(
                           children: [
                             Image.asset(
-                              'assets/icons/Frame 61.png',
-                              width: 24,
-                              height: 27,
+                              'assets/icons/greymain.png',
+                              width: 30,
+                              height: 30,
                             ),
                             Text(
                               'หน้าหลัก',
-                              style: TextStyle(fontSize: 12, color: red1),
+                              style: TextStyle(fontSize: 14),
                             )
                           ],
-                        )
-                      : Center(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'assets/icons/greymain.png',
-                                width: 24,
-                                height: 27,
-                              ),
-                              Text(
-                                'หน้าหลัก',
-                                style: TextStyle(fontSize: 12),
-                              )
-                            ],
-                          ),
                         ),
-                ),
+                      ),
               ),
               SizedBox(
                 width: 1,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 9),
-                child: GestureDetector(
-                  onTap: () {
-                    onItemSelect(1);
-                  },
-                  child: selectedIndex == 1
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+              GestureDetector(
+                onTap: () {
+                  onItemSelect(1);
+                },
+                child: selectedIndex == 1
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/redgroup.png',
+                            width: 30,
+                            height: 30,
+                          ),
+                          Text(
+                            'หมวดหมู่สินค้า',
+                            style: TextStyle(fontSize: 14, color: red1),
+                          )
+                        ],
+                      )
+                    : Center(
+                        child: Column(
                           children: [
                             Image.asset(
-                              'assets/icons/redgroup.png',
+                              'assets/icons/group.png',
                               width: 30,
                               height: 30,
                             ),
                             Text(
                               'หมวดหมู่สินค้า',
-                              style: TextStyle(fontSize: 12, color: red1),
+                              style: TextStyle(fontSize: 14),
                             )
                           ],
-                        )
-                      : Center(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'assets/icons/group.png',
-                                width: 30,
-                                height: 30,
-                              ),
-                              Text(
-                                'หมวดหมู่สินค้า',
-                                style: TextStyle(fontSize: 12),
-                              )
-                            ],
-                          ),
                         ),
-                ),
+                      ),
               ),
               SizedBox(
                 width: 50,
@@ -207,7 +203,7 @@ class _FirstPageState extends State<FirstPage> {
                           ],
                         )),
               SizedBox(
-                width: 10,
+                width: 20,
               ),
               GestureDetector(
                   onTap: () {
@@ -223,7 +219,7 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'รถเข็น',
-                              style: TextStyle(color: red1),
+                              style: TextStyle(color: red1, fontSize: 14),
                             )
                           ],
                         )
@@ -236,12 +232,12 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'รถเข็น',
-                              style: TextStyle(),
+                              style: TextStyle(fontSize: 14),
                             )
                           ],
                         )),
               SizedBox(
-                width: 30,
+                width: 35,
               ),
               GestureDetector(
                   onTap: () {
@@ -252,12 +248,12 @@ class _FirstPageState extends State<FirstPage> {
                           children: [
                             Image.asset(
                               'assets/icons/reduser.png',
-                              width: 27, // Adjust the width as needed
-                              height: 27, // Adjust the height as needed
+                              width: 30, // Adjust the width as needed
+                              height: 30, // Adjust the height as needed
                             ),
                             Text(
                               'บัญชี',
-                              style: TextStyle(color: red1),
+                              style: TextStyle(color: red1, fontSize: 14),
                             )
                           ],
                         )
@@ -265,12 +261,18 @@ class _FirstPageState extends State<FirstPage> {
                           children: [
                             Image.asset(
                               'assets/icons/user.png',
-                              width: 27, // Adjust the width as needed
-                              height: 27, // Adjust the height as needed
+                              width: 30, // Adjust the width as needed
+                              height: 30, // Adjust the height as needed
                             ),
-                            Text('บัญชี')
+                            Text(
+                              'บัญชี',
+                              style: TextStyle(fontSize: 14),
+                            )
                           ],
                         )),
+                SizedBox(
+                width: 10,
+              ),
             ],
           ),
         ),
