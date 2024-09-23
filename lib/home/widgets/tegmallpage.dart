@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/detailproduct.dart';

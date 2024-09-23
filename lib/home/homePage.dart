@@ -131,8 +131,7 @@ class _HomePageState extends State<HomePage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'ค้นหาสินค้า',
-                                hintStyle:
-                                    TextStyle(),
+                                hintStyle: TextStyle(),
                                 contentPadding: EdgeInsets.only(
                                     left: size.width * 0.02,
                                     bottom: size.height * 0.01),
@@ -750,6 +749,132 @@ class _HomePageState extends State<HomePage> {
               height: size.height * 0.01,
             ),
             Shippingimportratewidget(size: size),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Stack(
+                children: [
+                  Image.asset('assets/images/16.png'),
+                  Positioned(
+                      top: size.height * 0.06,
+                      left: size.width * 0.05,
+                      child: Row(
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: 'ประเภท ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'A',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.37,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.18,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      )),
+                      Positioned(
+                        top: size.height * 0.095,
+                        left: size.width * 0.05,
+                        child: Row(
+                        children: [
+                          Text('สินค้าทั่วไป',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.black
+                          ),)
+                        ],
+                      )),
+                      Positioned(
+                      top: size.height * 0.06,
+                      left: size.width * 0.05,
+                      child: Row(
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: 'ประเภท ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'A',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.37,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.18,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      )),
+                      Positioned(
+                        top: size.height * 0.095,
+                        left: size.width * 0.05,
+                        child: Row(
+                        children: [
+                          Text('สินค้าทั่วไป',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.black
+                          ),)
+                        ],
+                      ))
+                ],
+              ),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: size.height * 0.02, horizontal: size.width * 0.035),
