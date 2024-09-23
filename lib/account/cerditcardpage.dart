@@ -33,8 +33,9 @@ class _CerditcardpageState extends State<Cerditcardpage> {
       body: Center(
         child: Column(
           children: [
+            SizedBox(height: size.height * 0.02,),
             Container(
-              height: size.height * 0.23,
+              height: size.height * 0.28,
               width: size.width * 0.95,
               padding: EdgeInsets.all(10.0),
               decoration: BoxDecoration(

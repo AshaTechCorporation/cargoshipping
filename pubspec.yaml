@@ -39,6 +39,7 @@ dependencies:
   fan_carousel_image_slider: ^1.0.1
   collection: ^1.18.0
   cached_network_image: ^3.3.1
+  flutter_floating_bottom_bar: ^1.2.1+1
 
   #สไลบราลี่ที่ใช้ในการติดต่อ เอพีไอ และสร้างโมเดลข้อมูล
   build_runner: ^2.4.9
