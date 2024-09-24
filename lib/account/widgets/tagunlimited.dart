@@ -60,14 +60,17 @@ class Tagunlimited extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Image.asset('assets/icons/freeshipping.png'),
+                      Image.asset(
+                        'assets/icons/freeshipping.png',
+                        height: size.height * 0.06,
+                      ),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
                       Text(
                         'ส่งในกทม. และปริมณฑล ฟรี',
-                        style:
-                            TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -76,14 +79,15 @@ class Tagunlimited extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Image.asset('assets/icons/freevax.png'),
+                      Image.asset('assets/icons/freevax.png',
+                      height: size.height * 0.06,),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
                       Text(
                         'ฟรีค่าธรรมเนียมฝากสั่ง',
-                        style:
-                            TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -92,14 +96,15 @@ class Tagunlimited extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Image.asset('assets/icons/freeopening.png'),
+                      Image.asset('assets/icons/freeopening.png',
+                      height: size.height * 0.06,),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
                       Text(
                         'ฟรีค่าเปิดกระสอบขั้นต่ำการนำเข้า',
-                        style:
-                            TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -108,7 +113,8 @@ class Tagunlimited extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Image.asset('assets/icons/tegreward.png'),
+                      Image.asset('assets/icons/tegreward.png',
+                      height: size.height * 0.06,),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
@@ -144,7 +150,9 @@ class Tagunlimited extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(top: 15.0),
-                              child: Image.asset('assets/images/greencheck.png'),
+                              child:
+                                  Image.asset('assets/images/greencheck.png',
+                                  height: size.height * 0.025,),
                             ),
                             SizedBox(width: size.width * 0.03),
                             Expanded(
@@ -173,7 +181,8 @@ class Tagunlimited extends StatelessWidget {
                         SizedBox(height: size.height * 0.019),
                         Row(
                           children: [
-                            Image.asset('assets/images/greencheck.png'),
+                            Image.asset('assets/images/greencheck.png',
+                            height: size.height * 0.025,),
                             SizedBox(width: size.width * 0.03),
                             Text(
                               'ยกเลิกได้ทุกเมื่อ',
@@ -194,18 +203,18 @@ class Tagunlimited extends StatelessWidget {
                     height: size.height * 0.07,
                     width: size.width * 0.9,
                     decoration: BoxDecoration(
-                      color: red1,
-                      borderRadius: BorderRadius.circular(15)
-                    ),
+                        color: red1, borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('ลองใช้เลย',style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: white
-                        ),)
+                        Text(
+                          'ลองใช้เลย',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: white),
+                        )
                       ],
                     ),
                   ),

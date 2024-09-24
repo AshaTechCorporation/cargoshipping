@@ -78,10 +78,11 @@ class _SearchshowpageState extends State<Searchshowpage> {
                               border: InputBorder.none,
                               hintText: 'ค้นหาสินค้า',
                               hintStyle: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 13),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500),
                               contentPadding: EdgeInsets.only(
                                   left: size.width * 0.02,
-                                  bottom: size.height * 0.01),
+                                  bottom: size.height * 0.019),
                             ),
                           ),
                         ),
@@ -256,7 +257,7 @@ class _SearchshowpageState extends State<Searchshowpage> {
                       });
                     },
                     child: Image.asset('assets/icons/thai.png',
-                        height: size.height * 0.023),
+                        height: size.height * 0.0237),
                   ),
                 ),
               ],
@@ -282,11 +283,14 @@ class _SearchshowpageState extends State<Searchshowpage> {
                           borderRadius: BorderRadius.circular(5)
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('ราคา',style: TextStyle(
                               fontSize: 13,color: headingtext,fontWeight: FontWeight.bold
                             ),),
+                            SizedBox(
+                              width: size.width * 0.015,
+                            ),
                             Image.asset('assets/icons/updownprice.png',height: size.height * 0.019,)
                           ],
                         ),
@@ -305,11 +309,14 @@ class _SearchshowpageState extends State<Searchshowpage> {
                           borderRadius: BorderRadius.circular(5)
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('ตัวกรอง',style: TextStyle(
                               fontSize: 13,color: headingtext,fontWeight: FontWeight.bold
                             ),),
+                            SizedBox(
+                              width: size.width * 0.005,
+                            ),
                             Image.asset('assets/icons/fliter.png',height: size.height * 0.02,)
                           ],
                         ),
@@ -318,8 +325,8 @@ class _SearchshowpageState extends State<Searchshowpage> {
                   ),
                 ),
                 Wrap(
-              spacing: 20,
-              runSpacing: 10,
+              spacing: 15,
+              runSpacing: 15,
               children: List.generate(
                   listProducts.length,
                   (index) => Ouritem(

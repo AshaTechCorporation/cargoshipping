@@ -144,6 +144,7 @@ class _CartPageState extends State<CartPage> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
+            fontSize: 17
           ),
         ),
       ),

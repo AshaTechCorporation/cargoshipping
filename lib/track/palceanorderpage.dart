@@ -71,7 +71,7 @@ class Palceanorderpage extends StatelessWidget {
                         child: Row(
                           children: [
                             Image.asset(
-                              order['images'],
+                              order['images'],height: size.height * 0.045,
                             ),
                             SizedBox(width: size.width * 0.03),
                             Text(

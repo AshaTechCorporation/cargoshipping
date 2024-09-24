@@ -64,7 +64,11 @@ const List<Map<String, dynamic>> myorder = [
 ];
 
 const List<Map<String, dynamic>> orderlist = [
-  {'id': 1, 'name': 'ถึงโกดัง', 'images': 'assets/images/warehousechinese.png'},
+  {
+    'id': 1,
+    'name': 'ถึงโกดังจีน',
+    'images': 'assets/images/warehousechinese.png'
+  },
   {
     'id': 2,
     'name': 'อยู่ระหว่างการขนส่ง',
@@ -363,7 +367,7 @@ const List<Map<String, dynamic>> listallProducts = [
   }
 ];
 
- List<Map<String, dynamic>> itemfav = [
+List<Map<String, dynamic>> itemfav = [
   {
     'storeName': '1688严选店',
     'storeItems': [
@@ -518,7 +522,7 @@ final Map<String, String> yiwuInfo = {
   '手机': '18520290139',
 };
 
-List<Map<String, dynamic>> guidelist= [
+List<Map<String, dynamic>> guidelist = [
   {
     'image': 'assets/images/tag1.png',
     'title': 'วิธี ...',
@@ -584,16 +588,16 @@ const List<Map<String, dynamic>> tracktransport = [
     'title': 'อยู่ระหว่างการขนส่ง',
     'process': 'x',
   },
-  {
+    {
     'id': 3,
-    'images': 'assets/icons/waitingorderpayment.png',
-    'title': 'รอชำระคำขนส่ง',
+    'images': 'assets/icons/atwerehousethai.png',
+    'title': 'ถึงโกดังไทย',
     'process': 'x',
   },
   {
     'id': 4,
-    'images': 'assets/icons/atwerehousethai.png',
-    'title': 'ถึงโกดังไทย',
+    'images': 'assets/icons/waitingorderpayment.png',
+    'title': 'รอชำระคำขนส่ง',
     'process': 'x',
   },
   {
@@ -637,10 +641,10 @@ const List<Map<String, dynamic>> correctimporttrack = [
   },
 ];
 
- final List<String> imgList = [
-    'https://via.placeholder.com/600x200.png?text=Image+1',
-    'https://via.placeholder.com/600x200.png?text=Image+2',
-    'https://via.placeholder.com/600x200.png?text=Image+3',
-    'https://via.placeholder.com/600x200.png?text=Image+4',
-    'https://via.placeholder.com/600x200.png?text=Image+5',
-  ];
+final List<String> imgList = [
+  'https://via.placeholder.com/600x200.png?text=Image+1',
+  'https://via.placeholder.com/600x200.png?text=Image+2',
+  'https://via.placeholder.com/600x200.png?text=Image+3',
+  'https://via.placeholder.com/600x200.png?text=Image+4',
+  'https://via.placeholder.com/600x200.png?text=Image+5',
+];

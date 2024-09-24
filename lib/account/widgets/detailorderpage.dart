@@ -1,4 +1,7 @@
+import 'package:cargoshipping/account/mapTest.dart';
+import 'package:cargoshipping/account/widgets/shipreceiptpage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/widgets/reportformpage.dart';
 import 'package:flutter/material.dart';
 
 class Detailorderpage extends StatelessWidget {
@@ -44,7 +47,10 @@ class Detailorderpage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            print('object');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MapTest()));
                           },
                           child: Container(
                             height: size.height * 0.027,
@@ -175,8 +181,7 @@ class Detailorderpage extends StatelessWidget {
                     child: Row(
                       children: [
                         Padding(
-                          padding:
-                              EdgeInsets.only(bottom: size.height * 0.02),
+                          padding: EdgeInsets.only(bottom: size.height * 0.02),
                           child: Text(
                             'ที่อยู่จัดส่ง',
                             style: TextStyle(
@@ -945,80 +950,106 @@ class Detailorderpage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: white,
-        elevation: 10,
-        shape: CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset(
-                      'assets/icons/bottomreport.png',
-                      height: size.height * 0.03,
+      bottomNavigationBar: SizedBox(
+        height: size.height * 0.087,
+        child: BottomAppBar(
+          color: white,
+          elevation: 10,
+          shape: CircularNotchedRectangle(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReportFormPage(),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                          'assets/icons/bottomreport.png',
+                          height: size.height * 0.03,
+                        ),
+                        SizedBox(height: size.height * 0.008),
+                        Text('แจ้งปัญหา',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600)),
+                      ],
                     ),
-                    SizedBox(height: size.height * 0.008),
-                    Text('แจ้งปัญหา',
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: headingtext,
-                            fontWeight: FontWeight.w600)),
-                  ],
-                ),
-                SizedBox(
-                  width: size.width * 0.06,
-                ),
-                Container(
-                  height: size.height * 0.1,
-                  width: size.width * 0.002,
-                  color: Colors.grey,
-                ),
-                SizedBox(
-                  width: size.width * 0.06,
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset(
-                      'assets/icons/printreport.png',
-                      height: size.height * 0.03,
-                    ),
-                    SizedBox(height: size.height * 0.008),
-                    Text('พิมใบเสร็จส่งของ',
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: headingtext,
-                            fontWeight: FontWeight.w600)),
-                  ],
-                ),
-                SizedBox(
-                  width: size.width * 0.04,
-                ),
-                Container(
-                  height: size.height * 0.068,
-                  width: size.width * 0.42,
-                  decoration: BoxDecoration(
-                      color: red1, borderRadius: BorderRadius.circular(15)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'ยืนยันการรับสินค้า',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: white),
-                      )
-                    ],
                   ),
-                )
-              ],
-            ),
-          ],
+                  SizedBox(
+                    width: size.width * 0.06,
+                  ),
+                  Container(
+                    height: size.height * 0.1,
+                    width: size.width * 0.002,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(
+                    width: size.width * 0.06,
+                  ),
+                  SizedBox(
+                    width: size.width * 0.15,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                          'assets/icons/printreport.png',
+                          height: size.height * 0.03,
+                        ),
+                        SizedBox(height: size.height * 0.008),
+                        Text('เปิดบิล',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600)),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.width * 0.04,
+                  ),
+                  InkWell(
+                    onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Shipreceiptpage(),
+                          ),
+                        );
+                    },
+                    child: Container(
+                      height: size.height * 0.065,
+                      width: size.width * 0.485,
+                      decoration: BoxDecoration(
+                          color: red1, borderRadius: BorderRadius.circular(15)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'พิมใบเสร็จค่าขนส่ง',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: white),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

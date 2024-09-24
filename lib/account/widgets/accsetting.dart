@@ -184,8 +184,7 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: GestureDetector(
                   onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MapTest()));
+                    
                   },
                   child: Row(
                     children: [

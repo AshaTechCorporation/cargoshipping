@@ -85,7 +85,7 @@ class _TrackPageState extends State<TrackPage>
                       child: GestureDetector(
                         onTap: () {},
                         child: Container(
-                          height: size.height * 0.035,
+                          height: size.height * 0.037,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: red1,

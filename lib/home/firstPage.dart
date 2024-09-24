@@ -226,7 +226,7 @@ class _FirstPageState extends State<FirstPage> {
                       : Column(
                           children: [
                             Image.asset(
-                              'assets/icons/shipping.png',
+                              'assets/icons/addtocart.png',
                               width: 30, // Adjust the width as needed
                               height: 30, // Adjust the height as needed
                             ),

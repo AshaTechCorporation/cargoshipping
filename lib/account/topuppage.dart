@@ -14,6 +14,7 @@ class _TopuppageState extends State<Topuppage> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,15 +27,13 @@ class _TopuppageState extends State<Topuppage> {
           children: [
             Row(
               children: [
-                SizedBox(
-                  width: 25,
-                ),
+                SizedBox(width: size.width * 0.055),
                 Image.asset(
                   'assets/icons/qrcode.png',
-                  height: 20,
+                  height: size.height * 0.028,
                 ),
                 SizedBox(
-                  width: 10,
+                  width: size.width * 0.03,
                 ),
                 Text(
                   'QR พร้อมเพย์',
@@ -52,15 +51,15 @@ class _TopuppageState extends State<Topuppage> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: size.height * 0.01,
             ),
             Container(
-              width: 380,
+              width: size.width * 0.93,
               height: 1,
-              color: Colors.black,
+              color: Colors.grey,
             ),
             SizedBox(
-              height: 15,
+              height: size.height * 0.02,
             ),
             InkWell(
               onTap: () {
@@ -82,8 +81,14 @@ class _TopuppageState extends State<Topuppage> {
                 },
                 child: Row(
                   children: [
-                    SizedBox(width: 20),
-                    Image.asset('assets/icons/mobilebank.png'),
+                    SizedBox(width: size.width * 0.05),
+                    Image.asset(
+                      'assets/icons/mobilebank.png',
+                      height: size.height * 0.03,
+                    ),
+                    SizedBox(
+                      width: size.width * 0.03,
+                    ),
                     Text(
                       'โอนเงินผ่านแอป Mobile Banking',
                       style: TextStyle(fontSize: 13),
@@ -99,9 +104,9 @@ class _TopuppageState extends State<Topuppage> {
               height: 15,
             ),
             Container(
-              width: 380,
+              width: size.width * 0.93,
               height: 1,
-              color: Colors.black,
+              color: Colors.grey,
             ),
             SizedBox(
               height: 15,

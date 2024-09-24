@@ -111,10 +111,10 @@ class _TegmallpageState extends State<Tegmallpage> {
                                     border: InputBorder.none,
                                     hintText: 'ค้นหาสินค้า',
                                     hintStyle:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                        TextStyle(fontWeight: FontWeight.bold,fontSize: 13),
                                     contentPadding: EdgeInsets.only(
                                         left: size.width * 0.02,
-                                        bottom: size.height * 0.01),
+                                        bottom: size.height * 0.017),
                                   ),
                                 ),
                               ),

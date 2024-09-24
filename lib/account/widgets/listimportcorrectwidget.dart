@@ -26,7 +26,7 @@ class Listimportcorrectwidget extends StatelessWidget {
         children: [
           Container(
             height: size.height * 0.09,
-            width: size.width * 0.15,
+            width: size.width * 0.1,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(10.0),

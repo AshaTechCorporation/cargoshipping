@@ -24,8 +24,11 @@ class CardlistWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(
+            height: size.height * 0.01,
+          ),
           Container(
-            height: size.height * 0.09,
+            height: size.height * 0.04,
             width: size.width * 0.15,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -37,13 +40,17 @@ class CardlistWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
               child: AspectRatio(
-                aspectRatio: 5,
+                aspectRatio: 2,
                 child: Image.asset(
                   imagespath,
+                  // height:size.height * 0.1 ,
                   // fit: BoxFit.cover,
                 ),
               ),
             ),
+          ),
+          SizedBox(
+            height: size.height * 0.01,
           ),
           SizedBox(
             height: size.height * 0.05,

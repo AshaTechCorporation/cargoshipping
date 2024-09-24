@@ -726,9 +726,9 @@ class _itempageState extends State<itempage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          'assets/icons/cart.png',
-                          // height: 24,
-                          // width: 24,
+                          'assets/icons/addtocart.png',
+                          height: size.height * 0.035,
+                          width: size.width * 0.07,
                           color:
                               _selectedIndex == 0 ? Colors.black : Colors.black,
                         ),

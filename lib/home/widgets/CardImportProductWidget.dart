@@ -36,7 +36,7 @@ class CardImportProductWidget extends StatelessWidget {
             height: size.height * 0.12,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: background,
+              color: Color(0xfff7f3e9),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),

@@ -25,8 +25,8 @@ class Orderlist extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: size.height * 0.09,
-            width: size.width * 0.15,
+            height: size.height * 0.07,
+            width: size.width * 0.1,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(10.0),
