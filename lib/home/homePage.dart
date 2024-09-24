@@ -755,7 +755,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Image.asset('assets/images/16.png'),
                   Positioned(
-                      top: size.height * 0.06,
+                      top: size.height * 0.12,
                       left: size.width * 0.05,
                       child: Row(
                         children: [
@@ -769,7 +769,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'A',
+                                  text: 'C',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.red,
@@ -802,11 +802,70 @@ class _HomePageState extends State<HomePage> {
                         ],
                       )),
                       Positioned(
-                        top: size.height * 0.095,
+                        top: size.height * 0.155,
                         left: size.width * 0.05,
                         child: Row(
                         children: [
-                          Text('สินค้าทั่วไป',style: TextStyle(
+                          Text('สินค้ามาตราฐาน',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.black
+                          ),)
+                        ],
+                      )),
+                      Positioned(
+                      top: size.height * 0.185,
+                      left: size.width * 0.05,
+                      child: Row(
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: 'ประเภท ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'D',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.37,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.18,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      )),
+                      Positioned(
+                        top: size.height * 0.22,
+                        left: size.width * 0.05,
+                        child: Row(
+                        children: [
+                          Text('สินค้ามาตราฐาน',style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                             color: Colors.black
@@ -866,6 +925,65 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                         children: [
                           Text('สินค้าทั่วไป',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.black
+                          ),)
+                        ],
+                      )),
+                      Positioned(
+                      top: size.height * 0.258,
+                      left: size.width * 0.05,
+                      child: Row(
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: 'ประเภท ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'B',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.37,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.18,
+                          ),
+                          Text(
+                            '00',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      )),
+                      Positioned(
+                        top: size.height * 0.29,
+                        left: size.width * 0.05,
+                        child: Row(
+                        children: [
+                          Text('สินค้าอื่นๆ',style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                             color: Colors.black
@@ -884,7 +1002,7 @@ class _HomePageState extends State<HomePage> {
                     'หมวดหมู่สินค้า',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  Spacer(), // เว้นที่ระหว่างข้อความ
+                  Spacer(),
                   Text(
                     'หมวดหมู่ทั้งหมด',
                     style: TextStyle(
