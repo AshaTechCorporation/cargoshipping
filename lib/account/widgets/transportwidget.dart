@@ -26,7 +26,7 @@ class _TransportwidgetState extends State<Transportwidget> {
       itemBuilder: (context, index) {
         final item = transport[index];
         return Container(
-          height: size.height *0.07,
+          height: size.height *0.08,
           margin: EdgeInsets.symmetric(vertical: marginVertical, horizontal: marginHorizontal),
           padding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: paddingHorizontal),
           decoration: BoxDecoration(

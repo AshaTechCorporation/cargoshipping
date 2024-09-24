@@ -380,7 +380,7 @@ class _itempageState extends State<itempage> {
             ),
             Container(
               width: size.width * 0.95,
-              height: size.height * 0.27,
+              height: size.height * 0.28,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25), color: pinkmess),
               child: Padding(
@@ -612,7 +612,7 @@ class _itempageState extends State<itempage> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: size.height * 0.105,
+        height: size.height * 0.108,
         child: BottomAppBar(
           color: white,
           child: Row(

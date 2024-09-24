@@ -108,13 +108,13 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
                   Text(
                     'ชื่อผู้นำเข้า',
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 13.5,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.035,
+                    height: size.height * 0.042,
                     width: size.width * 0.62,
                     child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(

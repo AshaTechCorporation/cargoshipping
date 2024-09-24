@@ -41,8 +41,7 @@ class _PaperlessState extends State<Paperless> {
       appBar: AppBar(
         title: Text(
           'ขึ้นทะเบียนผู้นำเข้า',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
         ),
         backgroundColor: white,
       ),
@@ -52,10 +51,8 @@ class _PaperlessState extends State<Paperless> {
             child: SingleChildScrollView(
               padding: EdgeInsets.all(size.height * 0.01),
               child: isSubmitted
-                  ? _buildSummaryView(
-                      size) // ถ้าเป็น true จะแสดงข้อมูลที่กรอกแล้ว
-                  : _buildFormView(
-                      size), // ถ้ายังไม่กดปุ่ม จะแสดงฟอร์มกรอกข้อมูล
+                  ? _buildSummaryView(size) // ถ้าเป็น true จะแสดงข้อมูลที่กรอกแล้ว
+                  : _buildFormView(size), // ถ้ายังไม่กดปุ่ม จะแสดงฟอร์มกรอกข้อมูล
             ),
           ),
           GestureDetector(
@@ -113,12 +110,10 @@ class _PaperlessState extends State<Paperless> {
           'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน', // ใช้ชื่อเป็น hintText
           companyName, // ค่าที่จะถูกเก็บเมื่อเลือก
           ['บริษัท A', 'บริษัท B', 'บริษัท C'], // รายการชื่อบริษัท
-          (value) =>
-              setState(() => companyName = value!), // อัปเดตค่าเมื่อเลือก
+          (value) => setState(() => companyName = value!), // อัปเดตค่าเมื่อเลือก
           size,
         ),
-        _buildTextField(
-            'เลขที่ผู้เสียภาษี', (value) => taxNumber = value, size),
+        _buildTextField('เลขที่ผู้เสียภาษี', (value) => taxNumber = value, size),
         SizedBox(
           height: size.height * 0.02,
         ),
@@ -128,42 +123,36 @@ class _PaperlessState extends State<Paperless> {
             children: [
               Text(
                 'ที่อยู่บริษัทฯ ​',
-                style: TextStyle(
-                    fontSize: 13,
-                    color: headingtext,
-                    fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w500),
               ),
             ],
           ),
         ),
-        _buildDropdown(
-            'ที่อยู่บริษัทฯ',
-            province,
-            ['กรุงเทพมหานคร', 'เชียงใหม่', 'ขอนแก่น'],
-            (value) => setState(() => province = value!),
-            size),
-        _buildDropdown('อำเภอ', district, ['อำเภอเมือง', 'อำเภอหางดง'],
-            (value) => setState(() => district = value!), size),
-        _buildDropdown('ตำบล', subDistrict, ['ตำบลสวนดอก', 'ตำบลท่าศาลา'],
-            (value) => setState(() => subDistrict = value!), size),
-        _buildDropdown('รหัสไปรษณีย์', postalCode, ['50000', '50200'],
-            (value) => setState(() => postalCode = value!), size),
+        _buildDropdown('ที่อยู่บริษัทฯ', province, ['กรุงเทพมหานคร', 'เชียงใหม่', 'ขอนแก่น'], (value) => setState(() => province = value!), size),
+        SizedBox(height: size.height * 0.01),
+        _buildDropdown('อำเภอ', district, ['อำเภอเมือง', 'อำเภอหางดง'], (value) => setState(() => district = value!), size),
+        SizedBox(height: size.height * 0.01),
+        _buildDropdown('ตำบล', subDistrict, ['ตำบลสวนดอก', 'ตำบลท่าศาลา'], (value) => setState(() => subDistrict = value!), size),
+        SizedBox(height: size.height * 0.01),
+        _buildDropdown('รหัสไปรษณีย์', postalCode, ['50000', '50200'], (value) => setState(() => postalCode = value!), size),
         SizedBox(
           height: size.height * 0.02,
         ),
-        _buildTextField(
-            'ชื่อผู้มีอำนาจลงนาม', (value) => userFirstName = value, size),
-        _buildTextField('นามสกุล ผู้ใช้งานจองนำเข้า',
-            (value) => userLastName = value, size),
+        _buildTextField('ชื่อผู้มีอำนาจลงนาม', (value) => userFirstName = value, size),
+        SizedBox(height: size.height * 0.01),
+        _buildTextField('นามสกุล ผู้ใช้งานจองนำเข้า', (value) => userLastName = value, size),
+        SizedBox(height: size.height * 0.01),
         _buildTextField('เบอร์มือถือ', (value) => phoneNumber = value, size),
+        SizedBox(height: size.height * 0.01),
         _buildTextField('อีเมล์', (value) => email = value, size),
         SizedBox(height: size.height * 0.01),
         // ส่วนอัพโหลดไฟล์ในรูปแบบ Row
-        _buildFileUploadRow('ไฟล์ หนังสือรับรองทางบริษัท', 0,
-            'เอกสารต้องยังไม่หมดอายุ และเซ็นสำเนาถูกถูกต้อง', size),
-        _buildFileUploadRow('ไฟล์ สำเนาบัตรประชาชน', 1,
-            'กรุณาไม่ขีดคร่อมให้ท่านอัตโนมัติ', size),
+        _buildFileUploadRow('ไฟล์ หนังสือรับรองทางบริษัท', 0, 'เอกสารต้องยังไม่หมดอายุ และเซ็นสำเนาถูกถูกต้อง', size),
+        SizedBox(height: size.height * 0.01),
+        _buildFileUploadRow('ไฟล์ สำเนาบัตรประชาชน', 1, 'กรุณาไม่ขีดคร่อมให้ท่านอัตโนมัติ', size),
+        SizedBox(height: size.height * 0.01),
         _buildFileUploadRow('ไฟล์ ภพ.20', 2, '', size),
+        SizedBox(height: size.height * 0.01),
         _buildFileUploadRow('ไฟล์ ตราประทับ', 3, '', size),
         SizedBox(height: size.height * 0.01),
         // ปุ่มชำระเงินใน container ด้านบน
@@ -180,8 +169,7 @@ class _PaperlessState extends State<Paperless> {
           'assets/images/logofull.png',
           width: size.width * 0.59,
         ),
-        _buildSummaryField(
-            'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน', companyName, size),
+        _buildSummaryField('ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน', companyName, size),
         _buildSummaryField('เลขที่ผู้เสียภาษี', taxNumber, size),
         _buildSummaryField('ที่อยู่บริษัทฯ', province, size),
         _buildSummaryField('อำเภอ', district, size),
@@ -207,13 +195,10 @@ class _PaperlessState extends State<Paperless> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start, // จัดให้ข้อความอยู่ชิดซ้าย
+        crossAxisAlignment: CrossAxisAlignment.start, // จัดให้ข้อความอยู่ชิดซ้าย
         children: [
           Text(
-            isPaid
-                ? 'ท่านได้ชำระค่าบริการในการขึ้นทะเบียนแล้ว'
-                : 'ค่าใช้จ่ายในการขึ้นทะเบียน',
+            isPaid ? 'ท่านได้ชำระค่าบริการในการขึ้นทะเบียนแล้ว' : 'ค่าใช้จ่ายในการขึ้นทะเบียน',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 15,
@@ -247,17 +232,11 @@ class _PaperlessState extends State<Paperless> {
               children: [
                 Text(
                   'รวมยอดชำระค่าบริการในการขึ้นทะเบียน',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   '3,000 บาท',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -313,8 +292,7 @@ class _PaperlessState extends State<Paperless> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: red1, // เปลี่ยนสีปุ่มเป็นสีแดง
                   minimumSize: Size(size.width * 0.9, 50),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
               child: Text(
                 'ชำระเงิน',
                 style: TextStyle(
@@ -344,8 +322,7 @@ class _PaperlessState extends State<Paperless> {
       child: Container(
         width: size.width * 0.9,
         height: size.height * 0.05,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
         child: TextField(
           decoration: InputDecoration(
             labelText: label,
@@ -358,22 +335,20 @@ class _PaperlessState extends State<Paperless> {
   }
 
   // ฟังก์ชันสร้าง Dropdown ที่สามารถปรับขนาดตาม width ของหน้าจอ
-  Widget _buildDropdown(String hintText, String currentValue,
-      List<String> options, Function(String?) onChanged, Size size) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: size.height * 0.005),
-      child: SizedBox(
-        width: size.width * 0.9,
-        height: size.height * 0.055,
-        child: InputDecorator(
-          decoration: InputDecoration(
-            hintText: hintText, // เปลี่ยนเป็น hintText
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            fillColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
-            filled: true, // ต้องตั้งค่านี้เป็น true เพื่อให้ fillColor มีผล
+  Widget _buildDropdown(String hintText, String currentValue, List<String> options, Function(String?) onChanged, Size size) {
+    return SizedBox(
+      width: size.width * 0.9,
+      height: size.height * 0.07,
+      child: InputDecorator(
+        decoration: InputDecoration(
+          hintText: hintText, // เปลี่ยนเป็น hintText
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
+          fillColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
+          filled: true, // ต้องตั้งค่านี้เป็น true เพื่อให้ fillColor มีผล
+        ),
+        child: Center(
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               value: currentValue.isEmpty ? null : currentValue,
@@ -415,8 +390,7 @@ class _PaperlessState extends State<Paperless> {
   }
 
   // ฟังก์ชันสร้างส่วนอัพโหลดไฟล์ในรูปแบบ Row และสามารถปรับขนาดได้
-  Widget _buildFileUploadRow(
-      String label, int index, String? hintText, Size size) {
+  Widget _buildFileUploadRow(String label, int index, String? hintText, Size size) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -426,15 +400,13 @@ class _PaperlessState extends State<Paperless> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text(label, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               if (hintText != null && hintText.isNotEmpty)
                 Padding(
                   padding: EdgeInsets.only(top: size.height * 0.005),
                   child: Text(
                     hintText,
-                    style: TextStyle(
-                        fontSize: 12, color: red1, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.bold),
                   ),
                 ),
             ],
@@ -442,18 +414,13 @@ class _PaperlessState extends State<Paperless> {
           GestureDetector(
             onTap: () {
               setState(() {
-                uploadedFiles[index] =
-                    'ไฟล์ที่อัพโหลด'; // ตัวอย่างการอัพโหลดไฟล์
+                uploadedFiles[index] = 'ไฟล์ที่อัพโหลด'; // ตัวอย่างการอัพโหลดไฟล์
               });
             },
             child: Container(
               height: size.height * 0.053,
               width: size.width * 0.25,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                      color: Colors.grey, width: size.width * 0.001)),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.grey, width: size.width * 0.001)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

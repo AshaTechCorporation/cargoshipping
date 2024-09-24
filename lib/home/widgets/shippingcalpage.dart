@@ -85,7 +85,7 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: size.height *0.06,
+                    height: size.height *0.07,
                     child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(

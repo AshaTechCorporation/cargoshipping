@@ -55,7 +55,7 @@ class _FirsttopupState extends State<Firsttopup> {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: size.height * 0.03),
             Text(
               'หรือระบุ',
               textAlign: TextAlign.center,
@@ -63,7 +63,7 @@ class _FirsttopupState extends State<Firsttopup> {
             ),
             SizedBox(height: size.height * 0.025),
             SizedBox(
-              height: size.height * 0.045,
+              height: size.height * 0.055,
               child: TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -143,12 +143,12 @@ class _FirsttopupState extends State<Firsttopup> {
         });
       },
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.035,
-        width: MediaQuery.of(context).size.width * 0.26,
+        height: MediaQuery.of(context).size.height * 0.038,
+        width: MediaQuery.of(context).size.width * 0.24,
         margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01),
         decoration: BoxDecoration(
           color: isSelected ? Colors.red : Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(16.0),
           border: Border.all(
             color: Colors.grey,
             width: 0.6,
