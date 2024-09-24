@@ -1,3 +1,4 @@
+import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/account/widgets/addresspage.dart';
 import 'package:cargoshipping/account/widgets/userinfo.dart';
 import 'package:cargoshipping/constants.dart';
@@ -181,18 +182,24 @@ class _AccsettingState extends State<Accsetting> {
               color: white,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Row(
-                  children: [
-                    Text(
-                      'เกี่ยวกับเรา',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 13),
-                    ),
-                    Spacer(),
-                    Image.asset('assets/icons/rightarrow.png')
-                  ],
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MapTest()));
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        'เกี่ยวกับเรา',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 13),
+                      ),
+                      Spacer(),
+                      Image.asset('assets/icons/rightarrow.png')
+                    ],
+                  ),
                 ),
               ),
             ),
