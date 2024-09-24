@@ -57,18 +57,27 @@ class _SearchshowpageState extends State<Searchshowpage> {
     return Scaffold(
       backgroundColor: background,
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(size.height * 0.072),
-          child: AppBar(
-            backgroundColor: red1,
-            title: Row(
+        preferredSize: Size.fromHeight(size.height * 0.072),
+        child: Container(
+          color: red1,
+          height: size.height * 0.2,
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: size.height * 0.039, left: size.width * 0.03),
+            child: Row(
               children: [
+                Icon(Icons.arrow_back),
+                SizedBox(
+                  width: size.width * 0.03,
+                ),
                 Padding(
-                  padding: EdgeInsets.only(top: size.height * 0.01),
+                  padding: EdgeInsets.only(top: size.height * 0.009),
                   child: Container(
                     height: size.height * 0.041,
-                    width: size.width * 0.73,
+                    width: size.width * 0.78,
                     decoration: BoxDecoration(
-                        color: white, borderRadius: BorderRadius.circular(10)),
+                        color: white,
+                        borderRadius: BorderRadius.circular(10)),
                     child: Row(
                       children: [
                         SizedBox(
@@ -78,8 +87,7 @@ class _SearchshowpageState extends State<Searchshowpage> {
                               border: InputBorder.none,
                               hintText: 'ค้นหาสินค้า',
                               hintStyle: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 13, fontWeight: FontWeight.w500),
                               contentPadding: EdgeInsets.only(
                                   left: size.width * 0.02,
                                   bottom: size.height * 0.019),
@@ -169,7 +177,7 @@ class _SearchshowpageState extends State<Searchshowpage> {
                             },
                             child: Container(
                               height: size.height * 0.035,
-                              width: size.width * 0.13,
+                              width: size.width * 0.18,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: red1,
@@ -186,6 +194,9 @@ class _SearchshowpageState extends State<Searchshowpage> {
                       ],
                     ),
                   ),
+                ),
+                SizedBox(
+                  width: size.width * 0.01,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -257,74 +268,90 @@ class _SearchshowpageState extends State<Searchshowpage> {
                       });
                     },
                     child: Image.asset('assets/icons/thai.png',
-                        height: size.height * 0.0237),
+                        height: size.height * 0.03),
                   ),
                 ),
               ],
             ),
-          )),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(size.height * 0.02),
-                  child: Row(
-                    children: [
-                      Text('คำค้นหา',style: TextStyle(fontSize: 14,color: headingtext,fontWeight: FontWeight.bold),),
-                      Spacer(),
-                      Container(
-                        height: size.height * 0.039,
-                        width:  size.width * 0.2,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: red1,
-                            width: size.width * 0.004
-                          ),
-                          borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('ราคา',style: TextStyle(
-                              fontSize: 13,color: headingtext,fontWeight: FontWeight.bold
-                            ),),
-                            SizedBox(
-                              width: size.width * 0.015,
-                            ),
-                            Image.asset('assets/icons/updownprice.png',height: size.height * 0.019,)
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: size.width * 0.03,
-                      ),
-                      Container(
-                        height: size.height * 0.039,
-                        width:  size.width * 0.2,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: red1,
-                            width: size.width * 0.004
-                          ),
-                          borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('ตัวกรอง',style: TextStyle(
-                              fontSize: 13,color: headingtext,fontWeight: FontWeight.bold
-                            ),),
-                            SizedBox(
-                              width: size.width * 0.005,
-                            ),
-                            Image.asset('assets/icons/fliter.png',height: size.height * 0.02,)
-                          ],
-                        ),
-                      ),
-                    ],
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(size.height * 0.02),
+              child: Row(
+                children: [
+                  Text(
+                    'คำค้นหา',
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: headingtext,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-                Wrap(
+                  Spacer(),
+                  Container(
+                    height: size.height * 0.039,
+                    width: size.width * 0.2,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: red1, width: size.width * 0.004),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'ราคา',
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: headingtext,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: size.width * 0.015,
+                        ),
+                        Image.asset(
+                          'assets/icons/updownprice.png',
+                          height: size.height * 0.019,
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: size.width * 0.03,
+                  ),
+                  Container(
+                    height: size.height * 0.039,
+                    width: size.width * 0.2,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: red1, width: size.width * 0.004),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'ตัวกรอง',
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: headingtext,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: size.width * 0.005,
+                        ),
+                        Image.asset(
+                          'assets/icons/fliter.png',
+                          height: size.height * 0.02,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Wrap(
               spacing: 15,
               runSpacing: 15,
               children: List.generate(
@@ -353,9 +380,9 @@ class _SearchshowpageState extends State<Searchshowpage> {
                         },
                       )),
             ),
-              ],
-            ),
-          ),
+          ],
+        ),
+      ),
     );
   }
 }

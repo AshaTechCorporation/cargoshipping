@@ -27,12 +27,6 @@ class _SearchpageState extends State<Searchpage> {
       appBar: AppBar(
         backgroundColor: red1,
         toolbarHeight: size.height * 0.099,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_new_outlined),
-        ),
         title: PreferredSize(
           preferredSize: Size.fromHeight(size.height * 0.08),
           child: Container(
