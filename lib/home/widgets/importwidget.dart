@@ -18,7 +18,7 @@ class Importwidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: press,
       child: Container(
         height: size.height * 0.06,
@@ -36,25 +36,31 @@ class Importwidget extends StatelessWidget {
           ],
         ),
         child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(size.height * 0.007),
-                child: Image.asset(
-                  imagePath,
-                  height: id == 2 ? size.height * 0.07 : size.height * 0.05, // ปรับขนาดตาม id
-                  width: id == 2 ? size.width * 0.15 : size.width * 0.07, // ปรับขนาดตาม id
+          child: GestureDetector(
+            onTap: press,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(size.height * 0.007),
+                  child: GestureDetector(
+                    onTap: press,
+                    child: Image.asset(
+                      imagePath,
+                      height: id == 2 ? size.height * 0.07 : size.height * 0.05, // ปรับขนาดตาม id
+                      width: id == 2 ? size.width * 0.15 : size.width * 0.07, // ปรับขนาดตาม id
+                    ),
+                  ),
                 ),
-              ),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -338,6 +338,7 @@ class _HomePageState extends State<HomePage> {
                               id: importwidget[index]['id'],
                               press: () {
                                 if (index == 0) {
+                                  print(index);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -346,6 +347,7 @@ class _HomePageState extends State<HomePage> {
                                   );
                                 }
                                 if (index == 1) {
+                                  print(index);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

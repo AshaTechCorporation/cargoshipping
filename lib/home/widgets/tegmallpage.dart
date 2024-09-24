@@ -38,7 +38,7 @@ class _TegmallpageState extends State<Tegmallpage> {
       setState(() {
         categories = _categories;
       });
-      inspect(categories);
+      //inspect(categories);
       LoadingDialog.close(context);
     } on Exception catch (e) {
       if (!mounted) return;
