@@ -65,13 +65,14 @@ class _SearchshowpageState extends State<Searchshowpage> {
             padding: EdgeInsets.only(
                 top: size.height * 0.039, left: size.width * 0.03),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.arrow_back),
-                SizedBox(
-                  width: size.width * 0.03,
-                ),
+                Icon(Icons.arrow_back, color: Colors.white,),
+                // SizedBox(
+                //   width: size.width * 0.03,
+                // ),
                 Padding(
-                  padding: EdgeInsets.only(top: size.height * 0.009),
+                  padding: EdgeInsets.only(top: size.height * 0.01),
                   child: Container(
                     height: size.height * 0.041,
                     width: size.width * 0.78,
@@ -195,9 +196,9 @@ class _SearchshowpageState extends State<Searchshowpage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: size.width * 0.01,
-                ),
+                // SizedBox(
+                //   width: size.width * 0.01,
+                // ),
                 Padding(
                   padding: EdgeInsets.only(
                       top: size.height * 0.01, left: size.width * 0.006),
