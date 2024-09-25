@@ -321,7 +321,7 @@ class _PaperlessState extends State<Paperless> {
       padding: EdgeInsets.symmetric(vertical: size.height * 0.005),
       child: Container(
         width: size.width * 0.9,
-        height: size.height * 0.05,
+        height: size.height * 0.06,
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
         child: TextField(
           decoration: InputDecoration(
@@ -338,7 +338,7 @@ class _PaperlessState extends State<Paperless> {
   Widget _buildDropdown(String hintText, String currentValue, List<String> options, Function(String?) onChanged, Size size) {
     return SizedBox(
       width: size.width * 0.9,
-      height: size.height * 0.07,
+      height: size.height * 0.06,
       child: InputDecorator(
         decoration: InputDecoration(
           hintText: hintText, // เปลี่ยนเป็น hintText
@@ -356,7 +356,7 @@ class _PaperlessState extends State<Paperless> {
               hint: Text(
                 // แสดง hint ที่เป็นค่า default ของ Dropdown เอง
                 hintText,
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 16),
               ),
               items: options.map((String value) {
                 return DropdownMenuItem<String>(
@@ -365,6 +365,11 @@ class _PaperlessState extends State<Paperless> {
                 );
               }).toList(),
               onChanged: onChanged,
+              icon: Icon(
+                Icons.keyboard_arrow_down, // Your custom icon
+                size: 30, // Adjust the size of the icon
+                color: kSecondTextColor, // Customize the icon color
+              ),
             ),
           ),
         ),

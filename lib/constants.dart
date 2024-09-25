@@ -17,6 +17,7 @@ Color youngpink = Color(0xffffe6e7);
 Color green = Color(0xff3ace01);
 Color blue = Color(0xff3c5a9a);
 Color pinkser = Color(0xffffefe0);
+Color pinkmessSixper = Color(0xffDE1E26);
 
 const kBackgroundColor = Color(0xff1B58B1);
 const kSecondTextColor = Color(0xff7B7B7B);

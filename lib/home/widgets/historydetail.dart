@@ -24,7 +24,7 @@ class HistoryDetailPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-          height: size.height * 0.5,
+          height: size.height * 0.55,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10.0),
@@ -82,21 +82,30 @@ class HistoryDetailPage extends StatelessWidget {
                     width: size.width * 0.04,
                   ),
                   Container(
-                    width: 35,
-                    height: 35,
-                    color: Colors.grey[300],
+                    width: size.width * 0.1,
+                    height: size.height * 0.045,                    
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                   SizedBox(width: 8),
                   Container(
-                    width: 35,
-                    height: 35,
-                    color: Colors.grey[300],
+                    width: size.width * 0.1,
+                    height: size.height * 0.045,                    
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                   SizedBox(width: 8),
                   Container(
-                    width: 35,
-                    height: 35,
-                    color: Colors.grey[300],
+                    width: size.width * 0.1,
+                    height: size.height * 0.045,                    
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                 ],
               ),
