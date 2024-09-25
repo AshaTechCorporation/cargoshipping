@@ -30,7 +30,7 @@ class ProductCategories extends StatelessWidget {
               image: DecorationImage(
                 image: AssetImage(imagespath),
                 //image: NetworkImage(imagespath),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
           ),

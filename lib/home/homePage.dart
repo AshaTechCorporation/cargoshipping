@@ -46,8 +46,7 @@ class _HomePageState extends State<HomePage> {
     // เพิ่ม Listener เพื่อตรวจจับการเลื่อน
     _scrollController.addListener(() {
       double offset = _scrollController.offset;
-      double newOpacity =
-          (offset / 150).clamp(0.0, 1.0); // ปรับค่า 150 ตามต้องการ
+      double newOpacity = (offset / 150).clamp(0.0, 1.0); // ปรับค่า 150 ตามต้องการ
 
       if (newOpacity != appBarOpacity) {
         setState(() {
@@ -115,11 +114,9 @@ class _HomePageState extends State<HomePage> {
                     width: size.width * 0.83,
                     padding: EdgeInsets.all(size.height * 0.005),
                     decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey, width: size.width * 0.001),
+                      border: Border.all(color: Colors.grey, width: size.width * 0.001),
                       borderRadius: BorderRadius.circular(15),
-                      color: Color.lerp(
-                          Colors.transparent, Colors.white, appBarOpacity),
+                      color: Color.lerp(Colors.transparent, Colors.white, appBarOpacity),
                     ),
                     child: IntrinsicHeight(
                       child: Row(
@@ -132,9 +129,7 @@ class _HomePageState extends State<HomePage> {
                                 border: InputBorder.none,
                                 hintText: 'ค้นหาสินค้า',
                                 hintStyle: TextStyle(),
-                                contentPadding: EdgeInsets.only(
-                                    left: size.width * 0.02,
-                                    bottom: size.height * 0.01),
+                                contentPadding: EdgeInsets.only(left: size.width * 0.02, bottom: size.height * 0.01),
                               ),
                             ),
                           ),
@@ -147,12 +142,10 @@ class _HomePageState extends State<HomePage> {
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(color: Colors.white, width: 2),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: size.width * 0.01),
+                                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
                                   child: DropdownButton2<String>(
                                     isExpanded: true,
                                     hint: Align(
@@ -167,13 +160,11 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     items: items
-                                        .map((String item) =>
-                                            DropdownMenuItem<String>(
+                                        .map((String item) => DropdownMenuItem<String>(
                                               value: item,
                                               child: Text(
                                                 item,
-                                                style: TextStyle(
-                                                    fontSize: 14, color: red1),
+                                                style: TextStyle(fontSize: 14, color: red1),
                                               ),
                                             ))
                                         .toList(),
@@ -185,8 +176,7 @@ class _HomePageState extends State<HomePage> {
                                       getlistCategories(name: selectedValue);
                                     },
                                     buttonStyleData: ButtonStyleData(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: size.width * 0.02),
+                                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
                                       width: size.width * 0.1,
                                     ),
                                     menuItemStyleData: MenuItemStyleData(
@@ -202,10 +192,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Searchshowpage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Searchshowpage()));
                             },
                             child: Container(
                               height: size.height * 0.05,
@@ -227,8 +214,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.003),
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.003),
                     child: GestureDetector(
                       onTapDown: (TapDownDetails details) {
                         showMenu(
@@ -236,9 +222,7 @@ class _HomePageState extends State<HomePage> {
                           position: RelativeRect.fromLTRB(
                             details.globalPosition.dx,
                             details.globalPosition.dy + 25,
-                            MediaQuery.of(context).size.width -
-                                details.globalPosition.dx -
-                                10,
+                            MediaQuery.of(context).size.width - details.globalPosition.dx - 10,
                             0,
                           ),
                           items: <PopupMenuEntry<String>>[
@@ -295,8 +279,7 @@ class _HomePageState extends State<HomePage> {
                           }
                         });
                       },
-                      child: Image.asset('assets/icons/thai.png',
-                          height: size.height * 0.032),
+                      child: Image.asset('assets/icons/thai.png', height: size.height * 0.032),
                     ),
                   ),
                 ],
@@ -321,7 +304,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Positioned(
-                    bottom: MediaQuery.of(context).size.height * (-30 / 800),
+                    //bottom: MediaQuery.of(context).size.height * (-30 / 800),
+                    bottom: -20,
                     left: 0,
                     right: 0,
                     child: Padding(
@@ -331,12 +315,8 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           ...List.generate(
                             importwidget.length,
-                            (index) => Importwidget(
-                              size: size,
-                              title: importwidget[index]['name'],
-                              imagePath: importwidget[index]['images'],
-                              id: importwidget[index]['id'],
-                              press: () {
+                            (index) => GestureDetector(
+                              onTap: () {
                                 if (index == 0) {
                                   print(index);
                                   Navigator.push(
@@ -356,6 +336,12 @@ class _HomePageState extends State<HomePage> {
                                   );
                                 }
                               },
+                              child: Importwidget(
+                                size: size,
+                                title: importwidget[index]['name'],
+                                imagePath: importwidget[index]['images'],
+                                id: importwidget[index]['id'],
+                              ),
                             ),
                           ),
                         ],
@@ -374,10 +360,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
                   child: Text(
                     'บริการของเรา',
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -437,20 +420,14 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         'อัตราเงินประจำวันที่...',
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: headingtext),
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: headingtext),
                       ),
                       SizedBox(
                         width: size.width * 0.04,
                       ),
                       Text(
                         '22 สิงหาคม 2567',
-                        style: TextStyle(
-                            color: red1,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold),
+                        style: TextStyle(color: red1, fontSize: 13, fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
@@ -468,10 +445,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
                       '*อัตราเงินอาจมีการเปลี่ยนแปลง บริษัทขอสงวนสิทธิ์ในการไม่แจ้งให้ทราบล่วงหน้า',
-                      style: TextStyle(
-                          fontSize: 10,
-                          color: headingtext,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 10, color: headingtext, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -596,39 +570,22 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RichText(
-                            text: TextSpan(
-                                text: 'คลังกวางโจว :',
-                                style: TextStyle(
-                                    color: red1,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15),
-                                children: <TextSpan>[
-                              TextSpan(
-                                text:
-                                    ' TEG CARGO仓 广东省广州市白云区唐阁上村中街28号3栋105A仓 邮编510450',
-                                style:
-                                    TextStyle(color: headingtext, fontSize: 15),
-                              )
-                            ])),
+                            text: TextSpan(text: 'คลังกวางโจว :', style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                          TextSpan(
+                            text: ' TEG CARGO仓 广东省广州市白云区唐阁上村中街28号3栋105A仓 邮编510450',
+                            style: TextStyle(color: headingtext, fontSize: 15),
+                          )
+                        ])),
                         SizedBox(
                           height: size.height * 0.01,
                         ),
                         RichText(
-                            text: TextSpan(
-                                text: 'เบอร์โทรศัพท์ :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15),
-                                children: <TextSpan>[
-                              TextSpan(
-                                text: ' 18520290139啊苏',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 15),
-                              )
-                            ])),
+                            text: TextSpan(text: 'เบอร์โทรศัพท์ :', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                          TextSpan(
+                            text: ' 18520290139啊苏',
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 15),
+                          )
+                        ])),
                         SizedBox(
                           height: size.height * 0.018,
                         ),
@@ -638,20 +595,13 @@ class _HomePageState extends State<HomePage> {
                             width: size.width * 0.3,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                  foregroundColor: red1,
-                                  side: BorderSide(
-                                      color: red1, width: size.width * 0.004),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(13))),
+                                  foregroundColor: red1, side: BorderSide(color: red1, width: size.width * 0.004), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
                                 Clipboard.setData(
-                                  ClipboardData(
-                                      text: 'ที่อยู่ที่ต้องการคัดลอก'),
+                                  ClipboardData(text: 'ที่อยู่ที่ต้องการคัดลอก'),
                                 );
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content:
-                                          Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
+                                  SnackBar(content: Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
                                 );
                               },
                               child: Text(
@@ -675,39 +625,22 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RichText(
-                            text: TextSpan(
-                                text: 'คลังอี้อู :',
-                                style: TextStyle(
-                                    color: red1,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15),
-                                children: <TextSpan>[
-                              TextSpan(
-                                text:
-                                    ' TEG CARGO仓 浙江省义乌市稠城街道江北下朱货运市场一栋231-232号 邮编322023',
-                                style:
-                                    TextStyle(color: headingtext, fontSize: 15),
-                              )
-                            ])),
+                            text: TextSpan(text: 'คลังอี้อู :', style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                          TextSpan(
+                            text: ' TEG CARGO仓 浙江省义乌市稠城街道江北下朱货运市场一栋231-232号 邮编322023',
+                            style: TextStyle(color: headingtext, fontSize: 15),
+                          )
+                        ])),
                         SizedBox(
                           height: size.height * 0.01,
                         ),
                         RichText(
-                            text: TextSpan(
-                                text: 'เบอร์โทรศัพท์ :',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15),
-                                children: <TextSpan>[
-                              TextSpan(
-                                text: ' 18520290139',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 15),
-                              )
-                            ])),
+                            text: TextSpan(text: 'เบอร์โทรศัพท์ :', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                          TextSpan(
+                            text: ' 18520290139',
+                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 15),
+                          )
+                        ])),
                         SizedBox(
                           height: size.height * 0.018,
                         ),
@@ -717,20 +650,13 @@ class _HomePageState extends State<HomePage> {
                             width: size.width * 0.3,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                  foregroundColor: red1,
-                                  side: BorderSide(
-                                      color: red1, width: size.width * 0.004),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(13))),
+                                  foregroundColor: red1, side: BorderSide(color: red1, width: size.width * 0.004), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
                               onPressed: () {
                                 Clipboard.setData(
-                                  ClipboardData(
-                                      text: 'ที่อยู่ที่ต้องการคัดลอก'),
+                                  ClipboardData(text: 'ที่อยู่ที่ต้องการคัดลอก'),
                                 );
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content:
-                                          Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
+                                  SnackBar(content: Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
                                 );
                               },
                               child: Text(
@@ -757,10 +683,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
                   child: Text(
                     'อัตราค่าขนส่ง',
-                    style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -824,10 +747,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้ามาตราฐาน',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       )),
@@ -885,10 +805,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้ามาตราฐาน',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       )),
@@ -946,10 +863,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้าทั่วไป',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       )),
@@ -1007,10 +921,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้าอื่นๆ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       ))
@@ -1076,10 +987,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้าทั่วไป',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       )),
@@ -1137,10 +1045,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้ามาตราฐาน',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       )),
@@ -1198,10 +1103,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้ามาตราฐาน',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       )),
@@ -1259,10 +1161,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'สินค้าอื่นๆ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
                           )
                         ],
                       ))
@@ -1270,8 +1169,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
                   Text(
@@ -1281,8 +1179,7 @@ class _HomePageState extends State<HomePage> {
                   Spacer(),
                   Text(
                     'หมวดหมู่ทั้งหมด',
-                    style: TextStyle(
-                        fontSize: 12, color: red1, fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.w700),
                   )
                 ],
               ),
@@ -1370,27 +1267,17 @@ class _HomePageState extends State<HomePage> {
             //   ),
             // ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
                   Expanded(
                     child: RichText(
-                        text: TextSpan(
-                            text: 'สินค้าแนะนำ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                            children: <TextSpan>[
-                          TextSpan(
-                            text: ' จาก 1668',
-                            style: TextStyle(
-                                color: red1,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          )
-                        ])),
+                        text: TextSpan(text: 'สินค้าแนะนำ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18), children: <TextSpan>[
+                      TextSpan(
+                        text: ' จาก 1668',
+                        style: TextStyle(color: red1, fontWeight: FontWeight.bold, fontSize: 18),
+                      )
+                    ])),
                   ),
                 ],
               ),
@@ -1414,8 +1301,7 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => itempage(
                                 size: size,
                                 title: listProducts[index]['detail'],
-                                price: (listProducts[index]['price'] as num)
-                                    .toDouble(),
+                                price: (listProducts[index]['price'] as num).toDouble(),
                                 products: listProducts[index],
                                 press: () {},
                               ),
