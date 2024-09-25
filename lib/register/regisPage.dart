@@ -554,7 +554,7 @@ class _registerpageState extends State<registerpage> {
                   ),
                   iconStyleData: const IconStyleData(
                     icon: Icon(
-                      Icons.arrow_drop_down,
+                      Icons.keyboard_arrow_down,
                       color: Colors.black45,
                     ),
                     iconSize: 24,
@@ -622,7 +622,7 @@ class _registerpageState extends State<registerpage> {
                   ),
                   iconStyleData: const IconStyleData(
                     icon: Icon(
-                      Icons.arrow_drop_down,
+                      Icons.keyboard_arrow_down,
                       color: Colors.black45,
                     ),
                     iconSize: 24,
@@ -722,7 +722,7 @@ class _registerpageState extends State<registerpage> {
                   ),
                   iconStyleData: const IconStyleData(
                     icon: Icon(
-                      Icons.arrow_drop_down,
+                      Icons.keyboard_arrow_down,
                       color: Colors.black45,
                     ),
                     iconSize: 24,
@@ -919,7 +919,7 @@ class _registerpageState extends State<registerpage> {
                   ),
                   iconStyleData: const IconStyleData(
                     icon: Icon(
-                      Icons.arrow_drop_down,
+                      Icons.keyboard_arrow_down,
                       color: Colors.black45,
                     ),
                     iconSize: 24,
@@ -985,7 +985,7 @@ class _registerpageState extends State<registerpage> {
                   ),
                   iconStyleData: const IconStyleData(
                     icon: Icon(
-                      Icons.arrow_drop_down,
+                      Icons.keyboard_arrow_down,
                       color: Colors.black45,
                     ),
                     iconSize: 24,
@@ -1051,7 +1051,7 @@ class _registerpageState extends State<registerpage> {
                   ),
                   iconStyleData: const IconStyleData(
                     icon: Icon(
-                      Icons.arrow_drop_down,
+                      Icons.keyboard_arrow_down,
                       color: Colors.black45,
                     ),
                     iconSize: 24,
@@ -1117,7 +1117,7 @@ class _registerpageState extends State<registerpage> {
                   ),
                   iconStyleData: const IconStyleData(
                     icon: Icon(
-                      Icons.arrow_drop_down,
+                      Icons.keyboard_arrow_down,
                       color: Colors.black45,
                     ),
                     iconSize: 24,
