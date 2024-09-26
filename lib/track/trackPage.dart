@@ -151,6 +151,7 @@ class _TrackPageState extends State<TrackPage>
         setState(() {
           selectedIndex = index;
           _tabController?.animateTo(index);
+          print(selectedIndex);
         });
       },
       child: Container(

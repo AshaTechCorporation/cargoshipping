@@ -1,4 +1,9 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/track/InTransitPage.dart';
+import 'package:cargoshipping/track/chineseWarehouse.dart';
+import 'package:cargoshipping/track/successfulDelivery.dart';
+import 'package:cargoshipping/track/thaiWarehouse.dart';
+import 'package:cargoshipping/track/waitShippingPayment.dart';
 import 'package:flutter/material.dart';
 
 class Transporttrackpage extends StatefulWidget {
@@ -31,17 +36,16 @@ class _TransporttrackpageState extends State<Transporttrackpage> {
         ),
         body: Column(
           children: [
-            SizedBox(height: size.height * 0.02,),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
               child: Row(
                 children: [
                   Text(
                     'รายการสถานะ :',
-                    style: TextStyle(
-                        fontSize: 13,
-                        color: headingtext,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -55,40 +59,57 @@ class _TransporttrackpageState extends State<Transporttrackpage> {
                   itemCount: tracktransport.length,
                   itemBuilder: (context, index) {
                     final order = tracktransport[index];
-                    return Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: size.height * 0.01),
-                      padding: EdgeInsets.all(size.height * 0.01),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            blurRadius: 5,
-                            offset: Offset(0, 3), // Shadow position
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            order['images'],height: size.height * 0.045
-                          ),
-                          SizedBox(width: size.width * 0.03),
-                          Text(
-                            order['title'],
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
+                    return GestureDetector(
+                      onTap: () {
+                        if (order['id'] == 1) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChineseWarehouse()));
+                        } else if (order['id'] == 2) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>InTransitPage()));
+                        } else if (order['id'] == 3) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ThaiWarehouse()));
+                        } else if (order['id'] == 4) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>WaitShippingPayment()));
+                        } else {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SuccessfulDelivery()));
+                        }
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: size.height * 0.01),
+                        padding: EdgeInsets.all(size.height * 0.01),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              blurRadius: 5,
+                              offset: Offset(0, 3), // Shadow position
                             ),
-                          ),
-                          Spacer(),
-                          Text(
-                            'ดำเนินการอยู่ ${order['process']}',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Image.asset(order['images'], height: size.height * 0.045),
+                            SizedBox(width: size.width * 0.03),
+                            Text(
+                              order['title'],
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Spacer(),
+                            order['title'] == 'จัดส่งสำเร็จ'
+                                ? Text(
+                                    '${order['process']} รายการ',
+                                    style: TextStyle(color: Colors.grey),
+                                  )
+                                : Text(
+                                    'ดำเนินการอยู่ ${order['process']} รายการ',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                          ],
+                        ),
                       ),
                     );
                   }),
