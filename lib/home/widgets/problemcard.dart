@@ -26,7 +26,7 @@ class _ProblemCardPageState extends State<ProblemCardPage> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ReportFormPage()), // นำไปสู่หน้า ReportFormPage
+          MaterialPageRoute(builder: (context) => ReportFormPage()),
         );
       },
       child: Card(

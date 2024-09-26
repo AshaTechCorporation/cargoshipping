@@ -1,14 +1,9 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class Waitsumcard extends StatefulWidget {
-  const Waitsumcard({super.key});
+class Duringpurchase extends StatelessWidget {
+  const Duringpurchase({super.key});
 
-  @override
-  State<Waitsumcard> createState() => _WaitsumcardState();
-}
-
-class _WaitsumcardState extends State<Waitsumcard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -17,7 +12,7 @@ class _WaitsumcardState extends State<Waitsumcard> {
       appBar: AppBar(
         backgroundColor: white,
         title: Text(
-          'รอสรุปยอด',
+          'อยู่ระหว่างคำสั่งซื้อ',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -89,7 +84,6 @@ class _WaitsumcardState extends State<Waitsumcard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // compete(size: MediaQuery.of(context).size),
             SizedBox(
               height: size.height * 0.015,
             ),
@@ -97,10 +91,10 @@ class _WaitsumcardState extends State<Waitsumcard> {
               child: Stack(
                 children: [
                   Positioned(
-                    bottom: size.height * 0.015,
+                    bottom: size.height * 0.02,
                     right: size.width * 0.02,
                     child: Opacity(
-                      opacity: 0.7,
+                      opacity: 0.5,
                       child: Image.asset(
                         'assets/icons/carback.png',
                         width: size.width * 0.28,
@@ -110,7 +104,7 @@ class _WaitsumcardState extends State<Waitsumcard> {
                   ),
                   Container(
                     width: size.width * 0.95,
-                    height: size.height * 0.21,
+                    height: size.height * 0.23,
                     decoration: BoxDecoration(
                         // color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -152,25 +146,107 @@ class _WaitsumcardState extends State<Waitsumcard> {
                           children: [
                             Row(
                               children: [
+                                Image.asset(
+                                  'assets/icons/waitsum.png',
+                                  height: size.height * 0.037,
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.035,
+                                  child: Divider(
+                                    color: red1,
+                                    thickness: 2,
+                                  ),
+                                ),
                                 SizedBox(
                                   width: size.width * 0.01,
                                 ),
                                 Image.asset(
-                                  'assets/icons/waitsum.png',
-                                  height: size.height * 0.035,
+                                  'assets/icons/processpurchase.png',
+                                  height: size.height * 0.037,
                                 ),
                                 SizedBox(
-                                  width: size.width * 0.015,
+                                  width: size.width * 0.01,
                                 ),
-                                Text(
-                                  'รอสรุปยอด',
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
-                                      color: red1),
-                                )
+                                SizedBox(
+                                  width: size.width * 0.035,
+                                  child: Divider(
+                                    color: red1,
+                                    thickness: 2,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                Image.asset('assets/icons/confirmorder.png',
+                                    height: size.height * 0.037),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.25,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'อยู่ระหว่างการสั่งซื้อ',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: red1,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'เลขที่ยืนยันคำสั่งซื้อ',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: greyuserinfo,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: size.width * 0.01),
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            '0987654',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: greyuserinfo,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                Image.asset('assets/icons/greybox.png',
+                                    height: size.height * 0.037),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                  child: Divider(
+                                    color: Colors.grey[500],
+                                    thickness: 2,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                Image.asset('assets/icons/correctgrey.png',
+                                    height: size.height * 0.037),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
                               ],
                             ),
+                            SizedBox(width: 10),
                           ],
                         ),
                         SizedBox(

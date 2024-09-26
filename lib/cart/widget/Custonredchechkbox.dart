@@ -12,18 +12,19 @@ class Customredchechkbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onChanged,
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.red, // สีขอบกรอบของ Checkbox
-            width: 1.0,
+            width: 1.5,
           ),
-          borderRadius: BorderRadius.circular(4.0), // ขอบโค้งมนของ Checkbox
+          borderRadius: BorderRadius.circular(3.0), // ขอบโค้งมนของ Checkbox
         ),
-        width: 24.0,
-        height: 24.0,
+        width: size.width * 0.055,
+        height: size.height * 0.025,
         child: isSelected
             ? Icon(
                 Icons.check,

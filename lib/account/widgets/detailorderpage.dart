@@ -81,7 +81,8 @@ class Detailorderpage extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: size.width * 0.035),
                     child: Row(
                       children: [
-                        Image.asset('assets/icons/delivery.png'),
+                        Image.asset('assets/icons/delivery.png',
+                        height: size.height * 0.05,),
                         SizedBox(
                           width: size.width * 0.04,
                         ),

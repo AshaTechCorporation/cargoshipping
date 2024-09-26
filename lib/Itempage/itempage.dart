@@ -612,7 +612,7 @@ class _itempageState extends State<itempage> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: size.height * 0.108,
+        height: size.height * 0.099,
         child: BottomAppBar(
           color: white,
           child: Row(
@@ -628,8 +628,7 @@ class _itempageState extends State<itempage> {
                       children: [
                         Image.asset(
                           'assets/icons/Group2.png',
-                          height: 24,
-                          width: 24,
+                          height: size.height * 0.02,
                           color:
                               _selectedIndex == 0 ? Colors.black : Colors.black,
                         ),
@@ -727,8 +726,7 @@ class _itempageState extends State<itempage> {
                       children: [
                         Image.asset(
                           'assets/icons/addtocart.png',
-                          height: size.height * 0.035,
-                          width: size.width * 0.07,
+                          height: size.height * 0.03,
                           color:
                               _selectedIndex == 0 ? Colors.black : Colors.black,
                         ),
@@ -754,8 +752,8 @@ class _itempageState extends State<itempage> {
                 flex: 2,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.red[700],
-                    borderRadius: BorderRadius.circular(20),
+                    color: red1,
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -788,7 +786,8 @@ class _itempageState extends State<itempage> {
                         'ซื้อสินค้า', // ข้อความบนปุ่ม
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                     ),

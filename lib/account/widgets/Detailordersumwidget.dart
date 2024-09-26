@@ -1,4 +1,5 @@
 import 'package:cargoshipping/account/widgets/detailorderpage.dart';
+import 'package:cargoshipping/account/widgets/shipreceiptpage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -111,7 +112,7 @@ class Detailordersumwidget extends StatelessWidget {
                   Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Detailorderpage()));
+                            builder: (context) => Shipreceiptpage()));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

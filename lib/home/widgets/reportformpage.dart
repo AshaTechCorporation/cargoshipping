@@ -1,5 +1,9 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+import 'package:permission_handler/permission_handler.dart';
 
 class ReportFormPage extends StatefulWidget {
   const ReportFormPage({super.key});
@@ -13,18 +17,35 @@ class _ReportFormPageState extends State<ReportFormPage> {
   String? _selectedIssue;
   final _titleController = TextEditingController();
   final _detailsController = TextEditingController();
+  File? _image;
+  final ImagePicker _picker = ImagePicker();
+
+  // ฟังก์ชันสำหรับเลือกภาพจากแกลเลอรีหรือกล้อง
+  Future<void> _pickImage() async {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
         backgroundColor: background,
         title: Text(
           'แบบฟอร์มแจ้งปัญหา',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
         ),
       ),
       body: Padding(
@@ -58,20 +79,20 @@ class _ReportFormPageState extends State<ReportFormPage> {
                         ),
                         SizedBox(height: size.height * 0.015),
                         DropdownButtonFormField<String>(
+                          dropdownColor: white,
                           icon: Icon(Icons.keyboard_arrow_down),
                           decoration: InputDecoration(
-                            isDense:
-                                true,
+                            isDense: true,
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.0, horizontal: 12.0),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
+                            
                           ),
                           hint: Text(
                             'เลือกปัญหาที่พบในด้านนี้',
-                            style: TextStyle(
-                                fontSize: 14),
+                            style: TextStyle(fontSize: 14),
                           ),
                           value: _selectedIssue,
                           onChanged: (newValue) {
@@ -88,9 +109,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                               value: value,
                               child: Text(
                                 value,
-                                style: TextStyle(
-                                    fontSize:
-                                        14),
+                                style: TextStyle(fontSize: 14),
                               ),
                             );
                           }).toList(),
@@ -103,16 +122,12 @@ class _ReportFormPageState extends State<ReportFormPage> {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 8.0, horizontal: 12.0),
                             hintText: '... กรอกหัวข้อเรื่อง',
-                            hintStyle: TextStyle(
-                                fontSize:
-                                    14),
+                            hintStyle: TextStyle(fontSize: 14),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                          style: TextStyle(
-                              fontSize:
-                                  14),
+                          style: TextStyle(fontSize: 14),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'กรุณากรอกหัวข้อเรื่อง';
@@ -145,17 +160,14 @@ class _ReportFormPageState extends State<ReportFormPage> {
                             Text(
                               'รูปภาพประกอบ',
                               style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold
-                              ),
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
-                              width: size.width* 0.05,
+                              width: size.width * 0.05,
                             ),
                             ElevatedButton(
-                              onPressed: () {
-                                // เพิ่มฟังก์ชันการอัปโหลดรูปภาพ
-                              },
+                              onPressed:
+                                  _pickImage, // เรียกฟังก์ชันอัปโหลดรูปภาพ
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.black,
                                 backgroundColor: white,
@@ -163,12 +175,19 @@ class _ReportFormPageState extends State<ReportFormPage> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                              child: Text('อัพโหลดไฟล์รูป',style: TextStyle(
-                                color: greyuserinfo
-                              ),),
+                              child: Text(
+                                'อัพโหลดไฟล์รูป',
+                                style: TextStyle(color: greyuserinfo),
+                              ),
                             ),
                           ],
                         ),
+                        SizedBox(height: size.height * 0.02),
+                        if (_image != null)
+                          Image.file(
+                            _image!,
+                            height: size.height * 0.3,
+                          ),
                         SizedBox(height: size.height * 0.02),
                         ElevatedButton(
                           onPressed: () {

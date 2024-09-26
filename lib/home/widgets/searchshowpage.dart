@@ -67,10 +67,11 @@ class _SearchshowpageState extends State<Searchshowpage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.arrow_back, color: Colors.white,),
-                // SizedBox(
-                //   width: size.width * 0.03,
-                // ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.arrow_back, color: Colors.white,)),
                 Padding(
                   padding: EdgeInsets.only(top: size.height * 0.01),
                   child: Container(

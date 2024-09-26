@@ -1,4 +1,8 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/track/duringpurchase.dart';
+import 'package:cargoshipping/track/readytosend.dart';
+import 'package:cargoshipping/track/sended.dart';
+import 'package:cargoshipping/track/waitpurchase.dart';
 import 'package:cargoshipping/track/waitsumcard.dart';
 import 'package:flutter/material.dart';
 
@@ -44,14 +48,45 @@ class Palceanorderpage extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         if (index == 0) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          Waitsumcard(), //Correctimportpage
-                                    ),
-                                  );
-                                }
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Waitsumcard(),
+                            ),
+                          );
+                        }
+                        if (index == 1) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Waitpurchase(),
+                            ),
+                          );
+                        }
+                        if (index == 2) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Duringpurchase(),
+                            ),
+                          );
+                        }
+                        if (index == 3) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Readytosend(),
+                            ),
+                          );
+                        }
+                        if (index == 4) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Sended(),
+                            ),
+                          );
+                        }
                       },
                       child: Container(
                         margin:
@@ -71,7 +106,8 @@ class Palceanorderpage extends StatelessWidget {
                         child: Row(
                           children: [
                             Image.asset(
-                              order['images'],height: size.height * 0.045,
+                              order['images'],
+                              height: size.height * 0.045,
                             ),
                             SizedBox(width: size.width * 0.03),
                             Text(

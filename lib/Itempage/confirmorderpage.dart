@@ -1,6 +1,5 @@
 import 'package:cargoshipping/Itempage/widgets/conditionstransport.dart';
 import 'package:cargoshipping/cart/widget/Custonredchechkbox.dart';
-import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -127,7 +126,8 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                         children: [
                           Row(
                             children: [
-                              Image.asset('assets/icons/redcar.png'),
+                              Image.asset('assets/icons/redcar.png',
+                              height: size.height * 0.025,),
                               SizedBox(width: size.width * 0.02),
                               Text(
                                 'รูปแบบการขนส่ง',

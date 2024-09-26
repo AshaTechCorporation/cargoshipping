@@ -1,3 +1,4 @@
+import 'package:cargoshipping/cart/widget/Custonredchechkbox.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,7 @@ class _WithdrawmobileState extends State<Withdrawmobile> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('โอนเงินผ่านแอป Mobile Banking',style: TextStyle(
@@ -37,39 +39,37 @@ class _WithdrawmobileState extends State<Withdrawmobile> {
       ),
       body: Column(
         children: [
-          _buildRow('assets/icons/scb.png', 'SCB Easy', 0, isChecked1),
-          SizedBox(height: 10),
-          _buildDivider(),
-          SizedBox(height: 15),
-          _buildRow('assets/icons/kbank.png', 'K PLUS', 1, isChecked2),
-          SizedBox(height: 10),
-          _buildDivider(),
-          SizedBox(height: 15),
+          _buildRow('assets/icons/scb.png', 'SCB Easy', 0, isChecked1, size),
+          SizedBox(height: size.height * 0.018),
+          _buildDivider(size),
+          SizedBox(height: size.height * 0.015),
+          _buildRow('assets/icons/kbank.png', 'K PLUS', 1, isChecked2, size),
+          SizedBox(height: size.height * 0.018),
+          _buildDivider(size),
+          SizedBox(height: size.height * 0.015),
+          _buildRow('assets/icons/bay.png', 'Krungsri Mobile App', 2,
+              isChecked3, size),
+          SizedBox(height: size.height * 0.018),
+          _buildDivider(size),
+          SizedBox(height: size.height * 0.018),
           _buildRow(
-              'assets/icons/bay.png', 'Krungsri Mobile App', 2, isChecked3),
-          SizedBox(height: 10),
-          _buildDivider(),
-          SizedBox(height: 15),
-          _buildRow('assets/icons/ktb.png', 'Krungthai NEXT', 3, isChecked4),
-          SizedBox(height: 10),
-          _buildDivider(),
-          SizedBox(height: 15),
+              'assets/icons/ktb.png', 'Krungthai NEXT', 3, isChecked4, size),
+          SizedBox(height: size.height * 0.01),
+          _buildDivider(size),
+          SizedBox(height: size.height * 0.018),
           _buildRow('assets/icons/bbl.png', 'Bangkok Bank Mobile Banking', 4,
-              isChecked5),
-          SizedBox(height: 10),
-          _buildDivider(),
-          SizedBox(height: 15),
-          SizedBox(
-            height: 320,
-          ),
+              isChecked5, size),
+          SizedBox(height: size.height * 0.018),
+          _buildDivider(size),
+          Spacer(),
           Container(
-            height: 45,
-            width: 306,
+            height: size.height * 0.06,
+            width: size.width * 0.95,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: red1),
+                borderRadius: BorderRadius.circular(13), color: red1),
             child: Center(
                 child: Text(
-              'ยืนยันช่องทางการถอนเงิน',
+              'ยืนยันช่องทางการเติมเงิน',
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             )),
@@ -79,29 +79,34 @@ class _WithdrawmobileState extends State<Withdrawmobile> {
     );
   }
 
-  Widget _buildRow(String imagePath, String text, int index, bool isChecked) {
-    return Row(
-      children: [
-        SizedBox(width: 25),
-        Image.asset(imagePath, height: 30),
-        SizedBox(width: 10),
-        Text(text, style: TextStyle(fontSize: 13)),
-        Spacer(),
-        Checkbox(
-          value: isChecked,
-          onChanged: (bool? value) {
-            _handleCheckboxChange(index, value);
-          },
-        ),
-      ],
+  Widget _buildRow(
+      String imagePath, String text, int index, bool isChecked, Size size) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+      child: Row(
+        children: [
+          SizedBox(width: size.width * 0.01),
+          Image.asset(imagePath, height: size.height * 0.03),
+          SizedBox(width: size.width * 0.03),
+          Text(text,
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          Spacer(),
+          Customredchechkbox(
+            isSelected: isChecked,
+            onChanged: () {
+              _handleCheckboxChange(index, !isChecked);
+            },
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildDivider() {
+  Widget _buildDivider(Size size) {
     return Container(
-      width: 380,
-      height: 1,
-      color: Colors.black,
+      width: size.width * 0.99,
+      height: size.height * 0.0005,
+      color: Colors.grey,
     );
   }
 }

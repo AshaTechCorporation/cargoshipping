@@ -1,14 +1,9 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class Waitsumcard extends StatefulWidget {
-  const Waitsumcard({super.key});
+class Waitpurchase extends StatelessWidget {
+  const Waitpurchase({super.key});
 
-  @override
-  State<Waitsumcard> createState() => _WaitsumcardState();
-}
-
-class _WaitsumcardState extends State<Waitsumcard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -17,7 +12,7 @@ class _WaitsumcardState extends State<Waitsumcard> {
       appBar: AppBar(
         backgroundColor: white,
         title: Text(
-          'รอสรุปยอด',
+          'รอสรุปคำสั่งซื้อ',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -89,7 +84,6 @@ class _WaitsumcardState extends State<Waitsumcard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // compete(size: MediaQuery.of(context).size),
             SizedBox(
               height: size.height * 0.015,
             ),
@@ -156,14 +150,14 @@ class _WaitsumcardState extends State<Waitsumcard> {
                                   width: size.width * 0.01,
                                 ),
                                 Image.asset(
-                                  'assets/icons/waitsum.png',
+                                  'assets/icons/waitsumready.png',
                                   height: size.height * 0.035,
                                 ),
                                 SizedBox(
                                   width: size.width * 0.015,
                                 ),
                                 Text(
-                                  'รอสรุปยอด',
+                                  'จัดส่งสินค้าเรียบร้อย',
                                   style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
