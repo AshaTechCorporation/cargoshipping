@@ -12,7 +12,7 @@ class Readytosend extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: white,
         title: Text(
-          'อยู่ระหว่างคำสั่งซื้อ',
+          'สินค้าเตรียมจัดส่ง',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),

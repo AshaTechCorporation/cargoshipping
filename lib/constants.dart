@@ -559,7 +559,7 @@ const List<Map<String, dynamic>> palceanorder = [
   {
     'id': 4,
     'images': 'assets/icons/packingtrack.png',
-    'title': 'อยู่ระหว่างการสั่งซื้อ',
+    'title': 'สินค้าเตรียมจัดส่ง',
     'process': 'x',
   },
   {

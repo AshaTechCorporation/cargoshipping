@@ -119,9 +119,11 @@ class Palceanorderpage extends StatelessWidget {
                             ),
                             Spacer(),
                             Text(
-                              'ดำเนินการอยู่ ${order['process']}',
+                              index < 4
+                                  ? 'ดำเนินการอยู่ ${order['process']} รายการ'
+                                  : '${order['process']} รายการ',
                               style: TextStyle(color: Colors.grey),
-                            ),
+                            )
                           ],
                         ),
                       ),
