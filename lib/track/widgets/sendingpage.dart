@@ -1,10 +1,10 @@
-import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
-import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
+import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 
-class Detailordertrackpage extends StatelessWidget {
-  const Detailordertrackpage({super.key});
+class Sendingpage extends StatelessWidget {
+  const Sendingpage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,114 +24,84 @@ class Detailordertrackpage extends StatelessWidget {
           children: [
             Column(
               children: [
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
-                Center(
-                  child: Text(
-                    'คำสั่งซื้อนี้กำลังอยู่ในขั้นตอนการติดต่อกับผู้ขาย',
-                    style: TextStyle(fontSize: 13, color: red1),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
                 Container(
-                  height: size.height * 0.21,
+                  height: size.height * 0.229,
                   decoration: BoxDecoration(color: white),
                   child: Padding(
-                    padding: EdgeInsets.all(size.height * 0.009),
+                    padding: EdgeInsets.all(size.height * 0.02),
                     child: Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset('assets/icons/redpin.png'),
-                            SizedBox(
-                              width: size.width * 0.02,
-                            ),
                             Text(
-                              'รหัสนำเข้า AA',
+                              'ข้อมูลการจัดส่ง',
                               style: TextStyle(
-                                  fontSize: 14,
-                                  color: red1,
+                                  fontSize: 13,
+                                  color: headingtext,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Spacer(),
                             Container(
-                              height: size.height * 0.035,
-                              width: size.width * 0.3,
+                              height: size.height * 0.027,
+                              width: size.width * 0.55,
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black, width: 1.0),
+                                  border: Border.all(color: red1, width: 1.0),
                                   borderRadius: BorderRadius.circular(5)),
-                              child: Center(
-                                child: Text(
-                                  'เพิ่มรหัสนำเข้าลูกข่าย',
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'คาดว่าจะถึงโกดังจีนใน 25 ก.ค. 67',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: red1,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Image.asset('assets/icons/redpin.png')
+                                ],
                               ),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: size.height * 0.007,
+                          height: size.height * 0.009,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.08),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'ที่อยู่สำหรับกการจัดส่ง',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Image.asset(
+                                'assets/icons/packingtrack.png',
+                                height: size.height * 0.05,
+                              ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.height * 0.006,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.08),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Girati Sukapat',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  width: size.width * 0.03,
-                                ),
-                                Text(
-                                  '0976688742',
-                                  style: TextStyle(
-                                      color: headingtext,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                            SizedBox(
+                              width: size.width * 0.02,
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.08),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '111/222 xxxx',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 13),
+                            Expanded(
+                              flex: 8,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '31 ก.ค. 67  15:34',
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        color: headingtext,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'ร้านค้ากำลังเตรียมส่ง',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                         SizedBox(
                           height: size.height * 0.009,
@@ -142,43 +112,95 @@ class Detailordertrackpage extends StatelessWidget {
                           height: size.height * 0.0007,
                         ),
                         SizedBox(
-                          height: size.height * 0.009,
+                          height: size.height * 0.02,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: size.width * 0.01),
                           child: Row(
                             children: [
-                              Image.asset(
-                                'assets/icons/redtruck.png',
-                                height: size.height * 0.028,
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  'เลขออร์เดอร์',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                               SizedBox(
-                                width: size.width * 0.01,
+                                width: size.width * 0.03,
                               ),
-                              Text(
-                                'รูปแบบการขนส่ง',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                              Expanded(
+                                flex: 5,
+                                child: Text(
+                                  'A123456',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: headingtext,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               )
                             ],
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.077),
+                              horizontal: size.width * 0.01),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('ขนส่งทางรถ'),
-                              Text(
-                                'ชำระแยกครั้ง',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    color: red1,
-                                    fontWeight: FontWeight.bold),
+                              Expanded(
+                                flex: 3,
+                                child: Text(
+                                  'เลขที่คำสั่งซื้อ',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              SizedBox(width: size.width * 0.01),
+                              Expanded(
+                                flex: 7,
+                                child: Text(
+                                  '012345623',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: headingtext,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.01),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Text(
+                                  'รหัสผู้นำเข้า',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              SizedBox(
+                                width: size.width * 0.07,
+                              ),
+                              Expanded(
+                                flex: 9,
+                                child: Text(
+                                  '012345623',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: headingtext,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               )
                             ],
                           ),
@@ -190,25 +212,29 @@ class Detailordertrackpage extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'รายการสั่งซื้อสินค้า',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: size.height * 0.01,
                 ),
                 Container(
                   color: white,
-                  height: size.height * 0.3,
+                  height: size.height * 0.35,
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: size.height * 0.015,
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'รายละเอียดคำสั่งซื้อ',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsets.all(size.height * 0.01),
                         child: Row(
@@ -411,36 +437,55 @@ class Detailordertrackpage extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: size.width * 0.05),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'ยอดรวมค่าสินค้าทั้งหมด (100 ชิ้น)::',
+                              'ภาพระหว่างการขนส่ง',
                               style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600),
                             ),
                             Spacer(),
-                            Text(
-                              '(¥ 488)',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: headingtext,
-                                  fontWeight: FontWeight.w600),
+                            Container(
+                              height: size.height * 0.04,
+                              width: size.width * 0.08,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(5)),
                             ),
                             SizedBox(
-                              width: size.width * 0.03,
+                              width: size.width * 0.01,
                             ),
-                            Text(
-                              '฿ 2,345.53',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: red1,
-                                  fontWeight: FontWeight.w600),
-                            )
+                            Container(
+                              height: size.height * 0.04,
+                              width: size.width * 0.08,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.01,
+                            ),
+                            Container(
+                              height: size.height * 0.04,
+                              width: size.width * 0.08,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.01,
+                            ),
+                            Container(
+                              height: size.height * 0.04,
+                              width: size.width * 0.08,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -462,7 +507,7 @@ class Detailordertrackpage extends StatelessWidget {
                   height: size.height * 0.01,
                 ),
                 Container(
-                  height: size.height * 0.145,
+                  height: size.height * 0.237,
                   color: white,
                   child: Padding(
                     padding: EdgeInsets.all(size.height * 0.01),
@@ -549,36 +594,98 @@ class Detailordertrackpage extends StatelessWidget {
                         SizedBox(
                           height: size.height * 0.01,
                         ),
+                        Row(
+                          children: [
+                            Container(
+                              height: size.height * 0.035,
+                              width: size.width * 0.3,
+                              decoration: BoxDecoration(
+                                  color: red1,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                child: Text(
+                                  'ค่าใช้จ่ายส่วนสินค้า',
+                                  style: TextStyle(
+                                      color: white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.01),
+                              horizontal: size.width * 0.065),
                           child: Row(
                             children: [
                               Text(
-                                'ยอดรวมค่าบริการเสริมทั้งหมด:',
+                                'รวมค่าสินค้าทั้งหมด (100 ชิ้น)',
                                 style: TextStyle(
                                     fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.bold,
+                                    color: headingtext),
                               ),
                               Spacer(),
                               Text(
-                                '¥ 500',
+                                '฿ 2,345.53',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    color: red1,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: headingtext),
                               ),
-                              SizedBox(
-                                width: size.width * 0.01,
-                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: size.height * 0.001),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.065),
+                          child: Row(
+                            children: [
                               Text(
-                                '(~฿ 2,447.94)',
+                                'รวมค่าขนส่งในจีนรวมทั้งหมด',
                                 style: TextStyle(
-                                    fontSize: 11,
-                                    color: red1,
-                                    fontWeight: FontWeight.bold),
-                              )
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: headingtext),
+                              ),
+                              Spacer(),
+                              Text(
+                                '฿ 2,345.53',
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: headingtext),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: size.width * 0.025,
+                              right: size.width * 0.066),
+                          child: Row(
+                            children: [
+                              Text(
+                                'ยอดรวมที่ชำระแล้วทั้งหมด',
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              ),
+                              Spacer(),
+                              Text(
+                                '฿ 4,691.6',
+                                style: TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
                         ),
@@ -586,101 +693,112 @@ class Detailordertrackpage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'ค่าขนส่งในจีน',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
                 Container(
+                  height: size.height * 0.1,
                   color: white,
-                  height: size.height * 0.13,
-                  child: Padding(
-                    padding: EdgeInsets.all(size.height * 0.015),
-                    child: Column(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: size.height * 0.01,
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                        child: Row(
+                          children: [
+                            Text(
+                              'เวลาสั่งซื้อ',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: headingtext,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Spacer(),
+                            Text(
+                              '28 ก.ค. 2567',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: headingtext,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.02,
+                            ),
+                            Text(
+                              '11:09',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: headingtext,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.001,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                        child: Row(
+                          children: [
+                            Text(
+                              'เวลาที่ชำระเงินค่าใช้จ่ายส่วนสินค้า',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: headingtext,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Spacer(),
+                            Text(
+                              '28 ก.ค. 2567',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: headingtext,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.02,
+                            ),
+                            Text(
+                              '13:00',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: headingtext,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.001,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                    child: Row(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'ค่าขนส่งในจีน - จีน',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            ),
-                            Text(
-                              '฿ 0',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            )
-                          ],
+                        Text(
+                          'ช่องทางชำระเงินค่าใช้จ่ายส่วนสินค้า',
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: headingtext,
+                              fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
-                          height: size.height * 0.004,
+                        Spacer(),
+                        Text(
+                          'QR พร้อมเพย์',
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: headingtext,
+                              fontWeight: FontWeight.w600),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              'รอสรุปยอดขนส่ง',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: headingtext),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        Container(
-                          color: headingtext,
-                          height: size.height * 0.0006,
-                          width: size.width * 0.98,
-                        ),
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'ยอกค่าขนส่งในจีนทั้งหมด',
-                              style: TextStyle(
-                                  color: headingtext,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            ),
-                            Text(
-                              'รอสรุปยอด',
-                              style: TextStyle(
-                                  color: headingtext,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            )
-                          ],
-                        )
                       ],
                     ),
                   ),
+                    ],
+                  ),
                 ),
-                PaymentStepsWidget(size: size),
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
-                warningwidget(size: size)
               ],
             )
           ],
@@ -707,8 +825,8 @@ class Detailordertrackpage extends StatelessWidget {
                             .pop(); // ปิด dialog หลังจาก 2 วินาที
                       });
                       return AlertDialog(
-                        title: Text('ยืนยันเรียบร้อยแล้ว'),
-                        content: Text('คำสั่งซื้อของคุณได้รับการยืนยันแล้ว'),
+                        title: Text('เปิดบิล'),
+                        content: Text('เปิดบิลเสร็จสิ้น'),
                       );
                     },
                   );
@@ -722,7 +840,7 @@ class Detailordertrackpage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'ยันยันคำสั่งซื้อ',
+                      'เปิดบิล',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,

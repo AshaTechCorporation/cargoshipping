@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
 import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 import 'package:cargoshipping/constants.dart';
-import 'package:flutter/material.dart';
 
-class Detailordertrackpage extends StatelessWidget {
-  const Detailordertrackpage({super.key});
+class Placeorderourchase extends StatelessWidget {
+  const Placeorderourchase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Detailordertrackpage extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    'คำสั่งซื้อนี้กำลังอยู่ในขั้นตอนการติดต่อกับผู้ขาย',
+                    'กรุณาชำระเงินภายใน24 ชั่วโมงเพื่อยืนยันคำสั่งซื้อ',
                     style: TextStyle(fontSize: 13, color: red1),
                   ),
                 ),
@@ -693,6 +693,19 @@ class Detailordertrackpage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Column(
+                children: [
+                  Text('ยอดทั้งสิ้น',style: TextStyle(
+                    fontSize: 12,color: headingtext,fontWeight: FontWeight.bold
+                  ),),
+                  Text('฿ 248.8',style: TextStyle(
+                    fontSize: 17,color: red1,fontWeight: FontWeight.bold
+                  ),)
+                ],
+              ),
+              SizedBox(
+                width: size.width * 0.03,
+              ),
               GestureDetector(
                 onTap: () {
                   // เมื่อปุ่มถูกคลิก
@@ -707,8 +720,8 @@ class Detailordertrackpage extends StatelessWidget {
                             .pop(); // ปิด dialog หลังจาก 2 วินาที
                       });
                       return AlertDialog(
-                        title: Text('ยืนยันเรียบร้อยแล้ว'),
-                        content: Text('คำสั่งซื้อของคุณได้รับการยืนยันแล้ว'),
+                        title: Text('ชำระเงิน'),
+                        content: Text('ชำระเงินเสร็จสิ้น'),
                       );
                     },
                   );
@@ -722,7 +735,7 @@ class Detailordertrackpage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'ยันยันคำสั่งซื้อ',
+                      'ชำระเงิน',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,

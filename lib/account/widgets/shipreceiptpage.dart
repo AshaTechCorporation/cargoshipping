@@ -1314,7 +1314,6 @@ class Shipreceiptpage extends StatelessWidget {
                   SizedBox(
                     height: size.height * 0.01,
                   ),
-                  
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: size.width * 0.05),

@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
 import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 import 'package:cargoshipping/constants.dart';
-import 'package:flutter/material.dart';
 
-class Detailordertrackpage extends StatelessWidget {
-  const Detailordertrackpage({super.key});
+class Openbillpage extends StatelessWidget {
+  const Openbillpage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Detailordertrackpage extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    'คำสั่งซื้อนี้กำลังอยู่ในขั้นตอนการติดต่อกับผู้ขาย',
+                    'ตำสั่งนี้กำลังอยู่ในขั้นตอนการจัดเตรียมจากผู้ขาย',
                     style: TextStyle(fontSize: 13, color: red1),
                   ),
                 ),
@@ -462,7 +462,7 @@ class Detailordertrackpage extends StatelessWidget {
                   height: size.height * 0.01,
                 ),
                 Container(
-                  height: size.height * 0.145,
+                  height: size.height * 0.237,
                   color: white,
                   child: Padding(
                     padding: EdgeInsets.all(size.height * 0.01),
@@ -549,36 +549,88 @@ class Detailordertrackpage extends StatelessWidget {
                         SizedBox(
                           height: size.height * 0.01,
                         ),
+                        Row(
+                          children: [
+                            Container(
+                              height: size.height * 0.035,
+                              width: size.width * 0.3,
+                              decoration: BoxDecoration(
+                                  color: red1,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                child: Text(
+                                  'ค่าใช้จ่ายส่วนสินค้า',
+                                  style: TextStyle(
+                                      color: white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.01),
+                              horizontal: size.width * 0.065),
                           child: Row(
                             children: [
                               Text(
-                                'ยอดรวมค่าบริการเสริมทั้งหมด:',
+                                'รวมค่าสินค้าทั้งหมด (100 ชิ้น)',
                                 style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600),
+                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
                               ),
                               Spacer(),
                               Text(
-                                '¥ 500',
+                                '฿ 2,345.53',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    color: red1,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
                               ),
-                              SizedBox(
-                                width: size.width * 0.01,
-                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: size.height * 0.001),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.065),
+                          child: Row(
+                            children: [
                               Text(
-                                '(~฿ 2,447.94)',
+                                'รวมค่าขนส่งในจีนรวมทั้งหมด',
                                 style: TextStyle(
-                                    fontSize: 11,
-                                    color: red1,
-                                    fontWeight: FontWeight.bold),
-                              )
+                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
+                              ),
+                              Spacer(),
+                              Text(
+                                '฿ 2,345.53',
+                                style: TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                             left: size.width * 0.025,
+                             right: size.width * 0.066),
+                          child: Row(
+                            children: [
+                              Text(
+                                'ยอดรวมที่ชำระแล้วทั้งหมด',
+                                style: TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.bold,color: Colors.black),
+                              ),
+                              Spacer(),
+                              Text(
+                                '฿ 4,691.6',
+                                style: TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
                         ),
@@ -589,92 +641,8 @@ class Detailordertrackpage extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'ค่าขนส่งในจีน',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: size.height * 0.01,
-                ),
-                Container(
-                  color: white,
-                  height: size.height * 0.13,
-                  child: Padding(
-                    padding: EdgeInsets.all(size.height * 0.015),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'ค่าขนส่งในจีน - จีน',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            ),
-                            Text(
-                              '฿ 0',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: size.height * 0.004,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'รอสรุปยอดขนส่ง',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: headingtext),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        Container(
-                          color: headingtext,
-                          height: size.height * 0.0006,
-                          width: size.width * 0.98,
-                        ),
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'ยอกค่าขนส่งในจีนทั้งหมด',
-                              style: TextStyle(
-                                  color: headingtext,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            ),
-                            Text(
-                              'รอสรุปยอด',
-                              style: TextStyle(
-                                  color: headingtext,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
                 ),
                 PaymentStepsWidget(size: size),
                 SizedBox(
@@ -707,8 +675,8 @@ class Detailordertrackpage extends StatelessWidget {
                             .pop(); // ปิด dialog หลังจาก 2 วินาที
                       });
                       return AlertDialog(
-                        title: Text('ยืนยันเรียบร้อยแล้ว'),
-                        content: Text('คำสั่งซื้อของคุณได้รับการยืนยันแล้ว'),
+                        title: Text('เปิดบิล'),
+                        content: Text('เปิดบิลเสร็จสิ้น'),
                       );
                     },
                   );
@@ -722,7 +690,7 @@ class Detailordertrackpage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'ยันยันคำสั่งซื้อ',
+                      'เปิดบิล',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,

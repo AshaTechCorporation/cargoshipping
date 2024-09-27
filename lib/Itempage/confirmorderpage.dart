@@ -126,7 +126,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                         children: [
                           Row(
                             children: [
-                              Image.asset('assets/icons/redcar.png',
+                              Image.asset('assets/icons/redtruck.png',
                               height: size.height * 0.025,),
                               SizedBox(width: size.width * 0.02),
                               Text(
