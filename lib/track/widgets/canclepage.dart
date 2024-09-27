@@ -451,7 +451,7 @@ class Canclepage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             Container(
-              height: size.height * 0.145,
+              height: size.height * 0.155,
               color: white,
               child: Padding(
                 padding: EdgeInsets.all(size.height * 0.01),
@@ -587,7 +587,7 @@ class Canclepage extends StatelessWidget {
             ),
             Container(
               color: white,
-              height: size.height * 0.095,
+              height: size.height * 0.097,
               child: Padding(
                 padding: EdgeInsets.all(size.height * 0.015),
                 child: Column(

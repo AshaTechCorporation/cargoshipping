@@ -462,7 +462,7 @@ class Placeorderourchase extends StatelessWidget {
                   height: size.height * 0.01,
                 ),
                 Container(
-                  height: size.height * 0.145,
+                  height: size.height * 0.155,
                   color: white,
                   child: Padding(
                     padding: EdgeInsets.all(size.height * 0.01),
@@ -675,6 +675,9 @@ class Placeorderourchase extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: size.height * 0.01,
                 ),
                 PaymentStepsWidget(size: size),
                 SizedBox(

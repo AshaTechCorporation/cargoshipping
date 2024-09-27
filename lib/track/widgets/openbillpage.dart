@@ -14,8 +14,7 @@ class Openbillpage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'รายละเอียดคำสั่งซื้อ',
-          style: TextStyle(
-              fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: white,
       ),
@@ -51,19 +50,13 @@ class Openbillpage extends StatelessWidget {
                             ),
                             Text(
                               'รหัสนำเข้า AA',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: red1,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 14, color: red1, fontWeight: FontWeight.bold),
                             ),
                             Spacer(),
                             Container(
                               height: size.height * 0.035,
                               width: size.width * 0.3,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black, width: 1.0),
-                                  borderRadius: BorderRadius.circular(5)),
+                              decoration: BoxDecoration(border: Border.all(color: Colors.black, width: 1.0), borderRadius: BorderRadius.circular(5)),
                               child: Center(
                                 child: Text(
                                   'เพิ่มรหัสนำเข้าลูกข่าย',
@@ -77,16 +70,12 @@ class Openbillpage extends StatelessWidget {
                           height: size.height * 0.007,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.08),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'ที่อยู่สำหรับกการจัดส่ง',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -94,42 +83,33 @@ class Openbillpage extends StatelessWidget {
                           height: size.height * 0.006,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.08),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: [
                                 Text(
                                   'Girati Sukapat',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
                                   width: size.width * 0.03,
                                 ),
                                 Text(
                                   '0976688742',
-                                  style: TextStyle(
-                                      color: headingtext,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: headingtext, fontSize: 13, fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.08),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               '111/222 xxxx',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 13),
+                              style: TextStyle(color: Colors.black, fontSize: 13),
                             ),
                           ),
                         ),
@@ -145,8 +125,7 @@ class Openbillpage extends StatelessWidget {
                           height: size.height * 0.009,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.01),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
                           child: Row(
                             children: [
                               Image.asset(
@@ -158,27 +137,20 @@ class Openbillpage extends StatelessWidget {
                               ),
                               Text(
                                 'รูปแบบการขนส่ง',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.077),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.077),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('ขนส่งทางรถ'),
                               Text(
                                 'ชำระแยกครั้ง',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    color: red1,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 13, color: red1, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -196,8 +168,7 @@ class Openbillpage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'รายการสั่งซื้อสินค้า',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -217,9 +188,7 @@ class Openbillpage extends StatelessWidget {
                               flex: 2,
                               child: Container(
                                 height: size.height * 0.075,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(10)),
+                                decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10)),
                               ),
                             ),
                             SizedBox(width: size.width * 0.02),
@@ -230,9 +199,7 @@ class Openbillpage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ำ...',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -241,20 +208,14 @@ class Openbillpage extends StatelessWidget {
                                   ),
                                   Text(
                                     'สีขาวมล',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: headingtext,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 12, color: headingtext, fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.005,
                                   ),
                                   Text(
                                     '¥ 4.88 (฿ 00)',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        color: headingtext),
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: headingtext),
                                   ),
                                 ],
                               ),
@@ -267,17 +228,14 @@ class Openbillpage extends StatelessWidget {
                                 children: [
                                   Text(
                                     '1688严选店',
-                                    style: TextStyle(
-                                        fontSize: 12, color: headingtext),
+                                    style: TextStyle(fontSize: 12, color: headingtext),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.028,
                                   ),
                                   Text(
                                     'จำนวน 50',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -293,9 +251,7 @@ class Openbillpage extends StatelessWidget {
                               flex: 2,
                               child: Container(
                                 height: size.height * 0.075,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(10)),
+                                decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10)),
                               ),
                             ),
                             SizedBox(width: size.width * 0.02),
@@ -306,9 +262,7 @@ class Openbillpage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ำ...',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -317,20 +271,14 @@ class Openbillpage extends StatelessWidget {
                                   ),
                                   Text(
                                     'สีขาวมล',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: headingtext,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 12, color: headingtext, fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.005,
                                   ),
                                   Text(
                                     '¥ 4.88 (฿ 00)',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        color: headingtext),
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: headingtext),
                                   ),
                                 ],
                               ),
@@ -343,17 +291,14 @@ class Openbillpage extends StatelessWidget {
                                 children: [
                                   Text(
                                     '1688严选店',
-                                    style: TextStyle(
-                                        fontSize: 12, color: headingtext),
+                                    style: TextStyle(fontSize: 12, color: headingtext),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.028,
                                   ),
                                   Text(
                                     'จำนวน 50',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -373,25 +318,18 @@ class Openbillpage extends StatelessWidget {
                         height: size.height * 0.015,
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'หมายเหตุจากผู้ซื้อ:',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: headingtext,
-                                  fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w600),
                             ),
                             Spacer(),
                             Text(
                               'ไม่มี',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: headingtext,
-                                  fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -408,35 +346,25 @@ class Openbillpage extends StatelessWidget {
                         height: size.height * 0.015,
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'ยอดรวมค่าสินค้าทั้งหมด (100 ชิ้น)::',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                             ),
                             Spacer(),
                             Text(
                               '(¥ 488)',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: headingtext,
-                                  fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
                               width: size.width * 0.03,
                             ),
                             Text(
                               '฿ 2,345.53',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: red1,
-                                  fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 15, color: red1, fontWeight: FontWeight.w600),
                             )
                           ],
                         ),
@@ -453,8 +381,7 @@ class Openbillpage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'บริการเสริม',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -479,26 +406,19 @@ class Openbillpage extends StatelessWidget {
                             ),
                             Text(
                               'ตีลังไม้',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
                             ),
                             Spacer(),
                             Text(
                               '¥ 500',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               width: size.width * 0.02,
                             ),
                             Text(
                               '(฿ 2,000)',
-                              style: TextStyle(
-                                  color: headingtext,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(color: headingtext, fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -506,8 +426,7 @@ class Openbillpage extends StatelessWidget {
                           height: size.height * 0.008,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.065),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
                           child: Row(
                             children: [
                               Expanded(
@@ -523,8 +442,7 @@ class Openbillpage extends StatelessWidget {
                         ),
                         SizedBox(height: size.height * 0.001),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.065),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
                           child: Row(
                             children: [
                               Expanded(
@@ -554,16 +472,11 @@ class Openbillpage extends StatelessWidget {
                             Container(
                               height: size.height * 0.035,
                               width: size.width * 0.3,
-                              decoration: BoxDecoration(
-                                  color: red1,
-                                  borderRadius: BorderRadius.circular(10)),
+                              decoration: BoxDecoration(color: red1, borderRadius: BorderRadius.circular(10)),
                               child: Center(
                                 child: Text(
                                   'ค่าใช้จ่ายส่วนสินค้า',
-                                  style: TextStyle(
-                                      color: white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13),
+                                  style: TextStyle(color: white, fontWeight: FontWeight.bold, fontSize: 13),
                                 ),
                               ),
                             ),
@@ -573,40 +486,34 @@ class Openbillpage extends StatelessWidget {
                           height: size.height * 0.005,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.065),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
                           child: Row(
                             children: [
                               Text(
                                 'รวมค่าสินค้าทั้งหมด (100 ชิ้น)',
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
+                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: headingtext),
                               ),
                               Spacer(),
                               Text(
                                 '฿ 2,345.53',
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
+                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: headingtext),
                               ),
                             ],
                           ),
                         ),
                         SizedBox(height: size.height * 0.001),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.065),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
                           child: Row(
                             children: [
                               Text(
                                 'รวมค่าขนส่งในจีนรวมทั้งหมด',
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
+                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: headingtext),
                               ),
                               Spacer(),
                               Text(
                                 '฿ 2,345.53',
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold,color: headingtext),
+                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: headingtext),
                               ),
                             ],
                           ),
@@ -615,21 +522,17 @@ class Openbillpage extends StatelessWidget {
                           height: size.height * 0.005,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                             left: size.width * 0.025,
-                             right: size.width * 0.066),
+                          padding: EdgeInsets.only(left: size.width * 0.025, right: size.width * 0.066),
                           child: Row(
                             children: [
                               Text(
                                 'ยอดรวมที่ชำระแล้วทั้งหมด',
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold,color: Colors.black),
+                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
                               ),
                               Spacer(),
                               Text(
                                 '฿ 4,691.6',
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -637,9 +540,6 @@ class Openbillpage extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
                 ),
                 SizedBox(
                   height: size.height * 0.01,
@@ -671,8 +571,7 @@ class Openbillpage extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       Future.delayed(Duration(seconds: 2), () {
-                        Navigator.of(context)
-                            .pop(); // ปิด dialog หลังจาก 2 วินาที
+                        Navigator.of(context).pop(); // ปิด dialog หลังจาก 2 วินาที
                       });
                       return AlertDialog(
                         title: Text('เปิดบิล'),

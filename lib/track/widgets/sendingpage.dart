@@ -25,7 +25,7 @@ class Sendingpage extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: size.height * 0.245,
+                  height: size.height * 0.255,
                   decoration: BoxDecoration(color: Colors.white),
                   child: Stack(
                     children: [

@@ -676,6 +676,9 @@ class Detailordertrackpage extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
                 PaymentStepsWidget(size: size),
                 SizedBox(
                   height: size.height * 0.01,
