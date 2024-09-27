@@ -493,7 +493,7 @@ class _WerehousechipageState extends State<Werehousechipage> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: size.height * 0.085,
+        height: size.height * 0.095,
         child: BottomAppBar(
           color: white,
           child: Row(
