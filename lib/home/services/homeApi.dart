@@ -1,5 +1,7 @@
+import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
+import 'package:cargoshipping/models/problemtype.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -42,6 +44,24 @@ class HomeApi {
       final data = convert.jsonDecode(response.body);
       final list = data['items']['item'] as List;
       return list.map((e) => Item.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  //เรียกดูข้อมูล Category
+  static Future<List<ProblemType>> getProblem() async {
+    final url = Uri.https(publicUrl, '/api/ProblemType/showall');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => ProblemType.fromJson(e)).toList();
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);

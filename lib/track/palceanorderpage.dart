@@ -4,6 +4,7 @@ import 'package:cargoshipping/track/readytosend.dart';
 import 'package:cargoshipping/track/sended.dart';
 import 'package:cargoshipping/track/waitpurchase.dart';
 import 'package:cargoshipping/track/waitsumcard.dart';
+import 'package:cargoshipping/track/widgets/canclecard.dart';
 import 'package:flutter/material.dart';
 
 class Palceanorderpage extends StatelessWidget {
@@ -84,6 +85,14 @@ class Palceanorderpage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => Sended(),
+                            ),
+                          );
+                        }
+                        if (index == 5) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Canclecard(),
                             ),
                           );
                         }

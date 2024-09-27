@@ -1,10 +1,8 @@
-import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
-import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
+import 'package:cargoshipping/constants.dart';
 
-class Sendingpage extends StatelessWidget {
-  const Sendingpage({super.key});
+class Sendcomplete extends StatelessWidget {
+  const Sendcomplete({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class Sendingpage extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: size.height * 0.245,
+                  height: size.height * 0.29,
                   decoration: BoxDecoration(color: Colors.white),
                   child: Stack(
                     children: [
@@ -228,14 +226,53 @@ class Sendingpage extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Container(
+                              height: size.height * 0.001,
+                              width: size.width * 0.99,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.01),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: Text(
+                                      'เลขที่ติดตามพัสดุ',
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 9,
+                                    child: Text(
+                                      'A013245678',
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: headingtext,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       Positioned(
-                        bottom: 0,
+                        bottom: 60,
                         right: 20,
                         child: Opacity(
-                          opacity: 0.2,
+                          opacity: 0.5,
                           child: Image.asset(
                             'assets/icons/carback.png',
                             width: size.width * 0.2,

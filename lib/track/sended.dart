@@ -1,5 +1,6 @@
 import 'package:cargoshipping/account/widgets/shipreceiptpage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/track/widgets/sendcomplete.dart';
 import 'package:flutter/material.dart';
 
 class Sended extends StatelessWidget {
@@ -13,7 +14,7 @@ class Sended extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: white,
           title: Text(
-            'อยู่ระหว่างคำสั่งซื้อ',
+            'จัดส่งสินค้าแล้ว',
             style: TextStyle(
                 fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
           ),
@@ -93,7 +94,7 @@ class Sended extends StatelessWidget {
                    Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Shipreceiptpage(),
+                              builder: (context) => Sendcomplete(),
                             ),
                           );
                 },

@@ -1,6 +1,7 @@
 import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/reportformpage.dart';
+import 'package:cargoshipping/track/widgets/productcardwidget.dart';
 import 'package:flutter/material.dart';
 
 class Shipreceiptpage extends StatelessWidget {
@@ -385,313 +386,8 @@ class Shipreceiptpage extends StatelessWidget {
                     SizedBox(
                       height: size.height * 0.01,
                     ),
-                    Container(
-                      height: size.height * 0.24,
-                      width: size.width * 0.9,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: size.height * 0.12,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color(0xfff7f3e9),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: size.height * 0.01,
-                                        ),
-                                        Text(
-                                          '1. ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: size.height * 0.01,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Text(
-                                              'สีแดงอิฐ',
-                                              style: TextStyle(
-                                                color: greyuserinfo,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                              textAlign: TextAlign.right,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: size.height * 0.0001,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: size.width * 0.045),
-                                          child: RichText(
-                                            text: TextSpan(
-                                              text: 'ประเภท ',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13,
-                                              ),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: 'A',
-                                                  style: TextStyle(
-                                                    color: greyuserinfo,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: size.height * 0.006,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: size.width * 0.045),
-                                          child: RichText(
-                                            text: TextSpan(
-                                              text: 'Shop Tracking ',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13,
-                                              ),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: '  xxxxxx',
-                                                  style: TextStyle(
-                                                    color: greyuserinfo,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    height: size.height * 0.07,
-                                    width: size.width * 0.1,
-                                    margin: const EdgeInsets.all(5),
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: size.height * 0.003,
-                                        ),
-                                        RichText(
-                                          text: TextSpan(
-                                            text: 'unit ',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 13,
-                                            ),
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                text: 'กล่องลังจำนวน1',
-                                                style: TextStyle(
-                                                  color: greyuserinfo,
-                                                  fontSize: 13,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 7,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                flex: 5,
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'น้ำหนัก',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 13,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                        width:
-                                                            size.width * 0.02),
-                                                    Text(
-                                                      '2.5 กก.',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: greyuserinfo,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 8,
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'จำนวน',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 13,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                        width:
-                                                            size.width * 0.02),
-                                                    Text(
-                                                      '000',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: greyuserinfo,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: size.height * 0.01),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'ขนาด',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                  width: size.width * 0.02),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'ยาว 50 x สูง 60 x กว้าง 40 cm',
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: greyuserinfo,
-                                                      ),
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                    Text(
-                                                      '(30 CBM)',
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: greyuserinfo,
-                                                      ),
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        height: size.height * 0.098,
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    ProductCardWidget(
+                        size: size, greyuserinfo: greyuserinfo, red1: red1),
                     SizedBox(
                       height: size.height * 0.03,
                     ),
@@ -1110,11 +806,12 @@ class Shipreceiptpage extends StatelessWidget {
                       height: size.height * 0.02,
                     ),
                     Padding(
-                      padding:EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
                       child: Row(
                         children: [
                           Text(
-                            'สรปุยอดรวมที่ชำระแล้ว',
+                            'สรุปยอดรวมที่ชำระแล้ว',
                             style: TextStyle(
                                 color: Color(0xff004aad),
                                 fontSize: 15,
@@ -1131,281 +828,280 @@ class Shipreceiptpage extends StatelessWidget {
                         ],
                       ),
                     ),
-                     SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'หมายเหตุจากผู้ซื้อ:',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          'ไม่มี',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        )
-                      ],
+                    SizedBox(
+                      height: size.height * 0.01,
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'หมายเหตุจากผู้จัดส่ง:',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          'ไม่มี',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        )
-                      ],
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'หมายเหตุจากผู้ซื้อ:',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            'ไม่มี',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      children: [
-                        Text(
-                          'ภาพระหว่างการขนส่ง',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Spacer(),
-                        Container(
-                          height: size.height * 0.04,
-                          width: size.width * 0.08,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.01,
-                        ),
-                        Container(
-                          height: size.height * 0.04,
-                          width: size.width * 0.08,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.01,
-                        ),
-                        Container(
-                          height: size.height * 0.04,
-                          width: size.width * 0.08,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.01,
-                        ),
-                        Container(
-                          height: size.height * 0.04,
-                          width: size.width * 0.08,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                      ],
+                    SizedBox(
+                      height: size.height * 0.01,
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.02,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      children: [
-                        Text(
-                          'เวลาสั่งซื้อ',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Spacer(),
-                        Text(
-                          '28 ก.ค. 2567',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.02,
-                        ),
-                        Text(
-                          '11:09',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        )
-                      ],
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'หมายเหตุจากผู้จัดส่ง:',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            'ไม่มี',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      children: [
-                        Text(
-                          'เวลาที่ชำระเงินค่าใช้จ่ายส่วนสินค้า',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Spacer(),
-                        Text(
-                          '28 ก.ค. 2567',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.02,
-                        ),
-                        Text(
-                          '13:00',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        )
-                      ],
+                    SizedBox(
+                      height: size.height * 0.01,
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      children: [
-                        Text(
-                          'ช่องทางชำระเงินค่าใช้จ่ายส่วนสินค้า',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Spacer(),
-                        Text(
-                          'QR พร้อมเพย์',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        children: [
+                          Text(
+                            'ภาพระหว่างการขนส่ง',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Spacer(),
+                          Container(
+                            height: size.height * 0.04,
+                            width: size.width * 0.08,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.01,
+                          ),
+                          Container(
+                            height: size.height * 0.04,
+                            width: size.width * 0.08,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.01,
+                          ),
+                          Container(
+                            height: size.height * 0.04,
+                            width: size.width * 0.08,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.01,
+                          ),
+                          Container(
+                            height: size.height * 0.04,
+                            width: size.width * 0.08,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.018,
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      children: [
-                        Text(
-                          'เวลาที่ชำระเงินค่าใช้จ่ายส่วนบริการ',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Spacer(),
-                        Text(
-                          '28 ก.ค. 2567',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          width: size.width * 0.02,
-                        ),
-                        Text(
-                          '13:00',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        )
-                      ],
+                    SizedBox(
+                      height: size.height * 0.02,
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.006,
-                  ),
-                  
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                    child: Row(
-                      children: [
-                        Text(
-                          'ช่องทางชำระเงินค่าใช้จ่ายส่วนสินค้า',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Spacer(),
-                        Text(
-                          'QR พร้อมเพย์',
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: headingtext,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        children: [
+                          Text(
+                            'เวลาสั่งซื้อ',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Spacer(),
+                          Text(
+                            '28 ก.ค. 2567',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.02,
+                          ),
+                          Text(
+                            '11:09',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        children: [
+                          Text(
+                            'เวลาที่ชำระเงินค่าใช้จ่ายส่วนสินค้า',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Spacer(),
+                          Text(
+                            '28 ก.ค. 2567',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.02,
+                          ),
+                          Text(
+                            '13:00',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        children: [
+                          Text(
+                            'ช่องทางชำระเงินค่าใช้จ่ายส่วนสินค้า',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Spacer(),
+                          Text(
+                            'QR พร้อมเพย์',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.018,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        children: [
+                          Text(
+                            'เวลาที่ชำระเงินค่าใช้จ่ายส่วนบริการ',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Spacer(),
+                          Text(
+                            '28 ก.ค. 2567',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.02,
+                          ),
+                          Text(
+                            '13:00',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.006,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Row(
+                        children: [
+                          Text(
+                            'ช่องทางชำระเงินค่าใช้จ่ายส่วนสินค้า',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Spacer(),
+                          Text(
+                            'QR พร้อมเพย์',
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: headingtext,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
           ],
         ),
       ),
-       bottomNavigationBar: SizedBox(
+      bottomNavigationBar: SizedBox(
         height: size.height * 0.08,
         child: BottomAppBar(
           color: white,
@@ -1475,7 +1171,7 @@ class Shipreceiptpage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                        //
+                      //
                     },
                     child: Container(
                       height: size.height * 0.065,

@@ -22,6 +22,7 @@ Color pinkmessSixper = Color(0xffDE1E26);
 const kBackgroundColor = Color(0xff1B58B1);
 const kSecondTextColor = Color(0xff7B7B7B);
 const kConkgroundColor = Color(0xffFFFFFF);
+const String publicUrl = 'cargo-api.dev-asha9.com';
 
 const List<String> titleData = [
   'ขนส่งทางบก\nและทางทะเล',

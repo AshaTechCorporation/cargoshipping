@@ -1,15 +1,10 @@
-import 'package:cargoshipping/constants.dart';
-import 'package:cargoshipping/track/detailorderpage.dart';
+import 'package:cargoshipping/track/widgets/canclepage.dart';
 import 'package:flutter/material.dart';
+import 'package:cargoshipping/constants.dart';
 
-class Waitsumcard extends StatefulWidget {
-  const Waitsumcard({super.key});
+class Canclecard extends StatelessWidget {
+  const Canclecard({super.key});
 
-  @override
-  State<Waitsumcard> createState() => _WaitsumcardState();
-}
-
-class _WaitsumcardState extends State<Waitsumcard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -90,6 +85,7 @@ class _WaitsumcardState extends State<Waitsumcard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // compete(size: MediaQuery.of(context).size),
             SizedBox(
               height: size.height * 0.015,
             ),
@@ -98,7 +94,7 @@ class _WaitsumcardState extends State<Waitsumcard> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Detailordertrackpage(),
+                    builder: (context) => Canclepage(),
                   ),
                 );
               },
@@ -165,14 +161,14 @@ class _WaitsumcardState extends State<Waitsumcard> {
                                     width: size.width * 0.01,
                                   ),
                                   Image.asset(
-                                    'assets/icons/waitsum.png',
+                                    'assets/icons/cancle.png',
                                     height: size.height * 0.035,
                                   ),
                                   SizedBox(
                                     width: size.width * 0.015,
                                   ),
                                   Text(
-                                    'รอสรุปยอด',
+                                    'ยกเลิก/ล้มเหลว',
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold,

@@ -1,6 +1,9 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/historydetail.dart';
 import 'package:cargoshipping/home/widgets/problemcard.dart';
+import 'package:cargoshipping/models/problemtype.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 
 class ReportProblemPage extends StatefulWidget {
@@ -12,6 +15,36 @@ class ReportProblemPage extends StatefulWidget {
 
 class _ReportProblemPageState extends State<ReportProblemPage> {
   int _selectedChoice = 0;
+  List<ProblemType> problem = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getProblem();
+    });
+  }
+
+  //ดึงข้อมูล api problem
+  Future<void> getProblem() async {
+    try {
+      LoadingDialog.open(context);
+      final _problem = await HomeApi.getProblem();
+      if (!mounted) return;
+
+      setState(() {
+        problem = _problem;
+      });
+      //inspect(problem);
+      LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {

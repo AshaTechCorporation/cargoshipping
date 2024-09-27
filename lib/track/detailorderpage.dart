@@ -657,7 +657,7 @@ class Detailordertrackpage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'ยอกค่าขนส่งในจีนทั้งหมด',
+                              'ยอดค่าขนส่งในจีนทั้งหมด',
                               style: TextStyle(
                                   color: headingtext,
                                   fontWeight: FontWeight.bold,

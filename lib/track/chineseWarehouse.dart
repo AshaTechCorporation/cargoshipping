@@ -1,5 +1,6 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/widgets/CardWarehouseWidget.dart';
+import 'package:cargoshipping/track/widgets/werehousechipage.dart';
 import 'package:flutter/material.dart';
 
 class ChineseWarehouse extends StatefulWidget {
@@ -76,24 +77,34 @@ class _ChineseWarehouseState extends State<ChineseWarehouse> {
             )),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.015,
-            ),
-            CardWarehouseWidget(
-              size: size,
-              status: 1,
-              carback: 'assets/icons/carback.png',
-              iconPosition1: 'assets/icons/home_icon.png',
-              iconPosition2: 'assets/icons/icon_grayb1.png',
-              iconPosition3: 'assets/icons/icon_grayb2.png',
-              iconPosition4: 'assets/icons/icon_grayb3.png',
-              iconPosition5: 'assets/icons/correctgrey.png',
-              orderNo: 'Order no. A423456',
-              press: () {print('click press');},
-            )
-          ],
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Werehousechipage(),
+                            ),
+                          );
+          },
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.015,
+              ),
+              CardWarehouseWidget(
+                size: size,
+                status: 1,
+                carback: 'assets/icons/carback.png',
+                iconPosition1: 'assets/icons/home_icon.png',
+                iconPosition2: 'assets/icons/icon_grayb1.png',
+                iconPosition3: 'assets/icons/icon_grayb2.png',
+                iconPosition4: 'assets/icons/icon_grayb3.png',
+                iconPosition5: 'assets/icons/correctgrey.png',
+                orderNo: 'Order no. A423456',
+                press: () {print('click press');},
+              )
+            ],
+          ),
         ),
       ),
     );
