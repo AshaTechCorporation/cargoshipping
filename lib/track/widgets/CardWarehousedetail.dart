@@ -4,8 +4,8 @@ import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/widgets/productcardwidget.dart';
 
-class Intransitdetail extends StatelessWidget {
-  const Intransitdetail({super.key});
+class Cardwarehousedetail extends StatelessWidget {
+  const Cardwarehousedetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class Intransitdetail extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset(
-                          'assets/icons/icon_red2.png',
+                          'assets/icons/thaiwere.png',
                           height: size.height * 0.05,
                         ),
                         SizedBox(
@@ -97,22 +97,12 @@ class Intransitdetail extends StatelessWidget {
                               height: size.height * 0.005,
                             ),
                             Text(
-                              'อยู่ระหว่างการขนส่ง',
+                              'ถึงโกดังไทย',
                               style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              height: size.height * 0.005,
-                            ),
-                            Text(
-                              'กำหนดประมาณการณ์ถึงไทย วันที่ 15 ส.ค. 67',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: red1,
-                                  fontWeight: FontWeight.w600),
-                            )
                           ],
                         )
                       ],
@@ -121,10 +111,10 @@ class Intransitdetail extends StatelessWidget {
                   SizedBox(
                     height: size.height * 0.015,
                   ),
-                  Container(
-                    color: greymess,
-                    height: size.height * 0.0025,
-                    width: size.width * 0.95,
+                  CustomDivider(
+                    heightFactor: 0.0006,
+                    widthFactor: 0.95,
+                    color: Colors.grey,
                   ),
                   SizedBox(
                     height: size.height * 0.02,
@@ -395,9 +385,9 @@ class Intransitdetail extends StatelessWidget {
                         SizedBox(
                           height: size.height * 0.01,
                         ),
-                        Container(
-                          height: size.height * 0.0002,
-                          width: size.width * 0.95,
+                        CustomDivider(
+                          heightFactor: 0.0006,
+                          widthFactor: 0.95,
                           color: Colors.grey,
                         ),
                         SizedBox(
@@ -455,9 +445,9 @@ class Intransitdetail extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Container(
-                          height: size.height * 0.0005,
-                          width: size.width * 0.98,
+                        CustomDivider(
+                          heightFactor: 0.0006,
+                          widthFactor: 0.95,
                           color: Colors.grey,
                         ),
                         SizedBox(
@@ -517,8 +507,6 @@ class Intransitdetail extends StatelessWidget {
                                   ],
                                 ),
                               ),
-
-                              // Flex 3: ข้อความด้านขวา
                               Expanded(
                                 flex: 4,
                                 child: Align(
@@ -554,9 +542,74 @@ class Intransitdetail extends StatelessWidget {
                         SizedBox(
                           height: size.height * 0.01,
                         ),
-                        Container(
-                          height: size.height * 0.0002,
-                          width: size.width * 0.95,
+                        CustomDivider(
+                          heightFactor: 0.0006,
+                          widthFactor: 0.95,
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // Flex 1: รูปภาพ
+                            Expanded(
+                              flex: 1,
+                              child: Image.asset(
+                                'assets/icons/dateicon.png',
+                                height: size.height * 0.02,
+                                width: size.width * 0.04,
+                              ),
+                            ),
+                            SizedBox(width: size.width * 0.03),
+                            Expanded(
+                              flex: 5,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'วันที่เข้ารับ',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: () {
+                                    // กดเพื่อเลือกวิธีการจัดส่ง
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'เลือกวันที่จัดส่ง',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: red1,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.02,
+                                      ),
+                                      Image.asset(
+                                          'assets/icons/rightredarrow.png')
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        CustomDivider(
+                          heightFactor: 0.0006,
+                          widthFactor: 0.95,
                           color: Colors.grey,
                         ),
                         SizedBox(
@@ -842,7 +895,7 @@ class Intransitdetail extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  'สรุปยอดรวมที่ชำระแล้ว',
+                                  'สรุปยอดรวมที่ต้องชำระทั้งหมด',
                                   style: TextStyle(
                                       color: red1,
                                       fontSize: 13,
@@ -887,6 +940,14 @@ class Intransitdetail extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
+                          height: size.height * 0.005,
+                        ),
+                        CustomDivider(
+                          heightFactor: 0.0006,
+                          widthFactor: 0.95,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
                           height: size.height * 0.01,
                         ),
                         Padding(
@@ -911,6 +972,17 @@ class Intransitdetail extends StatelessWidget {
                               )
                             ],
                           ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
+                        CustomDivider(
+                          heightFactor: 0.0006,
+                          widthFactor: 0.95,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: size.height * 0.01,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -967,11 +1039,6 @@ class Intransitdetail extends StatelessWidget {
                         ),
                         SizedBox(
                           height: size.height * 0.01,
-                        ),
-                        CustomDivider(
-                          heightFactor: 0.0005,
-                          widthFactor: 0.98,
-                          color: Colors.grey,
                         ),
                       ],
                     ),

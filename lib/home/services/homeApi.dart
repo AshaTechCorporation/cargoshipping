@@ -1,6 +1,7 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
+import 'package:cargoshipping/models/problembodies.dart';
 import 'package:cargoshipping/models/problemtype.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -50,7 +51,7 @@ class HomeApi {
     }
   }
 
-  //เรียกดูข้อมูล Category
+  //เรียกดูข้อมูล ProblemType
   static Future<List<ProblemType>> getProblem() async {
     final url = Uri.https(publicUrl, '/api/ProblemType/showall');
     var headers = {'Content-Type': 'application/json'};
@@ -67,4 +68,32 @@ class HomeApi {
       throw Exception(data['message']);
     }
   }
+
+  //เรียกดูข้อมูลproblembody
+  static Future<List<Problembodies>> getProblemBodies(int id) async {
+  final url = Uri.https(publicUrl, '/api/ProblemBody/show/$id');
+  var headers = {'Content-Type': 'application/json'};
+  final response = await http.get(
+    headers: headers,
+    url,
+  );
+
+  if (response.statusCode == 200) {
+    final data = convert.jsonDecode(response.body);
+    
+    if (data['data'] is List) {
+      final list = data['data'] as List;
+      return list.map((e) => Problembodies.fromJson(e)).toList();
+    } else if (data['data'] is Map) {
+      final item = Problembodies.fromJson(data['data']);
+      return [item];
+    } else {
+      throw Exception('Unexpected data format');
+    }
+  } else {
+    final data = convert.jsonDecode(response.body);
+    throw Exception(data['message']);
+  }
+}
+
 }

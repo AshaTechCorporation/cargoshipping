@@ -1,4 +1,3 @@
-import 'package:cargoshipping/account/widgets/detailorderpage.dart';
 import 'package:cargoshipping/account/widgets/shipreceiptpage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/account/widgets/shipreceiptpage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/widgets/CardWarehouseWidget.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class _SuccessfulDeliveryState extends State<SuccessfulDelivery> {
         backgroundColor: white,
         title: Text(
           'จัดส่งสำเร็จ',
-          style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(30.0),
@@ -28,7 +30,10 @@ class _SuccessfulDeliveryState extends State<SuccessfulDelivery> {
                 Container(
                   width: size.width * 0.95,
                   height: size.height * 0.04,
-                  decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(13), border: Border.all(color: greyuserinfo, width: 0.5)),
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(13),
+                      border: Border.all(color: greyuserinfo, width: 0.5)),
                   child: Row(
                     children: [
                       Expanded(
@@ -36,9 +41,14 @@ class _SuccessfulDeliveryState extends State<SuccessfulDelivery> {
                         child: TextFormField(
                           decoration: InputDecoration(
                             hintText: 'ค้นหาเลข Tracking, Order, Container ',
-                            hintStyle: TextStyle(fontSize: 13, color: greyuserinfo, fontWeight: FontWeight.bold),
+                            hintStyle: TextStyle(
+                                fontSize: 13,
+                                color: greyuserinfo,
+                                fontWeight: FontWeight.bold),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.only(bottom: size.height * 0.018, left: size.width * 0.03),
+                            contentPadding: EdgeInsets.only(
+                                bottom: size.height * 0.018,
+                                left: size.width * 0.03),
                           ),
                         ),
                       ),
@@ -55,7 +65,10 @@ class _SuccessfulDeliveryState extends State<SuccessfulDelivery> {
                             child: Center(
                               child: Text(
                                 'ค้นหา',
-                                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -81,17 +94,25 @@ class _SuccessfulDeliveryState extends State<SuccessfulDelivery> {
             SizedBox(
               height: size.height * 0.015,
             ),
-            CardWarehouseWidget(
-              size: size,
-              status: 5,
-              carback: 'assets/icons/carback.png',
-              iconPosition1: 'assets/icons/home_icon.png',
-              iconPosition2: 'assets/icons/icon_red2.png',
-              iconPosition3: 'assets/icons/icon_red3.png',
-              iconPosition4: 'assets/icons/icon_red4.png',
-              iconPosition5: 'assets/icons/delivery.png',
-              orderNo: 'Order no. A423456',
-              press: () {print('click press');},
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Shipreceiptpage()));
+              },
+              child: CardWarehouseWidget(
+                size: size,
+                status: 5,
+                carback: 'assets/icons/carback.png',
+                iconPosition1: 'assets/icons/home_icon.png',
+                iconPosition2: 'assets/icons/icon_red2.png',
+                iconPosition3: 'assets/icons/icon_red3.png',
+                iconPosition4: 'assets/icons/icon_red4.png',
+                iconPosition5: 'assets/icons/delivery.png',
+                orderNo: 'Order no. A423456',
+                press: () {
+                  print('click press');
+                },
+              ),
             )
           ],
         ),

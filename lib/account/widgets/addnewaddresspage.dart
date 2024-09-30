@@ -75,7 +75,8 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                 height: size.height * 0.055,
                 width: double.infinity,
                 child: Padding(
-                  padding: EdgeInsets.only(left: size.width * 0.03, top: size.height * 0.02),
+                  padding: EdgeInsets.only(
+                      left: size.width * 0.03, top: size.height * 0.02),
                   child: Text(
                     'ข้อมูลทางติดต่อ',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -92,12 +93,14 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                     hintStyle: TextStyle(
                       fontSize: 13,
                     ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.015,
+                        horizontal: size.width * 0.03),
+                    border: InputBorder.none,
                   ),
                 ),
               ),
-              SizedBox(height: size.height * 0.004),
+              SizedBox(height: size.height * 0.003),
               Container(
                 height: size.height * 0.05,
                 color: white,
@@ -108,17 +111,14 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                     hintStyle: TextStyle(
                       fontSize: 13,
                     ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.015,
+                        horizontal: size.width * 0.03),
+                    border: InputBorder.none,
                   ),
                 ),
               ),
-              SizedBox(height: size.height * 0.004),
+              SizedBox(height: size.height * 0.003),
               Container(
                 height: size.height * 0.05,
                 color: white,
@@ -129,13 +129,10 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                     hintStyle: TextStyle(
                       fontSize: 13,
                     ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.015,
+                        horizontal: size.width * 0.03),
+                    border: InputBorder.none,
                   ),
                 ),
               ),
@@ -144,7 +141,8 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                 height: size.height * 0.07,
                 width: double.infinity,
                 child: Padding(
-                  padding: EdgeInsets.only(left: size.width * 0.03, top: size.height * 0.02),
+                  padding: EdgeInsets.only(
+                      left: size.width * 0.03, top: size.height * 0.02),
                   child: Row(
                     children: [
                       Text(
@@ -185,8 +183,9 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                         selectednewaddressprovice = value;
                       });
                     },
-                   buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                    buttonStyleData: ButtonStyleData(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.035),
                       height: size.height * 0.045,
                       width: size.width * 0.02,
                     ),
@@ -196,9 +195,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                   ),
                 ),
               ),
-              Divider(
-                height: size.height * 0.008,
-              ),
+              SizedBox(height: size.height * 0.003),
               Container(
                 width: double.infinity,
                 color: white,
@@ -230,7 +227,8 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       });
                     },
                     buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.035),
                       height: size.height * 0.045,
                       width: size.width * 0.02,
                     ),
@@ -240,9 +238,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                   ),
                 ),
               ),
-              Divider(
-                height: size.height * 0.008,
-              ),
+              SizedBox(height: size.height * 0.003),
               Container(
                 color: white,
                 width: double.infinity,
@@ -274,7 +270,8 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       });
                     },
                     buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.035),
                       height: size.height * 0.045,
                       width: size.width * 0.02,
                     ),
@@ -284,9 +281,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                   ),
                 ),
               ),
-              Divider(
-                height: size.height * 0.008,
-              ),
+              SizedBox(height: size.height * 0.003),
               Container(
                 color: white,
                 width: double.infinity,
@@ -318,7 +313,8 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       });
                     }, //พี่เดลเก่งอ่า
                     buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.035),
                       height: size.height * 0.045,
                       width: size.width * 0.02,
                     ),
@@ -328,9 +324,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                   ),
                 ),
               ),
-              Divider(
-                height: size.height * 0.008,
-              ),
+              SizedBox(height: size.height * 0.003),
               Container(
                 height: size.height * 0.05,
                 color: white,
@@ -341,8 +335,10 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                     hintStyle: TextStyle(
                       fontSize: 13,
                     ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: size.height * 0.015, horizontal: size.width * 0.03),
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.015,
+                        horizontal: size.width * 0.03),
+                    border: InputBorder.none,
                   ),
                 ),
               ),
@@ -378,13 +374,13 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       Row(
                         children: [
                           ChoiceChip(
-                            label: Container(
-                              alignment: Alignment.center,
+                            label: Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: size.height * 0.007),
                               child: Text(
                                 'สำนักงาน',
                                 style: TextStyle(
-                                  fontSize: 13,
-                                ),
+                                    fontSize: 13, fontWeight: FontWeight.w500),
                               ),
                             ),
                             selected: _selectedLoacation == 0,
@@ -394,10 +390,10 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                               });
                             },
                             shape: RoundedRectangleBorder(
-                              side: BorderSide(color: Colors.red),
+                              side: BorderSide(color: red1),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            selectedColor: Colors.red,
+                            selectedColor: red1,
                             labelStyle: TextStyle(
                               color: _selectedLoacation == 0
                                   ? Colors.white
@@ -415,8 +411,14 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                           ),
                           SizedBox(width: size.width * 0.02),
                           ChoiceChip(
-                            label: Text(
-                              'บ้าน',
+                            label: Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: size.height * 0.007),
+                              child: Text(
+                                'บ้าน',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500, fontSize: 13),
+                              ),
                             ),
                             selected: _selectedLoacation == 1,
                             onSelected: (bool selected) {
@@ -425,10 +427,10 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                               });
                             },
                             shape: RoundedRectangleBorder(
-                              side: BorderSide(color: Colors.red),
+                              side: BorderSide(color: red1),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            selectedColor: Colors.red,
+                            selectedColor: red1,
                             labelStyle: TextStyle(
                               color: _selectedLoacation == 1
                                   ? Colors.white
@@ -450,13 +452,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: size.height * 0.0001,
-              ),
-              Container(
-                height: size.height * 0.001,
-                color: Colors.grey[150],
-              ),
+              SizedBox(height: size.height * 0.0006),
               Container(
                 height: size.height * 0.05,
                 width: double.infinity,
@@ -483,8 +479,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                         activeTrackColor: Colors.red[100],
                         activeColor: Colors.red,
                         inactiveTrackColor: white,
-                        inactiveThumbColor:
-                            Color(0xffd9d9d9),
+                        inactiveThumbColor: Color(0xffd9d9d9),
                       )
                     ],
                   ),
@@ -522,8 +517,9 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                       Row(
                         children: [
                           ChoiceChip(
-                            label: Container(
-                              alignment: Alignment.center,
+                            label: Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: size.height * 0.007),
                               child: Text(
                                 'เฉพาะ จ.-ศ. เวลาราชการ',
                                 style: TextStyle(
@@ -538,10 +534,10 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                               });
                             },
                             shape: RoundedRectangleBorder(
-                              side: BorderSide(color: Colors.red),
+                              side: BorderSide(color: red1),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            selectedColor: Colors.red,
+                            selectedColor: red1,
                             labelStyle: TextStyle(
                               color: _selectedtime == 0
                                   ? Colors.white
@@ -559,8 +555,12 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                           ),
                           SizedBox(width: size.width * 0.02),
                           ChoiceChip(
-                            label: Text(
-                              'ทุกเวลา',
+                            label: Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: size.height * 0.007),
+                              child: Text(
+                                'ทุกเวลา',
+                              ),
                             ),
                             selected: _selectedtime == 1,
                             onSelected: (bool selected) {
@@ -569,10 +569,10 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
                               });
                             },
                             shape: RoundedRectangleBorder(
-                              side: BorderSide(color: Colors.red),
+                              side: BorderSide(color: red1),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            selectedColor: Colors.red,
+                            selectedColor: red1,
                             labelStyle: TextStyle(
                               color: _selectedtime == 1
                                   ? Colors.white

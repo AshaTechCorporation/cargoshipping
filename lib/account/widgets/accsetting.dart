@@ -23,13 +23,19 @@ class _AccsettingState extends State<Accsetting> {
         backgroundColor: background,
         title: Text(
           'ตั้งค่า',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
           child: Container(
-            color: Colors.grey[300],
-            height: size.height * 0.001,
+            color: Colors.grey,
+            height: 0.5,
           ),
         ),
       ),
@@ -108,13 +114,9 @@ class _AccsettingState extends State<Accsetting> {
               ),
             ),
             Container(
-            color: Colors.grey[300],
-            height: size.height * 0.001,
-          ),
-           Container(
-            color: Colors.grey[300],
-            height: size.height * 0.001,
-          ),
+              color: Colors.grey[300],
+              height: size.height * 0.001,
+            ),
             Container(
               color: background,
               height: size.height * 0.055,
@@ -150,9 +152,9 @@ class _AccsettingState extends State<Accsetting> {
               ),
             ),
             Container(
-            color: Colors.grey[300],
-            height: size.height * 0.001,
-          ),
+              color: Colors.grey[300],
+              height: size.height * 0.001,
+            ),
             Container(
               height: size.height * 0.05,
               color: white,
@@ -174,18 +176,16 @@ class _AccsettingState extends State<Accsetting> {
               ),
             ),
             Container(
-            color: Colors.grey[300],
-            height: size.height * 0.001,
-          ),
+              color: Colors.grey[300],
+              height: size.height * 0.001,
+            ),
             Container(
               height: size.height * 0.05,
               color: white,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: GestureDetector(
-                  onTap: (){
-                    
-                  },
+                  onTap: () {},
                   child: Row(
                     children: [
                       Text(
@@ -203,9 +203,9 @@ class _AccsettingState extends State<Accsetting> {
               ),
             ),
             Container(
-            color: Colors.grey[300],
-            height: size.height * 0.001,
-          ),
+              color: Colors.grey[300],
+              height: size.height * 0.001,
+            ),
             Container(
               height: size.height * 0.05,
               color: white,
@@ -227,9 +227,9 @@ class _AccsettingState extends State<Accsetting> {
               ),
             ),
             Container(
-            color: Colors.grey[300],
-            height: size.height * 0.001,
-          ),
+              color: Colors.grey[300],
+              height: size.height * 0.001,
+            ),
             SizedBox(
               height: size.height * 0.32,
             ),

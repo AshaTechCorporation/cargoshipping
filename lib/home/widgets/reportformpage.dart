@@ -1,4 +1,7 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/services/homeApi.dart';
+import 'package:cargoshipping/models/problembodies.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -19,6 +22,15 @@ class _ReportFormPageState extends State<ReportFormPage> {
   final _detailsController = TextEditingController();
   File? _image;
   final ImagePicker _picker = ImagePicker();
+  List<Problembodies> problembodies = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getProblemBodies(1);
+    });
+  }
 
   // ฟังก์ชันสำหรับเลือกภาพจากแกลเลอรีหรือกล้อง
   Future<void> _pickImage() async {
@@ -32,6 +44,24 @@ class _ReportFormPageState extends State<ReportFormPage> {
       setState(() {
         _image = File(pickedFile.path);
       });
+    }
+  }
+
+  // ดึงข้อมูล api problembodies
+  Future<void> getProblemBodies(int id) async {
+    try {
+      LoadingDialog.open(context);
+      final _problembodies = await HomeApi.getProblemBodies(id);
+      if (!mounted) return;
+
+      setState(() {
+        problembodies = _problembodies; // อัพเดทค่าของ problembodies
+      });
+      LoadingDialog.close(context);
+    } catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
     }
   }
 
@@ -79,7 +109,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                         ),
                         SizedBox(height: size.height * 0.015),
                         DropdownButtonFormField<String>(
-                          dropdownColor: white,
+                          dropdownColor: Colors.white,
                           icon: Icon(Icons.keyboard_arrow_down),
                           decoration: InputDecoration(
                             isDense: true,
@@ -88,27 +118,25 @@ class _ReportFormPageState extends State<ReportFormPage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
-                            
                           ),
                           hint: Text(
                             'เลือกปัญหาที่พบในด้านนี้',
                             style: TextStyle(fontSize: 14),
                           ),
-                          value: _selectedIssue,
+                          value: _selectedIssue, // ต้องตรวจสอบว่าค่านี้ถูกต้อง
                           onChanged: (newValue) {
                             setState(() {
                               _selectedIssue = newValue;
+                              print(
+                                  "Selected issue: $_selectedIssue"); // ตรวจสอบค่าที่เลือก
                             });
                           },
-                          items: <String>[
-                            'ปัญหาที่ 1',
-                            'ปัญหาที่ 2',
-                            'ปัญหาที่ 3'
-                          ].map<DropdownMenuItem<String>>((String value) {
+                          items: problembodies.map<DropdownMenuItem<String>>(
+                              (Problembodies problemBody) {
                             return DropdownMenuItem<String>(
-                              value: value,
+                              value: problemBody.body,
                               child: Text(
-                                value,
+                                problemBody.body,
                                 style: TextStyle(fontSize: 14),
                               ),
                             );

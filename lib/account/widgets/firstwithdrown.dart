@@ -22,6 +22,18 @@ class _FirstwithdrawpageState extends State<Firstwithdrawpage> {
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(size.height * 0.02),

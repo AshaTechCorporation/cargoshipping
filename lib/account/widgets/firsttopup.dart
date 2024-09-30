@@ -30,6 +30,11 @@ class _FirsttopupState extends State<Firsttopup> {
             Navigator.pop(context);
           },
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(size.height * 0.02),

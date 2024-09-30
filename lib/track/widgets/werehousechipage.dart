@@ -1,5 +1,6 @@
 import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/track/widgets/orderlistpage.dart';
 import 'package:cargoshipping/track/widgets/productcardwidget.dart';
 import 'package:flutter/material.dart';
 
@@ -336,24 +337,34 @@ class _WerehousechipageState extends State<Werehousechipage> {
                   SizedBox(
                     height: size.height * 0.014,
                   ),
-                  Container(
-                    height: size.height * 0.05,
-                    decoration: BoxDecoration(color: red1),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'รายการสั่งซื้อสินค้า',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: white,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Image.asset('assets/icons/rightarrowwhite.png')
-                        ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Orderlistpage(),
+                            ),
+                          );
+                    },
+                    child: Container(
+                      height: size.height * 0.05,
+                      decoration: BoxDecoration(color: red1),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'รายการสั่งซื้อสินค้า',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Image.asset('assets/icons/rightarrowwhite.png')
+                          ],
+                        ),
                       ),
                     ),
                   ),

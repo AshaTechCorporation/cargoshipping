@@ -90,12 +90,12 @@ class Readytosend extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-               Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Sendingpage(),
-                            ),
-                          );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Sendingpage(),
+                ),
+              );
             },
             child: Center(
               child: Stack(
@@ -255,8 +255,8 @@ class Readytosend extends StatelessWidget {
                           height: size.height * 0.02,
                         ),
                         Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.07),
                           child: Row(
                             children: [
                               Text(
@@ -276,8 +276,8 @@ class Readytosend extends StatelessWidget {
                           height: size.height * 0.01,
                         ),
                         Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.07),
                           child: Row(
                             children: [
                               Image.asset(

@@ -91,11 +91,11 @@ class Duringpurchase extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Openbillpage(),
-                            ),
-                          );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Openbillpage(),
+                  ),
+                );
               },
               child: Center(
                 child: Stack(
@@ -270,7 +270,8 @@ class Duringpurchase extends StatelessWidget {
                                 Text(
                                   'ประเภท สินค้าสั่งซื้อ ',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 13),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
                                 ),
                                 Spacer(),
                                 Text(

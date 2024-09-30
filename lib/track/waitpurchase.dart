@@ -90,12 +90,12 @@ class Waitpurchase extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Placeorderourchase(),
-                            ),
-                          );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Placeorderourchase(),
+                  ),
+                );
               },
               child: Center(
                 child: Stack(
@@ -167,7 +167,7 @@ class Waitpurchase extends StatelessWidget {
                                     width: size.width * 0.015,
                                   ),
                                   Text(
-                                    'จัดส่งสินค้าเรียบร้อย',
+                                    'สรุปยอดคำสั่งซื้อ',
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold,
@@ -188,7 +188,8 @@ class Waitpurchase extends StatelessWidget {
                                 Text(
                                   'ประเภท สินค้าสั่งซื้อ ',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 13),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
                                 ),
                                 Spacer(),
                                 Text(

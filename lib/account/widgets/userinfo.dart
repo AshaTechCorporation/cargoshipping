@@ -14,9 +14,23 @@ class _UserinfoState extends State<Userinfo> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text('ตั้งค่าบัญชี',style: TextStyle(
-            fontSize: 17,color: Colors.black,fontWeight: FontWeight.bold
-          ),),
+          title: Text(
+            'ตั้งค่าบัญชี',
+            style: TextStyle(
+                fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: backgroundColor,
+            ),
+          ),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(1.0),
+            child: Container(
+              color: Colors.grey,
+              height: 0.5,
+            ),
+          ),
         ),
         body: Container(
           color: background,
@@ -24,15 +38,13 @@ class _UserinfoState extends State<Userinfo> {
             children: [
               Container(
                 color: background,
-                height: size.height *0.06,
+                height: size.height * 0.06,
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, top: 25),
                   child: Text(
                     'ข้อมูลทางติดต่อ',
-                    style: TextStyle(
-                      color: greyuserinfo
-                        ),
+                    style: TextStyle(color: greyuserinfo,fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -43,9 +55,15 @@ class _UserinfoState extends State<Userinfo> {
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Row(
                     children: [
-                      Text('ชื่อผู้ใช้',style: TextStyle(fontSize: 13),),
+                      Text(
+                        'ชื่อผู้ใช้',
+                        style: TextStyle(fontSize: 13),
+                      ),
                       Spacer(),
-                      Text('Girati Sukapat',style: TextStyle(fontSize: 13),)
+                      Text(
+                        'Girati Sukapat',
+                        style: TextStyle(fontSize: 13),
+                      )
                     ],
                   ),
                 ),
@@ -61,9 +79,15 @@ class _UserinfoState extends State<Userinfo> {
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Row(
                     children: [
-                      Text('หมายเลขโทรศัพท์',style: TextStyle(fontSize: 13),),
+                      Text(
+                        'หมายเลขโทรศัพท์',
+                        style: TextStyle(fontSize: 13),
+                      ),
                       Spacer(),
-                      Text('******778',style: TextStyle(fontSize: 13),)
+                      Text(
+                        '******778',
+                        style: TextStyle(fontSize: 13),
+                      )
                     ],
                   ),
                 ),
@@ -79,9 +103,15 @@ class _UserinfoState extends State<Userinfo> {
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Row(
                     children: [
-                      Text('อีเมล',style: TextStyle(fontSize: 13),),
+                      Text(
+                        'อีเมล',
+                        style: TextStyle(fontSize: 13),
+                      ),
                       Spacer(),
-                      Text('g******@gmail.com',style: TextStyle(fontSize: 13),)
+                      Text(
+                        'g******@gmail.com',
+                        style: TextStyle(fontSize: 13),
+                      )
                     ],
                   ),
                 ),
@@ -97,9 +127,15 @@ class _UserinfoState extends State<Userinfo> {
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Row(
                     children: [
-                      Text('เปลี่ยนรหัสผ่าน',style: TextStyle(fontSize: 13),),
+                      Text(
+                        'เปลี่ยนรหัสผ่าน',
+                        style: TextStyle(fontSize: 13),
+                      ),
                       Spacer(),
-                      Text('************',style: TextStyle(fontSize: 13),)
+                      Text(
+                        '************',
+                        style: TextStyle(fontSize: 13),
+                      )
                     ],
                   ),
                 ),
@@ -109,7 +145,7 @@ class _UserinfoState extends State<Userinfo> {
                 color: arrowcolor,
               ),
               SizedBox(
-                height: size.height *0.089,
+                height: size.height * 0.089,
               ),
               GestureDetector(
                 onTap: () {
@@ -128,8 +164,7 @@ class _UserinfoState extends State<Userinfo> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pop();
+                                Navigator.of(context).pop();
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -140,8 +175,7 @@ class _UserinfoState extends State<Userinfo> {
                                       actions: [
                                         TextButton(
                                           onPressed: () {
-                                            Navigator.of(context)
-                                                .pop();
+                                            Navigator.of(context).pop();
                                           },
                                           child: Text('ตกลง'),
                                         )
@@ -160,7 +194,8 @@ class _UserinfoState extends State<Userinfo> {
                   width: size.width * 0.94,
                   height: size.height * 0.055,
                   decoration: BoxDecoration(
-                      color: arrowcolor, borderRadius: BorderRadius.circular(15)),
+                      color: arrowcolor,
+                      borderRadius: BorderRadius.circular(15)),
                   child: Center(
                       child: Text(
                     'ยืนยัน',

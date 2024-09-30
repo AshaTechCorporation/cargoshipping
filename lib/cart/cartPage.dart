@@ -138,7 +138,11 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
-        backgroundColor: background,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
         title: const Text(
           'รถเข็น',
           style: TextStyle(

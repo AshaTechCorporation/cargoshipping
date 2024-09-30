@@ -127,7 +127,6 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
     return ListView(
       padding: const EdgeInsets.all(16.0),
       children: problemData.map((problem) {
-        // แทนที่การเรียก _buildProblemCard ด้วยการสร้าง ProblemCardPage
         return ProblemCardPage(
           imagePath: problem['imagePath'],
           title: problem['title'],
@@ -136,6 +135,25 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
       }).toList(),
     );
   }
+//   Widget _buildNewProblemTab() {
+//   return ListView(
+//     padding: const EdgeInsets.all(16.0),
+//     children: problemData.map((problemDataItem) {
+//       // แปลงเป็น ProblemType
+//       final problem = ProblemType.fromJson(problemDataItem);
+
+//       // สร้าง List<String> สำหรับ options จาก problem_bodies
+//       List<String> options = problem.problem_bodies?.map((body) => body.body).toList() ?? [];
+
+//       return ProblemCardPage(
+//         imagePath: problemDataItem['imagePath'], // ถ้าต้องการใช้ imagePath
+//         title: problem.title, // ใช้ title จาก ProblemType
+//         options: options, // ใช้ options ที่ได้จาก problem_bodies
+//       );
+//     }).toList(),
+//   );
+// }
+
 
   Widget _buildHistoryTab() {
     // Tab ประวัติการแก้ไขปัญหา

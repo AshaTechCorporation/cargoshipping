@@ -59,11 +59,9 @@ class _TrackPageState extends State<TrackPage>
                 width: size.width * 0.95,
                 height: size.height * 0.04,
                 decoration: BoxDecoration(
-                    color: white, borderRadius: BorderRadius.circular(13),
-                    border: Border.all(
-                      color: greyuserinfo,
-                      width: 0.5
-                    )),
+                    color: white,
+                    borderRadius: BorderRadius.circular(13),
+                    border: Border.all(color: greyuserinfo, width: 0.5)),
                 child: Row(
                   children: [
                     Expanded(
@@ -71,12 +69,14 @@ class _TrackPageState extends State<TrackPage>
                       child: TextFormField(
                         decoration: InputDecoration(
                           hintText: 'ค้นหาเลข Tracking, Order, Container ',
-                          hintStyle: TextStyle(fontSize: 13,color: greyuserinfo,fontWeight: FontWeight.bold),
+                          hintStyle: TextStyle(
+                              fontSize: 13,
+                              color: greyuserinfo,
+                              fontWeight: FontWeight.bold),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.only(
-                            bottom: size.height * 0.018,
-                            left: size.width * 0.03
-                          ),
+                              bottom: size.height * 0.018,
+                              left: size.width * 0.03),
                         ),
                       ),
                     ),

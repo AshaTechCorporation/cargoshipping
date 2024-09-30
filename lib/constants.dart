@@ -18,6 +18,15 @@ Color green = Color(0xff3ace01);
 Color blue = Color(0xff3c5a9a);
 Color pinkser = Color(0xffffefe0);
 Color pinkmessSixper = Color(0xffDE1E26);
+LinearGradient backgroundColor = LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    Color(0xFFFFFFFF), // สีขาว (#FFFFFF)
+    Color(0xFFF5F5F5), // สีเทาอ่อน (#F5F5F5)
+  ],
+  stops: [0.6, 1.0],
+);
 
 const kBackgroundColor = Color(0xff1B58B1);
 const kSecondTextColor = Color(0xff7B7B7B);
@@ -281,6 +290,7 @@ List<String> howto = [
 List<MenuItem> menuItems = [
   MenuItem(imagePath: 'assets/icons/redcar.png', text: 'สรุปการขนส่ง'),
   MenuItem(imagePath: 'assets/icons/fav.png', text: 'รายการโปรด'),
+  MenuItem(imagePath: 'assets/icons/yellomoney.png', text: 'ประวัติธุรกรรม'),
   MenuItem(imagePath: 'assets/images/article.png', text: 'บทความ'),
   MenuItem(imagePath: 'assets/icons/guide.png', text: 'คู่มือการใช้งาน'),
   MenuItem(imagePath: 'assets/icons/report.png', text: 'แจ้งปัญหา'),
@@ -590,7 +600,7 @@ const List<Map<String, dynamic>> tracktransport = [
     'title': 'อยู่ระหว่างการขนส่ง',
     'process': 'x',
   },
-    {
+  {
     'id': 3,
     'images': 'assets/icons/atwerehousethai.png',
     'title': 'ถึงโกดังไทย',
@@ -649,4 +659,61 @@ final List<String> imgList = [
   'https://via.placeholder.com/600x200.png?text=Image+3',
   'https://via.placeholder.com/600x200.png?text=Image+4',
   'https://via.placeholder.com/600x200.png?text=Image+5',
+];
+
+const List<Map<String, dynamic>> topuphis = [
+  {
+    'id': 1,
+    'date': '26 ก.ย. 67',
+    'time': '16:50:54',
+    'detailLink': 'ดูรายละเอียด',
+    'by': 'mobile banking',
+    'amount': '500.00'
+  },
+  {
+    'id': 2,
+    'date': '26 ก.ย. 67',
+    'time': '16:50:54',
+    'detailLink': 'ดูรายละเอียด',
+    'by': 'mobile banking',
+    'amount': '500.00'
+  }
+];
+
+const List<Map<String, dynamic>> withdrownhis = [
+  {
+    'id': 1,
+    'date': '26 ก.ย. 67',
+    'time': '16:50:54',
+    'detailLink': 'ดูรายละเอียด',
+    'by': 'mobile banking',
+    'amount': '500.00'
+  },
+  {
+    'id': 2,
+    'date': '26 ก.ย. 67',
+    'time': '16:50:54',
+    'detailLink': 'ดูรายละเอียด',
+    'by': 'mobile banking',
+    'amount': '500.00'
+  }
+];
+
+const List<Map<String, dynamic>> statement = [
+  {
+    'id': 1,
+    'po': ' A523456',
+    'time': '20 ส.ค. 67 10:00',
+    'detailLink': 'ดูรายละเอียด',
+    'by': 'ค่าบริการ',
+    'amount': '00,000'
+  },
+  {
+    'id': 2,
+    'po': ' A523226',
+    'time': '21 ส.ค. 67 12:02',
+    'detailLink': 'ดูรายละเอียด',
+    'by': 'ค่าสินค้า',
+    'amount': '00,000'
+  },
 ];

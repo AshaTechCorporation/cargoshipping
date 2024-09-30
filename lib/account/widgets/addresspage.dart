@@ -21,11 +21,16 @@ class _AddresspageState extends State<Addresspage> {
           'ที่อยู่ของฉัน',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0),
+          preferredSize: Size.fromHeight(1.0),
           child: Container(
             color: Colors.grey,
-            height: 1.0,
+            height: 0.5,
           ),
         ),
       ),
@@ -72,7 +77,7 @@ class _AddresspageState extends State<Addresspage> {
                           child: Text(
                             'ค่าเริ่มต้น',
                             style: TextStyle(
-                                color: Colors.blue,
+                                color: Color(0xff4077c2),
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold),
                           ),

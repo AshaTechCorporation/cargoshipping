@@ -20,7 +20,8 @@ class _InTransitPageState extends State<InTransitPage> {
         backgroundColor: white,
         title: Text(
           'อยู่ระหว่างการขนส่ง',
-          style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(30.0),
@@ -29,7 +30,10 @@ class _InTransitPageState extends State<InTransitPage> {
                 Container(
                   width: size.width * 0.95,
                   height: size.height * 0.04,
-                  decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(13), border: Border.all(color: greyuserinfo, width: 0.5)),
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(13),
+                      border: Border.all(color: greyuserinfo, width: 0.5)),
                   child: Row(
                     children: [
                       Expanded(
@@ -37,9 +41,14 @@ class _InTransitPageState extends State<InTransitPage> {
                         child: TextFormField(
                           decoration: InputDecoration(
                             hintText: 'ค้นหาเลข Tracking, Order, Container ',
-                            hintStyle: TextStyle(fontSize: 13, color: greyuserinfo, fontWeight: FontWeight.bold),
+                            hintStyle: TextStyle(
+                                fontSize: 13,
+                                color: greyuserinfo,
+                                fontWeight: FontWeight.bold),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.only(bottom: size.height * 0.018, left: size.width * 0.03),
+                            contentPadding: EdgeInsets.only(
+                                bottom: size.height * 0.018,
+                                left: size.width * 0.03),
                           ),
                         ),
                       ),
@@ -56,7 +65,10 @@ class _InTransitPageState extends State<InTransitPage> {
                             child: Center(
                               child: Text(
                                 'ค้นหา',
-                                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -85,11 +97,11 @@ class _InTransitPageState extends State<InTransitPage> {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Intransitdetail(),
-                            ),
-                          );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Intransitdetail(),
+                  ),
+                );
               },
               child: CardWarehouseWidget(
                 size: size,
@@ -101,7 +113,9 @@ class _InTransitPageState extends State<InTransitPage> {
                 iconPosition4: 'assets/icons/icon_grayb3.png',
                 iconPosition5: 'assets/icons/correctgrey.png',
                 orderNo: 'Order no. A423456',
-                press: () {print('click press');},
+                press: () {
+                  print('click press');
+                },
               ),
             )
           ],

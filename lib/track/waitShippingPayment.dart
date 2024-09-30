@@ -1,5 +1,6 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/widgets/CardWarehouseWidget.dart';
+import 'package:cargoshipping/track/widgets/waitshippingdetail.dart';
 import 'package:flutter/material.dart';
 
 class WaitShippingPayment extends StatefulWidget {
@@ -81,17 +82,27 @@ class _WaitShippingPaymentState extends State<WaitShippingPayment> {
             SizedBox(
               height: size.height * 0.015,
             ),
-            CardWarehouseWidget(
-              size: size,
-              status: 4,
-              carback: 'assets/icons/carback.png',
-              iconPosition1: 'assets/icons/home_icon.png',
-              iconPosition2: 'assets/icons/icon_red2.png',
-              iconPosition3: 'assets/icons/icon_red3.png',
-              iconPosition4: 'assets/icons/icon_red4.png',
-              iconPosition5: 'assets/icons/correctgrey.png',
-              orderNo: 'Order no. A423456',
-              press: () {print('click press');},
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Waitshippingdetail(),
+                  ),
+                );
+              },
+              child: CardWarehouseWidget(
+                size: size,
+                status: 4,
+                carback: 'assets/icons/carback.png',
+                iconPosition1: 'assets/icons/home_icon.png',
+                iconPosition2: 'assets/icons/icon_red2.png',
+                iconPosition3: 'assets/icons/icon_red3.png',
+                iconPosition4: 'assets/icons/icon_red4.png',
+                iconPosition5: 'assets/icons/correctgrey.png',
+                orderNo: 'Order no. A423456',
+                press: () {print('click press');},
+              ),
             )
           ],
         ),

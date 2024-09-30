@@ -20,6 +20,16 @@ import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/paperless.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
+import 'package:cargoshipping/track/chineseWarehouse.dart';
+import 'package:cargoshipping/track/inTransitPage.dart';
+import 'package:cargoshipping/track/readytosend.dart';
+import 'package:cargoshipping/track/sended.dart';
+import 'package:cargoshipping/track/successfulDelivery.dart';
+import 'package:cargoshipping/track/thaiWarehouse.dart';
+import 'package:cargoshipping/track/waitShippingPayment.dart';
+import 'package:cargoshipping/track/waitpurchase.dart';
+import 'package:cargoshipping/track/waitsumcard.dart';
+import 'package:cargoshipping/track/widgets/canclecard.dart';
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatefulWidget {
@@ -318,7 +328,48 @@ class _AccountPageState extends State<AccountPage> {
                 (index) => CardlistWidget(
                   size: size,
                   title: myorder[index]['name'],
-                  press: () {},
+                  press: () {
+                    if (index == 0) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Waitsumcard(),
+                        ),
+                      );
+                    }
+                    if (index == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Waitpurchase(),
+                        ),
+                      );
+                    }
+                    if (index == 2) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Readytosend(),
+                        ),
+                      );
+                    }
+                    if (index == 3) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Sended(),
+                        ),
+                      );
+                    }
+                    if (index == 4) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Canclecard(),
+                        ),
+                      );
+                    }
+                  },
                   imagespath: myorder[index]['images'],
                 ),
               ),
@@ -367,7 +418,48 @@ class _AccountPageState extends State<AccountPage> {
               (index) => Orderlist(
                 size: size,
                 title: orderlist[index]['name'],
-                press: () {},
+                press: () {
+                  if (index == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChineseWarehouse(),
+                      ),
+                    );
+                  }
+                  if (index == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InTransitPage(),
+                      ),
+                    );
+                  }
+                  if (index == 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ThaiWarehouse(),
+                      ),
+                    );
+                  }
+                  if (index == 3) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WaitShippingPayment(),
+                      ),
+                    );
+                  }
+                  if (index == 4) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SuccessfulDelivery(),
+                      ),
+                    );
+                  }
+                },
                 imagespath: orderlist[index]['images'],
               ),
             ),

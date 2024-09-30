@@ -58,7 +58,7 @@ class ProductCardWidget extends StatelessWidget {
                           height: size.height * 0.01,
                         ),
                         Text(
-                          '1. ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
+                          ' ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: Colors.black,

@@ -1,7 +1,5 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
-import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 
 class Sendingpage extends StatelessWidget {
   const Sendingpage({super.key});

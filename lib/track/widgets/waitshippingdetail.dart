@@ -4,8 +4,8 @@ import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/widgets/productcardwidget.dart';
 
-class Intransitdetail extends StatelessWidget {
-  const Intransitdetail({super.key});
+class Waitshippingdetail extends StatelessWidget {
+  const Waitshippingdetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,34 +39,6 @@ class Intransitdetail extends StatelessWidget {
                               color: headingtext,
                               fontWeight: FontWeight.w600),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MapTest()));
-                          },
-                          child: Container(
-                            height: size.height * 0.027,
-                            width: size.width * 0.35,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: red1, width: 1.5),
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'สถานะการจัดส่ง',
-                                  style: TextStyle(
-                                      color: red1,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 11),
-                                ),
-                                Image.asset('assets/icons/redpin.png')
-                              ],
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ),
@@ -76,7 +48,7 @@ class Intransitdetail extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset(
-                          'assets/icons/icon_red2.png',
+                          'assets/icons/icon_red4.png',
                           height: size.height * 0.05,
                         ),
                         SizedBox(
@@ -97,22 +69,13 @@ class Intransitdetail extends StatelessWidget {
                               height: size.height * 0.005,
                             ),
                             Text(
-                              'อยู่ระหว่างการขนส่ง',
+                              'รอชำระค่าขนส่ง',
                               style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              height: size.height * 0.005,
-                            ),
-                            Text(
-                              'กำหนดประมาณการณ์ถึงไทย วันที่ 15 ส.ค. 67',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: red1,
-                                  fontWeight: FontWeight.w600),
-                            )
+                            
                           ],
                         )
                       ],
