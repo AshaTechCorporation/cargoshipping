@@ -917,6 +917,23 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
                 MenuList(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(size.width * 0.04),
+                      child: Image.asset('assets/icons/taobao.png',height: size.height * 0.07,),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(size.width * 0.04),
+                      child: Image.asset('assets/icons/tmall.png',height: size.height * 0.07,),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(size.width * 0.04),
+                      child: Image.asset('assets/icons/1688.png',height: size.height * 0.07,),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

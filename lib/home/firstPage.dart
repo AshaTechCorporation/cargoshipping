@@ -147,7 +147,7 @@ class _FirstPageState extends State<FirstPage> {
                             height: 30,
                           ),
                           Text(
-                            'หมวดหมู่สินค้า',
+                            'หมวดสินค้า',
                             style: TextStyle(fontSize: 14, color: red1),
                           )
                         ],
@@ -161,7 +161,7 @@ class _FirstPageState extends State<FirstPage> {
                               height: 30,
                             ),
                             Text(
-                              'หมวดหมู่สินค้า',
+                              'หมวดสินค้า',
                               style: TextStyle(fontSize: 14),
                             )
                           ],
