@@ -1,9 +1,10 @@
+import 'package:cargoshipping/account/widgets/accumulatedpointswidget.dart';
 import 'package:cargoshipping/account/widgets/statementwidget.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class Statement extends StatelessWidget {
-  const Statement({super.key});
+class Accumulatedpoints extends StatelessWidget {
+  const Accumulatedpoints({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class Statement extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'รายการเดินบัญชี',
+                    'รายการคะแนนสะสม',
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.black,
@@ -49,10 +50,10 @@ class Statement extends StatelessWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: statement.length,
+                itemCount: accumulatedpoints.length,
                 itemBuilder: (context, index) {
-                  return Statementwidget(
-                    statement: statement[index],
+                  return Accumulatedpointswidget(
+                    accumulatedpoints: accumulatedpoints[index],
                     onTap: () {
                       
                     },

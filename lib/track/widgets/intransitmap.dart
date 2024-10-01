@@ -3,16 +3,16 @@ import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapTest extends StatefulWidget {
-  const MapTest({super.key});
+class Intransitmap extends StatefulWidget {
+  const Intransitmap({super.key});
 
   @override
-  State<MapTest> createState() => _MapTestState();
+  State<Intransitmap> createState() => _IntransitmapState();
 }
 
-class _MapTestState extends State<MapTest> {
+class _IntransitmapState extends State<Intransitmap> {
   late GoogleMapController mapController;
-  Set<Marker> markers = Set();
+  Set<Marker> markers = {};
 
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
@@ -38,7 +38,7 @@ class _MapTestState extends State<MapTest> {
       appBar: AppBar(
         title: Text(
           'ข้อมูลการจัดส่ง',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
       // body: Stack(
@@ -104,14 +104,14 @@ class _MapTestState extends State<MapTest> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'สินค้ากำลังจัดส่งจีน',
+                            'สินค้าอยู่ระหว่างการขนส่ง',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xff004aad)),
                           ),
                           Text(
-                            'กำหนดจัดส่งในวันที่',
+                            'คาดว่าจะถึงไทยใน',
                             style: TextStyle(fontSize: 13, color: headingtext),
                           ),
                           Text(
@@ -134,7 +134,7 @@ class _MapTestState extends State<MapTest> {
           DraggableScrollableSheet(
               initialChildSize: 0.15,
               minChildSize: 0.15,
-              maxChildSize: 0.15,
+              maxChildSize: 0.25,
               builder:
                   (BuildContext context, ScrollController scrollController) {
                 return Container(
@@ -159,13 +159,14 @@ class _MapTestState extends State<MapTest> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding:EdgeInsets.only(top: size.height * 0.01),
+                          padding: EdgeInsets.only(top: size.height * 0.01),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('เลข PO',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 13)),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13)),
                               Text('A123456',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -184,39 +185,122 @@ class _MapTestState extends State<MapTest> {
                                 Text(
                                   '31 ก.ค. 67',
                                   style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 11,
                                       color: headingtext,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text('15:34',
+                                Text(
+                                  '15:34',
                                   style: TextStyle(
                                       fontSize: 13,
                                       color: headingtext,
-                                      fontWeight: FontWeight.bold),)
+                                      fontWeight: FontWeight.bold),
+                                )
                               ],
                             ),
                             SizedBox(
                               width: size.width * 0.03,
                             ),
-                            Image.asset('assets/icons/home_icon.png',height: size.height * 0.04,),
+                            Image.asset(
+                              'assets/icons/icon_red2.png',
+                              height: size.height * 0.04,
+                            ),
                             SizedBox(
                               width: size.width * 0.03,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(right: size.width * 0.1),
+                                  child: Text(
+                                    'สินค้าอยู่ระหว่างการขนส่ง',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: headingtext,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(right: size.width * 0.09),
+                                  child: Text(
+                                    'สินค้ากำลังเดินทางมาไทย',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: headingtext,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.19),
+                          child: Container(
+                            color: red1,
+                            height: size.height * 0.02,
+                            width: size.width * 0.005,
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
                                 Text(
-                                  'สินค้าถึงโกดังจีน',
+                                  '31 ก.ค. 67',
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      color: headingtext,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '15:34',
                                   style: TextStyle(
                                       fontSize: 13,
                                       color: headingtext,
                                       fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: size.width * 0.03,
+                            ),
+                            Image.asset(
+                              'assets/icons/chiwerehousegrey.png',
+                              height: size.height * 0.04,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.03,
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(right: size.width * 0.1),
+                                  child: Text(
+                                    'สินค้าถึงโกดังจีน',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: headingtext,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                                Text('กำลังเตรียมเดินทางมาไทย',
+                                Text(
+                                  'กำลังเตรียมเดินทางมาไทย',
                                   style: TextStyle(
-                                      fontSize: 12,
-                                      color: headingtext,
-                                      ),)
+                                    fontSize: 12,
+                                    color: headingtext,
+                                  ),
+                                )
                               ],
                             )
                           ],

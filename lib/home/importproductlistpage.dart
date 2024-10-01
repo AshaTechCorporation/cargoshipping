@@ -42,18 +42,18 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
             ),
             Center(
               child: Container(
-                height: size.height * 0.06,
+                height: size.height * 0.053,
                 width: size.width * 0.94,
                 decoration: BoxDecoration(
                     color: red1, borderRadius: BorderRadius.circular(15)),
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
                       child: Text(
-                        'PO no. A99999',
+                        'Custom no. A99999',
                         style: TextStyle(
-                            fontSize: 17,
+                            fontSize: 16,
                             color: white,
                             fontWeight: FontWeight.bold),
                       ),
@@ -98,7 +98,7 @@ class _ImportproductlistpageState extends State<Importproductlistpage> {
               height: size.height * 0.01,
             ),
             CardImportProductWidget(size: size),
-            Container(
+            SizedBox(
               height: size.height * 0.07,
               width: size.width * 0.9,
               // color: red1,

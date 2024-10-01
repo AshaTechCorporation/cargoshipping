@@ -1,6 +1,6 @@
 import 'package:cargoshipping/message/widgets/customdivider.dart';
+import 'package:cargoshipping/track/widgets/thaiwerehousemap.dart';
 import 'package:flutter/material.dart';
-import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/widgets/productcardwidget.dart';
 
@@ -44,7 +44,7 @@ class Cardwarehousedetail extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapTest()));
+                                    builder: (context) => Thaiwerehousemap()));
                           },
                           child: Container(
                             height: size.height * 0.027,

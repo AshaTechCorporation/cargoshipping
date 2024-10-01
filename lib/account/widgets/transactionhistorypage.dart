@@ -1,3 +1,5 @@
+import 'package:cargoshipping/account/widgets/Refund.dart';
+import 'package:cargoshipping/account/widgets/accumulatedpoints.dart';
 import 'package:cargoshipping/account/widgets/statement.dart';
 import 'package:cargoshipping/account/widgets/topuphis.dart';
 import 'package:cargoshipping/account/widgets/withdrown.dart';
@@ -20,7 +22,7 @@ class _TransactionhistorypageState extends State<Transactionhistorypage>
   void initState() {
     super.initState();
     // Initialize the TabController with length 3
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -66,17 +68,21 @@ class _TransactionhistorypageState extends State<Transactionhistorypage>
                   buildTabItem(0, 'ประวัติการเติมเงิน'),
                   buildTabItem(1, 'ประวัติการถอนเงิน'),
                   buildTabItem(2, 'รายการเดินบัญชี'),
+                  buildTabItem(3, 'ใบแจ้งยอดการคืนเงิน'),
+                  buildTabItem(4, 'รายการคะแนนสะสม'),
                 ],
               ),
             ),
             SizedBox(
-              height: size.height * 0.7, // กำหนดความสูงของ TabBarView
+              height: size.height * 0.7,
               child: TabBarView(
                 controller: _tabController,
-                children: const [
+                children: [
                   Topuphis(),
                   Withdrown(),
                   Statement(),
+                  Refund(),
+                  Accumulatedpoints()
                 ],
               ),
             )
@@ -99,7 +105,7 @@ class _TransactionhistorypageState extends State<Transactionhistorypage>
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: size.height * 0.01),
         padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.015, vertical: size.height * 0.008),
+            horizontal: size.width * 0.03, vertical: size.height * 0.008),
         decoration: BoxDecoration(
           color: isSelected ? red1 : Colors.white,
           borderRadius: BorderRadius.circular(15),

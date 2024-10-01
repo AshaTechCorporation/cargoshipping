@@ -1,4 +1,5 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/track/widgets/sendingmap.dart';
 import 'package:flutter/material.dart';
 
 class Sendingpage extends StatelessWidget {
@@ -41,25 +42,35 @@ class Sendingpage extends StatelessWidget {
                                       color: headingtext,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Container(
-                                  height: size.height * 0.027,
-                                  width: size.width * 0.55,
-                                  decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: red1, width: 1.0),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'คาดว่าจะถึงโกดังจีนใน 25 ก.ค. 67',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: red1,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Image.asset('assets/icons/redpin.png')
-                                    ],
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Sendingmap()));
+                                  },
+                                  child: Container(
+                                    height: size.height * 0.027,
+                                    width: size.width * 0.55,
+                                    decoration: BoxDecoration(
+                                        border:
+                                            Border.all(color: red1, width: 1.0),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'คาดว่าจะถึงโกดังจีนใน 25 ก.ค. 67',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: red1,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Image.asset('assets/icons/redpin.png')
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -222,7 +233,6 @@ class Sendingpage extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  
                                 ],
                               ),
                             ),

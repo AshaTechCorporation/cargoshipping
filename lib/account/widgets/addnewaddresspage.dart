@@ -53,7 +53,7 @@ class _AddnewaddresspageState extends State<Addnewaddresspage> {
       appBar: AppBar(
         backgroundColor: background,
         title: Text(
-          'เพิ่มที่อยู่ใหม่',
+          'เพิ่มที่อยู่',
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
         ),

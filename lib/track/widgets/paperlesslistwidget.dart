@@ -1,8 +1,8 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class CardImportProductWidget extends StatelessWidget {
-  const CardImportProductWidget({
+class paperlesslistwidget extends StatelessWidget {
+  const paperlesslistwidget({
     super.key,
     required this.size,
   });
@@ -21,14 +21,6 @@ class CardImportProductWidget extends StatelessWidget {
           color: Colors.grey,
           width: 0.5,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1),
-          ),
-        ],
       ),
       child: Column(
         children: [
@@ -36,7 +28,15 @@ class CardImportProductWidget extends StatelessWidget {
             height: size.height * 0.12,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color(0xfff7f3e9),
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xffe0f1e7), // สีแรก
+                  Color(0xfffffbe3), // สีที่สอง
+                ],
+                begin: Alignment.centerLeft, // เริ่มจากทางซ้าย
+                end: Alignment.centerRight, // ไปทางขวา
+                stops: [0.7, 1.0], // สัดส่วน 70% สีแรก และ 30% สีที่สอง
+              ),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
@@ -55,15 +55,31 @@ class CardImportProductWidget extends StatelessWidget {
                           height: size.height * 0.01,
                         ),
                         Text(
-                          '1. ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
-                          overflow: TextOverflow.ellipsis,
+                          '1. PO no. A99999',
                           style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              fontFamily: 'SukhumvitSet'),
                         ),
                         SizedBox(
-                          height: size.height * 0.01,
+                          width: size.width * 0.53,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                // ให้ข้อความสามารถใช้พื้นที่ใน Row ได้เต็มที่
+                                child: Text(
+                                  'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
+                                  style: TextStyle(
+                                      color: greyuserinfo,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -71,9 +87,9 @@ class CardImportProductWidget extends StatelessWidget {
                             Text(
                               'สีแดงอิฐ',
                               style: TextStyle(
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  color: greyuserinfo,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13),
                               textAlign: TextAlign.right,
                             ),
                           ],
@@ -86,9 +102,9 @@ class CardImportProductWidget extends StatelessWidget {
                             text: 'ประเภท ',
                             style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                               fontSize: 13,
-                              fontFamily: ''
+                              fontFamily: 'SukhumvitSet'
                             ),
                             children: <TextSpan>[
                               TextSpan(
@@ -103,24 +119,6 @@ class CardImportProductWidget extends StatelessWidget {
                         SizedBox(
                           height: size.height * 0.006,
                         ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Shop Tracking ',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: '  xxxxxx',
-                                style: TextStyle(
-                                  color: greyuserinfo,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -128,7 +126,7 @@ class CardImportProductWidget extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    height: size.height * 0.096,
+                    height: size.height * 0.099,
                     width: size.width * 0.1,
                     margin: const EdgeInsets.all(5),
                     padding: const EdgeInsets.all(10),
@@ -144,13 +142,15 @@ class CardImportProductWidget extends StatelessWidget {
                             text: 'โกดัง ',
                             style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.bold,
                               fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'SukhumvitSet'
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 text: 'กวางโจว',
-                                style: TextStyle(color: greyuserinfo, fontSize: 13),
+                                style: TextStyle(
+                                    color: greyuserinfo, fontSize: 13),
                               ),
                             ],
                           ),
@@ -163,34 +163,34 @@ class CardImportProductWidget extends StatelessWidget {
                             text: 'โดย ',
                             style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                               fontSize: 13,
+                              fontFamily: 'SukhumvitSet'
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 text: 'EK',
-                                style: TextStyle(color: greyuserinfo, fontSize: 13),
+                                style: TextStyle(
+                                    color: greyuserinfo, fontSize: 13),
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: size.height * 0.003,
                         ),
                         RichText(
                           text: TextSpan(
                             text: 'unit ',
                             style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.bold,
                               fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'SukhumvitSet'
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 text: 'กล่องลังจำนวน1',
                                 style: TextStyle(
                                   color: greyuserinfo,
-                                  fontSize: 13,
+                                  fontSize: 12,
                                 ),
                               ),
                             ],
@@ -277,7 +277,9 @@ class CardImportProductWidget extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(width: size.width * 0.02),
-                              Expanded(
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.02),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -290,6 +292,9 @@ class CardImportProductWidget extends StatelessWidget {
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(
+                                      height: size.height * 0.005,
                                     ),
                                     Text(
                                       '(30 CBM)',

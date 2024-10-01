@@ -91,19 +91,18 @@ class Sended extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                   Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Sendcomplete(),
-                            ),
-                          );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Sendcomplete(),
+                    ),
+                  );
                 },
                 child: Center(
                   child: Stack(
                     children: [
                       Positioned(
-                        bottom: size.height *
-                            0.02,
+                        bottom: size.height * 0.02,
                         right: size.width * 0.02,
                         child: Opacity(
                           opacity: 0.5,
@@ -238,7 +237,8 @@ class Sended extends StatelessWidget {
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: red1,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                           ),
@@ -252,7 +252,8 @@ class Sended extends StatelessWidget {
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: greyuserinfo,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                           ),
@@ -326,7 +327,8 @@ class Sended extends StatelessWidget {
                                   Text(
                                     'รายละเอียด',
                                     style: TextStyle(
-                                        color: red1, fontWeight: FontWeight.bold),
+                                        color: red1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                     width: size.width * 0.02,

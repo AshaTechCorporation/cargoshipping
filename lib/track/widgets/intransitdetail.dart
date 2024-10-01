@@ -1,4 +1,5 @@
 import 'package:cargoshipping/message/widgets/customdivider.dart';
+import 'package:cargoshipping/track/widgets/intransitmap.dart';
 import 'package:flutter/material.dart';
 import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/constants.dart';
@@ -44,7 +45,7 @@ class Intransitdetail extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapTest()));
+                                    builder: (context) => Intransitmap()));
                           },
                           child: Container(
                             height: size.height * 0.027,

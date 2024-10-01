@@ -1,16 +1,17 @@
 import 'package:cargoshipping/constants.dart';
-import 'package:cargoshipping/track/widgets/CardWarehouseWidget.dart';
-import 'package:cargoshipping/track/widgets/CardWarehousedetail.dart';
+import 'package:cargoshipping/track/widgets/checkpaperdetail.dart';
+import 'package:cargoshipping/track/widgets/paperlesswidget.dart';
+import 'package:cargoshipping/track/widgets/werehousechipage.dart';
 import 'package:flutter/material.dart';
 
-class ThaiWarehouse extends StatefulWidget {
-  const ThaiWarehouse({super.key});
+class Checkpaper extends StatefulWidget {
+  const Checkpaper({super.key});
 
   @override
-  State<ThaiWarehouse> createState() => _ThaiWarehouseState();
+  State<Checkpaper> createState() => _CheckpaperState();
 }
 
-class _ThaiWarehouseState extends State<ThaiWarehouse> {
+class _CheckpaperState extends State<Checkpaper> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -19,7 +20,7 @@ class _ThaiWarehouseState extends State<ThaiWarehouse> {
       appBar: AppBar(
         backgroundColor: white,
         title: Text(
-          'ถึงโกดังไทย',
+          'รอตรวจสอบเอกสาร',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -89,36 +90,36 @@ class _ThaiWarehouseState extends State<ThaiWarehouse> {
             )),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.015,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Cardwarehousedetail(),
-                  ),
-                );
-              },
-              child: CardWarehouseWidget(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Checkpaperdetail(),
+              ),
+            );
+          },
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.015,
+              ),
+              Paperlesswidget(
                 size: size,
-                status: 3,
+                status: 2,
                 carback: 'assets/icons/carback.png',
-                iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_red2.png',
-                iconPosition3: 'assets/icons/icon_red3.png',
-                iconPosition4: 'assets/icons/icon_grayb3.png',
+                iconPosition1: 'assets/icons/docsimport.png',
+                iconPosition2: 'assets/icons/duringprogress.png',
+                iconPosition3: 'assets/icons/icon_grayb3.png',
+                iconPosition4: 'assets/icons/paperprocess.png',
                 iconPosition5: 'assets/icons/correctgrey.png',
-                orderNo: 'Order no. A423456',
+                cusNo: 'Custom no. A423456',
                 press: () {
                   print('click press');
                 },
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

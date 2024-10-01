@@ -717,3 +717,34 @@ const List<Map<String, dynamic>> statement = [
     'amount': '00,000'
   },
 ];
+
+const List<Map<String, dynamic>> accumulatedpoints = [
+  {
+    'id': 1,
+    'user': ' A523456',
+    'time': '20 ส.ค. 67 10:00',
+    'point': '10',
+    'status': true,
+  },
+  {
+    'id': 2,
+    'user': ' A523456',
+    'time': '20 ส.ค. 67 10:00',
+    'point': '10',
+    'status': false,
+  },
+  {
+    'id': 3,
+    'user': ' A231226',
+    'time': '23 ส.ค. 67 19:24',
+    'point': '10',
+    'status': true,
+  },
+  {
+    'id': 4,
+    'user': ' A123456',
+    'time': '20 ส.ค. 67 10:00',
+    'point': '300',
+    'status': false,
+  },
+];
