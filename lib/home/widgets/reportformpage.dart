@@ -221,7 +221,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // ฟังก์ชันการแจ้งปัญหา
-                              print('ปัญหาได้รับการแจ้ง');
+                              
                             }
                           },
                           style: ElevatedButton.styleFrom(

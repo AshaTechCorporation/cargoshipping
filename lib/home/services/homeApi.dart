@@ -11,7 +11,8 @@ class HomeApi {
 
   //เรียกดูข้อมูล Category
   static Future<List<Categories>> getCategories({required String name}) async {
-    final url = Uri.https('api.atphosting24.com', '/category/api.php',{"folder": '$name'});
+    final url = Uri.https(
+        'api.atphosting24.com', '/category/api.php', {"folder": '$name'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -28,8 +29,9 @@ class HomeApi {
   }
 
   //เรียกดูข้อมูล ตาม Category
-  static Future<List<Item>> getItemCategories({required String categories_name}) async {
-    final url = Uri.https('api.kongcrdv.com', '/taobao/api_call.php',{
+  static Future<List<Item>> getItemCategories(
+      {required String categories_name}) async {
+    final url = Uri.https('api.kongcrdv.com', '/taobao/api_call.php', {
       "api_name": 'item_search',
       "lang": 'zh-CN',
       "q": '$categories_name',
@@ -71,29 +73,53 @@ class HomeApi {
 
   //เรียกดูข้อมูลproblembody
   static Future<List<Problembodies>> getProblemBodies(int id) async {
-  final url = Uri.https(publicUrl, '/api/ProblemBody/show/$id');
-  var headers = {'Content-Type': 'application/json'};
-  final response = await http.get(
-    headers: headers,
-    url,
-  );
+    final url = Uri.https(publicUrl, '/api/ProblemBody/show/$id');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
 
-  if (response.statusCode == 200) {
-    final data = convert.jsonDecode(response.body);
-    
-    if (data['data'] is List) {
-      final list = data['data'] as List;
-      return list.map((e) => Problembodies.fromJson(e)).toList();
-    } else if (data['data'] is Map) {
-      final item = Problembodies.fromJson(data['data']);
-      return [item];
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+
+      if (data['data'] is List) {
+        final list = data['data'] as List;
+        return list.map((e) => Problembodies.fromJson(e)).toList();
+      } else if (data['data'] is Map) {
+        final item = Problembodies.fromJson(data['data']);
+        return [item];
+      } else {
+        throw Exception('Unexpected data format');
+      }
     } else {
-      throw Exception('Unexpected data format');
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
     }
-  } else {
-    final data = convert.jsonDecode(response.body);
-    throw Exception(data['message']);
   }
-}
 
+//เรียกดูข้อมูลproblembody
+  static Future<List<Problembodies>> sendProblem(
+      {required int problem_types_id,
+      required String title,
+      required String body}) async {
+    final url = Uri.https(publicUrl, '/api/ReportProblem/store');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.post(headers: headers, url, body: {
+      'title': title,
+      'body': body,
+      'problem_types_id': problem_types_id,
+      'officer_response': '',
+      'photo_report': [],
+    });
+
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+
+      return data['message'];
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
 }

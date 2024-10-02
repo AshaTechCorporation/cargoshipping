@@ -27,7 +27,7 @@ class _PaperlessState extends State<Paperless> {
   bool isSubmitted = false; // ตัวแปรตรวจสอบว่าส่งฟอร์มหรือยัง
   bool isPaid = false; // ตัวแปรตรวจสอบว่าชำระเงินแล้วหรือไม่
 
-  bool isChecked1 = true;
+  bool isChecked1 = false;
   bool isChecked2 = false;
 
   void _onChanged(int index) {

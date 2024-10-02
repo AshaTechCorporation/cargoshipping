@@ -2,6 +2,7 @@ import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/historydetail.dart';
 import 'package:cargoshipping/home/widgets/problemcard.dart';
+import 'package:cargoshipping/home/widgets/reportformpage.dart';
 import 'package:cargoshipping/models/problemtype.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +45,6 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -83,7 +82,116 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
           ),
           Expanded(
             child: _selectedChoice == 0
-                ? _buildNewProblemTab()
+                ? Column(
+                    children: [
+                      problem.isNotEmpty
+                          ? Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.04),
+                              child: Column(
+                                  children: List.generate(
+                                problem.length,
+                                (index) => GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ReportFormPage()),
+                                    );
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 6.0),
+                                    elevation: 2,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(16.0),
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                pinkmess, // คุณสามารถใช้สี youngpink ตามที่คุณต้องการ
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                'assets/icons/bills.png', // ใช้ข้อมูลจาก widget
+                                                width: 24,
+                                                height: 24,
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                problem[index].title,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        // Container สำหรับ options
+                                        Container(
+                                          padding: const EdgeInsets.all(16.0),
+                                          width: double.infinity,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              bottomRight: Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: problem[index]
+                                                  .problem_bodies!
+                                                  .isNotEmpty
+                                              ? Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: List.generate(
+                                                      problem[index]
+                                                          .problem_bodies!
+                                                          .length,
+                                                      (index1) => Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    bottom:
+                                                                        4.0),
+                                                            child: Text(
+                                                              '• ${problem[index].problem_bodies![index1].body}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          )))
+                                              : SizedBox(),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )),
+                            )
+                          : SizedBox(),
+                      // _buildNewProblemTab(),
+                    ],
+                  )
                 : _buildHistoryTab(),
           ),
         ],
@@ -125,6 +233,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
 
   Widget _buildNewProblemTab() {
     return ListView(
+      shrinkWrap: true,
       padding: const EdgeInsets.all(16.0),
       children: problemData.map((problem) {
         return ProblemCardPage(
@@ -153,7 +262,6 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
 //     }).toList(),
 //   );
 // }
-
 
   Widget _buildHistoryTab() {
     // Tab ประวัติการแก้ไขปัญหา
