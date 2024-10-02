@@ -40,6 +40,18 @@ class _MapTestState extends State<MapTest> {
           'ข้อมูลการจัดส่ง',
           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       // body: Stack(
       //   children: [
@@ -104,7 +116,7 @@ class _MapTestState extends State<MapTest> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'สินค้ากำลังจัดส่งจีน',
+                            'สินค้าถึงโกดังจีน',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -165,7 +177,7 @@ class _MapTestState extends State<MapTest> {
                             children: [
                               Text('เลข PO',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 13)),
+                                      fontWeight: FontWeight.bold, fontSize: 13,color: Colors.black)),
                               Text('A123456',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -180,6 +192,7 @@ class _MapTestState extends State<MapTest> {
                         Row(
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   '31 ก.ค. 67',
@@ -209,13 +222,14 @@ class _MapTestState extends State<MapTest> {
                                   'สินค้าถึงโกดังจีน',
                                   style: TextStyle(
                                       fontSize: 13,
-                                      color: headingtext,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text('กำลังเตรียมเดินทางมาไทย',
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: headingtext,
+                                      fontWeight: FontWeight.bold
                                       ),)
                               ],
                             )

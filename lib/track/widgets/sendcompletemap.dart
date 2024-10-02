@@ -40,6 +40,18 @@ class _SendcompletemapState extends State<Sendcompletemap> {
           'ข้อมูลการจัดส่ง',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       // body: Stack(
       //   children: [
@@ -164,7 +176,7 @@ class _SendcompletemapState extends State<Sendcompletemap> {
                           padding: EdgeInsets.only(top: size.height * 0.01),
                           child: Row(
                             children: [
-                              Text('หมายเลขติดตามพัสดุ',
+                              Text('เลขที่ติดตามพัสดุ',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13)),

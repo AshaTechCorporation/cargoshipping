@@ -114,7 +114,12 @@ class _PaperduringprocessState extends State<Paperduringprocess> {
                 iconPosition5: 'assets/icons/correctgrey.png',
                 cusNo: 'Custom no. A423456',
                 press: () {
-                  print('click press');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Duringprocesspaper(),
+                    ),
+                  );
                 },
               )
             ],

@@ -7,7 +7,7 @@ import 'package:cargoshipping/track/waitShippingPayment.dart';
 import 'package:flutter/material.dart';
 
 class Transporttrackpage extends StatefulWidget {
-  const Transporttrackpage({Key? key}) : super(key: key);
+  const Transporttrackpage({super.key});
 
   @override
   State<Transporttrackpage> createState() => _TransporttrackpageState();
@@ -45,7 +45,10 @@ class _TransporttrackpageState extends State<Transporttrackpage> {
                 children: [
                   Text(
                     'รายการสถานะ :',
-                    style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: headingtext,
+                        fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -62,19 +65,35 @@ class _TransporttrackpageState extends State<Transporttrackpage> {
                     return GestureDetector(
                       onTap: () {
                         if (order['id'] == 1) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChineseWarehouse()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChineseWarehouse()));
                         } else if (order['id'] == 2) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>InTransitPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => InTransitPage()));
                         } else if (order['id'] == 3) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ThaiWarehouse()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ThaiWarehouse()));
                         } else if (order['id'] == 4) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>WaitShippingPayment()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WaitShippingPayment()));
                         } else {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SuccessfulDelivery()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SuccessfulDelivery()));
                         }
                       },
                       child: Container(
-                        margin: EdgeInsets.symmetric(vertical: size.height * 0.01),
+                        margin:
+                            EdgeInsets.symmetric(vertical: size.height * 0.01),
                         padding: EdgeInsets.all(size.height * 0.01),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -89,7 +108,8 @@ class _TransporttrackpageState extends State<Transporttrackpage> {
                         ),
                         child: Row(
                           children: [
-                            Image.asset(order['images'], height: size.height * 0.045),
+                            Image.asset(order['images'],
+                                height: size.height * 0.045),
                             SizedBox(width: size.width * 0.03),
                             Text(
                               order['title'],

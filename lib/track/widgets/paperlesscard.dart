@@ -114,7 +114,12 @@ class _PaperlesscardState extends State<Paperlesscard> {
                 iconPosition5: 'assets/icons/correctgrey.png',
                 cusNo: 'Order no. A423456',
                 press: () {
-                  print('click press');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Detailpaper(),
+                    ),
+                  );
                 },
               )
             ],

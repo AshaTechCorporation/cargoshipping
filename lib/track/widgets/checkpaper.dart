@@ -1,7 +1,6 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/track/widgets/checkpaperdetail.dart';
 import 'package:cargoshipping/track/widgets/paperlesswidget.dart';
-import 'package:cargoshipping/track/widgets/werehousechipage.dart';
 import 'package:flutter/material.dart';
 
 class Checkpaper extends StatefulWidget {
@@ -115,7 +114,12 @@ class _CheckpaperState extends State<Checkpaper> {
                 iconPosition5: 'assets/icons/correctgrey.png',
                 cusNo: 'Custom no. A423456',
                 press: () {
-                  print('click press');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Checkpaperdetail(),
+                    ),
+                  );
                 },
               )
             ],

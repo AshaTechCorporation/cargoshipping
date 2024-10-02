@@ -3,14 +3,14 @@ import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Intransitmap extends StatefulWidget {
-  const Intransitmap({super.key});
+class Orderdonemap extends StatefulWidget {
+  const Orderdonemap({super.key});
 
   @override
-  State<Intransitmap> createState() => _IntransitmapState();
+  State<Orderdonemap> createState() => _OrderdonemapState();
 }
 
-class _IntransitmapState extends State<Intransitmap> {
+class _OrderdonemapState extends State<Orderdonemap> {
   late GoogleMapController mapController;
   Set<Marker> markers = {};
 
@@ -116,17 +116,11 @@ class _IntransitmapState extends State<Intransitmap> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'สินค้าอยู่ระหว่างการขนส่ง',
+                            'จัดส่งสำเร็จเมื่อ',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xff004aad),
-                                ),
-                          ),
-                          SizedBox(height: size.height * 0.004),
-                          Text(
-                            'คาดว่าจะถึงไทยใน',
-                            style: TextStyle(fontSize: 13, color: headingtext,fontWeight: FontWeight.bold),
+                                color: Color(0xff004aad)),
                           ),
                           Text(
                             '25 ส.ค. - 26 ส.ค.',
@@ -143,12 +137,11 @@ class _IntransitmapState extends State<Intransitmap> {
               ),
             ),
           ),
-
           // กล่องที่อยู่ด้านล่าง
           DraggableScrollableSheet(
               initialChildSize: 0.15,
               minChildSize: 0.15,
-              maxChildSize: 0.25,
+              maxChildSize: 0.4,
               builder:
                   (BuildContext context, ScrollController scrollController) {
                 return Container(
@@ -175,23 +168,177 @@ class _IntransitmapState extends State<Intransitmap> {
                         Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('เลขที่ PO',
+                              Text('หมายเลขติดตามพัสดุ',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13)),
-                              Text('A123456',
+                              Spacer(),
+                              Text('TH12345678910',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
                                       color: headingtext)),
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                              Text(
+                                'คัดลอก',
+                                style: TextStyle(
+                                    color: Color(0xff004aad),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              )
                             ],
                           ),
                         ),
+                        
                         SizedBox(height: size.height * 0.01),
                         CustomDivider(heightFactor: size.height * 0.000001),
-                        SizedBox(height: size.height * 0.01),
+                        SizedBox(height: size.height * 0.02),
+                         Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.01),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    '1 ส.ค. 67',
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        color: headingtext,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    '15:34',
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        color: headingtext,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                              Image.asset(
+                                'assets/icons/orderdone.png',
+                                height: size.height * 0.04,
+                              ),
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(right: size.width * 0.1),
+                                    child: Text(
+                                      'การจัดส่งสำเร็จ',
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Text(
+                                    'ดูหลักฐานการจัดส่งสินค้า',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xff004aad),
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: size.height * 0.005),
+                        Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.19),
+                          child: Container(
+                            color: red1,
+                            height: size.height * 0.02,
+                            width: size.width * 0.005,
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.01),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    '1 ส.ค. 67',
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        color: headingtext,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    '15:34',
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        color: headingtext,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                              Image.asset(
+                                'assets/icons/greythai.png',
+                                height: size.height * 0.04,
+                              ),
+                              SizedBox(
+                                width: size.width * 0.03,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(right: size.width * 0.1),
+                                    child: Text(
+                                      'สินค้าถึงโกดังไทย',
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: headingtext,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Text(
+                                    'กำลังเตรียมจัดส่งพัสดุไปยังที่หมาย',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: headingtext,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: size.height * 0.005),
+                        Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.19),
+                          child: Container(
+                            color: red1,
+                            height: size.height * 0.02,
+                            width: size.width * 0.005,
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.005,
+                        ),
                         Row(
                           children: [
                             Column(
@@ -207,7 +354,7 @@ class _IntransitmapState extends State<Intransitmap> {
                                 Text(
                                   '15:34',
                                   style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 11,
                                       color: headingtext,
                                       fontWeight: FontWeight.bold),
                                 )
@@ -217,7 +364,7 @@ class _IntransitmapState extends State<Intransitmap> {
                               width: size.width * 0.03,
                             ),
                             Image.asset(
-                              'assets/icons/icon_red2.png',
+                              'assets/icons/icon_grayb1.png',
                               height: size.height * 0.04,
                             ),
                             SizedBox(
@@ -233,7 +380,7 @@ class _IntransitmapState extends State<Intransitmap> {
                                     'สินค้าอยู่ระหว่างการขนส่ง',
                                     style: TextStyle(
                                         fontSize: 13,
-                                        color: Colors.black,
+                                        color: headingtext,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -245,7 +392,6 @@ class _IntransitmapState extends State<Intransitmap> {
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: headingtext,
-                                      fontWeight: FontWeight.bold
                                     ),
                                   ),
                                 )
@@ -282,14 +428,14 @@ class _IntransitmapState extends State<Intransitmap> {
                                 Text(
                                   '15:34',
                                   style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 11,
                                       color: headingtext,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
                             ),
                             SizedBox(
-                              width: size.width * 0.03,
+                              width: size.width * 0.025,
                             ),
                             Image.asset(
                               'assets/icons/chiwerehousegrey.png',
@@ -299,6 +445,7 @@ class _IntransitmapState extends State<Intransitmap> {
                               width: size.width * 0.03,
                             ),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding:
@@ -316,7 +463,6 @@ class _IntransitmapState extends State<Intransitmap> {
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: headingtext,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 )
                               ],

@@ -1,4 +1,5 @@
 import 'package:cargoshipping/account/mapTest.dart';
+import 'package:cargoshipping/account/widgets/orderdonemap.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/reportformpage.dart';
 import 'package:cargoshipping/track/widgets/productcardwidget.dart';
@@ -43,7 +44,7 @@ class Shipreceiptpage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapTest()));
+                                    builder: (context) => Orderdonemap()));
                           },
                           child: Container(
                             height: size.height * 0.027,

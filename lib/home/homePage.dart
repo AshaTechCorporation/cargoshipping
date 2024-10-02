@@ -782,10 +782,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'C',
@@ -799,7 +799,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -843,10 +843,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'D',
@@ -860,7 +860,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -904,10 +904,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'A',
@@ -921,7 +921,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -965,10 +965,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'B',
@@ -982,7 +982,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -1034,10 +1034,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'A',
@@ -1051,7 +1051,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -1095,10 +1095,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'C',
@@ -1112,7 +1112,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -1156,10 +1156,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'D',
@@ -1173,7 +1173,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -1217,10 +1217,10 @@ class _HomePageState extends State<HomePage> {
                             text: TextSpan(
                               text: 'ประเภท ',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'SukhumvitSet'),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'B',
@@ -1234,7 +1234,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           SizedBox(
-                            width: size.width * 0.37,
+                            width: size.width * 0.39,
                           ),
                           Text(
                             '00',
@@ -1436,15 +1436,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-// Widget _buildMenuItem(String language, String flag) {
-//   return Row(
-//     children: [
-//       Text(flag, style: TextStyle(fontSize: 20)), // ใช้ emoji ธงชาติ
-//       SizedBox(width: 10),
-//       Text(language),
-//     ],
-//   );
-// }
 
 // ฟังก์ชันแสดงธงชาติที่เลือก
 Widget _buildFlagIcon(String language) {

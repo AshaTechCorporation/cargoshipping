@@ -40,6 +40,18 @@ class _ThaiwerehousemapState extends State<Thaiwerehousemap> {
           'ข้อมูลการจัดส่ง',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       // body: Stack(
       //   children: [
@@ -195,6 +207,7 @@ class _ThaiwerehousemapState extends State<Thaiwerehousemap> {
                           child: Row(
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
                                     '1 ส.ค. 67',
@@ -226,8 +239,8 @@ class _ThaiwerehousemapState extends State<Thaiwerehousemap> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsets.only(right: size.width * 0.1),
+                                    padding: EdgeInsets.only(
+                                        right: size.width * 0.1),
                                     child: Text(
                                       'สินค้าถึงโกดังไทย',
                                       style: TextStyle(
@@ -263,6 +276,7 @@ class _ThaiwerehousemapState extends State<Thaiwerehousemap> {
                         Row(
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   '31 ก.ค. 67',
@@ -336,6 +350,7 @@ class _ThaiwerehousemapState extends State<Thaiwerehousemap> {
                         Row(
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   '31 ก.ค. 67',

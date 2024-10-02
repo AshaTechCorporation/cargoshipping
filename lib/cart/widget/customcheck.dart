@@ -6,10 +6,10 @@ class CustomCheckbox extends StatelessWidget {
   final ValueChanged<bool?> onChanged;
 
   const CustomCheckbox({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,6 @@ class CustomCheckbox extends StatelessWidget {
                 Icons.check,
                 size: size.height * 0.025,
                 color: red1,
-                
               )
             : null,
       ),

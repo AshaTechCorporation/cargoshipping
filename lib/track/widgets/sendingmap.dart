@@ -40,6 +40,18 @@ class _SendingmapState extends State<Sendingmap> {
           'ข้อมูลการจัดส่ง',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       // body: Stack(
       //   children: [

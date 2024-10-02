@@ -114,7 +114,12 @@ class _PaperfinishState extends State<Paperfinish> {
                 iconPosition5: 'assets/icons/delivery.png',
                 cusNo: 'Custom no. A423456',
                 press: () {
-                  print('click press');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Paperfinishdetail(),
+                    ),
+                  );
                 },
               )
             ],

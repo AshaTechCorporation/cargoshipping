@@ -16,7 +16,7 @@ class Paperlesswidget extends StatelessWidget {
       required this.iconPosition5});
 
   final Size size;
-  VoidCallback press;
+  final VoidCallback press;
   final String carback;
   final String cusNo;
   final String iconPosition1;
@@ -28,8 +28,9 @@ class Paperlesswidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: size.height * 0.21,
+      color: white,
       child: Center(
         child: Stack(
           children: [
