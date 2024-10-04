@@ -5,12 +5,12 @@ part 'reportproblems.g.dart';
 @JsonSerializable()
 class ReportProblems {
   final int id;
-  final int problem_types_id;
+  final int? problem_types_id;
   final String title;
   final String body;
   final String? officer_response;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? created_at;
+  final DateTime? updated_at;
 
   ReportProblems({
     required this.id,
@@ -18,8 +18,8 @@ class ReportProblems {
     required this.title,
     required this.body,
     required this.officer_response,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
   });
 
   factory ReportProblems.fromJson(Map<String, dynamic> json) => _$ReportProblemsFromJson(json);

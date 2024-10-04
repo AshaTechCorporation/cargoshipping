@@ -326,7 +326,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        'แจ้งเมื่อ ${report.createdAt.day} ${report.createdAt.month} ${report.createdAt.year} (${report.createdAt.hour}:${report.createdAt.minute} น.)',
+                        'แจ้งเมื่อ ${report.created_at!.day} ${report.created_at!.month} ${report.created_at!.year} (${report.created_at!.hour}:${report.created_at!.minute} น.)',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
@@ -334,7 +334,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        'แก้ไขเสร็จเมื่อ ${report.updatedAt.day} ${report.updatedAt.month} ${report.updatedAt.year} (${report.updatedAt.hour}:${report.updatedAt.minute} น.)',
+                        'แก้ไขเสร็จเมื่อ ${report.updated_at!.day} ${report.updated_at!.month} ${report.updated_at!.year} (${report.updated_at!.hour}:${report.updated_at!.minute} น.)',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
