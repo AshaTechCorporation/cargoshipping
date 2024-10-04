@@ -44,9 +44,8 @@ class Withdrown extends StatelessWidget {
                 ],
               ),
             ),
-            // เพิ่ม Container เพื่อกำหนดความสูงให้ชัดเจน
             SizedBox(
-              height: size.height * 0.4, // กำหนดความสูงที่เหมาะสม
+              height: size.height * 0.4,
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

@@ -1115,12 +1115,7 @@ class Shipreceiptpage extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ReportFormPage(),
-                        ),
-                      );
+                      //
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

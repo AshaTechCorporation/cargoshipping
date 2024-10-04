@@ -4,6 +4,7 @@ import 'package:cargoshipping/home/widgets/historydetail.dart';
 import 'package:cargoshipping/home/widgets/problemcard.dart';
 import 'package:cargoshipping/home/widgets/reportformpage.dart';
 import 'package:cargoshipping/models/problemtype.dart';
+import 'package:cargoshipping/models/reportproblems.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +18,14 @@ class ReportProblemPage extends StatefulWidget {
 class _ReportProblemPageState extends State<ReportProblemPage> {
   int _selectedChoice = 0;
   List<ProblemType> problem = [];
+  List<ReportProblems> reportHistory = [];
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getProblem();
+      await getReportHistory();
     });
   }
 
@@ -37,6 +40,25 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
         problem = _problem;
       });
       //inspect(problem);
+      LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
+  // ฟังก์ชันดึงข้อมูล report
+  Future<void> getReportHistory() async {
+    try {
+      LoadingDialog.open(context);
+      final _reportHistory =
+          await HomeApi.getReport(); // ใช้ฟังก์ชัน getReport()
+      if (!mounted) return;
+
+      setState(() {
+        reportHistory = _reportHistory;
+      });
       LoadingDialog.close(context);
     } on Exception catch (e) {
       if (!mounted) return;
@@ -95,7 +117,11 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
                                   onTap: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => ReportFormPage()),
+                                      MaterialPageRoute(
+                                        builder: (context) => ReportFormPage(
+                                          problemType: problem[index],
+                                        ),
+                                      ),
                                     );
                                   },
                                   child: Card(
@@ -126,7 +152,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Image.asset(
-                                                'assets/icons/bills.png', // ใช้ข้อมูลจาก widget
+                                                'assets/icons/bills.png',
                                                 width: 24,
                                                 height: 24,
                                               ),
@@ -267,8 +293,9 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
     // Tab ประวัติการแก้ไขปัญหา
     return ListView.builder(
       padding: EdgeInsets.all(8.0),
-      itemCount: 4,
+      itemCount: reportHistory.length,
       itemBuilder: (context, index) {
+        final report = reportHistory[index];
         return GestureDetector(
           onTap: () {
             Navigator.push(
@@ -291,7 +318,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '(หัวข้อเรื่อง)',
+                        report.title,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -299,7 +326,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        'แจ้งเมื่อ 00 ส.ค. 00 (00:00 น.)',
+                        'แจ้งเมื่อ ${report.createdAt.day} ${report.createdAt.month} ${report.createdAt.year} (${report.createdAt.hour}:${report.createdAt.minute} น.)',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
@@ -307,7 +334,7 @@ class _ReportProblemPageState extends State<ReportProblemPage> {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        'แก้ไขเสร็จเมื่อ 00 ส.ค. 00 (00:00 น.)',
+                        'แก้ไขเสร็จเมื่อ ${report.updatedAt.day} ${report.updatedAt.month} ${report.updatedAt.year} (${report.updatedAt.hour}:${report.updatedAt.minute} น.)',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,

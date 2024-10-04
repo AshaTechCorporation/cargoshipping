@@ -1,6 +1,7 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/models/problembodies.dart';
+import 'package:cargoshipping/models/problemtype.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,7 +10,9 @@ import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 
 class ReportFormPage extends StatefulWidget {
-  const ReportFormPage({super.key});
+  final ProblemType problemType;
+
+  const ReportFormPage({super.key, required this.problemType});
 
   @override
   _ReportFormPageState createState() => _ReportFormPageState();
@@ -17,7 +20,7 @@ class ReportFormPage extends StatefulWidget {
 
 class _ReportFormPageState extends State<ReportFormPage> {
   final _formKey = GlobalKey<FormState>();
-  String? _selectedIssue;
+  int? _selectedIssue;
   final _titleController = TextEditingController();
   final _detailsController = TextEditingController();
   File? _image;
@@ -28,7 +31,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getProblemBodies(1);
+      await getProblemBodies(widget.problemType.id);
     });
   }
 
@@ -62,6 +65,41 @@ class _ReportFormPageState extends State<ReportFormPage> {
       if (!mounted) return;
       LoadingDialog.close(context);
       print(e);
+    }
+  }
+
+  // ยิง
+  Future<void> _submitProblem() async {
+    if (_formKey.currentState!.validate()) {
+      if (_selectedIssue == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('กรุณาเลือกปัญหาจาก dropdown')),
+        );
+        return;
+      }
+      try {
+        // ใช้ `problem_body_id` ที่เลือกจาก Dropdown
+        final message = await HomeApi.sendProblem(
+          problem_body_id: _selectedIssue!, // ส่ง `problem_body_id`
+          title: _titleController.text,
+          body: _detailsController.text,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('แจ้งปัญหาสำเร็จ: $message')),
+        );
+
+        // ล้างข้อมูลในฟอร์มหลังจากแจ้งปัญหาสำเร็จ
+        _titleController.clear();
+        _detailsController.clear();
+        setState(() {
+          _selectedIssue = null;
+          _image = null;
+        });
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('แจ้งปัญหาล้มเหลว: $e')),
+        );
+      }
     }
   }
 
@@ -100,7 +138,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'ปัญหาด้าน X',
+                            widget.problemType.title,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -108,7 +146,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                           ),
                         ),
                         SizedBox(height: size.height * 0.015),
-                        DropdownButtonFormField<String>(
+                        DropdownButtonFormField<int>(
                           dropdownColor: Colors.white,
                           icon: Icon(Icons.keyboard_arrow_down),
                           decoration: InputDecoration(
@@ -123,24 +161,26 @@ class _ReportFormPageState extends State<ReportFormPage> {
                             'เลือกปัญหาที่พบในด้านนี้',
                             style: TextStyle(fontSize: 14),
                           ),
-                          value: _selectedIssue, // ต้องตรวจสอบว่าค่านี้ถูกต้อง
-                          onChanged: (newValue) {
+                          value: _selectedIssue,
+                          onChanged: (int? newValue) {
                             setState(() {
                               _selectedIssue = newValue;
-                              print(
-                                  "Selected issue: $_selectedIssue"); // ตรวจสอบค่าที่เลือก
                             });
                           },
-                          items: problembodies.map<DropdownMenuItem<String>>(
-                              (Problembodies problemBody) {
-                            return DropdownMenuItem<String>(
-                              value: problemBody.body,
-                              child: Text(
-                                problemBody.body,
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            );
-                          }).toList(),
+                          // ใช้ problem_bodies จาก widget.problemType
+                          items: widget.problemType.problem_bodies!
+                              .map<DropdownMenuItem<int>>(
+                            (Problembodies problemBody) {
+                              return DropdownMenuItem<int>(
+                                value: problemBody.id, // ใช้ `id` เป็นค่า value
+                                child: Text(
+                                  problemBody
+                                      .body, // แสดง `body` เป็นข้อความใน Dropdown
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              );
+                            },
+                          ).toList(),
                         ),
                         SizedBox(height: size.height * 0.02),
                         TextFormField(
@@ -220,8 +260,7 @@ class _ReportFormPageState extends State<ReportFormPage> {
                         ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              // ฟังก์ชันการแจ้งปัญหา
-                              
+                              _submitProblem();
                             }
                           },
                           style: ElevatedButton.styleFrom(

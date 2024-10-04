@@ -22,17 +22,17 @@ class _PaperlessState extends State<Paperless> {
   String userLastName = '';
   String phoneNumber = '';
   String email = '';
-  List<String> uploadedFiles = ['', '', '', '']; // สำหรับอัพโหลดไฟล์
+  List<String> uploadedFiles = ['', '', '', ''];
 
-  bool isSubmitted = false; // ตัวแปรตรวจสอบว่าส่งฟอร์มหรือยัง
-  bool isPaid = false; // ตัวแปรตรวจสอบว่าชำระเงินแล้วหรือไม่
+  bool isSubmitted = false;
+  bool isPaid = false; 
 
   bool isChecked1 = false;
   bool isChecked2 = false;
 
   void _onChanged(int index) {
     setState(() {
-      // ถ้าเป็น checkbox ที่ถูกเลือกอยู่ ให้ทำการ uncheck
+        
       if (index == 1) {
         isChecked1 = !isChecked1;
         if (isChecked1) isChecked2 = false;

@@ -964,12 +964,12 @@ class Detailorderpage extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ReportFormPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => ReportFormPage(),
+                      //   ),
+                      // );
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

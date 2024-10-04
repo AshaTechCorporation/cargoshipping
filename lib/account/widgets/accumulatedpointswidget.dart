@@ -82,7 +82,6 @@ class Accumulatedpointswidget extends StatelessWidget {
                         ),
                 ),
               ),
-              // ข้อความทางขวา (จำนวนเงิน)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,

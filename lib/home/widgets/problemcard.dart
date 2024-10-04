@@ -24,10 +24,15 @@ class _ProblemCardPageState extends State<ProblemCardPage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ReportFormPage()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => ReportFormPage(
+        //       problemTypeId:
+        //           problem[index].id, // ใช้ `id` ของ `problem` ที่เลือก
+        //     ),
+        //   ),
+        // );
       },
       child: Card(
         shape: RoundedRectangleBorder(
