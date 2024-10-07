@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:cargoshipping/constants.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Paperlessfiles extends StatefulWidget {
   const Paperlessfiles({super.key});
@@ -68,9 +72,27 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
               height: size.height * 0.005,
             ),
             Container(
-                height: size.height * 0.25,
-                width: size.width * 0.95,
-                decoration: BoxDecoration(color: white),
+              height: size.height * 0.25,
+              width: size.width * 0.95,
+              decoration: BoxDecoration(color: Colors.white),
+              child: GestureDetector(
+                onTap: () async {
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles(
+                    type: FileType.custom, // ใช้ประเภท custom
+                    allowedExtensions: [
+                      'jpg',
+                      'png'
+                    ], // ระบุเฉพาะไฟล์ jpg และ png
+                  );
+
+                  if (result != null) {
+                    File file = File(result.files.single.path!);
+                    // ทำงานกับไฟล์ที่เลือก
+                  } else {
+                    // User canceled the picker
+                  }
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -80,7 +102,9 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                       width: size.width * 0.6,
                     ),
                   ],
-                )),
+                ),
+              ),
+            ),
             SizedBox(
               height: size.height * 0.01,
             ),
@@ -127,20 +151,38 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
             SizedBox(
               height: size.height * 0.005,
             ),
-            Container(
-                height: size.height * 0.25,
-                width: size.width * 0.95,
-                decoration: BoxDecoration(color: white),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/certificate.png',
-                      height: size.height * 0.17,
-                      width: size.width * 0.6,
-                    ),
-                  ],
-                )),
+            GestureDetector(
+              onTap: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                  type: FileType.custom, // ใช้ประเภท custom
+                  allowedExtensions: [
+                    'jpg',
+                    'png'
+                  ], // ระบุเฉพาะไฟล์ jpg และ png
+                );
+
+                if (result != null) {
+                  File file = File(result.files.single.path!);
+                  // ทำงานกับไฟล์ที่เลือก
+                } else {
+                  // User canceled the picker
+                }
+              },
+              child: Container(
+                  height: size.height * 0.25,
+                  width: size.width * 0.95,
+                  decoration: BoxDecoration(color: white),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/certificate.png',
+                        height: size.height * 0.17,
+                        width: size.width * 0.6,
+                      ),
+                    ],
+                  )),
+            ),
             SizedBox(
               height: size.height * 0.01,
             ),
@@ -187,20 +229,38 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
             SizedBox(
               height: size.height * 0.005,
             ),
-            Container(
-                height: size.height * 0.25,
-                width: size.width * 0.95,
-                decoration: BoxDecoration(color: white),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/card20.png',
-                      height: size.height * 0.17,
-                      width: size.width * 0.6,
-                    ),
-                  ],
-                )),
+            GestureDetector(
+              onTap: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                  type: FileType.custom, // ใช้ประเภท custom
+                  allowedExtensions: [
+                    'jpg',
+                    'png'
+                  ], // ระบุเฉพาะไฟล์ jpg และ png
+                );
+
+                if (result != null) {
+                  File file = File(result.files.single.path!);
+                  // ทำงานกับไฟล์ที่เลือก
+                } else {
+                  // User canceled the picker
+                }
+              },
+              child: Container(
+                  height: size.height * 0.25,
+                  width: size.width * 0.95,
+                  decoration: BoxDecoration(color: white),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/card20.png',
+                        height: size.height * 0.17,
+                        width: size.width * 0.6,
+                      ),
+                    ],
+                  )),
+            ),
             SizedBox(
               height: size.height * 0.02,
             ),
@@ -233,20 +293,38 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
             SizedBox(
               height: size.height * 0.005,
             ),
-            Container(
-                height: size.height * 0.25,
-                width: size.width * 0.95,
-                decoration: BoxDecoration(color: white),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/upseal.png',
-                      height: size.height * 0.17,
-                      width: size.width * 0.6,
-                    ),
-                  ],
-                )),
+            GestureDetector(
+              onTap: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                  type: FileType.custom, // ใช้ประเภท custom
+                  allowedExtensions: [
+                    'jpg',
+                    'png'
+                  ], // ระบุเฉพาะไฟล์ jpg และ png
+                );
+
+                if (result != null) {
+                  File file = File(result.files.single.path!);
+                  // ทำงานกับไฟล์ที่เลือก
+                } else {
+                  // User canceled the picker
+                }
+              },
+              child: Container(
+                  height: size.height * 0.25,
+                  width: size.width * 0.95,
+                  decoration: BoxDecoration(color: white),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/upseal.png',
+                        height: size.height * 0.17,
+                        width: size.width * 0.6,
+                      ),
+                    ],
+                  )),
+            ),
             Container(
               padding: EdgeInsets.all(size.height * 0.02),
               width: size.width,
@@ -268,7 +346,8 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                   ),
                   SizedBox(height: size.height * 0.01),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.02),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -344,9 +423,7 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: () {
-                 
-                },
+                onTap: () {},
                 child: Container(
                   height: size.height * 0.07,
                   width: size.width * 0.9,

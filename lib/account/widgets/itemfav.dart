@@ -1,5 +1,6 @@
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:flutter/material.dart';
 
 class Itemfav extends StatefulWidget {
@@ -25,7 +26,7 @@ class _ItemfavState extends State<Itemfav> {
         .map<List<bool>>(
             (store) => List.generate(store['storeItems'].length, (_) => false))
         .toList();
-          // Initialize quantities with default value of 1 for each item
+    // Initialize quantities with default value of 1 for each item
     quantities = itemfav
         .map<List<int>>(
             (store) => List.generate(store['storeItems'].length, (_) => 1))
@@ -60,18 +61,28 @@ class _ItemfavState extends State<Itemfav> {
 
   void _deleteStoreItem(int storeIndex, int itemIndex) {
     setState(() {
-     itemfav = List<Map<String, dynamic>>.from(itemfav);
-    itemfav[storeIndex]['storeItems'] = List<Map<String, dynamic>>.from(itemfav[storeIndex]['storeItems']);
-    itemfav[storeIndex]['storeItems'].removeAt(itemIndex);
-    storeItemSelections[storeIndex].removeAt(itemIndex);
+      itemfav = List<Map<String, dynamic>>.from(itemfav);
+      itemfav[storeIndex]['storeItems'] =
+          List<Map<String, dynamic>>.from(itemfav[storeIndex]['storeItems']);
+      itemfav[storeIndex]['storeItems'].removeAt(itemIndex);
+      storeItemSelections[storeIndex].removeAt(itemIndex);
 
-    if (itemfav[storeIndex]['storeItems'].isEmpty) {
-      _deleteStore(storeIndex);
-    } else {
-      storeSelections[storeIndex] =
-          storeItemSelections[storeIndex].every((item) => item);
-    }
+      if (itemfav[storeIndex]['storeItems'].isEmpty) {
+        _deleteStore(storeIndex);
+      } else {
+        storeSelections[storeIndex] =
+            storeItemSelections[storeIndex].every((item) => item);
+      }
     });
+  }
+
+  bool _isAnyItemSelected() {
+    for (int i = 0; i < storeSelections.length; i++) {
+      if (storeSelections[i] || storeItemSelections[i].contains(true)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @override
@@ -131,7 +142,12 @@ class _ItemfavState extends State<Itemfav> {
                         ),
                       ],
                     ),
-                    const Divider(),
+                    CustomDivider(
+                      heightFactor: size.height * 0.000001,
+                    ),
+                    SizedBox(
+                      height: size.height * 0.015,
+                    ),
                     ...List.generate(
                       store['storeItems'].length,
                       (itemIndex) => Column(
@@ -155,29 +171,38 @@ class _ItemfavState extends State<Itemfav> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 0,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.01, vertical: size.height * 0.006),
-          child: Container(
-            height: size.height * 0.1,
-            decoration: BoxDecoration(
-              color: red1,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Text(
-                'เพิ่มสินค้าที่เลือกไปยังรถเข็น',
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+      bottomNavigationBar: AnimatedSwitcher(
+        duration: Duration(milliseconds: 250),
+        switchInCurve: Curves.easeInOut,
+        switchOutCurve: Curves.easeInOut,
+        child: _isAnyItemSelected()
+            ? BottomAppBar(
+                key: ValueKey('visible'),
+                elevation: 0,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: size.width * 0.01,
+                      vertical: size.height * 0.006),
+                  child: Container(
+                    height: size.height * 0.1,
+                    decoration: BoxDecoration(
+                      color: red1,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'เลิกถูกใจ',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ),
+              )
+            : SizedBox.shrink(key: ValueKey('hidden')),
       ),
     );
   }
@@ -213,10 +238,22 @@ class _ItemfavState extends State<Itemfav> {
             children: [
               Text(
                 item['name'],
-                style: const TextStyle(fontSize: 14),
+                style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: size.height * 0.01),
+              Text(
+                'ขายแล้ว ${item['send']}+ ภายใน 30 วัน',
+                style: TextStyle(
+                    fontSize: 11,
+                    color: headingtext,
+                    fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: size.height * 0.005),
               const Text(
                 '¥4.88',
                 style: TextStyle(
@@ -246,7 +283,6 @@ class _ItemfavState extends State<Itemfav> {
             const SizedBox(height: 8),
             Image.asset(
               'assets/icons/shoppingbutton.png',
-              width: size.width * 0.12,
               height: size.height * 0.044,
               fit: BoxFit.fill,
             ),

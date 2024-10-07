@@ -387,11 +387,13 @@ List<Map<String, dynamic>> itemfav = [
         'id': 1,
         'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
         'imageAssetPath': 'assets/images/shelf.png',
+        'send': '4000'
       },
       {
         'id': 2,
         'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
         'imageAssetPath': 'assets/images/shelf.png',
+        'send': '5000'
       },
     ],
   },
@@ -403,12 +405,14 @@ List<Map<String, dynamic>> itemfav = [
         'name':
             'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
         'imageAssetPath': 'assets/images/box.png',
+        'send': '4000'
       },
       {
         'id': 2,
         'name':
             'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
         'imageAssetPath': 'assets/images/headband.png',
+        'send': '4000'
       },
     ],
   },
@@ -746,5 +750,62 @@ const List<Map<String, dynamic>> accumulatedpoints = [
     'time': '20 ส.ค. 67 10:00',
     'point': '300',
     'status': false,
+  },
+];
+
+ List<Map<String, dynamic>> cart = [
+  {
+    'storeName': '1688严选店',
+    'storeItems': [
+      {
+        'id': 1,
+        'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
+        'imageAssetPath': 'assets/images/shelf.png',
+        'price': '¥8.14',
+        'color':[
+          'สีขาวมุข',
+          'สีขาวนวล',
+          'สีแดง',
+        ]
+      },
+      {
+        'id': 2,
+        'name': 'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
+        'imageAssetPath': 'assets/images/box.png',
+        'price': '¥4.28',
+        'color':[
+          'สีขาวมุข',
+          'สีขาวนวล',
+          'สีแดง',
+        ]
+      },
+    ],
+  },
+  {
+    'storeName': '1688严选店2',
+    'storeItems': [
+      {
+        'id': 1,
+        'name': 'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
+        'imageAssetPath': 'assets/images/headband.png',
+        'price': '¥1.42',
+        'color':[
+          'สีขาวมุข',
+          'สีขาวนวล',
+          'สีแดง',
+        ]
+      },
+      {
+        'id': 2,
+        'name': 'กางเกงขาสั้นผู้ชาย, กางเกงขาสั้นลําลอง,',
+        'imageAssetPath': 'assets/images/pant.png',
+        'price': '¥10.78',
+        'color':[
+          'สีขาวมุข',
+          'สีขาวนวล',
+          'สีแดง',
+        ]
+      },
+    ],
   },
 ];

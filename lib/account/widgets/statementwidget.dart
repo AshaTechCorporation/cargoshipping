@@ -63,7 +63,7 @@ class Statementwidget extends StatelessWidget {
                           height: size.height *
                               0.012), // ระยะห่างระหว่าง row และ 'ผ่าน'
                       Text(
-                        'ชำระส่วน${statement['point']}',
+                        'ชำระส่วน${statement['by']}',
                         style: TextStyle(
                             fontSize: 13,
                             color: headingtext,

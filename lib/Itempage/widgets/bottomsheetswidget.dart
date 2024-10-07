@@ -1,7 +1,7 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class ProductDetailsBottomSheet extends StatelessWidget {
+class ProductDetailsBottomSheet extends StatefulWidget {
   final Map<String, dynamic> product;
   final String buttonLabel; // ป้ายข้อความของปุ่ม
   final Function()? onButtonPress; // ฟังก์ชันเมื่อกดปุ่ม
@@ -12,6 +12,13 @@ class ProductDetailsBottomSheet extends StatelessWidget {
     required this.onButtonPress, // รับฟังก์ชันของปุ่ม
   });
 
+  @override
+  State<ProductDetailsBottomSheet> createState() =>
+      _ProductDetailsBottomSheetState();
+}
+
+class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
+  String? selectedService;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -41,19 +48,26 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.asset(
-                          product['image'],
+                          widget.product['image'],
                           fit: BoxFit.fill,
                         ),
                       ),
                     ),
                     SizedBox(width: size.width * 0.04),
                     Text(
-                      '¥ ${product['price']}',
+                      '¥ ${widget.product['price']}',
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    Spacer(),
+                    IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
                   ],
                 ),
@@ -73,11 +87,11 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    _buildColorOption('สีธูปแดง'),
-                    _buildColorOption('สีขาวมวล'),
-                    _buildColorOption('สีน้ำตาลอ่อน'),
-                    _buildColorOption('สีเทาอ่อน'),
-                    _buildColorOption('สีนอร์ดิกบลู'),
+                    _buildColorOption('สีธูปแดง',context),
+                    _buildColorOption('สีขาวมวล',context),
+                    _buildColorOption('สีน้ำตาลอ่อน',context),
+                    _buildColorOption('สีเทาอ่อน',context),
+                    _buildColorOption('สีนอร์ดิกบลู',context),
                   ],
                 ),
                 SizedBox(height: size.height * 0.01),
@@ -87,8 +101,11 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 SizedBox(height: size.height * 0.01),
-                _buildOptionRow('ตัวเลือก', 'ข้อมูล'),
-                _buildOptionRow('ตัวเลือก', 'ข้อมูล'),
+                Text('ตัวเลือก',style: TextStyle(
+                  fontSize: 13,color: Colors.black,fontWeight: FontWeight.bold
+                ),),
+                _buildOptionRow('ตัวเลือก', 'ข้อมูล','ตัวเลือก'),
+                _buildOptionRow('ตัวเลือก', 'ข้อมูล','ตัวเลือก'),
                 SizedBox(height: size.height * 0.01),
                 _buildQuantitySelector(size),
                 SizedBox(height: size.height * 0.01),
@@ -110,7 +127,8 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                 _buildPriceDetails(),
                 SizedBox(height: size.height * 0.06),
                 GestureDetector(
-                  onTap: onButtonPress, // ใช้ฟังก์ชัน onButtonPress ที่ส่งมา
+                  onTap: widget
+                      .onButtonPress, // ใช้ฟังก์ชัน onButtonPress ที่ส่งมา
                   child: Center(
                     child: Container(
                       height: size.height * 0.067,
@@ -121,7 +139,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          buttonLabel, // ใช้ข้อความปุ่มที่ส่งมา
+                          widget.buttonLabel, // ใช้ข้อความปุ่มที่ส่งมา
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -140,31 +158,43 @@ class ProductDetailsBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildColorOption(String colorName) {
-    return Column(
-      children: [
-        Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        SizedBox(height: 4),
-        Text(colorName, style: TextStyle(fontSize: 12)),
-      ],
-    );
-  }
+  Widget _buildColorOption(String colorName, BuildContext context) {
+  // รับค่า size ของหน้าจอ
+  final size = MediaQuery.of(context).size;
 
-  Widget _buildOptionRow(String title, String value) {
+  return Column(
+    children: [
+      Container(
+        // กำหนดขนาดของ Container โดยใช้ขนาดจาก size ของ MediaQuery
+        width: size.width * 0.25, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
+        height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      SizedBox(height: size.height * 0.005), // เพิ่มขนาดให้สัมพันธ์กับหน้าจอ
+      Text(
+        colorName,
+        style: TextStyle(fontSize: size.height * 0.015), // กำหนดขนาดข้อความ
+      ),
+    ],
+  );
+}
+
+  Widget _buildOptionRow(String title, String value, String detail) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: EdgeInsets.symmetric(vertical: 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextStyle(fontSize: 16)),
-          Text(value, style: TextStyle(fontSize: 16)),
+          Column(
+            children: [
+              Text(title, style: TextStyle(fontSize: 13,color: Colors.black,fontWeight: FontWeight.bold)),
+              Text(detail, style: TextStyle(fontSize: 13)),
+            ],
+          ),
+          Text(value, style: TextStyle(fontSize: 13)),
         ],
       ),
     );
@@ -196,19 +226,43 @@ class ProductDetailsBottomSheet extends StatelessWidget {
   }
 
   Widget _buildServiceOption(String title, String price) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: red1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: TextStyle(fontSize: 14, color: Colors.black)),
-          SizedBox(height: 4),
-          Text(price, style: TextStyle(fontSize: 12, color: Colors.grey)),
-        ],
+    final isSelected = selectedService == title;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedService = isSelected ? null : title;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected ? red1 : Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: red1),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: isSelected ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 4),
+            Text(
+              price,
+              style: TextStyle(
+                  fontSize: 12,
+                  color: isSelected ? Colors.white : Colors.grey,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }

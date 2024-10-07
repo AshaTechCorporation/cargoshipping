@@ -36,6 +36,7 @@ class _TransactionhistorypageState extends State<Transactionhistorypage>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
         title: const Text(
           'ประวัติธุรกรรม',

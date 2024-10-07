@@ -35,7 +35,7 @@ class Topuphis extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    width: size.width * 0.024,
+                    width: size.width * 0.01,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 10),

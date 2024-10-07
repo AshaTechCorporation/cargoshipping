@@ -18,7 +18,7 @@ class Detailordersumpage extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
-        itemCount: 5,
+        itemCount: 3,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Detailordersumwidget();

@@ -13,12 +13,11 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   bool _isSelected = false;
-  final List<bool> _storeItemsSelection = [false, false];
-  final List<String> _storeNames = ['1688严选店', '1688严选店2'];
-  final List<List<bool>> _productItemsSelection = [
-    [false, false],
-    [false, false]
-  ]; // บันทึกการเลือกสินค้าแต่ละตัว
+  final List<bool> _storeItemsSelection =
+      List.generate(cart.length, (_) => false);
+  late final List<List<bool>> _productItemsSelection = cart
+      .map((store) => List<bool>.filled(store['storeItems'].length, false))
+      .toList();
 
   void _selectAll(bool? value) {
     setState(() {
@@ -44,26 +43,21 @@ class _CartPageState extends State<CartPage> {
   void _updateProductSelection(int storeIndex, int productIndex, bool? value) {
     setState(() {
       _productItemsSelection[storeIndex][productIndex] = value ?? false;
-      // Update store selection based on product selections
       _storeItemsSelection[storeIndex] =
           !_productItemsSelection[storeIndex].contains(false);
       _isSelected = _storeItemsSelection.every((selected) => selected);
     });
   }
 
-  void _deleteStore(int storeIndex) {
-    setState(() {
-      _storeNames.removeAt(storeIndex);
-      _storeItemsSelection.removeAt(storeIndex);
-      _productItemsSelection.removeAt(storeIndex);
-      _isSelected = _storeItemsSelection.every((selected) => selected);
-    });
-  }
-
   void _deleteProduct(int storeIndex, int productIndex) {
     setState(() {
-      _productItemsSelection[storeIndex].removeAt(productIndex);
-      if (_productItemsSelection[storeIndex].isEmpty) {
+      // ทำสำเนาของรายการ storeItems ที่สามารถแก้ไขได้
+      cart[storeIndex]['storeItems'] =
+          List<Map<String, dynamic>>.from(cart[storeIndex]['storeItems']);
+
+      cart[storeIndex]['storeItems'].removeAt(productIndex);
+
+      if (cart[storeIndex]['storeItems'].isEmpty) {
         _deleteStore(storeIndex);
       } else {
         _storeItemsSelection[storeIndex] =
@@ -73,9 +67,21 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
+  void _deleteStore(int storeIndex) {
+    setState(() {
+      // ทำสำเนาของรายการหลักที่สามารถแก้ไขได้
+      cart = List<Map<String, dynamic>>.from(cart);
+
+      cart.removeAt(storeIndex);
+      _storeItemsSelection.removeAt(storeIndex);
+      _productItemsSelection.removeAt(storeIndex);
+      _isSelected = _storeItemsSelection.every((selected) => selected);
+    });
+  }
+
   Widget _buildCheckbox(
       String label, bool value, ValueChanged<bool?> onChanged) {
-    final size = MediaQuery.of(context).size; // ประกาศ size ที่นี่
+    final size = MediaQuery.of(context).size;
 
     return Row(
       children: [
@@ -146,17 +152,14 @@ class _CartPageState extends State<CartPage> {
         title: const Text(
           'รถเข็น',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 17
-          ),
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
         ),
       ),
       body: ListView.builder(
-        itemCount: _storeItemsSelection.length,
+        itemCount: cart.length,
         itemBuilder: (context, index) {
           return StoreItem(
-            storeName: _storeNames[index],
+            storeName: cart[index]['storeName'],
             isSelected: _storeItemsSelection[index],
             onSelectionChanged: (isSelected) =>
                 _updateStoreSelection(index, isSelected),
@@ -166,6 +169,7 @@ class _CartPageState extends State<CartPage> {
             onDeleteStore: () => _deleteStore(index),
             onDeleteProduct: (productIndex) =>
                 _deleteProduct(index, productIndex),
+            storeItems: cart[index]['storeItems'],
           );
         },
       ),

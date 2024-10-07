@@ -12,7 +12,7 @@ class PaymentStepsWidget extends StatelessWidget {
               height: size.height * 0.40,
               width: size.width * 0.95,
               decoration: BoxDecoration(
-                  color: white, borderRadius: BorderRadius.circular(25)),
+                  color: white, borderRadius: BorderRadius.circular(15)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

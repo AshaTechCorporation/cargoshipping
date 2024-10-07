@@ -19,9 +19,23 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
-        title: Text('วิธีคำนวณค่าขนส่ง',style: TextStyle(
-          fontSize: 17,color: Colors.black,fontWeight: FontWeight.bold
-        ),),
+        title: Text(
+          'วิธีคำนวณค่าขนส่ง',
+          style: TextStyle(
+              fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,7 +50,7 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                     topRight: Radius.circular(10)),
                 border: Border.all(
                   color: Colors.grey,
-                  width: 0.5,
+                  width: 0.3,
                 ),
               ),
               height: size.height * 0.065,
@@ -44,13 +58,14 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
               child: Center(
                 child: Text(
                   'วิธีคำนวณค่าขนส่ง',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold, color: red1),
                 ),
               ),
             ),
             Container(
               height: size.height * 0.8,
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(size.height * 0.03),
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(color: Colors.grey.shade300),
@@ -58,7 +73,6 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 16),
                   Text(
                     'ประเภทการขนส่ง',
                     style: TextStyle(
@@ -66,7 +80,7 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: size.height * 0.015),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -75,7 +89,7 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                           'ทางเรือ', 'assets/icons/boatim.png'),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: size.height * 0.015),
                   Text(
                     'ประเภทสินค้า',
                     style: TextStyle(
@@ -83,12 +97,24 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: size.height * 0.015),
                   SizedBox(
-                    height: size.height *0.07,
+                    height: size.height * 0.07,
                     child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                            width: 0.5,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                            width: 0.5,
+                          ),
                         ),
                         filled: true,
                         fillColor: Colors.white,
@@ -98,7 +124,7 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                         style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                            color: headingtext),
                       ),
                       value: selectedProductType,
                       onChanged: (String? newValue) {
@@ -115,7 +141,7 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                       }).toList(),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: size.height * 0.02),
                   Text(
                     'ขนาดสินค้า',
                     style: TextStyle(
@@ -123,11 +149,11 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
-                  _buildTextField('ความกว้าง (ซม.)'),
-                  _buildTextField('ความยาว (ซม.)'),
-                  _buildTextField('ความสูง (ซม.)'),
-                  _buildTextField('น้ำหนักจริง (กก.)'),
-                  SizedBox(height: 16),
+                  _buildTextField('ความกว้าง (ซม.)',context),
+                  _buildTextField('ความยาว (ซม.)',context),
+                  _buildTextField('ความสูง (ซม.)',context),
+                  _buildTextField('น้ำหนักจริง (กก.)',context),
+                  SizedBox(height: size.height * 0.015),
                   Center(
                     child: Container(
                       height: size.height * 0.06,
@@ -157,7 +183,7 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                     height: size.height * 0.04,
                   ),
                   Align(
-                    alignment: Alignment.centerRight, // จัดให้ชิดขวา
+                    alignment: Alignment.centerRight,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -165,18 +191,18 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
                           '**น้ำหนัก / CBM ถ้าส่งฟรี มากกว่า 250 kg/CBM\nสินค้าชิ้นนี้จะถูกคิดเป็น เรทกิโล',
                           textAlign: TextAlign.right,
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 11,
                               color: greyuserinfo,
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: size.height * 0.03,
+                          height: size.height * 0.02,
                         ),
                         Text(
                           '**น้ำหนัก / CBM ถ้าส่งฟรี น้อยกว่า 250 kg/CBM\nสินค้าชิ้นนี้จะถูกคิดเป็น เรทคิว',
                           textAlign: TextAlign.right,
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 11,
                               color: greyuserinfo,
                               fontWeight: FontWeight.bold),
                         ),
@@ -193,15 +219,22 @@ class _ShippingCalculatorPageState extends State<ShippingCalculatorPage> {
   }
 
   // สร้าง TextField สำหรับกรอกข้อมูล
-  Widget _buildTextField(String labelText) {
+  Widget _buildTextField(String labelText, BuildContext context) {
+    // รับค่าขนาดของหน้าจอจาก MediaQuery
+    final size = MediaQuery.of(context).size;
+
     return SizedBox(
-      height: 50,
+      // ใช้ขนาดหน้าจอที่ได้จาก MediaQuery
+      height: size.height * 0.055, // ปรับค่าตามที่ต้องการ
+      width: size.width * 0.9, // ปรับค่าตามที่ต้องการ
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: EdgeInsets.symmetric(
+          vertical: size.height * 0.01, // ปรับ padding ตามขนาดหน้าจอ
+        ),
         child: TextField(
           decoration: InputDecoration(
             labelText: labelText,
-            hintStyle: TextStyle(color: greyuserinfo, fontSize: 13),
+            labelStyle: TextStyle(color: headingtext, fontSize: 13,fontWeight: FontWeight.bold),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                 color: greymess,

@@ -25,14 +25,13 @@ class _PaperlessState extends State<Paperless> {
   List<String> uploadedFiles = ['', '', '', ''];
 
   bool isSubmitted = false;
-  bool isPaid = false; 
+  bool isPaid = false;
 
   bool isChecked1 = false;
   bool isChecked2 = false;
 
   void _onChanged(int index) {
     setState(() {
-        
       if (index == 1) {
         isChecked1 = !isChecked1;
         if (isChecked1) isChecked2 = false;
@@ -73,10 +72,7 @@ class _PaperlessState extends State<Paperless> {
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.all(size.height * 0.03),
-              child:
-                  // ? _buildSummaryView(
-                  //     size) // ถ้าเป็น true จะแสดงข้อมูลที่กรอกแล้ว
-                  _buildFormView(size), // ถ้ายังไม่กดปุ่ม จะแสดงฟอร์มกรอกข้อมูล
+              child: _buildFormView(size),
             ),
           ),
         ],
@@ -152,6 +148,23 @@ class _PaperlessState extends State<Paperless> {
         SizedBox(
           height: size.height * 0.02,
         ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+          child: Row(
+            children: [
+              Text(
+                'ลงทะเบียน Paperless แล้วหรือไม่ ​',
+                style: TextStyle(
+                    fontSize: 13,
+                    color: headingtext,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: size.height * 0.01,
+        ),
         Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -205,7 +218,7 @@ class _PaperlessState extends State<Paperless> {
                   ),
                 ),
               ),
-              SizedBox(width: 16),
+              SizedBox(width: size.width * 0.06),
               // Container ตัวที่ 2
               GestureDetector(
                 onTap: () => _onChanged(2),
@@ -262,7 +275,7 @@ class _PaperlessState extends State<Paperless> {
           height: size.height * 0.02,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
           child: Row(
             children: [
               Text(
@@ -274,6 +287,9 @@ class _PaperlessState extends State<Paperless> {
               ),
             ],
           ),
+        ),
+        SizedBox(
+          height: size.height * 0.01,
         ),
         _buildDropdown(
             'ที่อยู่บริษัทฯ',
@@ -303,6 +319,9 @@ class _PaperlessState extends State<Paperless> {
         SizedBox(height: size.height * 0.01),
         _buildTextField('อีเมล์', (value) => email = value, size),
         SizedBox(height: size.height * 0.01),
+        Text('** ข้อมูลของท่านจะได้รับการตรวจสอบภายใน 1-2 วันทำการ เพื่ออนุมัติ สถานะพร้อมนำเข้า',style: TextStyle(
+          fontSize: 12, color: red1 , fontWeight: FontWeight.bold
+        ),)
       ],
     );
   }
@@ -313,11 +332,29 @@ class _PaperlessState extends State<Paperless> {
       width: size.width * 0.9,
       height: size.height * 0.045,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: TextField(
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          labelStyle: TextStyle(
+            fontSize: 13
+          ),
+          // ขอบสีเทาบางลงเมื่อไม่ได้โฟกัส
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+                color: Colors.grey, width: 1), // กำหนดสีขอบและความบาง
+          ),
+          // ขอบสีเทาบางลงเมื่อโฟกัส
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+                color: Colors.grey, width: 1), // กำหนดสีขอบและความบาง
+          ),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 10), // เพิ่ม padding ถ้าต้องการ
         ),
         onChanged: onChanged,
       ),
@@ -333,10 +370,19 @@ class _PaperlessState extends State<Paperless> {
       child: InputDecorator(
         decoration: InputDecoration(
           hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+          hintStyle: TextStyle(
+            fontSize: 13
           ),
-          fillColor: Colors.white, // กำหนดสีพื้นหลังเป็นสีขาว
+          // ปรับแต่งขอบเหมือน _buildTextField
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.grey, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.grey, width: 1),
+          ),
+          fillColor: Colors.white,
           filled: true, // ต้องตั้งค่านี้เป็น true เพื่อให้ fillColor มีผล
         ),
         child: Center(
@@ -356,9 +402,9 @@ class _PaperlessState extends State<Paperless> {
               }).toList(),
               onChanged: onChanged,
               icon: Icon(
-                Icons.keyboard_arrow_down, // Your custom icon
-                size: 20, // Adjust the size of the icon
-                color: kSecondTextColor, // Customize the icon color
+                Icons.keyboard_arrow_down,
+                size: 20, // ปรับขนาดของไอคอน
+                color: Colors.grey, // ปรับสีของไอคอน
               ),
             ),
           ),

@@ -21,12 +21,24 @@ class _OrdersumpageState extends State<Ordersumpage> {
           'สรุปการสั่งซื้อ',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: backgroundColor,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.5,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(size.width * 0.04),
               child: Row(
                 children: [
                   Text(

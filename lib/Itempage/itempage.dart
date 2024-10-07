@@ -5,6 +5,7 @@ import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
 import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
+import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:flutter/material.dart';
 
 class itempage extends StatefulWidget {
@@ -149,10 +150,25 @@ class _itempageState extends State<itempage> {
                           style: TextStyle(fontSize: 16),
                         ),
                         SizedBox(width: size.width * 0.01),
-                        Icon(
-                          Icons.favorite_border_outlined,
-                          color: Colors.red,
-                        )
+                        IconButton(
+                          icon: Icon(
+                            Icons.favorite_border_outlined,
+                            color: Colors.red,
+                          ),
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'เพิ่มไปยังสินค้าที่ถูกใจแล้ว',
+                                  style: TextStyle(color: white),
+                                ),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.black.withOpacity(0.5),
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -291,6 +307,12 @@ class _itempageState extends State<itempage> {
                   SizedBox(
                     height: size.height * 0.01,
                   ),
+                  CustomDivider(
+                    heightFactor: size.height * 0.0000005,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
                   Text(
                     'เงื่อนไขการใช้งาน',
                     style: TextStyle(
@@ -309,11 +331,11 @@ class _itempageState extends State<itempage> {
                           Text(
                             'การขนส่ง',
                             style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
+                                fontSize: 14,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: size.width * 0.01),
                           Expanded(
                             child: Align(
                               child: SizedBox(
@@ -340,9 +362,9 @@ class _itempageState extends State<itempage> {
                           Text(
                             'บริการ',
                             style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
+                                fontSize: 14,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(width: size.width * 0.05),
                           Expanded(
@@ -369,13 +391,13 @@ class _itempageState extends State<itempage> {
                       Row(
                         children: [
                           Text(
-                            'การขนส่ง',
+                            'ข้อมูลจำเพาะ',
                             style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
+                                fontSize: 14,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(width: size.width * 0.099),
+                          SizedBox(width: size.width * 0.06),
                           Expanded(
                             child: Text(
                               'มีให้เลือก 10 สี',
@@ -395,14 +417,24 @@ class _itempageState extends State<itempage> {
                   SizedBox(
                     height: size.height * 0.015,
                   ),
+                  CustomDivider(
+                    heightFactor: size.height * 0.0000005,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.015,
+                  ),
                   Image.asset('assets/images/Frame 100.png'),
                   Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('แสดงเพิ่มเติม'),
+                      Text(
+                        'แสดงเพิ่มเติม',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(
-                        width: 5,
+                        width: size.width * 0.02,
                       ),
                       Image.asset('assets/icons/downarrow.png')
                     ],
@@ -411,7 +443,8 @@ class _itempageState extends State<itempage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 13),
+              padding: EdgeInsets.only(
+                  top: size.height * 0.02, left: size.width * 0.05),
               child: Row(
                 children: [
                   Text(
@@ -422,7 +455,7 @@ class _itempageState extends State<itempage> {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: size.height * 0.01,
             ),
             Wrap(
               spacing: 12,
@@ -465,7 +498,8 @@ class _itempageState extends State<itempage> {
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(right: size.width * 0.01),
+                  padding: EdgeInsets.only(
+                      right: size.width * 0.03, top: size.height * 0.001),
                   child: TextButton(
                     onPressed: () => _onItemTapped(0),
                     child: Column(
@@ -508,8 +542,7 @@ class _itempageState extends State<itempage> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      right: size.width * 0.01), // ขยับไปทางขวา 10 หน่วย
+                  padding: EdgeInsets.only(right: size.width * 0.01),
                   child: TextButton(
                     onPressed: () {
                       showModalBottomSheet(
@@ -530,8 +563,7 @@ class _itempageState extends State<itempage> {
                                 builder: (BuildContext context) {
                                   return AlertDialog(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          20),
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 24),
@@ -556,7 +588,6 @@ class _itempageState extends State<itempage> {
                                   );
                                 },
                               );
-
                               Future.delayed(Duration(seconds: 1), () {
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
@@ -630,10 +661,9 @@ class _itempageState extends State<itempage> {
                       child: Text(
                         'ซื้อสินค้า', // ข้อความบนปุ่ม
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

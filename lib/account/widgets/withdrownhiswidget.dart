@@ -34,7 +34,7 @@ class Withdrownhiswidget extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(
                       top: size.height * 0.015,
-                      left: size.width * 0.03),
+                      left: size.width * 0.04,),
                   child: Column(
                     crossAxisAlignment:
                         CrossAxisAlignment.start,
@@ -67,7 +67,7 @@ class Withdrownhiswidget extends StatelessWidget {
               ),
               // ข้อความทางขวา (จำนวนเงิน)
               Padding(
-                padding:EdgeInsets.only(right: size.width * 0.04),
+                padding:EdgeInsets.only(right: size.width * 0.07),
                 child: Align(
                   alignment: Alignment.centerRight, // จัดให้อยู่ตรงกลางขวา
                   child: Text(
