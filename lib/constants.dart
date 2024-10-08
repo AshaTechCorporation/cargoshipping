@@ -44,6 +44,69 @@ const List<String> titleData = [
   'เรทราคานำเข้า'
 ];
 
+List<String> Imgservice = [
+  'assets/icons/exportboktale.png',
+  'assets/icons/fcl.png',
+  'assets/icons/lcl.png',
+  'assets/icons/dellitohome.png',
+  'assets/icons/withlisecse.png',
+  'assets/icons/translater.png',
+  'assets/icons/calculator.png',
+  'assets/icons/priceimport.png',
+  'assets/icons/etc.png',
+];
+const List<Map<String, dynamic>> myservice = [
+  {
+    'id': 1,
+    'name': 'ขนส่งทางบก',
+    'images': 'assets/icons/carservice.png'
+  },
+  {
+    'id': 2,
+    'name': 'ขนส่งทางทะเล',
+    'images': 'assets/icons/shipservice.png'
+  },
+  {
+    'id': 3,
+    'name': 'จัดส่งแบบ\nเหมาตู้ FCL',
+    'images': 'assets/icons/fcl.png'
+  },
+  {
+    'id': 4,
+    'name': 'จัดส่งแบบ LCL\nทางเครื่องบิน',
+    'images': 'assets/icons/lcl.png'
+  },
+  {'id': 5, 
+   'name': 'ส่งถึงหน้าบ้าน', 
+   'images': 'assets/icons/dellitohome.png'
+   },
+   {
+    'id': 6,
+    'name': 'ขนส่งพร้อม\nออกหนังสือ',
+    'images': 'assets/icons/withlisecse.png'
+  },
+  {
+    'id': 7,
+    'name': 'ล่าม ไกด์ทัวร์\nและหาสินค้า',
+    'images': 'assets/icons/translater.png'
+  },
+  {
+    'id': 8,
+    'name': 'คำนวณ\nค่าขนส่ง',
+    'images': 'assets/icons/calculator.png'
+  },
+  {
+    'id': 9,
+    'name': 'เรทราคานำเข้า',
+    'images': 'assets/icons/priceimport.png'
+  },
+  {
+    'id': 10,
+    'name': 'อื่นๆ',
+    'images': 'assets/icons/etcservice.png'
+  },
+];
+
 const List<String> topup = ['เติมเงิน', 'ถอนเงิน'];
 
 const List<String> aboutQuestion = [
@@ -127,17 +190,7 @@ const List<String> reccomproduct = [
   'ตุ๊กตาหมีสีเหลือง',
   'ตุ๊กตาหมีสีขาว'
 ];
-List<String> Imgservice = [
-  'assets/icons/exportboktale.png',
-  'assets/icons/fcl.png',
-  'assets/icons/lcl.png',
-  'assets/icons/dellitohome.png',
-  'assets/icons/withlisecse.png',
-  'assets/icons/translater.png',
-  'assets/icons/calculator.png',
-  'assets/icons/priceimport.png',
-  'assets/icons/etc.png',
-];
+
 
 List<String> catagoryrecom = [
   'เสื้อผ้า',

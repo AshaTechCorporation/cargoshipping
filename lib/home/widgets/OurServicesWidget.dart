@@ -25,7 +25,7 @@ class OurServicesWidget extends StatelessWidget {
           maxWidth: size.width * 0.2, 
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               height: size.height * 0.066,
@@ -51,7 +51,7 @@ class OurServicesWidget extends StatelessWidget {
             Center(
               child: Text(
                 title,
-                style: TextStyle(fontSize: 14,
+                style: TextStyle(fontSize: 13,
                 fontWeight: FontWeight.bold),
               ),
             ),

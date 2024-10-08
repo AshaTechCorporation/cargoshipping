@@ -388,48 +388,77 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: size.height * 0.015,
             ),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: List.generate(titleData.length, (index) {
-                return SizedBox(
-                  width: size.width * 0.21,
-                  child: OurServicesWidget(
-                    size: size,
-                    title: titleData[index],
-                    press: () {
-                      if (index == 0) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Servicedetail(
-                              title: titleData[index],
-                            ),
-                          ),
-                        );
-                      }
-                      if (index == 1) {}
-                      if (index == 6) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ShippingCalculatorPage(),
-                          ),
-                        );
-                      }
-                      if (index == 7) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Importrate(),
-                          ),
-                        );
-                      }
-                    },
-                    imagespath: Imgservice[index],
+            // Wrap(
+            //   spacing: 8,
+            //   runSpacing: 8,
+            //   children: List.generate(titleData.length, (index) {
+            //     return SizedBox(
+            //       width: size.width * 0.21,
+            //       child: OurServicesWidget(
+            //         size: size,
+            //         title: titleData[index],
+            //         press: () {
+            //           if (index == 0) {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                 builder: (context) => Servicedetail(
+            //                   title: titleData[index],
+            //                 ),
+            //               ),
+            //             );
+            //           }
+            //           if (index == 1) {}
+            //           if (index == 6) {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                 builder: (context) => ShippingCalculatorPage(),
+            //               ),
+            //             );
+            //           }
+            //           if (index == 7) {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                 builder: (context) => Importrate(),
+            //               ),
+            //             );
+            //           }
+            //         },
+            //         imagespath: Imgservice[index],
+            //       ),
+            //     );
+            //   }),
+            // ),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            SizedBox(
+              height: size.height * 0.26,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    // mainAxisSpacing: 5.0,
+                    // crossAxisSpacing: 10.0,
                   ),
-                );
-              }),
+                  itemCount: myservice.length,
+                  itemBuilder: (context, index) {
+                    final Service = myservice[index];
+                    return OurServicesWidget(
+                        size: size,
+                        title: Service['name'],
+                        press: () {
+                          //
+                        },
+                        imagespath: Service['images']);
+                  },
+                ),
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(size.height * 0.021),
