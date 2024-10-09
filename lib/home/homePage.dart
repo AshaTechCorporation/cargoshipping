@@ -1,9 +1,13 @@
-import 'dart:developer';
 import 'package:cargoshipping/Itempage/itempage.dart';
+import 'package:cargoshipping/account/widgets/fclpage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/correctimport.dart';
 import 'package:cargoshipping/home/detailproduct.dart';
+import 'package:cargoshipping/home/fclpage.dart';
 import 'package:cargoshipping/home/importproductlistpage.dart';
+import 'package:cargoshipping/home/lclpage.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
+import 'package:cargoshipping/home/shipservicepage.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
@@ -17,6 +21,9 @@ import 'package:cargoshipping/home/widgets/searchshowpage.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:cargoshipping/home/widgets/shippingimportrate.dart';
 import 'package:cargoshipping/home/widgets/tegmallpage.dart';
+import 'package:cargoshipping/home/widgets/translaterguideservicepage.dart';
+import 'package:cargoshipping/home/worldexport.dart';
+import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
@@ -36,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
   double appBarOpacity = 0.0;
   Color searchBarColor = Colors.transparent;
+  bool _isExpanded = true;
 
   @override
   void initState() {
@@ -386,7 +394,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SizedBox(
-              height: size.height * 0.015,
+              height: size.height * 0.01,
             ),
             // Wrap(
             //   spacing: 8,
@@ -431,9 +439,9 @@ class _HomePageState extends State<HomePage> {
             //     );
             //   }),
             // ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
+            // SizedBox(
+            //   height: size.height * 0.01,
+            // ),
             SizedBox(
               height: size.height * 0.26,
               child: Padding(
@@ -443,8 +451,8 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    // mainAxisSpacing: 5.0,
-                    // crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 1.0,
+                    crossAxisSpacing: 1.0,
                   ),
                   itemCount: myservice.length,
                   itemBuilder: (context, index) {
@@ -453,7 +461,81 @@ class _HomePageState extends State<HomePage> {
                         size: size,
                         title: Service['name'],
                         press: () {
-                          //
+                          if (index == 0) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Servicedetail(),
+                              ),
+                            );
+                          }
+                          if (index == 1) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Shipservicepage(),
+                              ),
+                            );
+                          }
+                          if (index == 2) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Fclpage1(),
+                              ),
+                            );
+                          }
+                          if (index == 3) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Lclpage(),
+                              ),
+                            );
+                          }
+                          if (index == 4) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Worldexport(),
+                              ),
+                            );
+                          }
+                          if (index == 5) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Correctimportservice(),
+                              ),
+                            );
+                          }
+                          if (index == 6) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Translaterguideservicepage(),
+                              ),
+                            );
+                          }
+                          if (index == 7) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ShippingCalculatorPage(),
+                              ),
+                            );
+                          }
+                           if (index == 8) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Importrate(),
+                              ),
+                            );
+                          }
+                          if (index == 9) {
+                            _showBottomSheet(context);
+                          }
                         },
                         imagespath: Service['images']);
                   },
@@ -1462,6 +1544,107 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 1.0,
+          maxChildSize: 1.0,
+          minChildSize: 0.5,
+          builder: (_, scrollController) {
+            return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return Container(
+                  color: white,
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: size.height * 0.01,
+                      ),
+                      // ส่วนหัวด้านบน
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'บริการทั้งหมด',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.expand_more),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          controller: scrollController,
+                          itemCount: allmyservice.length,
+                          itemBuilder: (context, index) {
+                            final service = allmyservice[index];
+                            return Column(
+                              children: [
+                                ListTile(
+                                  leading: Container(
+                                    height: size.height * 0.05,
+                                    width: size.width * 0.15,
+                                    decoration: BoxDecoration(
+                                      color: background,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: AspectRatio(
+                                        aspectRatio: 1,
+                                        child: Image.asset(
+                                          service['images'],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                    service['name'],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 13,
+                                        color: Colors.black),
+                                  ),
+                                  subtitle: Text(
+                                    service['subtitle'],
+                                    style: TextStyle(
+                                        fontSize: 12, color: headingtext),
+                                  ),
+                                  onTap: () {
+                                    print('Tapped on ${service['name']}');
+                                  },
+                                ),
+                                CustomDivider(
+                                  heightFactor: size.height * 0.0000005,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 }

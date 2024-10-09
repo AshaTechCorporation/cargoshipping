@@ -1,8 +1,8 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class Servicedetail extends StatelessWidget {
-  const Servicedetail({
+class Lclpage extends StatelessWidget {
+  const Lclpage({
     super.key,
   });
 
@@ -13,7 +13,7 @@ class Servicedetail extends StatelessWidget {
       backgroundColor: white,
       appBar: AppBar(
         title: Text(
-          'บริการขนส่งทางบก',
+          'บริการจัดส่ง LCL',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -43,7 +43,7 @@ class Servicedetail extends StatelessWidget {
                 borderRadius:
                     BorderRadius.circular(10.0), // ขอบมนให้เหมือนกับ Container
                 child: Image.asset(
-                  'assets/images/image 45.png',
+                  'assets/images/lclimages.png',
                   fit: BoxFit.cover, // ให้ภาพครอบคลุมพื้นที่ทั้งหมด
                 ),
               ),
@@ -51,7 +51,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 8.0, left: 8.0),
               child: Text(
-                'บริการขนส่งพัสดุทางบก (ทางรถ)',
+                'บริการส่งพัสดุแบบ LCL',
                 style: TextStyle(
                   fontSize: 20,
                   color: red1,
@@ -62,7 +62,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0),
               child: Text(
-                'นำเข้า Door to Door ทางบก',
+                'LCL บริการขนส่งแบบไม่เต็มตู้',
                 style: TextStyle(
                     color: headingtext,
                     fontSize: 13,
@@ -72,19 +72,9 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 10.0),
               child: Text(
-                'บริการส่งของจากจีนครบวงจร ขนส่งด่วนที่สุด 4-7 วัน จากจีน ถึงไทย ส่งตรงถึงหน้าบ้าน พร้อมผู้ดูแลส่วนตัว สามารถสั่งซื้อ สินค้าพร้อมระบบติดตาม พัสดุ อำนวยความสะดวกใน การค้าระหว่างสองประเทศเส้นทาง การขนส่งทางบก ค่าขนส่งเริ่มต้น 20 บาทต่อกิโลกรัม',
+                'บริการส่งของจากจีนครบวงจร ขนส่งด่วนทางเรือ 12-18 วัน จากจีนถึงไทย ส่งตรงถึงหน้าบ้าน พร้อมผู้ดูแลส่วนตัว สามารถสั่ง ซื้อสินค้า พร้อมระบบติดตามพัสดุ อำนวยความสะดวก ในการค้าระหว่างสองประเทศ พร้อมได้รับเอกสารนำเข้าแบบถูกต้อง ไม่ว่าจะเป็นเอกสาร ใบขนสินค้าขาเข้า ใบเสร็จจากศุลกากร และ ใบเสร็จต่างๆ ตามจริงของสายเรือ',
                 style: TextStyle(
                     color: headingtext,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 8.0, top: 13.0),
-              child: Text(
-                'โกดังเปิดให้บริการ : กว่างโจว ,อี้อู ,เซิ้นเจิ้น ,ซัวเถา',
-                style: TextStyle(
-                    color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
@@ -92,7 +82,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 5.0),
               child: Text(
-                'ขนส่งทางบก คือ  การขนส่งทางรถบรรทุก ซึ่งมีต้นทุนต่ำเมื่อ เทียบกับการขนส่งทางอากาศ และง่ายกว่า ในระยะเท่ากัน และ สะดวกกว่า คล่องตัวกว่าถ้าเทียบกับการขนส่งทางทะเล บริการพิธีการ ศุลกากรและแพ็คเกจภาษีแบบ door-to-door ปลอดภัย รวดเร็ว ง่ายและสะดวก ส่งฟรีในตัวเมืองกรุงเทพ',
+                'โกดังเปิดให้บริการ : กว่างโจว ,อี้อู ,เซิ้นเจิ้น ,ซัวเถา ,ชิงเต่า ,เทียนจิน ,เซียงไฮ้ ,เซี่ยเมิน ,ต้าเหลี่ยน',
                 style: TextStyle(
                     color: headingtext,
                     fontSize: 13,
@@ -102,7 +92,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 13.0),
               child: Text(
-                'ระยะเวลาในการขนส่งจีน-ไทย : 4-7 วันทำการ ',
+                'LCL (Less than Container Load) คือ การขนส่งแบบแชร์พื้นที่ใน ตู้คอนเทนเนอร์ ซึ่งจะมีเจ้าของสินค้าหลายรายรวมกันมาในตู้ คอนเทนเนอร์',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
@@ -110,19 +100,19 @@ class Servicedetail extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 8.0, top: 5.0),
+              padding: EdgeInsets.only(left: 8.0, top: 13.0),
               child: Text(
-                'พัสดุจะถูกจัดส่งผ่านคลังสินค้าของกรุงเทพฯไปยังจังหวัด ต่างๆ หลังจากชำระเงิน1-2วันทำการสำหรับการนัดวันจัดสั่ง จัดส่งผ่านทางขนส่งร่วมให้บริการของบริษัทฯ J&T / IT Transport / นิ่มซีเส็ง และอื่นๆ',
+                'ระยะเวลาในการขนส่งจีน-ไทย : 12-18 วันทำการ พัสดุจะถูกจัดส่ง ผ่านคลังสินค้าของกรุงเทพฯ ไปยังจังหวัดต่างๆ หลังจากชำระเงิน 1-2 วันทำการสำหรับการนัดวันจัดส่ง จัดส่งผ่านทางขนส่ง ร่วมให้บริการของบริษัทฯ J&T / IT Transport / นิ่มซีเส็ง และอื่นๆ',
                 style: TextStyle(
-                    color: headingtext,
+                    color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 8.0, top: 13.0),
+              padding: EdgeInsets.only(left: 8.0, top: 10),
               child: Text(
-                'วันและเวลานัดรับพัสดุ: วันจันทร์ – วันเสาร์ เวลา 9.00-18.00 น. (โกดังปิดทุกวันอาทิตย์)',
+                'วันและเวลานัดรับพัสดุ : วันจันทร์ - วันเสาร์ เวลา 9.00-18.00 น. (โกดังปิดทุกวันอาทิตย์)',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
@@ -178,7 +168,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 13.0),
               child: Text(
-                'ผลิตภัณฑ์การขนส่งหลัก : เฟอร์นิเจอร์ อุปกรณ์ความงาม ยานพาหนะไฟฟ้า อาหาร เครื่องสำอางค์ วัสดุยา ของเล่นและ ของขวัญ เครื่องใช้ไฟฟ้า วัสดุก่อสร้างและฮาร์ดแวร ์ แบตเตอรี่ลิเธียม แล็ปท็อป โทรศัพท์มือถือ อุปกรณ์สื่อสาร ผลิตภัณฑ์อิเล็กทรอนิกส์ เสื้อผ้า รองเท้า โคมไฟ LED อุปกรณ์ทางการแพทย์ ชิ้นส่วนรถยนต์และอุปกรณ์ รถจักรยานยนต์ ฯลฯ',
+                'รูปแบบบการให้บริการปิดตู้ของ TEGCARGO มีหลากหลายรูปแบบ ตามความต้องการของลูกค้าและโรงงาน',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
@@ -187,6 +177,16 @@ class Servicedetail extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 5.0),
+              child: Text(
+                'ผลิตภัณฑ์การขนส่งหลัก : เฟอร์นิเจอร์ อุปกรณ์ความงาม ยานพาหนะไฟฟ้า อาหาร เครื่องสำอางค์ วัสดุยา ของเล่นและ ของขวัญ เครื่องใช้ไฟฟ้า วัสดุก่อสร้างและฮาร์ดแวร ์ แบตเตอรี่ลิเธียม แล็ปท็อป โทรศัพท์มือถือ อุปกรณ์สื่อสาร ผลิตภัณฑ์อิเล็กทรอนิกส์ เสื้อผ้า รองเท้า โคมไฟ LED อุปกรณ์ทางการแพทย์ ชิ้นส่วนรถยนต์และอุปกรณ์ รถจักรยานยนต์ ฯลฯ',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 8.0, top: 13.0),
               child: Text(
                 'สามารถตอบสนองความต้องการด้านการขนส่งต่างๆ ของผลิตภัณฑ์ของคุณ',
                 style: TextStyle(
@@ -208,8 +208,7 @@ class Servicedetail extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   Future.delayed(Duration(seconds: 2), () {
-                    Navigator.of(context)
-                        .pop(); // ปิด dialog หลังจาก 2 วินาที
+                    Navigator.of(context).pop(); // ปิด dialog หลังจาก 2 วินาที
                   });
                   return AlertDialog(
                     title: Text('เปิดบิล'),
@@ -224,8 +223,7 @@ class Servicedetail extends StatelessWidget {
               decoration: BoxDecoration(
                   color: red1,
                   borderRadius: BorderRadius.circular(15),
-                  border:
-                      Border.all(width: size.width * 0.003, color: red1)),
+                  border: Border.all(width: size.width * 0.003, color: red1)),
               child: Center(
                 child: Text(
                   'สนใจใช้บริการนี้',

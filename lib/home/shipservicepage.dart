@@ -1,8 +1,8 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
-class Servicedetail extends StatelessWidget {
-  const Servicedetail({
+class Shipservicepage extends StatelessWidget {
+  const Shipservicepage({
     super.key,
   });
 
@@ -13,7 +13,7 @@ class Servicedetail extends StatelessWidget {
       backgroundColor: white,
       appBar: AppBar(
         title: Text(
-          'บริการขนส่งทางบก',
+          'บริการขนส่งทางทะเล',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -43,7 +43,7 @@ class Servicedetail extends StatelessWidget {
                 borderRadius:
                     BorderRadius.circular(10.0), // ขอบมนให้เหมือนกับ Container
                 child: Image.asset(
-                  'assets/images/image 45.png',
+                  'assets/images/shipservice.png',
                   fit: BoxFit.cover, // ให้ภาพครอบคลุมพื้นที่ทั้งหมด
                 ),
               ),
@@ -51,7 +51,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 8.0, left: 8.0),
               child: Text(
-                'บริการขนส่งพัสดุทางบก (ทางรถ)',
+                'บริการขนส่งพัสดุทางทะเล (ทางเรือ)',
                 style: TextStyle(
                   fontSize: 20,
                   color: red1,
@@ -62,7 +62,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0),
               child: Text(
-                'นำเข้า Door to Door ทางบก',
+                'นำเข้า Door to Door ทางทะเล',
                 style: TextStyle(
                     color: headingtext,
                     fontSize: 13,
@@ -72,7 +72,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 10.0),
               child: Text(
-                'บริการส่งของจากจีนครบวงจร ขนส่งด่วนที่สุด 4-7 วัน จากจีน ถึงไทย ส่งตรงถึงหน้าบ้าน พร้อมผู้ดูแลส่วนตัว สามารถสั่งซื้อ สินค้าพร้อมระบบติดตาม พัสดุ อำนวยความสะดวกใน การค้าระหว่างสองประเทศเส้นทาง การขนส่งทางบก ค่าขนส่งเริ่มต้น 20 บาทต่อกิโลกรัม',
+                'บริการสั่งของจากจีนครบวงจร ขนส่งด่วนที่สุด 12-18 วัน จากจีนถึงไทย ส่งตรงถึงหน้าบ้าน พร้อมผู้ดูแลส่วนตัว สามารถ สั่งซื้อสินค้า พร้อมระบบติดตามพัสดุ อำนวยความสะดวก ในการค้าระหว่างสองประเทศเส้นทางการขนส่งทางทะเล ค่าขนส่ง เรีมต้น 10 บาทต่อกิโลกรัม',
                 style: TextStyle(
                     color: headingtext,
                     fontSize: 13,
@@ -92,7 +92,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 5.0),
               child: Text(
-                'ขนส่งทางบก คือ  การขนส่งทางรถบรรทุก ซึ่งมีต้นทุนต่ำเมื่อ เทียบกับการขนส่งทางอากาศ และง่ายกว่า ในระยะเท่ากัน และ สะดวกกว่า คล่องตัวกว่าถ้าเทียบกับการขนส่งทางทะเล บริการพิธีการ ศุลกากรและแพ็คเกจภาษีแบบ door-to-door ปลอดภัย รวดเร็ว ง่ายและสะดวก ส่งฟรีในตัวเมืองกรุงเทพ',
+                'ขนส่งทางทะเล คือ ขนส่งทางเรือ ซึ่งมีต้นทุนต่ำ สะดวก คล่องตัว ง่าย สินค้าไม่เสียหาย บริการพิธีการศุลกากรและแพ็คเกจภาษีแบบ door-to-door ปลอดภัย รวดเร็ว ง่ายและสะดวก ส่งฟรีในตัวเมืองกรุงเทพ',
                 style: TextStyle(
                     color: headingtext,
                     fontSize: 13,
@@ -102,7 +102,7 @@ class Servicedetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 8.0, top: 13.0),
               child: Text(
-                'ระยะเวลาในการขนส่งจีน-ไทย : 4-7 วันทำการ ',
+                'ระยะเวลาในการขนส่งจีน-ไทย : 12-18 วันทำการ ',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,

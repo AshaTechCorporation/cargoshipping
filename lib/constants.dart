@@ -77,12 +77,12 @@ const List<Map<String, dynamic>> myservice = [
     'images': 'assets/icons/lcl.png'
   },
   {'id': 5, 
-   'name': 'ส่งถึงหน้าบ้าน', 
+   'name': 'บริการส่งออก\nสินค้าทั่วโลก', 
    'images': 'assets/icons/dellitohome.png'
    },
    {
     'id': 6,
-    'name': 'ขนส่งพร้อม\nออกหนังสือ',
+    'name': 'บริการนำเข้า\nแบบถูกต้อง',
     'images': 'assets/icons/withlisecse.png'
   },
   {
@@ -104,6 +104,117 @@ const List<Map<String, dynamic>> myservice = [
     'id': 10,
     'name': 'อื่นๆ',
     'images': 'assets/icons/etcservice.png'
+  },
+];
+
+const List<Map<String, dynamic>> allmyservice = [
+  {
+    'id': 1,
+    'name': 'ขนส่งทางบก',
+    'subtitle':'นำเข้า Door to Door ทางบก',
+    'images': 'assets/icons/carservice.png'
+  },
+  {
+    'id': 2,
+    'name': 'ขนส่งทางทะเล',
+    'subtitle':'นำเข้า Door to Door ทางทะเล',
+    'images': 'assets/icons/shipservice.png'
+  },
+  {
+    'id': 3,
+    'name': 'บริการนำเข้าแบบถูกต้อง',
+    'subtitle':'บริการออกเอกสารนำเข้า โดยไม่มีค่าบริการขั้นต่ำ',
+    'images': 'assets/icons/correctimportlogo.png'
+  },
+  {
+    'id': 4,
+    'name': 'จัดส่งแบบเหมาตู้ FCL',
+    'subtitle':'บริการขนส่งแบบเหมาตู้คอนเทนเนอร์',
+    'images': 'assets/icons/fcl.png'
+  },
+  {
+    'id': 5,
+    'name': 'จัดส่งแบบ LCLทางเครื่องบิน',
+    'subtitle':'บริการขนส่งแบบแชร์พื้นที่ในตู้คอนเทนเนอร์',
+    'images': 'assets/icons/lcl.png'
+  },
+  {
+    'id': 6, 
+   'name': 'บริการส่งออกสินค้าทั่วโลก', 
+   'subtitle':'บริการส่งออกสินค้าทุกประเทศทั่วโลก',
+   'images': 'assets/icons/dellitohome.png'
+   },
+   {
+    'id': 7,
+    'name': 'บริการชิปปิ้ง ดำเนินพิธีการศุลกากร',
+    'subtitle':'บริการ SHIPPING เคลียร์สินค้า ภาษีศุลกากร',
+    'images': 'assets/icons/withlisecse.png'
+  },
+  {
+    'id': 8,
+    'name': 'บริการทัวร์ส่วนตัว',
+    'subtitle':'บริการทัวร์แบบไกด์ 1:1',
+    'images': 'assets/icons/tourprivateicon.png'
+  },
+  {
+    'id': 9,
+    'name': 'บริการจองตั๋วเครื่องบิน',
+    'subtitle':'...',
+    'images': 'assets/icons/bookingairplane.png'
+  },
+  {
+    'id': 10,
+    'name': 'บริการไกด์ ล่าม และหาสินค้า',
+    'subtitle':'บริการเจ้าหน้าที่ล่ามติดต่อโรงงาน และไกด์พาทัวร์ช็อปปิ้ง',
+    'images': 'assets/icons/translater.png'
+  },
+  {
+    'id': 11,
+    'name': 'บริการจัดหาโรงงาน',
+    'subtitle':'บริการจัดหาโรงงานโดยไม่ผ่านร้านค้า',
+    'images': 'assets/icons/werehousesearch.png'
+  },
+  {
+    'id': 12,
+    'name': 'บริการตรวจสอบ QC สินค้าหน้าโรงงาน',
+    'subtitle':'...',
+    'images': 'assets/icons/werehouseqc.png'
+  },
+  {
+    'id': 13,
+    'name': 'บริการสั่งซื้อสินค้าผ่าน App',
+    'subtitle':'...',
+    'images': 'assets/icons/apporder.png'
+  },
+  {
+    'id': 14,
+    'name': 'บริการโอนชำระค่าสินค้า',
+    'subtitle':'บริการโอนชำระค่าสินค้าเข้าธนาคาร และเติมเข้า Wallet',
+    'images': 'assets/icons/productpayment.png'
+  },
+  {
+    'id': 15,
+    'name': 'บริการเติม Alipay / WeChat',
+    'subtitle':'บริการโอนเงินไปจีน/ฝากจ่ายค่าสินค้า เติมเงิน Alipay, Wechat ',
+    'images': 'assets/icons/aliandwechat.png'
+  },
+  {
+    'id': 16,
+    'name': 'บริการโอนเงินชำระค่าเทอม ',
+    'subtitle':'...',
+    'images': 'assets/icons/termfee.png'
+  },
+  {
+    'id': 17,
+    'name': 'เรทราคานำเข้า',
+    'subtitle':'เรทราคานำเข้าจากพื้นที่ต่างๆ และบริการเสริม',
+    'images': 'assets/icons/priceimport.png'
+  },
+  {
+    'id': 18,
+    'name': 'คำนวณค่าขนส่ง',
+    'subtitle':'คำนวณค่าขนส่งจากขนาดและน้ำหนักสินค้า',
+    'images': 'assets/icons/calculator.png'
   },
 ];
 
