@@ -1,13 +1,22 @@
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/account/widgets/fclpage.dart';
+import 'package:cargoshipping/account/widgets/guidepage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/alipayservice.dart';
+import 'package:cargoshipping/home/alliandwechatservice.dart';
+import 'package:cargoshipping/home/bookingairservice.dart';
 import 'package:cargoshipping/home/correctimport.dart';
 import 'package:cargoshipping/home/detailproduct.dart';
 import 'package:cargoshipping/home/fclpage.dart';
 import 'package:cargoshipping/home/importproductlistpage.dart';
 import 'package:cargoshipping/home/lclpage.dart';
+import 'package:cargoshipping/home/orderinapp.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
+import 'package:cargoshipping/home/shippingservice.dart';
 import 'package:cargoshipping/home/shipservicepage.dart';
+import 'package:cargoshipping/home/tourprivateservice.dart';
+import 'package:cargoshipping/home/werehouseqc.dart';
+import 'package:cargoshipping/home/werehousesearch.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
@@ -513,7 +522,8 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Translaterguideservicepage(),
+                                builder: (context) =>
+                                    Translaterguideservicepage(),
                               ),
                             );
                           }
@@ -525,7 +535,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             );
                           }
-                           if (index == 8) {
+                          if (index == 8) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -1626,7 +1636,120 @@ class _HomePageState extends State<HomePage> {
                                         fontSize: 12, color: headingtext),
                                   ),
                                   onTap: () {
-                                    print('Tapped on ${service['name']}');
+                                    if (index == 0) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Servicedetail(),
+                                        ),
+                                      );
+                                    }
+                                    if (index == 1) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              Shipservicepage(),
+                                        ),
+                                      );
+                                    }
+                                    if (index == 2) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              Correctimportservice(),
+                                        ),
+                                      );
+                                    }
+                                    if (index == 3) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Fclpage1(),
+                                        ),
+                                      );
+                                    }
+                                    if (index == 4) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Lclpage(),
+                                        ),
+                                      );
+                                    }
+                                    if (index == 5) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Worldexport(),
+                                        ),
+                                      );
+                                    }
+                                    if (index == 6) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Shippingservice()),
+                                      );
+                                    }
+                                    if (index == 7) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Tourprivateservice()));
+                                    }
+                                    if (index == 8) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Bookingairservice()));
+                                    }
+                                    if (index == 9) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Translaterguideservicepage()));
+                                    }
+                                    if (index == 10) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Werehousesearch()));
+                                    }
+                                    if (index == 11) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Werehouseqc()));
+                                    }
+                                    if (index == 12) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Orderinapp()));
+                                    }
+                                    if (index == 13) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Alipayservice()));
+                                    }
+                                    if (index == 14) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Alliandwechatservice()));
+                                    }
                                   },
                                 ),
                                 CustomDivider(

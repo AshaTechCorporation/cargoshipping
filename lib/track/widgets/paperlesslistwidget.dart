@@ -35,7 +35,7 @@ class paperlesslistwidget extends StatelessWidget {
                 ],
                 begin: Alignment.centerLeft, // เริ่มจากทางซ้าย
                 end: Alignment.centerRight, // ไปทางขวา
-                stops: [0.7, 1.0], // สัดส่วน 70% สีแรก และ 30% สีที่สอง
+                stops: [0.2, 1.0], // สัดส่วน 70% สีแรก และ 30% สีที่สอง
               ),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),

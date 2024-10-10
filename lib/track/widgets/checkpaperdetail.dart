@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/track/widgets/paperlesslistwidget.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class Checkpaperdetail extends StatefulWidget {
@@ -95,13 +99,16 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
                     text: TextSpan(
                       text: 'สถานะ:   ',
                       style: TextStyle(
-                          color: greyuserinfo, fontWeight: FontWeight.bold,fontFamily: 'SukhumvitSet'),
+                          color: greyuserinfo,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'SukhumvitSet'),
                       children: const <TextSpan>[
                         TextSpan(
                             text: 'xxxxx',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,fontFamily: 'SukhumvitSet')),
+                                color: Colors.black,
+                                fontFamily: 'SukhumvitSet')),
                       ],
                     ),
                   ),
@@ -124,20 +131,24 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
               height: size.height * 0.02,
             ),
             Padding(
-              padding:EdgeInsets.symmetric(horizontal: size.width * 0.04),
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('วันที่รับเรื่อง',style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),),
-                  Text('10 ก.ย. 2567',style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),)
+                  Text(
+                    'วันที่รับเรื่อง',
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '10 ก.ย. 2567',
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  )
                 ],
               ),
             ),
@@ -151,20 +162,24 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
               height: size.height * 0.02,
             ),
             Padding(
-              padding:EdgeInsets.symmetric(horizontal: size.width * 0.04),
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
               child: Row(
                 children: [
-                  Text('ชื่อผู้นำเข้า',style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),),
-                  SizedBox(width: size.width * 0.04,),
-                  Text('บจก. ABCD',style: TextStyle(
-                    fontSize: 13,
-                    color: red1,
-                    fontWeight: FontWeight.bold
-                  ),)
+                  Text(
+                    'ชื่อผู้นำเข้า',
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    width: size.width * 0.04,
+                  ),
+                  Text(
+                    'บจก. ABCD',
+                    style: TextStyle(
+                        fontSize: 13, color: red1, fontWeight: FontWeight.bold),
+                  )
                 ],
               ),
             ),
@@ -185,83 +200,169 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
                   Text(
                     'เอกสารนำเข้าถูกต้อง',
                     style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontFamily: 'SukhumvitSet'
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontFamily: 'SukhumvitSet'),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'อัปโหลดไฟล์ Invoice',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.01,
+                    height: size.height * 0.005,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('1. Invoice',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: Color(0xffd0e9da),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.015),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: Image.asset(
+                                    'assets/icons/greencorrect.png',
+                                    height: size.height * 0.03,
+                                  )),
+                              Image.asset(
+                                'assets/images/invoiceimages.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'แสดงเอกสาร Invoice',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                   SizedBox(
-                    height: size.height * 0.01,
+                    height: size.height * 0.025,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('2. Packing list',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'อัปโหลดไฟล์ Packing list',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: Color(0xffd0e9da),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.015),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: Image.asset(
+                                    'assets/icons/greencorrect.png',
+                                    height: size.height * 0.03,
+                                  )),
+                              Image.asset(
+                                'assets/images/pakinglistimg.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.025,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'อื่นๆ เช่น ใบอนุญาต',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: Color(0xffd0e9da),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.015),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: Image.asset(
+                                    'assets/icons/greencorrect.png',
+                                    height: size.height * 0.03,
+                                  )),
+                              Image.asset(
+                                'assets/images/moreupload.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
                           ),
                         ),
-                        child: Center(
-                          child: Text(
-                            'แสดงเอกสาร Packing list',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.025,
@@ -294,9 +395,10 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
                               Text(
                                 'หมายเหตุ',
                                 style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,),
+                                  fontSize: 13,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               )
                             ],
                           ),
@@ -340,7 +442,6 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
             children: [
               GestureDetector(
                 onTap: () {
-                  
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -359,18 +460,17 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
                   height: size.height * 0.06,
                   width: size.width * 0.9,
                   decoration: BoxDecoration(
-                      color: red1,
-                      borderRadius: BorderRadius.circular(15),
-                     ),
+                    color: red1,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: Center(
                     child: Text(
                       'ชำระค่าบริการ',
                       style: TextStyle(
-                        color: white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'SukhumvitSet'
-                      ),
+                          color: white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'SukhumvitSet'),
                     ),
                   ),
                 ),
@@ -382,5 +482,3 @@ class _CheckpaperdetailState extends State<Checkpaperdetail> {
     );
   }
 }
-
-

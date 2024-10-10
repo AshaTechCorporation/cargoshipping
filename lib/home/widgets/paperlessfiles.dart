@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:cargoshipping/constants.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
-
 class Paperlessfiles extends StatefulWidget {
   const Paperlessfiles({super.key});
 
@@ -369,8 +367,8 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                     height: size.height * 0.04,
                     padding: EdgeInsets.all(size.height * 0.01),
                     decoration: BoxDecoration(
-                      color: Colors.pink[100], // พื้นหลังสีชมพู
-                      borderRadius: BorderRadius.circular(8), // ขอบมน
+                      color: Colors.pink[100],
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -396,7 +394,7 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: red1, // เปลี่ยนสีปุ่มเป็นสีแดง
+                        backgroundColor: red1,
                         minimumSize: Size(size.width * 0.9, 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
@@ -404,8 +402,8 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                       'ชำระเงิน',
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold, // ตัวหนา
-                        color: Colors.white, // สีตัวอักษรเป็นสีขาว
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),

@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/CardImportProductWidget.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/track/widgets/paperlesslistwidget.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class Detailpaper extends StatefulWidget {
@@ -97,7 +101,9 @@ class _DetailpaperState extends State<Detailpaper> {
                     text: TextSpan(
                       text: 'สถานะ:   ',
                       style: TextStyle(
-                          color: greyuserinfo, fontWeight: FontWeight.bold,fontFamily: 'SukhumvitSet'),
+                          color: greyuserinfo,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'SukhumvitSet'),
                       children: const <TextSpan>[
                         TextSpan(
                             text: 'xxxxx',
@@ -209,148 +215,254 @@ class _DetailpaperState extends State<Detailpaper> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('1. Invoice',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: TextButton(
-                          onPressed: () {
-                            // การทำงานเมื่อลิงก์ถูกกด
-                            print('ดูไฟล์ตัวอย่าง Invoice');
-                          },
-                          child: Text(
-                            'ดูไฟล์ตัวอย่าง',
-                            style: TextStyle(
-                              color: Color(0xff004AAD),
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'อัพโหลดไฟล์ Invoice',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ),
-                      )
-                    ],
+                  SizedBox(
+                    height: size.height * 0.01,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('2. Packing list',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: TextButton(
-                          onPressed: () {
-                            // การทำงานเมื่อลิงก์ถูกกด
-                            print('ดูไฟล์ตัวอย่าง Packing list');
-                          },
-                          child: Text(
-                            'ดูไฟล์ตัวอย่าง',
-                            style: TextStyle(
-                              color: Color(0xff004AAD),
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'อัพโหลดไฟล์ Packing list',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    ],
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'อัปโหลดไฟล์ Invoice',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('3. อื่นๆ เช่น ใบอนุญาต',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
-                      ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.3,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
-                          ),
-                        ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'รองรับไฟล์รูปถ่าย JPG, PNG เท่านั้น',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: headingtext,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom, // ใช้ประเภท custom
+                          allowedExtensions: [
+                            'jpg',
+                            'png',
+                            'pdf'
+                          ], // ระบุเฉพาะไฟล์ jpg และ png
+                        );
+
+                        if (result != null) {
+                          File file = File(result.files.single.path!);
+                          // ทำงานกับไฟล์ที่เลือก
+                        } else {
+                          // User canceled the picker
+                        }
+                      },
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: white,
                         child: Center(
-                          child: Text(
-                            'อัพโหลดไฟล์อื่นๆ',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/invoiceimages.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
                           ),
                         ),
-                      )
-                    ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        // การทำงานเมื่อลิงก์ถูกกด
+                        print('ดูไฟล์ตัวอย่าง Invoice');
+                      },
+                      child: Text(
+                        'ดูไฟล์ตัวอย่าง',
+                        style: TextStyle(
+                          color: Color(0xff004AAD),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'อัปโหลดไฟล์ Packing list',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'รองรับไฟล์รูปถ่าย JPG, PNG, PDF เท่านั้น',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: headingtext,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom, // ใช้ประเภท custom
+                          allowedExtensions: [
+                            'jpg',
+                            'png',
+                            'pdf'
+                          ], // ระบุเฉพาะไฟล์ jpg และ png
+                        );
+
+                        if (result != null) {
+                          File file = File(result.files.single.path!);
+                          // ทำงานกับไฟล์ที่เลือก
+                        } else {
+                          // User canceled the picker
+                        }
+                      },
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: white,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/pakinglistimg.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        // การทำงานเมื่อลิงก์ถูกกด
+                        print('ดูไฟล์ตัวอย่าง Invoice');
+                      },
+                      child: Text(
+                        'ดูไฟล์ตัวอย่าง',
+                        style: TextStyle(
+                          color: Color(0xff004AAD),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'อื่นๆ เช่น ใบอนุญาต',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'รองรับไฟล์รูปถ่าย JPG, PNG, PDF เท่านั้น',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: headingtext,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom, // ใช้ประเภท custom
+                          allowedExtensions: [
+                            'jpg',
+                            'png',
+                            'pdf'
+                          ], // ระบุเฉพาะไฟล์ jpg และ png
+                        );
+
+                        if (result != null) {
+                          File file = File(result.files.single.path!);
+                          // ทำงานกับไฟล์ที่เลือก
+                        } else {
+                          // User canceled the picker
+                        }
+                      },
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: white,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/moreupload.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.025,
-                  ),
-                  CustomDivider(),
-                  SizedBox(
-                    height: size.height * 0.03,
                   ),
                   Text(
                     'ค่าบริการในการดำเนินการ',
@@ -358,7 +470,7 @@ class _DetailpaperState extends State<Detailpaper> {
                         fontSize: 15, color: red1, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: size.height * 0.03,
+                    height: size.height * 0.01,
                   ),
                   Text(
                     'ค่าบริการส่วนที่1: ชำระก่อนเริ่มจัดทำ',
@@ -564,14 +676,20 @@ class _DetailpaperState extends State<Detailpaper> {
                           ),
                           Text(
                             ': ค่าภาษีมูลค่าเพิ่ม และค่าอากรค่าเข้าจะแจ้งให้ท่านทราบเพื่อ ยืนยันยอดชำระอีกครั้งในภายหลังจัดทำเอกสารตามไฟล์แนบ ทั้ง 2 ฉบับด้านบนเรียบร้อยแล้ว',
-                            style: TextStyle(fontSize: 13, color: Colors.black,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: size.height * 0.01,
                           ),
                           Text(
                             ': ระยะเวลาดำเนินการ 10-20 วัน ยังไม่รวมระยะเวลาขึ้นทะเบียน Paperless',
-                            style: TextStyle(fontSize: 13, color: Colors.black,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -592,7 +710,6 @@ class _DetailpaperState extends State<Detailpaper> {
             children: [
               GestureDetector(
                 onTap: () {
-                  
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -611,18 +728,17 @@ class _DetailpaperState extends State<Detailpaper> {
                   height: size.height * 0.06,
                   width: size.width * 0.9,
                   decoration: BoxDecoration(
-                      color: red1,
-                      borderRadius: BorderRadius.circular(15),
-                     ),
+                    color: red1,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: Center(
                     child: Text(
                       'นำเข้าเอกสาร',
                       style: TextStyle(
-                        color: white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'SukhumvitSet'
-                      ),
+                          color: white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'SukhumvitSet'),
                     ),
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/track/widgets/paperlesslistwidget.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 class Duringprocesspaper extends StatefulWidget {
@@ -282,110 +283,198 @@ class _DuringprocesspaperState extends State<Duringprocesspaper> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('1. Invoice',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
-                      ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'แสดงเอกสาร Invoice',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
                   SizedBox(
                     height: size.height * 0.01,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('2. Packing list',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
-                      ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'แสดงเอกสาร Packing list',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    ],
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'แสดงไฟล์ Invoice',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   SizedBox(
-                    height: size.height * 0.01,
+                    height: size.height * 0.005,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text('3. ฉบับร่าง',
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: Color(0xffd0e9da),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.015),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: Image.asset(
+                                    'assets/icons/greencorrect.png',
+                                    height: size.height * 0.03,
+                                  )),
+                              Image.asset(
+                                'assets/images/invoiceimages.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Container(
-                        height: size.height * 0.034,
-                        width: size.width * 0.35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 0.5,
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.025,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'แสดงไฟล์ Packing list',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: Color(0xffd0e9da),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.015),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: Image.asset(
+                                    'assets/icons/greencorrect.png',
+                                    height: size.height * 0.03,
+                                  )),
+                              Image.asset(
+                                'assets/images/pakinglistimg.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
                           ),
                         ),
-                        child: Center(
-                          child: Text(
-                            'แสดงเอกสาร ฉบับร่าง',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.025,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'แสดงไฟล์อื่นๆ',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  DottedBorder(
+                    color: Color(0xff00ac47),
+                    strokeWidth: 1.5,
+                    dashPattern: [6, 10],
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(12),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.95,
+                        color: Color(0xffd0e9da),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.015),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: Image.asset(
+                                    'assets/icons/greencorrect.png',
+                                    height: size.height * 0.03,
+                                  )),
+                              Image.asset(
+                                'assets/images/moreupload.png',
+                                height: size.height * 0.17,
+                                width: size.width * 0.6,
+                              ),
+                            ],
                           ),
                         ),
-                      )
-                    ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.015,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'แสดงไฟล์ฉบับร่าง',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.005,
+                  ),
+                  Container(
+                    height: size.height * 0.25,
+                    width: size.width * 0.95,
+                    decoration: BoxDecoration(
+                        color: Color(0xff00ac47),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/draft.png',
+                          height: size.height * 0.2,
+                          // width: size.width * 0.01,
+                          // fit: BoxFit.contain,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.025,
