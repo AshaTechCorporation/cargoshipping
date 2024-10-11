@@ -15,29 +15,46 @@ class TrackPage extends StatefulWidget {
 class _TrackPageState extends State<TrackPage>
     with SingleTickerProviderStateMixin {
   int selectedIndex = 0;
-  TabController? _tabController;
+  late PageController _pageController;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _tabController = TabController(length: 4, vsync: this);
+  //   _tabController?.addListener(() {
+  //     setState(() {
+  //       selectedIndex = _tabController!.index;
+  //     });
+  //   });
+  // }
+
+  // @override
+  // void dispose() {
+  //   _tabController?.dispose();
+  //   super.dispose();
+  // }
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _pageController = PageController();
   }
 
   @override
   void dispose() {
-    _tabController?.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     // ตรวจสอบว่า _tabController ไม่เป็น null
-    if (_tabController == null) {
-      return Scaffold(
-        backgroundColor: background,
-        body: Center(child: CircularProgressIndicator()),
-      );
-    }
+    // if (_tabController == null) {
+    //   return Scaffold(
+    //     backgroundColor: background,
+    //     body: Center(child: CircularProgressIndicator()),
+    //   );
+    // }
 
     final size = MediaQuery.of(context).size;
 
@@ -131,8 +148,13 @@ class _TrackPageState extends State<TrackPage>
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
         children: [
           Palceanorderpage(),
           Transporttrackpage(),
@@ -148,11 +170,8 @@ class _TrackPageState extends State<TrackPage>
     bool isSelected = selectedIndex == index;
     return GestureDetector(
       onTap: () {
-        setState(() {
-          selectedIndex = index;
-          _tabController?.animateTo(index);
-          print(selectedIndex);
-        });
+         _pageController.animateToPage(index,
+            duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: size.height * 0.01),

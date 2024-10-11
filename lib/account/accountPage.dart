@@ -1,4 +1,5 @@
 import 'package:cargoshipping/account/widgets/CardlistWidget.dart';
+import 'package:cargoshipping/account/widgets/alltranspothis.dart';
 import 'package:cargoshipping/account/widgets/bookingtourpage.dart';
 import 'package:cargoshipping/account/widgets/exportabroadpage.dart';
 import 'package:cargoshipping/account/widgets/fclpage.dart';
@@ -305,7 +306,7 @@ class _AccountPageState extends State<AccountPage> {
                   child: Row(
                     children: [
                       Text(
-                        'ประวัติสรุปการสั่งซื้อ',
+                        'ประวัติคำสั่งซื้อทั้งหมด',
                         style: TextStyle(fontSize: 12, color: greyuserinfo),
                       ),
                       SizedBox(
@@ -392,12 +393,12 @@ class _AccountPageState extends State<AccountPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Ordersumpage()));
+                            builder: (context) => Alltranspothis()));
                   },
                   child: Row(
                     children: [
                       Text(
-                        'ประวัติสรุปการสั่งซื้อ',
+                        'ประวัติการขนส่งทั้งหมด',
                         style: TextStyle(fontSize: 12, color: greyuserinfo),
                       ),
                       SizedBox(

@@ -13,6 +13,8 @@ class InTransitPage extends StatefulWidget {
 class _InTransitPageState extends State<InTransitPage> {
   @override
   Widget build(BuildContext context) {
+    final filteredDetails =
+        transportdetail.where((element) => element['status'] == 2).toList();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: background,
@@ -94,30 +96,63 @@ class _InTransitPageState extends State<InTransitPage> {
             SizedBox(
               height: size.height * 0.015,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Intransitdetail(),
-                  ),
-                );
-              },
-              child: CardWarehouseWidget(
-                size: size,
-                status: 2,
-                carback: 'assets/icons/carback.png',
-                iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_red2.png',
-                iconPosition3: 'assets/icons/icon_grayb2.png',
-                iconPosition4: 'assets/icons/icon_grayb3.png',
-                iconPosition5: 'assets/icons/correctgrey.png',
-                orderNo: 'Order no. A423456',
-                press: () {
-                  print('click press');
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => Intransitdetail(),
+            //       ),
+            //     );
+            //   },
+            //   child: CardWarehouseWidget(
+            //     size: size,
+            //     status: 2,
+            //     isPaid: true,
+            //     carback: 'assets/icons/carback.png',
+            //     iconPosition1: 'assets/icons/home_icon.png',
+            //     iconPosition2: 'assets/icons/icon_red2.png',
+            //     iconPosition3: 'assets/icons/icon_grayb2.png',
+            //     iconPosition4: 'assets/icons/icon_grayb3.png',
+            //     iconPosition5: 'assets/icons/correctgrey.png',
+            //     orderNo: 'Order no. A423456',
+            //     press: () {
+            //       print('click press');
+            //     },
+            //   ),
+            // )
+            ...filteredDetails.map((detail) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Intransitdetail(),
+                    ),
+                  );
                 },
-              ),
-            )
+                child: CardWarehouseWidget(
+                  size: size,
+                  status: detail['status'],
+                  sendtothai:
+                      detail['sendtothai'],
+                  sended: detail[
+                      'sended'],
+                  isPaid: detail['paid'],
+                  carback: 'assets/icons/carback.png',
+                  iconPosition1: 'assets/icons/home_icon.png',
+                  iconPosition2: 'assets/icons/icon_red2.png',
+                  iconPosition3: 'assets/icons/icon_grayb2.png',
+                  iconPosition4: 'assets/icons/icon_grayb3.png',
+                  iconPosition5: 'assets/icons/correctgrey.png',
+                  orderNo:
+                      'Order no. ${detail['order']}', // ส่งข้อมูลเลขที่สั่งซื้อ
+                  press: () {
+                    print('click press');
+                  },
+                ),
+              );
+            }).toList(), // สร้าง widget ตามจำนวนรายการที่กรองได้
           ],
         ),
       ),

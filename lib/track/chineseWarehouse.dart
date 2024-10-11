@@ -13,6 +13,9 @@ class ChineseWarehouse extends StatefulWidget {
 class _ChineseWarehouseState extends State<ChineseWarehouse> {
   @override
   Widget build(BuildContext context) {
+    // กรองข้อมูลให้เฉพาะที่มี status == 1
+    final filteredDetails =
+        transportdetail.where((element) => element['status'] == 1).toList();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: background,
@@ -88,37 +91,77 @@ class _ChineseWarehouseState extends State<ChineseWarehouse> {
               ],
             )),
       ),
+      // body: SingleChildScrollView(
+      //   child: GestureDetector(
+      //     onTap: () {
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //           builder: (context) => Werehousechipage(),
+      //         ),
+      //       );
+      //     },
+      //     child: Column(
+      //       children: [
+      //         SizedBox(
+      //           height: size.height * 0.015,
+      //         ),
+      //         CardWarehouseWidget(
+      //           size: size,
+      //           status: 1,
+      //           isPaid: false,
+      //           carback: 'assets/icons/carback.png',
+      //           iconPosition1: 'assets/icons/home_icon.png',
+      //           iconPosition2: 'assets/icons/icon_grayb1.png',
+      //           iconPosition3: 'assets/icons/icon_grayb2.png',
+      //           iconPosition4: 'assets/icons/icon_grayb3.png',
+      //           iconPosition5: 'assets/icons/correctgrey.png',
+      //           orderNo: 'Order no. A423456',
+      //           press: () {
+      //             print('click press');
+      //           },
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Werehousechipage(),
-              ),
-            );
-          },
-          child: Column(
-            children: [
-              SizedBox(
-                height: size.height * 0.015,
-              ),
-              CardWarehouseWidget(
-                size: size,
-                status: 1,
-                carback: 'assets/icons/carback.png',
-                iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_grayb1.png',
-                iconPosition3: 'assets/icons/icon_grayb2.png',
-                iconPosition4: 'assets/icons/icon_grayb3.png',
-                iconPosition5: 'assets/icons/correctgrey.png',
-                orderNo: 'Order no. A423456',
-                press: () {
-                  print('click press');
+        child: Column(
+          children: [
+            SizedBox(height: size.height * 0.015),
+            ...filteredDetails.map((detail) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          Werehousechipage(),
+                    ),
+                  );
                 },
-              )
-            ],
-          ),
+                child: CardWarehouseWidget(
+                  size: size,
+                  status: detail['status'],
+                  isPaid: detail['paid'],
+                  carback: 'assets/icons/carback.png',
+                  iconPosition1: 'assets/icons/home_icon.png',
+                  iconPosition2: 'assets/icons/icon_grayb1.png',
+                  iconPosition3: 'assets/icons/icon_grayb2.png',
+                  iconPosition4: 'assets/icons/icon_grayb3.png',
+                  iconPosition5: 'assets/icons/correctgrey.png',
+                  orderNo: 'Order no. ${detail['order']}',
+                  sendtothai:
+                      detail['sendtothai'],
+                  sended: detail[
+                      'sended'],
+                  press: () {
+                    print('click press');
+                  },
+                ),
+              );
+            }).toList(),
+          ],
         ),
       ),
     );

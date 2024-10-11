@@ -14,83 +14,34 @@ class Allhistorypage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CardWarehouseWidget(
-              size: size,
-              status: 1, // Status 1
-              carback: 'assets/icons/carback.png',
-              orderNo: 'Order no. A423456',
-              iconPosition1: 'assets/icons/home_icon.png',
-              iconPosition2: 'assets/icons/icon_grayb1.png',
-              iconPosition3: 'assets/icons/icon_grayb2.png',
-              iconPosition4: 'assets/icons/icon_grayb3.png',
-              iconPosition5: 'assets/icons/correctgrey.png',
-              press: () {
-                print('Pressed status 1');
-              },
-            ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            CardWarehouseWidget(
-              size: size,
-              status: 2, // Status 2
-              carback: 'assets/icons/carback.png',
-              orderNo: 'Order no. A423457',
-              iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_red2.png',
-                iconPosition3: 'assets/icons/icon_grayb2.png',
-                iconPosition4: 'assets/icons/icon_grayb3.png',
-                iconPosition5: 'assets/icons/correctgrey.png',
-              press: () {
-                print('Pressed status 2');
-              },
-            ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            CardWarehouseWidget(
-              size: size,
-              status: 3, // Status 3
-              carback: 'assets/icons/carback.png',
-              orderNo: 'Order no. A423458',
-               iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_red2.png',
-                iconPosition3: 'assets/icons/icon_red3.png',
-                iconPosition4: 'assets/icons/icon_grayb3.png',
-                iconPosition5: 'assets/icons/correctgrey.png',
-              press: () {
-                print('Pressed status 3');
-              },
-            ),
-            CardWarehouseWidget(
-              size: size,
-              status: 4, // Status 4
-              carback: 'assets/icons/carback.png',
-              orderNo: 'Order no. A423459',
-              iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_red2.png',
-                iconPosition3: 'assets/icons/icon_red3.png',
-                iconPosition4: 'assets/icons/icon_red4.png',
-                iconPosition5: 'assets/icons/correctgrey.png',
-              press: () {
-                print('Pressed status 4');
-              },
-            ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            CardWarehouseWidget(
-              size: size,
-              status: 5, // Status 5
-              carback: 'assets/icons/carback.png',
-              orderNo: 'Order no. A423460',
-              iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_red2.png',
-                iconPosition3: 'assets/icons/icon_red3.png',
-                iconPosition4: 'assets/icons/icon_red4.png',
-                iconPosition5: 'assets/icons/delivery.png',
-              press: () {
-                print('Pressed status 5');
+            ListView.builder(
+              itemCount: transportdetail.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final detail = transportdetail[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
+                  child: CardWarehouseWidget(
+                    size: size,
+                    sendtothai:
+                        detail['sendtothai'], // ส่งข้อมูลวันที่คาดว่าจะถึงไทย
+                    sended: detail['sended'], // ส่งข้อมูลวันที่จัดส่งแล้ว
+                    status: detail['status'], // ส่งค่า status จากข้อมูล
+                    isPaid: detail['paid'], // ส่งค่าการชำระเงินจากข้อมูล
+                    carback: 'assets/icons/carback.png',
+                    iconPosition1: 'assets/icons/home_icon.png',
+                    iconPosition2: 'assets/icons/icon_red2.png',
+                    iconPosition3: 'assets/icons/icon_red3.png',
+                    iconPosition4: 'assets/icons/icon_red4.png',
+                    iconPosition5: 'assets/icons/delivery.png',
+                    orderNo:
+                        'Order no. ${detail['order']}', // ส่งข้อมูลเลขที่สั่งซื้อ
+                    press: () {
+                      print('click press');
+                    },
+                  ),
+                );
               },
             ),
             SizedBox(

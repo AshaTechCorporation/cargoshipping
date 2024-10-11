@@ -2,18 +2,22 @@ import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
 class CardWarehouseWidget extends StatelessWidget {
-  CardWarehouseWidget(
-      {super.key,
-      required this.size,
-      required this.press,
-      required this.carback,
-      required this.orderNo,
-      required this.iconPosition1,
-      required this.status,
-      required this.iconPosition2,
-      required this.iconPosition3,
-      required this.iconPosition4,
-      required this.iconPosition5});
+  CardWarehouseWidget({
+    super.key,
+    required this.size,
+    required this.press,
+    required this.carback,
+    required this.orderNo,
+    required this.iconPosition1,
+    required this.status,
+    required this.iconPosition2,
+    required this.iconPosition3,
+    required this.iconPosition4,
+    required this.iconPosition5,
+    required this.isPaid,
+    required this.sended,
+    required this.sendtothai,
+  });
 
   final Size size;
   VoidCallback press;
@@ -24,7 +28,10 @@ class CardWarehouseWidget extends StatelessWidget {
   final String iconPosition3;
   final String iconPosition4;
   final String iconPosition5;
+  final bool isPaid;
   final int status;
+  final String sended;
+  final String sendtothai;
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +54,13 @@ class CardWarehouseWidget extends StatelessWidget {
             ),
             Container(
               width: size.width * 0.95,
-              height: status == 1 || status == 5 ? size.height * 0.23 : size.height * 0.3,
+              height: status == 1 || status == 5
+                  ? size.height * 0.23
+                  : size.height * 0.3,
               decoration: BoxDecoration(
                   // color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey, width: 0.5)),
+                  border: Border.all(color: Colors.grey, width: 1.0)),
               child: Column(
                 children: [
                   SizedBox(
@@ -72,7 +81,10 @@ class CardWarehouseWidget extends StatelessWidget {
                       children: [
                         Text(
                           orderNo,
-                          style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -109,11 +121,17 @@ class CardWarehouseWidget extends StatelessWidget {
                                     children: [
                                       Text(
                                         'สินค้าถึงโกดังจีน',
-                                        style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: red1,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         'เมื่อ 25 ก.ค. 67',
-                                        style: TextStyle(fontSize: 12, color: greyuserinfo, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: greyuserinfo,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -122,9 +140,12 @@ class CardWarehouseWidget extends StatelessWidget {
                           SizedBox(
                             width: size.width * 0.01,
                           ),
-                          Image.asset(iconPosition2, height: size.height * 0.037),
+                          Image.asset(iconPosition2,
+                              height: size.height * 0.037),
                           SizedBox(
-                            width: status == 2 ? size.width * 0.02 : size.width * 0.01,
+                            width: status == 2
+                                ? size.width * 0.02
+                                : size.width * 0.01,
                           ),
                           status == 2
                               ? SizedBox()
@@ -148,19 +169,29 @@ class CardWarehouseWidget extends StatelessWidget {
                                   width: size.width * 0.25,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'อยู่ระหว่างการขนส่ง',
-                                        style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: red1,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         'คาดการณ์ถึงไทย',
-                                        style: TextStyle(fontSize: 12, color: greyuserinfo, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: greyuserinfo,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         'เมื่อ 25 ก.ค. 67',
-                                        style: TextStyle(fontSize: 12, color: greyuserinfo, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: greyuserinfo,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -169,7 +200,8 @@ class CardWarehouseWidget extends StatelessWidget {
                           SizedBox(
                             width: size.width * 0.01,
                           ),
-                          Image.asset(iconPosition3, height: size.height * 0.037),
+                          Image.asset(iconPosition3,
+                              height: size.height * 0.037),
                           SizedBox(
                             width: size.width * 0.01,
                           ),
@@ -197,11 +229,17 @@ class CardWarehouseWidget extends StatelessWidget {
                                     children: [
                                       Text(
                                         'สินค้าถึงโกดังไทย',
-                                        style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: red1,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         'เมื่อ 25 ก.ค. 67',
-                                        style: TextStyle(fontSize: 12, color: greyuserinfo, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: greyuserinfo,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -210,9 +248,12 @@ class CardWarehouseWidget extends StatelessWidget {
                           SizedBox(
                             width: size.width * 0.01,
                           ),
-                          Image.asset(iconPosition4, height: size.height * 0.037),
+                          Image.asset(iconPosition4,
+                              height: size.height * 0.037),
                           SizedBox(
-                            width: status == 4 ? size.width * 0.02 : size.width * 0.01,
+                            width: status == 4
+                                ? size.width * 0.02
+                                : size.width * 0.01,
                           ),
                           status == 4
                               ? SizedBox()
@@ -236,15 +277,22 @@ class CardWarehouseWidget extends StatelessWidget {
                                   width: size.width * 0.25,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'รอชำระเงิน',
-                                        style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: red1,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text(
                                         'เมื่อ 25 ก.ค. 67',
-                                        style: TextStyle(fontSize: 12, color: greyuserinfo, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: greyuserinfo,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -253,11 +301,11 @@ class CardWarehouseWidget extends StatelessWidget {
                           SizedBox(
                             width: size.width * 0.01,
                           ),
-                          Image.asset(iconPosition5, height: size.height * 0.037),
+                          Image.asset(iconPosition5,
+                              height: size.height * 0.037),
                           SizedBox(
                             width: size.width * 0.01,
                           ),
-                          
                           status == 5
                               ? SizedBox(
                                   width: size.width * 0.25,
@@ -265,7 +313,10 @@ class CardWarehouseWidget extends StatelessWidget {
                                     children: [
                                       Text(
                                         'จัดส่งสินค้าสำเร็จ',
-                                        style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: red1,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -280,18 +331,31 @@ class CardWarehouseWidget extends StatelessWidget {
                     height: size.height * 0.02,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.07),
                     child: Row(
                       children: [
                         Text(
                           'ประเภท สินค้าสั่งซื้อ ',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
                         ),
                         Spacer(),
-                        Text(
-                          'กำหนดจัดส่งใน 25 ก.ค. 67',
-                          style: TextStyle(fontSize: 13),
-                        )
+
+                        if (status == 2)
+                          Text(
+                            'คาดว่าจะถึงไทย $sendtothai', // แสดงข้อความสำหรับ status 2 พร้อมกับค่า sendtothai
+                            style: TextStyle(fontSize: 13),
+                          )
+                        else if (status == 5)
+                          Text(
+                            'จัดส่งแล้ว $sended', // แสดงข้อความสำหรับ status 5 พร้อมกับค่า sended
+                            style: TextStyle(fontSize: 13),
+                          )
+                        else
+                          SizedBox() // สำหรับ status อื่น ๆ แสดงเป็น SizedBox เปล่า
                       ],
                     ),
                   ),
@@ -299,7 +363,8 @@ class CardWarehouseWidget extends StatelessWidget {
                     height: size.height * 0.01,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.07),
                     child: Row(
                       children: [
                         Image.asset(
@@ -311,7 +376,10 @@ class CardWarehouseWidget extends StatelessWidget {
                         ),
                         Text(
                           'ขนส่งทางรถ',
-                          style: TextStyle(fontSize: 13, color: greyuserinfo, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: greyuserinfo,
+                              fontWeight: FontWeight.bold),
                         ),
                         Spacer(),
                         GestureDetector(
@@ -320,7 +388,8 @@ class CardWarehouseWidget extends StatelessWidget {
                             children: [
                               Text(
                                 'รายละเอียด',
-                                style: TextStyle(color: red1, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: red1, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: size.width * 0.02,
@@ -338,7 +407,8 @@ class CardWarehouseWidget extends StatelessWidget {
                   status == 1 || status == 5
                       ? SizedBox()
                       : Padding(
-                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.07),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -348,31 +418,64 @@ class CardWarehouseWidget extends StatelessWidget {
                                 children: [
                                   Text(
                                     'สินค้าประเภท A จำนวน 5 ชิ้น',
-                                    style: TextStyle(fontSize: 13, color: greyuserinfo, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: greyuserinfo,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     'ค่าขนส่ง 0,000 บาท',
-                                    style: TextStyle(fontSize: 13, color: red1, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: red1,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  height: size.height * 0.05,
-                                  width: size.width * 0.18,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: red1,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'ชำระเงิน',
-                                      style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              (isPaid)
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          'assets/icons/greencorrect.png',
+                                          height: size.height * 0.025,
+                                        ),
+                                        SizedBox(width: size.width * 0.02),
+                                        Text(
+                                          'ชำระเงินแล้ว',
+                                          style: TextStyle(
+                                            color: Color(0xff3ace01),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : GestureDetector(
+                                      onTap: () {
+                                        // Action สำหรับการชำระเงิน
+                                      },
+                                      child: Container(
+                                        height: size.height * 0.05,
+                                        width: size.width * 0.18,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: red1, // สีของปุ่มชำระเงิน
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'ชำระเงิน',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
                             ],
                           ),
                         ),

@@ -13,6 +13,8 @@ class WaitShippingPayment extends StatefulWidget {
 class _WaitShippingPaymentState extends State<WaitShippingPayment> {
   @override
   Widget build(BuildContext context) {
+    final filteredDetails =
+        transportdetail.where((element) => element['status'] == 4).toList();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: background,
@@ -20,7 +22,8 @@ class _WaitShippingPaymentState extends State<WaitShippingPayment> {
         backgroundColor: white,
         title: Text(
           'รอชำระค่าขนส่ง',
-          style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(30.0),
@@ -29,7 +32,10 @@ class _WaitShippingPaymentState extends State<WaitShippingPayment> {
                 Container(
                   width: size.width * 0.95,
                   height: size.height * 0.04,
-                  decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(13), border: Border.all(color: greyuserinfo, width: 0.5)),
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(13),
+                      border: Border.all(color: greyuserinfo, width: 0.5)),
                   child: Row(
                     children: [
                       Expanded(
@@ -37,9 +43,14 @@ class _WaitShippingPaymentState extends State<WaitShippingPayment> {
                         child: TextFormField(
                           decoration: InputDecoration(
                             hintText: 'ค้นหาเลข Tracking, Order, Container ',
-                            hintStyle: TextStyle(fontSize: 13, color: greyuserinfo, fontWeight: FontWeight.bold),
+                            hintStyle: TextStyle(
+                                fontSize: 13,
+                                color: greyuserinfo,
+                                fontWeight: FontWeight.bold),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.only(bottom: size.height * 0.018, left: size.width * 0.03),
+                            contentPadding: EdgeInsets.only(
+                                bottom: size.height * 0.018,
+                                left: size.width * 0.03),
                           ),
                         ),
                       ),
@@ -56,7 +67,10 @@ class _WaitShippingPaymentState extends State<WaitShippingPayment> {
                             child: Center(
                               child: Text(
                                 'ค้นหา',
-                                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -82,28 +96,62 @@ class _WaitShippingPaymentState extends State<WaitShippingPayment> {
             SizedBox(
               height: size.height * 0.015,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Waitshippingdetail(),
-                  ),
-                );
-              },
-              child: CardWarehouseWidget(
-                size: size,
-                status: 4,
-                carback: 'assets/icons/carback.png',
-                iconPosition1: 'assets/icons/home_icon.png',
-                iconPosition2: 'assets/icons/icon_red2.png',
-                iconPosition3: 'assets/icons/icon_red3.png',
-                iconPosition4: 'assets/icons/icon_red4.png',
-                iconPosition5: 'assets/icons/correctgrey.png',
-                orderNo: 'Order no. A423456',
-                press: () {print('click press');},
-              ),
-            )
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => Waitshippingdetail(),
+            //       ),
+            //     );
+            //   },
+            //   child: CardWarehouseWidget(
+            //     size: size,
+            //     status: 4,
+            //     isPaid: false,
+            //     carback: 'assets/icons/carback.png',
+            //     iconPosition1: 'assets/icons/home_icon.png',
+            //     iconPosition2: 'assets/icons/icon_red2.png',
+            //     iconPosition3: 'assets/icons/icon_red3.png',
+            //     iconPosition4: 'assets/icons/icon_red4.png',
+            //     iconPosition5: 'assets/icons/correctgrey.png',
+            //     orderNo: 'Order no. A423456',
+            //     press: () {
+            //       print('click press');
+            //     },
+            //   ),
+            // ),
+            ...filteredDetails.map((detail) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Waitshippingdetail(),
+                    ),
+                  );
+                },
+                child: CardWarehouseWidget(
+                  size: size,
+                  sendtothai:
+                      detail['sendtothai'], // ส่งข้อมูลวันที่คาดว่าจะถึงไทย
+                  sended: detail['sended'], // ส่งข้อมูลวันที่จัดส่งแล้ว
+                  status: detail['status'], // ส่งค่า status จากข้อมูล
+                  isPaid: detail['paid'], // ส่งค่าการชำระเงินจากข้อมูล
+                  carback: 'assets/icons/carback.png',
+                  iconPosition1: 'assets/icons/home_icon.png',
+                  iconPosition2: 'assets/icons/icon_red2.png',
+                  iconPosition3: 'assets/icons/icon_red3.png',
+                  iconPosition4: 'assets/icons/icon_red4.png',
+                  iconPosition5: 'assets/icons/correctgrey.png',
+                  orderNo:
+                      'Order no. ${detail['order']}', // ส่งข้อมูลเลขที่สั่งซื้อ
+                  press: () {
+                    print('click press');
+                  },
+                ),
+              );
+            }).toList(),
           ],
         ),
       ),

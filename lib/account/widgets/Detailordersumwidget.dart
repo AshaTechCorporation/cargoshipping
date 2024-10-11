@@ -20,11 +20,10 @@ class _DetailordersumwidgetState extends State<Detailordersumwidget>
 
     return GestureDetector(
       onTap: () {
-        // ให้ Navigator ทำงานได้เฉพาะตอนที่ไม่ขยาย
         if (!_isExpanded) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Confirmorderpage()),
+            MaterialPageRoute(builder: (context) => Shipreceiptpage()),
           );
         }
       },

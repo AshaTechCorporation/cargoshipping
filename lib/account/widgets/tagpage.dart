@@ -8,18 +8,21 @@ class TagsPage extends StatefulWidget {
   _TagsPageState createState() => _TagsPageState();
 }
 
-class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _TagsPageState extends State<TagsPage> {
+  late PageController _pageController; // ประกาศ late เพื่อระบุว่าจะกำหนดในภายหลัง
+  int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    // กำหนดค่า PageController ทันทีใน initState ก่อนใช้งาน
+    _pageController = PageController(initialPage: selectedIndex); 
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    // อย่าลืมเรียกใช้ dispose เพื่อปิด PageController
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -41,13 +44,15 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
         ),
         title: Text(
           'บทความ',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.01),
+            padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.03, vertical: size.height * 0.01),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -58,8 +63,13 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
             ),
           ),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
+            child: PageView(
+              controller: _pageController, // ใช้ PageController ที่ถูกกำหนดแล้ว
+              onPageChanged: (index) {
+                setState(() {
+                  selectedIndex = index; // อัปเดตเมื่อเปลี่ยนหน้า
+                });
+              },
               children: [
                 _buildTagContent(size),
                 _buildTagContent(size),
@@ -114,22 +124,25 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
 
   Widget _buildTabItem(int index, String title) {
     final size = MediaQuery.of(context).size;
-    bool isSelected = _tabController.index == index;
-    
+    bool isSelected = selectedIndex == index;
+
     return GestureDetector(
       onTap: () {
         setState(() {
-          _tabController.index = index;
+          selectedIndex = index;
+          // ใช้ PageController เพื่อเลื่อนไปยังหน้าเมื่อแท็บถูกกด
+          _pageController.animateToPage(index,
+              duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
         });
       },
       child: Container(
         height: size.height * 0.04,
         width: size.width * 0.29,
-        padding: EdgeInsets.symmetric(vertical: size.height * 0.01, horizontal: size.width * 0.01),
+        padding: EdgeInsets.symmetric(
+            vertical: size.height * 0.01, horizontal: size.width * 0.01),
         decoration: BoxDecoration(
             color: isSelected ? red1 : Colors.white,
             borderRadius: BorderRadius.circular(15.0),
-            //border: Border.all(color: Colors.grey),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -224,9 +237,9 @@ class _TagsPageState extends State<TagsPage> with SingleTickerProviderStateMixin
           Expanded(
             flex: 10,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.012),
+              padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.03, vertical: size.height * 0.012),
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(

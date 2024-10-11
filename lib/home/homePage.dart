@@ -14,6 +14,7 @@ import 'package:cargoshipping/home/orderinapp.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/shippingservice.dart';
 import 'package:cargoshipping/home/shipservicepage.dart';
+import 'package:cargoshipping/home/termfee.dart';
 import 'package:cargoshipping/home/tourprivateservice.dart';
 import 'package:cargoshipping/home/werehouseqc.dart';
 import 'package:cargoshipping/home/werehousesearch.dart';
@@ -1749,6 +1750,29 @@ class _HomePageState extends State<HomePage> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   Alliandwechatservice()));
+                                    }
+                                    if (index == 15) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Termfee()));
+                                    }
+                                    if (index == 17) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShippingCalculatorPage(),
+                                        ),
+                                      );
+                                    }
+                                    if (index == 16) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Importrate(),
+                                        ),
+                                      );
                                     }
                                   },
                                 ),

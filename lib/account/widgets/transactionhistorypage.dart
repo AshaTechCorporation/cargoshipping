@@ -16,18 +16,18 @@ class Transactionhistorypage extends StatefulWidget {
 class _TransactionhistorypageState extends State<Transactionhistorypage>
     with SingleTickerProviderStateMixin {
   int selectedIndex = 0;
-  late TabController _tabController;
+  late PageController _pageController;
+
 
   @override
   void initState() {
     super.initState();
-    // Initialize the TabController with length 3
-    _tabController = TabController(length: 5, vsync: this);
+    _pageController = PageController();
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -56,39 +56,46 @@ class _TransactionhistorypageState extends State<Transactionhistorypage>
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.01,
+      body: Column(
+        children: [
+          SizedBox(
+            height: size.height * 0.01,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: AnimatedBuilder(
+              animation: _pageController,
+              builder: (context, _) {
+                return Row(
+                  children: [
+                    buildTabItem(0, 'ประวัติการเติมเงิน'),
+                    buildTabItem(1, 'ประวัติการถอนเงิน'),
+                    buildTabItem(2, 'รายการเดินบัญชี'),
+                    buildTabItem(3, 'ใบแจ้งยอดการคืนเงิน'),
+                    buildTabItem(4, 'รายการคะแนนสะสม'),
+                  ],
+                );
+              },
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  buildTabItem(0, 'ประวัติการเติมเงิน'),
-                  buildTabItem(1, 'ประวัติการถอนเงิน'),
-                  buildTabItem(2, 'รายการเดินบัญชี'),
-                  buildTabItem(3, 'ใบแจ้งยอดการคืนเงิน'),
-                  buildTabItem(4, 'รายการคะแนนสะสม'),
-                ],
-              ),
+          ),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              children: [
+                Topuphis(),
+                Withdrown(),
+                Statement(),
+                Refund(),
+                Accumulatedpoints(),
+              ],
             ),
-            SizedBox(
-              height: size.height * 0.7,
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  Topuphis(),
-                  Withdrown(),
-                  Statement(),
-                  Refund(),
-                  Accumulatedpoints()
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -98,10 +105,8 @@ class _TransactionhistorypageState extends State<Transactionhistorypage>
     bool isSelected = selectedIndex == index;
     return GestureDetector(
       onTap: () {
-        setState(() {
-          selectedIndex = index;
-          _tabController.animateTo(index);
-        });
+        _pageController.animateToPage(index,
+            duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: size.height * 0.01),

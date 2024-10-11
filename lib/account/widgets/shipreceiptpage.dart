@@ -2,6 +2,7 @@ import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/account/widgets/orderdonemap.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/widgets/reportformpage.dart';
+import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/track/widgets/productcardwidget.dart';
 import 'package:flutter/material.dart';
 
@@ -346,7 +347,7 @@ class Shipreceiptpage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'รายละเอียดรายการสินค้า',
+                            'รายละเอียดสั่งซื้อสินค้า',
                             style: TextStyle(
                                 fontSize: 13,
                                 color: white,
@@ -832,6 +833,12 @@ class Shipreceiptpage extends StatelessWidget {
                     SizedBox(
                       height: size.height * 0.01,
                     ),
+                    CustomDivider(
+                      heightFactor: size.height * 0.0000006,
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: size.width * 0.05),
@@ -854,6 +861,12 @@ class Shipreceiptpage extends StatelessWidget {
                           )
                         ],
                       ),
+                    ),
+                     SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    CustomDivider(
+                      heightFactor: size.height * 0.0000006,
                     ),
                     SizedBox(
                       height: size.height * 0.01,
@@ -880,6 +893,12 @@ class Shipreceiptpage extends StatelessWidget {
                           )
                         ],
                       ),
+                    ),
+                     SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    CustomDivider(
+                      heightFactor: size.height * 0.0000006,
                     ),
                     SizedBox(
                       height: size.height * 0.01,

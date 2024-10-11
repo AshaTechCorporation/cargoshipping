@@ -56,31 +56,20 @@ List<String> Imgservice = [
   'assets/icons/etc.png',
 ];
 const List<Map<String, dynamic>> myservice = [
-  {
-    'id': 1,
-    'name': 'ขนส่งทางบก',
-    'images': 'assets/icons/carservice.png'
-  },
-  {
-    'id': 2,
-    'name': 'ขนส่งทางทะเล',
-    'images': 'assets/icons/shipservice.png'
-  },
-  {
-    'id': 3,
-    'name': 'จัดส่งแบบ\nเหมาตู้ FCL',
-    'images': 'assets/icons/fcl.png'
-  },
+  {'id': 1, 'name': 'ขนส่งทางบก', 'images': 'assets/icons/carservice.png'},
+  {'id': 2, 'name': 'ขนส่งทางทะเล', 'images': 'assets/icons/shipservice.png'},
+  {'id': 3, 'name': 'จัดส่งแบบ\nเหมาตู้ FCL', 'images': 'assets/icons/fcl.png'},
   {
     'id': 4,
     'name': 'จัดส่งแบบ LCL\nทางเครื่องบิน',
     'images': 'assets/icons/lcl.png'
   },
-  {'id': 5, 
-   'name': 'บริการส่งออก\nสินค้าทั่วโลก', 
-   'images': 'assets/icons/dellitohome.png'
-   },
-   {
+  {
+    'id': 5,
+    'name': 'บริการส่งออก\nสินค้าทั่วโลก',
+    'images': 'assets/icons/dellitohome.png'
+  },
+  {
     'id': 6,
     'name': 'บริการนำเข้า\nแบบถูกต้อง',
     'images': 'assets/icons/withlisecse.png'
@@ -90,130 +79,118 @@ const List<Map<String, dynamic>> myservice = [
     'name': 'ล่าม ไกด์ทัวร์\nและหาสินค้า',
     'images': 'assets/icons/translater.png'
   },
-  {
-    'id': 8,
-    'name': 'คำนวณ\nค่าขนส่ง',
-    'images': 'assets/icons/calculator.png'
-  },
-  {
-    'id': 9,
-    'name': 'เรทราคานำเข้า',
-    'images': 'assets/icons/priceimport.png'
-  },
-  {
-    'id': 10,
-    'name': 'อื่นๆ',
-    'images': 'assets/icons/etcservice.png'
-  },
+  {'id': 8, 'name': 'คำนวณ\nค่าขนส่ง', 'images': 'assets/icons/calculator.png'},
+  {'id': 9, 'name': 'เรทราคานำเข้า', 'images': 'assets/icons/priceimport.png'},
+  {'id': 10, 'name': 'อื่นๆ', 'images': 'assets/icons/etcservice.png'},
 ];
 
 const List<Map<String, dynamic>> allmyservice = [
   {
     'id': 1,
     'name': 'ขนส่งทางบก',
-    'subtitle':'นำเข้า Door to Door ทางบก',
+    'subtitle': 'นำเข้า Door to Door ทางบก',
     'images': 'assets/icons/carservice.png'
   },
   {
     'id': 2,
     'name': 'ขนส่งทางทะเล',
-    'subtitle':'นำเข้า Door to Door ทางทะเล',
+    'subtitle': 'นำเข้า Door to Door ทางทะเล',
     'images': 'assets/icons/shipservice.png'
   },
   {
     'id': 3,
     'name': 'บริการนำเข้าแบบถูกต้อง',
-    'subtitle':'บริการออกเอกสารนำเข้า โดยไม่มีค่าบริการขั้นต่ำ',
+    'subtitle': 'บริการออกเอกสารนำเข้า โดยไม่มีค่าบริการขั้นต่ำ',
     'images': 'assets/icons/correctimportlogo.png'
   },
   {
     'id': 4,
     'name': 'จัดส่งแบบเหมาตู้ FCL',
-    'subtitle':'บริการขนส่งแบบเหมาตู้คอนเทนเนอร์',
+    'subtitle': 'บริการขนส่งแบบเหมาตู้คอนเทนเนอร์',
     'images': 'assets/icons/fcl.png'
   },
   {
     'id': 5,
     'name': 'จัดส่งแบบ LCLทางเครื่องบิน',
-    'subtitle':'บริการขนส่งแบบแชร์พื้นที่ในตู้คอนเทนเนอร์',
+    'subtitle': 'บริการขนส่งแบบแชร์พื้นที่ในตู้คอนเทนเนอร์',
     'images': 'assets/icons/lcl.png'
   },
   {
-    'id': 6, 
-   'name': 'บริการส่งออกสินค้าทั่วโลก', 
-   'subtitle':'บริการส่งออกสินค้าทุกประเทศทั่วโลก',
-   'images': 'assets/icons/dellitohome.png'
-   },
-   {
+    'id': 6,
+    'name': 'บริการส่งออกสินค้าทั่วโลก',
+    'subtitle': 'บริการส่งออกสินค้าทุกประเทศทั่วโลก',
+    'images': 'assets/icons/dellitohome.png'
+  },
+  {
     'id': 7,
     'name': 'บริการชิปปิ้ง ดำเนินพิธีการศุลกากร',
-    'subtitle':'บริการ SHIPPING เคลียร์สินค้า ภาษีศุลกากร',
+    'subtitle': 'บริการ SHIPPING เคลียร์สินค้า ภาษีศุลกากร',
     'images': 'assets/icons/withlisecse.png'
   },
   {
     'id': 8,
     'name': 'บริการทัวร์ส่วนตัว',
-    'subtitle':'บริการทัวร์แบบไกด์ 1:1',
+    'subtitle': 'บริการทัวร์แบบไกด์ 1:1',
     'images': 'assets/icons/tourprivateicon.png'
   },
   {
     'id': 9,
     'name': 'บริการจองตั๋วเครื่องบิน',
-    'subtitle':'...',
+    'subtitle': '...',
     'images': 'assets/icons/bookingairplane.png'
   },
   {
     'id': 10,
     'name': 'บริการไกด์ ล่าม และหาสินค้า',
-    'subtitle':'บริการเจ้าหน้าที่ล่ามติดต่อโรงงาน และไกด์พาทัวร์ช็อปปิ้ง',
+    'subtitle': 'บริการเจ้าหน้าที่ล่ามติดต่อโรงงาน และไกด์พาทัวร์ช็อปปิ้ง',
     'images': 'assets/icons/translater.png'
   },
   {
     'id': 11,
     'name': 'บริการจัดหาโรงงาน',
-    'subtitle':'บริการจัดหาโรงงานโดยไม่ผ่านร้านค้า',
+    'subtitle': 'บริการจัดหาโรงงานโดยไม่ผ่านร้านค้า',
     'images': 'assets/icons/werehousesearch.png'
   },
   {
     'id': 12,
     'name': 'บริการตรวจสอบ QC สินค้าหน้าโรงงาน',
-    'subtitle':'...',
+    'subtitle': '...',
     'images': 'assets/icons/werehouseqc.png'
   },
   {
     'id': 13,
     'name': 'บริการสั่งซื้อสินค้าผ่าน App',
-    'subtitle':'...',
+    'subtitle': '...',
     'images': 'assets/icons/apporder.png'
   },
   {
     'id': 14,
     'name': 'บริการโอนชำระค่าสินค้า',
-    'subtitle':'บริการโอนชำระค่าสินค้าเข้าธนาคาร และเติมเข้า Wallet',
+    'subtitle': 'บริการโอนชำระค่าสินค้าเข้าธนาคาร และเติมเข้า Wallet',
     'images': 'assets/icons/productpayment.png'
   },
   {
     'id': 15,
     'name': 'บริการเติม Alipay / WeChat',
-    'subtitle':'บริการโอนเงินไปจีน/ฝากจ่ายค่าสินค้า เติมเงิน Alipay, Wechat ',
+    'subtitle': 'บริการโอนเงินไปจีน/ฝากจ่ายค่าสินค้า เติมเงิน Alipay, Wechat ',
     'images': 'assets/icons/aliandwechat.png'
   },
   {
     'id': 16,
     'name': 'บริการโอนเงินชำระค่าเทอม ',
-    'subtitle':'...',
+    'subtitle': '...',
     'images': 'assets/icons/termfee.png'
   },
   {
     'id': 17,
     'name': 'เรทราคานำเข้า',
-    'subtitle':'เรทราคานำเข้าจากพื้นที่ต่างๆ และบริการเสริม',
+    'subtitle': 'เรทราคานำเข้าจากพื้นที่ต่างๆ และบริการเสริม',
     'images': 'assets/icons/priceimport.png'
   },
   {
     'id': 18,
     'name': 'คำนวณค่าขนส่ง',
-    'subtitle':'คำนวณค่าขนส่งจากขนาดและน้ำหนักสินค้า',
+    'subtitle': 'คำนวณค่าขนส่งจากขนาดและน้ำหนักสินค้า',
     'images': 'assets/icons/calculator.png'
   },
 ];
@@ -301,7 +278,6 @@ const List<String> reccomproduct = [
   'ตุ๊กตาหมีสีเหลือง',
   'ตุ๊กตาหมีสีขาว'
 ];
-
 
 List<String> catagoryrecom = [
   'เสื้อผ้า',
@@ -493,21 +469,96 @@ const List<Map<String, dynamic>> transport = [
     'month': 'สิงหาคม 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images': 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png',
+    'detailmonth':[
+      {
+        'po':'A56345',
+        'succes': '20 ส.ค. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A12345',
+        'succes': '21 ส.ค. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A44545',
+        'succes': '26 ส.ค. 67',
+        'cbm':'00,'
+      },
+    ]
   },
   {
     'id': 2,
     'month': 'กรกฎาคม 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images': 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png',
+    'detailmonth':[
+      {
+        'po':'A56345',
+        'succes': '20 ก.ค. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A12345',
+        'succes': '21 ก.ค. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A44545',
+        'succes': '26 ก.ค. 67',
+        'cbm':'00,'
+      },
+    ]
   },
   {
     'id': 3,
     'month': 'มิถุนายน 2567',
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
-    'images': 'assets/icons/ordermont.png'
+    'images': 'assets/icons/ordermont.png',
+    'detailmonth':[
+      {
+        'po':'A56345',
+        'succes': '20 ม.ย. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A12345',
+        'succes': '21 ม.ย. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A44545',
+        'succes': '26 ม.ย. 67',
+        'cbm':'00,'
+      },
+    ]
+  },
+  {
+    'id': 4,
+    'month': 'มีนาคม 2567',
+    'amount': '00,000 บาท',
+    'detailLink': 'ดูรายละเอียด',
+    'images': 'assets/icons/ordermont.png',
+    'detailmonth':[
+      {
+        'po':'A56345',
+        'succes': '20 มี.ค. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A12345',
+        'succes': '21 มี.ค. 67',
+        'cbm':'00,'
+      },
+      {
+        'po':'A44545',
+        'succes': '26 มี.ค. 67',
+        'cbm':'00,'
+      },
+    ]
   }
 ];
 
@@ -917,7 +968,7 @@ const List<Map<String, dynamic>> accumulatedpoints = [
   },
 ];
 
- List<Map<String, dynamic>> cart = [
+List<Map<String, dynamic>> cart = [
   {
     'storeName': '1688严选店',
     'storeItems': [
@@ -926,7 +977,7 @@ const List<Map<String, dynamic>> accumulatedpoints = [
         'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
         'imageAssetPath': 'assets/images/shelf.png',
         'price': '¥8.14',
-        'color':[
+        'color': [
           'สีขาวมุข',
           'สีขาวนวล',
           'สีแดง',
@@ -934,10 +985,11 @@ const List<Map<String, dynamic>> accumulatedpoints = [
       },
       {
         'id': 2,
-        'name': 'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
+        'name':
+            'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
         'imageAssetPath': 'assets/images/box.png',
         'price': '¥4.28',
-        'color':[
+        'color': [
           'สีขาวมุข',
           'สีขาวนวล',
           'สีแดง',
@@ -950,10 +1002,11 @@ const List<Map<String, dynamic>> accumulatedpoints = [
     'storeItems': [
       {
         'id': 1,
-        'name': 'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
+        'name':
+            'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
         'imageAssetPath': 'assets/images/headband.png',
         'price': '¥1.42',
-        'color':[
+        'color': [
           'สีขาวมุข',
           'สีขาวนวล',
           'สีแดง',
@@ -964,12 +1017,111 @@ const List<Map<String, dynamic>> accumulatedpoints = [
         'name': 'กางเกงขาสั้นผู้ชาย, กางเกงขาสั้นลําลอง,',
         'imageAssetPath': 'assets/images/pant.png',
         'price': '¥10.78',
-        'color':[
+        'color': [
           'สีขาวมุข',
           'สีขาวนวล',
           'สีแดง',
         ]
       },
     ],
+  },
+];
+
+const List<Map<String, dynamic>> transportdetail = [
+  {
+    'status': 1,
+    'paid': true,
+    'order': 'a423456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '22 ก.ค. 67',
+    'sendtothai': '25 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '5',
+    'shipcost': '5,000',
+  },
+  {
+    'status': 2,
+    'paid': true,
+    'order': 'a423456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '22 ก.ค. 67',
+    'sendtothai': '25 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '5',
+    'shipcost': '5,000',
+  },
+  {
+    'status': 3,
+    'paid': true,
+    'order': 'a423456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '22 ก.ค. 67',
+    'sendtothai': '25 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '5',
+    'shipcost': '5,000',
+  },
+  {
+    'status': 4,
+    'paid': true,
+    'order': 'a423456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '22 ก.ค. 67',
+    'sendtothai': '25 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '5',
+    'shipcost': '5,000',
+  },
+  {
+    'status': 5,
+    'paid': true,
+    'order': 'a423456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '22 ก.ค. 67',
+    'sendtothai': '25 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '5',
+    'shipcost': '5,000',
+  },
+  {
+    'status': 1,
+    'paid': true,
+    'order': 'a243456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '21 ก.ค. 67',
+    'sendtothai': '24 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '10',
+    'shipcost': '5,000',
+  },
+  {
+    'status': 3,
+    'paid': false,
+    'order': 'a243456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '21 ก.ค. 67',
+    'sendtothai': '24 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '10',
+    'shipcost': '5,000',
+  },
+  {
+    'status': 3,
+    'paid': true,
+    'order': 'a243456',
+    'type': 'สินค้าสั่งซื้อ',
+    'sended': '21 ก.ค. 67',
+    'sendtothai': '24 ก.ค. 67',
+    'typetranfer': 'ทางรถ',
+    'ordertype': 'A',
+    'amouth': '10',
+    'shipcost': '5,000',
   },
 ];
