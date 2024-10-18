@@ -581,6 +581,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: size.height * 0.01),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                         payment.length,
                         (index) => Payment(

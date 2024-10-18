@@ -396,7 +396,7 @@ const List<Map<String, dynamic>> importwidget = [
   {
     'id': 1,
     'name': 'นำเข้าถูกต้อง',
-    'images': 'assets/icons/correctimport .png',
+    'images': 'assets/icons/correctimport.png',
   },
   {
     'id': 2,

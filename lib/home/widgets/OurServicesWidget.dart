@@ -28,7 +28,7 @@ class OurServicesWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: size.height * 0.066,
+              height: size.height * 0.06,
               width: size.width * 0.19,
               decoration: BoxDecoration(
                 color: pinkser,
