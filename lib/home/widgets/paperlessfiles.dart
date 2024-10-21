@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/widgets/paymentChannel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 class Paperlessfiles extends StatefulWidget {
@@ -383,7 +384,7 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                         Text(
                           '3,000 บาท',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: red1,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
@@ -392,7 +393,9 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                   ),
                   SizedBox(height: size.height * 0.01),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentChannel()));
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: red1,
                         minimumSize: Size(size.width * 0.9, 50),

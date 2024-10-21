@@ -45,9 +45,10 @@ class Importwidget extends StatelessWidget {
             ),
             Text(
               title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
                 color: Colors.black,
+                fontSize: 14
               ),
             ),
           ],

@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'ค้นหาสินค้า',
-                                hintStyle: TextStyle(),
+                                hintStyle: TextStyle(fontSize: 13),
                                 contentPadding: EdgeInsets.only(
                                     left: size.width * 0.02,
                                     bottom: size.height * 0.01),
@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                                               child: Text(
                                                 item,
                                                 style: TextStyle(
-                                                    fontSize: 14, color: red1),
+                                                    fontSize: 13, color: red1, fontWeight: FontWeight.w600),
                                               ),
                                             ))
                                         .toList(),
@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                               child: Center(
                                 child: Text(
                                   'ค้นหา',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600),
                                 ),
                               ),
                             ),

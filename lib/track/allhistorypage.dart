@@ -17,6 +17,7 @@ class Allhistorypage extends StatelessWidget {
             ListView.builder(
               itemCount: transportdetail.length,
               shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
               itemBuilder: (context, index) {
                 final detail = transportdetail[index];
                 return Padding(
@@ -49,7 +50,7 @@ class Allhistorypage extends StatelessWidget {
             ),
             CustomDivider(),
             SizedBox(
-              height: size.height * 0.01,
+              height: size.height * 0.12,
             ),
           ],
         ),

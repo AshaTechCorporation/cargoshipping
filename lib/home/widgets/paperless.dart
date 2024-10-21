@@ -50,9 +50,8 @@ class _PaperlessState extends State<Paperless> {
       backgroundColor: background,
       appBar: AppBar(
         title: Text(
-          'ขึ้นทะเบียนผู้นำเข้า',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
+          'ขึ้นทะเบียนผู้นำเข้า (Paperless)',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -100,7 +99,7 @@ class _PaperlessState extends State<Paperless> {
                   ),
                   child: Center(
                     child: Text(
-                      'ยืนยันข้อมูลผู้นำเข้า',
+                      'อัปโหลดไฟล์เอกสาร',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
@@ -136,15 +135,13 @@ class _PaperlessState extends State<Paperless> {
           'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน', // ใช้ชื่อเป็น hintText
           companyName, // ค่าที่จะถูกเก็บเมื่อเลือก
           ['บริษัท A', 'บริษัท B', 'บริษัท C'], // รายการชื่อบริษัท
-          (value) =>
-              setState(() => companyName = value!), // อัปเดตค่าเมื่อเลือก
+          (value) => setState(() => companyName = value!), // อัปเดตค่าเมื่อเลือก
           size,
         ),
         SizedBox(
           height: size.height * 0.01,
         ),
-        _buildTextField(
-            'เลขที่ผู้เสียภาษี', (value) => taxNumber = value, size),
+        _buildTextField('เลขที่ผู้เสียภาษี', (value) => taxNumber = value, size),
         SizedBox(
           height: size.height * 0.02,
         ),
@@ -154,10 +151,7 @@ class _PaperlessState extends State<Paperless> {
             children: [
               Text(
                 'ลงทะเบียน Paperless แล้วหรือไม่ ​',
-                style: TextStyle(
-                    fontSize: 13,
-                    color: headingtext,
-                    fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -208,10 +202,7 @@ class _PaperlessState extends State<Paperless> {
                         padding: EdgeInsets.all(size.width * 0.01),
                         child: Text(
                           'ลงทะเบียนแล้ว',
-                          style: TextStyle(
-                              color: isChecked1 ? red1 : Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                          style: TextStyle(color: isChecked1 ? red1 : Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
                     ],
@@ -258,10 +249,7 @@ class _PaperlessState extends State<Paperless> {
                         padding: EdgeInsets.all(size.width * 0.01),
                         child: Text(
                           'ยังไม่ได้ลงทะเบียน',
-                          style: TextStyle(
-                              color: isChecked2 ? red1 : Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                          style: TextStyle(color: isChecked2 ? red1 : Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
                     ],
@@ -280,10 +268,7 @@ class _PaperlessState extends State<Paperless> {
             children: [
               Text(
                 'ที่อยู่บริษัทฯ ​',
-                style: TextStyle(
-                    fontSize: 13,
-                    color: headingtext,
-                    fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -291,37 +276,28 @@ class _PaperlessState extends State<Paperless> {
         SizedBox(
           height: size.height * 0.01,
         ),
-        _buildDropdown(
-            'ที่อยู่บริษัทฯ',
-            province,
-            ['กรุงเทพมหานคร', 'เชียงใหม่', 'ขอนแก่น'],
-            (value) => setState(() => province = value!),
-            size),
+        _buildDropdown('ที่อยู่บริษัทฯ', province, ['กรุงเทพมหานคร', 'เชียงใหม่', 'ขอนแก่น'], (value) => setState(() => province = value!), size),
         SizedBox(height: size.height * 0.01),
-        _buildDropdown('อำเภอ', district, ['อำเภอเมือง', 'อำเภอหางดง'],
-            (value) => setState(() => district = value!), size),
+        _buildDropdown('อำเภอ', district, ['อำเภอเมือง', 'อำเภอหางดง'], (value) => setState(() => district = value!), size),
         SizedBox(height: size.height * 0.01),
-        _buildDropdown('ตำบล', subDistrict, ['ตำบลสวนดอก', 'ตำบลท่าศาลา'],
-            (value) => setState(() => subDistrict = value!), size),
+        _buildDropdown('ตำบล', subDistrict, ['ตำบลสวนดอก', 'ตำบลท่าศาลา'], (value) => setState(() => subDistrict = value!), size),
         SizedBox(height: size.height * 0.01),
-        _buildDropdown('รหัสไปรษณีย์', postalCode, ['50000', '50200'],
-            (value) => setState(() => postalCode = value!), size),
+        _buildDropdown('รหัสไปรษณีย์', postalCode, ['50000', '50200'], (value) => setState(() => postalCode = value!), size),
         SizedBox(
           height: size.height * 0.02,
         ),
-        _buildTextField(
-            'ชื่อผู้มีอำนาจลงนาม', (value) => userFirstName = value, size),
+        _buildTextField('ชื่อผู้มีอำนาจลงนาม', (value) => userFirstName = value, size),
         SizedBox(height: size.height * 0.01),
-        _buildTextField('นามสกุล ผู้ใช้งานจองนำเข้า',
-            (value) => userLastName = value, size),
+        _buildTextField('นามสกุล ผู้ใช้งานจองนำเข้า', (value) => userLastName = value, size),
         SizedBox(height: size.height * 0.01),
         _buildTextField('เบอร์มือถือ', (value) => phoneNumber = value, size),
         SizedBox(height: size.height * 0.01),
         _buildTextField('อีเมล์', (value) => email = value, size),
         SizedBox(height: size.height * 0.01),
-        Text('** ข้อมูลของท่านจะได้รับการตรวจสอบภายใน 1-2 วันทำการ เพื่ออนุมัติ สถานะพร้อมนำเข้า',style: TextStyle(
-          fontSize: 12, color: red1 , fontWeight: FontWeight.bold
-        ),)
+        Text(
+          '** ข้อมูลของท่านจะได้รับการตรวจสอบภายใน 1-2 วันทำการ เพื่ออนุมัติ สถานะพร้อมนำเข้า',
+          style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.bold),
+        )
       ],
     );
   }
@@ -338,23 +314,18 @@ class _PaperlessState extends State<Paperless> {
       child: TextField(
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(
-            fontSize: 13
-          ),
+          labelStyle: TextStyle(fontSize: 13),
           // ขอบสีเทาบางลงเมื่อไม่ได้โฟกัส
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color: Colors.grey, width: 1), // กำหนดสีขอบและความบาง
+            borderSide: BorderSide(color: Colors.grey, width: 1), // กำหนดสีขอบและความบาง
           ),
           // ขอบสีเทาบางลงเมื่อโฟกัส
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color: Colors.grey, width: 1), // กำหนดสีขอบและความบาง
+            borderSide: BorderSide(color: Colors.grey, width: 1), // กำหนดสีขอบและความบาง
           ),
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 10), // เพิ่ม padding ถ้าต้องการ
+          contentPadding: EdgeInsets.symmetric(horizontal: 10), // เพิ่ม padding ถ้าต้องการ
         ),
         onChanged: onChanged,
       ),
@@ -362,50 +333,36 @@ class _PaperlessState extends State<Paperless> {
   }
 
   // ฟังก์ชันสร้าง Dropdown ที่สามารถปรับขนาดตาม width ของหน้าจอ
-  Widget _buildDropdown(String hintText, String currentValue,
-      List<String> options, Function(String?) onChanged, Size size) {
+  Widget _buildDropdown(String hintText, String currentValue, List<String> options, Function(String?) onChanged, Size size) {
     return SizedBox(
       width: size.width * 0.9,
-      height: size.height * 0.055,
-      child: InputDecorator(
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(
-            fontSize: 13
-          ),
-          // ปรับแต่งขอบเหมือน _buildTextField
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.grey, width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.grey, width: 1),
-          ),
-          fillColor: Colors.white,
-          filled: true, // ต้องตั้งค่านี้เป็น true เพื่อให้ fillColor มีผล
+      height: size.height * 0.045,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white, // White background
+          border: Border.all(color: Colors.grey, width: 1), // Border color and width
+          borderRadius: BorderRadius.circular(10), // Rounded corners
         ),
-        child: Center(
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: currentValue.isEmpty ? null : currentValue,
-              isExpanded: true,
-              hint: Text(
-                hintText,
-                style: TextStyle(fontSize: 15),
-              ),
-              items: options.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: onChanged,
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                size: 20, // ปรับขนาดของไอคอน
-                color: Colors.grey, // ปรับสีของไอคอน
-              ),
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            value: currentValue.isEmpty ? null : currentValue,
+            isExpanded: true,
+            hint: Text(
+              hintText,
+              style: TextStyle(fontSize: 15),
+            ),
+            items: options.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value, style: TextStyle(fontSize: 15)),
+              );
+            }).toList(),
+            onChanged: onChanged,
+            icon: Icon(
+              Icons.keyboard_arrow_down,
+              size: 20, // ปรับขนาดของไอคอน
+              color: Colors.grey, // ปรับสีของไอคอน
             ),
           ),
         ),
