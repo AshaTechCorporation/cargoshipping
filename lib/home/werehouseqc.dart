@@ -31,35 +31,47 @@ class Werehouseqc extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start, // จัดข้อความและวิดเจ็ตภายในให้ชิดซ้าย
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0), // ขอบมน
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+          child: Column(
+            crossAxisAlignment:
+                CrossAxisAlignment.start, // จัดข้อความและวิดเจ็ตภายในให้ชิดซ้าย
+            children: [
+              SizedBox(
+                height: size.height * 0.01,
               ),
-              child: ClipRRect(
-                borderRadius:
-                    BorderRadius.circular(10.0), // ขอบมนให้เหมือนกับ Container
-                child: Image.asset(
-                  'assets/images/werehouseqc.png',
-                  fit: BoxFit.cover, // ให้ภาพครอบคลุมพื้นที่ทั้งหมด
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0), // ขอบมน
+                ),
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(10.0), // ขอบมนให้เหมือนกับ Container
+                  child: Image.asset(
+                    'assets/images/werehouseqc.png',
+                    fit: BoxFit.cover, // ให้ภาพครอบคลุมพื้นที่ทั้งหมด
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 8.0),
-              child: Text(
-                'บริการตรวจสอบ QC สินค้าหน้าโรงงาน',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: red1,
-                  fontWeight: FontWeight.bold,
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 8.0),
+                child: Text(
+                  'บริการตรวจสอบ QC สินค้าหน้าโรงงาน',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: red1,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SizedBox(
@@ -68,19 +80,19 @@ class Werehouseqc extends StatelessWidget {
           color: white,
           child: GestureDetector(
             onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  Future.delayed(Duration(seconds: 2), () {
-                    Navigator.of(context)
-                        .pop(); // ปิด dialog หลังจาก 2 วินาที
-                  });
-                  return AlertDialog(
-                    title: Text('เปิดบิล'),
-                    content: Text('เปิดบิลเสร็จสิ้น'),
-                  );
-                },
-              );
+              // showDialog(
+              //   context: context,
+              //   builder: (BuildContext context) {
+              //     Future.delayed(Duration(seconds: 2), () {
+              //       Navigator.of(context)
+              //           .pop(); // ปิด dialog หลังจาก 2 วินาที
+              //     });
+              //     return AlertDialog(
+              //       title: Text('เปิดบิล'),
+              //       content: Text('เปิดบิลเสร็จสิ้น'),
+              //     );
+              //   },
+              // );
             },
             child: Container(
               height: size.height * 0.06,

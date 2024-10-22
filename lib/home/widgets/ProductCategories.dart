@@ -20,7 +20,7 @@ class ProductCategories extends StatelessWidget {
       onTap: press,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             width: size.width * 0.3,
