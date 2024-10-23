@@ -1,4 +1,7 @@
+import 'package:cargoshipping/account/services/accountApi.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/articletype.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 
 class TagsPage extends StatefulWidget {
@@ -11,12 +14,17 @@ class TagsPage extends StatefulWidget {
 class _TagsPageState extends State<TagsPage> {
   late PageController _pageController; // ประกาศ late เพื่อระบุว่าจะกำหนดในภายหลัง
   int selectedIndex = 0;
+  List<ArticleType> articleTyped = [];
+  ArticleType? articleType;
 
   @override
   void initState() {
     super.initState();
     // กำหนดค่า PageController ทันทีใน initState ก่อนใช้งาน
-    _pageController = PageController(initialPage: selectedIndex); 
+    _pageController = PageController(initialPage: selectedIndex);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getlistArticleType();
+    });
   }
 
   @override
@@ -24,6 +32,44 @@ class _TagsPageState extends State<TagsPage> {
     // อย่าลืมเรียกใช้ dispose เพื่อปิด PageController
     _pageController.dispose();
     super.dispose();
+  }
+
+  //ดึงข้อมูล api ArticleType
+  Future<void> getlistArticleType() async {
+    try {
+      LoadingDialog.open(context);
+      final _articleTyped = await AccountApi.getArticleType();
+      if (!mounted) return;
+      setState(() {
+        articleTyped = _articleTyped;
+      });
+      //inspect(categories);
+      LoadingDialog.close(context);
+      getArticleTypeById(article_id: articleTyped[0].id);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
+  //ดึงข้อมูล api ArticleType By ID
+  Future<void> getArticleTypeById({required int article_id}) async {
+    try {
+      //LoadingDialog.open(context);
+      final _articleType = await AccountApi.getArticleTypeById(article_id: article_id);
+      if (!mounted) return;
+
+      setState(() {
+        articleType = _articleType;
+      });
+      //inspect(categories);
+      //LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
   }
 
   @override
@@ -44,39 +90,62 @@ class _TagsPageState extends State<TagsPage> {
         ),
         title: Text(
           'บทความ',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: size.width * 0.03, vertical: size.height * 0.01),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildTabItem(0, "TAG 1"),
-                _buildTabItem(1, "TAG 2"),
-                _buildTabItem(2, "TAG 3"),
-              ],
-            ),
-          ),
-          Expanded(
-            child: PageView(
-              controller: _pageController, // ใช้ PageController ที่ถูกกำหนดแล้ว
-              onPageChanged: (index) {
-                setState(() {
-                  selectedIndex = index; // อัปเดตเมื่อเปลี่ยนหน้า
-                });
-              },
-              children: [
-                _buildTagContent(size),
-                _buildTagContent(size),
-                _buildTagContent(size),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(
+          //       horizontal: size.width * 0.03, vertical: size.height * 0.01),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       _buildTabItem(0, "TAG 1"),
+          //       _buildTabItem(1, "TAG 2"),
+          //       _buildTabItem(2, "TAG 3"),
+          //     ],
+          //   ),
+          // ),
+          articleTyped.isEmpty
+              ? SizedBox()
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.01),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(articleTyped.length, (index) => _buildTabItem(index, "${articleTyped[index].name}")),
+                  ),
+                ),
+          articleTyped.isEmpty
+              ? SizedBox()
+              : articleType != null
+              ?Expanded(
+                  child: PageView(
+                    controller: _pageController, // ใช้ PageController ที่ถูกกำหนดแล้ว
+                    onPageChanged: (index) {
+                      setState(() {
+                        selectedIndex = index; // อัปเดตเมื่อเปลี่ยนหน้า
+                      });
+                      getArticleTypeById(article_id: articleTyped[index].id);
+                    },
+                    children: List.generate(articleTyped.length, (index1) => _buildTagContent(size: size, articleType: articleType!)),
+                  ),
+                ):SizedBox(),
+          // Expanded(
+          //   child: PageView(
+          //     controller: _pageController, // ใช้ PageController ที่ถูกกำหนดแล้ว
+          //     onPageChanged: (index) {
+          //       setState(() {
+          //         selectedIndex = index; // อัปเดตเมื่อเปลี่ยนหน้า
+          //       });
+          //     },
+          //     children: [
+          //       _buildTagContent(size),
+          //       _buildTagContent(size),
+          //       _buildTagContent(size),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -131,26 +200,21 @@ class _TagsPageState extends State<TagsPage> {
         setState(() {
           selectedIndex = index;
           // ใช้ PageController เพื่อเลื่อนไปยังหน้าเมื่อแท็บถูกกด
-          _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+          _pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
         });
       },
       child: Container(
         height: size.height * 0.04,
         width: size.width * 0.29,
-        padding: EdgeInsets.symmetric(
-            vertical: size.height * 0.01, horizontal: size.width * 0.01),
-        decoration: BoxDecoration(
-            color: isSelected ? red1 : Colors.white,
-            borderRadius: BorderRadius.circular(15.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: Offset(0, 1),
-              ),
-            ]),
+        padding: EdgeInsets.symmetric(vertical: size.height * 0.01, horizontal: size.width * 0.01),
+        decoration: BoxDecoration(color: isSelected ? red1 : Colors.white, borderRadius: BorderRadius.circular(15.0), boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: Offset(0, 1),
+          ),
+        ]),
         child: Center(
           child: Text(
             title,
@@ -164,52 +228,60 @@ class _TagsPageState extends State<TagsPage> {
     );
   }
 
-  Widget _buildTagContent(Size size) {
+  Widget _buildTagContent({required Size size, required ArticleType articleType}) {
     return ListView(
       padding: EdgeInsets.all(size.height * 0.009),
-      children: [
-        _buildCard(
-          size,
-          'assets/images/tag1.png',
-          'THC Charge รู้ไว้ก่อน! ค่าใช้จ่ายเบื้องหลังใบขนสินค้านำเข้า',
-          '24 กรกฎาคม 2567',
-        ),
-        SizedBox(height: 8),
-        _buildCard(
-          size,
-          'assets/images/tag2.png',
-          '3 เอกสารสำคัญเมื่อใบขนสินค้าจากจีนที่จำเป็นต้องมี',
-          '24 กรกฎาคม 2567',
-        ),
-        SizedBox(height: 8),
-        _buildCard(
-          size,
-          'assets/images/tag3.png',
-          'สิ่งที่ควรรู้ก่อนสั่งซื้อสินค้าเกี่ยวกับใบขนส่งสินค้า',
-          '24 กรกฎาคม 2567',
-        ),
-        SizedBox(height: 8),
-        _buildCard(
-          size,
-          'assets/images/tag1.png',
-          'THC Charge รู้ไว้ก่อน! ค่าใช้จ่ายเบื้องหลังใบขนสินค้านำเข้า',
-          '24 กรกฎาคม 2567',
-        ),
-        SizedBox(height: 8),
-        _buildCard(
-          size,
-          'assets/images/tag2.png',
-          '3 เอกสารสำคัญเมื่อใบขนสินค้าจากจีนที่จำเป็นต้องมี',
-          '24 กรกฎาคม 2567',
-        ),
-        SizedBox(height: 8),
-        _buildCard(
-          size,
-          'assets/images/tag3.png',
-          'สิ่งที่ควรรู้ก่อนสั่งซื้อสินค้าเกี่ยวกับใบขนส่งสินค้า',
-          '24 กรกฎาคม 2567',
-        ),
-      ],
+      children: List.generate(
+          articleType.articles!.length,
+          (index) => _buildCard(
+                size,
+                'assets/images/tag1.png',
+                '${articleType.articles![index].title}',
+                '24 กรกฎาคม 2567',
+              )),
+      // children: [
+      //   _buildCard(
+      //     size,
+      //     'assets/images/tag1.png',
+      //     'THC Charge รู้ไว้ก่อน! ค่าใช้จ่ายเบื้องหลังใบขนสินค้านำเข้า',
+      //     '24 กรกฎาคม 2567',
+      //   ),
+      //   SizedBox(height: 8),
+      //   _buildCard(
+      //     size,
+      //     'assets/images/tag2.png',
+      //     '3 เอกสารสำคัญเมื่อใบขนสินค้าจากจีนที่จำเป็นต้องมี',
+      //     '24 กรกฎาคม 2567',
+      //   ),
+      //   SizedBox(height: 8),
+      //   _buildCard(
+      //     size,
+      //     'assets/images/tag3.png',
+      //     'สิ่งที่ควรรู้ก่อนสั่งซื้อสินค้าเกี่ยวกับใบขนส่งสินค้า',
+      //     '24 กรกฎาคม 2567',
+      //   ),
+      //   SizedBox(height: 8),
+      //   _buildCard(
+      //     size,
+      //     'assets/images/tag1.png',
+      //     'THC Charge รู้ไว้ก่อน! ค่าใช้จ่ายเบื้องหลังใบขนสินค้านำเข้า',
+      //     '24 กรกฎาคม 2567',
+      //   ),
+      //   SizedBox(height: 8),
+      //   _buildCard(
+      //     size,
+      //     'assets/images/tag2.png',
+      //     '3 เอกสารสำคัญเมื่อใบขนสินค้าจากจีนที่จำเป็นต้องมี',
+      //     '24 กรกฎาคม 2567',
+      //   ),
+      //   SizedBox(height: 8),
+      //   _buildCard(
+      //     size,
+      //     'assets/images/tag3.png',
+      //     'สิ่งที่ควรรู้ก่อนสั่งซื้อสินค้าเกี่ยวกับใบขนส่งสินค้า',
+      //     '24 กรกฎาคม 2567',
+      //   ),
+      // ],
     );
   }
 
@@ -237,8 +309,7 @@ class _TagsPageState extends State<TagsPage> {
           Expanded(
             flex: 10,
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.03, vertical: size.height * 0.012),
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.012),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
