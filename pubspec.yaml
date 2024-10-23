@@ -44,6 +44,7 @@ dependencies:
   google_maps_flutter: ^2.5.0
   location: ^5.0.3
   permission_handler: ^11.3.1
+  intl: ^0.18.0
 
   #สไลบราลี่ที่ใช้ในการติดต่อ เอพีไอ และสร้างโมเดลข้อมูล
   build_runner: ^2.4.9

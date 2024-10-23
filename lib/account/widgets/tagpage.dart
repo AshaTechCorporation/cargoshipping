@@ -1,8 +1,11 @@
 import 'package:cargoshipping/account/services/accountApi.dart';
+import 'package:cargoshipping/account/widgets/tagDetailPage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/articletype.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:cargoshipping/extension/dateExtension.dart';
+import 'package:intl/intl.dart';
 
 class TagsPage extends StatefulWidget {
   const TagsPage({super.key});
@@ -34,6 +37,13 @@ class _TagsPageState extends State<TagsPage> {
     super.dispose();
   }
 
+  String formatDateto(DateTime date) {
+    var buddhistCalendarYear = date.year + 543; // Convert to Buddhist calendar year
+    return DateFormat('dd-MM-yyyy').format(
+      DateTime(buddhistCalendarYear, date.month, date.day),
+    );
+  }
+
   //ดึงข้อมูล api ArticleType
   Future<void> getlistArticleType() async {
     try {
@@ -58,8 +68,7 @@ class _TagsPageState extends State<TagsPage> {
     try {
       //LoadingDialog.open(context);
       final _articleType = await AccountApi.getArticleTypeById(article_id: article_id);
-      if (!mounted) return;
-
+      if (!mounted) return;        
       setState(() {
         articleType = _articleType;
       });
@@ -234,10 +243,13 @@ class _TagsPageState extends State<TagsPage> {
       children: List.generate(
           articleType.articles!.length,
           (index) => _buildCard(
-                size,
-                'assets/images/tag1.png',
-                '${articleType.articles![index].title}',
-                '24 กรกฎาคม 2567',
+                size: size,
+                imagePath:  '${articleType.articles![index].photo_content_url}',
+                title: '${articleType.articles![index].title}',
+                date:  '${formatDateto(articleType.articles![index].created_at!)}',
+                press: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TagDetailPage(article: articleType.articles![index],)));
+                }
               )),
       // children: [
       //   _buildCard(
@@ -285,61 +297,70 @@ class _TagsPageState extends State<TagsPage> {
     );
   }
 
-  Widget _buildCard(Size size, String imagePath, String title, String date) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 3,
-            child: ClipRRect(
-              borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
-              child: Image.asset(
-                imagePath,
-                height: size.height * 0.11,
-                width: size.height * 0.1,
-                fit: BoxFit.fill,
+  Widget _buildCard({required Size size, required String imagePath, required String title, required String date, required VoidCallback press}) {
+    return GestureDetector(
+      onTap: press,
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 3,
+              child: ClipRRect(
+                borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
+                child: Image.network(
+                  imagePath,
+                  height: size.height * 0.11,
+                  width: size.height * 0.1,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 10,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.012),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 2,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        date,
+            Expanded(
+              flex: 10,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.012),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: size.height * 0.06,
+                      width: double.infinity,
+                      //color: Colors.amber,
+                      child: Text(
+                        title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    //SizedBox(height: size.height * 0.01),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          date,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
