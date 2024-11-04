@@ -1,18 +1,17 @@
 import 'package:cargoshipping/constants.dart';
-import 'package:cargoshipping/models/article.dart';
 import 'package:cargoshipping/models/manual.dart';
 import 'package:flutter/material.dart';
 
-class TagDetailPage extends StatefulWidget {
-  TagDetailPage({super.key, required this.article});
+class TagManualPage extends StatefulWidget {
+  TagManualPage({super.key, required this.manual});
 
-  final Article article;
+  final Manual manual;
 
   @override
-  State<TagDetailPage> createState() => _TagDetailPageState();
+  State<TagManualPage> createState() => _TagManualPageState();
 }
 
-class _TagDetailPageState extends State<TagDetailPage> {
+class _TagManualPageState extends State<TagManualPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -29,7 +28,7 @@ class _TagDetailPageState extends State<TagDetailPage> {
           ),
         ),
         title: Text(
-          '${widget.article.title}',
+          '${widget.manual.title}',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
@@ -49,7 +48,7 @@ class _TagDetailPageState extends State<TagDetailPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0), // ขอบมนให้เหมือนกับ Container
                   child: Image.network(
-                    '${widget.article.photo_content_url}',
+                    '${widget.manual.photo_content_url}',
                     fit: BoxFit.fill, // ให้ภาพครอบคลุมพื้นที่ทั้งหมด
                   ),
                 ),
@@ -60,7 +59,7 @@ class _TagDetailPageState extends State<TagDetailPage> {
               Padding(
                 padding: EdgeInsets.only(top: 8.0, left: 8.0),
                 child: Text(
-                  '${widget.article.title}',
+                  '${widget.manual.title}',
                   style: TextStyle(
                     fontSize: 20,
                     color: red1,
@@ -74,7 +73,7 @@ class _TagDetailPageState extends State<TagDetailPage> {
               Padding(
                 padding: EdgeInsets.only(left: 8.0),
                 child: Text(
-                  '${widget.article.content}',
+                  '${widget.manual.content}',
                   style: TextStyle(color: headingtext, fontSize: 13, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -88,5 +87,3 @@ class _TagDetailPageState extends State<TagDetailPage> {
     );
   }
 }
-
-
