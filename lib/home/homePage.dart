@@ -1,6 +1,4 @@
 import 'package:cargoshipping/Itempage/itempage.dart';
-import 'package:cargoshipping/account/widgets/fclpage.dart';
-import 'package:cargoshipping/account/widgets/guidepage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/alipayservice.dart';
 import 'package:cargoshipping/home/alliandwechatservice.dart';
@@ -8,7 +6,6 @@ import 'package:cargoshipping/home/bookingairservice.dart';
 import 'package:cargoshipping/home/correctimport.dart';
 import 'package:cargoshipping/home/detailproduct.dart';
 import 'package:cargoshipping/home/fclpage.dart';
-import 'package:cargoshipping/home/importproductlistpage.dart';
 import 'package:cargoshipping/home/lclpage.dart';
 import 'package:cargoshipping/home/orderinapp.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
@@ -21,20 +18,18 @@ import 'package:cargoshipping/home/werehousesearch.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
-import 'package:cargoshipping/home/widgets/carimportrate.dart';
-import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
 import 'package:cargoshipping/home/widgets/paperless.dart';
 import 'package:cargoshipping/home/widgets/payment.dart';
 import 'package:cargoshipping/home/widgets/searchshowpage.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
-import 'package:cargoshipping/home/widgets/shippingimportrate.dart';
 import 'package:cargoshipping/home/widgets/tegmallpage.dart';
 import 'package:cargoshipping/home/widgets/translaterguideservicepage.dart';
 import 'package:cargoshipping/home/worldexport.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/upload/uploadService.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -55,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   double appBarOpacity = 0.0;
   Color searchBarColor = Colors.transparent;
   bool _isExpanded = true;
-  TextEditingController searchText = TextEditingController();
+  TextEditingController searchText = TextEditingController();  
 
   @override
   void initState() {
@@ -105,7 +100,7 @@ class _HomePageState extends State<HomePage> {
     'taobao',
     '1688',
   ];
-  String selectedValue = 'taobao';
+  String selectedValue = '1688';
   // Country? _selectedCountry;
   String selectedLanguage = 'ไทย';
   ImagePicker picker = ImagePicker();
@@ -165,17 +160,46 @@ class _HomePageState extends State<HomePage> {
                           InkWell(
                               onTap: () async {
                                 final img = await openDialogImage();
-                                if (img != null) {                                  
+                                if (img != null) {
                                   setState(() {
                                     selectedimage = img;
                                   });
                                   print(selectedimage!.path);
                                   try {
-                                    final _imgcode = await HomeApi.uploadImage(imgcode: selectedimage!.path);
-                                  }on Exception catch (e) {
+                                    LoadingDialog.open(context);
+                                    final _imageUpload = await UoloadService.uploadImage(selectedimage!);
+                                    if (_imageUpload['photo_test_url'] != null) {
+                                      final _imgcode = await HomeApi.uploadImage(imgcode: _imageUpload['photo_test_url']);
+                                      if (_imgcode != null) {
+                                        final _searchImage = await HomeApi.getItemSearchImg(searchImg: _imgcode, type: selectedValue);
+                                        LoadingDialog.close(context);
+                                        if (_searchImage.isNotEmpty) {
+                                          setState(() {
+                                            searchText.clear();
+                                          });
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => Searchshowpage(
+                                                        items: _searchImage,
+                                                      )));
+                                        } else {
+                                          LoadingDialog.close(context);
+                                          print('No item from Api');
+                                        }
+                                      }else{
+                                        LoadingDialog.close(context);
+                                        print('No item from Api');
+                                      }
+                                    } else {
+                                      LoadingDialog.close(context);
+                                      print('ล้มเหลว');
+                                    }
+                                  } on Exception catch (e) {
+                                    if (!mounted) return;
+                                    LoadingDialog.close(context);
                                     print(e);
                                   }
-                                  
                                 }
                               },
                               child: Image.asset('assets/icons/cam.png')),

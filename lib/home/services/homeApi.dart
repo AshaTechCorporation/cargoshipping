@@ -84,7 +84,7 @@ class HomeApi {
   }
 
   //อัปโหลดรูป
-  static Future<ItemImage> uploadImage(
+  static Future uploadImage(
       {required String imgcode}) async {
     final url = Uri.https('kongcrdv.com', '/ima/index.php', {
       "imgcode": '${imgcode}',
@@ -98,7 +98,7 @@ class HomeApi {
     if (response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
       if (data['status'] == "success") {
-        return ItemImage.fromJson(data['items']);
+        return data['items']['item']['name'];
       } else {
         throw Exception(data['message']);
       }      
