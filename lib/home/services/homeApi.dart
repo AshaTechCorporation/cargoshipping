@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
+import 'package:cargoshipping/models/itemimage.dart';
+import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/problembodies.dart';
 import 'package:cargoshipping/models/problemtype.dart';
 import 'package:cargoshipping/models/reportproblems.dart';
@@ -50,6 +52,80 @@ class HomeApi {
       final data = convert.jsonDecode(response.body);
       final list = data['items']['item'] as List;
       return list.map((e) => Item.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  //ค้นหาข้อมูลสินค้า
+  static Future<List<ItemSearch>> getItemSearch(
+      {required String search, required String type}) async {
+    final url = Uri.https('api.kongcrdv.com', '/$type/api_call.php', {
+      "api_name": 'item_search',
+      "lang": 'zh-CN',
+      "q": '$search',
+      "page": '1',
+      "key": 'tegcargo06062024'
+    });
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['items']['item'] as List;
+      return list.map((e) => ItemSearch.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  //อัปโหลดรูป
+  static Future<ItemImage> uploadImage(
+      {required String imgcode}) async {
+    final url = Uri.https('kongcrdv.com', '/ima/index.php', {
+      "imgcode": '${imgcode}',
+      "key": 'tegcargo06062024'
+    });
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      if (data['status'] == "success") {
+        return ItemImage.fromJson(data['items']);
+      } else {
+        throw Exception(data['message']);
+      }      
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  //ค้นหาข้อมูลสินค้าด้วยรูป
+  static Future<List<ItemSearch>> getItemSearchImg(
+      {required String searchImg, required String type}) async {
+    final url = Uri.https('api.kongcrdv.com', '/$type/api_call.php', {
+      "api_name": 'item_search_img',
+      "lang": 'zh-CN',
+      "imgid": '$searchImg',
+      "key": 'tegcargo06062024'
+    });
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['items']['item'] as List;
+      return list.map((e) => ItemSearch.fromJson(e)).toList();
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
@@ -220,4 +296,7 @@ class HomeApi {
   //     throw Exception('Failed to load report with id: $id');
   //   }
   // }
+
+
+
 }
