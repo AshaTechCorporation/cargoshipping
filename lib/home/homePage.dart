@@ -13,11 +13,13 @@ import 'package:cargoshipping/home/shippingservice.dart';
 import 'package:cargoshipping/home/shipservicepage.dart';
 import 'package:cargoshipping/home/termfee.dart';
 import 'package:cargoshipping/home/tourprivateservice.dart';
+import 'package:cargoshipping/home/waitPurchasePage.dart';
 import 'package:cargoshipping/home/werehouseqc.dart';
 import 'package:cargoshipping/home/werehousesearch.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/OurServicesWidget.dart';
 import 'package:cargoshipping/home/widgets/Servicedetail.dart';
+import 'package:cargoshipping/home/widgets/WaitPurchase.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/importwidget.dart';
 import 'package:cargoshipping/home/widgets/paperless.dart';
@@ -29,12 +31,14 @@ import 'package:cargoshipping/home/widgets/translaterguideservicepage.dart';
 import 'package:cargoshipping/home/worldexport.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/track/widgets/placeorderourchase.dart';
 import 'package:cargoshipping/upload/uploadService.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +54,7 @@ class _HomePageState extends State<HomePage> {
   double appBarOpacity = 0.0;
   Color searchBarColor = Colors.transparent;
   bool _isExpanded = true;
-  TextEditingController searchText = TextEditingController();  
+  TextEditingController searchText = TextEditingController();
 
   @override
   void initState() {
@@ -187,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                                           LoadingDialog.close(context);
                                           print('No item from Api');
                                         }
-                                      }else{
+                                      } else {
                                         LoadingDialog.close(context);
                                         print('No item from Api');
                                       }
@@ -607,6 +611,76 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.035),
+              child: Row(
+                children: [
+                  Text(
+                    'รายการรอชำระ',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WaitPurchasePage(),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          'รายการทั้งหมด',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                    child: WaitPurchase(
+                      size: size,
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Placeorderourchase(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                    child: WaitPurchase(
+                      size: size,
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Placeorderourchase(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             Padding(
               padding: EdgeInsets.all(size.height * 0.021),
               child: Column(
