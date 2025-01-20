@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/orderDetail.dart';
 import 'package:cargoshipping/home/widgets/WaitPurchase.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class _WaitPurchasePageState extends State<WaitPurchasePage> {
   List<bool> _isCheckedList = [];
   bool showBottomAppBar = true;
   bool isSelected = false;
+  bool isSelectAll = false;
 
   @override
   void initState() {
@@ -58,9 +60,12 @@ class _WaitPurchasePageState extends State<WaitPurchasePage> {
           style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         bottom: PreferredSize(
-            preferredSize: Size.fromHeight(30.0),
+            preferredSize: Size.fromHeight(size.height * 0.09),
             child: Column(
               children: [
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
                 Container(
                   width: size.width * 0.95,
                   height: size.height * 0.04,
@@ -99,6 +104,46 @@ class _WaitPurchasePageState extends State<WaitPurchasePage> {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'เลือกทั้งหมด',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(width: size.width * 0.02),
+                    CustomCheckbox(
+                      value: isSelectAll,
+                      onChanged: (value) {
+                        setState(() {
+                          isSelectAll = value ?? false;
+                          print(isSelectAll);
+                          if (isSelectAll == true) {
+                            //isSelectAll = true;
+                            for (var i = 0; i < _isCheckedList.length; i++) {
+                              _isCheckedList.removeAt(i);
+                              _isCheckedList.insert(i, true);
+                              _dragExtents.removeAt(i);
+                              _dragExtents.insert(i, -82.28571428571429);
+                            }
+                          } else {
+                            //isSelectAll = false;
+                            for (var i = 0; i < _isCheckedList.length; i++) {
+                              _isCheckedList.removeAt(i);
+                              _isCheckedList.insert(i, false);
+                              _dragExtents.removeAt(i);
+                              _dragExtents.insert(i, 0.0);
+                            }
+                          }
+                        });
+                      },
+                    ),
+                    SizedBox(width: size.width * 0.03),
+                  ],
                 ),
                 SizedBox(
                   height: size.height * 0.01,
@@ -175,6 +220,7 @@ class _WaitPurchasePageState extends State<WaitPurchasePage> {
                           child: WaitPurchase(
                             size: size,
                             press: () {},
+                            pressPrice: () {},
                           ),
                         ),
                       ),
@@ -197,25 +243,13 @@ class _WaitPurchasePageState extends State<WaitPurchasePage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      if (isSelected == false) {
-                        isSelected = true;
-                        for (var i = 0; i < _isCheckedList.length; i++) {
-                          _isCheckedList.removeAt(i);
-                          _isCheckedList.insert(i, true);
-                          _dragExtents.removeAt(i);
-                          _dragExtents.insert(i, -82.28571428571429);
-                        }
-                      } else {
-                        isSelected = false;
-                        for (var i = 0; i < _isCheckedList.length; i++) {
-                          _isCheckedList.removeAt(i);
-                          _isCheckedList.insert(i, false);
-                          _dragExtents.removeAt(i);
-                          _dragExtents.insert(i, 0.0);
-                        }
-                      }
-                    });
+                    setState(() {});
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderDetail(),
+                      ),
+                    );
                   },
                   child: Container(
                     height: size.height * 0.06,
@@ -223,7 +257,7 @@ class _WaitPurchasePageState extends State<WaitPurchasePage> {
                     decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(15), border: Border.all(width: size.width * 0.003, color: red1)),
                     child: Center(
                       child: Text(
-                        'เลือกทั้งหมด',
+                        'เลือกเปิดบิล',
                         style: TextStyle(
                           color: red1,
                           fontSize: 17,

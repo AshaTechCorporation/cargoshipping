@@ -1,4 +1,6 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/widgets/WaitPurchase.dart';
+import 'package:cargoshipping/home/widgets/paymentChannel.dart';
 import 'package:cargoshipping/track/widgets/placeorderourchase.dart';
 import 'package:flutter/material.dart';
 
@@ -73,19 +75,44 @@ class Waitpurchase extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // SizedBox(
+            //   height: size.height * 0.015,
+            // ),
+            // WaitpurchaseWidget(
+            //   size: size,
+            //   press: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => Placeorderourchase(),
+            //       ),
+            //     );
+            //   },
+            // ),
             SizedBox(
               height: size.height * 0.015,
             ),
-            WaitpurchaseWidget(
-              size: size,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Placeorderourchase(),
-                  ),
-                );
-              },
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+              child: WaitPurchase(
+                size: size,
+                press: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => Placeorderourchase(),
+                  //   ),
+                  // );
+                },
+                pressPrice: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentChannel(),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

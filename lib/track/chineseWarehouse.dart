@@ -160,6 +160,7 @@ class _ChineseWarehouseState extends State<ChineseWarehouse> {
                     press: () {
                       print('click press');
                     },
+                    pressPrice: (){},
                   ),
                 ),
               );

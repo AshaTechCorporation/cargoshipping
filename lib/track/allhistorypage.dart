@@ -41,6 +41,7 @@ class Allhistorypage extends StatelessWidget {
                     press: () {
                       print('click press');
                     },
+                    pressPrice: (){},
                   ),
                 );
               },

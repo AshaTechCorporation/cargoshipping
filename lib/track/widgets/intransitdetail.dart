@@ -1027,19 +1027,19 @@ class Intransitdetail extends StatelessWidget {
                   // print("ปุ่มส่งรายการสั่งซื้อถูกคลิก");
 
                   // แสดง dialog
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      Future.delayed(Duration(seconds: 2), () {
-                        Navigator.of(context)
-                            .pop(); // ปิด dialog หลังจาก 2 วินาที
-                      });
-                      return AlertDialog(
-                        title: Text('เปิดบิล'),
-                        content: Text('เปิดบิลเสร็จสิ้น'),
-                      );
-                    },
-                  );
+                  // showDialog(
+                  //   context: context,
+                  //   builder: (BuildContext context) {
+                  //     Future.delayed(Duration(seconds: 2), () {
+                  //       Navigator.of(context)
+                  //           .pop(); // ปิด dialog หลังจาก 2 วินาที
+                  //     });
+                  //     return AlertDialog(
+                  //       title: Text('เปิดบิล'),
+                  //       content: Text('เปิดบิลเสร็จสิ้น'),
+                  //     );
+                  //   },
+                  // );
                 },
                 child: Container(
                   height: size.height * 0.06,
@@ -1075,19 +1075,19 @@ class Intransitdetail extends StatelessWidget {
                   // print("ปุ่มส่งรายการสั่งซื้อถูกคลิก");
 
                   // แสดง dialog
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      Future.delayed(Duration(seconds: 2), () {
-                        Navigator.of(context)
-                            .pop(); // ปิด dialog หลังจาก 2 วินาที
-                      });
-                      return AlertDialog(
-                        title: Text('เปิดบิล'),
-                        content: Text('เปิดบิลเสร็จสิ้น'),
-                      );
-                    },
-                  );
+                  // showDialog(
+                  //   context: context,
+                  //   builder: (BuildContext context) {
+                  //     Future.delayed(Duration(seconds: 2), () {
+                  //       Navigator.of(context)
+                  //           .pop(); // ปิด dialog หลังจาก 2 วินาที
+                  //     });
+                  //     return AlertDialog(
+                  //       title: Text('เปิดบิล'),
+                  //       content: Text('เปิดบิลเสร็จสิ้น'),
+                  //     );
+                  //   },
+                  // );
                 },
                 child: Container(
                   height: size.height * 0.06,

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cargoshipping/constants.dart';
 
 class WaitPurchase extends StatelessWidget {
-  WaitPurchase({super.key, required this.size, required this.press});
+  WaitPurchase({super.key, required this.size, required this.press, required this.pressPrice});
 
   final Size size;
   VoidCallback press;
+  VoidCallback pressPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -154,9 +155,7 @@ class WaitPurchase extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
                           child: GestureDetector(
-                            onTap: () {
-                              // Action สำหรับการชำระเงิน
-                            },
+                            onTap: pressPrice,
                             child: Container(
                               height: size.height * 0.05,
                               width: size.width * 0.24,

@@ -143,6 +143,7 @@ class _SuccessfulDeliveryState extends State<SuccessfulDelivery> {
                   press: () {
                     print('click press');
                   },
+                  pressPrice: (){},
                 ),
               );
             }).toList(),

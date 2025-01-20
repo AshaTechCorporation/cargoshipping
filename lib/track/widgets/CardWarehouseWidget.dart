@@ -17,10 +17,12 @@ class CardWarehouseWidget extends StatelessWidget {
     required this.isPaid,
     required this.sended,
     required this.sendtothai,
+    required this.pressPrice
   });
 
   final Size size;
   VoidCallback press;
+  VoidCallback pressPrice;
   final String carback;
   final String orderNo;
   final String iconPosition1;
@@ -453,9 +455,7 @@ class CardWarehouseWidget extends StatelessWidget {
                                       ],
                                     )
                                   : GestureDetector(
-                                      onTap: () {
-                                        // Action สำหรับการชำระเงิน
-                                      },
+                                      onTap: pressPrice,
                                       child: Container(
                                         height: size.height * 0.05,
                                         width: size.width * 0.18,

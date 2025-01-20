@@ -343,6 +343,7 @@ class _ThaiWarehouseState extends State<ThaiWarehouse> {
                             press: () {
                               print('click press');
                             },
+                            pressPrice: (){},
                           ),
                         ),
                       ),

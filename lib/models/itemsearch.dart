@@ -6,11 +6,12 @@ part 'itemsearch.g.dart';
 class ItemSearch {
   final String? title;
   final String? pic_url;
-  final String? price;
-  final String? promotion_price;
+  final int? price;
+  final int? promotion_price;
+  final int? orginal_price;
   final int? sales;  
-  final int? num_iid;
-  final String? tag_percent;
+  final String? num_iid;
+  final String? seller_id;
   final String? detail_url;
 
 
@@ -21,8 +22,9 @@ class ItemSearch {
     this.price,
     this.promotion_price,
     this.sales,
-    this.tag_percent,
-    this.title
+    this.title,
+    this.orginal_price,
+    this.seller_id
   );
 
   factory ItemSearch.fromJson(Map<String, dynamic> json) => _$ItemSearchFromJson(json);

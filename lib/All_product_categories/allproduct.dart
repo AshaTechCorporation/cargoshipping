@@ -3,6 +3,7 @@ import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
+import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     '1688',
   ];
   List<Categories> categories = [];
-  List<Item> item = [];
+  List<ItemSearch> item = [];
 
   @override
   void initState() {
@@ -58,7 +59,8 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
   Future<void> getlistCategoriesByName({required String categories_name}) async {
     try {
       LoadingDialog.open(context);
-      final _item = await HomeApi.getItemCategories(categories_name: categories_name);
+      // final _item = await HomeApi.getItemCategories(categories_name: categories_name);
+      final _item = await HomeApi.getItemSearch(search: categories_name, type: items[0]);
 
       if (!mounted) return;
 
@@ -128,7 +130,8 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                               ),
                             ),
                             SizedBox(
-                              height: size.height * 0.025,
+                              // height: size.height * 0.025,
+                              height: size.height * 0.12,
                             ),
                           ],
                         ),
@@ -257,7 +260,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildSection({required String title, required List<Item> items}) {
+  Widget _buildSection({required String title, required List<ItemSearch> items}) {
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: size.height * 0.01),

@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
-import 'package:cargoshipping/models/itemimage.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/problembodies.dart';
 import 'package:cargoshipping/models/problemtype.dart';
 import 'package:cargoshipping/models/reportproblems.dart';
+import 'package:cargoshipping/models/searchpic1688.dart';
+import 'package:cargoshipping/models/searchpictaobao.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -16,8 +17,7 @@ class HomeApi {
 
   //เรียกดูข้อมูล Category
   static Future<List<Categories>> getCategories({required String name}) async {
-    final url = Uri.https(
-        'api.atphosting24.com', '/category/api.php', {"folder": '$name'});
+    final url = Uri.https('api.atphosting24.com', '/category/api.php', {"folder": '$name'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -34,15 +34,8 @@ class HomeApi {
   }
 
   //เรียกดูข้อมูล ตาม Category
-  static Future<List<Item>> getItemCategories(
-      {required String categories_name}) async {
-    final url = Uri.https('api.kongcrdv.com', '/taobao/api_call.php', {
-      "api_name": 'item_search',
-      "lang": 'zh-CN',
-      "q": '$categories_name',
-      "page": '1',
-      "key": 'tegcargo06062024'
-    });
+  static Future<List<Item>> getItemCategories({required String categories_name}) async {
+    final url = Uri.https('api.kongcrdv.com', '/taobao/api_call.php', {"api_name": 'item_search', "lang": 'zh-CN', "q": '$categories_name', "page": '1', "key": 'tegcargo06062024'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -59,14 +52,21 @@ class HomeApi {
   }
 
   //ค้นหาข้อมูลสินค้า
-  static Future<List<ItemSearch>> getItemSearch(
-      {required String search, required String type}) async {
-    final url = Uri.https('api.kongcrdv.com', '/$type/api_call.php', {
-      "api_name": 'item_search',
+  static Future<List<ItemSearch>> getItemSearch({required String search, required String type}) async {
+    // final url = Uri.https('api.kongcrdv.com', '/$type/api_call.php', {
+    //   "api_name": 'item_search',
+    //   "lang": 'zh-CN',
+    //   "q": '$search',
+    //   "page": '1',
+    //   "key": 'tegcargo06062024'
+    // });
+    final url = Uri.https('api.icom.la', '/$type/api/call.php', {
+      "item_search": 'item_search',
       "lang": 'zh-CN',
       "q": '$search',
       "page": '1',
-      "key": 'tegcargo06062024'
+      "api_key": 'tegcargo06062024',
+      "is_promotion": '1',
     });
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
@@ -75,7 +75,7 @@ class HomeApi {
     );
     if (response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
-      final list = data['items']['item'] as List;
+      final list = data['item']['items']['item'] as List;
       return list.map((e) => ItemSearch.fromJson(e)).toList();
     } else {
       final data = convert.jsonDecode(response.body);
@@ -83,13 +83,32 @@ class HomeApi {
     }
   }
 
-  //อัปโหลดรูป
-  static Future uploadImage(
-      {required String imgcode}) async {
-    final url = Uri.https('kongcrdv.com', '/ima/index.php', {
-      "imgcode": '${imgcode}',
-      "key": 'tegcargo06062024'
+  //ดูข้อมูลรายละเอียดสินค้า
+  static Future<ItemSearch> getItemDetail({required String num_id, required String type}) async {
+    final url = Uri.https('api.icom.la', '/$type/api/call.php', {
+      "item_get": '',
+      "lang": 'zh-CN',
+      "num_iid": '$num_id',
+      "api_key": 'tegcargo06062024',
+      "is_promotion": '1',
     });
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      return ItemSearch.fromJson(data['item']);
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  //อัปโหลดรูป
+  static Future uploadImage({required String imgcode}) async {
+    final url = Uri.https('kongcrdv.com', '/ima/index.php', {"imgcode": '${imgcode}', "key": 'tegcargo06062024'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -101,7 +120,7 @@ class HomeApi {
         return data['items']['item']['name'];
       } else {
         throw Exception(data['message']);
-      }      
+      }
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
@@ -109,14 +128,14 @@ class HomeApi {
   }
 
   //ค้นหาข้อมูลสินค้าด้วยรูป
-  static Future<List<ItemSearch>> getItemSearchImg(
-      {required String searchImg, required String type}) async {
-    final url = Uri.https('api.kongcrdv.com', '/$type/api_call.php', {
-      "api_name": 'item_search_img',
-      "lang": 'zh-CN',
-      "imgid": '$searchImg',
-      "key": 'tegcargo06062024'
-    });
+  static Future getItemSearchImg({required String searchImg, required String type}) async {
+    // final url = Uri.https('api.kongcrdv.com', '/$type/api_call.php', {
+    //   "api_name": 'item_search_img',
+    //   "lang": 'zh-CN',
+    //   "imgid": '$searchImg',
+    //   "key": 'tegcargo06062024'
+    // });
+    final url = Uri.https('api.icom.la', '/$type/api/call.php', {"item_search_img": '', "lang": 'zh-CN', "imgid": '$searchImg', "page": '1', "api_key": 'tegcargo06062024'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -124,8 +143,12 @@ class HomeApi {
     );
     if (response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
-      final list = data['items']['item'] as List;
-      return list.map((e) => ItemSearch.fromJson(e)).toList();
+      final list = data['item']['items']['item'] as List;
+      if (type == '1688') {
+        return list.map((e) => SearchPic1688.fromJson(e)).toList();
+      } else {
+        return list.map((e) => SearchPicTaobao.fromJson(e)).toList();
+      }
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
@@ -234,8 +257,7 @@ class HomeApi {
   // }
 
   static Future<String> sendProblem({
-    required int
-        problem_body_id, // เปลี่ยนจาก `problem_types_id` เป็น `problem_body_id`
+    required int problem_body_id, // เปลี่ยนจาก `problem_types_id` เป็น `problem_body_id`
     required String title,
     required String body,
   }) async {
@@ -296,7 +318,4 @@ class HomeApi {
   //     throw Exception('Failed to load report with id: $id');
   //   }
   // }
-
-
-
 }

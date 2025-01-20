@@ -5,14 +5,20 @@ import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/OurItemSearch.dart';
 import 'package:cargoshipping/models/categories.dart';
 
-import 'package:cargoshipping/models/itemsearch.dart';
+import 'package:cargoshipping/models/searchpic1688.dart';
+import 'package:cargoshipping/models/searchpictaobao.dart';
+import 'package:cargoshipping/upload/uploadService.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Searchshowpage extends StatefulWidget {
-  Searchshowpage({super.key, required this.items});
-  List<ItemSearch> items;
+  Searchshowpage({super.key, required this.items1688, required this.itemstaobao, required this.type});
+  List<SearchPic1688> items1688;
+  List<SearchPicTaobao> itemstaobao;
+  String type;
 
   @override
   State<Searchshowpage> createState() => _SearchshowpageState();
@@ -20,16 +26,31 @@ class Searchshowpage extends StatefulWidget {
 
 class _SearchshowpageState extends State<Searchshowpage> {
   List<Categories> categories = [];
-  List<ItemSearch> itemSearch = [];
+  List<SearchPic1688> itemSearch1688 = [];
+  List<SearchPicTaobao> itemSearchTaobao = [];
+  ImagePicker picker = ImagePicker();
+  XFile? selectedimage;
+  TextEditingController searchText = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     setState(() {
-      itemSearch = widget.items;
+      selectedValue = widget.type;
+      if (widget.items1688.isNotEmpty) {
+        itemSearch1688 = widget.items1688;
+      } else {
+        itemSearchTaobao = widget.itemstaobao;
+      }
     });
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       //await getlistCategories(name: items[0]);
     });
+  }
+
+  Future openDialogImage() async {
+    final img = await picker.pickImage(source: ImageSource.gallery);
+    return img;
   }
 
   Future<void> getlistCategories({required String name}) async {
@@ -56,7 +77,7 @@ class _SearchshowpageState extends State<Searchshowpage> {
   ];
   String selectedLanguage = 'ไทย';
 
-  String selectedValue = 'taobao';
+  String selectedValue = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -99,10 +120,58 @@ class _SearchshowpageState extends State<Searchshowpage> {
                             ),
                           ),
                         ),
-                        Image.asset(
-                          'assets/icons/cam.png',
-                          height: size.height * 0.035,
-                          width: size.width * 0.07,
+                        GestureDetector(
+                          onTap: () async {
+                            final img = await openDialogImage();
+                            if (img != null) {
+                              setState(() {
+                                selectedimage = img;
+                              });
+                              try {
+                                LoadingDialog.open(context);
+                                final _imageUpload = await UoloadService.uploadImage(selectedimage!);
+                                if (_imageUpload['photo_test_url'] != null) {
+                                  final _imgcode = await HomeApi.uploadImage(imgcode: _imageUpload['photo_test_url']);
+                                  if (_imgcode != null) {
+                                    final _searchImage = await HomeApi.getItemSearchImg(searchImg: _imgcode, type: selectedValue);
+                                    LoadingDialog.close(context);
+                                    if (_searchImage.isNotEmpty) {
+                                      setState(() {
+                                        searchText.clear();
+                                        if (selectedValue == '1688') {
+                                          itemSearchTaobao.clear();
+                                          itemSearch1688.clear();
+                                          itemSearch1688 = _searchImage;
+                                        } else {
+                                          itemSearchTaobao.clear();
+                                          itemSearch1688.clear();
+                                          itemSearchTaobao = _searchImage;
+                                        }
+                                      });
+                                    } else {
+                                      LoadingDialog.close(context);
+                                      print('No item from Api');
+                                    }
+                                  } else {
+                                    LoadingDialog.close(context);
+                                    print('No item from Api');
+                                  }
+                                } else {
+                                  LoadingDialog.close(context);
+                                  print('ล้มเหลว');
+                                }
+                              } on Exception catch (e) {
+                                if (!mounted) return;
+                                LoadingDialog.close(context);
+                                print(e);
+                              }
+                            }
+                          },
+                          child: Image.asset(
+                            'assets/icons/cam.png',
+                            height: size.height * 0.035,
+                            width: size.width * 0.07,
+                          ),
                         ),
                         SizedBox(
                           width: size.width * 0.005,
@@ -131,7 +200,7 @@ class _SearchshowpageState extends State<Searchshowpage> {
                                     child: Text(
                                       'เลือกสินค้า',
                                       style: TextStyle(
-                                        fontSize: 11,
+                                        fontSize: 15,
                                         color: red1,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -142,7 +211,7 @@ class _SearchshowpageState extends State<Searchshowpage> {
                                             value: item,
                                             child: Text(
                                               item,
-                                              style: TextStyle(fontSize: 14, color: red1),
+                                              style: TextStyle(fontSize: 15, color: red1),
                                             ),
                                           ))
                                       .toList(),
@@ -154,11 +223,11 @@ class _SearchshowpageState extends State<Searchshowpage> {
                                     getlistCategories(name: selectedValue);
                                   },
                                   buttonStyleData: ButtonStyleData(
-                                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
                                     width: size.width * 0.1,
                                   ),
                                   menuItemStyleData: MenuItemStyleData(
-                                    height: size.height * 0.1,
+                                    height: size.height * 0.06,
                                   ),
                                 ),
                               ),
@@ -266,6 +335,9 @@ class _SearchshowpageState extends State<Searchshowpage> {
                     child: Image.asset('assets/icons/thai.png', height: size.height * 0.03),
                   ),
                 ),
+                SizedBox(
+                  width: size.width * 0.001,
+                ),
               ],
             ),
           ),
@@ -331,20 +403,50 @@ class _SearchshowpageState extends State<Searchshowpage> {
                 ],
               ),
             ),
-            itemSearch.isEmpty
+            itemSearch1688.isEmpty
                 ? SizedBox()
                 : Wrap(
                     spacing: 15,
                     runSpacing: 15,
                     children: List.generate(
-                        itemSearch.length,
+                        itemSearch1688.length,
                         (index) => OurItemSearch(
-                              image: itemSearch[index].pic_url ?? '',
-                              sale: itemSearch[index].sales.toString(),
-                              send: itemSearch[index].promotion_price ?? '',
+                              image: itemSearch1688[index].pic_url ?? '',
+                              sale: itemSearch1688[index].sales.toString(),
+                              send: '${itemSearch1688[index].promotion_price ?? ''}',
                               size: MediaQuery.of(context).size,
-                              price: itemSearch[index].price ?? '',
-                              detail: itemSearch[index].title ?? '',
+                              price: '${itemSearch1688[index].price ?? ''}',
+                              detail: itemSearch1688[index].title ?? '',
+                              press: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => itempage(
+                                //       size: size,
+                                //       title: listProducts[index]['detail'],
+                                //       price: (listProducts[index]['price'] as num).toDouble(),
+                                //       products: listProducts[index],
+                                //       press: () {},
+                                //     ),
+                                //   ),
+                                // );
+                              },
+                            )),
+                  ),
+            itemSearchTaobao.isEmpty
+                ? SizedBox()
+                : Wrap(
+                    spacing: 15,
+                    runSpacing: 15,
+                    children: List.generate(
+                        itemSearchTaobao.length,
+                        (index) => OurItemSearch(
+                              image: itemSearchTaobao[index].pic_url ?? '',
+                              sale: itemSearchTaobao[index].promotion_price.toString(),
+                              send: '${itemSearchTaobao[index].promotion_price ?? ''}',
+                              size: MediaQuery.of(context).size,
+                              price: '${itemSearchTaobao[index].price ?? ''}',
+                              detail: itemSearchTaobao[index].title ?? '',
                               press: () {
                                 // Navigator.push(
                                 //   context,

@@ -149,6 +149,7 @@ class _WaitShippingPaymentState extends State<WaitShippingPayment> {
                   press: () {
                     print('click press');
                   },
+                  pressPrice: (){},
                 ),
               );
             }).toList(),

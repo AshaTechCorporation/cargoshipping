@@ -181,12 +181,25 @@ class _HomePageState extends State<HomePage> {
                                           setState(() {
                                             searchText.clear();
                                           });
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => Searchshowpage(
-                                                        items: _searchImage,
-                                                      )));
+                                          if (selectedValue == '1688') {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Searchshowpage(
+                                                          items1688: _searchImage,
+                                                          itemstaobao: [],
+                                                          type: selectedValue,
+                                                        )));
+                                          } else {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Searchshowpage(
+                                                          itemstaobao: _searchImage,
+                                                          items1688: [],
+                                                          type: selectedValue,
+                                                        )));
+                                          }
                                         } else {
                                           LoadingDialog.close(context);
                                           print('No item from Api');
@@ -275,12 +288,12 @@ class _HomePageState extends State<HomePage> {
                                     setState(() {
                                       searchText.clear();
                                     });
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Searchshowpage(
-                                                  items: _search,
-                                                )));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => Searchshowpage(
+                                    //               items: _search,
+                                    //             )));
                                   } else {
                                     print('No item from Api');
                                   }
@@ -661,6 +674,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
+                      pressPrice: () {},
                     ),
                   ),
                   Padding(
@@ -675,6 +689,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
+                      pressPrice: () {},
                     ),
                   ),
                 ],
