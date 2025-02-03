@@ -135,7 +135,14 @@ class HomeApi {
     //   "imgid": '$searchImg',
     //   "key": 'tegcargo06062024'
     // });
-    final url = Uri.https('api.icom.la', '/$type/api/call.php', {"item_search_img": '', "lang": 'zh-CN', "imgid": '$searchImg', "page": '1', "api_key": 'tegcargo06062024'});
+    final url = Uri.https('api.icom.la', '/$type/api/call.php', 
+    {
+      "item_search_img": 'item_search_img', 
+      "lang": 'zh-CN', 
+      "imgid": '$searchImg', 
+      "page": '1', 
+      "api_key": 'tegcargo06062024'
+    });
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,

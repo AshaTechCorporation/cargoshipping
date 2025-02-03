@@ -264,71 +264,78 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
-      child: Container(
-        padding: EdgeInsets.all(size.height * 0.01),
-        margin: EdgeInsets.only(left: size.width * 0.01),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6.0,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: size.height * 0.02),
-            GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              mainAxisSpacing: 15,
-              crossAxisSpacing: 5,
-              physics: NeverScrollableScrollPhysics(),
-              children: items.map((item) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    item.pic_url != null || item.pic_url != ''
-                        ? SizedBox(
-                            height: size.height * 0.063,
-                            width: size.width * 0.9,
-                            child: CachedNetworkImage(
-                              imageUrl: "${item.pic_url}",
-                              fit: BoxFit.fill,                              
-                              placeholder: (context, url) => SizedBox(
-                                height: size.height * 0.001,
-                                width: size.width * 0.001,
-                                child: CircularProgressIndicator(strokeWidth: 1,)),
-                              errorWidget: (context, url, error) => Image.asset('assets/images/noimages.jpg',fit: BoxFit.fill,),
-                            ),
-                          )
-                        : Image.asset('assets/images/noimages.jpg',fit: BoxFit.fill,),
-                    // แสดงภาพจาก assets
-                    // Image.network(
-                    //   item.pic_url!,
-                    //   width: size.width * 0.9,
-                    //   height: size.height * 0.063,
-                    //   fit: BoxFit.fill,
-                    // ),
-                    SizedBox(height: size.height * 0.006),
-                    Text(
-                      '${item.title! ?? ''}',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
-                      textAlign: TextAlign.center,
+      child: GestureDetector(
+        child: Container(
+          padding: EdgeInsets.all(size.height * 0.01),
+          margin: EdgeInsets.only(left: size.width * 0.01),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: size.height * 0.02),
+              GridView.count(
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 5,
+                physics: NeverScrollableScrollPhysics(),
+                children: items.map((item) {
+                  return GestureDetector(
+                    onTap: (){
+                      print(item.title);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        item.pic_url != null || item.pic_url != ''
+                            ? SizedBox(
+                                height: size.height * 0.063,
+                                width: size.width * 0.9,
+                                child: CachedNetworkImage(
+                                  imageUrl: "${item.pic_url}",
+                                  fit: BoxFit.fill,                              
+                                  placeholder: (context, url) => SizedBox(
+                                    height: size.height * 0.001,
+                                    width: size.width * 0.001,
+                                    child: CircularProgressIndicator(strokeWidth: 1,)),
+                                  errorWidget: (context, url, error) => Image.asset('assets/images/noimages.jpg',fit: BoxFit.fill,),
+                                ),
+                              )
+                            : Image.asset('assets/images/noimages.jpg',fit: BoxFit.fill,),
+                        // แสดงภาพจาก assets
+                        // Image.network(
+                        //   item.pic_url!,
+                        //   width: size.width * 0.9,
+                        //   height: size.height * 0.063,
+                        //   fit: BoxFit.fill,
+                        // ),
+                        SizedBox(height: size.height * 0.006),
+                        Text(
+                          '${item.title! ?? ''}',
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
-                  ],
-                );
-              }).toList(),
-            ),
-          ],
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
