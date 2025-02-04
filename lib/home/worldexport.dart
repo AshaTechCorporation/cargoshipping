@@ -205,7 +205,6 @@ class Worldexport extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: SizedBox(
-        height: size.height * 0.08,
         child: BottomAppBar(
           color: white,
           child: GestureDetector(

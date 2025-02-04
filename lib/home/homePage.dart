@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/alipayservice.dart';
@@ -31,6 +33,8 @@ import 'package:cargoshipping/home/widgets/translaterguideservicepage.dart';
 import 'package:cargoshipping/home/worldexport.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/models/rateShip.dart';
+import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:cargoshipping/track/widgets/placeorderourchase.dart';
 import 'package:cargoshipping/upload/uploadService.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
@@ -40,6 +44,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,17 +55,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Categories> categories = [];
+  List<ServiceTransporter> serviceTransporter = [];
+  List<ServiceTransporter> storeTEG = [];
+  List<RateShip> rateShip = [];
   final ScrollController _scrollController = ScrollController();
   double appBarOpacity = 0.0;
   Color searchBarColor = Colors.transparent;
   bool _isExpanded = true;
   TextEditingController searchText = TextEditingController();
+  Map<String, List<RateShip>> groupedData = {};
+  bool enabled = true;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getlistCategories(name: items[0]);
+      await getlistService();
     });
     // เพิ่ม Listener เพื่อตรวจจับการเลื่อน
     _scrollController.addListener(() {
@@ -93,6 +104,37 @@ class _HomePageState extends State<HomePage> {
       });
       //inspect(categories);
       LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
+  //ดึงข้อมูล api Category
+  Future<void> getlistService() async {
+    try {
+      // LoadingDialog.open(context);
+      final _service = await HomeApi.getService();
+      final _store = await HomeApi.getStore();
+      final _rateShip = await HomeApi.getRateShip();
+      if (!mounted) return;
+
+      setState(() {
+        serviceTransporter = _service;
+        storeTEG = _store;
+        rateShip = _rateShip;
+        for (var item in _rateShip) {
+          groupedData.putIfAbsent(item.vehicle!, () => []).add(item);
+        }
+        Future.delayed(Duration(seconds: 2), () async {
+          if (_service.isNotEmpty) {
+            enabled = !enabled;
+          }
+        });
+      });
+
+      // LoadingDialog.close(context);
     } on Exception catch (e) {
       if (!mounted) return;
       LoadingDialog.close(context);
@@ -464,16 +506,33 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: size.height * 0.06,
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
-                  child: Text(
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
                     'บริการของเรา',
-                    style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                ),
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      _showBottomSheet(context);
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          'บริการทั้งหมด',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: size.height * 0.01,
@@ -528,99 +587,101 @@ class _HomePageState extends State<HomePage> {
               height: size.height * 0.26,
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 1.0,
-                    crossAxisSpacing: 1.0,
+                child: Skeletonizer(
+                  enabled: enabled,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 1.0,
+                    ),
+                    itemCount: serviceTransporter.length,
+                    itemBuilder: (context, index) {
+                      return OurServicesWidget(
+                          size: size,
+                          title: serviceTransporter[index].name ?? '',
+                          press: () {
+                            if (serviceTransporter[index].name == 'ขนส่งทางบก') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Servicedetail(),
+                                ),
+                              );
+                            }
+                            if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Shipservicepage(),
+                                ),
+                              );
+                            }
+                            if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Fclpage1(),
+                                ),
+                              );
+                            }
+                            if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Lclpage(),
+                                ),
+                              );
+                            }
+                            if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Worldexport(),
+                                ),
+                              );
+                            }
+                            if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Correctimportservice(),
+                                ),
+                              );
+                            }
+                            if (index == 6) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Translaterguideservicepage(),
+                                ),
+                              );
+                            }
+                            if (index == 7) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ShippingCalculatorPage(),
+                                ),
+                              );
+                            }
+                            if (index == 8) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Importrate(),
+                                ),
+                              );
+                            }
+                            if (index == 9) {
+                              _showBottomSheet(context);
+                            }
+                          },
+                          imagespath: serviceTransporter[index].image ?? '');
+                    },
                   ),
-                  itemCount: myservice.length,
-                  itemBuilder: (context, index) {
-                    final Service = myservice[index];
-                    return OurServicesWidget(
-                        size: size,
-                        title: Service['name'],
-                        press: () {
-                          if (index == 0) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Servicedetail(),
-                              ),
-                            );
-                          }
-                          if (index == 1) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Shipservicepage(),
-                              ),
-                            );
-                          }
-                          if (index == 2) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Fclpage1(),
-                              ),
-                            );
-                          }
-                          if (index == 3) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Lclpage(),
-                              ),
-                            );
-                          }
-                          if (index == 4) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Worldexport(),
-                              ),
-                            );
-                          }
-                          if (index == 5) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Correctimportservice(),
-                              ),
-                            );
-                          }
-                          if (index == 6) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Translaterguideservicepage(),
-                              ),
-                            );
-                          }
-                          if (index == 7) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ShippingCalculatorPage(),
-                              ),
-                            );
-                          }
-                          if (index == 8) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Importrate(),
-                              ),
-                            );
-                          }
-                          if (index == 9) {
-                            _showBottomSheet(context);
-                          }
-                        },
-                        imagespath: Service['images']);
-                  },
                 ),
               ),
             ),
@@ -848,113 +909,126 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: size.height * 0.005,
                   ),
-                  SizedBox(
-                    height: size.height * 0.19,
-                    width: size.width * 0.93,
-                    // color: Colors.white,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                            text: TextSpan(text: 'คลังกวางโจว :', style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
-                          TextSpan(
-                            text: ' TEG CARGO仓 广东省广州市白云区唐阁上村中街28号3栋105A仓 邮编510450',
-                            style: TextStyle(color: headingtext, fontSize: 15),
-                          )
-                        ])),
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        RichText(
-                            text: TextSpan(text: 'เบอร์โทรศัพท์ :', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
-                          TextSpan(
-                            text: ' 18520290139啊苏',
-                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 15),
-                          )
-                        ])),
-                        SizedBox(
-                          height: size.height * 0.018,
-                        ),
-                        Center(
-                          child: SizedBox(
-                            height: size.height * 0.042,
-                            width: size.width * 0.3,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                  foregroundColor: red1, side: BorderSide(color: red1, width: size.width * 0.004), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
-                              onPressed: () {
-                                Clipboard.setData(
-                                  ClipboardData(text: 'ที่อยู่ที่ต้องการคัดลอก'),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
-                                );
-                              },
-                              child: Text(
-                                'คัดลอกที่อยู่',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
+                  Column(
+                    children: List.generate(
+                      storeTEG.length,
+                      (indexStore) => SizedBox(
+                        height: size.height * 0.19,
+                        width: size.width * 0.93,
+                        // color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                                text: TextSpan(
+                                    text: '${storeTEG[indexStore].name ?? ''} :',
+                                    style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15),
+                                    children: <TextSpan>[
+                                  TextSpan(
+                                    text: ' ${storeTEG[indexStore].address ?? ''}',
+                                    style: TextStyle(color: headingtext, fontSize: 15),
+                                  )
+                                ])),
+                            SizedBox(
+                              height: size.height * 0.01,
                             ),
-                          ),
-                        )
-                      ],
+                            RichText(
+                                text: TextSpan(text: 'เบอร์โทรศัพท์ :', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                              TextSpan(
+                                text: ' ${storeTEG[indexStore].phone ?? ''}',
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 15),
+                              )
+                            ])),
+                            SizedBox(
+                              height: size.height * 0.018,
+                            ),
+                            Center(
+                              child: SizedBox(
+                                height: size.height * 0.042,
+                                width: size.width * 0.3,
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                      foregroundColor: red1,
+                                      side: BorderSide(color: red1, width: size.width * 0.004),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
+                                  onPressed: () {
+                                    Clipboard.setData(
+                                      ClipboardData(text: storeTEG[indexStore].address ?? ''),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
+                                    );
+                                  },
+                                  child: Text(
+                                    'คัดลอกที่อยู่',
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Container(
-                    height: size.height * 0.19,
-                    width: size.width * 0.93,
-                    // color: Colors.white,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                            text: TextSpan(text: 'คลังอี้อู :', style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
-                          TextSpan(
-                            text: ' TEG CARGO仓 浙江省义乌市稠城街道江北下朱货运市场一栋231-232号 邮编322023',
-                            style: TextStyle(color: headingtext, fontSize: 15),
-                          )
-                        ])),
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        RichText(
-                            text: TextSpan(text: 'เบอร์โทรศัพท์ :', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
-                          TextSpan(
-                            text: ' 18520290139',
-                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 15),
-                          )
-                        ])),
-                        SizedBox(
-                          height: size.height * 0.018,
-                        ),
-                        Center(
-                          child: SizedBox(
-                            height: size.height * 0.042,
-                            width: size.width * 0.3,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                  foregroundColor: red1, side: BorderSide(color: red1, width: size.width * 0.004), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
-                              onPressed: () {
-                                Clipboard.setData(
-                                  ClipboardData(text: 'ที่อยู่ที่ต้องการคัดลอก'),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
-                                );
-                              },
-                              child: Text(
-                                'คัดลอกที่อยู่',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+
+                  // SizedBox(
+                  //   height: size.height * 0.01,
+                  // ),
+                  // Container(
+                  //   height: size.height * 0.19,
+                  //   width: size.width * 0.93,
+                  //   // color: Colors.white,
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       RichText(
+                  //           text: TextSpan(text: 'คลังอี้อู :', style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                  //         TextSpan(
+                  //           text: ' TEG CARGO仓 浙江省义乌市稠城街道江北下朱货运市场一栋231-232号 邮编322023',
+                  //           style: TextStyle(color: headingtext, fontSize: 15),
+                  //         )
+                  //       ])),
+                  //       SizedBox(
+                  //         height: size.height * 0.01,
+                  //       ),
+                  //       RichText(
+                  //           text: TextSpan(text: 'เบอร์โทรศัพท์ :', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                  //         TextSpan(
+                  //           text: ' 18520290139',
+                  //           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 15),
+                  //         )
+                  //       ])),
+                  //       SizedBox(
+                  //         height: size.height * 0.018,
+                  //       ),
+                  //       Center(
+                  //         child: SizedBox(
+                  //           height: size.height * 0.042,
+                  //           width: size.width * 0.3,
+                  //           child: TextButton(
+                  //             style: TextButton.styleFrom(
+                  //                 foregroundColor: red1,
+                  //                 side: BorderSide(color: red1, width: size.width * 0.004),
+                  //                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
+                  //             onPressed: () {
+                  //               Clipboard.setData(
+                  //                 ClipboardData(text: 'ที่อยู่ที่ต้องการคัดลอก'),
+                  //               );
+                  //               ScaffoldMessenger.of(context).showSnackBar(
+                  //                 SnackBar(content: Text('คัดลอกที่อยู่เรียบร้อยแล้ว')),
+                  //               );
+                  //             },
+                  //             child: Text(
+                  //               'คัดลอกที่อยู่',
+                  //               style: TextStyle(fontWeight: FontWeight.bold),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -974,454 +1048,530 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(size.height * 0.012),
-              child: Stack(
-                children: [
-                  Image.asset('assets/images/16.png'),
-                  Positioned(
-                      top: size.height * 0.12,
-                      left: size.width * 0.05,
-                      child: Row(
+            groupedData.isEmpty
+                ? SizedBox.shrink()
+                : Column(
+                    children: groupedData.entries.map((entry) {
+                      return Stack(
                         children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'C',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                          Image.asset(entry.key == 'Car' ? 'assets/images/16.png' : 'assets/images/17.png'),
+                          Positioned(
+                            top: size.height * 0.08,
+                            left: size.width * 0.05,
+                            child: Column(
+                              children: entry.value.map((item) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        RichText(
+                                          text: TextSpan(
+                                            text: item.type,
+                                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+                                            children: <TextSpan>[
+                                              // TextSpan(
+                                              //   text: item.type,
+                                              //   style: TextStyle(
+                                              //     fontWeight: FontWeight.bold,
+                                              //     color: Colors.red,
+                                              //     fontSize: 14,
+                                              //   ),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: size.width * 0.39,
+                                        ),
+                                        Text(
+                                          item.kg ?? '',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: size.width * 0.18,
+                                        ),
+                                        Text(
+                                          item.cbm ?? '',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Positioned(
+                                        top: size.height * 0.22,
+                                        left: size.width * 0.05,
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              item.name ?? '',
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+                                            )
+                                          ],
+                                        )),
+                                  ],
+                                );
+                              }).toList(),
                             ),
                           )
                         ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.155,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้ามาตราฐาน',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.185,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'D',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.22,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้ามาตราฐาน',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.06,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'A',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.095,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้าทั่วไป',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.258,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'B',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.29,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้าอื่นๆ',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      ))
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(size.height * 0.012),
-              child: Stack(
-                children: [
-                  Image.asset('assets/images/17.png'),
-                  Positioned(
-                      top: size.height * 0.06,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'A',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.095,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้าทั่วไป',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.12,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'C',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.155,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้ามาตราฐาน',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.185,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'D',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.22,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้ามาตราฐาน',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.258,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: 'ประเภท ',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'B',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.39,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.18,
-                          ),
-                          Text(
-                            '00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      )),
-                  Positioned(
-                      top: size.height * 0.29,
-                      left: size.width * 0.05,
-                      child: Row(
-                        children: [
-                          Text(
-                            'สินค้าอื่นๆ',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
-                          )
-                        ],
-                      ))
-                ],
-              ),
-            ),
+                      );
+                    }).toList(),
+                  ),
+            // Padding(
+            //   padding: EdgeInsets.all(size.height * 0.012),
+            //   child: Stack(
+            //     children: [
+            //       Image.asset('assets/images/16.png'),
+            //       Positioned(
+            //           top: size.height * 0.12,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'C',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.155,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้ามาตราฐาน',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.185,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'D',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.22,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้ามาตราฐาน',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.06,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'A',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.095,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้าทั่วไป',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.258,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'B',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.29,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้าอื่นๆ',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           ))
+            //     ],
+            //   ),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.all(size.height * 0.012),
+            //   child: Stack(
+            //     children: [
+            //       Image.asset('assets/images/17.png'),
+            //       Positioned(
+            //           top: size.height * 0.06,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'A',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.095,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้าทั่วไป',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.12,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'C',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.155,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้ามาตราฐาน',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.185,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'D',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.22,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้ามาตราฐาน',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.258,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   text: 'ประเภท ',
+            //                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
+            //                   children: <TextSpan>[
+            //                     TextSpan(
+            //                       text: 'B',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         color: Colors.red,
+            //                         fontSize: 14,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.39,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SizedBox(
+            //                 width: size.width * 0.18,
+            //               ),
+            //               Text(
+            //                 '00',
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               )
+            //             ],
+            //           )),
+            //       Positioned(
+            //           top: size.height * 0.29,
+            //           left: size.width * 0.05,
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'สินค้าอื่นๆ',
+            //                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
+            //               )
+            //             ],
+            //           ))
+            //     ],
+            //   ),
+            // ),
+
             Padding(
               padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
@@ -1616,9 +1766,9 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: ListView.builder(
                           controller: scrollController,
-                          itemCount: allmyservice.length,
+                          itemCount: serviceTransporter.length,
                           itemBuilder: (context, index) {
-                            final service = allmyservice[index];
+                            final service = serviceTransporter[index];
                             return Column(
                               children: [
                                 ListTile(
@@ -1633,22 +1783,22 @@ class _HomePageState extends State<HomePage> {
                                       borderRadius: BorderRadius.circular(10.0),
                                       child: AspectRatio(
                                         aspectRatio: 1,
-                                        child: Image.asset(
-                                          service['images'],
+                                        child: Image.network(
+                                          service.image ?? '',
                                         ),
                                       ),
                                     ),
                                   ),
                                   title: Text(
-                                    service['name'],
+                                    service.name ?? '',
                                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.black),
                                   ),
                                   subtitle: Text(
-                                    service['subtitle'],
+                                    service.description ?? '',
                                     style: TextStyle(fontSize: 12, color: headingtext),
                                   ),
                                   onTap: () {
-                                    if (index == 0) {
+                                    if (serviceTransporter[index].name == 'ขนส่งทางบก') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -1656,7 +1806,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     }
-                                    if (index == 1) {
+                                    if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -1664,15 +1814,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     }
-                                    if (index == 2) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Correctimportservice(),
-                                        ),
-                                      );
-                                    }
-                                    if (index == 3) {
+                                    if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -1680,7 +1822,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     }
-                                    if (index == 4) {
+                                    if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -1688,7 +1830,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     }
-                                    if (index == 5) {
+                                    if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -1696,10 +1838,12 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     }
-                                    if (index == 6) {
+                                    if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => Shippingservice()),
+                                        MaterialPageRoute(
+                                          builder: (context) => Correctimportservice(),
+                                        ),
                                       );
                                     }
                                     if (index == 7) {

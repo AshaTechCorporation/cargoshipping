@@ -6,9 +6,11 @@ import 'package:cargoshipping/models/item.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/problembodies.dart';
 import 'package:cargoshipping/models/problemtype.dart';
+import 'package:cargoshipping/models/rateShip.dart';
 import 'package:cargoshipping/models/reportproblems.dart';
 import 'package:cargoshipping/models/searchpic1688.dart';
 import 'package:cargoshipping/models/searchpictaobao.dart';
+import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -35,7 +37,8 @@ class HomeApi {
 
   //เรียกดูข้อมูล ตาม Category
   static Future<List<Item>> getItemCategories({required String categories_name}) async {
-    final url = Uri.https('api.kongcrdv.com', '/taobao/api_call.php', {"api_name": 'item_search', "lang": 'zh-CN', "q": '$categories_name', "page": '1', "key": 'tegcargo06062024'});
+    final url =
+        Uri.https('api.kongcrdv.com', '/taobao/api_call.php', {"api_name": 'item_search', "lang": 'zh-CN', "q": '$categories_name', "page": '1', "key": 'tegcargo06062024'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -135,14 +138,8 @@ class HomeApi {
     //   "imgid": '$searchImg',
     //   "key": 'tegcargo06062024'
     // });
-    final url = Uri.https('api.icom.la', '/$type/api/call.php', 
-    {
-      "item_search_img": 'item_search_img', 
-      "lang": 'zh-CN', 
-      "imgid": '$searchImg', 
-      "page": '1', 
-      "api_key": 'tegcargo06062024'
-    });
+    final url =
+        Uri.https('api.icom.la', '/$type/api/call.php', {"item_search_img": 'item_search_img', "lang": 'zh-CN', "imgid": '$searchImg', "page": '1', "api_key": 'tegcargo06062024'});
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -325,4 +322,85 @@ class HomeApi {
   //     throw Exception('Failed to load report with id: $id');
   //   }
   // }
+
+  static Future<List<ServiceTransporter>> getService() async {
+    final url = Uri.https(publicUrl, '/api/get_services');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => ServiceTransporter.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  static Future<List<ServiceTransporter>> getStore() async {
+    final url = Uri.https(publicUrl, '/api/get_store');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => ServiceTransporter.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  static Future<List<ServiceTransporter>> getCategoryProduct() async {
+    final url = Uri.https(publicUrl, '/api/get_category_product');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => ServiceTransporter.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  static Future<List<RateShip>> getRateShip({int? page = 0, int? length = 10, String? search}) async {
+    final url = Uri.https(publicUrl, '/api/rate_page');
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // final token = prefs.getString('token');
+    var headers = {
+      // 'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+    final response = await http.post(url,
+        headers: headers,
+        body: convert.jsonEncode({
+          "draw": 1,
+          "order": [
+            {"column": 0, "dir": "asc"}
+          ],
+          "start": page,
+          "length": length,
+          "search": {"value": search, "regex": false}
+        }));
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data']['data'] as List;
+      return list.map((e) => RateShip.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+      // throw ApiException(data['message']);
+    }
+  }
 }

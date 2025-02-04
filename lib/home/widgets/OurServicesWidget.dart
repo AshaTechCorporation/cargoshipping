@@ -22,7 +22,7 @@ class OurServicesWidget extends StatelessWidget {
       onTap: press,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: size.width * 0.2, 
+          maxWidth: size.width * 0.2,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +39,7 @@ class OurServicesWidget extends StatelessWidget {
                 child: Center(
                   child: AspectRatio(
                     aspectRatio: 1,
-                    child: Image.asset(
+                    child: Image.network(
                       imagespath,
                       // fit: BoxFit.cover,
                     ),
@@ -51,8 +51,8 @@ class OurServicesWidget extends StatelessWidget {
             Center(
               child: Text(
                 title,
-                style: TextStyle(fontSize: 13,
-                fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
             ),
           ],

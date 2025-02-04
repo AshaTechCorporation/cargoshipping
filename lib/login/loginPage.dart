@@ -26,8 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: background,
         title: Text(
           'เข้าสู่ระบบ',
-          style: TextStyle(
-              fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
@@ -73,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.02),
-                 SizedBox(
+                SizedBox(
                   height: size.height * 0.06,
                   child: TextFormField(
                     controller: _emailController,
@@ -112,8 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: _passwordController,
                     decoration: InputDecoration(
                       labelText: 'รหัสผ่าน',
-                      labelStyle:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      labelStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       prefixIcon: Image.asset(
                         'assets/icons/password.png',
                         height: size.height * 0.001,
@@ -121,11 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                       suffixIcon: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GestureDetector(
-                              onTap: () {},
-                              child: Image.asset('assets/icons/eyepass.png'))
-                        ],
+                        children: [GestureDetector(onTap: () {}, child: Image.asset('assets/icons/eyepass.png'))],
                       ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -140,8 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    validator: (value){
-                      if(value == null || value.isEmpty){
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
                         return 'กรุณากรอกรหัสผู้นำเข้า';
                       }
                       return null;
@@ -170,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(
                   height: size.height * 0.059,
-                  width: size.width * 0.87,
+                  width: size.width * 0.9,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context, rootNavigator: true).pushReplacement(
@@ -179,18 +173,14 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 219, 18, 4),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 135, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: const Text(
                       'เข้าสู่ระบบ',
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

@@ -97,8 +97,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                           width: size.width * 0.85,
                           padding: EdgeInsets.all(size.height * 0.005),
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.grey, width: size.width * 0.001),
+                            border: Border.all(color: Colors.grey, width: size.width * 0.001),
                             borderRadius: BorderRadius.circular(10),
                             color: white,
                           ),
@@ -112,11 +111,8 @@ class _TegmallpageState extends State<Tegmallpage> {
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: 'ค้นหาสินค้า',
-                                      hintStyle:
-                                          TextStyle(fontWeight: FontWeight.bold,fontSize: 13),
-                                      contentPadding: EdgeInsets.only(
-                                          left: size.width * 0.02,
-                                          bottom: size.height * 0.017),
+                                      hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                      contentPadding: EdgeInsets.only(left: size.width * 0.02, bottom: size.height * 0.017),
                                     ),
                                   ),
                                 ),
@@ -129,12 +125,10 @@ class _TegmallpageState extends State<Tegmallpage> {
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                            color: Colors.white, width: 2),
+                                        border: Border.all(color: Colors.white, width: 2),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.01),
+                                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
                                         child: DropdownButton2<String>(
                                           isExpanded: true,
                                           hint: Align(
@@ -149,14 +143,11 @@ class _TegmallpageState extends State<Tegmallpage> {
                                             ),
                                           ),
                                           items: items
-                                              .map((String item) =>
-                                                  DropdownMenuItem<String>(
+                                              .map((String item) => DropdownMenuItem<String>(
                                                     value: item,
                                                     child: Text(
                                                       item,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: red1),
+                                                      style: TextStyle(fontSize: 14, color: red1),
                                                     ),
                                                   ))
                                               .toList(),
@@ -165,12 +156,10 @@ class _TegmallpageState extends State<Tegmallpage> {
                                             setState(() {
                                               selectedValue = value!;
                                             });
-                                            getlistCategories(
-                                                name: selectedValue);
+                                            getlistCategories(name: selectedValue);
                                           },
                                           buttonStyleData: ButtonStyleData(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: size.width * 0.02),
+                                            padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
                                             width: size.width * 0.1,
                                           ),
                                           menuItemStyleData: MenuItemStyleData(
@@ -186,7 +175,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                   //เมื่อกด ค้นหา จะแสดงสินค้า ไม่ได้ไปหน้าอื่น
+                                    //เมื่อกด ค้นหา จะแสดงสินค้า ไม่ได้ไปหน้าอื่น
                                   },
                                   child: Container(
                                     height: size.height * 0.05,
@@ -208,8 +197,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.003),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.003),
                           child: GestureDetector(
                             onTapDown: (TapDownDetails details) {
                               showMenu(
@@ -217,9 +205,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                                 position: RelativeRect.fromLTRB(
                                   details.globalPosition.dx,
                                   details.globalPosition.dy + 25,
-                                  MediaQuery.of(context).size.width -
-                                      details.globalPosition.dx -
-                                      10,
+                                  MediaQuery.of(context).size.width - details.globalPosition.dx - 10,
                                   0,
                                 ),
                                 items: <PopupMenuEntry<String>>[
@@ -276,8 +262,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                                 }
                               });
                             },
-                            child: Image.asset('assets/icons/thai.png',
-                                height: size.height * 0.032),
+                            child: Image.asset('assets/icons/thai.png', height: size.height * 0.032),
                           ),
                         ),
                       ],
@@ -304,8 +289,18 @@ class _TegmallpageState extends State<Tegmallpage> {
               ),
               items: imgList
                   .map((item) => Center(
-                        child:
-                            Image.network(item, fit: BoxFit.fill, width: size.width * 0.87, height: size.height * 0.17,),
+                        child: Image.network(
+                          item,
+                          fit: BoxFit.fill,
+                          width: size.width * 0.87,
+                          height: size.height * 0.17,
+                          errorBuilder: (context, error, stackTrace) => Image.asset(
+                            width: size.width * 0.87,
+                            height: size.height * 0.17,
+                            'assets/images/logofull.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ))
                   .toList(),
             ),
@@ -313,18 +308,14 @@ class _TegmallpageState extends State<Tegmallpage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: imgList.asMap().entries.map((entry) {
                 return GestureDetector(
-                  onTap: () => _onDotTapped(entry.key),
+                  // onTap: () => _onDotTapped(entry.key),
                   child: Container(
                     width: size.width * 0.015,
                     height: size.height * 0.01,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black)
-                          .withOpacity(_currentIndex == entry.key ? 0.9 : 0.4),
+                      color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withOpacity(_currentIndex == entry.key ? 0.9 : 0.4),
                     ),
                   ),
                 );
@@ -332,8 +323,7 @@ class _TegmallpageState extends State<Tegmallpage> {
             ),
             Image.asset('assets/images/tegmall.png'),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
                   Text(
@@ -343,8 +333,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                   Spacer(), // เว้นที่ระหว่างข้อความ
                   Text(
                     'หมวดหมู่ทั้งหมด',
-                    style: TextStyle(
-                        fontSize: 12, color: red1, fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 12, color: red1, fontWeight: FontWeight.w700),
                   )
                 ],
               ),
@@ -352,8 +341,8 @@ class _TegmallpageState extends State<Tegmallpage> {
             categories.isEmpty
                 ? SizedBox()
                 : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
-                  child: SizedBox(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                    child: SizedBox(
                       height: size.height * 0.31,
                       child: GridView.builder(
                         scrollDirection: Axis.horizontal,
@@ -383,29 +372,19 @@ class _TegmallpageState extends State<Tegmallpage> {
                         },
                       ),
                     ),
-                ),
+                  ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: size.width * 0.035),
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
                   Expanded(
                     child: RichText(
-                        text: TextSpan(
-                            text: 'สินค้าแนะนำ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                            children: <TextSpan>[
-                          TextSpan(
-                            text: ' จาก 1668',
-                            style: TextStyle(
-                                color: red1,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          )
-                        ])),
+                        text: TextSpan(text: 'สินค้าแนะนำ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18), children: <TextSpan>[
+                      TextSpan(
+                        text: ' จาก 1668',
+                        style: TextStyle(color: red1, fontWeight: FontWeight.bold, fontSize: 18),
+                      )
+                    ])),
                   ),
                 ],
               ),
@@ -429,8 +408,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                               builder: (context) => itempage(
                                 size: size,
                                 title: listProducts[index]['detail'],
-                                price: (listProducts[index]['price'] as num)
-                                    .toDouble(),
+                                price: (listProducts[index]['price'] as num).toDouble(),
                                 products: listProducts[index],
                                 press: () {},
                               ),
@@ -439,7 +417,9 @@ class _TegmallpageState extends State<Tegmallpage> {
                         },
                       )),
             ),
-            SizedBox(height: size.height * 0.06,),
+            SizedBox(
+              height: size.height * 0.06,
+            ),
           ],
         ),
       ),
