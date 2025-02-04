@@ -4,6 +4,7 @@ import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
+import 'package:cargoshipping/models/itemsearch1688.dart';
 import 'package:cargoshipping/models/problembodies.dart';
 import 'package:cargoshipping/models/problemtype.dart';
 import 'package:cargoshipping/models/rateShip.dart';
@@ -56,7 +57,7 @@ class HomeApi {
   }
 
   //ค้นหาข้อมูลสินค้า
-  static Future<List<ItemSearch>> getItemSearch({required String search, required String type}) async {
+  static Future getItemSearch({required String search, required String type}) async {
     // final url = Uri.https('api.kongcrdv.com', '/$type/api_call.php', {
     //   "api_name": 'item_search',
     //   "lang": 'zh-CN',
@@ -80,7 +81,12 @@ class HomeApi {
     if (response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
       final list = data['item']['items']['item'] as List;
-      return list.map((e) => ItemSearch.fromJson(e)).toList();
+      //return list.map((e) => ItemSearch.fromJson(e)).toList();
+      if (type == '1688') {
+        return list.map((e) => ItemSearch1688.fromJson(e)).toList();
+      } else {
+        return list.map((e) => ItemSearch.fromJson(e)).toList();
+      }
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);

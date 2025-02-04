@@ -14,6 +14,9 @@ class ServiceTransporter {
   String? line;
   String? phone;
   String? address;
+  String? prefix;
+  String? taobao;
+  String? one_six_eight_eight;
   // String? status;
   List<ServiceTransporterById>? images;
   List<ServiceTransporterById>? icons;
@@ -33,6 +36,9 @@ class ServiceTransporter {
     this.images,
     this.icons,
     this.icon_boxs,
+    this.one_six_eight_eight,
+    this.prefix,
+    this.taobao
   );
 
   factory ServiceTransporter.fromJson(Map<String, dynamic> json) => _$ServiceTransporterFromJson(json);

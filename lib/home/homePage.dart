@@ -1639,14 +1639,15 @@ class _HomePageState extends State<HomePage> {
                           size: size,
                           title: categoryProduct[index].name!,
                           press: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => Detailproduct(
-                            //       categories: categories[index],
-                            //     ),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Detailproduct(
+                                  type: selectedValue,
+                                  categoryProduct: selectedValue == '1688' ? categoryProduct[index].one_six_eight_eight! : categoryProduct[index].taobao!,
+                                ),
+                              ),
+                            );
                           },
                           imagespath: categoryProduct[index].image ?? '',
                         );

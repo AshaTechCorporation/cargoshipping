@@ -4,6 +4,8 @@ import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
+import 'package:cargoshipping/models/itemsearch1688.dart';
+import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +22,8 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
   ];
   List<Categories> categories = [];
   List<ItemSearch> item = [];
+  List<ItemSearch1688> item1688 = [];
+  List<ServiceTransporter> categoryProduct = [];
 
   @override
   void initState() {
@@ -40,12 +44,14 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
   Future<void> getlistCategories({required String name}) async {
     try {
       LoadingDialog.open(context);
-      final _categories = await HomeApi.getCategories(name: name);
+      //final _categories = await HomeApi.getCategories(name: name);
+      final _categoryProduct = await HomeApi.getCategoryProduct();
       if (!mounted) return;
       setState(() {
-        categories = _categories;
+        //categories = _categories;
+        categoryProduct = _categoryProduct;
       });
-      getlistCategoriesByName(categories_name: categories[0].name!);
+      getlistCategoriesByName(categories_name: categoryProduct[0].taobao!);
       //inspect(categories);
       LoadingDialog.close(context);
     } on Exception catch (e) {
@@ -113,7 +119,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                 //     ],
                 //   ),
                 // )
-                categories.isNotEmpty
+                categoryProduct.isNotEmpty
                     ? SingleChildScrollView(
                         child: Column(
                           children: [
@@ -124,8 +130,9 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
                                 children: List.generate(
-                                  categories.length,
-                                  (index) => _buildTabItem('${categories[index].name}', 'assets/images/noimages.jpg', index),
+                                  categoryProduct.length,
+                                  (index) => _buildTabItem('${categoryProduct[index].name}', '${categoryProduct[index].image}', index, '${categoryProduct[index].taobao}'),
+                                  //_buildTabItem('${categoryProduct[index].name}', 'assets/images/noimages.jpg', index, '${categoryProduct[index].taobao}'),
                                 ),
                               ),
                             ),
@@ -137,14 +144,14 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                         ),
                       )
                     : SizedBox(),
-                categories.isNotEmpty
+                categoryProduct.isNotEmpty
                     ? Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: IndexedStack(
                             index: selectedIndex,
                             children: List.generate(
-                              categories.length,
+                              categoryProduct.length,
                               (index) => SingleChildScrollView(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -156,7 +163,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                                             physics: ClampingScrollPhysics(),
                                             //children: List.generate(item.length, (index1)=> _buildSection(title: categories[index].name!, items: item)),
                                             children: [
-                                              _buildSection(title: categories[index].name!, items: item),
+                                              _buildSection(title: categoryProduct[index].name!, items: item),
                                             ],
                                           )
                                         : SizedBox(),
@@ -195,11 +202,11 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildTabItem(String title, String imagePath, int index) {
+  Widget _buildTabItem(String title, String imagePath, int index, String search) {
     bool isSelected = selectedIndex == index;
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => onTabTapped(index: index, name: title),
+      onTap: () => onTabTapped(index: index, name: search),
       child: Container(
         height: size.height * 0.17,
         child: Stack(
@@ -234,12 +241,27 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
                 child: Column(
                   children: [
-                    Image.asset(
-                      imagePath,
-                      width: 40,
-                      height: 40,
-                      fit: BoxFit.fill,
-                    ),
+                    imagePath != null || imagePath != ''
+                        ? CachedNetworkImage(
+                            imageUrl: "${imagePath}",
+                            fit: BoxFit.fill,
+                            placeholder: (context, url) => SizedBox(
+                                height: size.height * 0.001,
+                                width: size.width * 0.001,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 1,
+                                )),
+                            errorWidget: (context, url, error) => Image.asset(
+                              'assets/images/noimages.jpg',
+                              fit: BoxFit.fill,
+                            ),
+                          )
+                        : Image.asset(
+                            imagePath,
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.fill,
+                          ),
                     SizedBox(height: 8),
                     Text(
                       title,

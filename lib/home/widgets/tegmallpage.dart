@@ -358,14 +358,14 @@ class _TegmallpageState extends State<Tegmallpage> {
                             size: size,
                             title: categories[index].name!,
                             press: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Detailproduct(
-                                    categories: categories[index],
-                                  ),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Detailproduct(
+                              //       categories: categories[index],
+                              //     ),
+                              //   ),
+                              // );
                             },
                             imagespath: 'assets/images/noimages.jpg',
                           );

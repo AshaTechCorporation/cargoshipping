@@ -6,7 +6,8 @@ part of 'serviceTransporter.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ServiceTransporter _$ServiceTransporterFromJson(Map<String, dynamic> json) => ServiceTransporter(
+ServiceTransporter _$ServiceTransporterFromJson(Map<String, dynamic> json) =>
+    ServiceTransporter(
       (json['id'] as num?)?.toInt(),
       json['code'] as String?,
       json['name'] as String?,
@@ -16,12 +17,25 @@ ServiceTransporter _$ServiceTransporterFromJson(Map<String, dynamic> json) => Se
       json['line'] as String?,
       json['phone'] as String?,
       json['address'] as String?,
-      (json['images'] as List<dynamic>?)?.map((e) => ServiceTransporterById.fromJson(e as Map<String, dynamic>)).toList(),
-      (json['icons'] as List<dynamic>?)?.map((e) => ServiceTransporterById.fromJson(e as Map<String, dynamic>)).toList(),
-      (json['icon_boxs'] as List<dynamic>?)?.map((e) => ServiceTransporterById.fromJson(e as Map<String, dynamic>)).toList(),
+      (json['images'] as List<dynamic>?)
+          ?.map(
+              (e) => ServiceTransporterById.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['icons'] as List<dynamic>?)
+          ?.map(
+              (e) => ServiceTransporterById.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['icon_boxs'] as List<dynamic>?)
+          ?.map(
+              (e) => ServiceTransporterById.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['one_six_eight_eight'] as String?,
+      json['prefix'] as String?,
+      json['taobao'] as String?,
     );
 
-Map<String, dynamic> _$ServiceTransporterToJson(ServiceTransporter instance) => <String, dynamic>{
+Map<String, dynamic> _$ServiceTransporterToJson(ServiceTransporter instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'code': instance.code,
       'name': instance.name,
@@ -31,6 +45,9 @@ Map<String, dynamic> _$ServiceTransporterToJson(ServiceTransporter instance) => 
       'line': instance.line,
       'phone': instance.phone,
       'address': instance.address,
+      'prefix': instance.prefix,
+      'taobao': instance.taobao,
+      'one_six_eight_eight': instance.one_six_eight_eight,
       'images': instance.images,
       'icons': instance.icons,
       'icon_boxs': instance.icon_boxs,
