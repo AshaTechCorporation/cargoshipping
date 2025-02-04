@@ -1,5 +1,8 @@
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/rateShip.dart';
+import 'package:cargoshipping/register/server/registerService.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -70,19 +73,19 @@ class _registerpageState extends State<registerpage> {
 
   String? selectedzipcode;
 
-  String? selectedtotalsend;
-
   String? selectedformatsent;
 
   String? selectedprovice;
 
   String? selecteddistrict;
 
-  String? selectedsendoften;
+  RateShip? selectedtotalsend;
 
-  String? selectedimporttype;
+  RateShip? selectedsendoften;
 
-  String? selecteduserwant;
+  RateShip? selectedimporttype;
+
+  RateShip? selecteduserwant;
 
 // checkbox
   String? _selectedGender;
@@ -92,6 +95,41 @@ class _registerpageState extends State<registerpage> {
   bool _agreement = false;
 
   // final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    // กำหนดค่า PageController ทันทีใน initState ก่อนใช้งาน
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getProducts();
+    });
+  }
+
+  List<RateShip>? total = [];
+  List<RateShip>? often = [];
+  List<RateShip>? import = [];
+  List<RateShip>? want = [];
+
+  Future<void> getProducts() async {
+    try {
+      LoadingDialog.open(context);
+      final total1 = await RegisterService.getDataRegister(type: 'Total');
+      final often1 = await RegisterService.getDataRegister(type: 'Often');
+      final import1 = await RegisterService.getDataRegister(type: 'Import');
+      final want1 = await RegisterService.getDataRegister(type: 'Want');
+      setState(() {
+        total = total1;
+        often = often1;
+        import = import1;
+        want = want1;
+      });
+      if (!mounted) return;
+      LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -1018,269 +1056,275 @@ class _registerpageState extends State<registerpage> {
                   ],
                 ),
                 SizedBox(height: size.height * 0.01),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: totalsend
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
+                total?.isEmpty ?? true
+                    ? SizedBox.shrink()
+                    : DropdownButtonFormField2<RateShip>(
+                        isExpanded: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
                             ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'please select ยอดจำนวนส่ง';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {},
-                  onSaved: (value) {
-                    selectedtotalsend = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                        ),
+                        hint: const Text(
+                          'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        items: total!
+                            .map((item) => DropdownMenuItem<RateShip>(
+                                  value: item,
+                                  child: Text(
+                                    item.option ?? '',
+                                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                                  ),
+                                ))
+                            .toList(),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'please select ยอดจำนวนส่ง';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {},
+                        onSaved: (value) {
+                          selectedtotalsend = value;
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.only(right: 8),
+                        ),
+                        iconStyleData: const IconStyleData(
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 24,
+                        ),
+                        dropdownStyleData: DropdownStyleData(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                        ),
+                      ),
                 SizedBox(height: size.height * 0.01),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'ท่านนำเข้าบ่อยหรือไม่ ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: sendoften
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
+                often?.isEmpty ?? true
+                    ? SizedBox.shrink()
+                    : DropdownButtonFormField2<RateShip>(
+                        isExpanded: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
                             ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'please select ยอดจำนวนส่ง';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {},
-                  onSaved: (value) {
-                    selectedsendoften = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                        ),
+                        hint: const Text(
+                          'ท่านนำเข้าบ่อยหรือไม่ ',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        items: often!
+                            .map((item) => DropdownMenuItem<RateShip>(
+                                  value: item,
+                                  child: Text(
+                                    item.option ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'please select ยอดจำนวนส่ง';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {},
+                        onSaved: (value) {
+                          selectedsendoften = value;
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.only(right: 8),
+                        ),
+                        iconStyleData: const IconStyleData(
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 24,
+                        ),
+                        dropdownStyleData: DropdownStyleData(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                        ),
+                      ),
                 SizedBox(height: size.height * 0.01),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'ต้องการนำเข้าแบบใด ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: importtype
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
+                import?.isEmpty ?? true
+                    ? SizedBox.shrink()
+                    : DropdownButtonFormField2<RateShip>(
+                        isExpanded: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
                             ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'กรุณากรอก';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {},
-                  onSaved: (value) {
-                    selectedimporttype = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                        ),
+                        hint: const Text(
+                          'ต้องการนำเข้าแบบใด ',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        items: import!
+                            .map((item) => DropdownMenuItem<RateShip>(
+                                  value: item,
+                                  child: Text(
+                                    item.option ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'กรุณากรอก';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {},
+                        onSaved: (value) {
+                          selectedimporttype = value;
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.only(right: 8),
+                        ),
+                        iconStyleData: const IconStyleData(
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 24,
+                        ),
+                        dropdownStyleData: DropdownStyleData(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                        ),
+                      ),
                 SizedBox(height: size.height * 0.01),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'สิ่งที่ท่านต้องการ ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: userwant
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
+                want?.isEmpty ?? true
+                    ? SizedBox.shrink()
+                    : DropdownButtonFormField2<RateShip>(
+                        isExpanded: true,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
                             ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'กรุณากรอก';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {},
-                  onSaved: (value) {
-                    selecteduserwant = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 0.5,
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                        ),
+                        hint: const Text(
+                          'สิ่งที่ท่านต้องการ ',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        items: want!
+                            .map((item) => DropdownMenuItem<RateShip>(
+                                  value: item,
+                                  child: Text(
+                                    item.option ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'กรุณากรอก';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {},
+                        onSaved: (value) {
+                          selecteduserwant = value;
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.only(right: 8),
+                        ),
+                        iconStyleData: const IconStyleData(
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 24,
+                        ),
+                        dropdownStyleData: DropdownStyleData(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                        ),
+                      ),
                 SizedBox(
                   height: size.height * 0.015,
                 ),
@@ -1335,114 +1379,114 @@ class _registerpageState extends State<registerpage> {
                 SizedBox(
                   height: size.height * 0.015,
                 ),
-                Text(
-                  'หรือ',
-                  style: TextStyle(fontSize: 15),
-                ),
-                SizedBox(
-                  height: size.height * 0.012,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: size.height * 0.05,
-                      width: size.width * 0.2,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/icons/google.png'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: size.height * 0.05,
-                      width: size.width * 0.2,
-                      decoration: BoxDecoration(
-                        color: Color(0xff3c5a9a),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/icons/facebook.png'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: size.height * 0.05,
-                      width: size.width * 0.2,
-                      decoration: BoxDecoration(
-                        color: Color(0xff00b900),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/icons/line.png'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: size.height * 0.05,
-                      width: size.width * 0.2,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/icons/apple.png'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Text(
+                //   'หรือ',
+                //   style: TextStyle(fontSize: 15),
+                // ),
+                // SizedBox(
+                //   height: size.height * 0.012,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Container(
+                //       height: size.height * 0.05,
+                //       width: size.width * 0.2,
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         borderRadius: BorderRadius.circular(20),
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.black.withOpacity(0.1),
+                //             spreadRadius: 1,
+                //             blurRadius: 1,
+                //             offset: Offset(0, 1),
+                //           ),
+                //         ],
+                //       ),
+                //       child: Center(
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Image.asset('assets/icons/google.png'),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //     Container(
+                //       height: size.height * 0.05,
+                //       width: size.width * 0.2,
+                //       decoration: BoxDecoration(
+                //         color: Color(0xff3c5a9a),
+                //         borderRadius: BorderRadius.circular(20),
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.black.withOpacity(0.1),
+                //             spreadRadius: 1,
+                //             blurRadius: 1,
+                //             offset: Offset(0, 1),
+                //           ),
+                //         ],
+                //       ),
+                //       child: Center(
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Image.asset('assets/icons/facebook.png'),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //     Container(
+                //       height: size.height * 0.05,
+                //       width: size.width * 0.2,
+                //       decoration: BoxDecoration(
+                //         color: Color(0xff00b900),
+                //         borderRadius: BorderRadius.circular(20),
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.black.withOpacity(0.1),
+                //             spreadRadius: 1,
+                //             blurRadius: 1,
+                //             offset: Offset(0, 1),
+                //           ),
+                //         ],
+                //       ),
+                //       child: Center(
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Image.asset('assets/icons/line.png'),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //     Container(
+                //       height: size.height * 0.05,
+                //       width: size.width * 0.2,
+                //       decoration: BoxDecoration(
+                //         color: Colors.black,
+                //         borderRadius: BorderRadius.circular(20),
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.black.withOpacity(0.1),
+                //             spreadRadius: 1,
+                //             blurRadius: 1,
+                //             offset: Offset(0, 1),
+                //           ),
+                //         ],
+                //       ),
+                //       child: Center(
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Image.asset('assets/icons/apple.png'),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'serviceTransporter.g.dart';
@@ -9,10 +10,14 @@ class ServiceTransporter {
   String? name;
   String? description;
   String? image;
+  String? remark;
   String? line;
   String? phone;
   String? address;
-  String? status;
+  // String? status;
+  List<ServiceTransporterById>? images;
+  List<ServiceTransporterById>? icons;
+  List<ServiceTransporterById>? icon_boxs;
 
   ServiceTransporter(
     this.id,
@@ -20,10 +25,14 @@ class ServiceTransporter {
     this.name,
     this.description,
     this.image,
+    this.remark,
     this.line,
     this.phone,
     this.address,
-    this.status,
+    // this.status,
+    this.images,
+    this.icons,
+    this.icon_boxs,
   );
 
   factory ServiceTransporter.fromJson(Map<String, dynamic> json) => _$ServiceTransporterFromJson(json);

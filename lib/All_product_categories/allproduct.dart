@@ -295,7 +295,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                 physics: NeverScrollableScrollPhysics(),
                 children: items.map((item) {
                   return GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       print(item.title);
                     },
                     child: Column(
@@ -307,15 +307,23 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                                 width: size.width * 0.9,
                                 child: CachedNetworkImage(
                                   imageUrl: "${item.pic_url}",
-                                  fit: BoxFit.fill,                              
+                                  fit: BoxFit.fill,
                                   placeholder: (context, url) => SizedBox(
-                                    height: size.height * 0.001,
-                                    width: size.width * 0.001,
-                                    child: CircularProgressIndicator(strokeWidth: 1,)),
-                                  errorWidget: (context, url, error) => Image.asset('assets/images/noimages.jpg',fit: BoxFit.fill,),
+                                      height: size.height * 0.001,
+                                      width: size.width * 0.001,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                      )),
+                                  errorWidget: (context, url, error) => Image.asset(
+                                    'assets/images/noimages.jpg',
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               )
-                            : Image.asset('assets/images/noimages.jpg',fit: BoxFit.fill,),
+                            : Image.asset(
+                                'assets/images/noimages.jpg',
+                                fit: BoxFit.fill,
+                              ),
                         // แสดงภาพจาก assets
                         // Image.network(
                         //   item.pic_url!,

@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
       // LoadingDialog.close(context);
     } on Exception catch (e) {
       if (!mounted) return;
-      LoadingDialog.close(context);
+      // LoadingDialog.close(context);
       print(e);
     }
   }
@@ -606,81 +606,89 @@ class _HomePageState extends State<HomePage> {
                           size: size,
                           title: serviceTransporter[index].name ?? '',
                           press: () {
-                            if (serviceTransporter[index].name == 'ขนส่งทางบก') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Servicedetail(),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Servicedetail(
+                                  id: serviceTransporter[index].id!,
                                 ),
-                              );
-                            }
-                            if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Shipservicepage(),
-                                ),
-                              );
-                            }
-                            if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Fclpage1(),
-                                ),
-                              );
-                            }
-                            if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Lclpage(),
-                                ),
-                              );
-                            }
-                            if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Worldexport(),
-                                ),
-                              );
-                            }
-                            if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Correctimportservice(),
-                                ),
-                              );
-                            }
-                            if (index == 6) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Translaterguideservicepage(),
-                                ),
-                              );
-                            }
-                            if (index == 7) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ShippingCalculatorPage(),
-                                ),
-                              );
-                            }
-                            if (index == 8) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Importrate(),
-                                ),
-                              );
-                            }
-                            if (index == 9) {
-                              _showBottomSheet(context);
-                            }
+                              ),
+                            );
+                            // if (serviceTransporter[index].name == 'ขนส่งทางบก') {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Servicedetail(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Shipservicepage(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Fclpage1(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Lclpage(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Worldexport(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Correctimportservice(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (index == 6) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Translaterguideservicepage(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (index == 7) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => ShippingCalculatorPage(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (index == 8) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => Importrate(),
+                            //     ),
+                            //   );
+                            // }
+                            // if (index == 9) {
+                            //   _showBottomSheet(context);
+                            // }
                           },
                           imagespath: serviceTransporter[index].image ?? '');
                     },
@@ -826,7 +834,7 @@ class _HomePageState extends State<HomePage> {
                           TextSpan(
                             text: 'รหัสผู้นำเข้า: ',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 15,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                             ),
@@ -834,7 +842,7 @@ class _HomePageState extends State<HomePage> {
                           TextSpan(
                             text: '${importcard[0]['Importercode']}',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 15,
                               color: Colors.white,
                             ),
                           ),
@@ -851,7 +859,7 @@ class _HomePageState extends State<HomePage> {
                             TextSpan(
                               text: 'ส่งทางรถ: ',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -859,7 +867,7 @@ class _HomePageState extends State<HomePage> {
                             TextSpan(
                               text: '${importcard[0]['Sendbycar']}',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 color: Colors.white,
                               ),
                             ),
@@ -872,7 +880,7 @@ class _HomePageState extends State<HomePage> {
                             TextSpan(
                               text: 'ส่งทางเรือ: ',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -880,7 +888,7 @@ class _HomePageState extends State<HomePage> {
                             TextSpan(
                               text: '${importcard[0]['Sendbyboat']}',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 color: Colors.white,
                               ),
                             ),
@@ -1833,97 +1841,107 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(fontSize: 12, color: headingtext),
                                   ),
                                   onTap: () {
-                                    if (serviceTransporter[index].name == 'ขนส่งทางบก') {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Servicedetail(),
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Servicedetail(
+                                          id: serviceTransporter[index].id!,
                                         ),
-                                      );
-                                    }
-                                    if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Shipservicepage(),
-                                        ),
-                                      );
-                                    }
-                                    if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Fclpage1(),
-                                        ),
-                                      );
-                                    }
-                                    if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Lclpage(),
-                                        ),
-                                      );
-                                    }
-                                    if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Worldexport(),
-                                        ),
-                                      );
-                                    }
-                                    if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Correctimportservice(),
-                                        ),
-                                      );
-                                    }
-                                    if (index == 7) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Tourprivateservice()));
-                                    }
-                                    if (index == 8) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Bookingairservice()));
-                                    }
-                                    if (index == 9) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Translaterguideservicepage()));
-                                    }
-                                    if (index == 10) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Werehousesearch()));
-                                    }
-                                    if (index == 11) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Werehouseqc()));
-                                    }
-                                    if (index == 12) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Orderinapp()));
-                                    }
-                                    if (index == 13) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Alipayservice()));
-                                    }
-                                    if (index == 14) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Alliandwechatservice()));
-                                    }
-                                    if (index == 15) {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Termfee()));
-                                    }
-                                    if (index == 17) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ShippingCalculatorPage(),
-                                        ),
-                                      );
-                                    }
-                                    if (index == 16) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Importrate(),
-                                        ),
-                                      );
-                                    }
+                                      ),
+                                    );
+                                    // if (serviceTransporter[index].name == 'ขนส่งทางบก') {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => Servicedetail(
+                                    //         serviceTransporter: serviceTransporter[index],
+                                    //       ),
+                                    //     ),
+                                    //   );
+                                    // }
+                                    // if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => Shipservicepage(),
+                                    //     ),
+                                    //   );
+                                    // }
+                                    // if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => Fclpage1(),
+                                    //     ),
+                                    //   );
+                                    // }
+                                    // if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => Lclpage(),
+                                    //     ),
+                                    //   );
+                                    // }
+                                    // if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => Worldexport(),
+                                    //     ),
+                                    //   );
+                                    // }
+                                    // if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => Correctimportservice(),
+                                    //     ),
+                                    //   );
+                                    // }
+                                    // if (index == 7) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Tourprivateservice()));
+                                    // }
+                                    // if (index == 8) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Bookingairservice()));
+                                    // }
+                                    // if (index == 9) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Translaterguideservicepage()));
+                                    // }
+                                    // if (index == 10) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Werehousesearch()));
+                                    // }
+                                    // if (index == 11) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Werehouseqc()));
+                                    // }
+                                    // if (index == 12) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Orderinapp()));
+                                    // }
+                                    // if (index == 13) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Alipayservice()));
+                                    // }
+                                    // if (index == 14) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Alliandwechatservice()));
+                                    // }
+                                    // if (index == 15) {
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => Termfee()));
+                                    // }
+                                    // if (index == 17) {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => ShippingCalculatorPage(),
+                                    //     ),
+                                    //   );
+                                    // }
+                                    // if (index == 16) {
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => Importrate(),
+                                    //     ),
+                                    //   );
+                                    // }
                                   },
                                 ),
                                 CustomDivider(

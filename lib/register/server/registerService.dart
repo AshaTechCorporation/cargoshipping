@@ -1,4 +1,6 @@
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/rateShip.dart';
+import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -6,6 +8,7 @@ class RegisterService {
   const RegisterService();
 
   static Future register({
+    required String member_type,
     String? fname,
     String? lname,
     String? phone,
@@ -30,6 +33,7 @@ class RegisterService {
       url,
       headers: headers,
       body: convert.jsonEncode({
+        'member_type': member_type,
         'fname': fname,
         'lname': lname,
         'phone': phone,
@@ -49,6 +53,23 @@ class RegisterService {
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = convert.jsonDecode(response.body);
       return data;
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  static Future<List<RateShip>> getDataRegister({String? type}) async {
+    final url = Uri.https(publicUrl, '/api/get_question_master/$type');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => RateShip.fromJson(e)).toList();
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);

@@ -11,6 +11,7 @@ import 'package:cargoshipping/models/reportproblems.dart';
 import 'package:cargoshipping/models/searchpic1688.dart';
 import 'package:cargoshipping/models/searchpictaobao.dart';
 import 'package:cargoshipping/models/serviceTransporter.dart';
+import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -337,6 +338,19 @@ class HomeApi {
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
+    }
+  }
+
+  static Future<ServiceTransporter> getServiceByid({int? id}) async {
+    final url = Uri.https(publicUrl, '/api/services/$id');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      return ServiceTransporter.fromJson(data['data']);
+    } else {
+      throw Exception('Failed to load report with id: $id');
     }
   }
 

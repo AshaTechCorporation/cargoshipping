@@ -110,7 +110,7 @@ class _FirstPageState extends State<FirstPage> {
                           ),
                           Text(
                             'หน้าหลัก',
-                            style: TextStyle(fontSize: 14, color: red1),
+                            style: TextStyle(fontSize: 10, color: red1),
                           )
                         ],
                       )
@@ -124,7 +124,7 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'หน้าหลัก',
-                              style: TextStyle(fontSize: 14),
+                              style: TextStyle(fontSize: 10),
                             )
                           ],
                         ),
@@ -148,7 +148,7 @@ class _FirstPageState extends State<FirstPage> {
                           ),
                           Text(
                             'หมวดสินค้า',
-                            style: TextStyle(fontSize: 14, color: red1),
+                            style: TextStyle(fontSize: 10, color: red1),
                           )
                         ],
                       )
@@ -162,7 +162,7 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'หมวดสินค้า',
-                              style: TextStyle(fontSize: 14),
+                              style: TextStyle(fontSize: 10),
                             )
                           ],
                         ),
@@ -219,7 +219,7 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'รถเข็น',
-                              style: TextStyle(color: red1, fontSize: 14),
+                              style: TextStyle(color: red1, fontSize: 10),
                             )
                           ],
                         )
@@ -232,7 +232,7 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'รถเข็น',
-                              style: TextStyle(fontSize: 14),
+                              style: TextStyle(fontSize: 10),
                             )
                           ],
                         )),
@@ -253,7 +253,7 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'บัญชี',
-                              style: TextStyle(color: red1, fontSize: 14),
+                              style: TextStyle(color: red1, fontSize: 10),
                             )
                           ],
                         )
@@ -266,11 +266,11 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             Text(
                               'บัญชี',
-                              style: TextStyle(fontSize: 14),
+                              style: TextStyle(fontSize: 10),
                             )
                           ],
                         )),
-                SizedBox(
+              SizedBox(
                 width: 10,
               ),
             ],

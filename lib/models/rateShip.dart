@@ -9,6 +9,7 @@ class RateShip {
   String? vehicle;
   String? type;
   String? name;
+  String? option;
   String? kg;
   String? cbm;
   String? status;
@@ -19,6 +20,7 @@ class RateShip {
     this.vehicle,
     this.type,
     this.name,
+    this.option,
     this.kg,
     this.cbm,
     this.status,

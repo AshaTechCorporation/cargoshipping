@@ -61,140 +61,34 @@ const List<Map<String, dynamic>> myservice = [
   {'id': 1, 'name': 'ขนส่งทางบก', 'images': 'assets/icons/carservice.png'},
   {'id': 2, 'name': 'ขนส่งทางทะเล', 'images': 'assets/icons/shipservice.png'},
   {'id': 3, 'name': 'จัดส่งแบบ\nเหมาตู้ FCL', 'images': 'assets/icons/fcl.png'},
-  {
-    'id': 4,
-    'name': 'จัดส่งแบบ LCL\nทางเครื่องบิน',
-    'images': 'assets/icons/lcl.png'
-  },
-  {
-    'id': 5,
-    'name': 'บริการส่งออก\nสินค้าทั่วโลก',
-    'images': 'assets/icons/dellitohome.png'
-  },
-  {
-    'id': 6,
-    'name': 'บริการนำเข้า\nแบบถูกต้อง',
-    'images': 'assets/icons/withlisecse.png'
-  },
-  {
-    'id': 7,
-    'name': 'ล่าม ไกด์ทัวร์\nและหาสินค้า',
-    'images': 'assets/icons/translater.png'
-  },
+  {'id': 4, 'name': 'จัดส่งแบบ LCL\nทางเครื่องบิน', 'images': 'assets/icons/lcl.png'},
+  {'id': 5, 'name': 'บริการส่งออก\nสินค้าทั่วโลก', 'images': 'assets/icons/dellitohome.png'},
+  {'id': 6, 'name': 'บริการนำเข้า\nแบบถูกต้อง', 'images': 'assets/icons/withlisecse.png'},
+  {'id': 7, 'name': 'ล่าม ไกด์ทัวร์\nและหาสินค้า', 'images': 'assets/icons/translater.png'},
   {'id': 8, 'name': 'คำนวณ\nค่าขนส่ง', 'images': 'assets/icons/calculator.png'},
   {'id': 9, 'name': 'เรทราคานำเข้า', 'images': 'assets/icons/priceimport.png'},
   {'id': 10, 'name': 'อื่นๆ', 'images': 'assets/icons/etcservice.png'},
 ];
 
 const List<Map<String, dynamic>> allmyservice = [
-  {
-    'id': 1,
-    'name': 'ขนส่งทางบก',
-    'subtitle': 'นำเข้า Door to Door ทางบก',
-    'images': 'assets/icons/carservice.png'
-  },
-  {
-    'id': 2,
-    'name': 'ขนส่งทางทะเล',
-    'subtitle': 'นำเข้า Door to Door ทางทะเล',
-    'images': 'assets/icons/shipservice.png'
-  },
-  {
-    'id': 3,
-    'name': 'บริการนำเข้าแบบถูกต้อง',
-    'subtitle': 'บริการออกเอกสารนำเข้า โดยไม่มีค่าบริการขั้นต่ำ',
-    'images': 'assets/icons/correctimportlogo.png'
-  },
-  {
-    'id': 4,
-    'name': 'จัดส่งแบบเหมาตู้ FCL',
-    'subtitle': 'บริการขนส่งแบบเหมาตู้คอนเทนเนอร์',
-    'images': 'assets/icons/fcl.png'
-  },
-  {
-    'id': 5,
-    'name': 'จัดส่งแบบ LCLทางเครื่องบิน',
-    'subtitle': 'บริการขนส่งแบบแชร์พื้นที่ในตู้คอนเทนเนอร์',
-    'images': 'assets/icons/lcl.png'
-  },
-  {
-    'id': 6,
-    'name': 'บริการส่งออกสินค้าทั่วโลก',
-    'subtitle': 'บริการส่งออกสินค้าทุกประเทศทั่วโลก',
-    'images': 'assets/icons/dellitohome.png'
-  },
-  {
-    'id': 7,
-    'name': 'บริการชิปปิ้ง ดำเนินพิธีการศุลกากร',
-    'subtitle': 'บริการ SHIPPING เคลียร์สินค้า ภาษีศุลกากร',
-    'images': 'assets/icons/withlisecse.png'
-  },
-  {
-    'id': 8,
-    'name': 'บริการทัวร์ส่วนตัว',
-    'subtitle': 'บริการทัวร์แบบไกด์ 1:1',
-    'images': 'assets/icons/tourprivateicon.png'
-  },
-  {
-    'id': 9,
-    'name': 'บริการจองตั๋วเครื่องบิน',
-    'subtitle': '...',
-    'images': 'assets/icons/bookingairplane.png'
-  },
-  {
-    'id': 10,
-    'name': 'บริการไกด์ ล่าม และหาสินค้า',
-    'subtitle': 'บริการเจ้าหน้าที่ล่ามติดต่อโรงงาน และไกด์พาทัวร์ช็อปปิ้ง',
-    'images': 'assets/icons/translater.png'
-  },
-  {
-    'id': 11,
-    'name': 'บริการจัดหาโรงงาน',
-    'subtitle': 'บริการจัดหาโรงงานโดยไม่ผ่านร้านค้า',
-    'images': 'assets/icons/werehousesearch.png'
-  },
-  {
-    'id': 12,
-    'name': 'บริการตรวจสอบ QC สินค้าหน้าโรงงาน',
-    'subtitle': '...',
-    'images': 'assets/icons/werehouseqc.png'
-  },
-  {
-    'id': 13,
-    'name': 'บริการสั่งซื้อสินค้าผ่าน App',
-    'subtitle': '...',
-    'images': 'assets/icons/apporder.png'
-  },
-  {
-    'id': 14,
-    'name': 'บริการโอนชำระค่าสินค้า',
-    'subtitle': 'บริการโอนชำระค่าสินค้าเข้าธนาคาร และเติมเข้า Wallet',
-    'images': 'assets/icons/productpayment.png'
-  },
-  {
-    'id': 15,
-    'name': 'บริการเติม Alipay / WeChat',
-    'subtitle': 'บริการโอนเงินไปจีน/ฝากจ่ายค่าสินค้า เติมเงิน Alipay, Wechat ',
-    'images': 'assets/icons/aliandwechat.png'
-  },
-  {
-    'id': 16,
-    'name': 'บริการโอนเงินชำระค่าเทอม ',
-    'subtitle': '...',
-    'images': 'assets/icons/termfee.png'
-  },
-  {
-    'id': 17,
-    'name': 'เรทราคานำเข้า',
-    'subtitle': 'เรทราคานำเข้าจากพื้นที่ต่างๆ และบริการเสริม',
-    'images': 'assets/icons/priceimport.png'
-  },
-  {
-    'id': 18,
-    'name': 'คำนวณค่าขนส่ง',
-    'subtitle': 'คำนวณค่าขนส่งจากขนาดและน้ำหนักสินค้า',
-    'images': 'assets/icons/calculator.png'
-  },
+  {'id': 1, 'name': 'ขนส่งทางบก', 'subtitle': 'นำเข้า Door to Door ทางบก', 'images': 'assets/icons/carservice.png'},
+  {'id': 2, 'name': 'ขนส่งทางทะเล', 'subtitle': 'นำเข้า Door to Door ทางทะเล', 'images': 'assets/icons/shipservice.png'},
+  {'id': 3, 'name': 'บริการนำเข้าแบบถูกต้อง', 'subtitle': 'บริการออกเอกสารนำเข้า โดยไม่มีค่าบริการขั้นต่ำ', 'images': 'assets/icons/correctimportlogo.png'},
+  {'id': 4, 'name': 'จัดส่งแบบเหมาตู้ FCL', 'subtitle': 'บริการขนส่งแบบเหมาตู้คอนเทนเนอร์', 'images': 'assets/icons/fcl.png'},
+  {'id': 5, 'name': 'จัดส่งแบบ LCLทางเครื่องบิน', 'subtitle': 'บริการขนส่งแบบแชร์พื้นที่ในตู้คอนเทนเนอร์', 'images': 'assets/icons/lcl.png'},
+  {'id': 6, 'name': 'บริการส่งออกสินค้าทั่วโลก', 'subtitle': 'บริการส่งออกสินค้าทุกประเทศทั่วโลก', 'images': 'assets/icons/dellitohome.png'},
+  {'id': 7, 'name': 'บริการชิปปิ้ง ดำเนินพิธีการศุลกากร', 'subtitle': 'บริการ SHIPPING เคลียร์สินค้า ภาษีศุลกากร', 'images': 'assets/icons/withlisecse.png'},
+  {'id': 8, 'name': 'บริการทัวร์ส่วนตัว', 'subtitle': 'บริการทัวร์แบบไกด์ 1:1', 'images': 'assets/icons/tourprivateicon.png'},
+  {'id': 9, 'name': 'บริการจองตั๋วเครื่องบิน', 'subtitle': '...', 'images': 'assets/icons/bookingairplane.png'},
+  {'id': 10, 'name': 'บริการไกด์ ล่าม และหาสินค้า', 'subtitle': 'บริการเจ้าหน้าที่ล่ามติดต่อโรงงาน และไกด์พาทัวร์ช็อปปิ้ง', 'images': 'assets/icons/translater.png'},
+  {'id': 11, 'name': 'บริการจัดหาโรงงาน', 'subtitle': 'บริการจัดหาโรงงานโดยไม่ผ่านร้านค้า', 'images': 'assets/icons/werehousesearch.png'},
+  {'id': 12, 'name': 'บริการตรวจสอบ QC สินค้าหน้าโรงงาน', 'subtitle': '...', 'images': 'assets/icons/werehouseqc.png'},
+  {'id': 13, 'name': 'บริการสั่งซื้อสินค้าผ่าน App', 'subtitle': '...', 'images': 'assets/icons/apporder.png'},
+  {'id': 14, 'name': 'บริการโอนชำระค่าสินค้า', 'subtitle': 'บริการโอนชำระค่าสินค้าเข้าธนาคาร และเติมเข้า Wallet', 'images': 'assets/icons/productpayment.png'},
+  {'id': 15, 'name': 'บริการเติม Alipay / WeChat', 'subtitle': 'บริการโอนเงินไปจีน/ฝากจ่ายค่าสินค้า เติมเงิน Alipay, Wechat ', 'images': 'assets/icons/aliandwechat.png'},
+  {'id': 16, 'name': 'บริการโอนเงินชำระค่าเทอม ', 'subtitle': '...', 'images': 'assets/icons/termfee.png'},
+  {'id': 17, 'name': 'เรทราคานำเข้า', 'subtitle': 'เรทราคานำเข้าจากพื้นที่ต่างๆ และบริการเสริม', 'images': 'assets/icons/priceimport.png'},
+  {'id': 18, 'name': 'คำนวณค่าขนส่ง', 'subtitle': 'คำนวณค่าขนส่งจากขนาดและน้ำหนักสินค้า', 'images': 'assets/icons/calculator.png'},
 ];
 
 const List<String> topup = ['เติมเงิน', 'ถอนเงิน'];
@@ -204,75 +98,30 @@ const List<String> aboutQuestion = [
   'เกี่ยวกับ TEG Cargo',
 ];
 const List<Map<String, dynamic>> myorder = [
-  {
-    'id': 1,
-    'name': 'รอตรวจสอบคำสั่งซื้อ',
-    'images': 'assets/images/ordercheck.png'
-  },
-  {
-    'id': 2,
-    'name': 'รอชำระคำสั่งซื้อ',
-    'images': 'assets/images/watingpayment.png'
-  },
-  {
-    'id': 3,
-    'name': 'ร้านค้าเตรียมจัดส่ง',
-    'images': 'assets/images/shoppacking.png'
-  },
-  {
-    'id': 4,
-    'name': 'จัดส่งสินค้าแล้ว',
-    'images': 'assets/images/deliordersucces.png'
-  },
+  {'id': 1, 'name': 'รอตรวจสอบคำสั่งซื้อ', 'images': 'assets/images/ordercheck.png'},
+  {'id': 2, 'name': 'รอชำระคำสั่งซื้อ', 'images': 'assets/images/watingpayment.png'},
+  {'id': 3, 'name': 'ร้านค้าเตรียมจัดส่ง', 'images': 'assets/images/shoppacking.png'},
+  {'id': 4, 'name': 'จัดส่งสินค้าแล้ว', 'images': 'assets/images/deliordersucces.png'},
   {'id': 5, 'name': 'ยกเลิก', 'images': 'assets/images/cancelorder.png'},
 ];
 
 const List<Map<String, dynamic>> orderlist = [
-  {
-    'id': 1,
-    'name': 'ถึงโกดังจีน',
-    'images': 'assets/images/warehousechinese.png'
-  },
-  {
-    'id': 2,
-    'name': 'อยู่ระหว่างการขนส่ง',
-    'images': 'assets/images/shipprocess.png'
-  },
+  {'id': 1, 'name': 'ถึงโกดังจีน', 'images': 'assets/images/warehousechinese.png'},
+  {'id': 2, 'name': 'อยู่ระหว่างการขนส่ง', 'images': 'assets/images/shipprocess.png'},
   {'id': 3, 'name': 'ถึงโกดังไทย', 'images': 'assets/images/thaiwerehouse.png'},
-  {
-    'id': 4,
-    'name': 'รอชำระค่าขนส่ง',
-    'images': 'assets/images/waitingpayment.png'
-  },
+  {'id': 4, 'name': 'รอชำระค่าขนส่ง', 'images': 'assets/images/waitingpayment.png'},
   {'id': 5, 'name': 'จัดส่งสำเร็จ', 'images': 'assets/images/ordersucces.png'},
 ];
 
 const List<Map<String, dynamic>> listimportcorrect = [
-  {
-    'id': 1,
-    'name': 'นำเข้าถูกต้อง',
-    'images': 'assets/images/correctimport.png'
-  },
-  {
-    'id': 2,
-    'name': 'รอตรวจสอบเอกสาร',
-    'images': 'assets/images/waitforverifi.png'
-  },
+  {'id': 1, 'name': 'นำเข้าถูกต้อง', 'images': 'assets/images/correctimport.png'},
+  {'id': 2, 'name': 'รอตรวจสอบเอกสาร', 'images': 'assets/images/waitforverifi.png'},
   {'id': 3, 'name': 'รอชำระภาษี', 'images': 'assets/images/taxpayment.png'},
-  {
-    'id': 4,
-    'name': 'อยู่ระหว่างดำเนินการ',
-    'images': 'assets/images/duringprocess.png'
-  },
+  {'id': 4, 'name': 'อยู่ระหว่างดำเนินการ', 'images': 'assets/images/duringprocess.png'},
   {'id': 5, 'name': 'เสร็จสิน', 'images': 'assets/images/finish.png'},
 ];
 
-const List<String> listImport = [
-  'นำเข้าทางรถ',
-  'นำเข้าทางเรือ',
-  'เรทราคานำเข้า',
-  'การคำนวน\nค่าขนส่ง'
-];
+const List<String> listImport = ['นำเข้าทางรถ', 'นำเข้าทางเรือ', 'เรทราคานำเข้า', 'การคำนวน\nค่าขนส่ง'];
 
 const List<String> reccomproduct = [
   'ชั้นวางพลาสติกในครัว, \nชั้นวางของในห้องน้ําแบบไม่มีรู...',
@@ -323,8 +172,7 @@ const List<Map<String, dynamic>> listProducts = [
     'imagedetail2': 'assets/images/images25.png',
     'imagedetail3': 'assets/images/images26.png',
     'price': 4.88,
-    'detail':
-        'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มีรูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา, กล่องเก็บของ',
+    'detail': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มีรูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา, กล่องเก็บของ',
     'send': '48 ชั่วโมง',
     'sale': '5000+ '
   },
@@ -335,8 +183,7 @@ const List<Map<String, dynamic>> listProducts = [
     'imagedetail2': 'assets/images/images25.png',
     'imagedetail3': 'assets/images/images26.png',
     'price': 11.19,
-    'detail':
-        'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
+    'detail': 'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
     'send': '48 ชั่วโมง',
     'sale': '4000+ '
   },
@@ -347,8 +194,7 @@ const List<Map<String, dynamic>> listProducts = [
     'imagedetail2': 'assets/images/images25.png',
     'imagedetail3': 'assets/images/images26.png',
     'price': 9.40,
-    'detail':
-        'กางเกงขาสั้นผู้ชาย, กางเกงขาสั้นลําลอง, กางเกงใหญ่ผู้ชาย, ฤดูร้อนผู้ชาย, วัยรุ่น, วัยกลางคนและผู้สูงอายุ',
+    'detail': 'กางเกงขาสั้นผู้ชาย, กางเกงขาสั้นลําลอง, กางเกงใหญ่ผู้ชาย, ฤดูร้อนผู้ชาย, วัยรุ่น, วัยกลางคนและผู้สูงอายุ',
     'send': '48 ชั่วโมง',
     'sale': '3000+ '
   },
@@ -370,8 +216,7 @@ const List<Map<String, dynamic>> listProducts = [
     'imagedetail2': 'assets/images/images25.png',
     'imagedetail3': 'assets/images/images26.png',
     'price': 55.60,
-    'detail':
-        'เสื้อเบลเซอร์สีกาแฟผู้หญิง 2023 ฤดูใบไม้ผลิและฤดูใบไม้ร่วงชายตัวน้อยทอดถนนแฟชั่นใหม่',
+    'detail': 'เสื้อเบลเซอร์สีกาแฟผู้หญิง 2023 ฤดูใบไม้ผลิและฤดูใบไม้ร่วงชายตัวน้อยทอดถนนแฟชั่นใหม่',
     'send': '48 ชั่วโมง',
     'sale': '2000+ '
   },
@@ -382,8 +227,7 @@ const List<Map<String, dynamic>> listProducts = [
     'imagedetail2': 'assets/images/images25.png',
     'imagedetail3': 'assets/images/images26.png',
     'price': 23,
-    'detail':
-        'เสื้อคาร์ดิแกนเสื้อถักทับแจ็คเก็ตผู้หญิงรุ่นเกาหลีของฤดูใบไม้ร่วง',
+    'detail': 'เสื้อคาร์ดิแกนเสื้อถักทับแจ็คเก็ตผู้หญิงรุ่นเกาหลีของฤดูใบไม้ร่วง',
     'send': '48 ชั่วโมง',
     'sale': '1000+ '
   },
@@ -442,27 +286,9 @@ List<MenuItem> menuItems = [
 ];
 
 const List<Map<String, dynamic>> ordersum = [
-  {
-    'id': 1,
-    'month': 'สิงหาคม 2567',
-    'amount': '00,000 บาท',
-    'detailLink': 'ดูรายละเอียด',
-    'images': 'assets/icons/ordermont.png'
-  },
-  {
-    'id': 2,
-    'month': 'กรกฎาคม 2567',
-    'amount': '00,000 บาท',
-    'detailLink': 'ดูรายละเอียด',
-    'images': 'assets/icons/ordermont.png'
-  },
-  {
-    'id': 3,
-    'month': 'มิถุนายน 2567',
-    'amount': '00,000 บาท',
-    'detailLink': 'ดูรายละเอียด',
-    'images': 'assets/icons/ordermont.png'
-  }
+  {'id': 1, 'month': 'สิงหาคม 2567', 'amount': '00,000 บาท', 'detailLink': 'ดูรายละเอียด', 'images': 'assets/icons/ordermont.png'},
+  {'id': 2, 'month': 'กรกฎาคม 2567', 'amount': '00,000 บาท', 'detailLink': 'ดูรายละเอียด', 'images': 'assets/icons/ordermont.png'},
+  {'id': 3, 'month': 'มิถุนายน 2567', 'amount': '00,000 บาท', 'detailLink': 'ดูรายละเอียด', 'images': 'assets/icons/ordermont.png'}
 ];
 
 const List<Map<String, dynamic>> transport = [
@@ -472,22 +298,10 @@ const List<Map<String, dynamic>> transport = [
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
     'images': 'assets/icons/ordermont.png',
-    'detailmonth':[
-      {
-        'po':'A56345',
-        'succes': '20 ส.ค. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A12345',
-        'succes': '21 ส.ค. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A44545',
-        'succes': '26 ส.ค. 67',
-        'cbm':'00,'
-      },
+    'detailmonth': [
+      {'po': 'A56345', 'succes': '20 ส.ค. 67', 'cbm': '00,'},
+      {'po': 'A12345', 'succes': '21 ส.ค. 67', 'cbm': '00,'},
+      {'po': 'A44545', 'succes': '26 ส.ค. 67', 'cbm': '00,'},
     ]
   },
   {
@@ -496,22 +310,10 @@ const List<Map<String, dynamic>> transport = [
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
     'images': 'assets/icons/ordermont.png',
-    'detailmonth':[
-      {
-        'po':'A56345',
-        'succes': '20 ก.ค. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A12345',
-        'succes': '21 ก.ค. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A44545',
-        'succes': '26 ก.ค. 67',
-        'cbm':'00,'
-      },
+    'detailmonth': [
+      {'po': 'A56345', 'succes': '20 ก.ค. 67', 'cbm': '00,'},
+      {'po': 'A12345', 'succes': '21 ก.ค. 67', 'cbm': '00,'},
+      {'po': 'A44545', 'succes': '26 ก.ค. 67', 'cbm': '00,'},
     ]
   },
   {
@@ -520,22 +322,10 @@ const List<Map<String, dynamic>> transport = [
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
     'images': 'assets/icons/ordermont.png',
-    'detailmonth':[
-      {
-        'po':'A56345',
-        'succes': '20 ม.ย. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A12345',
-        'succes': '21 ม.ย. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A44545',
-        'succes': '26 ม.ย. 67',
-        'cbm':'00,'
-      },
+    'detailmonth': [
+      {'po': 'A56345', 'succes': '20 ม.ย. 67', 'cbm': '00,'},
+      {'po': 'A12345', 'succes': '21 ม.ย. 67', 'cbm': '00,'},
+      {'po': 'A44545', 'succes': '26 ม.ย. 67', 'cbm': '00,'},
     ]
   },
   {
@@ -544,22 +334,10 @@ const List<Map<String, dynamic>> transport = [
     'amount': '00,000 บาท',
     'detailLink': 'ดูรายละเอียด',
     'images': 'assets/icons/ordermont.png',
-    'detailmonth':[
-      {
-        'po':'A56345',
-        'succes': '20 มี.ค. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A12345',
-        'succes': '21 มี.ค. 67',
-        'cbm':'00,'
-      },
-      {
-        'po':'A44545',
-        'succes': '26 มี.ค. 67',
-        'cbm':'00,'
-      },
+    'detailmonth': [
+      {'po': 'A56345', 'succes': '20 มี.ค. 67', 'cbm': '00,'},
+      {'po': 'A12345', 'succes': '21 มี.ค. 67', 'cbm': '00,'},
+      {'po': 'A44545', 'succes': '26 มี.ค. 67', 'cbm': '00,'},
     ]
   }
 ];
@@ -600,18 +378,8 @@ List<Map<String, dynamic>> itemfav = [
   {
     'storeName': '1688严选店',
     'storeItems': [
-      {
-        'id': 1,
-        'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
-        'imageAssetPath': 'assets/images/shelf.png',
-        'send': '4000'
-      },
-      {
-        'id': 2,
-        'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...',
-        'imageAssetPath': 'assets/images/shelf.png',
-        'send': '5000'
-      },
+      {'id': 1, 'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...', 'imageAssetPath': 'assets/images/shelf.png', 'send': '4000'},
+      {'id': 2, 'name': 'ชั้นวางพลาสติกในครัว, ชั้นวางของในห...', 'imageAssetPath': 'assets/images/shelf.png', 'send': '5000'},
     ],
   },
   {
@@ -619,18 +387,11 @@ List<Map<String, dynamic>> itemfav = [
     'storeItems': [
       {
         'id': 1,
-        'name':
-            'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
+        'name': 'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
         'imageAssetPath': 'assets/images/box.png',
         'send': '4000'
       },
-      {
-        'id': 2,
-        'name':
-            'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
-        'imageAssetPath': 'assets/images/headband.png',
-        'send': '4000'
-      },
+      {'id': 2, 'name': 'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน', 'imageAssetPath': 'assets/images/headband.png', 'send': '4000'},
     ],
   },
 ];
@@ -703,12 +464,7 @@ List<Map<String, dynamic>> problemData = [
     'id': 6,
     'imagePath': 'assets/icons/bills.png', //no images
     'title': 'ปัญหาด้านเว็บไซต์',
-    'options': [
-      'เว็บไซต์ใช้งานยาก',
-      'เว็บไซต์แสดงผลไม่ถูกต้อง',
-      'ไม่สามารถแจ้งปัญหาได้',
-      'ไม่สามารถเพิ่มตะกร้าเข้าสินค้าได้'
-    ],
+    'options': ['เว็บไซต์ใช้งานยาก', 'เว็บไซต์แสดงผลไม่ถูกต้อง', 'ไม่สามารถแจ้งปัญหาได้', 'ไม่สามารถเพิ่มตะกร้าเข้าสินค้าได้'],
   },
   {
     'id': 7,
@@ -722,12 +478,7 @@ List<Map<String, dynamic>> problemData = [
     'id': 8,
     'imagePath': 'assets/icons/bills.png', //no images
     'title': 'สอบถามข้อมูลเพิ่มเติม',
-    'options': [
-      'แนะนำการบริการ',
-      'สอบถามข้อมูลเพิ่มเติม',
-      'บริการล่ามและค้นหาค้นหาสินค้า',
-      'ร้องเรียนการบริการ'
-    ],
+    'options': ['แนะนำการบริการ', 'สอบถามข้อมูลเพิ่มเติม', 'บริการล่ามและค้นหาค้นหาสินค้า', 'ร้องเรียนการบริการ'],
   },
   {
     'id': 9,
@@ -883,60 +634,18 @@ final List<String> imgList = [
 ];
 
 const List<Map<String, dynamic>> topuphis = [
-  {
-    'id': 1,
-    'date': '26 ก.ย. 67',
-    'time': '16:50:54',
-    'detailLink': 'ดูรายละเอียด',
-    'by': 'mobile banking',
-    'amount': '500.00'
-  },
-  {
-    'id': 2,
-    'date': '26 ก.ย. 67',
-    'time': '16:50:54',
-    'detailLink': 'ดูรายละเอียด',
-    'by': 'mobile banking',
-    'amount': '500.00'
-  }
+  {'id': 1, 'date': '26 ก.ย. 67', 'time': '16:50:54', 'detailLink': 'ดูรายละเอียด', 'by': 'mobile banking', 'amount': '500.00'},
+  {'id': 2, 'date': '26 ก.ย. 67', 'time': '16:50:54', 'detailLink': 'ดูรายละเอียด', 'by': 'mobile banking', 'amount': '500.00'}
 ];
 
 const List<Map<String, dynamic>> withdrownhis = [
-  {
-    'id': 1,
-    'date': '26 ก.ย. 67',
-    'time': '16:50:54',
-    'detailLink': 'ดูรายละเอียด',
-    'by': 'mobile banking',
-    'amount': '500.00'
-  },
-  {
-    'id': 2,
-    'date': '26 ก.ย. 67',
-    'time': '16:50:54',
-    'detailLink': 'ดูรายละเอียด',
-    'by': 'mobile banking',
-    'amount': '500.00'
-  }
+  {'id': 1, 'date': '26 ก.ย. 67', 'time': '16:50:54', 'detailLink': 'ดูรายละเอียด', 'by': 'mobile banking', 'amount': '500.00'},
+  {'id': 2, 'date': '26 ก.ย. 67', 'time': '16:50:54', 'detailLink': 'ดูรายละเอียด', 'by': 'mobile banking', 'amount': '500.00'}
 ];
 
 const List<Map<String, dynamic>> statement = [
-  {
-    'id': 1,
-    'po': ' A523456',
-    'time': '20 ส.ค. 67 10:00',
-    'detailLink': 'ดูรายละเอียด',
-    'by': 'ค่าบริการ',
-    'amount': '00,000'
-  },
-  {
-    'id': 2,
-    'po': ' A523226',
-    'time': '21 ส.ค. 67 12:02',
-    'detailLink': 'ดูรายละเอียด',
-    'by': 'ค่าสินค้า',
-    'amount': '00,000'
-  },
+  {'id': 1, 'po': ' A523456', 'time': '20 ส.ค. 67 10:00', 'detailLink': 'ดูรายละเอียด', 'by': 'ค่าบริการ', 'amount': '00,000'},
+  {'id': 2, 'po': ' A523226', 'time': '21 ส.ค. 67 12:02', 'detailLink': 'ดูรายละเอียด', 'by': 'ค่าสินค้า', 'amount': '00,000'},
 ];
 
 const List<Map<String, dynamic>> accumulatedpoints = [
@@ -987,8 +696,7 @@ List<Map<String, dynamic>> cart = [
       },
       {
         'id': 2,
-        'name':
-            'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
+        'name': 'กล่องเก็บผ้าฝ้ายและผ้าลินิน Tianshan, ตะกร้าเก็บเสื้อผ้าในครัวเรือน,กล่องเก็บกํามะหยี่,ที่เก็บผ้านวม',
         'imageAssetPath': 'assets/images/box.png',
         'price': '¥4.28',
         'color': [
@@ -1004,8 +712,7 @@ List<Map<String, dynamic>> cart = [
     'storeItems': [
       {
         'id': 1,
-        'name':
-            'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
+        'name': 'ผ้าพันคอลายพรางผ้าไหมมัลติฟังก์ชั่น, ผ้าพันคอฤดูร้อนปั่นจักรยาน',
         'imageAssetPath': 'assets/images/headband.png',
         'price': '¥1.42',
         'color': [
