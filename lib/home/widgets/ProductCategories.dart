@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class ProductCategories extends StatelessWidget {
   final Size size;
   final String title;
@@ -28,8 +29,8 @@ class ProductCategories extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               image: DecorationImage(
-                image: AssetImage(imagespath),
-                //image: NetworkImage(imagespath),
+                // image: AssetImage(imagespath),
+                image: NetworkImage(imagespath),
                 fit: BoxFit.fill,
               ),
             ),

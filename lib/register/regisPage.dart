@@ -14,21 +14,31 @@ class registerpage extends StatefulWidget {
 class _registerpageState extends State<registerpage> {
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _reccomController = TextEditingController();
   final TextEditingController _telController = TextEditingController();
   final TextEditingController _importercodeController = TextEditingController();
   final TextEditingController _birthController = TextEditingController();
+  final TextEditingController zipcode = TextEditingController();
 // dropdown
   final List<String> subdistrict = [
     '1',
     '2',
   ];
-  final List<String> zipcode = [
-    '3',
-    '4',
+  // final List<String> zipcode = [
+  //   '3',
+  //   '4',
+  // ];
+
+  final List<String> provice = [
+    '5',
+    '1',
+  ];
+
+  final List<String> district = [
+    '1',
+    '2',
   ];
 
   final List<String> _formatsent = [
@@ -64,6 +74,10 @@ class _registerpageState extends State<registerpage> {
 
   String? selectedformatsent;
 
+  String? selectedprovice;
+
+  String? selecteddistrict;
+
   String? selectedsendoften;
 
   String? selectedimporttype;
@@ -87,8 +101,7 @@ class _registerpageState extends State<registerpage> {
           alignment: Alignment.centerLeft,
           child: Text(
             'ลงทะเบียนผู้ใช้งาน',
-            style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
         bottom: PreferredSize(
@@ -127,8 +140,7 @@ class _registerpageState extends State<registerpage> {
                     decoration: InputDecoration(
                       hintText: 'ชื่อ',
                       labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -162,8 +174,7 @@ class _registerpageState extends State<registerpage> {
                     decoration: InputDecoration(
                       hintText: 'นามสกุล',
                       labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -193,8 +204,7 @@ class _registerpageState extends State<registerpage> {
                     decoration: InputDecoration(
                       hintText: 'เบอร์มือถือ',
                       labelStyle: TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -224,8 +234,7 @@ class _registerpageState extends State<registerpage> {
                     decoration: InputDecoration(
                       hintText: 'วันเกิด',
                       labelStyle: TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -254,10 +263,7 @@ class _registerpageState extends State<registerpage> {
                           padding: EdgeInsets.only(left: size.width * 0.01),
                           child: Text(
                             'เพศ',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey),
                           ),
                         ),
                         SizedBox(
@@ -276,12 +282,8 @@ class _registerpageState extends State<registerpage> {
                           child: Container(
                             height: size.height * 0.043,
                             width: size.width * 0.2,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: Colors.grey,
-                                    width: size.width * 0.001)),
+                            decoration:
+                                BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.grey, width: size.width * 0.001)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -302,9 +304,7 @@ class _registerpageState extends State<registerpage> {
                                 ),
                                 Text(
                                   'ชาย',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600),
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -326,11 +326,7 @@ class _registerpageState extends State<registerpage> {
                       child: Container(
                         height: size.height * 0.043,
                         width: size.width * 0.2,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: Colors.grey, width: size.width * 0.001)),
+                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.grey, width: size.width * 0.001)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -351,8 +347,7 @@ class _registerpageState extends State<registerpage> {
                             ),
                             Text(
                               'หญิง',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -371,8 +366,7 @@ class _registerpageState extends State<registerpage> {
                     decoration: InputDecoration(
                       hintText: 'รหัสผู้นำเข้า',
                       labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -417,8 +411,7 @@ class _registerpageState extends State<registerpage> {
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'รหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                     ),
                     obscureText: true,
                   ),
@@ -450,8 +443,7 @@ class _registerpageState extends State<registerpage> {
                       suffixIcon: Icon(Icons.remove_red_eye_outlined),
                       hintText: 'ยืนยันรหัสผ่าน',
                       labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                     ),
                     obscureText: true,
                   ),
@@ -469,8 +461,7 @@ class _registerpageState extends State<registerpage> {
                     decoration: InputDecoration(
                       hintText: 'ผู้แนะนำ',
                       labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(
-                          top: size.height * 0.01, left: size.height * 0.02),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(
@@ -503,6 +494,138 @@ class _registerpageState extends State<registerpage> {
                   ],
                 ),
                 SizedBox(height: size.height * 0.02),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
+                  hint: const Text(
+                    'จังหวัด',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: provice
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'please select distict';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {},
+                  onSaved: (value) {
+                    selectedprovice = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
+                DropdownButtonFormField2<String>(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
+                  hint: const Text(
+                    'อำเภอ',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  items: district
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'please select distict';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {},
+                  onSaved: (value) {
+                    selecteddistrict = value.toString();
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.only(right: 8),
+                  ),
+                  iconStyleData: const IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                SizedBox(height: size.height * 0.01),
                 DropdownButtonFormField2<String>(
                   isExpanded: true,
                   decoration: InputDecoration(
@@ -569,71 +692,98 @@ class _registerpageState extends State<registerpage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
+                // DropdownButtonFormField2<String>(
+                //   isExpanded: true,
+                //   decoration: InputDecoration(
+                //     contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(15.0),
+                //       borderSide: BorderSide(
+                //         color: Colors.grey,
+                //         width: 0.5,
+                //       ),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(15.0),
+                //       borderSide: BorderSide(
+                //         color: Colors.grey,
+                //         width: 0.5,
+                //       ),
+                //     ),
+                //     fillColor: Colors.white,
+                //     filled: true,
+                //   ),
+                //   hint: const Text(
+                //     'รหัสไปรษณีย์',
+                //     style: TextStyle(fontSize: 14),
+                //   ),
+                //   items: zipcode
+                //       .map((item) => DropdownMenuItem<String>(
+                //             value: item,
+                //             child: Text(
+                //               item,
+                //               style: const TextStyle(
+                //                 fontSize: 14,
+                //               ),
+                //             ),
+                //           ))
+                //       .toList(),
+                //   validator: (value) {
+                //     if (value == null) {
+                //       return 'Please select zipcode.';
+                //     }
+                //     return null;
+                //   },
+                //   onChanged: (value) {
+                //     //
+                //   },
+                //   onSaved: (value) {
+                //     selectedzipcode = value.toString();
+                //   },
+                //   buttonStyleData: const ButtonStyleData(
+                //     padding: EdgeInsets.only(right: 8),
+                //   ),
+                //   iconStyleData: const IconStyleData(
+                //     icon: Icon(
+                //       Icons.keyboard_arrow_down,
+                //       color: Colors.black45,
+                //     ),
+                //     iconSize: 24,
+                //   ),
+                //   dropdownStyleData: DropdownStyleData(
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(15),
+                //     ),
+                //   ),
+                //   menuItemStyleData: const MenuItemStyleData(
+                //     padding: EdgeInsets.symmetric(horizontal: 16),
+                //   ),
+                // ),
+                SizedBox(
+                  height: size.height * 0.052,
+                  child: TextField(
+                    controller: zipcode,
+                    decoration: InputDecoration(
+                      hintText: 'รหัสไปรษณีย์',
+                      labelStyle: const TextStyle(),
+                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
+                      fillColor: Colors.white,
+                      filled: true,
                     ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'รหัสไปรษณีย์',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: zipcode
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Please select zipcode.';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    //
-                  },
-                  onSaved: (value) {
-                    selectedzipcode = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
@@ -1164,10 +1314,8 @@ class _registerpageState extends State<registerpage> {
                                 },
                             ),
                             TextSpan(
-                              text:
-                                  ' การสั่งซื้อและส่งตามนโยบายของ บริษัทฯและ ',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12),
+                              text: ' การสั่งซื้อและส่งตามนโยบายของ บริษัทฯและ ',
+                              style: TextStyle(color: Colors.black, fontSize: 12),
                             ),
                             TextSpan(
                               text: 'นโยบายความเป็นส่วนตัว',
@@ -1304,8 +1452,7 @@ class _registerpageState extends State<registerpage> {
         child: Container(
           width: double.infinity,
           height: size.height * 0.073,
-          decoration: BoxDecoration(
-              color: red1, borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(color: red1, borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: TextButton(
               onPressed: () {
@@ -1313,10 +1460,7 @@ class _registerpageState extends State<registerpage> {
               },
               child: Text(
                 'สมัครสมาชิก',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           ),

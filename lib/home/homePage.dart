@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
   List<ServiceTransporter> serviceTransporter = [];
   List<ServiceTransporter> storeTEG = [];
   List<RateShip> rateShip = [];
+  List<ServiceTransporter> categoryProduct = [];
   final ScrollController _scrollController = ScrollController();
   double appBarOpacity = 0.0;
   Color searchBarColor = Colors.transparent;
@@ -118,12 +119,14 @@ class _HomePageState extends State<HomePage> {
       final _service = await HomeApi.getService();
       final _store = await HomeApi.getStore();
       final _rateShip = await HomeApi.getRateShip();
+      final _categoryProduct = await HomeApi.getCategoryProduct();
       if (!mounted) return;
 
       setState(() {
         serviceTransporter = _service;
         storeTEG = _store;
         rateShip = _rateShip;
+        categoryProduct = _categoryProduct;
         for (var item in _rateShip) {
           groupedData.putIfAbsent(item.vehicle!, () => []).add(item);
         }
@@ -1610,7 +1613,7 @@ class _HomePageState extends State<HomePage> {
             //           ),
             //         ),
             //       ),
-            categories.isEmpty
+            categoryProduct.isEmpty
                 ? SizedBox()
                 : SizedBox(
                     height: size.height * 0.31,
@@ -1622,26 +1625,58 @@ class _HomePageState extends State<HomePage> {
                         mainAxisSpacing: 10,
                         childAspectRatio: 1.0,
                       ),
-                      itemCount: categories.length,
+                      itemCount: categoryProduct.length,
                       itemBuilder: (context, index) {
                         return ProductCategories(
                           size: size,
-                          title: categories[index].name!,
+                          title: categoryProduct[index].name!,
                           press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Detailproduct(
-                                  categories: categories[index],
-                                ),
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => Detailproduct(
+                            //       categories: categories[index],
+                            //     ),
+                            //   ),
+                            // );
                           },
-                          imagespath: 'assets/images/noimages.jpg',
+                          imagespath: categoryProduct[index].image ?? '',
                         );
                       },
                     ),
                   ),
+            // categories.isEmpty
+            //     ? SizedBox()
+            //     : SizedBox(
+            //         height: size.height * 0.31,
+            //         child: GridView.builder(
+            //           scrollDirection: Axis.horizontal,
+            //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //             crossAxisCount: 2,
+            //             crossAxisSpacing: 10,
+            //             mainAxisSpacing: 10,
+            //             childAspectRatio: 1.0,
+            //           ),
+            //           itemCount: categories.length,
+            //           itemBuilder: (context, index) {
+            //             return ProductCategories(
+            //               size: size,
+            //               title: categories[index].name!,
+            //               press: () {
+            //                 Navigator.push(
+            //                   context,
+            //                   MaterialPageRoute(
+            //                     builder: (context) => Detailproduct(
+            //                       categories: categories[index],
+            //                     ),
+            //                   ),
+            //                 );
+            //               },
+            //               imagespath: 'assets/images/noimages.jpg',
+            //             );
+            //           },
+            //         ),
+            //       ),
             // Wrap(
             //   spacing: 15,
             //   runSpacing: 10,
