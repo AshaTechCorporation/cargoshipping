@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                                   try {
                                     LoadingDialog.open(context);
                                     final _imageUpload = await UoloadService.uploadImage(selectedimage!);
-                                    if (_imageUpload['photo_test_url'] != null) {
+                                    if (_imageUpload != null) {
                                       final _imgcode = await HomeApi.uploadImage(imgcode: _imageUpload['photo_test_url']);
                                       if (_imgcode != null) {
                                         final _searchImage = await HomeApi.getItemSearchImg(searchImg: _imgcode, type: selectedValue);

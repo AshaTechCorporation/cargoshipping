@@ -4,10 +4,10 @@ import 'package:image_picker/image_picker.dart';
 class UoloadService {
   static uploadImage(XFile file) async {
     var formData = FormData.fromMap(
-      {'photo_test': await MultipartFile.fromFile(file.path, filename: file.name),},
+      {'image': await MultipartFile.fromFile(file.path, filename: file.name), 'path':'images/asset/'},
     );
 
-    final res = await Dio().post('https://cargo-api.dev-asha9.com/api/test/store',
+    final res = await Dio().post('https://cargo-api.dev-asha9.com/api/upload_images',
         data: formData, options: Options(headers: {'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>'}));
 
     if (res.statusCode == 200 || res.statusCode == 201) {
