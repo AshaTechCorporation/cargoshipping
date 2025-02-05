@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   dropdown_button2: ^2.3.9
   fan_carousel_image_slider: ^1.0.1
+  shared_preferences: ^2.0.20
   collection: ^1.18.0
   cached_network_image: ^3.3.1
   google_maps_flutter: ^2.5.0

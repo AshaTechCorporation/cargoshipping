@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/firstPage.dart';
 import 'package:cargoshipping/register/Agentpage.dart';
 import 'package:cargoshipping/register/legalpersonpage.dart';
 import 'package:cargoshipping/register/regisPage.dart';
+import 'package:cargoshipping/register/server/registerService.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -166,10 +172,115 @@ class _LoginPageState extends State<LoginPage> {
                   height: size.height * 0.059,
                   width: size.width * 0.9,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context, rootNavigator: true).pushReplacement(
-                        MaterialPageRoute(builder: (context) => FirstPage()),
-                      );
+                    onPressed: () async {
+                      LoadingDialog.open(context);
+                      try {
+                        final token = await RegisterService.login(_emailController.text, _passwordController.text, '', '');
+                        if (token != null) {
+                          final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                          final SharedPreferences prefs = await _prefs;
+                          await prefs.setString('token', token['token']);
+                          await prefs.setInt('userID', token['userID']);
+                          LoadingDialog.close(context);
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                        }
+                      } on ClientException catch (e) {
+                        LoadingDialog.close(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('แจ้งเตือน'),
+                                  content: Text(e.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('ตกลง'),
+                                    )
+                                  ],
+                                ));
+                      } on SocketException catch (e) {
+                        LoadingDialog.close(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('แจ้งเตือน'),
+                                  content: Text(e.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('ตกลง'),
+                                    )
+                                  ],
+                                ));
+                      } on HttpException catch (e) {
+                        LoadingDialog.close(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('แจ้งเตือน'),
+                                  content: Text(e.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('ตกลง'),
+                                    )
+                                  ],
+                                ));
+                      } on FormatException catch (e) {
+                        LoadingDialog.close(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('แจ้งเตือน'),
+                                  content: Text(e.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('ตกลง'),
+                                    )
+                                  ],
+                                ));
+                      } on Exception catch (e) {
+                        LoadingDialog.close(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('แจ้งเตือน'),
+                                  content: Text(e.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('ตกลง'),
+                                    )
+                                  ],
+                                ));
+                      } catch (e) {
+                        LoadingDialog.close(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('แจ้งเตือน'),
+                                  content: Text(e.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('ตกลง'),
+                                    )
+                                  ],
+                                ));
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 219, 18, 4),

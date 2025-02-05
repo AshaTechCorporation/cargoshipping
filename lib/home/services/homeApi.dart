@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/User/user.dart';
 import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
@@ -20,6 +21,27 @@ import 'dart:convert' as convert;
 
 class HomeApi {
   const HomeApi();
+
+  static Future<User> getUserById({required int id}) async {
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // final token = prefs.getString('token');
+    var headers = {
+      // 'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+    final url = Uri.https(publicUrl, '/api/member/$id');
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      return User.fromJson(data['data']);
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
 
   //เรียกดูข้อมูล Category
   static Future<List<Categories>> getCategories({required String name}) async {
