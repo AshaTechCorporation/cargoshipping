@@ -11,8 +11,8 @@ Provice _$ProviceFromJson(Map<String, dynamic> json) => Provice(
       (json['provinceCode'] as num?)?.toInt(),
       (json['districtCode'] as num?)?.toInt(),
       (json['subdistrictCode'] as num?)?.toInt(),
-      json['nameTH'] as String?,
       json['nameEn'] as String?,
+      json['nameTH'] as String?,
       (json['postalCode'] as num?)?.toInt(),
     );
 
@@ -21,7 +21,7 @@ Map<String, dynamic> _$ProviceToJson(Provice instance) => <String, dynamic>{
       'provinceCode': instance.provinceCode,
       'districtCode': instance.districtCode,
       'subdistrictCode': instance.subdistrictCode,
-      'nameTH': instance.nameTH,
       'nameEn': instance.nameEn,
+      'nameTH': instance.nameTH,
       'postalCode': instance.postalCode,
     };

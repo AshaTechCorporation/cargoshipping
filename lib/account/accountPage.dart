@@ -17,11 +17,13 @@ import 'package:cargoshipping/account/widgets/tagunlimited.dart';
 import 'package:cargoshipping/account/widgets/topupwidget.dart';
 import 'package:cargoshipping/account/widgets/werehousepage.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/correctimportpage.dart';
 import 'package:cargoshipping/home/widgets/importrate.dart';
 import 'package:cargoshipping/home/widgets/paperless.dart';
 import 'package:cargoshipping/home/widgets/shippingcalpage.dart';
 import 'package:cargoshipping/login/loginPage.dart';
+import 'package:cargoshipping/models/User/user.dart';
 import 'package:cargoshipping/track/chineseWarehouse.dart';
 import 'package:cargoshipping/track/inTransitPage.dart';
 import 'package:cargoshipping/track/readytosend.dart';
@@ -32,7 +34,9 @@ import 'package:cargoshipping/track/waitShippingPayment.dart';
 import 'package:cargoshipping/track/waitpurchase.dart';
 import 'package:cargoshipping/track/waitsumcard.dart';
 import 'package:cargoshipping/track/widgets/canclecard.dart';
+import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatefulWidget {
@@ -46,16 +50,49 @@ class _AccountPageState extends State<AccountPage> {
   bool isGuangzhouSelected = true;
   late SharedPreferences prefs;
   String? token;
+  int? userID;
+  User? user;
 
   @override
   void initState() {
     super.initState();
-    fristLoad();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await fristLoad();
+      if (userID != null) {
+        await getUser(userID!);
+      }
+    });
   }
 
   Future<void> fristLoad() async {
     prefs = await SharedPreferences.getInstance();
-    token = prefs.getString('token');
+    final _token = prefs.getString('token');
+    final userID1 = prefs.getInt('userID');
+    setState(() {
+      token = _token;
+      userID = userID1;
+    });
+  }
+
+  Future<void> getUser(int id) async {
+    try {
+      LoadingDialog.open(context);
+      final user1 = await HomeApi.getUserById(id: id);
+      if (!mounted) return;
+
+      setState(() {
+        user = user1;
+      });
+      LoadingDialog.close(context);
+    } on ClientException catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      print(e);
+    }
   }
 
   @override
@@ -123,13 +160,14 @@ class _AccountPageState extends State<AccountPage> {
                             Row(
                               children: [
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'A123456',
+                                      '${user?.code ?? ''}',
                                       style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      'Name Surname',
+                                      '${user?.fname ?? 'ยินดีต้อนรับ'} ${user?.lname ?? ''}',
                                       style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                                     )
                                   ],
