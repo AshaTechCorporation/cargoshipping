@@ -321,7 +321,18 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                   return GestureDetector(
                     onTap: () {
                       print(item.title);
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Itempage(
+                                    size: size,
+                                    title: title,
+                                    price: 4.88,
+                                    press: () {},
+                                    products: listProducts[0],
+                                    num_iid: item.num_iid!,
+                                    type: 'taobao',
+                                  )));
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,

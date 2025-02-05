@@ -7,8 +7,9 @@ class ItemImage {
   final String? name;
   final String? file_url;
   final String? status;
+  final String? url;
 
-  ItemImage(this.file_url, this.name, this.status);
+  ItemImage(this.file_url, this.name, this.status, this.url);
 
   factory ItemImage.fromJson(Map<String, dynamic> json) => _$ItemImageFromJson(json);
 

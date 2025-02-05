@@ -1,3 +1,4 @@
+import 'package:cargoshipping/models/itemimage.dart';
 import 'package:cargoshipping/models/propimgs.dart';
 import 'package:cargoshipping/models/props.dart';
 import 'package:cargoshipping/models/skus1688.dart';
@@ -49,6 +50,7 @@ class Itemt1688 {
   final int? sales;
   final String? shop_id;
   final String? format_check;
+  final List<ItemImage>? item_imgs;
 
 
   Itemt1688(
@@ -93,7 +95,8 @@ class Itemt1688 {
     this.express_fee,
     this.post_fee,
     this.rootCatId,
-    this.sales
+    this.sales,
+    this.item_imgs
   );
 
   factory Itemt1688.fromJson(Map<String, dynamic> json) => _$Itemt1688FromJson(json);

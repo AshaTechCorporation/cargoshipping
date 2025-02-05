@@ -5,6 +5,8 @@ import 'package:cargoshipping/models/categories.dart';
 import 'package:cargoshipping/models/item.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/itemsearch1688.dart';
+import 'package:cargoshipping/models/itemt1688.dart';
+import 'package:cargoshipping/models/itemtaobao.dart';
 import 'package:cargoshipping/models/problembodies.dart';
 import 'package:cargoshipping/models/problemtype.dart';
 import 'package:cargoshipping/models/rateShip.dart';
@@ -94,7 +96,7 @@ class HomeApi {
   }
 
   //ดูข้อมูลรายละเอียดสินค้า
-  static Future<ItemSearch> getItemDetail({required String num_id, required String type}) async {
+  static Future getItemDetail({required String num_id, required String type}) async {
     final url = Uri.https('api.icom.la', '/$type/api/call.php', {
       "item_get": '',
       "lang": 'zh-CN',
@@ -109,7 +111,12 @@ class HomeApi {
     );
     if (response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
-      return ItemSearch.fromJson(data['item']);
+      if (type == '1688') {
+        return Itemt1688.fromJson(data['item']);
+      } else {
+        return data['item'];
+      }
+      //return ItemSearch.fromJson(data['item']);
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);

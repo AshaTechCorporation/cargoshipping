@@ -184,13 +184,15 @@ class _ShoppingCategoriesState extends State<ShoppingCategories> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => itempage(
+                                  builder: (context) => Itempage(
                                     size: size,
                                     title: listProducts[index]['detail'],
                                     price: (listProducts[index]['price'] as num)
                                         .toDouble(),
                                     products: listProducts[index],
                                     press: () {},
+                                    num_iid: '721593979484',
+                                    type: 'taobao',
                                   ),
                                 ),
                               );

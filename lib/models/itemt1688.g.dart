@@ -55,6 +55,9 @@ Itemt1688 _$Itemt1688FromJson(Map<String, dynamic> json) => Itemt1688(
       json['post_fee'] as String?,
       (json['rootCatId'] as num?)?.toInt(),
       (json['sales'] as num?)?.toInt(),
+      (json['item_imgs'] as List<dynamic>?)
+          ?.map((e) => ItemImage.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$Itemt1688ToJson(Itemt1688 instance) => <String, dynamic>{
@@ -100,4 +103,5 @@ Map<String, dynamic> _$Itemt1688ToJson(Itemt1688 instance) => <String, dynamic>{
       'sales': instance.sales,
       'shop_id': instance.shop_id,
       'format_check': instance.format_check,
+      'item_imgs': instance.item_imgs,
     };

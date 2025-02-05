@@ -1,3 +1,4 @@
+import 'package:cargoshipping/models/itemimage.dart';
 import 'package:cargoshipping/models/propimgs.dart';
 import 'package:cargoshipping/models/props.dart';
 import 'package:cargoshipping/models/skus.dart';
@@ -11,26 +12,26 @@ class ItemTaobao {
   final String? num_iid;
   final String? title;
   final String? desc_short;
-  final double? price;
+  final String? price;
   final double? total_price;
   final double? suggestive_price;
   final double? orginal_price;
   final String? nick;
-  final int? num;
+  final String? num;
   final String? min_num;
   final String? detail_url;
   final String? pic_url;
   final String? brand;
-  final String? cid;
+  final int? cid;
   final String? created_time;
   final String? modified_time;
   final String? delist_time;
   final String? desc;
   final List<String>? desc_img;
-  final String? item_weight;
+  final double? item_weight;
   final String? item_size;
   final String? location;
-  final String? ems_fee;
+  final int? ems_fee;
   final String? shipping_to;
   final String? has_discount;
   final Video? video;
@@ -43,10 +44,11 @@ class ItemTaobao {
   final List<Props>? props;
   final String? total_sold;
   final Skus? skus;
-  final int? seller_id;
+  final String? seller_id;
   final String? shop_id;
   final List<PropImgs>? props_imgs;
   final String? format_check;
+  final List<ItemImage>? item_imgs;
 
 
   ItemTaobao(
@@ -88,7 +90,8 @@ class ItemTaobao {
     this.title,
     this.total_price,
     this.total_sold,
-    this.video
+    this.video,
+    this.item_imgs
   );
 
   factory ItemTaobao.fromJson(Map<String, dynamic> json) => _$ItemTaobaoFromJson(json);

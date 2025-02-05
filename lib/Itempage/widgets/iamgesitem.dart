@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class ImagesItem extends StatelessWidget {
   const ImagesItem( {
     super.key,
-    required this.products,
+    required this.image,
   });
 
-  final Map<String, dynamic> products;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class ImagesItem extends StatelessWidget {
       ),
       height: 470,
       alignment: Alignment.topCenter,
-      child: Image.asset(
-        products['image'],  // ใช้ products['image'] โดยตรง
+      child: Image.network(
+        image,  // ใช้ products['image'] โดยตรง
         fit: BoxFit.cover,
         width: double.infinity,
         height: double.infinity,
