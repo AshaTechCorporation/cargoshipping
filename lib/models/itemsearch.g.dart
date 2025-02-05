@@ -10,11 +10,11 @@ ItemSearch _$ItemSearchFromJson(Map<String, dynamic> json) => ItemSearch(
       json['detail_url'] as String?,
       json['num_iid'] as String?,
       json['pic_url'] as String?,
-      (json['price'] as num?)?.toInt(),
-      (json['promotion_price'] as num?)?.toInt(),
+      json['price'] as String?,
+      json['promotion_price'] as String?,
       (json['sales'] as num?)?.toInt(),
       json['title'] as String?,
-      (json['orginal_price'] as num?)?.toInt(),
+      json['orginal_price'] as String?,
       json['seller_id'] as String?,
     );
 

@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cargoshipping/Itempage/itempage.dart';
+import 'package:cargoshipping/cart/cartPage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/models/categories.dart';
@@ -319,6 +321,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                   return GestureDetector(
                     onTap: () {
                       print(item.title);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CartPage()));
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,

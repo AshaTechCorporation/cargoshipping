@@ -6,9 +6,9 @@ part 'itemsearch.g.dart';
 class ItemSearch {
   final String? title;
   final String? pic_url;
-  final int? price;
-  final int? promotion_price;
-  final int? orginal_price;
+  final String? price;
+  final String? promotion_price;
+  final String? orginal_price;
   final int? sales;  
   final String? num_iid;
   final String? seller_id;
