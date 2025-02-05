@@ -13,12 +13,13 @@ class ProductDetailsBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<ProductDetailsBottomSheet> createState() =>
-      _ProductDetailsBottomSheetState();
+  State<ProductDetailsBottomSheet> createState() => _ProductDetailsBottomSheetState();
 }
 
 class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
   String? selectedService;
+  int amount = 1;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -47,8 +48,8 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          widget.product['image'],
+                        child: Image.network(
+                          'https:${widget.product['pic_url']}',
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -87,11 +88,11 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    _buildColorOption('สีธูปแดง',context),
-                    _buildColorOption('สีขาวมวล',context),
-                    _buildColorOption('สีน้ำตาลอ่อน',context),
-                    _buildColorOption('สีเทาอ่อน',context),
-                    _buildColorOption('สีนอร์ดิกบลู',context),
+                    _buildColorOption('สีธูปแดง', context),
+                    _buildColorOption('สีขาวมวล', context),
+                    _buildColorOption('สีน้ำตาลอ่อน', context),
+                    _buildColorOption('สีเทาอ่อน', context),
+                    _buildColorOption('สีนอร์ดิกบลู', context),
                   ],
                 ),
                 SizedBox(height: size.height * 0.01),
@@ -101,11 +102,12 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   color: Colors.grey,
                 ),
                 SizedBox(height: size.height * 0.01),
-                Text('ตัวเลือก',style: TextStyle(
-                  fontSize: 13,color: Colors.black,fontWeight: FontWeight.bold
-                ),),
-                _buildOptionRow('ตัวเลือก', 'ข้อมูล','ตัวเลือก'),
-                _buildOptionRow('ตัวเลือก', 'ข้อมูล','ตัวเลือก'),
+                Text(
+                  'ตัวเลือก',
+                  style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                _buildOptionRow('ตัวเลือก', 'ข้อมูล', 'ตัวเลือก'),
+                _buildOptionRow('ตัวเลือก', 'ข้อมูล', 'ตัวเลือก'),
                 SizedBox(height: size.height * 0.01),
                 _buildQuantitySelector(size),
                 SizedBox(height: size.height * 0.01),
@@ -127,8 +129,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                 _buildPriceDetails(),
                 SizedBox(height: size.height * 0.06),
                 GestureDetector(
-                  onTap: widget
-                      .onButtonPress, // ใช้ฟังก์ชัน onButtonPress ที่ส่งมา
+                  onTap: widget.onButtonPress, // ใช้ฟังก์ชัน onButtonPress ที่ส่งมา
                   child: Center(
                     child: Container(
                       height: size.height * 0.067,
@@ -159,28 +160,28 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
   }
 
   Widget _buildColorOption(String colorName, BuildContext context) {
-  // รับค่า size ของหน้าจอ
-  final size = MediaQuery.of(context).size;
+    // รับค่า size ของหน้าจอ
+    final size = MediaQuery.of(context).size;
 
-  return Column(
-    children: [
-      Container(
-        // กำหนดขนาดของ Container โดยใช้ขนาดจาก size ของ MediaQuery
-        width: size.width * 0.25, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
-        height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.circular(8),
+    return Column(
+      children: [
+        Container(
+          // กำหนดขนาดของ Container โดยใช้ขนาดจาก size ของ MediaQuery
+          width: size.width * 0.25, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
+          height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
-      ),
-      SizedBox(height: size.height * 0.005), // เพิ่มขนาดให้สัมพันธ์กับหน้าจอ
-      Text(
-        colorName,
-        style: TextStyle(fontSize: size.height * 0.015), // กำหนดขนาดข้อความ
-      ),
-    ],
-  );
-}
+        SizedBox(height: size.height * 0.005), // เพิ่มขนาดให้สัมพันธ์กับหน้าจอ
+        Text(
+          colorName,
+          style: TextStyle(fontSize: size.height * 0.015), // กำหนดขนาดข้อความ
+        ),
+      ],
+    );
+  }
 
   Widget _buildOptionRow(String title, String value, String detail) {
     return Padding(
@@ -190,7 +191,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
         children: [
           Column(
             children: [
-              Text(title, style: TextStyle(fontSize: 13,color: Colors.black,fontWeight: FontWeight.bold)),
+              Text(title, style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold)),
               Text(detail, style: TextStyle(fontSize: 13)),
             ],
           ),
@@ -208,15 +209,25 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
         Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  if (amount > 1) {
+                    amount = amount - 1;
+                  }
+                });
+              },
               icon: Icon(Icons.remove),
             ),
             Text(
-              '50',
+              '${amount}',
               style: TextStyle(fontSize: 16),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  amount = amount + 1;
+                });
+              },
               icon: Icon(Icons.add),
             ),
           ],
@@ -248,18 +259,12 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
           children: [
             Text(
               title,
-              style: TextStyle(
-                  fontSize: 14,
-                  color: isSelected ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 14, color: isSelected ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
             Text(
               price,
-              style: TextStyle(
-                  fontSize: 12,
-                  color: isSelected ? Colors.white : Colors.grey,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 12, color: isSelected ? Colors.white : Colors.grey, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -268,12 +273,22 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
   }
 
   Widget _buildPriceDetails() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        Text('จำนวนสินค้า 50 ชิ้น', style: TextStyle(fontSize: 16)),
-        Text('¥11.19 (~฿55.56)',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('จำนวนสินค้า ${amount} ชิ้น', style: TextStyle(fontSize: 16)),
+            Text('¥${widget.product['price']} (~฿55.56)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('บริการเสริม ()', style: TextStyle(fontSize: 16)),
+            Text('¥500 (~฿2447.94)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
       ],
     );
   }

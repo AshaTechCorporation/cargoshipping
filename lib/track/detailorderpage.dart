@@ -702,19 +702,19 @@ class Detailordertrackpage extends StatelessWidget {
                   // print("ปุ่มส่งรายการสั่งซื้อถูกคลิก");
 
                   // แสดง dialog
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      Future.delayed(Duration(seconds: 2), () {
-                        Navigator.of(context)
-                            .pop(); // ปิด dialog หลังจาก 2 วินาที
-                      });
-                      return AlertDialog(
-                        title: Text('ยืนยันเรียบร้อยแล้ว'),
-                        content: Text('คำสั่งซื้อของคุณได้รับการยืนยันแล้ว'),
-                      );
-                    },
-                  );
+                  // showDialog(
+                  //   context: context,
+                  //   builder: (BuildContext context) {
+                  //     Future.delayed(Duration(seconds: 2), () {
+                  //       Navigator.of(context)
+                  //           .pop(); // ปิด dialog หลังจาก 2 วินาที
+                  //     });
+                  //     return AlertDialog(
+                  //       title: Text('ยืนยันเรียบร้อยแล้ว'),
+                  //       content: Text('คำสั่งซื้อของคุณได้รับการยืนยันแล้ว'),
+                  //     );
+                  //   },
+                  // );
                 },
                 child: Container(
                   height: size.height * 0.06,

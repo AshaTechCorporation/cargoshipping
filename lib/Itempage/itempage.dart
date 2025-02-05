@@ -431,7 +431,7 @@ class _ItempageState extends State<Itempage> {
                         SizedBox(
                           height: size.height * 0.015,
                         ),
-                        Image.asset('assets/images/Frame 100.png'),
+                        Image.network('https:${itemTaobao!['pic_url']}'),
                         Divider(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -634,7 +634,7 @@ class _ItempageState extends State<Itempage> {
                         ),
                         builder: (BuildContext context) {
                           return ProductDetailsBottomSheet(
-                            product: widget.products, // ส่งข้อมูลสินค้า
+                            product: itemTaobao!, // ส่งข้อมูลสินค้า
                             buttonLabel: 'ซื้อสินค้า', // แสดงข้อความปุ่มเป็น "ซื้อสินค้า"
                             onButtonPress: () {
                               Navigator.push(

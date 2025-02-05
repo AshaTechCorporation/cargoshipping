@@ -1,6 +1,7 @@
 import 'package:cargoshipping/Itempage/widgets/conditionstransport.dart';
 import 'package:cargoshipping/cart/widget/Custonredchechkbox.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/track/detailorderpage.dart';
 import 'package:flutter/material.dart';
 
 class Confirmorderpage extends StatefulWidget {
@@ -37,8 +38,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
         backgroundColor: background,
         title: Text(
           'ยืนยันการสั่งซื้อ',
-          style: TextStyle(
-              fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
@@ -126,13 +126,14 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                         children: [
                           Row(
                             children: [
-                              Image.asset('assets/icons/redtruck.png',
-                              height: size.height * 0.025,),
+                              Image.asset(
+                                'assets/icons/redtruck.png',
+                                height: size.height * 0.025,
+                              ),
                               SizedBox(width: size.width * 0.02),
                               Text(
                                 'รูปแบบการขนส่ง',
-                                style: TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -142,14 +143,12 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding:
-                                      EdgeInsets.only(left: size.width * 0.07),
+                                  padding: EdgeInsets.only(left: size.width * 0.07),
                                   child: Text('ขนส่งทางรถ'),
                                 ),
                                 Spacer(),
                                 Customredchechkbox(
-                                  isSelected:
-                                      carSelected, // ใช้ 'isSelected' แทน 'value'
+                                  isSelected: carSelected, // ใช้ 'isSelected' แทน 'value'
                                   onChanged: () {
                                     setState(() {
                                       handleCheckboxChanged('car');
@@ -167,18 +166,17 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding:
-                                      EdgeInsets.only(left: size.width * 0.07),
+                                  padding: EdgeInsets.only(left: size.width * 0.07),
                                   child: Text('ขนส่งทางเรือ'),
                                 ),
                                 Spacer(),
                                 Customredchechkbox(
-                                 isSelected: boatSelected,
-                                 onChanged: () {
-                                   setState(() {
-                                     handleCheckboxChanged('boat');
-                                   });
-                                 },
+                                  isSelected: boatSelected,
+                                  onChanged: () {
+                                    setState(() {
+                                      handleCheckboxChanged('boat');
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -186,26 +184,18 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                           SizedBox(height: size.height * 0.02),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Conditionstransport()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Conditionstransport()));
                             },
                             child: Row(
                               children: [
                                 Text(
                                   'เงื่อนไขการขนส่ง',
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
                                 ),
                                 Spacer(),
                                 Text(
                                   'เลือกเงื่อนไขการขนส่ง',
-                                  style: TextStyle(
-                                      color: red1, fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: red1, fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
                                   width: size.width * 0.03,
@@ -235,10 +225,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       padding: const EdgeInsets.only(left: 15),
                       child: Text(
                         'รายการสั่งซื้อสินค้า',
-                        style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     )
                   ],
@@ -249,8 +236,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                 child: Column(
                   children: [
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Container(
@@ -280,10 +266,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                                       'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
+                                      style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                                     ),
                                     SizedBox(height: size.height * 0.01),
                                     Text('สีขาวนวล'),
@@ -294,10 +277,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                                         Spacer(),
                                         Text(
                                           'จำนวน 50',
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500),
+                                          style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w500),
                                         )
                                       ],
                                     ),
@@ -310,8 +290,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Container(
@@ -341,10 +320,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                                       'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
+                                      style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                                     ),
                                     SizedBox(height: size.height * 0.01),
                                     Text('สีขาวนวล'),
@@ -355,10 +331,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                                         Spacer(),
                                         Text(
                                           'จำนวน 50',
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500),
+                                          style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w500),
                                         )
                                       ],
                                     ),
@@ -382,24 +355,17 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       height: size.height * 0.01,
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'หมายเหตุเพิ่มเติม',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(fontSize: 13, color: greyuserinfo, fontWeight: FontWeight.w500),
                           ),
                           Text(
                             'ฝากข้อความหมายเหตุ',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(fontSize: 13, color: greyuserinfo, fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
@@ -408,34 +374,24 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       height: size.height * 0.01,
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
                       child: Row(
                         children: [
                           Text(
                             'ยอดรวมคำสั่งซื้อทั้งหมด (100 ชิ้น):',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600),
+                            style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                           ),
                           Spacer(),
                           Text(
                             '¥ 488',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: red1,
-                                fontWeight: FontWeight.w700),
+                            style: TextStyle(fontSize: 16, color: red1, fontWeight: FontWeight.w700),
                           ),
                           SizedBox(
                             width: size.width * 0.02,
                           ),
                           Text(
                             '(~฿ 2,345.53 B)',
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: red1,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(fontSize: 11, color: red1, fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
@@ -453,10 +409,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                 child: Text(
                   'อัตราแลกเปลี่ยน ณ วันที่ 00 ส.ค. 00 (00:00:00)\n4.8851 หยวนจีนต่อบาทไทย',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color(0xff004aad),
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Color(0xff004aad), fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(
@@ -492,28 +445,19 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                           ),
                           Text(
                             'ตีลังไม้',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600),
+                            style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                           ),
                           Spacer(),
                           Text(
                             '¥ 500',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             width: size.width * 0.01,
                           ),
                           Text(
                             '(~฿ 2,447.94)',
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 11, color: Colors.black, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -558,28 +502,19 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                         children: [
                           Text(
                             'ยอดรวมค่าบริการเสริมทั้งหมด:',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600),
+                            style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                           ),
                           Spacer(),
                           Text(
                             '¥ 500',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: red1,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, color: red1, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             width: size.width * 0.01,
                           ),
                           Text(
                             '(~฿ 2,447.94)',
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: red1,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 11, color: red1, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -595,8 +530,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                 child: Text(
                   '*ค่าบริการเสริมขึ้นอยู่กับขนาดสินค้า จะแจ้งค่าใช้จ่ายเมื่อพัสดุถึงโกดังจีน',
                   textAlign: TextAlign.right,
-                  style: TextStyle(
-                      fontSize: 11, color: red1, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 11, color: red1, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(
@@ -618,31 +552,23 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       height: size.height * 0.01,
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.08),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
                       child: Row(
                         children: [
                           Text(
                             'ค่าขนส่งจีน - จีน',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
                           ),
                           Spacer(),
                           Text(
                             '฿ 0',
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.08),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
                       child: Row(
                         children: [
                           Text('รอสรุปยอดขนส่ง'),
@@ -661,18 +587,14 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       height: size.height * 0.006,
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('ยอดรวมค่าขนส่งในจีนทั้งหมด'),
                           Text(
                             'รอสรุปยอด',
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: greyuserinfo,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 17, color: greyuserinfo, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -730,7 +652,10 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
               GestureDetector(
                 onTap: () {
                   // ใส่โค้ดที่จะทำเมื่อคลิกปุ่ม
-                  print("ปุ่มส่งรายการสั่งซื้อถูกคลิก");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Detailordertrackpage()),
+                  );
                 },
                 child: Container(
                   height: size.height * 0.06,
