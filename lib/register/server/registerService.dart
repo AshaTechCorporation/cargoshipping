@@ -1,12 +1,43 @@
+import 'dart:io';
+
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/rateShip.dart';
 import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:cargoshipping/models/serviceTransporterById.dart';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class RegisterService {
   const RegisterService();
+
+  static Future login(
+    String username,
+    String password,
+    String device_no,
+    String notify_token,
+  ) async {
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // final domain = prefs.getString('domain');
+    final url = Uri.https(publicUrl, '/api/login_app');
+    final response = await http.post(url, body: {
+      'importer_code': username,
+      "password": password,
+      'device_no': device_no,
+      'notify_token': notify_token,
+    }).timeout(const Duration(minutes: 1));
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final dataOut = {'token': data['token'], "userID": data['data']['id']};
+      return dataOut;
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+      // throw ApiException(data['message']);
+    }
+  }
 
   static Future register({
     required String member_type,
@@ -18,6 +49,13 @@ class RegisterService {
     String? gender,
     String? importer_code,
     String? referrer,
+    String? comp_name,
+    String? comp_tax,
+    String? comp_phone,
+    String? cargo_name,
+    String? cargo_website,
+    String? cargo_image,
+    String? order_quantity_in_thai,
     String? live_address,
     String? live_province,
     String? live_district,
@@ -55,6 +93,13 @@ class RegisterService {
         'gender': gender,
         'importer_code': importer_code,
         'referrer': referrer,
+        'comp_name': comp_name,
+        'comp_tax': comp_tax,
+        'comp_phone': comp_phone,
+        'cargo_name': cargo_name,
+        'cargo_website': cargo_website,
+        'cargo_image': cargo_image,
+        'order_quantity_in_thai': order_quantity_in_thai,
         'live_address': live_address,
         'live_province': live_province,
         'live_district': live_district,
@@ -116,6 +161,33 @@ class RegisterService {
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
+    }
+  }
+
+  static Future addImage({File? file, required String path}) async {
+    const apiUrl = '$baseUrl/api/upload_images';
+    // final token = prefs.getString('token');
+    final headers = {
+      // 'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+    var formData = FormData.fromMap(
+      {
+        'image': await MultipartFile.fromFile(file!.path),
+        'path': path,
+      },
+    );
+    final response = await Dio().post(
+      apiUrl,
+      data: formData,
+      options: Options(headers: headers),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = response.data['data'];
+      return data;
+    } else {
+      throw Exception('อัพโหดลไฟล์ล้มเหลว');
     }
   }
 }

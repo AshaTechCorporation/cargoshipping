@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cargoshipping/cart/widget/customcheck.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
 
 class registerpage extends StatefulWidget {
   const registerpage({super.key, required this.type});
@@ -240,6 +242,8 @@ class _registerpageState extends State<registerpage> {
   ///////////////////////////////////////////////// ตัวแทน
   final TextEditingController nameAgent = TextEditingController();
   final TextEditingController webAgent = TextEditingController();
+  final TextEditingController totalAgent = TextEditingController();
+  File? _selectedFile;
 
   @override
   Widget build(BuildContext context) {
@@ -745,7 +749,7 @@ class _registerpageState extends State<registerpage> {
                           FromRegister(
                             width: size.width * 0.9,
                             controller: phoneOffice,
-                            hintText: 'เบอร์โทรศัพท์',
+                            hintText: 'เบอร์โทรบริษัท',
                             validator: (value) {
                               if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
                               return null;
@@ -769,7 +773,16 @@ class _registerpageState extends State<registerpage> {
                           FromRegister(
                             width: size.width * 0.9,
                             controller: webAgent,
-                            hintText: 'เว็บไวต์คาร์โก้ของื่าน',
+                            hintText: 'เว็บไวต์คาร์โก้ของท่าน',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: totalAgent,
+                            hintText: 'จำนวนการส่งในไทย',
                             validator: (value) {
                               if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
                               return null;
@@ -777,32 +790,69 @@ class _registerpageState extends State<registerpage> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text('รูปภาพคาร์โก้'),
-                              GestureDetector(
-                                onTap: () {
-                                  print('object');
-                                },
-                                child: Container(
-                                  width: size.width * 0.47,
-                                  height: size.height * 0.069,
-                                  decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(10)),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'อัพโหลดไฟล์รูป',
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
+                              _selectedFile == null
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        getImage(ImageSource.gallery);
+                                      },
+                                      child: Container(
+                                        width: size.width * 0.47,
+                                        height: size.height * 0.069,
+                                        decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(10)),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: size.width * 0.235,
+                                              height: size.height * 0.0345,
+                                              decoration: BoxDecoration(color: red1, borderRadius: BorderRadius.circular(10)),
+                                              child: Center(
+                                                child: Text(
+                                                  'อัพโหลดไฟล์รูป',
+                                                  style: TextStyle(color: Colors.white),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  : Stack(
+                                      children: [
+                                        SizedBox(
+                                          width: size.width * 0.65,
+                                          height: size.height * 0.25,
+                                          child: Image.file(
+                                            _selectedFile!,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                _selectedFile = null;
+                                              });
+                                            },
+                                            child: Icon(
+                                              Icons.remove_circle,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                             ],
                           ),
                         ],
                       ),
-
+                SizedBox(height: size.height * 0.01),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1923,7 +1973,13 @@ class _registerpageState extends State<registerpage> {
           child: Center(
             child: TextButton(
               onPressed: () async {
+                String? imagePro;
                 LoadingDialog.open(context);
+                if (widget.type == 'ตัวแทน') {
+                  if (_selectedFile != null) {
+                    imagePro = await RegisterService.addImage(file: _selectedFile, path: 'images/asset/');
+                  }
+                }
                 try {
                   await RegisterService.register(
                     member_type: widget.type,
@@ -1935,11 +1991,18 @@ class _registerpageState extends State<registerpage> {
                     gender: _selectedGender,
                     importer_code: _importercodeController.text,
                     referrer: _reccomController.text,
-                    live_address: homeCode.text,
-                    live_province: selectedProvices!.nameTH,
-                    live_district: selecteddistrict!.nameTH,
-                    live_sub_district: selectedSubdistricts!.nameTH,
-                    live_postal_code: zipcode.text,
+                    comp_name: nameOffice.text,
+                    comp_tax: taxOffice.text,
+                    comp_phone: phoneOffice.text,
+                    order_quantity_in_thai: totalAgent.text,
+                    live_address: homeCodeOffice.text != '' ? homeCodeOffice.text : homeCode.text,
+                    live_province: selectedProvicesOffice != null ? selectedProvicesOffice!.nameTH : selectedProvices!.nameTH,
+                    live_district: selecteddistrictOffice != null ? selecteddistrictOffice!.nameTH : selecteddistrict!.nameTH,
+                    live_sub_district: selectedSubdistrictsOffice != null ? selectedSubdistrictsOffice!.nameTH : selectedSubdistricts!.nameTH,
+                    live_postal_code: zipcodeOffice.text != '' ? zipcodeOffice.text : zipcode.text,
+                    cargo_name: nameAgent.text,
+                    cargo_website: webAgent.text,
+                    cargo_image: imagePro,
                     address: homeCode.text,
                     province: selectedProvices!.nameTH,
                     district: selecteddistrict!.nameTH,
@@ -2037,5 +2100,53 @@ class _registerpageState extends State<registerpage> {
     final day = date.day.toString().padLeft(2, '0'); // เติม 0 ให้เป็นเลข 2 หลัก
     final month = date.month.toString().padLeft(2, '0'); // เติม 0 ให้เป็นเลข 2 หลัก
     return '${date.year}-$month-$day';
+  }
+
+  Future<void> getImage(ImageSource source) async {
+    try {
+      if (Platform.isIOS) {
+        final XFile? image = await ImagePicker().pickImage(source: source);
+        if (image != null) {
+          // final cropped = await ImageCropper().cropImage(
+          //   sourcePath: image.path,
+          //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+          //   compressQuality: 90,
+          //   maxHeight: 500,
+          //   maxWidth: 500,
+          //   compressFormat: ImageCompressFormat.jpg,
+          // );
+
+          setState(() {
+            _selectedFile = File(image.path);
+            inspect(_selectedFile);
+          });
+        }
+      } else {
+        final XFile? image = await ImagePicker().pickImage(source: source);
+        if (image != null) {
+          // final cropped = await ImageCropper().cropImage(
+          //   sourcePath: image.path,
+          //   aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+          //   compressQuality: 90,
+          //   maxHeight: 500,
+          //   maxWidth: 500,
+          //   compressFormat: ImageCompressFormat.jpg,
+          // );
+
+          setState(() {
+            _selectedFile = File(image.path);
+            inspect(_selectedFile);
+          });
+        }
+        // if (image != null) {
+        //   setState(() {
+        //     _selectedFile = File(image.path);
+        //     inspect(_selectedFile);
+        //   });
+        // }
+      }
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
   }
 }
