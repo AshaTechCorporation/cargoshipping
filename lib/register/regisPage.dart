@@ -1,14 +1,25 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/provice.dart';
 import 'package:cargoshipping/models/rateShip.dart';
+import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:cargoshipping/register/server/registerService.dart';
+import 'package:cargoshipping/widgets/Form.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class registerpage extends StatefulWidget {
-  const registerpage({super.key});
+  const registerpage({super.key, required this.type});
+  final String type;
 
   @override
   State<registerpage> createState() => _registerpageState();
@@ -23,61 +34,9 @@ class _registerpageState extends State<registerpage> {
   final TextEditingController _telController = TextEditingController();
   final TextEditingController _importercodeController = TextEditingController();
   final TextEditingController _birthController = TextEditingController();
+  String dateSentApi = '';
+  final TextEditingController homeCode = TextEditingController();
   final TextEditingController zipcode = TextEditingController();
-// dropdown
-  final List<String> subdistrict = [
-    '1',
-    '2',
-  ];
-  // final List<String> zipcode = [
-  //   '3',
-  //   '4',
-  // ];
-
-  final List<String> provice = [
-    '5',
-    '1',
-  ];
-
-  final List<String> district = [
-    '1',
-    '2',
-  ];
-
-  final List<String> _formatsent = [
-    '3',
-    '4',
-  ];
-
-  final List<String> totalsend = [
-    '5',
-    '6',
-  ];
-
-  final List<String> sendoften = [
-    '7',
-    '8',
-  ];
-
-  final List<String> importtype = [
-    '2',
-    '4',
-  ];
-
-  final List<String> userwant = [
-    '8',
-    '6',
-  ];
-
-  String? selectedsubdistrict;
-
-  String? selectedzipcode;
-
-  String? selectedformatsent;
-
-  String? selectedprovice;
-
-  String? selecteddistrict;
 
   RateShip? selectedtotalsend;
 
@@ -100,7 +59,26 @@ class _registerpageState extends State<registerpage> {
     super.initState();
     // กำหนดค่า PageController ทันทีใน initState ก่อนใช้งาน
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getLocation();
       await getProducts();
+      await _loadData();
+      await _loadDataOffice();
+    });
+  }
+
+  double? lat;
+  double? long;
+
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    setState(() {
+      lat = position.latitude;
+      long = position.longitude;
     });
   }
 
@@ -108,6 +86,8 @@ class _registerpageState extends State<registerpage> {
   List<RateShip>? often = [];
   List<RateShip>? import = [];
   List<RateShip>? want = [];
+  List<ServiceTransporterById>? transports = [];
+  ServiceTransporterById? selectedTransports;
 
   Future<void> getProducts() async {
     try {
@@ -116,11 +96,13 @@ class _registerpageState extends State<registerpage> {
       final often1 = await RegisterService.getDataRegister(type: 'Often');
       final import1 = await RegisterService.getDataRegister(type: 'Import');
       final want1 = await RegisterService.getDataRegister(type: 'Want');
+      final transports1 = await RegisterService.getTransport();
       setState(() {
         total = total1;
         often = often1;
         import = import1;
         want = want1;
+        transports = transports1;
       });
       if (!mounted) return;
       LoadingDialog.close(context);
@@ -130,6 +112,135 @@ class _registerpageState extends State<registerpage> {
     }
   }
 
+  List<Provice> provices = [];
+  Provice? selectedProvices;
+
+  Future<List<Provice>> loadProvices() async {
+    String jsonString = await rootBundle.loadString('assets/provice/provinces.json');
+    List<dynamic> jsonList = json.decode(jsonString);
+    return jsonList.map((json) => Provice.fromJson(json)).toList();
+  }
+
+  Future<void> _loadData() async {
+    List<Provice> locations = await loadProvices();
+    setState(() {
+      provices = locations;
+      // selectedProvices = provices.isNotEmpty ? provices.first : null;
+    });
+  }
+
+  List<Provice> districts = [];
+  Provice? selecteddistrict;
+  Future<List<Provice>> loadDistricts() async {
+    String jsonString = await rootBundle.loadString('assets/provice/districts.json');
+    List<dynamic> jsonList = json.decode(jsonString);
+    return jsonList.map((json) => Provice.fromJson(json)).toList();
+  }
+
+  Future<List<Provice>> getProvicesByProvince(int provinceCode) async {
+    List<Provice> allDistricts = await loadDistricts();
+    return allDistricts.where((district) => district.provinceCode == provinceCode).toList();
+  }
+
+  Future<void> _loadDistricts(int provinceCode) async {
+    List<Provice> districts1 = await getProvicesByProvince(provinceCode);
+    setState(() {
+      inspect(districts);
+      districts = districts1;
+    });
+  }
+
+  List<Provice> subdistricts = [];
+  Provice? selectedSubdistricts;
+  Future<List<Provice>> loadSubdistricts() async {
+    String jsonString = await rootBundle.loadString('assets/provice/subdistricts.json');
+    List<dynamic> jsonList = json.decode(jsonString);
+    return jsonList.map((json) => Provice.fromJson(json)).toList();
+  }
+
+  Future<List<Provice>> getDistricts(int districtCode) async {
+    List<Provice> allSubDistricts = await loadSubdistricts();
+    return allSubDistricts.where((district) => district.districtCode == districtCode).toList();
+  }
+
+  Future<void> _loadSubdistricts(int districtCode) async {
+    List<Provice> subdistricts1 = await getDistricts(districtCode);
+    setState(() {
+      inspect(subdistricts1);
+      subdistricts = subdistricts1;
+    });
+  }
+
+  ///////////////////////////////////////////////// นิติบุคคล
+  final TextEditingController nameOffice = TextEditingController();
+  final TextEditingController taxOffice = TextEditingController();
+  final TextEditingController zipcodeOffice = TextEditingController();
+  final TextEditingController phoneOffice = TextEditingController();
+  final TextEditingController homeCodeOffice = TextEditingController();
+
+  List<Provice> provicesOffice = [];
+  Provice? selectedProvicesOffice;
+
+  Future<List<Provice>> loadProvicesOffice() async {
+    String jsonString = await rootBundle.loadString('assets/provice/provinces.json');
+    List<dynamic> jsonList = json.decode(jsonString);
+    return jsonList.map((json) => Provice.fromJson(json)).toList();
+  }
+
+  Future<void> _loadDataOffice() async {
+    List<Provice> locations = await loadProvicesOffice();
+    setState(() {
+      provicesOffice = locations;
+      // selectedProvices = provices.isNotEmpty ? provices.first : null;
+    });
+  }
+
+  List<Provice> districtsOffice = [];
+  Provice? selecteddistrictOffice;
+  Future<List<Provice>> loadDistrictsOffice() async {
+    String jsonString = await rootBundle.loadString('assets/provice/districts.json');
+    List<dynamic> jsonList = json.decode(jsonString);
+    return jsonList.map((json) => Provice.fromJson(json)).toList();
+  }
+
+  Future<List<Provice>> getProvicesByProvinceOffice(int provinceCode) async {
+    List<Provice> allDistricts = await loadDistrictsOffice();
+    return allDistricts.where((district) => district.provinceCode == provinceCode).toList();
+  }
+
+  Future<void> _loadDistrictsOffice(int provinceCode) async {
+    List<Provice> districts1 = await getProvicesByProvinceOffice(provinceCode);
+    setState(() {
+      inspect(districts);
+      districtsOffice = districts1;
+    });
+  }
+
+  List<Provice> subdistrictsOffice = [];
+  Provice? selectedSubdistrictsOffice;
+  Future<List<Provice>> loadSubdistrictsOffice() async {
+    String jsonString = await rootBundle.loadString('assets/provice/subdistricts.json');
+    List<dynamic> jsonList = json.decode(jsonString);
+    return jsonList.map((json) => Provice.fromJson(json)).toList();
+  }
+
+  Future<List<Provice>> getDistrictsOffice(int districtCode) async {
+    List<Provice> allSubDistricts = await loadSubdistrictsOffice();
+    return allSubDistricts.where((district) => district.districtCode == districtCode).toList();
+  }
+
+  Future<void> _loadSubdistrictsOffice(int districtCode) async {
+    List<Provice> subdistricts1 = await getDistrictsOffice(districtCode);
+    setState(() {
+      inspect(subdistricts1);
+      subdistrictsOffice = subdistricts1;
+    });
+  }
+
+  ///////////////////////////////////////////////// ตัวแทน
+  final TextEditingController nameAgent = TextEditingController();
+  final TextEditingController webAgent = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -138,7 +249,7 @@ class _registerpageState extends State<registerpage> {
         title: Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            'ลงทะเบียนผู้ใช้งาน',
+            'ลงทะเบียนผู้ใช้งาน${widget.type}',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
@@ -171,128 +282,48 @@ class _registerpageState extends State<registerpage> {
                 SizedBox(
                   height: size.height * 0.04,
                 ),
-                SizedBox(
-                  height: size.height * 0.052,
-                  child: TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      hintText: 'ชื่อ',
-                      labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      fillColor: Colors.white,
-                      filled: true,
-                    ),
-                  ),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _nameController,
+                  hintText: 'ชื่อ',
+                  validator: (value) {
+                    if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                    return null;
+                  },
                 ),
-                SizedBox(
-                  height: size.height * 0.01,
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _lastnameController,
+                  hintText: 'นามสกุล',
+                  validator: (value) {
+                    if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                    return null;
+                  },
                 ),
-                Container(
-                  height: size.height * 0.052,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: white,
-                  ),
-                  child: TextField(
-                    controller: _lastnameController,
-                    decoration: InputDecoration(
-                      hintText: 'นามสกุล',
-                      labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                    ),
-                  ),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _telController,
+                  hintText: 'เบอร์มือถือ',
+                  validator: (value) {
+                    if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                    return null;
+                  },
                 ),
-                SizedBox(height: size.height * 0.01),
-                Container(
-                  height: size.height * 0.052,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: white,
-                  ),
-                  child: TextField(
-                    controller: _telController,
-                    decoration: InputDecoration(
-                      hintText: 'เบอร์มือถือ',
-                      labelStyle: TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                    ),
-                  ),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _birthController,
+                  hintText: 'วันเกิด',
+                  readOnly: true,
+                  onTap: () {
+                    _afterselectDate(context);
+                  },
+                  icons: Icon(Icons.calendar_month),
+                  validator: (value) {
+                    if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                    return null;
+                  },
                 ),
-                SizedBox(height: size.height * 0.01),
-                Container(
-                  height: size.height * 0.052,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: white,
-                  ),
-                  child: TextField(
-                    controller: _birthController,
-                    decoration: InputDecoration(
-                      hintText: 'วันเกิด',
-                      labelStyle: TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
+
                 Row(
                   children: [
                     Row(
@@ -310,10 +341,10 @@ class _registerpageState extends State<registerpage> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              if (_selectedGender == 'Male') {
+                              if (_selectedGender == 'male') {
                                 _selectedGender = null;
                               } else {
-                                _selectedGender = 'Male';
+                                _selectedGender = 'male';
                               }
                             });
                           },
@@ -326,11 +357,11 @@ class _registerpageState extends State<registerpage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CustomCheckbox(
-                                  value: _selectedGender == 'Male',
+                                  value: _selectedGender == 'male',
                                   onChanged: (bool? value) {
                                     setState(() {
                                       if (value == true) {
-                                        _selectedGender = 'Male';
+                                        _selectedGender = 'male';
                                       } else {
                                         _selectedGender = null;
                                       }
@@ -354,10 +385,10 @@ class _registerpageState extends State<registerpage> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          if (_selectedGender == 'Female') {
+                          if (_selectedGender == 'female') {
                             _selectedGender = null;
                           } else {
-                            _selectedGender = 'Female';
+                            _selectedGender = 'female';
                           }
                         });
                       },
@@ -369,11 +400,11 @@ class _registerpageState extends State<registerpage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomCheckbox(
-                              value: _selectedGender == 'Female',
+                              value: _selectedGender == 'female',
                               onChanged: (bool? value) {
                                 setState(() {
                                   if (value == true) {
-                                    _selectedGender = 'Female';
+                                    _selectedGender = 'female';
                                   } else {
                                     _selectedGender = null;
                                   }
@@ -394,130 +425,384 @@ class _registerpageState extends State<registerpage> {
                   ],
                 ),
                 SizedBox(
-                  height: size.height * 0.025,
+                  height: size.height * 0.015,
                 ),
-                Container(
-                  height: size.height * 0.052,
-                  color: white,
-                  child: TextField(
-                    controller: _importercodeController,
-                    decoration: InputDecoration(
-                      hintText: 'รหัสผู้นำเข้า',
-                      labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                    ),
-                  ),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _importercodeController,
+                  hintText: 'รหัสผู้นำเข้า',
+                  validator: (value) {
+                    if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                    return null;
+                  },
                 ),
-                SizedBox(height: size.height * 0.01),
-                Container(
-                  height: size.height * 0.052,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: white,
-                  ),
-                  child: TextField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                      hintText: 'รหัสผ่าน',
-                      labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                    ),
-                    obscureText: true,
-                  ),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _passwordController,
+                  hintText: 'รหัสผ่าน',
+                  isPassword: true,
+                  validator: (value) {
+                    if (value!.isEmpty || value == '') {
+                      return 'กรุณากรอกรหัสผ่าน';
+                    }
+                    if (value.length < 8 || value.length > 20) {
+                      return 'รหัสผ่านต้องมีความยาว 8 - 20 ตัวอักษร';
+                    }
+                    if (value != _confirmPasswordController.text) {
+                      return 'รหัสผ่านไม่ตรงกัน';
+                    }
+                    return null;
+                  },
                 ),
-                SizedBox(height: size.height * 0.01),
-                Container(
-                  height: size.height * 0.052,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: white,
-                  ),
-                  child: TextField(
-                    controller: _confirmPasswordController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                      hintText: 'ยืนยันรหัสผ่าน',
-                      labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                    ),
-                    obscureText: true,
-                  ),
+
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _confirmPasswordController,
+                  hintText: 'ยืนยันรหัสผ่าน',
+                  isPassword: true,
+                  validator: (value) {
+                    if (value!.isEmpty || value == '') {
+                      return 'กรุณากรอกรหัสผ่าน';
+                    }
+                    if (value.length < 8 || value.length > 20) {
+                      return 'รหัสผ่านต้องมีความยาว 8 - 20 ตัวอักษร';
+                    }
+                    if (value != _passwordController.text) {
+                      return 'รหัสผ่านไม่ตรงกัน';
+                    }
+                    return null;
+                  },
                 ),
-                SizedBox(height: size.height * 0.01),
-                const SizedBox(height: 20),
-                Container(
-                  height: size.height * 0.052,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: white,
-                  ),
-                  child: TextField(
-                    controller: _reccomController,
-                    decoration: InputDecoration(
-                      hintText: 'ผู้แนะนำ',
-                      labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                    ),
-                  ),
+
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _reccomController,
+                  hintText: 'ผู้แนะนำ',
+                  // validator: (value) {
+                  //   if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                  //   return null;
+                  // },
                 ),
-                SizedBox(height: size.height * 0.02),
+                widget.type == 'บุคคลทั่วไป' || widget.type != 'นิติบุคคล' && widget.type != 'ตัวแทน'
+                    ? SizedBox.shrink()
+                    : Column(
+                        children: [
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: nameOffice,
+                            hintText: 'ชื่อบริษัทฯ ห้างร้าน ห้างหุ้นส่วน',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: taxOffice,
+                            hintText: 'เลขที่ผู้เสียภาษี',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'ที่อยู่บริษัทฯ',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w200,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: homeCodeOffice,
+                            hintText: 'บ้านเลขที่',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: DropdownSearch<Provice>(
+                              selectedItem: selectedProvicesOffice,
+                              // items: listProvinec,
+                              items: provicesOffice,
+                              itemAsString: (item) => item.nameTH ?? '',
+                              popupProps: PopupProps.menu(
+                                constraints: BoxConstraints(maxHeight: 450),
+                                fit: FlexFit.loose,
+                                itemBuilder: (context, item, isSelected) => Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.nameTH ?? '',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              dropdownDecoratorProps: DropDownDecoratorProps(
+                                baseStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: 'Prompt',
+                                ),
+                                dropdownSearchDecoration: InputDecoration(
+                                  hintText: 'จังหวัด',
+                                  hintStyle: TextStyle(
+                                    color: Colors.black45,
+                                    fontFamily: 'Prompt',
+                                  ),
+                                  border: InputBorder.none,
+                                  suffixIconColor: Colors.grey,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedProvicesOffice = value;
+                                  if (value != null) {
+                                    // getDistrits(id: value.id!);
+                                    _loadDistrictsOffice(value.provinceCode!);
+                                    selecteddistrictOffice = null;
+                                    selectedSubdistrictsOffice = null;
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                          SizedBox(height: size.height * 0.01),
+                          selectedProvicesOffice == null
+                              ? SizedBox.shrink()
+                              : Column(
+                                  children: [
+                                    Container(
+                                      height: MediaQuery.of(context).size.height * 0.06,
+                                      width: MediaQuery.of(context).size.width * 0.9,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      padding: EdgeInsets.all(8),
+                                      child: DropdownSearch<Provice>(
+                                        selectedItem: selecteddistrictOffice,
+                                        items: districtsOffice,
+                                        itemAsString: (item) => item.nameTH ?? '',
+                                        popupProps: PopupProps.menu(
+                                          constraints: BoxConstraints(maxHeight: 450),
+                                          fit: FlexFit.loose,
+                                          itemBuilder: (context, item, isSelected) => Container(
+                                            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item.nameTH ?? '',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                          baseStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            fontFamily: 'Prompt',
+                                          ),
+                                          dropdownSearchDecoration: InputDecoration(
+                                            hintText: 'อำเภอ',
+                                            hintStyle: TextStyle(
+                                              color: Colors.black45,
+                                              fontFamily: 'Prompt',
+                                            ),
+                                            border: InputBorder.none,
+                                            suffixIconColor: Colors.grey,
+                                          ),
+                                        ),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selecteddistrictOffice = value;
+                                            if (value != null) {
+                                              _loadSubdistrictsOffice(value.districtCode!);
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(height: size.height * 0.01),
+                                  ],
+                                ),
+                          selecteddistrictOffice == null
+                              ? SizedBox.shrink()
+                              : Column(
+                                  children: [
+                                    Container(
+                                      height: MediaQuery.of(context).size.height * 0.06,
+                                      width: MediaQuery.of(context).size.width * 0.9,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      padding: EdgeInsets.all(8),
+                                      child: DropdownSearch<Provice>(
+                                        selectedItem: selectedSubdistrictsOffice,
+                                        items: subdistrictsOffice,
+                                        itemAsString: (item) => item.nameTH ?? '',
+                                        popupProps: PopupProps.menu(
+                                          constraints: BoxConstraints(maxHeight: 450),
+                                          fit: FlexFit.loose,
+                                          itemBuilder: (context, item, isSelected) => Container(
+                                            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item.nameTH ?? '',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        dropdownDecoratorProps: DropDownDecoratorProps(
+                                          baseStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            fontFamily: 'Prompt',
+                                          ),
+                                          dropdownSearchDecoration: InputDecoration(
+                                            hintText: 'ตำบล',
+                                            hintStyle: TextStyle(
+                                              color: Colors.black45,
+                                              fontFamily: 'Prompt',
+                                            ),
+                                            border: InputBorder.none,
+                                            suffixIconColor: Colors.grey,
+                                          ),
+                                        ),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectedSubdistrictsOffice = value;
+                                            // if (value != null) {
+                                            //   // getDistrits(id: value.id!);
+                                            //   _loadDistricts(value.provinceCode!);
+                                            // }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(height: size.height * 0.01),
+                                  ],
+                                ),
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: zipcodeOffice,
+                            hintText: 'รหัสไปรษณีย์',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: phoneOffice,
+                            hintText: 'เบอร์โทรศัพท์',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                        ],
+                      ),
+                widget.type == 'บุคคลทั่วไป' || widget.type != 'ตัวแทน'
+                    ? SizedBox.shrink()
+                    : Column(
+                        children: [
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: nameAgent,
+                            hintText: 'ชื่อคาร์โกของท่าน',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                          FromRegister(
+                            width: size.width * 0.9,
+                            controller: webAgent,
+                            hintText: 'เว็บไวต์คาร์โก้ของื่าน',
+                            validator: (value) {
+                              if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                              return null;
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('รูปภาพคาร์โก้'),
+                              GestureDetector(
+                                onTap: () {
+                                  print('object');
+                                },
+                                child: Container(
+                                  width: size.width * 0.47,
+                                  height: size.height * 0.069,
+                                  decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(10)),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'อัพโหลดไฟล์รูป',
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -532,400 +817,292 @@ class _registerpageState extends State<registerpage> {
                   ],
                 ),
                 SizedBox(height: size.height * 0.02),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'จังหวัด',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: provice
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          ))
-                      .toList(),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: homeCode,
+                  hintText: 'บ้านเลขที่',
                   validator: (value) {
-                    if (value == null) {
-                      return 'please select distict';
-                    }
+                    if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
                     return null;
                   },
-                  onChanged: (value) {},
-                  onSaved: (value) {
-                    selectedprovice = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
                 ),
-                SizedBox(height: size.height * 0.01),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.06,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: Colors.grey,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
                   ),
-                  hint: const Text(
-                    'อำเภอ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: district
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
+                  padding: EdgeInsets.all(8),
+                  child: DropdownSearch<Provice>(
+                    selectedItem: selectedProvices,
+                    // items: listProvinec,
+                    items: provices,
+                    itemAsString: (item) => item.nameTH ?? '',
+                    popupProps: PopupProps.menu(
+                      constraints: BoxConstraints(maxHeight: 450),
+                      fit: FlexFit.loose,
+                      itemBuilder: (context, item, isSelected) => Container(
+                        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.nameTH ?? '',
+                              style: TextStyle(
+                                color: Colors.black,
                               ),
                             ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'please select distict';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {},
-                  onSaved: (value) {
-                    selecteddistrict = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
-                SizedBox(height: size.height * 0.01),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'ตำบล',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: subdistrict
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'please select distict';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {},
-                  onSaved: (value) {
-                    selectedsubdistrict = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
-                SizedBox(height: size.height * 0.01),
-                // DropdownButtonFormField2<String>(
-                //   isExpanded: true,
-                //   decoration: InputDecoration(
-                //     contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                //     enabledBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(15.0),
-                //       borderSide: BorderSide(
-                //         color: Colors.grey,
-                //         width: 0.5,
-                //       ),
-                //     ),
-                //     focusedBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(15.0),
-                //       borderSide: BorderSide(
-                //         color: Colors.grey,
-                //         width: 0.5,
-                //       ),
-                //     ),
-                //     fillColor: Colors.white,
-                //     filled: true,
-                //   ),
-                //   hint: const Text(
-                //     'รหัสไปรษณีย์',
-                //     style: TextStyle(fontSize: 14),
-                //   ),
-                //   items: zipcode
-                //       .map((item) => DropdownMenuItem<String>(
-                //             value: item,
-                //             child: Text(
-                //               item,
-                //               style: const TextStyle(
-                //                 fontSize: 14,
-                //               ),
-                //             ),
-                //           ))
-                //       .toList(),
-                //   validator: (value) {
-                //     if (value == null) {
-                //       return 'Please select zipcode.';
-                //     }
-                //     return null;
-                //   },
-                //   onChanged: (value) {
-                //     //
-                //   },
-                //   onSaved: (value) {
-                //     selectedzipcode = value.toString();
-                //   },
-                //   buttonStyleData: const ButtonStyleData(
-                //     padding: EdgeInsets.only(right: 8),
-                //   ),
-                //   iconStyleData: const IconStyleData(
-                //     icon: Icon(
-                //       Icons.keyboard_arrow_down,
-                //       color: Colors.black45,
-                //     ),
-                //     iconSize: 24,
-                //   ),
-                //   dropdownStyleData: DropdownStyleData(
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(15),
-                //     ),
-                //   ),
-                //   menuItemStyleData: const MenuItemStyleData(
-                //     padding: EdgeInsets.symmetric(horizontal: 16),
-                //   ),
-                // ),
-                SizedBox(
-                  height: size.height * 0.052,
-                  child: TextField(
-                    controller: zipcode,
-                    decoration: InputDecoration(
-                      hintText: 'รหัสไปรษณีย์',
-                      labelStyle: const TextStyle(),
-                      contentPadding: EdgeInsets.only(top: size.height * 0.01, left: size.height * 0.02),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
+                          ],
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.5,
-                        ),
-                      ),
-                      fillColor: Colors.white,
-                      filled: true,
                     ),
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      baseStyle: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        fontFamily: 'Prompt',
+                      ),
+                      dropdownSearchDecoration: InputDecoration(
+                        hintText: 'จังหวัด',
+                        hintStyle: TextStyle(
+                          color: Colors.black45,
+                          fontFamily: 'Prompt',
+                        ),
+                        border: InputBorder.none,
+                        suffixIconColor: Colors.grey,
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedProvices = value;
+                        if (value != null) {
+                          // getDistrits(id: value.id!);
+                          _loadDistricts(value.provinceCode!);
+                          selecteddistrict = null;
+                          selectedSubdistricts = null;
+                        }
+                      });
+                    },
                   ),
                 ),
+
                 SizedBox(height: size.height * 0.01),
-                InkWell(
-                  onTap: () {
-                    print('map');
+                selectedProvices == null
+                    ? SizedBox.shrink()
+                    : Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: DropdownSearch<Provice>(
+                              selectedItem: selecteddistrict,
+                              // items: listProvinec,
+                              items: districts,
+                              itemAsString: (item) => item.nameTH ?? '',
+                              popupProps: PopupProps.menu(
+                                constraints: BoxConstraints(maxHeight: 450),
+                                fit: FlexFit.loose,
+                                itemBuilder: (context, item, isSelected) => Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.nameTH ?? '',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              dropdownDecoratorProps: DropDownDecoratorProps(
+                                baseStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: 'Prompt',
+                                ),
+                                dropdownSearchDecoration: InputDecoration(
+                                  hintText: 'อำเภอ',
+                                  hintStyle: TextStyle(
+                                    color: Colors.black45,
+                                    fontFamily: 'Prompt',
+                                  ),
+                                  border: InputBorder.none,
+                                  suffixIconColor: Colors.grey,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  selecteddistrict = value;
+                                  if (value != null) {
+                                    _loadSubdistricts(value.districtCode!);
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                          SizedBox(height: size.height * 0.01),
+                        ],
+                      ),
+
+                selecteddistrict == null
+                    ? SizedBox.shrink()
+                    : Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: DropdownSearch<Provice>(
+                              selectedItem: selectedSubdistricts,
+                              // items: listProvinec,
+                              items: subdistricts,
+                              itemAsString: (item) => item.nameTH ?? '',
+                              popupProps: PopupProps.menu(
+                                constraints: BoxConstraints(maxHeight: 450),
+                                fit: FlexFit.loose,
+                                itemBuilder: (context, item, isSelected) => Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.nameTH ?? '',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              dropdownDecoratorProps: DropDownDecoratorProps(
+                                baseStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: 'Prompt',
+                                ),
+                                dropdownSearchDecoration: InputDecoration(
+                                  hintText: 'ตำบล',
+                                  hintStyle: TextStyle(
+                                    color: Colors.black45,
+                                    fontFamily: 'Prompt',
+                                  ),
+                                  border: InputBorder.none,
+                                  suffixIconColor: Colors.grey,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedSubdistricts = value;
+                                  // if (value != null) {
+                                  //   // getDistrits(id: value.id!);
+                                  //   _loadDistricts(value.provinceCode!);
+                                  // }
+                                });
+                              },
+                            ),
+                          ),
+                          SizedBox(height: size.height * 0.01),
+                        ],
+                      ),
+
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: zipcode,
+                  hintText: 'รหัสไปรษณีย์',
+                  validator: (value) {
+                    if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
+                    return null;
                   },
-                  child: Container(
-                      height: size.height * 0.055,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: white,
+                ),
+                transports?.isEmpty ?? true
+                    ? SizedBox.shrink()
+                    : Container(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: Colors.grey,
-                            width: 0.5,
-                          )),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: size.width * 0.02,
                           ),
-                          Image.asset('assets/icons/pin.png'),
-                          SizedBox(
-                            width: size.width * 0.02,
-                          ),
-                          Text(
-                            'พิกัด Google map',
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          )
-                        ],
-                      )),
-                ),
-                SizedBox(height: size.height * 0.035),
-                DropdownButtonFormField2<String>(
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  hint: const Text(
-                    'รูปแบบส่งต่อ(ในไทย)',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  items: _formatsent
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: DropdownSearch<ServiceTransporterById>(
+                          selectedItem: selectedTransports,
+                          // items: listProvinec,
+                          items: transports!,
+                          itemAsString: (item) => item.name ?? '',
+                          popupProps: PopupProps.menu(
+                            constraints: BoxConstraints(maxHeight: 450),
+                            fit: FlexFit.loose,
+                            itemBuilder: (context, item, isSelected) => Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.name ?? '',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ))
-                      .toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Please select format.';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    //
-                  },
-                  onSaved: (value) {
-                    selectedformatsent = value.toString();
-                  },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.only(right: 8),
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: 24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
+                          ),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            baseStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              fontFamily: 'Prompt',
+                            ),
+                            dropdownSearchDecoration: InputDecoration(
+                              hintText: 'รูปแบบส่งต่อ(ในไทย)',
+                              hintStyle: TextStyle(
+                                color: Colors.black45,
+                                fontFamily: 'Prompt',
+                              ),
+                              border: InputBorder.none,
+                              suffixIconColor: Colors.grey,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedTransports = value;
+                            });
+                          },
+                        ),
+                      ),
+
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: size.height * 0.02,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -1058,273 +1235,519 @@ class _registerpageState extends State<registerpage> {
                 SizedBox(height: size.height * 0.01),
                 total?.isEmpty ?? true
                     ? SizedBox.shrink()
-                    : DropdownButtonFormField2<RateShip>(
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
+                    : Container(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: Colors.grey,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                        hint: const Text(
-                          'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        items: total!
-                            .map((item) => DropdownMenuItem<RateShip>(
-                                  value: item,
-                                  child: Text(
+                        padding: EdgeInsets.all(8),
+                        child: DropdownSearch<RateShip>(
+                          selectedItem: selectedtotalsend,
+                          // items: listProvinec,
+                          items: total!,
+                          itemAsString: (item) => item.option ?? '',
+                          popupProps: PopupProps.menu(
+                            constraints: BoxConstraints(maxHeight: 450),
+                            fit: FlexFit.loose,
+                            itemBuilder: (context, item, isSelected) => Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     item.option ?? '',
-                                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
                                   ),
-                                ))
-                            .toList(),
-                        validator: (value) {
-                          if (value == null) {
-                            return 'please select ยอดจำนวนส่ง';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {},
-                        onSaved: (value) {
-                          selectedtotalsend = value;
-                        },
-                        buttonStyleData: const ButtonStyleData(
-                          padding: EdgeInsets.only(right: 8),
-                        ),
-                        iconStyleData: const IconStyleData(
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.black45,
+                                ],
+                              ),
+                            ),
                           ),
-                          iconSize: 24,
-                        ),
-                        dropdownStyleData: DropdownStyleData(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            baseStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              fontFamily: 'Prompt',
+                            ),
+                            dropdownSearchDecoration: InputDecoration(
+                              hintText: 'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง',
+                              hintStyle: TextStyle(
+                                color: Colors.black45,
+                                fontFamily: 'Prompt',
+                              ),
+                              border: InputBorder.none,
+                              suffixIconColor: Colors.grey,
+                            ),
                           ),
-                        ),
-                        menuItemStyleData: const MenuItemStyleData(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedtotalsend = value;
+                            });
+                          },
                         ),
                       ),
+                // total?.isEmpty ?? true
+                //     ? SizedBox.shrink()
+                //     : DropdownButtonFormField2<RateShip>(
+                //         isExpanded: true,
+                //         decoration: InputDecoration(
+                //           contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                //           enabledBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           focusedBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           fillColor: Colors.white,
+                //           filled: true,
+                //         ),
+                //         hint: const Text(
+                //           'ยอดจำนวนค่าขนส่งที่เคยนำเข้าต่อครั้ง ',
+                //           style: TextStyle(fontSize: 14),
+                //         ),
+                //         items: total!
+                //             .map((item) => DropdownMenuItem<RateShip>(
+                //                   value: item,
+                //                   child: Text(
+                //                     item.option ?? '',
+                //                     style: const TextStyle(fontSize: 14, color: Colors.black),
+                //                   ),
+                //                 ))
+                //             .toList(),
+                //         validator: (value) {
+                //           if (value == null) {
+                //             return 'please select ยอดจำนวนส่ง';
+                //           }
+                //           return null;
+                //         },
+                //         onChanged: (value) {},
+                //         onSaved: (value) {
+                //           selectedtotalsend = value;
+                //         },
+                //         buttonStyleData: const ButtonStyleData(
+                //           padding: EdgeInsets.only(right: 8),
+                //         ),
+                //         iconStyleData: const IconStyleData(
+                //           icon: Icon(
+                //             Icons.keyboard_arrow_down,
+                //             color: Colors.black45,
+                //           ),
+                //           iconSize: 24,
+                //         ),
+                //         dropdownStyleData: DropdownStyleData(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //         ),
+                //         menuItemStyleData: const MenuItemStyleData(
+                //           padding: EdgeInsets.symmetric(horizontal: 16),
+                //         ),
+                //       ),
                 SizedBox(height: size.height * 0.01),
                 often?.isEmpty ?? true
                     ? SizedBox.shrink()
-                    : DropdownButtonFormField2<RateShip>(
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
+                    : Container(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: Colors.grey,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                        hint: const Text(
-                          'ท่านนำเข้าบ่อยหรือไม่ ',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        items: often!
-                            .map((item) => DropdownMenuItem<RateShip>(
-                                  value: item,
-                                  child: Text(
+                        padding: EdgeInsets.all(8),
+                        child: DropdownSearch<RateShip>(
+                          selectedItem: selectedsendoften,
+                          // items: listProvinec,
+                          items: often!,
+                          itemAsString: (item) => item.option ?? '',
+                          popupProps: PopupProps.menu(
+                            constraints: BoxConstraints(maxHeight: 450),
+                            fit: FlexFit.loose,
+                            itemBuilder: (context, item, isSelected) => Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     item.option ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      color: Colors.black,
                                     ),
                                   ),
-                                ))
-                            .toList(),
-                        validator: (value) {
-                          if (value == null) {
-                            return 'please select ยอดจำนวนส่ง';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {},
-                        onSaved: (value) {
-                          selectedsendoften = value;
-                        },
-                        buttonStyleData: const ButtonStyleData(
-                          padding: EdgeInsets.only(right: 8),
-                        ),
-                        iconStyleData: const IconStyleData(
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.black45,
+                                ],
+                              ),
+                            ),
                           ),
-                          iconSize: 24,
-                        ),
-                        dropdownStyleData: DropdownStyleData(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            baseStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              fontFamily: 'Prompt',
+                            ),
+                            dropdownSearchDecoration: InputDecoration(
+                              hintText: 'ท่านนำเข้าบ่อยหรือไม่',
+                              hintStyle: TextStyle(
+                                color: Colors.black45,
+                                fontFamily: 'Prompt',
+                              ),
+                              border: InputBorder.none,
+                              suffixIconColor: Colors.grey,
+                            ),
                           ),
-                        ),
-                        menuItemStyleData: const MenuItemStyleData(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedsendoften = value;
+                            });
+                          },
                         ),
                       ),
+
+                // often?.isEmpty ?? true
+                //     ? SizedBox.shrink()
+                //     : DropdownButtonFormField2<RateShip>(
+                //         isExpanded: true,
+                //         decoration: InputDecoration(
+                //           contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                //           enabledBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           focusedBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           fillColor: Colors.white,
+                //           filled: true,
+                //         ),
+                //         hint: const Text(
+                //           'ท่านนำเข้าบ่อยหรือไม่ ',
+                //           style: TextStyle(fontSize: 14),
+                //         ),
+                //         items: often!
+                //             .map((item) => DropdownMenuItem<RateShip>(
+                //                   value: item,
+                //                   child: Text(
+                //                     item.option ?? '',
+                //                     style: const TextStyle(
+                //                       fontSize: 14,
+                //                     ),
+                //                   ),
+                //                 ))
+                //             .toList(),
+                //         validator: (value) {
+                //           if (value == null) {
+                //             return 'please select ยอดจำนวนส่ง';
+                //           }
+                //           return null;
+                //         },
+                //         onChanged: (value) {},
+                //         onSaved: (value) {
+                //           selectedsendoften = value;
+                //         },
+                //         buttonStyleData: const ButtonStyleData(
+                //           padding: EdgeInsets.only(right: 8),
+                //         ),
+                //         iconStyleData: const IconStyleData(
+                //           icon: Icon(
+                //             Icons.keyboard_arrow_down,
+                //             color: Colors.black45,
+                //           ),
+                //           iconSize: 24,
+                //         ),
+                //         dropdownStyleData: DropdownStyleData(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //         ),
+                //         menuItemStyleData: const MenuItemStyleData(
+                //           padding: EdgeInsets.symmetric(horizontal: 16),
+                //         ),
+                //       ),
+
                 SizedBox(height: size.height * 0.01),
                 import?.isEmpty ?? true
                     ? SizedBox.shrink()
-                    : DropdownButtonFormField2<RateShip>(
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
+                    : Container(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: Colors.grey,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                        hint: const Text(
-                          'ต้องการนำเข้าแบบใด ',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        items: import!
-                            .map((item) => DropdownMenuItem<RateShip>(
-                                  value: item,
-                                  child: Text(
+                        padding: EdgeInsets.all(8),
+                        child: DropdownSearch<RateShip>(
+                          selectedItem: selectedimporttype,
+                          // items: listProvinec,
+                          items: import!,
+                          itemAsString: (item) => item.option ?? '',
+                          popupProps: PopupProps.menu(
+                            constraints: BoxConstraints(maxHeight: 450),
+                            fit: FlexFit.loose,
+                            itemBuilder: (context, item, isSelected) => Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     item.option ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      color: Colors.black,
                                     ),
                                   ),
-                                ))
-                            .toList(),
-                        validator: (value) {
-                          if (value == null) {
-                            return 'กรุณากรอก';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {},
-                        onSaved: (value) {
-                          selectedimporttype = value;
-                        },
-                        buttonStyleData: const ButtonStyleData(
-                          padding: EdgeInsets.only(right: 8),
-                        ),
-                        iconStyleData: const IconStyleData(
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.black45,
+                                ],
+                              ),
+                            ),
                           ),
-                          iconSize: 24,
-                        ),
-                        dropdownStyleData: DropdownStyleData(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            baseStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              fontFamily: 'Prompt',
+                            ),
+                            dropdownSearchDecoration: InputDecoration(
+                              hintText: 'ต้องการนำเข้าแบบใด',
+                              hintStyle: TextStyle(
+                                color: Colors.black45,
+                                fontFamily: 'Prompt',
+                              ),
+                              border: InputBorder.none,
+                              suffixIconColor: Colors.grey,
+                            ),
                           ),
-                        ),
-                        menuItemStyleData: const MenuItemStyleData(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedimporttype = value;
+                            });
+                          },
                         ),
                       ),
+
+                // import?.isEmpty ?? true
+                //     ? SizedBox.shrink()
+                //     : DropdownButtonFormField2<RateShip>(
+                //         isExpanded: true,
+                //         decoration: InputDecoration(
+                //           contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                //           enabledBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           focusedBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           fillColor: Colors.white,
+                //           filled: true,
+                //         ),
+                //         hint: const Text(
+                //           'ต้องการนำเข้าแบบใด ',
+                //           style: TextStyle(fontSize: 14),
+                //         ),
+                //         items: import!
+                //             .map((item) => DropdownMenuItem<RateShip>(
+                //                   value: item,
+                //                   child: Text(
+                //                     item.option ?? '',
+                //                     style: const TextStyle(
+                //                       fontSize: 14,
+                //                     ),
+                //                   ),
+                //                 ))
+                //             .toList(),
+                //         validator: (value) {
+                //           if (value == null) {
+                //             return 'กรุณากรอก';
+                //           }
+                //           return null;
+                //         },
+                //         onChanged: (value) {},
+                //         onSaved: (value) {
+                //           selectedimporttype = value;
+                //         },
+                //         buttonStyleData: const ButtonStyleData(
+                //           padding: EdgeInsets.only(right: 8),
+                //         ),
+                //         iconStyleData: const IconStyleData(
+                //           icon: Icon(
+                //             Icons.keyboard_arrow_down,
+                //             color: Colors.black45,
+                //           ),
+                //           iconSize: 24,
+                //         ),
+                //         dropdownStyleData: DropdownStyleData(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //         ),
+                //         menuItemStyleData: const MenuItemStyleData(
+                //           padding: EdgeInsets.symmetric(horizontal: 16),
+                //         ),
+                //       ),
+
                 SizedBox(height: size.height * 0.01),
                 want?.isEmpty ?? true
                     ? SizedBox.shrink()
-                    : DropdownButtonFormField2<RateShip>(
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
+                    : Container(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: Colors.grey,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 0.5,
-                            ),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
                         ),
-                        hint: const Text(
-                          'สิ่งที่ท่านต้องการ ',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        items: want!
-                            .map((item) => DropdownMenuItem<RateShip>(
-                                  value: item,
-                                  child: Text(
+                        padding: EdgeInsets.all(8),
+                        child: DropdownSearch<RateShip>(
+                          selectedItem: selecteduserwant,
+                          // items: listProvinec,
+                          items: want!,
+                          itemAsString: (item) => item.option ?? '',
+                          popupProps: PopupProps.menu(
+                            constraints: BoxConstraints(maxHeight: 450),
+                            fit: FlexFit.loose,
+                            itemBuilder: (context, item, isSelected) => Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     item.option ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      color: Colors.black,
                                     ),
                                   ),
-                                ))
-                            .toList(),
-                        validator: (value) {
-                          if (value == null) {
-                            return 'กรุณากรอก';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {},
-                        onSaved: (value) {
-                          selecteduserwant = value;
-                        },
-                        buttonStyleData: const ButtonStyleData(
-                          padding: EdgeInsets.only(right: 8),
-                        ),
-                        iconStyleData: const IconStyleData(
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.black45,
+                                ],
+                              ),
+                            ),
                           ),
-                          iconSize: 24,
-                        ),
-                        dropdownStyleData: DropdownStyleData(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            baseStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              fontFamily: 'Prompt',
+                            ),
+                            dropdownSearchDecoration: InputDecoration(
+                              hintText: 'สิ่งที่ท่านต้องการ',
+                              hintStyle: TextStyle(
+                                color: Colors.black45,
+                                fontFamily: 'Prompt',
+                              ),
+                              border: InputBorder.none,
+                              suffixIconColor: Colors.grey,
+                            ),
                           ),
-                        ),
-                        menuItemStyleData: const MenuItemStyleData(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          onChanged: (value) {
+                            setState(() {
+                              selecteduserwant = value;
+                            });
+                          },
                         ),
                       ),
+
+                // want?.isEmpty ?? true
+                //     ? SizedBox.shrink()
+                //     : DropdownButtonFormField2<RateShip>(
+                //         isExpanded: true,
+                //         decoration: InputDecoration(
+                //           contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                //           enabledBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           focusedBorder: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(10),
+                //             borderSide: BorderSide(
+                //               color: Colors.grey,
+                //               width: 0.5,
+                //             ),
+                //           ),
+                //           fillColor: Colors.white,
+                //           filled: true,
+                //         ),
+                //         hint: const Text(
+                //           'สิ่งที่ท่านต้องการ ',
+                //           style: TextStyle(fontSize: 14),
+                //         ),
+                //         items: want!
+                //             .map((item) => DropdownMenuItem<RateShip>(
+                //                   value: item,
+                //                   child: Text(
+                //                     item.option ?? '',
+                //                     style: const TextStyle(
+                //                       fontSize: 14,
+                //                     ),
+                //                   ),
+                //                 ))
+                //             .toList(),
+                //         validator: (value) {
+                //           if (value == null) {
+                //             return 'กรุณากรอก';
+                //           }
+                //           return null;
+                //         },
+                //         onChanged: (value) {},
+                //         onSaved: (value) {
+                //           selecteduserwant = value;
+                //         },
+                //         buttonStyleData: const ButtonStyleData(
+                //           padding: EdgeInsets.only(right: 8),
+                //         ),
+                //         iconStyleData: const IconStyleData(
+                //           icon: Icon(
+                //             Icons.keyboard_arrow_down,
+                //             color: Colors.black45,
+                //           ),
+                //           iconSize: 24,
+                //         ),
+                //         dropdownStyleData: DropdownStyleData(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //         ),
+                //         menuItemStyleData: const MenuItemStyleData(
+                //           padding: EdgeInsets.symmetric(horizontal: 16),
+                //         ),
+                //       ),
+
                 SizedBox(
                   height: size.height * 0.015,
                 ),
@@ -1496,20 +1919,123 @@ class _registerpageState extends State<registerpage> {
         child: Container(
           width: double.infinity,
           height: size.height * 0.073,
-          decoration: BoxDecoration(color: red1, borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(color: _agreement == false ? Colors.grey : red1, borderRadius: BorderRadius.circular(10)),
           child: Center(
             child: TextButton(
-              onPressed: () {
-                print('succes');
+              onPressed: () async {
+                LoadingDialog.open(context);
+                try {
+                  await RegisterService.register(
+                    member_type: widget.type,
+                    fname: _nameController.text,
+                    lname: _lastnameController.text,
+                    phone: _telController.text,
+                    password: _passwordController.text,
+                    birth_date: dateSentApi,
+                    gender: _selectedGender,
+                    importer_code: _importercodeController.text,
+                    referrer: _reccomController.text,
+                    live_address: homeCode.text,
+                    live_province: selectedProvices!.nameTH,
+                    live_district: selecteddistrict!.nameTH,
+                    live_sub_district: selectedSubdistricts!.nameTH,
+                    live_postal_code: zipcode.text,
+                    address: homeCode.text,
+                    province: selectedProvices!.nameTH,
+                    district: selecteddistrict!.nameTH,
+                    sub_district: selectedSubdistricts!.nameTH,
+                    postal_code: zipcode.text,
+                    latitude: lat,
+                    longitude: long,
+                    transport_thai_master_id: selectedTransports!.id,
+                    ever_imported_from_china: _selecteduseto,
+                    order_quantity: selectedtotalsend!.option,
+                    frequent_importer: selectedsendoften!.option,
+                    need_transport_type: selectedimporttype!.option,
+                    additional_requests: selecteduserwant!.option,
+                    image: '',
+                  );
+                  LoadingDialog.close(context);
+                  if (!mounted) return;
+                  Navigator.pop(context);
+                } on Exception catch (e) {
+                  if (!mounted) return;
+                  LoadingDialog.close(context);
+                  print(e);
+                } catch (e) {
+                  if (!mounted) return;
+                  LoadingDialog.close(context);
+                  print(e);
+                }
               },
               child: Text(
                 'สมัครสมาชิก',
-                style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, color: _agreement == false ? const Color.fromARGB(255, 228, 225, 225) : Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _afterselectDate(BuildContext context) async {
+    final config = CalendarDatePicker2WithActionButtonsConfig(
+        calendarType: CalendarDatePicker2Type.single,
+        selectedDayHighlightColor: kBackgroundColor,
+        dayTextStylePredicate: ({required DateTime date}) {
+          return TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+          );
+        },
+        yearBuilder: ({required int year, TextStyle? textStyle, bool? isDisabled, bool? isSelected, bool? isCurrentYear, BoxDecoration? decoration}) {
+          final buddhistYear = year + 543; // แปลงปี ค.ศ. เป็น พ.ศ.
+          return Center(
+            child: Text(
+              '$buddhistYear',
+              style: textStyle,
+            ),
+          );
+        },
+        // ปรับแต่งข้อความสำหรับตัวเลือกเดือน/ปี
+        modePickerTextHandler: ({required DateTime monthDate}) {
+          final buddhistYear = monthDate.year + 543; // แปลงปี ค.ศ. เป็น พ.ศ.
+          final monthNames = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+          final monthName = monthNames[monthDate.month - 1];
+          return "$monthName พ.ศ. $buddhistYear";
+        },
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now());
+
+    final selectedDates = await showCalendarDatePicker2Dialog(
+      dialogBackgroundColor: Colors.white,
+      context: context,
+      config: config,
+      dialogSize: const Size(325, 400),
+      value: [],
+    );
+
+    if (selectedDates != null && selectedDates.isNotEmpty) {
+      final selectedDate = selectedDates.first;
+      final formattedDate = _convertToBuddhistEra(selectedDate ?? DateTime.now());
+      final formatttedDateapi = _convertToapi(selectedDate ?? DateTime.now());
+      _birthController.text = formattedDate;
+      dateSentApi = formatttedDateapi;
+    }
+  }
+
+  String _convertToBuddhistEra(DateTime date) {
+    final buddhistYear = date.year + 543;
+    final day = date.day.toString().padLeft(2, '0'); // เติม 0 ให้เป็นเลข 2 หลัก
+    final month = date.month.toString().padLeft(2, '0'); // เติม 0 ให้เป็นเลข 2 หลัก
+    return '$day-$month-$buddhistYear';
+  }
+
+  String _convertToapi(DateTime date) {
+    final day = date.day.toString().padLeft(2, '0'); // เติม 0 ให้เป็นเลข 2 หลัก
+    final month = date.month.toString().padLeft(2, '0'); // เติม 0 ให้เป็นเลข 2 หลัก
+    return '${date.year}-$month-$day';
   }
 }
