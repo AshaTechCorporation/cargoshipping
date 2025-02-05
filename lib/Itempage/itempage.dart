@@ -497,7 +497,7 @@ class _ItempageState extends State<Itempage> {
               ),
       ),
       bottomNavigationBar: SizedBox(
-        height: size.height * 0.099,
+        // height: size.height * 0.099,
         child: BottomAppBar(
           color: white,
           child: Row(
@@ -517,12 +517,12 @@ class _ItempageState extends State<Itempage> {
                           color: _selectedIndex == 0 ? Colors.black : Colors.black,
                         ),
                         SizedBox(
-                          height: size.height * 0.01,
+                          height: size.height * 0.005,
                         ),
                         Text(
                           'หมวดสินค้า',
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: _selectedIndex == 0 ? Colors.black : Colors.black, fontSize: 12),
+                          style: TextStyle(color: _selectedIndex == 0 ? Colors.black : Colors.black, fontSize: 9),
                         ),
                       ],
                     ),
@@ -538,9 +538,7 @@ class _ItempageState extends State<Itempage> {
                 width: size.width * 0.001,
                 color: Colors.grey,
               ),
-              SizedBox(
-                width: size.width * 0.01,
-              ),
+
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(right: size.width * 0.01),
@@ -611,7 +609,7 @@ class _ItempageState extends State<Itempage> {
                           'เพิ่มลงรถเข็น',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: TextStyle(color: _selectedIndex == 1 ? Colors.black : Colors.black, fontSize: 12),
+                          style: TextStyle(color: _selectedIndex == 1 ? Colors.black : Colors.black, fontSize: 9),
                         ),
                       ],
                     ),
