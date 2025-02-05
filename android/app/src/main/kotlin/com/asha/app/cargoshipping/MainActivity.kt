@@ -1,4 +1,4 @@
-package com.example.cargoshipping
+package com.asha.app.cargoshipping
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -6,9 +6,13 @@ import 'package:cargoshipping/register/Agentpage.dart';
 import 'package:cargoshipping/register/legalpersonpage.dart';
 import 'package:cargoshipping/register/regisPage.dart';
 import 'package:cargoshipping/register/server/registerService.dart';
+import 'package:cargoshipping/widgets/Form.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,6 +26,58 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String device_no = '';
+  String notify_token = '';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await requestNotificationPermission();
+      getToken();
+      getdeviceId();
+    });
+  }
+
+  void getdeviceId() async {
+    final deviceInfo = DeviceInfoPlugin();
+
+    if (Platform.isAndroid) {
+      // ดึงข้อมูล Android ID
+      final androidInfo = await deviceInfo.androidInfo;
+      device_no = androidInfo.id;
+      print('android: ${device_no}');
+    } else if (Platform.isIOS) {
+      // ดึงข้อมูล Identifier for Vendor (iOS)
+      final iosInfo = await deviceInfo.iosInfo;
+      device_no = iosInfo.identifierForVendor!;
+      print('iOS Identifier: ${iosInfo.identifierForVendor}');
+    }
+  }
+
+  void getToken() async {
+    var playerId = OneSignal.User.pushSubscription.id;
+    notify_token = playerId ?? '';
+    print('token: ${playerId}');
+  }
+
+  Future<void> requestNotificationPermission() async {
+    if (Platform.isAndroid) {
+      if (await Permission.notification.isGranted) {
+        print("Notification permission already granted");
+      } else {
+        var status = await Permission.notification.request();
+        if (status.isGranted) {
+          print("Notification permission granted");
+        } else if (status.isDenied) {
+          print("Notification permission denied");
+        } else if (status.isPermanentlyDenied) {
+          print("Notification permission permanently denied");
+          openAppSettings();
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,76 +134,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.02),
-                SizedBox(
-                  height: size.height * 0.06,
-                  child: TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      prefixIcon: Image.asset('assets/images/userlogin.png'),
-                      labelText: 'รหัสผู้นำเข้า',
-                      labelStyle: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.3,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 1.0,
-                        ),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'กรุณากรอกรหัสผู้นำเข้า';
-                      }
-                      return null;
-                    },
-                  ),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _emailController,
+                  hintText: 'รหัสผู้นำเข้า',
                 ),
-                SizedBox(height: size.height * 0.02),
-                SizedBox(
-                  height: size.height * 0.06,
-                  child: TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'รหัสผ่าน',
-                      labelStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                      prefixIcon: Image.asset(
-                        'assets/icons/password.png',
-                        height: size.height * 0.001,
-                      ),
-                      suffixIcon: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [GestureDetector(onTap: () {}, child: Image.asset('assets/icons/eyepass.png'))],
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 0.3,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey,
-                          width: 1.0,
-                        ),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'กรุณากรอกรหัสผู้นำเข้า';
-                      }
-                      return null;
-                    },
-                    obscureText: true,
-                  ),
+                FromRegister(
+                  width: size.width * 0.9,
+                  controller: _passwordController,
+                  hintText: 'รหัสผ่าน',
+                  isPassword: true,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -174,8 +170,11 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       LoadingDialog.open(context);
+                      if (notify_token == '') {
+                        getToken();
+                      }
                       try {
-                        final token = await RegisterService.login(_emailController.text, _passwordController.text, '', '');
+                        final token = await RegisterService.login(_emailController.text, _passwordController.text, device_no, notify_token);
                         if (token != null) {
                           final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
                           final SharedPreferences prefs = await _prefs;
@@ -284,7 +283,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 219, 18, 4),
-                      padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -296,28 +295,32 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(255, 219, 18, 4),
-                    backgroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 120, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                SizedBox(
+                  height: size.height * 0.059,
+                  width: size.width * 0.9,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Color.fromARGB(255, 219, 18, 4),
+                      backgroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 100, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      side: BorderSide(
+                        color: Color.fromARGB(255, 219, 18, 4), // สีของขอบ
+                        width: 1,
+                      ),
                     ),
-                    side: BorderSide(
-                      color: Color.fromARGB(255, 219, 18, 4), // สีของขอบ
-                      width: 1,
-                    ),
-                  ),
-                  onPressed: () {
-                    _showSelectionDialog(context);
-                  },
-                  child: const Text(
-                    'ลงทะเบียนผู้ใช้ใหม่',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 219, 18, 4),
+                    onPressed: () {
+                      _showSelectionDialog(context);
+                    },
+                    child: const Text(
+                      'ลงทะเบียนผู้ใช้ใหม่',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 219, 18, 4),
+                      ),
                     ),
                   ),
                 ),

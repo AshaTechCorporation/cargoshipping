@@ -2,8 +2,10 @@ import 'package:cargoshipping/account/mapTest.dart';
 import 'package:cargoshipping/account/widgets/addresspage.dart';
 import 'package:cargoshipping/account/widgets/userinfo.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/firstPage.dart';
 import 'package:cargoshipping/login/loginPage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Accsetting extends StatefulWidget {
   const Accsetting({super.key, required this.title});
@@ -15,6 +17,13 @@ class Accsetting extends StatefulWidget {
 }
 
 class _AccsettingState extends State<Accsetting> {
+  Future<void> clearToken() async {
+    final _prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = _prefs;
+    prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -23,8 +32,7 @@ class _AccsettingState extends State<Accsetting> {
         backgroundColor: background,
         title: Text(
           'ตั้งค่า',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -51,8 +59,7 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.only(left: 10, top: 17),
                 child: Text(
                   'ตั้งค่าบัญชีผู้ใช้',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: headingtext),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: headingtext),
                 ),
               ),
             ),
@@ -64,17 +71,13 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Userinfo()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Userinfo()));
                   },
                   child: Row(
                     children: [
                       Text(
                         'ข้อมูลเกี่ยวกับบัญชี',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 13),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 13),
                       ),
                       Spacer(),
                       Image.asset('assets/icons/rightarrow.png')
@@ -94,17 +97,13 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Addresspage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Addresspage()));
                   },
                   child: Row(
                     children: [
                       Text(
                         'ที่อยู่ของฉัน',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 13),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 13),
                       ),
                       Spacer(),
                       Image.asset('assets/icons/rightarrow.png')
@@ -125,8 +124,7 @@ class _AccsettingState extends State<Accsetting> {
                 padding: const EdgeInsets.only(left: 10, top: 17),
                 child: Text(
                   'ช่วยเหลือ',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: headingtext),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: headingtext),
                 ),
               ),
             ),
@@ -140,10 +138,7 @@ class _AccsettingState extends State<Accsetting> {
                   children: [
                     Text(
                       'ข้อตกลงและเงื่อไขการให้บริการ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 13),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 13),
                     ),
                     Spacer(),
                     Image.asset('assets/icons/rightarrow.png')
@@ -164,10 +159,7 @@ class _AccsettingState extends State<Accsetting> {
                   children: [
                     Text(
                       'เวอร์ชัน',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 13),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 13),
                     ),
                     Spacer(),
                     Image.asset('assets/icons/rightarrow.png')
@@ -190,10 +182,7 @@ class _AccsettingState extends State<Accsetting> {
                     children: [
                       Text(
                         'เกี่ยวกับเรา',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 13),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 13),
                       ),
                       Spacer(),
                       Image.asset('assets/icons/rightarrow.png')
@@ -215,10 +204,7 @@ class _AccsettingState extends State<Accsetting> {
                   children: [
                     Text(
                       'คำร้องขอลบบัญชีผู้ใช้',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 13),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 13),
                     ),
                     Spacer(),
                     Image.asset('assets/icons/rightarrow.png'),
@@ -236,10 +222,7 @@ class _AccsettingState extends State<Accsetting> {
             Container(
               height: 50,
               width: 170,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: red1, width: 1)),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: red1, width: 1)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -261,11 +244,8 @@ class _AccsettingState extends State<Accsetting> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()),
-                                        (route) => false);
+                                    clearToken();
+                                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
                                   },
                                   child: Text('ตกลง'),
                                 )
@@ -275,10 +255,7 @@ class _AccsettingState extends State<Accsetting> {
                     },
                     child: Text(
                       'ออกจากระบบ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: red1,
-                          fontSize: 17),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: red1, fontSize: 17),
                     ),
                   )
                 ],

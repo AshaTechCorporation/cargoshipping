@@ -538,7 +538,6 @@ class _registerpageState extends State<registerpage> {
                             },
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.06,
                             width: MediaQuery.of(context).size.width * 0.9,
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -607,7 +606,6 @@ class _registerpageState extends State<registerpage> {
                               : Column(
                                   children: [
                                     Container(
-                                      height: MediaQuery.of(context).size.height * 0.06,
                                       width: MediaQuery.of(context).size.width * 0.9,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
@@ -674,7 +672,6 @@ class _registerpageState extends State<registerpage> {
                               : Column(
                                   children: [
                                     Container(
-                                      height: MediaQuery.of(context).size.height * 0.06,
                                       width: MediaQuery.of(context).size.width * 0.9,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
@@ -877,7 +874,6 @@ class _registerpageState extends State<registerpage> {
                   },
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.06,
                   width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -940,14 +936,12 @@ class _registerpageState extends State<registerpage> {
                     },
                   ),
                 ),
-
                 SizedBox(height: size.height * 0.01),
                 selectedProvices == null
                     ? SizedBox.shrink()
                     : Column(
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.06,
                             width: MediaQuery.of(context).size.width * 0.9,
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -1016,7 +1010,6 @@ class _registerpageState extends State<registerpage> {
                     : Column(
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.06,
                             width: MediaQuery.of(context).size.width * 0.9,
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -1093,7 +1086,6 @@ class _registerpageState extends State<registerpage> {
                 transports?.isEmpty ?? true
                     ? SizedBox.shrink()
                     : Container(
-                        height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -1286,7 +1278,6 @@ class _registerpageState extends State<registerpage> {
                 total?.isEmpty ?? true
                     ? SizedBox.shrink()
                     : Container(
-                        height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -1412,7 +1403,6 @@ class _registerpageState extends State<registerpage> {
                 often?.isEmpty ?? true
                     ? SizedBox.shrink()
                     : Container(
-                        height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -1542,7 +1532,6 @@ class _registerpageState extends State<registerpage> {
                 import?.isEmpty ?? true
                     ? SizedBox.shrink()
                     : Container(
-                        height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -1672,7 +1661,6 @@ class _registerpageState extends State<registerpage> {
                 want?.isEmpty ?? true
                     ? SizedBox.shrink()
                     : Container(
-                        height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -2024,11 +2012,29 @@ class _registerpageState extends State<registerpage> {
                 } on Exception catch (e) {
                   if (!mounted) return;
                   LoadingDialog.close(context);
-                  print(e);
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialogYes(
+                      title: 'แจ้งเตือน',
+                      description: '$e',
+                      pressYes: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  );
                 } catch (e) {
                   if (!mounted) return;
                   LoadingDialog.close(context);
-                  print(e);
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialogYes(
+                      title: 'แจ้งเตือน',
+                      description: '$e',
+                      pressYes: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  );
                 }
               },
               child: Text(

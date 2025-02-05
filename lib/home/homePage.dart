@@ -591,109 +591,106 @@ class _HomePageState extends State<HomePage> {
               height: size.height * 0.26,
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Skeletonizer(
-                  enabled: enabled,
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 1.0,
-                    ),
-                    itemCount: serviceTransporter.length,
-                    itemBuilder: (context, index) {
-                      return OurServicesWidget(
-                          size: size,
-                          title: serviceTransporter[index].name ?? '',
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Servicedetail(
-                                  id: serviceTransporter[index].id!,
-                                ),
-                              ),
-                            );
-                            // if (serviceTransporter[index].name == 'ขนส่งทางบก') {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Servicedetail(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Shipservicepage(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Fclpage1(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Lclpage(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Worldexport(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Correctimportservice(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (index == 6) {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Translaterguideservicepage(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (index == 7) {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => ShippingCalculatorPage(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (index == 8) {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => Importrate(),
-                            //     ),
-                            //   );
-                            // }
-                            // if (index == 9) {
-                            //   _showBottomSheet(context);
-                            // }
-                          },
-                          imagespath: serviceTransporter[index].image ?? '');
-                    },
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 1.0,
                   ),
+                  itemCount: serviceTransporter.length,
+                  itemBuilder: (context, index) {
+                    return OurServicesWidget(
+                        size: size,
+                        title: serviceTransporter[index].name ?? '',
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Servicedetail(
+                                id: serviceTransporter[index].id!,
+                              ),
+                            ),
+                          );
+                          // if (serviceTransporter[index].name == 'ขนส่งทางบก') {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Servicedetail(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (serviceTransporter[index].name == 'ขนส่งทางทะเล') {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Shipservicepage(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (serviceTransporter[index].name == 'จัดส่งแบบเหมาตู้') {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Fclpage1(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (serviceTransporter[index].name == 'จัดส่งแบบ LCL ทางเครื่องบิน') {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Lclpage(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (serviceTransporter[index].name == 'บริการส่งออกสินค้าทั่วโลก') {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Worldexport(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (serviceTransporter[index].name == 'บริการนำเข้าแบบถูกต้อง') {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Correctimportservice(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (index == 6) {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Translaterguideservicepage(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (index == 7) {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => ShippingCalculatorPage(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (index == 8) {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Importrate(),
+                          //     ),
+                          //   );
+                          // }
+                          // if (index == 9) {
+                          //   _showBottomSheet(context);
+                          // }
+                        },
+                        imagespath: serviceTransporter[index].image ?? '');
+                  },
                 ),
               ),
             ),
@@ -798,10 +795,10 @@ class _HomePageState extends State<HomePage> {
                               size: size,
                               press: () {
                                 if (index == 0) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (contex)=>Tegmallpage()));
-                                }else if(index == 1){
-                                  Navigator.push(context, MaterialPageRoute(builder: (contex)=>DepositPayment()));
-                                }else {}
+                                  Navigator.push(context, MaterialPageRoute(builder: (contex) => Tegmallpage()));
+                                } else if (index == 1) {
+                                  Navigator.push(context, MaterialPageRoute(builder: (contex) => DepositPayment()));
+                                } else {}
                               },
                               imagespath: payment[index],
                             )),

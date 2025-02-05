@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1021314805189",
+    "project_id": "tegcargo-a658c",
+    "storage_bucket": "tegcargo-a658c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021314805189:android:01c56df188d378de28afac",
+        "android_client_info": {
+          "package_name": "com.asha.app.cargoshipping"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD97ZVkijltYXIC8S2LX4T9Zeos_4vP1QI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
