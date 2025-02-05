@@ -911,7 +911,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(
               width: size.width * 0.93,
-              height: size.height * 0.42,
+              //height: size.height * 0.42,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -930,7 +930,7 @@ class _HomePageState extends State<HomePage> {
                     children: List.generate(
                       storeTEG.length,
                       (indexStore) => SizedBox(
-                        height: size.height * 0.19,
+                        //height: size.height * 0.19,
                         width: size.width * 0.93,
                         // color: Colors.white,
                         child: Column(
@@ -1054,6 +1054,9 @@ class _HomePageState extends State<HomePage> {
             //   height: size.height * 0.01,
             // ),
             // Shippingimportratewidget(size: size),
+            SizedBox(
+              height: size.height * 0.04,
+            ),
             Row(
               children: [
                 Padding(
