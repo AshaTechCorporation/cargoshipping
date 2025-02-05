@@ -6,6 +6,7 @@ import 'package:cargoshipping/home/alipayservice.dart';
 import 'package:cargoshipping/home/alliandwechatservice.dart';
 import 'package:cargoshipping/home/bookingairservice.dart';
 import 'package:cargoshipping/home/correctimport.dart';
+import 'package:cargoshipping/home/depositPayment.dart';
 import 'package:cargoshipping/home/detailproduct.dart';
 import 'package:cargoshipping/home/fclpage.dart';
 import 'package:cargoshipping/home/lclpage.dart';
@@ -799,7 +800,7 @@ class _HomePageState extends State<HomePage> {
                                 if (index == 0) {
                                   Navigator.push(context, MaterialPageRoute(builder: (contex)=>Tegmallpage()));
                                 }else if(index == 1){
-
+                                  Navigator.push(context, MaterialPageRoute(builder: (contex)=>DepositPayment()));
                                 }else {}
                               },
                               imagespath: payment[index],
