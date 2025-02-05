@@ -95,12 +95,12 @@ class _WaitsumcardState extends State<Waitsumcard> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Detailordertrackpage(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => Detailordertrackpage(),
+                //   ),
+                // );
               },
               child: Center(
                 child: Stack(

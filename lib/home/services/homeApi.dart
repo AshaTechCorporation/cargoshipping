@@ -21,6 +21,8 @@ import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class HomeApi {
   const HomeApi();
 
@@ -458,8 +460,6 @@ class HomeApi {
   static Future<String> createOrder({
     String? date,
     int? total_price,
-    String? member_id,
-    String? member_address_id,
     String? shipping_type,
     String? payment_term,
     String? note,
@@ -467,15 +467,16 @@ class HomeApi {
   }) async {
     final url = Uri.https(publicUrl, '/api/orders');
     var headers = {'Content-Type': 'application/json'};
-
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userID = prefs.getString('userID');
     final response = await http.post(
       url,
       headers: headers,
       body: jsonEncode({
         'date': date,
         'total_price': total_price,
-        'member_id': member_id,
-        'member_address_id': member_address_id,
+        'member_id': userID,
+        'member_address_id': userID,
         'shipping_type': shipping_type,
         'payment_term': payment_term,
         'note': note,

@@ -662,7 +662,12 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                   // ใส่โค้ดที่จะทำเมื่อคลิกปุ่ม
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Detailordertrackpage()),
+                    MaterialPageRoute(builder: (context) => Detailordertrackpage(
+                      name: widget.name,
+                      num_iid: widget.num_iid,
+                      type: widget.type,
+                      products: widget.products,
+                    )),
                   );
                 },
                 child: Container(

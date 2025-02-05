@@ -703,33 +703,31 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      List<PartService> example2 = [
-                        PartService(1, 200),
-                      ];
-                      List<Products> example = [
-                        Products(
-                          '843650150244',
-                          '深灰色百褶裙女高腰显瘦春秋2024新款冬季毛呢半身裙jk短裙a字裙',
-                          'https://detail.1688.com/offer/843650150244.html',
-                          'https://detail.1688.com/offer/843650150244.html',
-                          'ของเด็ก',
-                          'ของเด็ก',
-                          'ของเด็ก',
-                          '20',
-                          '1',
-                          example2,
-                        ),
-                      ];
-                      await HomeApi.createOrder(
-                        date: "2023-11-20",
-                        total_price: 1299,
-                        member_id: "9",
-                        member_address_id: '9',
-                        shipping_type: 'Car',
-                        payment_term: '1',
-                        note: '',
-                        products: example,
-                      );
+                      // List<PartService> example2 = [
+                      //   PartService(1, 200),
+                      // ];
+                      // List<Products> example = [
+                      //   Products(
+                      //     '843650150244',
+                      //     '深灰色百褶裙女高腰显瘦春秋2024新款冬季毛呢半身裙jk短裙a字裙',
+                      //     'https://detail.1688.com/offer/843650150244.html',
+                      //     'https://detail.1688.com/offer/843650150244.html',
+                      //     'ของเด็ก',
+                      //     'ของเด็ก',
+                      //     'ของเด็ก',
+                      //     '20',
+                      //     '1',
+                      //     example2,
+                      //   ),
+                      // ];
+                      // await HomeApi.createOrder(
+                      //   date: "2023-11-20",
+                      //   total_price: 1299,
+                      //   shipping_type: 'Car',
+                      //   payment_term: '1',
+                      //   note: '',
+                      //   products: example,
+                      // );
                     },
                     child: Text(
                       'รายการรอชำระ',
