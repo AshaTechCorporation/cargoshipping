@@ -7,7 +7,15 @@ import 'package:flutter/material.dart';
 class Confirmorderpage extends StatefulWidget {
   const Confirmorderpage({
     super.key,
+    required this.name,
+    required this.num_iid,
+    required this.products,
+    required this.type
   });
+  final Map<String, dynamic> products;
+  final String num_iid;
+  final String type;
+  final String name;
 
   @override
   State<Confirmorderpage> createState() => _ConfirmorderpageState();

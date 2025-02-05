@@ -111,10 +111,10 @@ class _CartPageState extends State<CartPage> {
             _buildCheckbox('ทั้งหมด', _isSelected, _selectAll),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Confirmorderpage()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Confirmorderpage()),
+                // );
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,

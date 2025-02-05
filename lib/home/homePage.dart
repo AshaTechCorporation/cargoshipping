@@ -1761,6 +1761,7 @@ class _HomePageState extends State<HomePage> {
                                 press: () {},
                                 num_iid: '721593979484',
                                 type: selectedValue,
+                                name: 'xxx',
                               ),
                             ),
                           );

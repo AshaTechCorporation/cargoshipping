@@ -332,6 +332,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                                     products: listProducts[0],
                                     num_iid: item.num_iid!,
                                     type: 'taobao',
+                                    name: item.title!,
                                   )));
                     },
                     child: Column(

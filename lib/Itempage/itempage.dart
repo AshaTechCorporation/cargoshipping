@@ -13,7 +13,7 @@ import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 
 class Itempage extends StatefulWidget {
-  Itempage({super.key, required this.size, required this.title, required this.price, required this.press, required this.products, required this.num_iid, required this.type});
+  Itempage({super.key, required this.size, required this.title, required this.price, required this.press, required this.products, required this.num_iid, required this.type, required this.name});
 
   final Size size;
   final String title;
@@ -22,6 +22,7 @@ class Itempage extends StatefulWidget {
   final Map<String, dynamic> products;
   final String num_iid;
   final String type;
+  final String name;
 
   @override
   State<Itempage> createState() => _ItempageState();
@@ -487,6 +488,7 @@ class _ItempageState extends State<Itempage> {
                                       press: () {},
                                       num_iid: widget.num_iid,
                                       type: widget.type,
+                                      name: widget.name,
                                     ),
                                   ),
                                 );
@@ -639,7 +641,12 @@ class _ItempageState extends State<Itempage> {
                             onButtonPress: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Confirmorderpage()),
+                                MaterialPageRoute(builder: (context) => Confirmorderpage(
+                                  products: widget.products,
+                                  name: widget.name,
+                                  type: widget.type,
+                                  num_iid: widget.num_iid,
+                                )),
                               );
                             },
                           );
