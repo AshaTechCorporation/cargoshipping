@@ -357,7 +357,10 @@ void _showSelectionDialog(BuildContext context) {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => registerpage()),
+                  MaterialPageRoute(
+                      builder: (context) => registerpage(
+                            type: 'บุคคลทั่วไป',
+                          )),
                 );
               },
             ),
@@ -368,8 +371,15 @@ void _showSelectionDialog(BuildContext context) {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Legalpersonpage()),
+                  MaterialPageRoute(
+                      builder: (context) => registerpage(
+                            type: 'นิติบุคคล',
+                          )),
                 );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Legalpersonpage()),
+                // );
               },
             ),
             _buildOption(
@@ -379,8 +389,15 @@ void _showSelectionDialog(BuildContext context) {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Agentpage()),
+                  MaterialPageRoute(
+                      builder: (context) => registerpage(
+                            type: 'ตัวแทน',
+                          )),
                 );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Agentpage()),
+                // );
               },
             ),
           ],
