@@ -642,7 +642,7 @@ class _ItempageState extends State<Itempage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Confirmorderpage(
-                                  products: widget.products,
+                                  products: itemTaobao!,
                                   name: widget.name,
                                   type: widget.type,
                                   num_iid: widget.num_iid,
