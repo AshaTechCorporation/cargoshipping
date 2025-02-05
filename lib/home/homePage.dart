@@ -34,6 +34,8 @@ import 'package:cargoshipping/home/widgets/translaterguideservicepage.dart';
 import 'package:cargoshipping/home/worldexport.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/models/orders/partService.dart';
+import 'package:cargoshipping/models/orders/products.dart';
 import 'package:cargoshipping/models/rateShip.dart';
 import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:cargoshipping/track/widgets/placeorderourchase.dart';
@@ -699,9 +701,40 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: size.width * 0.035),
               child: Row(
                 children: [
-                  Text(
-                    'รายการรอชำระ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  GestureDetector(
+                    onTap: () async {
+                      List<PartService> example2 = [
+                        PartService(1, 200),
+                      ];
+                      List<Products> example = [
+                        Products(
+                          '843650150244',
+                          '深灰色百褶裙女高腰显瘦春秋2024新款冬季毛呢半身裙jk短裙a字裙',
+                          'https://detail.1688.com/offer/843650150244.html',
+                          'https://detail.1688.com/offer/843650150244.html',
+                          'ของเด็ก',
+                          'ของเด็ก',
+                          'ของเด็ก',
+                          '20',
+                          '1',
+                          example2,
+                        ),
+                      ];
+                      await HomeApi.createOrder(
+                        date: "2023-11-20",
+                        total_price: 1299,
+                        member_id: "9",
+                        member_address_id: '9',
+                        shipping_type: 'Car',
+                        payment_term: '1',
+                        note: '',
+                        products: example,
+                      );
+                    },
+                    child: Text(
+                      'รายการรอชำระ',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
                   ),
                   Spacer(),
                   GestureDetector(
