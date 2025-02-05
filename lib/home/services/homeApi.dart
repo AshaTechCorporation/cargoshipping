@@ -8,6 +8,8 @@ import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/itemsearch1688.dart';
 import 'package:cargoshipping/models/itemt1688.dart';
 import 'package:cargoshipping/models/itemtaobao.dart';
+import 'package:cargoshipping/models/orders/orders.dart';
+import 'package:cargoshipping/models/orders/products.dart';
 import 'package:cargoshipping/models/problembodies.dart';
 import 'package:cargoshipping/models/problemtype.dart';
 import 'package:cargoshipping/models/rateShip.dart';
@@ -450,6 +452,43 @@ class HomeApi {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
       // throw ApiException(data['message']);
+    }
+  }
+
+  static Future<String> createOrder({
+    String? date,
+    int? total_price,
+    String? member_id,
+    String? member_address_id,
+    String? shipping_type,
+    String? payment_term,
+    String? note,
+    List<Products>? products,
+  }) async {
+    final url = Uri.https(publicUrl, '/api/orders');
+    var headers = {'Content-Type': 'application/json'};
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode({
+        'date': date,
+        'total_price': total_price,
+        'member_id': member_id,
+        'member_address_id': member_address_id,
+        'shipping_type': shipping_type,
+        'payment_term': payment_term,
+        'note': note,
+        'products': products,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['message'];
+    } else {
+      final data = jsonDecode(response.body);
+      throw Exception(data['message']);
     }
   }
 }
