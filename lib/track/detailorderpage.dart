@@ -8,11 +8,12 @@ import 'package:cargoshipping/models/orders/products.dart';
 import 'package:flutter/material.dart';
 
 class Detailordertrackpage extends StatefulWidget {
-  Detailordertrackpage({super.key, required this.name, required this.num_iid, required this.products, required this.type});
+  Detailordertrackpage({super.key, required this.name, required this.num_iid, required this.products, required this.type, required this.amount});
   final Map<String, dynamic> products;
   final String num_iid;
   final String type;
   final String name;
+  final int amount;
 
   @override
   State<Detailordertrackpage> createState() => _DetailordertrackpageState();
@@ -36,7 +37,7 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
         'ของเด็ก',
         'ของเด็ก',
         '${widget.products['price']}',
-        '1',
+        '${widget.amount}',
         example2,
       );
       products.add(_product);

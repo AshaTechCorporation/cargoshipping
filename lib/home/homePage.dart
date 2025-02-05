@@ -34,6 +34,7 @@ import 'package:cargoshipping/home/widgets/translaterguideservicepage.dart';
 import 'package:cargoshipping/home/worldexport.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/orders/partService.dart';
 import 'package:cargoshipping/models/orders/products.dart';
 import 'package:cargoshipping/models/rateShip.dart';
@@ -69,12 +70,13 @@ class _HomePageState extends State<HomePage> {
   TextEditingController searchText = TextEditingController();
   Map<String, List<RateShip>> groupedData = {};
   bool enabled = true;
+  List<ItemSearch> item = [];
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getlistCategories(name: items[0]);
+      //await getlistCategories(name: items[0]);
       await getlistService();
     });
     // เพิ่ม Listener เพื่อตรวจจับการเลื่อน
@@ -115,6 +117,27 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> getlistCategoriesByName({required String categories_name}) async {
+    try {
+      //LoadingDialog.open(context);
+      // final _item = await HomeApi.getItemCategories(categories_name: categories_name);
+      String result = categories_name.replaceAll(" ", "");
+      final _item = await HomeApi.getItemSearch(search: result, type: selectedValue);
+
+      if (!mounted) return;
+
+      setState(() {
+        item = _item;
+      });
+      //inspect(item);
+      //LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      //LoadingDialog.close(context);
+      print(e);
+    }
+  }
+
   //ดึงข้อมูล api Category
   Future<void> getlistService() async {
     try {
@@ -139,6 +162,7 @@ class _HomePageState extends State<HomePage> {
           }
         });
       });
+      await getlistCategoriesByName(categories_name: categoryProduct[0].taobao!);
 
       // LoadingDialog.close(context);
     } on Exception catch (e) {
@@ -152,7 +176,7 @@ class _HomePageState extends State<HomePage> {
     'taobao',
     '1688',
   ];
-  String selectedValue = '1688';
+  String selectedValue = 'taobao';
   // Country? _selectedCountry;
   String selectedLanguage = 'ไทย';
   ImagePicker picker = ImagePicker();
@@ -966,15 +990,12 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RichText(
-                                text: TextSpan(
-                                    text: '${storeTEG[indexStore].name ?? ''} :',
-                                    style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15),
-                                    children: <TextSpan>[
-                                  TextSpan(
-                                    text: ' ${storeTEG[indexStore].address ?? ''}',
-                                    style: TextStyle(color: headingtext, fontSize: 15),
-                                  )
-                                ])),
+                                text: TextSpan(text: '${storeTEG[indexStore].name ?? ''} :', style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
+                              TextSpan(
+                                text: ' ${storeTEG[indexStore].address ?? ''}',
+                                style: TextStyle(color: headingtext, fontSize: 15),
+                              )
+                            ])),
                             SizedBox(
                               height: size.height * 0.01,
                             ),
@@ -994,9 +1015,7 @@ class _HomePageState extends State<HomePage> {
                                 width: size.width * 0.3,
                                 child: TextButton(
                                   style: TextButton.styleFrom(
-                                      foregroundColor: red1,
-                                      side: BorderSide(color: red1, width: size.width * 0.004),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
+                                      foregroundColor: red1, side: BorderSide(color: red1, width: size.width * 0.004), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
                                   onPressed: () {
                                     Clipboard.setData(
                                       ClipboardData(text: storeTEG[indexStore].address ?? ''),
@@ -1760,7 +1779,7 @@ class _HomePageState extends State<HomePage> {
                     child: RichText(
                         text: TextSpan(text: 'สินค้าแนะนำ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18), children: <TextSpan>[
                       TextSpan(
-                        text: ' จาก 1668',
+                        text: ' จาก ${selectedValue}',
                         style: TextStyle(color: red1, fontWeight: FontWeight.bold, fontSize: 18),
                       )
                     ])),
@@ -1768,37 +1787,54 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Wrap(
-              spacing: 20,
-              runSpacing: 10,
-              children: List.generate(
-                  listProducts.length,
-                  (index) => Ouritem(
-                        image: listProducts[index]['image'],
-                        sale: listProducts[index]['sale'],
-                        send: listProducts[index]['send'],
-                        size: MediaQuery.of(context).size,
-                        price: (listProducts[index]['price'] as num).toDouble(),
-                        detail: listProducts[index]['detail'],
-                        press: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Itempage(
-                                size: size,
-                                title: listProducts[index]['detail'],
-                                price: (listProducts[index]['price'] as num).toDouble(),
-                                products: listProducts[index],
-                                press: () {},
-                                num_iid: '721593979484',
-                                type: selectedValue,
-                                name: 'xxx',
-                              ),
-                            ),
-                          );
-                        },
-                      )),
-            ),
+            item.isEmpty
+                ? SizedBox()
+                : Wrap(
+                    spacing: 12,
+                    runSpacing: 10,
+                    children: List.generate(
+                        item.length,
+                        (index) => Ouritem(
+                              image: item[index].pic_url!,
+                              sale: item[index].sales.toString(),
+                              send: item[index].sales.toString(),
+                              size: MediaQuery.of(context).size,
+                              price: item[index].price!,
+                              detail: item[index].title!,
+                              press: () async {},
+                            )),
+                  ),
+            // Wrap(
+            //   spacing: 20,
+            //   runSpacing: 10,
+            //   children: List.generate(
+            //       listProducts.length,
+            //       (index) => Ouritem(
+            //             image: listProducts[index]['image'],
+            //             sale: listProducts[index]['sale'],
+            //             send: listProducts[index]['send'],
+            //             size: MediaQuery.of(context).size,
+            //             price: listProducts[index]['price'].toString(),
+            //             detail: listProducts[index]['detail'],
+            //             press: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => Itempage(
+            //                     size: size,
+            //                     title: listProducts[index]['detail'],
+            //                     price: (listProducts[index]['price'] as num).toDouble(),
+            //                     products: listProducts[index],
+            //                     press: () {},
+            //                     num_iid: '721593979484',
+            //                     type: selectedValue,
+            //                     name: 'xxx',
+            //                   ),
+            //                 ),
+            //               );
+            //             },
+            //           )),
+            // ),
             SizedBox(
               height: size.height * 0.05,
             ),

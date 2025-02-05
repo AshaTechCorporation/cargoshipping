@@ -10,12 +10,14 @@ class Confirmorderpage extends StatefulWidget {
     required this.name,
     required this.num_iid,
     required this.products,
-    required this.type
+    required this.type,
+    required this.amount
   });
   final Map<String, dynamic> products;
   final String num_iid;
   final String type;
   final String name;
+  final int amount;
 
   @override
   State<Confirmorderpage> createState() => _ConfirmorderpageState();
@@ -667,6 +669,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       num_iid: widget.num_iid,
                       type: widget.type,
                       products: widget.products,
+                      amount: widget.amount,
                     )),
                   );
                 },

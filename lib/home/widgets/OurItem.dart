@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class Ouritem extends StatelessWidget {
   final String detail;
   final String send;
   final String sale;
-  final double price;
+  final String price;
   final VoidCallback press;
 
   @override
@@ -37,14 +38,31 @@ class Ouritem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
-              child: Image.asset(
-                image,
-                fit: BoxFit.fill,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+              child: CachedNetworkImage(
                 height: size.height * 0.14,
                 width: double.infinity,
+                imageUrl: "${image}",
+                fit: BoxFit.fill,
+                placeholder: (context, url) => SizedBox(
+                    child: CircularProgressIndicator(
+                  strokeWidth: 1,
+                )),
+                errorWidget: (context, url, error) => Image.asset(
+                  'assets/images/noimages.jpg',
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
+            // ClipRRect(
+            //   borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+            //   child: Image.network(
+            //     image,
+            //     fit: BoxFit.fill,
+            //     height: size.height * 0.14,
+            //     width: double.infinity,
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -69,10 +87,7 @@ class Ouritem extends StatelessWidget {
                   ),
                   Text(
                     'จัดส่ง $send',
-                    style: TextStyle(
-                        fontSize: 11,
-                        color: greyuserinfo,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 11, color: greyuserinfo, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
@@ -84,10 +99,7 @@ class Ouritem extends StatelessWidget {
                 children: [
                   Text(
                     'ขายแล้ว $sale ใน 30 วัน',
-                    style: TextStyle(
-                        fontSize: 11,
-                        color: greyuserinfo,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 11, color: greyuserinfo, fontWeight: FontWeight.bold),
                   )
                 ],
               ),

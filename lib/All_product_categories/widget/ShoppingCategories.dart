@@ -178,7 +178,7 @@ class _ShoppingCategoriesState extends State<ShoppingCategories> {
                             sale: listProducts[index]['sale'],
                             send: listProducts[index]['send'],
                             size: MediaQuery.of(context).size,
-                            price: (listProducts[index]['price'] as num).toDouble(),
+                            price: listProducts[index]['price'].toString(),
                             detail: listProducts[index]['detail'],
                             press: () {
                               Navigator.push(

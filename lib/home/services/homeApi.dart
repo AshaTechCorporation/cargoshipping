@@ -468,15 +468,15 @@ class HomeApi {
     final url = Uri.https(publicUrl, '/api/orders');
     var headers = {'Content-Type': 'application/json'};
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final userID = prefs.getString('userID');
+    final userID = prefs.getInt('userID');
     final response = await http.post(
       url,
       headers: headers,
       body: jsonEncode({
         'date': date,
         'total_price': total_price,
-        'member_id': userID,
-        'member_address_id': userID,
+        'member_id': userID.toString(),
+        'member_address_id': userID.toString(),
         'shipping_type': shipping_type,
         'payment_term': payment_term,
         'note': note,

@@ -5,11 +5,13 @@ class ProductDetailsBottomSheet extends StatefulWidget {
   final Map<String, dynamic> product;
   final String buttonLabel; // ป้ายข้อความของปุ่ม
   final Function()? onButtonPress; // ฟังก์ชันเมื่อกดปุ่ม
+  final ValueChanged onChange;
 
   const ProductDetailsBottomSheet({
     required this.product,
     required this.buttonLabel, // รับข้อความของปุ่ม
     required this.onButtonPress, // รับฟังก์ชันของปุ่ม
+    required this.onChange
   });
 
   @override
@@ -214,6 +216,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   if (amount > 1) {
                     amount = amount - 1;
                   }
+                  widget.onChange(amount);
                 });
               },
               icon: Icon(Icons.remove),
@@ -227,6 +230,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                 setState(() {
                   amount = amount + 1;
                 });
+                widget.onChange(amount);
               },
               icon: Icon(Icons.add),
             ),
