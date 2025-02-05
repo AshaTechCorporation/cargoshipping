@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                                     LoadingDialog.open(context);
                                     final _imageUpload = await UoloadService.uploadImage(selectedimage!);
                                     if (_imageUpload != null) {
-                                      final _imgcode = await HomeApi.uploadImage(imgcode: _imageUpload['photo_test_url']);
+                                      final _imgcode = await HomeApi.uploadImage(imgcode: 'https://cargo-api.dev-asha9.com/${_imageUpload}');
                                       if (_imgcode != null) {
                                         final _searchImage = await HomeApi.getItemSearchImg(searchImg: _imgcode, type: selectedValue);
                                         LoadingDialog.close(context);
@@ -795,7 +795,13 @@ class _HomePageState extends State<HomePage> {
                         payment.length,
                         (index) => Payment(
                               size: size,
-                              press: () {},
+                              press: () {
+                                if (index == 0) {
+                                  Navigator.push(context, MaterialPageRoute(builder: (contex)=>Tegmallpage()));
+                                }else if(index == 1){
+
+                                }else {}
+                              },
                               imagespath: payment[index],
                             )),
                   ),

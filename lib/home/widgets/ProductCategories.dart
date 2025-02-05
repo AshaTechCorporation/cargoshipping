@@ -38,7 +38,7 @@ class ProductCategories extends StatelessWidget {
           SizedBox(height: size.height * 0.01),
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             textAlign: TextAlign.center,
           ),
         ],

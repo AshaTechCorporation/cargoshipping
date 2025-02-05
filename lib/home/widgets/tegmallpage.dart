@@ -6,6 +6,9 @@ import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/home/widgets/ProductCategories.dart';
 import 'package:cargoshipping/models/categories.dart';
+import 'package:cargoshipping/models/itemsearch.dart';
+import 'package:cargoshipping/models/itemsearch1688.dart';
+import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -20,6 +23,9 @@ class Tegmallpage extends StatefulWidget {
 
 class _TegmallpageState extends State<Tegmallpage> {
   List<Categories> categories = [];
+  List<ServiceTransporter> categoryProduct = [];
+  List<ItemSearch> item = [];
+  List<ItemSearch1688> item1688 = [];
   int _currentIndex = 0;
   @override
   void initState() {
@@ -32,11 +38,13 @@ class _TegmallpageState extends State<Tegmallpage> {
   Future<void> getlistCategories({required String name}) async {
     try {
       LoadingDialog.open(context);
-      final _categories = await HomeApi.getCategories(name: name);
+      //final _categories = await HomeApi.getCategories(name: name);
+      final _categoryProduct = await HomeApi.getCategoryProduct();
       if (!mounted) return;
 
       setState(() {
-        categories = _categories;
+        //categories = _categories;
+        categoryProduct = _categoryProduct;
       });
       //inspect(categories);
       LoadingDialog.close(context);
@@ -338,13 +346,14 @@ class _TegmallpageState extends State<Tegmallpage> {
                 ],
               ),
             ),
-            categories.isEmpty
+            categoryProduct.isEmpty
                 ? SizedBox()
                 : Padding(
                     padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
                     child: SizedBox(
                       height: size.height * 0.31,
                       child: GridView.builder(
+                        shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -352,11 +361,11 @@ class _TegmallpageState extends State<Tegmallpage> {
                           mainAxisSpacing: 8,
                           childAspectRatio: 1.0,
                         ),
-                        itemCount: categories.length,
+                        itemCount: categoryProduct.length,
                         itemBuilder: (context, index) {
                           return ProductCategories(
                             size: size,
-                            title: categories[index].name!,
+                            title: categoryProduct[index].name!,
                             press: () {
                               // Navigator.push(
                               //   context,
@@ -367,7 +376,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                               //   ),
                               // );
                             },
-                            imagespath: 'assets/images/noimages.jpg',
+                            imagespath: '${categoryProduct[index].image}',
                           );
                         },
                       ),
@@ -381,7 +390,7 @@ class _TegmallpageState extends State<Tegmallpage> {
                     child: RichText(
                         text: TextSpan(text: 'สินค้าแนะนำ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18), children: <TextSpan>[
                       TextSpan(
-                        text: ' จาก 1668',
+                        text: ' จาก ${selectedValue}',
                         style: TextStyle(color: red1, fontWeight: FontWeight.bold, fontSize: 18),
                       )
                     ])),
