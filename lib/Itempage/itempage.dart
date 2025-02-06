@@ -86,6 +86,12 @@ class _ItempageState extends State<Itempage> {
     });
   }
 
+  @override
+  void dispose() {
+    store.close();
+    super.dispose();
+  }
+
   //ดูข้อมูลสินค้าตาม Category Name
   Future<void> getlistCategoriesByName({required String categories_name}) async {
     try {

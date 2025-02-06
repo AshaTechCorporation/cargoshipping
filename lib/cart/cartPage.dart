@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:cargoshipping/Itempage/confirmorderpage.dart';
 import 'package:cargoshipping/cart/widget/customcheck.dart';
 import 'package:cargoshipping/cart/widget/storeitem.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/itemmodel/item_model.dart';
+import 'package:cargoshipping/objectbox.g.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -12,21 +17,66 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  late final Store store;
+  late final Box<JsonData> jsonBox;
+  List<Map<String, dynamic>> itemCart = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await initObjectBox();
+    });
+  }
+
+  @override
+  void dispose() {
+    store.close();
+    super.dispose();
+  }
+
+  Future<void> initObjectBox() async {
+    store = await openStore();
+    jsonBox = store.box<JsonData>(); // เปิด Box สำหรับ Map
+    getAllJsonData();
+  }
+
+  void getAllJsonData() {
+    final allData = jsonBox.getAll(); // ดึงข้อมูลทั้งหมดจาก ObjectBox
+    itemCart.clear(); // ล้างข้อมูลเก่าก่อนเพิ่มข้อมูลใหม่
+
+    for (var data in allData) {
+      if (data is JsonData) {
+        // ตรวจสอบว่าเป็น JsonData Object
+        Map<String, dynamic> jsonMap = jsonDecode(data.json); // แปลง String กลับเป็น Map
+
+        Map<String, dynamic> filteredData = {};
+        jsonMap.forEach((key, value) {
+          if (value is String) {
+            // กรองเฉพาะค่าที่เป็น String
+            filteredData[key] = value;
+          }
+        });
+
+        itemCart.add(filteredData); // เพิ่มข้อมูลที่กรองแล้วลงใน itemCart
+      }
+    }    
+    inspect(itemCart);
+  }
+
   bool _isSelected = false;
-  final List<bool> _storeItemsSelection =
-      List.generate(cart.length, (_) => false);
-  late final List<List<bool>> _productItemsSelection = cart
-      .map((store) => List<bool>.filled(store['storeItems'].length, false))
-      .toList();
+  // final List<bool> _storeItemsSelection = List.generate(cart.length, (_) => false);
+  // late final List<List<bool>> _productItemsSelection = cart.map((store) => List<bool>.filled(store['storeItems'].length, false)).toList();
+
+  final List<bool> _storeItemsSelection = List.generate(cart.length, (_) => false);
+  late final List<List<bool>> _productItemsSelection = cart.map((store) => List<bool>.filled(store['storeItems'].length, false)).toList();
 
   void _selectAll(bool? value) {
     setState(() {
       _isSelected = value ?? false;
-      _storeItemsSelection.fillRange(
-          0, _storeItemsSelection.length, _isSelected);
+      _storeItemsSelection.fillRange(0, _storeItemsSelection.length, _isSelected);
       for (int i = 0; i < _productItemsSelection.length; i++) {
-        _productItemsSelection[i]
-            .fillRange(0, _productItemsSelection[i].length, _isSelected);
+        _productItemsSelection[i].fillRange(0, _productItemsSelection[i].length, _isSelected);
       }
     });
   }
@@ -34,8 +84,7 @@ class _CartPageState extends State<CartPage> {
   void _updateStoreSelection(int index, bool? value) {
     setState(() {
       _storeItemsSelection[index] = value ?? false;
-      _productItemsSelection[index].fillRange(
-          0, _productItemsSelection[index].length, _storeItemsSelection[index]);
+      _productItemsSelection[index].fillRange(0, _productItemsSelection[index].length, _storeItemsSelection[index]);
       _isSelected = _storeItemsSelection.every((selected) => selected);
     });
   }
@@ -43,8 +92,7 @@ class _CartPageState extends State<CartPage> {
   void _updateProductSelection(int storeIndex, int productIndex, bool? value) {
     setState(() {
       _productItemsSelection[storeIndex][productIndex] = value ?? false;
-      _storeItemsSelection[storeIndex] =
-          !_productItemsSelection[storeIndex].contains(false);
+      _storeItemsSelection[storeIndex] = !_productItemsSelection[storeIndex].contains(false);
       _isSelected = _storeItemsSelection.every((selected) => selected);
     });
   }
@@ -52,16 +100,14 @@ class _CartPageState extends State<CartPage> {
   void _deleteProduct(int storeIndex, int productIndex) {
     setState(() {
       // ทำสำเนาของรายการ storeItems ที่สามารถแก้ไขได้
-      cart[storeIndex]['storeItems'] =
-          List<Map<String, dynamic>>.from(cart[storeIndex]['storeItems']);
+      cart[storeIndex]['storeItems'] = List<Map<String, dynamic>>.from(cart[storeIndex]['storeItems']);
 
       cart[storeIndex]['storeItems'].removeAt(productIndex);
 
       if (cart[storeIndex]['storeItems'].isEmpty) {
         _deleteStore(storeIndex);
       } else {
-        _storeItemsSelection[storeIndex] =
-            !_productItemsSelection[storeIndex].contains(false);
+        _storeItemsSelection[storeIndex] = !_productItemsSelection[storeIndex].contains(false);
         _isSelected = _storeItemsSelection.every((selected) => selected);
       }
     });
@@ -79,8 +125,7 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  Widget _buildCheckbox(
-      String label, bool value, ValueChanged<bool?> onChanged) {
+  Widget _buildCheckbox(String label, bool value, ValueChanged<bool?> onChanged) {
     final size = MediaQuery.of(context).size;
 
     return Row(
@@ -151,8 +196,7 @@ class _CartPageState extends State<CartPage> {
         ),
         title: const Text(
           'รถเข็น',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
         ),
       ),
       body: ListView.builder(
@@ -161,14 +205,11 @@ class _CartPageState extends State<CartPage> {
           return StoreItem(
             storeName: cart[index]['storeName'],
             isSelected: _storeItemsSelection[index],
-            onSelectionChanged: (isSelected) =>
-                _updateStoreSelection(index, isSelected),
+            onSelectionChanged: (isSelected) => _updateStoreSelection(index, isSelected),
             productItemsSelection: _productItemsSelection[index],
-            onProductSelectionChanged: (productIndex, isSelected) =>
-                _updateProductSelection(index, productIndex, isSelected),
+            onProductSelectionChanged: (productIndex, isSelected) => _updateProductSelection(index, productIndex, isSelected),
             onDeleteStore: () => _deleteStore(index),
-            onDeleteProduct: (productIndex) =>
-                _deleteProduct(index, productIndex),
+            onDeleteProduct: (productIndex) => _deleteProduct(index, productIndex),
             storeItems: cart[index]['storeItems'],
           );
         },
