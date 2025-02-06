@@ -25,8 +25,12 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['postal_code'] as String?,
       json['wallet_balance'] as String?,
       json['image'] as String?,
-      json['detail'] == null ? null : Company.fromJson(json['detail'] as Map<String, dynamic>),
-      (json['ship_address'] as List<dynamic>?)?.map((e) => Shipping.fromJson(e as Map<String, dynamic>)).toList(),
+      json['detail'] == null
+          ? null
+          : Company.fromJson(json['detail'] as Map<String, dynamic>),
+      (json['ship_address'] as List<dynamic>?)
+          ?.map((e) => Shipping.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

@@ -3,6 +3,8 @@ import 'package:cargoshipping/account/widgets/tagDetailPage.dart';
 import 'package:cargoshipping/account/widgets/tagManualPage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/manualtype.dart';
+import 'package:cargoshipping/models/newsPaper/newsPaper.dart';
+import 'package:cargoshipping/models/newsPaper/newsPaperShow.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +19,8 @@ class Guidepage extends StatefulWidget {
 class _GuidepageState extends State<Guidepage> {
   late PageController _pageController; // ประกาศ late เพื่อระบุว่าจะกำหนดในภายหลัง
   int selectedIndex = 0;
-  List<ManualType> manualTyped = [];
+  List<NewsPaperShow> manualTyped = [];
+  List<NewsPaper> manuals = [];
   ManualType? manualType;
 
   @override
@@ -48,14 +51,15 @@ class _GuidepageState extends State<Guidepage> {
   Future<void> getlistManualType() async {
     try {
       LoadingDialog.open(context);
-      final _manualTyped = await AccountApi.getManualType();
+      final _manualTyped = await AccountApi.getManual();
       if (!mounted) return;
       setState(() {
         manualTyped = _manualTyped;
+        manuals.addAll(_manualTyped[0].manuals!);
       });
       //inspect(categories);
       LoadingDialog.close(context);
-      getManualTypeById(manual_id: manualTyped[0].id);
+      // getManualTypeById(manual_id: manualTyped[0].id);
     } on Exception catch (e) {
       if (!mounted) return;
       LoadingDialog.close(context);
@@ -68,7 +72,7 @@ class _GuidepageState extends State<Guidepage> {
     try {
       //LoadingDialog.open(context);
       final _articleType = await AccountApi.getManualTypeById(manual_id: manual_id);
-      if (!mounted) return;        
+      if (!mounted) return;
       setState(() {
         manualType = _articleType;
       });
@@ -87,113 +91,164 @@ class _GuidepageState extends State<Guidepage> {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
-        title: Text('คู่มือการใช้งาน',style: TextStyle(
-          color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17
-        ),),
+        title: Text(
+          'คู่มือการใช้งาน',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17),
+        ),
         backgroundColor: background,
       ),
       body: Column(
         children: [
-
           manualTyped.isEmpty
               ? SizedBox()
               : Padding(
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.01),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: List.generate(manualTyped.length, (index) => Padding(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                      child: _buildTabItem(index, "${manualTyped[index].name}"),
-                    )),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        manualTyped.length,
+                        (index) => GestureDetector(
+                          onTap: () {
+                            LoadingDialog.open(context);
+                            setState(() {
+                              selectedIndex = index;
+                              manuals.clear();
+                              manuals.addAll(manualTyped[index].manuals!);
+                            });
+                            Future.delayed(Duration(seconds: 1), () {
+                              if (!mounted) return;
+                              LoadingDialog.close(context);
+                            });
+                          },
+                          child: Container(
+                            height: size.height * 0.05,
+                            width: size.width * 0.29,
+                            margin: EdgeInsets.symmetric(horizontal: 4),
+                            padding: EdgeInsets.symmetric(vertical: size.height * 0.01, horizontal: size.width * 0.01),
+                            decoration: BoxDecoration(
+                              color: selectedIndex == index ? red1 : Colors.white,
+                              borderRadius: BorderRadius.circular(15.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                manualTyped[index].name ?? '',
+                                style: TextStyle(
+                                  color: selectedIndex == index ? Colors.white : greyuserinfo,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-          manualTyped.isEmpty
-              ? SizedBox()
-              : manualType != null
-              ?Expanded(
-                  child: PageView(
-                    controller: _pageController, // ใช้ PageController ที่ถูกกำหนดแล้ว
-                    onPageChanged: (index) {
-                      setState(() {
-                        selectedIndex = index; // อัปเดตเมื่อเปลี่ยนหน้า
-                      });
-                      getManualTypeById(manual_id: manualTyped[index].id);
-                    },
-                    children: List.generate(manualTyped.length, (index1) => _buildTagContent(size: size, manualTyped: manualType!)),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: List.generate(
+                manuals.length,
+                (index) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TagDetailPage(
+                                  article: manuals[index],
+                                )));
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(4),
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
+                            child: Image.network(
+                              manuals[index].name ?? '',
+                              height: size.height * 0.11,
+                              width: size.height * 0.1,
+                              fit: BoxFit.contain, // ให้ภาพครอบคลุมพื้นที่ทั้งหมด
+                              errorBuilder: (context, error, stackTrace) => Image.asset(
+                                height: size.height * 0.11,
+                                width: size.height * 0.1,
+                                'assets/images/logofull.png',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            // Image.asset(
+                            //   'assets/images/logofull.png',
+                            //   height: size.height * 0.11,
+                            //   width: size.height * 0.1,
+                            //   fit: BoxFit.contain,
+                            // ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 10,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03, vertical: size.height * 0.012),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: size.height * 0.06,
+                                  width: double.infinity,
+                                  //color: Colors.amber,
+                                  child: Text(
+                                    manuals[index].name ?? ' - ',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                //SizedBox(height: size.height * 0.01),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      DateFormat('dd-MM-yyyy').format(manuals[index].created_at!),
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ):SizedBox(),
-
-          // ListView.builder(
-          //   itemCount: guidelist.length,
-          //   itemBuilder: (context, index) {
-          //     final item = guidelist[index];
-          //     return Padding(
-          //       padding: EdgeInsets.symmetric(
-          //         horizontal: size.width * 0.03,
-          //         vertical: size.height * 0.01,
-          //       ),
-          //       child: Card(
-          //         color: Colors.white,
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(15),
-          //         ),
-          //         child: Row(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Expanded(
-          //               flex: 3,
-          //               child: ClipRRect(
-          //                 borderRadius: BorderRadius.horizontal(
-          //                   left: Radius.circular(10),
-          //                 ),
-          //                 child: Image.asset(
-          //                   item['image'],
-          //                   height: size.height * 0.11,
-          //                   width: size.height * 0.1,
-          //                   fit: BoxFit.fill,
-          //                 ),
-          //               ),
-          //             ),
-          //             Expanded(
-          //               flex: 10,
-          //               child: Padding(
-          //                 padding: EdgeInsets.symmetric(
-          //                   horizontal: size.width * 0.03,
-          //                   vertical: size.height * 0.012,
-          //                 ),
-          //                 child: Column(
-          //                   crossAxisAlignment: CrossAxisAlignment.start,
-          //                   children: [
-          //                     Text(
-          //                       item['title'],
-          //                       maxLines: 2,
-          //                       style: TextStyle(
-          //                         fontSize: 15,
-          //                         fontWeight: FontWeight.bold,
-          //                       ),
-          //                     ),
-          //                     if (item['subtitle'].isNotEmpty)
-          //                       Padding(
-          //                         padding: EdgeInsets.only(top: 4.0),
-          //                         child: Text(
-          //                           item['subtitle'],
-          //                           style: TextStyle(
-          //                             fontSize: 13,
-          //                             color: Colors.grey[600],
-          //                           ),
-          //                         ),
-          //                       ),
-          //                     SizedBox(height: 8),
-          //                   ],
-          //                 ),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -242,15 +297,18 @@ class _GuidepageState extends State<Guidepage> {
       children: List.generate(
           manualTyped.manuals!.length,
           (index) => _buildCard(
-                size: size,
-                imagePath:  '${manualTyped.manuals![index].photo_content_url}',
-                title: '${manualTyped.manuals![index].title}',
-                date:  '${formatDateto(manualTyped.manuals![index].created_at!)}',
-                press: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TagManualPage(manual: manualTyped.manuals![index],)));
-                }
-              )),
-      
+              size: size,
+              imagePath: '${manualTyped.manuals![index].photo_content_url}',
+              title: '${manualTyped.manuals![index].title}',
+              date: '${formatDateto(manualTyped.manuals![index].created_at!)}',
+              press: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TagManualPage(
+                              manual: manualTyped.manuals![index],
+                            )));
+              })),
     );
   }
 
@@ -321,5 +379,4 @@ class _GuidepageState extends State<Guidepage> {
       ),
     );
   }
-  
 }
