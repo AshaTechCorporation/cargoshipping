@@ -1,3 +1,4 @@
+import 'package:cargoshipping/models/orders/optionsItem.dart';
 import 'package:cargoshipping/models/orders/products.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -13,6 +14,7 @@ class Orders {
   String? payment_term;
   String? note;
   List<Products>? products;
+  List<OptionsItem>? options;
 
   Orders(
     this.date,
@@ -23,6 +25,7 @@ class Orders {
     this.payment_term,
     this.note,
     this.products,
+    this.options,
   );
 
   factory Orders.fromJson(Map<String, dynamic> json) => _$OrdersFromJson(json);
