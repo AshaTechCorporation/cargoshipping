@@ -35,6 +35,7 @@ class Itempage extends StatefulWidget {
   @override
   State<Itempage> createState() => _ItempageState();
 }
+
 class _ItempageState extends State<Itempage> {
   int _selectedIndex = 0;
   int amount = 1;
@@ -47,17 +48,32 @@ class _ItempageState extends State<Itempage> {
 
   Future<void> initObjectBox() async {
     store = await openStore();
-    jsonBox = store.box<JsonData>();
+    jsonBox = store.box<JsonData>(); // เปิด Box สำหรับ Map
+  }
+
+  void saveJson(Map<String, dynamic> data) {
+    final jsonString = jsonEncode(data);
+    final jsonData = JsonData(json: jsonString);
+    jsonBox.put(jsonData);
+  }
+
+  void getAllJsonData() {
+    final allData = jsonBox.getAll(); // ดึงข้อมูลทั้งหมด
+    for (var data in allData) {
+      //print(data); // แสดงผลแต่ละรายการ
+      inspect(data);
+    }
   }
 
   void _onItemTapped(int index) async {
-    final _pro = await context.read<HomeController>().productCart;
+    //final _pro = await context.read<HomeController>().productCart;
+    getAllJsonData();
     setState(() {
       _selectedIndex = index;
     });
     // Handle item tap
     print('Selected index: $index');
-    inspect(_pro);
+    //inspect(_pro);
   }
 
   @override
@@ -66,6 +82,7 @@ class _ItempageState extends State<Itempage> {
     print(widget.num_iid);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getDetailItem(num_iid: widget.num_iid, type: widget.type);
+      await initObjectBox();
     });
   }
 
@@ -606,7 +623,9 @@ class _ItempageState extends State<Itempage> {
                             buttonLabel: 'เพิ่มลงรถเข็น',
                             onChange: (value) {},
                             onButtonPress: () async {
-                              await context.read<HomeController>().addProductsToCart(itemTaobao!);
+                              // เก็บข้อมูล
+                              saveJson(itemTaobao!); // jsonData คือข้อมูล JSON ที่ให้มา
+                              //await context.read<HomeController>().addProductsToCart(itemTaobao!);
                               // showDialog(
                               //   context: context,
                               //   builder: (BuildContext context) {
