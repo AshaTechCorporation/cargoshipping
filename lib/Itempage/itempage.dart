@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cargoshipping/Itempage/confirmorderpage.dart';
 import 'package:cargoshipping/Itempage/widgets/bottomsheetswidget.dart';
 import 'package:cargoshipping/Itempage/widgets/iamgesitem.dart';
@@ -5,6 +7,7 @@ import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
 import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
+import 'package:cargoshipping/home/services/homeController.dart.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
@@ -12,6 +15,7 @@ import 'package:cargoshipping/models/itemt1688.dart';
 import 'package:cargoshipping/models/itemtaobao.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Itempage extends StatefulWidget {
   Itempage({super.key, required this.size, required this.title, required this.price, required this.press, required this.products, required this.num_iid, required this.type, required this.name});
@@ -37,12 +41,14 @@ class _ItempageState extends State<Itempage> {
   Map<String, dynamic>? itemTaobao;
   List<ItemSearch> item = [];
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async{
+    final _pro = await context.read<HomeController>().productCart;
     setState(() {
       _selectedIndex = index;
     });
     // Handle item tap
     print('Selected index: $index');
+    inspect(_pro);
   }
 
   @override
@@ -118,8 +124,11 @@ class _ItempageState extends State<Itempage> {
               width: 35,
               height: 27,
             ),
-            onPressed: () {
+            onPressed: () async{
               // Action when the icon is pressed
+              await context.read<HomeController>().clearProductCart();
+              final _pro = await context.read<HomeController>().productCart;
+              inspect(_pro);
             },
           ),
           IconButton(
@@ -584,43 +593,44 @@ class _ItempageState extends State<Itempage> {
                         ),
                         builder: (BuildContext context) {
                           return ProductDetailsBottomSheet(
-                            product: widget.products,
+                            product: itemTaobao!,
                             buttonLabel: 'เพิ่มลงรถเข็น',
                             onChange: (value){},
-                            onButtonPress: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(vertical: 24),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        Image.asset(
-                                          'assets/icons/addcart.png',
-                                          height: 60,
-                                        ),
-                                        SizedBox(height: size.height * 0.01),
-                                        Text(
-                                          'เพิ่มสินค้าในรถเข็น\nเรียบร้อยแล้ว',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                              Future.delayed(Duration(seconds: 1), () {
-                                Navigator.of(context).pop();
-                                Navigator.of(context).pop();
-                              });
+                            onButtonPress: () async{
+                              await context.read<HomeController>().addProductsToCart(itemTaobao!);
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (BuildContext context) {
+                              //     return AlertDialog(
+                              //       shape: RoundedRectangleBorder(
+                              //         borderRadius: BorderRadius.circular(20),
+                              //       ),
+                              //       contentPadding: EdgeInsets.symmetric(vertical: 24),
+                              //       content: Column(
+                              //         mainAxisSize: MainAxisSize.min,
+                              //         children: <Widget>[
+                              //           Image.asset(
+                              //             'assets/icons/addcart.png',
+                              //             height: 60,
+                              //           ),
+                              //           SizedBox(height: size.height * 0.01),
+                              //           Text(
+                              //             'เพิ่มสินค้าในรถเข็น\nเรียบร้อยแล้ว',
+                              //             textAlign: TextAlign.center,
+                              //             style: TextStyle(
+                              //               fontSize: 16,
+                              //               fontWeight: FontWeight.bold,
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     );
+                              //   },
+                              // );
+                              // Future.delayed(Duration(seconds: 1), () {
+                              //   Navigator.of(context).pop();
+                              //   Navigator.of(context).pop();
+                              // });
                             },
                           );
                         },
