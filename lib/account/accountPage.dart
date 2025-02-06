@@ -37,6 +37,7 @@ import 'package:cargoshipping/track/widgets/canclecard.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatefulWidget {
@@ -213,37 +214,39 @@ class _AccountPageState extends State<AccountPage> {
                             SizedBox(
                               height: size.height * 0.009,
                             ),
-                            Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      'TEG+ Point ',
-                                      style: TextStyle(color: white, fontSize: 14, fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      '150 คะแนน ',
-                                      style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                                Spacer(),
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: size.width * 0.2),
-                                      child: Text(
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'TEG+ Point ',
+                                        style: TextStyle(color: white, fontSize: 14, fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '150 คะแนน ',
+                                        style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
                                         'Wallet ',
                                         style: TextStyle(color: white, fontSize: 13, fontWeight: FontWeight.bold),
                                       ),
-                                    ),
-                                    Text(
-                                      'คงเหลือ 1025 บาท',
-                                      style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              ],
+                                      Text(
+                                        'คงเหลือ ${NumberFormat('#,##0.00').format(double.parse(user?.wallet_balance ?? '0.00'))} บาท',
+                                        style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: size.height * 0.01,

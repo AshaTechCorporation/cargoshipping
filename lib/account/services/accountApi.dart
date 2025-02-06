@@ -4,6 +4,8 @@ import 'package:cargoshipping/models/manualtype.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class AccountApi {
   const AccountApi();
 
@@ -45,6 +47,7 @@ class AccountApi {
   //เรียกดูข้อมูล ประเภทคู่มือ
   static Future<List<ManualType>> getManualType() async {
     final url = Uri.https(publicUrl, '/api/ManualType/showall');
+
     var headers = {'Content-Type': 'application/json'};
     final response = await http.get(
       headers: headers,
@@ -71,6 +74,45 @@ class AccountApi {
     if (response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
       return ManualType.fromJson(data['data']);
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  static Future addWallet({
+    String? in_from,
+    String? out_to,
+    String? reference_id,
+    String? detail,
+    int? amount,
+    String? type,
+  }) async {
+    // final domain = prefs.getString('domain');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final userID = prefs.getInt('userID');
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+    final url = Uri.https(publicUrl, '/api/wallet_trans');
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: convert.jsonEncode({
+        'member_id': userID,
+        'in_from': in_from,
+        'out_to': out_to,
+        'reference_id': reference_id,
+        'detail': detail,
+        'amount': amount,
+        'type': type,
+      }),
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = convert.jsonDecode(response.body);
+      return data;
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
