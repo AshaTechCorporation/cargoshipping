@@ -38,12 +38,14 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     });
   }
 
-  void onTabTapped({required int index, required String name, required ServiceTransporter categorySelect}) {
+  void onTabTapped({required int index, required String name, required ServiceTransporter categorySelected}) {
     setState(() {
       selectedIndex = index;
-      categorySelect = categorySelect;
+      //final _categorySelect = categorySelect;
+      categorySelect = categorySelected;
     });
-    inspect(categorySelect);
+    //inspect(categorySelect);
+    //print(name);
     getlistCategoriesByName(categories_name: name);
   }
 
@@ -81,6 +83,9 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
       setState(() {
         item = _item;
       });
+      // print(categories_name);
+      // print(categorySelect!.name!);
+      // inspect(categorySelect);
       //inspect(item);
       LoadingDialog.close(context);
     } on Exception catch (e) {
@@ -210,11 +215,11 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildTabItem(String title, String imagePath, int index, String search,ServiceTransporter categorySelect) {
+  Widget _buildTabItem(String title, String imagePath, int index, String search, ServiceTransporter categorySelected) {
     bool isSelected = selectedIndex == index;
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => onTabTapped(index: index, name: search, categorySelect: categorySelect),
+      onTap: () => onTabTapped(index: index, name: search, categorySelected: categorySelected),
       child: Container(
         height: size.height * 0.17,
         child: Stack(
@@ -274,6 +279,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                     Text(
                       title,
                       textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.black,
@@ -326,7 +332,8 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                 children: items.map((item) {
                   return GestureDetector(
                     onTap: () {
-                      print(item.title);
+                      // print(categorySelect!.name!);
+                      // inspect(categorySelect);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -338,7 +345,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                                     products: listProducts[0],
                                     num_iid: item.num_iid!,
                                     type: 'taobao',
-                                    name: item.title!,
+                                    name: categorySelect!.name!,
                                     categorySelect: categorySelect!,
                                   )));
                     },

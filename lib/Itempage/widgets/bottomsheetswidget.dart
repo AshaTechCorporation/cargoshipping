@@ -14,6 +14,7 @@ class ProductDetailsBottomSheet extends StatefulWidget {
   final ValueChanged onSelectedSizes;
   final ValueChanged onSelectedExtraService;
   final List<ServiceTransporterById> extraService;
+  final String name;
 
   const ProductDetailsBottomSheet(
       {required this.product,
@@ -23,6 +24,7 @@ class ProductDetailsBottomSheet extends StatefulWidget {
       required this.onSelectedColors,
       required this.onSelectedSizes,
       required this.onSelectedExtraService,
+      required this.name,
       required this.extraService});
 
   @override
@@ -42,29 +44,58 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
   void initState() {
     super.initState();
     setState(() {
-      colors.clear();
-      sizes.clear();
-      if (widget.product['props_name'] != "" || widget.product['props_name'] != null) {
-        List<Map<String, String>> colorList = [];
-        List<Map<String, String>> sizeList = [];
-        // แยกข้อมูลโดยใช้ ';' เป็นตัวแบ่ง
-        List<String> entries = widget.product['props_name'].split(';');
+      if (widget.name == 'เสื้อผ้า') {
+        colors.clear();
+        sizes.clear();
+        if (widget.product['props_name'] != "" || widget.product['props_name'] != null) {
+          List<Map<String, String>> colorList = [];
+          List<Map<String, String>> sizeList = [];
+          // แยกข้อมูลโดยใช้ ';' เป็นตัวแบ่ง
+          List<String> entries = widget.product['props_name'].split(';');
 
-        for (String entry in entries) {
-          List<String> parts = entry.split(':');
-          if (parts.length == 4) {
-            Map<String, String> data = {"num_prop": "${parts[0]}:${parts[1]}", "name": parts[2], "value": parts[3]};
+          for (String entry in entries) {
+            List<String> parts = entry.split(':');
+            if (parts.length == 4) {
+              Map<String, String> data = {"num_prop": "${parts[0]}:${parts[1]}", "name": parts[2], "value": parts[3]};
 
-            // แยกสีและขนาดออกจากกัน
-            if (parts[2] == "颜色") {
-              colorList.add(data);
-            } else if (parts[2] == "尺码") {
-              sizeList.add(data);
+              // แยกสีและขนาดออกจากกัน
+              if (parts[2] == "颜色") {
+                colorList.add(data);
+              } else if (parts[2] == "尺码") {
+                sizeList.add(data);
+              }
             }
           }
+          colors = colorList;
+          sizes = sizeList;
         }
-        colors = colorList;
-        sizes = sizeList;
+      } else {
+        List<String> rows = widget.product['props_name'].split(';');
+
+// Parse rows into a list of maps
+        List<Map<String, dynamic>> parsedData = rows
+            .where((row) => row.trim().isNotEmpty) // Remove empty rows
+            .map((row) {
+              List<String> parts = row.split(':');
+              if (parts.length == 4) {
+                return {
+                  "Category ID": parts[0],
+                  "Item ID": parts[1],
+                  "name": parts[2],
+                  "value": parts[3],
+                };
+              }
+              return {}; // Return empty map if format is incorrect
+            })
+            .where((map) => map.isNotEmpty) // Filter out empty maps
+            .toList()
+            .cast<Map<String, dynamic>>(); // Explicitly cast to List<Map<String, dynamic>>
+
+        // Print the parsed data
+        List<Map<String, String>> stringParsedData = parsedData.map((map) => map.map((key, value) => MapEntry(key, value.toString()))).toList();
+        sizes = stringParsedData;
+        print(parsedData);
+        // inspect(parsedData);
       }
     });
   }
@@ -314,7 +345,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
-              child: Text(value),
+              child: Text(value, style: TextStyle(overflow: TextOverflow.ellipsis),),
             ),
           ),
         ),

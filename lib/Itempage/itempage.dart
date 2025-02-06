@@ -138,6 +138,7 @@ class _ItempageState extends State<Itempage> {
       await getDetailItem(num_iid: widget.num_iid, type: widget.type);
       await initObjectBox();
       getExtraServices();
+      print(widget.name);
     });
   }
 
@@ -698,6 +699,7 @@ class _ItempageState extends State<Itempage> {
                         ),
                         builder: (BuildContext context) {
                           return ProductDetailsBottomSheet(
+                            name: widget.name,
                             product: itemTaobao!,
                             buttonLabel: 'เพิ่มลงรถเข็น',
                             extraService: extraServices,
@@ -787,6 +789,7 @@ class _ItempageState extends State<Itempage> {
                         ),
                         builder: (BuildContext context) {
                           return ProductDetailsBottomSheet(
+                            name: widget.name,
                             product: itemTaobao!, // ส่งข้อมูลสินค้า
                             buttonLabel: 'ซื้อสินค้า', // แสดงข้อความปุ่มเป็น "ซื้อสินค้า"
                             extraService: extraServices,

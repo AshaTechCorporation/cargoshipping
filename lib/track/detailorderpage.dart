@@ -41,7 +41,7 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
   void initState() {
     super.initState();
     setState(() {
-      final _product = Products('${widget.num_iid}', '${widget.products['title']}', 'https:${widget.products['pic_url']}', '${widget.products['detail_url']}', '${widget.name}', '${widget.type}', '',
+      final _product = Products('${widget.num_iid}', '${widget.products['title']}', '${widget.products['detail_url']}', 'https:${widget.products['pic_url']}', '${widget.name}', '${widget.type}', '',
           '${widget.products['price']}', '${widget.amount}', widget.add_on_services, widget.optionsItems);
       products.add(_product);
       print(sum(products));
