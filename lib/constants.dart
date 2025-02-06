@@ -1,4 +1,5 @@
 import 'package:cargoshipping/account/widgets/menulist.dart';
+import 'package:cargoshipping/models/orders/products.dart';
 import 'package:flutter/material.dart';
 
 Color color1 = Color(int.parse('0xffcd7f32'));
@@ -35,6 +36,10 @@ const kSecondTextColor = Color(0xff7B7B7B);
 const kConkgroundColor = Color(0xffFFFFFF);
 const String publicUrl = 'cargo-api.dev-asha9.com';
 const String baseUrl = 'https://cargo-api.dev-asha9.com';
+
+//คำนวนค่าสินค้า เวอร์ชั่น 1
+//double sum(List<ListProduct> orders) => orders.fold(0, (previous, o) => previous + (o.product.qty * o.product.priceAll));
+double sum(List<Products> orders) => orders.fold(0, (previous, o) => previous + ((int.parse(o.product_qty!)  * double.parse(o.product_price!)+ o.add_on_services![0].add_on_service_price!)));
 
 const List<String> titleData = [
   'ขนส่งทางบก\nและทางทะเล',

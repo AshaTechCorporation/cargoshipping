@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cargoshipping/Itempage/widgets/conditionstransport.dart';
 import 'package:cargoshipping/cart/widget/Custonredchechkbox.dart';
 import 'package:cargoshipping/constants.dart';
@@ -7,16 +8,8 @@ import 'package:cargoshipping/track/detailorderpage.dart';
 import 'package:flutter/material.dart';
 
 class Confirmorderpage extends StatefulWidget {
-  const Confirmorderpage({
-    super.key,
-    required this.name,
-    required this.num_iid,
-    required this.products,
-    required this.type,
-    required this.amount,
-    required this.optionsItems,
-    required this.add_on_services
-  });
+  const Confirmorderpage(
+      {super.key, required this.name, required this.num_iid, required this.products, required this.type, required this.amount, required this.optionsItems, required this.add_on_services});
   final Map<String, dynamic> products;
   final String num_iid;
   final String type;
@@ -32,15 +25,19 @@ class Confirmorderpage extends StatefulWidget {
 class _ConfirmorderpageState extends State<Confirmorderpage> {
   bool carSelected = false;
   bool boatSelected = false;
+  String? selectShippingType;
+  int payment_term = 1;
 
   void handleCheckboxChanged(String type) {
     setState(() {
       if (type == 'car') {
         carSelected = true;
         boatSelected = false;
-      } else if (type == 'boat') {
+        selectShippingType = type;
+      } else if (type == 'Ship') {
         carSelected = false;
         boatSelected = true;
+        selectShippingType = type;
       }
     });
   }
@@ -190,7 +187,7 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                                   isSelected: boatSelected,
                                   onChanged: () {
                                     setState(() {
-                                      handleCheckboxChanged('boat');
+                                      handleCheckboxChanged('Ship');
                                     });
                                   },
                                 ),
@@ -199,8 +196,12 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                           ),
                           SizedBox(height: size.height * 0.02),
                           InkWell(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Conditionstransport()));
+                            onTap: () async {
+                              final _payment_term = await Navigator.push(context, MaterialPageRoute(builder: (context) => Conditionstransport()));
+                              setState(() {
+                                payment_term = _payment_term;
+                              });
+                              print(payment_term);
                             },
                             child: Row(
                               children: [
@@ -247,120 +248,136 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: size.height * 0.25,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          color: background,
-                          height: size.height * 0.13,
-                          width: size.width * 0.999,
-                          child: Row(
-                            children: [
-                              ClipRRect(
+              // Column(
+              //   children: List.generate(
+              //     widget.products.length,
+              //     (index) => Padding(
+              //       padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+              //       child: Align(
+              //         alignment: Alignment.topCenter,
+              //         child: Container(
+              //           color: background,
+              //           height: size.height * 0.12,
+              //           width: size.width * 0.999,
+              //           child: Row(
+              //             children: [
+              //               ClipRRect(
+              //                 borderRadius: BorderRadius.circular(16.0),
+              //                 child: Image.asset(
+              //                   'assets/images/box.png',
+              //                   width: size.width * 0.19,
+              //                   height: size.height * 0.1,
+              //                   fit: BoxFit.cover,
+              //                 ),
+              //               ),
+              //               SizedBox(
+              //                 width: size.width * 0.035,
+              //               ),
+              //               Expanded(
+              //                 child: Column(
+              //                   crossAxisAlignment: CrossAxisAlignment.start,
+              //                   children: [
+              //                     SizedBox(height: size.height * 0.022),
+              //                     Text(
+              //                       'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
+              //                       maxLines: 1,
+              //                       overflow: TextOverflow.ellipsis,
+              //                       style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
+              //                     ),
+              //                     SizedBox(height: size.height * 0.01),
+              //                     Text('สีขาวนวล'),
+              //                     SizedBox(height: size.height * 0.01),
+              //                     Row(
+              //                       children: [
+              //                         Text('¥ 4.88 (฿ 00)'),
+              //                         Spacer(),
+              //                         Text(
+              //                           'จำนวน 50',
+              //                           style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w500),
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ],
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        color: background,
+                        //height: size.height * 0.13,
+                        width: size.width * 0.999,
+                        child: Row(
+                          children: [
+                            ClipRRect(
                                 borderRadius: BorderRadius.circular(16.0),
-                                child: Image.asset(
-                                  'assets/images/box.png',
+                                child: CachedNetworkImage(
                                   width: size.width * 0.19,
                                   height: size.height * 0.1,
-                                  fit: BoxFit.cover,
-                                ),
+                                  imageUrl: "https:${widget.products['pic_url']}",
+                                  fit: BoxFit.fill,
+                                  placeholder: (context, url) => SizedBox(
+                                      height: size.height * 0.001,
+                                      width: size.width * 0.001,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                      )),
+                                  errorWidget: (context, url, error) => Image.asset(
+                                    'assets/images/noimages.jpg',
+                                    fit: BoxFit.fill,
+                                  ),
+                                )),
+                            SizedBox(
+                              width: size.width * 0.035,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: size.height * 0.022),
+                                  Text(
+                                    '${widget.products['title']}',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(height: size.height * 0.01),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: List.generate(widget.optionsItems.length, (index) => Text('${widget.optionsItems[index].option_name}')),
+                                  ),
+                                  SizedBox(height: size.height * 0.01),
+                                  Row(
+                                    children: [
+                                      Text('¥ ${widget.products['price']} (฿ 00)'),
+                                      Spacer(),
+                                      Text(
+                                        'จำนวน ${widget.amount}',
+                                        style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w500),
+                                      )
+                                    ],
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                width: size.width * 0.035,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(height: size.height * 0.022),
-                                    Text(
-                                      'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
-                                    ),
-                                    SizedBox(height: size.height * 0.01),
-                                    Text('สีขาวนวล'),
-                                    SizedBox(height: size.height * 0.01),
-                                    Row(
-                                      children: [
-                                        Text('¥ 4.88 (฿ 00)'),
-                                        Spacer(),
-                                        Text(
-                                          'จำนวน 50',
-                                          style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w500),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          color: background,
-                          height: size.height * 0.12,
-                          width: size.width * 0.999,
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(16.0),
-                                child: Image.asset(
-                                  'assets/images/box.png',
-                                  width: size.width * 0.19,
-                                  height: size.height * 0.1,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              SizedBox(
-                                width: size.width * 0.035,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(height: size.height * 0.022),
-                                    Text(
-                                      'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ําแบบไม่มี รูพรุน, สุขโครกติดผนัง, เครื่องใช้ในห้องน้ํา',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
-                                    ),
-                                    SizedBox(height: size.height * 0.01),
-                                    Text('สีขาวนวล'),
-                                    SizedBox(height: size.height * 0.01),
-                                    Row(
-                                      children: [
-                                        Text('¥ 4.88 (฿ 00)'),
-                                        Spacer(),
-                                        Text(
-                                          'จำนวน 50',
-                                          style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w500),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Container(
                 height: size.height * 0.071,
@@ -394,19 +411,19 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       child: Row(
                         children: [
                           Text(
-                            'ยอดรวมคำสั่งซื้อทั้งหมด (100 ชิ้น):',
+                            'ยอดรวมคำสั่งซื้อทั้งหมด (${widget.amount} ชิ้น):',
                             style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                           ),
                           Spacer(),
                           Text(
-                            '¥ 488',
+                            '¥ ${widget.products['price']}',
                             style: TextStyle(fontSize: 16, color: red1, fontWeight: FontWeight.w700),
                           ),
                           SizedBox(
                             width: size.width * 0.02,
                           ),
                           Text(
-                            '(~฿ 2,345.53 B)',
+                            '(~฿ ${widget.products['price']} B)',
                             style: TextStyle(fontSize: 11, color: red1, fontWeight: FontWeight.w500),
                           )
                         ],
@@ -450,32 +467,42 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       SizedBox(
                         height: size.height * 0.01,
                       ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/icons/correctred.png',
-                            height: size.height * 0.018,
+                      Column(
+                        children: List.generate(
+                          widget.add_on_services.length,
+                          (index) => Row(
+                            children: [
+                              Image.asset(
+                                'assets/icons/correctred.png',
+                                height: size.height * 0.018,
+                              ),
+                              SizedBox(
+                                width: size.width * 0.02,
+                              ),
+                              widget.add_on_services[index].add_on_service_id == 1
+                                  ? Text(
+                                      'ตีลังไม้',
+                                      style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
+                                    )
+                                  : Text(
+                                      'ห่อฟองสบู่ ดี',
+                                      style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
+                                    ),
+                              Spacer(),
+                              Text(
+                                '¥ ${widget.add_on_services[index].add_on_service_price}',
+                                style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: size.width * 0.01,
+                              ),
+                              Text(
+                                '(~฿ ${widget.add_on_services[index].add_on_service_price})',
+                                style: TextStyle(fontSize: 11, color: Colors.black, fontWeight: FontWeight.bold),
+                              )
+                            ],
                           ),
-                          SizedBox(
-                            width: size.width * 0.02,
-                          ),
-                          Text(
-                            'ตีลังไม้',
-                            style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
-                          ),
-                          Spacer(),
-                          Text(
-                            '¥ 500',
-                            style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.01,
-                          ),
-                          Text(
-                            '(~฿ 2,447.94)',
-                            style: TextStyle(fontSize: 11, color: Colors.black, fontWeight: FontWeight.bold),
-                          )
-                        ],
+                        ),
                       ),
                       SizedBox(height: size.height * 0.007),
                       Row(
@@ -670,15 +697,18 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                   // ใส่โค้ดที่จะทำเมื่อคลิกปุ่ม
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Detailordertrackpage(
-                      name: widget.name,
-                      num_iid: widget.num_iid,
-                      type: widget.type,
-                      products: widget.products,
-                      amount: widget.amount,
-                      add_on_services: widget.add_on_services,
-                      optionsItems: widget.optionsItems,
-                    )),
+                    MaterialPageRoute(
+                        builder: (context) => Detailordertrackpage(
+                              name: widget.name,
+                              num_iid: widget.num_iid,
+                              type: widget.type,
+                              products: widget.products,
+                              amount: widget.amount,
+                              add_on_services: widget.add_on_services,
+                              optionsItems: widget.optionsItems,
+                              shipping_type: selectShippingType!,
+                              payment_term: payment_term.toString(),
+                            )),
                   );
                 },
                 child: Container(

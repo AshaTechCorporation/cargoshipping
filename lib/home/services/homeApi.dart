@@ -459,7 +459,7 @@ class HomeApi {
 
   static Future<String> createOrder({
     String? date,
-    int? total_price,
+    double? total_price,
     String? shipping_type,
     String? payment_term,
     String? note,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cargoshipping/Itempage/widgets/paymentstepperwidget.dart';
 import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 import 'package:cargoshipping/constants.dart';
@@ -10,7 +11,16 @@ import 'package:flutter/material.dart';
 
 class Detailordertrackpage extends StatefulWidget {
   Detailordertrackpage(
-      {super.key, required this.name, required this.num_iid, required this.products, required this.type, required this.amount, required this.optionsItems, required this.add_on_services});
+      {super.key,
+      required this.name,
+      required this.num_iid,
+      required this.products,
+      required this.type,
+      required this.amount,
+      required this.optionsItems,
+      required this.add_on_services,
+      required this.shipping_type,
+      required this.payment_term});
   final Map<String, dynamic> products;
   final String num_iid;
   final String type;
@@ -18,6 +28,8 @@ class Detailordertrackpage extends StatefulWidget {
   final int amount;
   final List<OptionsItem> optionsItems;
   final List<PartService> add_on_services;
+  final String shipping_type;
+  final String payment_term;
 
   @override
   State<Detailordertrackpage> createState() => _DetailordertrackpageState();
@@ -28,21 +40,11 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
   @override
   void initState() {
     super.initState();
-    setState(() {      
-      final _product = Products(
-        '${widget.num_iid}',
-        '${widget.products['title']}',
-        'https:${widget.products['pic_url']}',
-        '${widget.products['detail_url']}',
-        '${widget.name}',
-        '${widget.type}',
-        '',
-        '${widget.products['price']}',
-        '${widget.amount}',
-        widget.add_on_services,
-        widget.optionsItems
-      );
+    setState(() {
+      final _product = Products('${widget.num_iid}', '${widget.products['title']}', 'https:${widget.products['pic_url']}', '${widget.products['detail_url']}', '${widget.name}', '${widget.type}', '',
+          '${widget.products['price']}', '${widget.amount}', widget.add_on_services, widget.optionsItems);
       products.add(_product);
+      print(sum(products));
     });
   }
 
@@ -187,11 +189,16 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('ขนส่งทางรถ'),
-                              Text(
-                                'ชำระแยกครั้ง',
-                                style: TextStyle(fontSize: 13, color: red1, fontWeight: FontWeight.bold),
-                              )
+                              Text('ขนส่งทาง ${widget.shipping_type}'),
+                              widget.payment_term == '1'
+                                  ? Text(
+                                      'ชำระแยกครั้ง',
+                                      style: TextStyle(fontSize: 13, color: red1, fontWeight: FontWeight.bold),
+                                    )
+                                  : Text(
+                                      'ชำระครั้งเดียว',
+                                      style: TextStyle(fontSize: 13, color: red1, fontWeight: FontWeight.bold),
+                                    )
                             ],
                           ),
                         ),
@@ -226,10 +233,24 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                           children: [
                             Expanded(
                               flex: 2,
-                              child: Container(
-                                height: size.height * 0.075,
-                                decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10)),
-                              ),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  child: CachedNetworkImage(
+                                    width: size.width * 0.19,
+                                    height: size.height * 0.1,
+                                    imageUrl: "https:${widget.products['pic_url']}",
+                                    fit: BoxFit.fill,
+                                    placeholder: (context, url) => SizedBox(
+                                        height: size.height * 0.001,
+                                        width: size.width * 0.001,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 1,
+                                        )),
+                                    errorWidget: (context, url, error) => Image.asset(
+                                      'assets/images/noimages.jpg',
+                                      fit: BoxFit.fill,
+                                    ),
+                                  )),
                             ),
                             SizedBox(width: size.width * 0.02),
                             Expanded(
@@ -238,7 +259,7 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ำ...',
+                                    '${widget.products['title']}',
                                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -246,15 +267,16 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                                   SizedBox(
                                     height: size.height * 0.005,
                                   ),
-                                  Text(
-                                    'สีขาวมล',
-                                    style: TextStyle(fontSize: 12, color: headingtext, fontWeight: FontWeight.bold),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: List.generate(widget.optionsItems.length, (index) => Text('${widget.optionsItems[index].option_name}')),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.005,
                                   ),
                                   Text(
-                                    '¥ 4.88 (฿ 00)',
+                                    '¥ ${widget.products['price']} (฿ ${widget.products['price']})',
                                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: headingtext),
                                   ),
                                 ],
@@ -267,77 +289,14 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                                 // crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '1688严选店',
+                                    '${widget.type}',
                                     style: TextStyle(fontSize: 12, color: headingtext),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.028,
                                   ),
                                   Text(
-                                    'จำนวน 50',
-                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(size.height * 0.01),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                height: size.height * 0.075,
-                                decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(10)),
-                              ),
-                            ),
-                            SizedBox(width: size.width * 0.02),
-                            Expanded(
-                              flex: 4,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'ชั้นวางพลาสติกในครัว, ชั้นวางของในห้องน้ำ...',
-                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(
-                                    height: size.height * 0.005,
-                                  ),
-                                  Text(
-                                    'สีขาวมล',
-                                    style: TextStyle(fontSize: 12, color: headingtext, fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: size.height * 0.005,
-                                  ),
-                                  Text(
-                                    '¥ 4.88 (฿ 00)',
-                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: headingtext),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: size.width * 0.02),
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                // crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '1688严选店',
-                                    style: TextStyle(fontSize: 12, color: headingtext),
-                                  ),
-                                  SizedBox(
-                                    height: size.height * 0.028,
-                                  ),
-                                  Text(
-                                    'จำนวน 50',
+                                    'จำนวน ${widget.amount}',
                                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -391,19 +350,19 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'ยอดรวมค่าสินค้าทั้งหมด (100 ชิ้น)::',
+                              'ยอดรวมค่าสินค้าทั้งหมด (${widget.amount} ชิ้น)::',
                               style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
                             ),
                             Spacer(),
                             Text(
-                              '(¥ 488)',
+                              '(¥ ${widget.products['price']})',
                               style: TextStyle(fontSize: 13, color: headingtext, fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
                               width: size.width * 0.03,
                             ),
                             Text(
-                              '฿ 2,345.53',
+                              '฿ ${widget.products['price']}',
                               style: TextStyle(fontSize: 15, color: red1, fontWeight: FontWeight.w600),
                             )
                           ],
@@ -435,32 +394,42 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                     padding: EdgeInsets.all(size.height * 0.01),
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/icons/checktookred.png',
-                              height: size.height * 0.02,
+                        Column(
+                          children: List.generate(
+                            widget.add_on_services.length,
+                            (index) => Row(
+                              children: [
+                                Image.asset(
+                                  'assets/icons/correctred.png',
+                                  height: size.height * 0.018,
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.02,
+                                ),
+                                widget.add_on_services[index].add_on_service_id == 1
+                                    ? Text(
+                                        'ตีลังไม้',
+                                        style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
+                                      )
+                                    : Text(
+                                        'ห่อฟองสบู่ ดี',
+                                        style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.w600),
+                                      ),
+                                Spacer(),
+                                Text(
+                                  '¥ ${widget.add_on_services[index].add_on_service_price}',
+                                  style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.01,
+                                ),
+                                Text(
+                                  '(~฿ ${widget.add_on_services[index].add_on_service_price})',
+                                  style: TextStyle(fontSize: 11, color: Colors.black, fontWeight: FontWeight.bold),
+                                )
+                              ],
                             ),
-                            SizedBox(
-                              width: size.width * 0.02,
-                            ),
-                            Text(
-                              'ตีลังไม้',
-                              style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
-                            ),
-                            Spacer(),
-                            Text(
-                              '¥ 500',
-                              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: size.width * 0.02,
-                            ),
-                            Text(
-                              '(฿ 2,000)',
-                              style: TextStyle(color: headingtext, fontWeight: FontWeight.bold),
-                            )
-                          ],
+                          ),
                         ),
                         SizedBox(
                           height: size.height * 0.008,
@@ -517,14 +486,14 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                               ),
                               Spacer(),
                               Text(
-                                '¥ 500',
+                                '¥ ${sum(products)}',
                                 style: TextStyle(fontSize: 16, color: red1, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: size.width * 0.01,
                               ),
                               Text(
-                                '(~฿ 2,447.94)',
+                                '(~฿ ${sum(products)})',
                                 style: TextStyle(fontSize: 11, color: red1, fontWeight: FontWeight.bold),
                               )
                             ],
@@ -634,8 +603,8 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                   try {
                     await HomeApi.createOrder(
                       date: "2023-11-20",
-                      total_price: 29,
-                      shipping_type: 'Car',
+                      total_price: sum(products),
+                      shipping_type: '${widget.shipping_type}',
                       payment_term: '1',
                       note: '',
                       products: products,

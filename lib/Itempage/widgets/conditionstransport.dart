@@ -17,6 +17,9 @@ class _ConditionstransportState extends State<Conditionstransport> {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pop(context, _selectedOption);
+        }, icon: Icon(Icons.arrow_back)),
         title: Text(
           'เงื่อนไขการขนส่ง',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 17),
@@ -39,7 +42,7 @@ class _ConditionstransportState extends State<Conditionstransport> {
             title: 'ชำระแยกครั้ง',
             subtitle:
                 'ครั้งแรกชำระค่าสินค้า และค่าขนส่งในจีน\nครั้งที่สองชำระค่าขนส่งจีน-ไทย และค่าขนส่งในไทย',
-            value: 0,
+            value: 1,
           ),
           SizedBox(height: size.height * 0.01,),
           Container(
@@ -50,7 +53,7 @@ class _ConditionstransportState extends State<Conditionstransport> {
           _buildCustomCheckboxListTile(
             title: 'ชำระครั้งเดียว',
             subtitle: 'เฉพาะสินค้าประเภทเสื้อผ้าเท่านั้น',
-            value: 1,
+            value: 2,
           ),
           SizedBox(height: size.height * 0.01,),
           Container(

@@ -36,6 +36,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
   List<Map<String, String>> sizes = []; // ตัวแปรสำหรับเก็บขนาด
   String? selectedColor;
   String? selectedSize;
+  ServiceTransporterById? selectExtraService;
 
   @override
   void initState() {
@@ -389,6 +390,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
         setState(() {
           selectedService = isSelected ? null : title;
           //inspect(selectExtra);
+          selectExtraService = selectExtra;
           widget.onSelectedExtraService(selectExtra);
         });
       },
@@ -426,14 +428,14 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('จำนวนสินค้า ${amount} ชิ้น', style: TextStyle(fontSize: 16)),
-            Text('¥${widget.product['price']} (~฿55.56)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text('¥${widget.product['price']} (~฿${widget.product['price']})', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('บริการเสริม ()', style: TextStyle(fontSize: 16)),
-            Text('¥500 (~฿2447.94)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text('บริการเสริม (${selectExtraService?.name ?? ''})', style: TextStyle(fontSize: 16)),
+            Text('¥500 (~฿${selectExtraService?.standard_price ?? ''})', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ],
         ),
       ],
