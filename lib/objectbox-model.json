@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:4602695536737606285",
-      "lastPropertyId": "5:4397235671025351682",
+      "lastPropertyId": "6:1316421952452414829",
       "name": "JsonData",
       "properties": [
         {
@@ -27,6 +27,11 @@
         {
           "id": "5:4397235671025351682",
           "name": "jsonList",
+          "type": 30
+        },
+        {
+          "id": "6:1316421952452414829",
+          "name": "jsonProduct",
           "type": 30
         }
       ],

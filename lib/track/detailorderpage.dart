@@ -8,6 +8,7 @@ import 'package:cargoshipping/models/orders/optionsItem.dart';
 import 'package:cargoshipping/models/orders/partService.dart';
 import 'package:cargoshipping/models/orders/products.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Detailordertrackpage extends StatefulWidget {
   Detailordertrackpage(
@@ -601,8 +602,10 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
               GestureDetector(
                 onTap: () async {
                   try {
+                    DateTime dateNow = DateTime.now();
+                    String formattedDate = DateFormat('yyyy-MM-dd').format(dateNow);
                     await HomeApi.createOrder(
-                      date: "2023-11-20",
+                      date: "${formattedDate}",
                       total_price: sum(products),
                       shipping_type: '${widget.shipping_type}',
                       payment_term: '1',

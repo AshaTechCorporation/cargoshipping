@@ -22,7 +22,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 4602695536737606285),
       name: 'JsonData',
-      lastPropertyId: const obx_int.IdUid(5, 4397235671025351682),
+      lastPropertyId: const obx_int.IdUid(6, 1316421952452414829),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -43,6 +43,11 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(5, 4397235671025351682),
             name: 'jsonList',
+            type: 30,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 1316421952452414829),
+            name: 'jsonProduct',
             type: 30,
             flags: 0)
       ],
@@ -111,11 +116,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final categoryNameOffset = fbb.writeString(object.categoryName);
           final jsonListOffset = fbb.writeList(
               object.jsonList.map(fbb.writeString).toList(growable: false));
-          fbb.startTable(6);
+          final jsonProductOffset = fbb.writeList(
+              object.jsonProduct.map(fbb.writeString).toList(growable: false));
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(2, typeOffset);
           fbb.addOffset(3, categoryNameOffset);
           fbb.addOffset(4, jsonListOffset);
+          fbb.addOffset(5, jsonProductOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -131,10 +139,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 10, '');
           final typeParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
+          final jsonProductParam = const fb.ListReader<String>(
+                  fb.StringReader(asciiOptimization: true),
+                  lazy: false)
+              .vTableGet(buffer, rootOffset, 14, []);
           final object = JsonData(
               jsonList: jsonListParam,
               categoryName: categoryNameParam,
-              type: typeParam)
+              type: typeParam,
+              jsonProduct: jsonProductParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -161,4 +174,8 @@ class JsonData_ {
   /// See [JsonData.jsonList].
   static final jsonList =
       obx.QueryStringVectorProperty<JsonData>(_entities[0].properties[3]);
+
+  /// See [JsonData.jsonProduct].
+  static final jsonProduct =
+      obx.QueryStringVectorProperty<JsonData>(_entities[0].properties[4]);
 }

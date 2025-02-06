@@ -7,6 +7,7 @@ class JsonData {
   String type;
   String categoryName;
   List<String> jsonList;
+  List<String> jsonProduct;
 
-  JsonData({required this.jsonList, required this.categoryName, required this.type});
+  JsonData({required this.jsonList, required this.categoryName, required this.type, required this.jsonProduct});
 }

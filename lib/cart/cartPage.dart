@@ -54,11 +54,17 @@ class _CartPageState extends State<CartPage> {
           return jsonDecode(jsonStr) as Map<String, dynamic>;
         }).toList();
 
+        // แปลง List<String> jsonList เป็น List<Map<String, dynamic>>
+        List<Map<String, dynamic>> decodedListProduct = data.jsonProduct.map((jsonStr) {
+          return jsonDecode(jsonStr) as Map<String, dynamic>;
+        }).toList();
+
         // จัดรูปแบบข้อมูลให้ตรงกับที่ต้องการ
         Map<String, dynamic> formattedData = {
           "type": data.type,
           "categoryName": data.categoryName,
           "jsonList": decodedList, // เก็บเป็น List ของ Map
+          "jsonProduct": decodedListProduct, // เก็บเป็น List ของ Map
         };
 
         itemCart.add(formattedData);

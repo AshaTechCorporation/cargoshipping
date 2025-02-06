@@ -16,6 +16,7 @@ import 'package:cargoshipping/models/itemt1688.dart';
 import 'package:cargoshipping/models/itemtaobao.dart';
 import 'package:cargoshipping/models/orders/optionsItem.dart';
 import 'package:cargoshipping/models/orders/partService.dart';
+import 'package:cargoshipping/models/orders/products.dart';
 import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:cargoshipping/objectbox.g.dart';
@@ -66,6 +67,7 @@ class _ItempageState extends State<Itempage> {
   String? selectedSize;
   List<OptionsItem> optionsItems = [];
   List<PartService> add_on_services = [];
+  List<Products> cartProducts = [];
 
   Future<void> initObjectBox() async {
     store = await openStore();
@@ -78,8 +80,9 @@ class _ItempageState extends State<Itempage> {
   //   jsonBox.put(jsonData);
   // }
 
-  void saveJson(Map<String, dynamic> data, String type, String categoryName) {
+  void saveJson(Map<String, dynamic> data, String type, String categoryName, Map<String, dynamic> products) {
     final jsonString = jsonEncode(data); // แปลงข้อมูล JSON เป็น String
+    final jsonStringPro = jsonEncode(products);
 
     // ค้นหาข้อมูลที่มี categoryName และ type ตรงกัน
     final query = jsonBox.query(JsonData_.categoryName.equals(categoryName) & JsonData_.type.equals(type)).build();
@@ -91,16 +94,20 @@ class _ItempageState extends State<Itempage> {
       // ถ้ามีข้อมูลอยู่แล้ว -> อัปเดต List<String> json
       List<String> updatedJsonList = List.from(existingData.jsonList)..add(jsonString);
 
+      // อัปเดต List<Products> โดยเพิ่มข้อมูลใหม่
+      List<String> updatedProductsList = List.from(existingData.jsonProduct)..add(jsonStringPro);
+
       existingData.jsonList = updatedJsonList;
+      existingData.jsonProduct = updatedProductsList; // อัปเดต products
       jsonBox.put(existingData); // อัปเดตข้อมูลที่มีอยู่แล้ว
-      print(" อัปเดตข้อมูลสำเร็จ: ${existingData.jsonList.length} รายการ");
+      print("อัปเดตข้อมูลสำเร็จ: ${existingData.jsonList.length} รายการ, Products: ${existingData.jsonProduct.length} รายการ");
     } else {
       // ถ้ายังไม่มีข้อมูล -> สร้างใหม่
       final jsonData = JsonData(
-        jsonList: [jsonString], // เก็บเป็น List<String>
-        type: type,
-        categoryName: categoryName,
-      );
+          jsonList: [jsonString], // เก็บเป็น List<String>
+          type: type,
+          categoryName: categoryName,
+          jsonProduct: [jsonStringPro]);
       jsonBox.put(jsonData);
       print(" เพิ่มข้อมูลใหม่สำเร็จ");
     }
@@ -149,7 +156,7 @@ class _ItempageState extends State<Itempage> {
   }
 
   //ดูข้อมูล บริการเสริม
-  Future<void> getExtraServices() async{
+  Future<void> getExtraServices() async {
     try {
       final _extraservices = await HomeApi.getExtraService();
       setState(() {
@@ -703,13 +710,83 @@ class _ItempageState extends State<Itempage> {
                             product: itemTaobao!,
                             buttonLabel: 'เพิ่มลงรถเข็น',
                             extraService: extraServices,
-                            onChange: (value) {},
-                            onSelectedColors: (valueColor) {},
-                            onSelectedExtraService: (valueExtra){},
-                            onSelectedSizes: (valueSize){},
+                            onChange: (val) {
+                              setState(() {
+                                amount = val;
+                              });
+                            },
+                            onSelectedColors: (valueColor) {
+                              setState(() {
+                                selectedColor = valueColor;
+                              });
+                            },
+                            onSelectedExtraService: (valueExtra) {
+                              setState(() {
+                                selectExtraService = valueExtra;
+                              });
+                            },
+                            onSelectedSizes: (valueSize) {
+                              setState(() {
+                                selectedSize = valueSize;
+                              });
+                            },
                             onButtonPress: () async {
                               // เก็บข้อมูล
-                              saveJson(itemTaobao!, widget.type, widget.categorySelect.name!); // jsonData คือข้อมูล JSON ที่ให้มา
+                              // saveJson(itemTaobao!, widget.type, widget.categorySelect.name!); // jsonData คือข้อมูล JSON ที่ให้มา
+                              setState(() {
+                                // List ที่จะใช้
+                                List<String> listText = [];
+                                List<Map<String, dynamic>> add_on_servicess = [];
+                                List<Map<String, dynamic>> optionsItemss = [];
+
+                                if (selectedSize != null) {
+                                  listText.add(selectedSize!);
+                                }
+                                if (selectedColor != null) {
+                                  listText.add(selectedColor!);
+                                }
+                                if (selectExtraService != null) {
+                                  final _addOnService = PartService(selectExtraService!.id, selectExtraService!.standard_price);
+                                  add_on_services.add(_addOnService);
+                                }
+                                if (listText.isNotEmpty) {
+                                  for (var i = 0; i < listText.length; i++) {
+                                    final option = OptionsItem(listText[i], '', '');
+                                    optionsItems.add(option);
+                                  }
+                                }
+                                if (selectExtraService != null) {
+                                  final addOnService = {"add_on_service_id": selectExtraService!.id, "add_on_service_price": selectExtraService!.standard_price};
+                                  add_on_servicess.add(addOnService);
+                                }
+                                if (listText.isNotEmpty) {
+                                  for (var i = 0; i < listText.length; i++) {
+                                    final option = {
+                                      "option_name": listText[i],
+                                      "option_image": "", // กำหนดรูปภาพเพิ่มเติมถ้าจำเป็น
+                                      "option_note": ""
+                                    };
+                                    optionsItemss.add(option);
+                                  }
+                                }
+                                // สร้าง Map หลัก
+                                Map<String, dynamic> productDetails = {
+                                  "product_code": "${itemTaobao!['num_iid']}",
+                                  "product_name": "${itemTaobao!['title']}",
+                                  "product_url": "${itemTaobao!['detail_url']}",
+                                  "product_image": "https:${itemTaobao!['pic_url']}",
+                                  "product_category": "${widget.name}",
+                                  "product_store_type": "${widget.type}",
+                                  "product_note": "",
+                                  "product_price": "${itemTaobao!['price']}",
+                                  "product_qty": "${amount}",
+                                  "add_on_services": add_on_servicess,
+                                  "options": optionsItemss,
+                                };
+
+                                //inspect(productDetails); // แสดงผลข้อมูล
+                                saveJson(itemTaobao!, widget.type, widget.categorySelect.name!,productDetails);
+                              });
                               //await context.read<HomeController>().addProductsToCart(itemTaobao!);
                               // showDialog(
                               //   context: context,
@@ -803,12 +880,12 @@ class _ItempageState extends State<Itempage> {
                                 selectedColor = valueColor;
                               });
                             },
-                            onSelectedExtraService: (valueExtra){
+                            onSelectedExtraService: (valueExtra) {
                               setState(() {
                                 selectExtraService = valueExtra;
                               });
                             },
-                            onSelectedSizes: (valueSize){
+                            onSelectedSizes: (valueSize) {
                               setState(() {
                                 selectedSize = valueSize;
                               });
@@ -816,7 +893,7 @@ class _ItempageState extends State<Itempage> {
                             onButtonPress: () {
                               setState(() {
                                 List<String> listText = [];
-                                
+
                                 if (selectedSize != null) {
                                   listText.add(selectedSize!);
                                 }
@@ -827,15 +904,14 @@ class _ItempageState extends State<Itempage> {
                                   final _addOnService = PartService(selectExtraService!.id, selectExtraService!.standard_price);
                                   add_on_services.add(_addOnService);
                                 }
-                                if (listText.isNotEmpty) {                                  
+                                if (listText.isNotEmpty) {
                                   for (var i = 0; i < listText.length; i++) {
                                     final option = OptionsItem(listText[i], '', '');
                                     optionsItems.add(option);
                                   }
-                                }                                
+                                }
                                 inspect(optionsItems);
                                 inspect(add_on_services);
-                                
                               });
                               Navigator.push(
                                 context,
