@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +10,11 @@ class ProductDetailsBottomSheet extends StatefulWidget {
   final Function()? onButtonPress; // ฟังก์ชันเมื่อกดปุ่ม
   final ValueChanged onChange;
 
-  const ProductDetailsBottomSheet({
-    required this.product,
-    required this.buttonLabel, // รับข้อความของปุ่ม
-    required this.onButtonPress, // รับฟังก์ชันของปุ่ม
-    required this.onChange
-  });
+  const ProductDetailsBottomSheet(
+      {required this.product,
+      required this.buttonLabel, // รับข้อความของปุ่ม
+      required this.onButtonPress, // รับฟังก์ชันของปุ่ม
+      required this.onChange});
 
   @override
   State<ProductDetailsBottomSheet> createState() => _ProductDetailsBottomSheetState();
@@ -21,6 +23,41 @@ class ProductDetailsBottomSheet extends StatefulWidget {
 class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
   String? selectedService;
   int amount = 1;
+  List<Map<String, String>> colors = []; // ตัวแปรสำหรับเก็บสี
+  List<Map<String, String>> sizes = []; // ตัวแปรสำหรับเก็บขนาด
+  String? selectedColor;
+  String? selectedSize;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      colors.clear();
+      sizes.clear();
+      if (widget.product['props_name'] != "" || widget.product['props_name'] != null) {
+        List<Map<String, String>> colorList = [];
+        List<Map<String, String>> sizeList = [];
+        // แยกข้อมูลโดยใช้ ';' เป็นตัวแบ่ง
+        List<String> entries = widget.product['props_name'].split(';');
+
+        for (String entry in entries) {
+          List<String> parts = entry.split(':');
+          if (parts.length == 4) {
+            Map<String, String> data = {"num_prop": "${parts[0]}:${parts[1]}", "name": parts[2], "value": parts[3]};
+
+            // แยกสีและขนาดออกจากกัน
+            if (parts[2] == "颜色") {
+              colorList.add(data);
+            } else if (parts[2] == "尺码") {
+              sizeList.add(data);
+            }
+          }
+        }
+        colors = colorList;
+        sizes = sizeList;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +74,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   children: [
@@ -50,10 +87,24 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          'https:${widget.product['pic_url']}',
+                        child: CachedNetworkImage(
+                          imageUrl: "https:${widget.product['pic_url']}",
                           fit: BoxFit.fill,
+                          placeholder: (context, url) => SizedBox(
+                              height: size.height * 0.001,
+                              width: size.width * 0.001,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                              )),
+                          errorWidget: (context, url, error) => Image.asset(
+                            'assets/images/noimages.jpg',
+                            fit: BoxFit.fill,
+                          ),
                         ),
+                        // child: Image.network(
+                        //   'https:${widget.product['pic_url']}',
+                        //   fit: BoxFit.fill,
+                        // ),
                       ),
                     ),
                     SizedBox(width: size.width * 0.04),
@@ -81,22 +132,37 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   color: Colors.grey,
                 ),
                 SizedBox(height: size.height * 0.01),
-                Text(
-                  'สี',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+                // Text(
+                //   'สี',
+                //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                // ),
                 SizedBox(height: size.height * 0.01),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    _buildColorOption('สีธูปแดง', context),
-                    _buildColorOption('สีขาวมวล', context),
-                    _buildColorOption('สีน้ำตาลอ่อน', context),
-                    _buildColorOption('สีเทาอ่อน', context),
-                    _buildColorOption('สีนอร์ดิกบลู', context),
-                  ],
-                ),
+
+                colors.isEmpty
+                    ? SizedBox()
+                    : Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: List.generate(
+                          colors.length,
+                          (index) => _buildColorOption(colors[index]['name']!, context, colors[index]['value']!, () {
+                            setState(() {
+                              selectedColor = colors[index]['value'];
+                            });
+                          }),
+                        ),
+                      ),
+                // Wrap(
+                //   spacing: 8,
+                //   runSpacing: 8,
+                //   children: [
+                //     _buildColorOption('สีธูปแดง', context),
+                //     _buildColorOption('สีขาวมวล', context),
+                //     _buildColorOption('สีน้ำตาลอ่อน', context),
+                //     _buildColorOption('สีเทาอ่อน', context),
+                //     _buildColorOption('สีนอร์ดิกบลู', context),
+                //   ],
+                // ),
                 SizedBox(height: size.height * 0.01),
                 Container(
                   height: size.height * 0.0006,
@@ -104,15 +170,29 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   color: Colors.grey,
                 ),
                 SizedBox(height: size.height * 0.01),
-                Text(
-                  'ตัวเลือก',
-                  style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-                _buildOptionRow('ตัวเลือก', 'ข้อมูล', 'ตัวเลือก'),
-                _buildOptionRow('ตัวเลือก', 'ข้อมูล', 'ตัวเลือก'),
-                SizedBox(height: size.height * 0.01),
-                _buildQuantitySelector(size),
-                SizedBox(height: size.height * 0.01),
+                // Text(
+                //   'ตัวเลือก',
+                //   style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
+                // ),
+                sizes.isEmpty
+                    ? SizedBox()
+                    : Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: List.generate(
+                          sizes.length,
+                          (index) => _buildSizesOption(sizes[index]['name']!, context, sizes[index]['value']!, () {
+                            setState(() {
+                              selectedSize = sizes[index]['value'];
+                            });
+                          }),
+                        ),
+                      ),
+                // _buildOptionRow('ตัวเลือก', 'ข้อมูล', 'ตัวเลือก'),
+                // _buildOptionRow('ตัวเลือก', 'ข้อมูล', 'ตัวเลือก'),
+                // SizedBox(height: size.height * 0.01),
+                // _buildQuantitySelector(size),
+                // SizedBox(height: size.height * 0.01),
                 Text(
                   'บริการเสริม',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -161,19 +241,55 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
     );
   }
 
-  Widget _buildColorOption(String colorName, BuildContext context) {
+  Widget _buildColorOption(String colorName, BuildContext context, String value, VoidCallback press) {
     // รับค่า size ของหน้าจอ
     final size = MediaQuery.of(context).size;
 
     return Column(
       children: [
-        Container(
-          // กำหนดขนาดของ Container โดยใช้ขนาดจาก size ของ MediaQuery
-          width: size.width * 0.25, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
-          height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8),
+        GestureDetector(
+          onTap: press,
+          child: Container(
+            // กำหนดขนาดของ Container โดยใช้ขนาดจาก size ของ MediaQuery
+            width: size.width * 0.28, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
+            height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
+            decoration: BoxDecoration(
+              color: selectedColor == value ? Colors.redAccent :Colors.grey[300],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Text(value),
+            ),
+          ),
+        ),
+        SizedBox(height: size.height * 0.005), // เพิ่มขนาดให้สัมพันธ์กับหน้าจอ
+        Text(
+          colorName,
+          style: TextStyle(fontSize: size.height * 0.015), // กำหนดขนาดข้อความ
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSizesOption(String colorName, BuildContext context, String value, VoidCallback press) {
+    // รับค่า size ของหน้าจอ
+    final size = MediaQuery.of(context).size;
+
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: press,
+          child: Container(
+            // กำหนดขนาดของ Container โดยใช้ขนาดจาก size ของ MediaQuery
+            width: size.width * 0.28, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
+            height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
+            decoration: BoxDecoration(
+              color: selectedSize == value ? Colors.redAccent :Colors.grey[300],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Text(value),
+            ),
           ),
         ),
         SizedBox(height: size.height * 0.005), // เพิ่มขนาดให้สัมพันธ์กับหน้าจอ
