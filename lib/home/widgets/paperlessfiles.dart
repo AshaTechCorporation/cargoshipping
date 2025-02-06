@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/home/widgets/paperlessConfirm.dart';
 import 'package:cargoshipping/home/widgets/paymentChannel.dart';
 import 'package:cargoshipping/models/provice.dart';
 import 'package:cargoshipping/register/server/registerService.dart';
@@ -728,13 +729,13 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                       sendfileCompany20 = await RegisterService.addImage(file: fileCompany20, path: 'images/asset/');
                     }
                   }
-                  if (extensionfileCompany == 'pdf') {
-                    if (fileCompany != null) {
-                      sendfileCompany = await RegisterService.addFile(file: fileCompany, path: 'images/asset/');
+                  if (extensionfileCompanyPhoto == 'pdf') {
+                    if (fileCompanyPhoto != null) {
+                      sendfileCompanyPhoto = await RegisterService.addFile(file: fileCompanyPhoto, path: 'images/asset/');
                     }
                   } else {
-                    if (fileCompany != null) {
-                      sendfileCompany = await RegisterService.addImage(file: fileCompany, path: 'images/asset/');
+                    if (fileCompanyPhoto != null) {
+                      sendfileCompanyPhoto = await RegisterService.addImage(file: fileCompanyPhoto, path: 'images/asset/');
                     }
                   }
                   await RegisterService.registerImporter(
@@ -755,6 +756,31 @@ class _PaperlessfilesState extends State<Paperlessfiles> {
                     logo_file: sendfileCompanyPhoto,
                   );
                   LoadingDialog.close(context);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PaperlessConfirm(
+                                companyName: widget.companyName,
+                                taxNumber: widget.taxNumber,
+                                homeCode: widget.homeCode,
+                                postalCode: widget.postalCode,
+                                userFirstName: widget.userFirstName,
+                                phoneNumber: widget.phoneNumber,
+                                email: widget.email,
+                                selectedProvicesOffice: widget.selectedProvicesOffice,
+                                selecteddistrictOffice: widget.selecteddistrictOffice,
+                                selectedSubdistrictsOffice: widget.selectedSubdistrictsOffice,
+                                checkPaperless: widget.checkPaperless,
+                                fileIDcard: fileIDcard!,
+                                extensionIDcard: extensionIDcard!,
+                                fileCompany: fileCompany!,
+                                extensionfileCompany: extensionfileCompany!,
+                                fileCompany20: fileCompany20!,
+                                extensionfileCompany20: extensionfileCompany20!,
+                                fileCompanyPhoto: fileCompanyPhoto!,
+                                extensionfileCompanyPhoto: extensionfileCompanyPhoto!,
+                              )),
+                      (route) => false);
                 } on ClientException catch (e) {
                   if (!mounted) return;
                   LoadingDialog.close(context);
