@@ -1,3 +1,4 @@
+import 'package:cargoshipping/models/newsPaper/newsPaper.dart';
 import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -38,7 +39,7 @@ class ServiceTransporter {
     this.icon_boxs,
     this.one_six_eight_eight,
     this.prefix,
-    this.taobao
+    this.taobao,
   );
 
   factory ServiceTransporter.fromJson(Map<String, dynamic> json) => _$ServiceTransporterFromJson(json);

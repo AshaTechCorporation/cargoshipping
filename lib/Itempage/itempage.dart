@@ -252,6 +252,12 @@ class _ItempageState extends State<Itempage> {
                                   width: 70,
                                   height: 70,
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => Image.asset(
+                                    width: 70,
+                                    height: 70,
+                                    'assets/images/logofull.png',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),

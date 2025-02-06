@@ -289,7 +289,7 @@ class _PaperlessState extends State<Paperless> {
               },
               child: Container(
                 height: size.height * 0.045,
-                width: size.width * 0.45,
+                width: size.width * 0.43,
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.grey, width: size.width * 0.001)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -322,7 +322,7 @@ class _PaperlessState extends State<Paperless> {
               },
               child: Container(
                 height: size.height * 0.045,
-                width: size.width * 0.45,
+                width: size.width * 0.43,
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.grey, width: size.width * 0.001)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

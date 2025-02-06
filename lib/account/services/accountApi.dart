@@ -1,6 +1,8 @@
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/articletype.dart';
 import 'package:cargoshipping/models/manualtype.dart';
+import 'package:cargoshipping/models/newsPaper/newsPaperShow.dart';
+import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -113,6 +115,42 @@ class AccountApi {
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = convert.jsonDecode(response.body);
       return data;
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  static Future<List<NewsPaperShow>> getNewsPaper() async {
+    final url = Uri.https(publicUrl, '/api/get_category_news');
+
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => NewsPaperShow.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  static Future<List<NewsPaperShow>> getManual() async {
+    final url = Uri.https(publicUrl, '/api/get_category_manual');
+
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => NewsPaperShow.fromJson(e)).toList();
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);

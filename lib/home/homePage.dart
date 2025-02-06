@@ -156,11 +156,6 @@ class _HomePageState extends State<HomePage> {
         for (var item in _rateShip) {
           groupedData.putIfAbsent(item.vehicle!, () => []).add(item);
         }
-        Future.delayed(Duration(seconds: 2), () async {
-          if (_service.isNotEmpty) {
-            enabled = !enabled;
-          }
-        });
       });
       await getlistCategoriesByName(categories_name: categoryProduct[0].taobao!);
 
@@ -990,12 +985,15 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RichText(
-                                text: TextSpan(text: '${storeTEG[indexStore].name ?? ''} :', style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15), children: <TextSpan>[
-                              TextSpan(
-                                text: ' ${storeTEG[indexStore].address ?? ''}',
-                                style: TextStyle(color: headingtext, fontSize: 15),
-                              )
-                            ])),
+                                text: TextSpan(
+                                    text: '${storeTEG[indexStore].name ?? ''} :',
+                                    style: TextStyle(color: red1, fontWeight: FontWeight.w600, fontSize: 15),
+                                    children: <TextSpan>[
+                                  TextSpan(
+                                    text: ' ${storeTEG[indexStore].address ?? ''}',
+                                    style: TextStyle(color: headingtext, fontSize: 15),
+                                  )
+                                ])),
                             SizedBox(
                               height: size.height * 0.01,
                             ),
@@ -1015,7 +1013,9 @@ class _HomePageState extends State<HomePage> {
                                 width: size.width * 0.3,
                                 child: TextButton(
                                   style: TextButton.styleFrom(
-                                      foregroundColor: red1, side: BorderSide(color: red1, width: size.width * 0.004), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
+                                      foregroundColor: red1,
+                                      side: BorderSide(color: red1, width: size.width * 0.004),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13))),
                                   onPressed: () {
                                     Clipboard.setData(
                                       ClipboardData(text: storeTEG[indexStore].address ?? ''),
@@ -1108,7 +1108,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
                   child: Text(
                     'อัตราค่าขนส่ง',
                     style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
@@ -1120,75 +1120,126 @@ class _HomePageState extends State<HomePage> {
                 ? SizedBox.shrink()
                 : Column(
                     children: groupedData.entries.map((entry) {
-                      return Stack(
-                        children: [
-                          Image.asset(entry.key == 'Car' ? 'assets/images/16.png' : 'assets/images/17.png'),
-                          Positioned(
-                            top: size.height * 0.08,
-                            left: size.width * 0.05,
-                            child: Column(
-                              children: entry.value.map((item) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        RichText(
-                                          text: TextSpan(
-                                            text: item.type,
-                                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16, fontFamily: 'SukhumvitSet'),
-                                            children: <TextSpan>[
-                                              // TextSpan(
-                                              //   text: item.type,
-                                              //   style: TextStyle(
-                                              //     fontWeight: FontWeight.bold,
-                                              //     color: Colors.red,
-                                              //     fontSize: 14,
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: size.width * 0.39,
-                                        ),
-                                        Text(
-                                          item.kg ?? '',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: size.width * 0.18,
-                                        ),
-                                        Text(
-                                          item.cbm ?? '',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Positioned(
-                                        top: size.height * 0.22,
-                                        left: size.width * 0.05,
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              item.name ?? '',
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
-                                            )
-                                          ],
-                                        )),
-                                  ],
-                                );
-                              }).toList(),
+                      return Container(
+                          height: size.height * 0.35,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(entry.key == 'Car' ? 'assets/images/16.png' : 'assets/images/17.png'),
+                              fit: BoxFit.fill,
                             ),
-                          )
-                        ],
-                      );
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: entry.value.map((item) {
+                              return Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        item.type ?? '',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.4,
+                                      ),
+                                      Text(
+                                        item.kg ?? '',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.2,
+                                      ),
+                                      Text(
+                                        item.cbm ?? '',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        item.name ?? '',
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ));
+                      // return Stack(
+                      //   children: [
+                      //     Image.asset(entry.key == 'Car' ? 'assets/images/16.png' : 'assets/images/17.png'),
+                      //     Positioned(
+                      //       top: size.height * 0.08,
+                      //       left: size.width * 0.05,
+                      //       child: Column(
+                      //         children: entry.value.map((item) {
+                      //           return Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               Row(
+                      //                 children: [
+                      //                   Text(
+                      //                     item.type ?? '',
+                      //                     style: TextStyle(
+                      //                       fontSize: 16,
+                      //                       fontWeight: FontWeight.bold,
+                      //                       color: Colors.black,
+                      //                     ),
+                      //                   ),
+                      //                   SizedBox(
+                      //                     width: size.width * 0.39,
+                      //                   ),
+                      //                   Text(
+                      //                     item.kg ?? '',
+                      //                     style: TextStyle(
+                      //                       fontSize: 20,
+                      //                       fontWeight: FontWeight.bold,
+                      //                     ),
+                      //                   ),
+                      //                   SizedBox(
+                      //                     width: size.width * 0.18,
+                      //                   ),
+                      //                   Text(
+                      //                     item.cbm ?? '',
+                      //                     style: TextStyle(
+                      //                       fontSize: 20,
+                      //                       fontWeight: FontWeight.bold,
+                      //                     ),
+                      //                   )
+                      //                 ],
+                      //               ),
+                      //               Positioned(
+                      //                   top: size.height * 0.22,
+                      //                   left: size.width * 0.05,
+                      //                   child: Row(
+                      //                     children: [
+                      //                       Text(
+                      //                         item.name ?? '',
+                      //                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+                      //                       )
+                      //                     ],
+                      //                   )),
+                      //             ],
+                      //           );
+                      //         }).toList(),
+                      //       ),
+                      //     )
+                      //   ],
+                      // );
                     }).toList(),
                   ),
             // Padding(
