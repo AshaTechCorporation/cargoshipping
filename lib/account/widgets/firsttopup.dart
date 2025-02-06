@@ -1,6 +1,7 @@
 import 'package:cargoshipping/account/topuppage.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Firsttopup extends StatefulWidget {
   const Firsttopup({super.key});
@@ -60,10 +61,10 @@ class _FirsttopupState extends State<Firsttopup> {
                   children: [
                     _buildAmountContainer('100'),
                     _buildAmountContainer('500'),
-                    _buildAmountContainer('1,000'),
-                    _buildAmountContainer('5,000'),
-                    _buildAmountContainer('10,000'),
-                    _buildAmountContainer('50,000'),
+                    _buildAmountContainer('1000'),
+                    _buildAmountContainer('5000'),
+                    _buildAmountContainer('10000'),
+                    _buildAmountContainer('50000'),
                   ],
                 ),
               ),
@@ -195,7 +196,7 @@ class _FirsttopupState extends State<Firsttopup> {
         ),
         alignment: Alignment.center,
         child: Text(
-          amount,
+          NumberFormat('#,###').format(double.parse(amount)),
           style: TextStyle(fontSize: 13.0, color: isSelected ? Colors.white : Colors.black, fontWeight: FontWeight.bold),
         ),
       ),

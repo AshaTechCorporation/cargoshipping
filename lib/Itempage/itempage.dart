@@ -21,7 +21,16 @@ import 'package:provider/provider.dart';
 import 'dart:convert';
 
 class Itempage extends StatefulWidget {
-  Itempage({super.key, required this.size, required this.title, required this.price, required this.press, required this.products, required this.num_iid, required this.type, required this.name});
+  Itempage(
+      {super.key,
+      required this.size,
+      required this.title,
+      required this.price,
+      required this.press,
+      required this.products,
+      required this.num_iid,
+      required this.type,
+      required this.name});
 
   final Size size;
   final String title;
@@ -209,6 +218,12 @@ class _ItempageState extends State<Itempage> {
                                   width: 70,
                                   height: 70,
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => Image.asset(
+                                    width: 70,
+                                    height: 70,
+                                    'assets/images/logofull.png',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),

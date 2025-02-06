@@ -151,7 +151,7 @@ class _TopuppageState extends State<Topuppage> {
                 reference_id: '#OR-99999',
                 detail: 'Wallet',
                 amount: widget.amount,
-                type: '0',
+                type: '1',
               );
               LoadingDialog.close(context);
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
