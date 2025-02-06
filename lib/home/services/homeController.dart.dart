@@ -7,8 +7,14 @@ class HomeController extends ChangeNotifier {
 
   List<Map<String, dynamic>> productCart = [];
 
-  addProductsToCart(Map<String, dynamic> data) async {
+  addProductsToCart(Map<String, dynamic> data) async {    
     productCart.add(data);
     notifyListeners();
   }
+
+  clearProductCart(){
+    productCart.clear();
+    notifyListeners();
+  }
+  
 }
