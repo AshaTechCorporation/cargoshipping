@@ -3,17 +3,21 @@ import 'package:cargoshipping/Itempage/widgets/warningwidget.dart';
 import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/home/firstPage.dart';
 import 'package:cargoshipping/home/services/homeApi.dart';
+import 'package:cargoshipping/models/orders/optionsItem.dart';
 import 'package:cargoshipping/models/orders/partService.dart';
 import 'package:cargoshipping/models/orders/products.dart';
 import 'package:flutter/material.dart';
 
 class Detailordertrackpage extends StatefulWidget {
-  Detailordertrackpage({super.key, required this.name, required this.num_iid, required this.products, required this.type, required this.amount});
+  Detailordertrackpage(
+      {super.key, required this.name, required this.num_iid, required this.products, required this.type, required this.amount, required this.optionsItems, required this.add_on_services});
   final Map<String, dynamic> products;
   final String num_iid;
   final String type;
   final String name;
   final int amount;
+  final List<OptionsItem> optionsItems;
+  final List<PartService> add_on_services;
 
   @override
   State<Detailordertrackpage> createState() => _DetailordertrackpageState();
@@ -24,21 +28,19 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      List<PartService> example2 = [
-        PartService(1, 200),
-      ];
+    setState(() {      
       final _product = Products(
         '${widget.num_iid}',
-        '${widget.name}',
+        '${widget.products['title']}',
         'https:${widget.products['pic_url']}',
         '${widget.products['detail_url']}',
-        'ของเด็ก',
-        'ของเด็ก',
-        'ของเด็ก',
+        '${widget.name}',
+        '${widget.type}',
+        '',
         '${widget.products['price']}',
         '${widget.amount}',
-        example2,
+        widget.add_on_services,
+        widget.optionsItems
       );
       products.add(_product);
     });
@@ -632,7 +634,7 @@ class _DetailordertrackpageState extends State<Detailordertrackpage> {
                   try {
                     await HomeApi.createOrder(
                       date: "2023-11-20",
-                      total_price: 1299,
+                      total_price: 29,
                       shipping_type: 'Car',
                       payment_term: '1',
                       note: '',

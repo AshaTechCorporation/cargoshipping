@@ -1,6 +1,8 @@
 import 'package:cargoshipping/Itempage/widgets/conditionstransport.dart';
 import 'package:cargoshipping/cart/widget/Custonredchechkbox.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/orders/optionsItem.dart';
+import 'package:cargoshipping/models/orders/partService.dart';
 import 'package:cargoshipping/track/detailorderpage.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +13,17 @@ class Confirmorderpage extends StatefulWidget {
     required this.num_iid,
     required this.products,
     required this.type,
-    required this.amount
+    required this.amount,
+    required this.optionsItems,
+    required this.add_on_services
   });
   final Map<String, dynamic> products;
   final String num_iid;
   final String type;
   final String name;
   final int amount;
+  final List<OptionsItem> optionsItems;
+  final List<PartService> add_on_services;
 
   @override
   State<Confirmorderpage> createState() => _ConfirmorderpageState();
@@ -670,6 +676,8 @@ class _ConfirmorderpageState extends State<Confirmorderpage> {
                       type: widget.type,
                       products: widget.products,
                       amount: widget.amount,
+                      add_on_services: widget.add_on_services,
+                      optionsItems: widget.optionsItems,
                     )),
                   );
                 },

@@ -14,7 +14,10 @@ import 'package:cargoshipping/models/itemmodel/item_model.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/itemt1688.dart';
 import 'package:cargoshipping/models/itemtaobao.dart';
+import 'package:cargoshipping/models/orders/optionsItem.dart';
+import 'package:cargoshipping/models/orders/partService.dart';
 import 'package:cargoshipping/models/serviceTransporter.dart';
+import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:cargoshipping/objectbox.g.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +60,12 @@ class _ItempageState extends State<Itempage> {
   List<ItemSearch> item = [];
   late final Store store;
   late final Box<JsonData> jsonBox;
+  List<ServiceTransporterById> extraServices = [];
+  ServiceTransporterById? selectExtraService;
+  String? selectedColor;
+  String? selectedSize;
+  List<OptionsItem> optionsItems = [];
+  List<PartService> add_on_services = [];
 
   Future<void> initObjectBox() async {
     store = await openStore();
@@ -128,6 +137,7 @@ class _ItempageState extends State<Itempage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getDetailItem(num_iid: widget.num_iid, type: widget.type);
       await initObjectBox();
+      getExtraServices();
     });
   }
 
@@ -135,6 +145,20 @@ class _ItempageState extends State<Itempage> {
   void dispose() {
     store.close();
     super.dispose();
+  }
+
+  //ดูข้อมูล บริการเสริม
+  Future<void> getExtraServices() async{
+    try {
+      final _extraservices = await HomeApi.getExtraService();
+      setState(() {
+        extraServices = _extraservices;
+      });
+      //inspect(extraServices);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      print(e);
+    }
   }
 
   //ดูข้อมูลสินค้าตาม Category Name
@@ -676,7 +700,11 @@ class _ItempageState extends State<Itempage> {
                           return ProductDetailsBottomSheet(
                             product: itemTaobao!,
                             buttonLabel: 'เพิ่มลงรถเข็น',
+                            extraService: extraServices,
                             onChange: (value) {},
+                            onSelectedColors: (valueColor) {},
+                            onSelectedExtraService: (valueExtra){},
+                            onSelectedSizes: (valueSize){},
                             onButtonPress: () async {
                               // เก็บข้อมูล
                               saveJson(itemTaobao!, widget.type, widget.categorySelect.name!); // jsonData คือข้อมูล JSON ที่ให้มา
@@ -761,12 +789,51 @@ class _ItempageState extends State<Itempage> {
                           return ProductDetailsBottomSheet(
                             product: itemTaobao!, // ส่งข้อมูลสินค้า
                             buttonLabel: 'ซื้อสินค้า', // แสดงข้อความปุ่มเป็น "ซื้อสินค้า"
+                            extraService: extraServices,
                             onChange: (val) {
                               setState(() {
                                 amount = val;
                               });
                             },
+                            onSelectedColors: (valueColor) {
+                              setState(() {
+                                selectedColor = valueColor;
+                              });
+                            },
+                            onSelectedExtraService: (valueExtra){
+                              setState(() {
+                                selectExtraService = valueExtra;
+                              });
+                            },
+                            onSelectedSizes: (valueSize){
+                              setState(() {
+                                selectedSize = valueSize;
+                              });
+                            },
                             onButtonPress: () {
+                              setState(() {
+                                List<String> listText = [];
+                                
+                                if (selectedSize != null) {
+                                  listText.add(selectedSize!);
+                                }
+                                if (selectedColor != null) {
+                                  listText.add(selectedColor!);
+                                }
+                                if (selectExtraService != null) {
+                                  final _addOnService = PartService(selectExtraService!.id, selectExtraService!.standard_price);
+                                  add_on_services.add(_addOnService);
+                                }
+                                if (listText.isNotEmpty) {                                  
+                                  for (var i = 0; i < listText.length; i++) {
+                                    final option = OptionsItem(listText[i], '', '');
+                                    optionsItems.add(option);
+                                  }
+                                }                                
+                                inspect(optionsItems);
+                                inspect(add_on_services);
+                                
+                              });
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -776,6 +843,8 @@ class _ItempageState extends State<Itempage> {
                                           type: widget.type,
                                           num_iid: itemTaobao!['num_iid'],
                                           amount: amount,
+                                          add_on_services: add_on_services,
+                                          optionsItems: optionsItems,
                                         )),
                               );
                             },

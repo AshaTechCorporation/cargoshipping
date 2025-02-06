@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cargoshipping/constants.dart';
+import 'package:cargoshipping/models/serviceTransporterById.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsBottomSheet extends StatefulWidget {
@@ -9,12 +10,20 @@ class ProductDetailsBottomSheet extends StatefulWidget {
   final String buttonLabel; // ป้ายข้อความของปุ่ม
   final Function()? onButtonPress; // ฟังก์ชันเมื่อกดปุ่ม
   final ValueChanged onChange;
+  final ValueChanged onSelectedColors;
+  final ValueChanged onSelectedSizes;
+  final ValueChanged onSelectedExtraService;
+  final List<ServiceTransporterById> extraService;
 
   const ProductDetailsBottomSheet(
       {required this.product,
       required this.buttonLabel, // รับข้อความของปุ่ม
       required this.onButtonPress, // รับฟังก์ชันของปุ่ม
-      required this.onChange});
+      required this.onChange,
+      required this.onSelectedColors,
+      required this.onSelectedSizes,
+      required this.onSelectedExtraService,
+      required this.extraService});
 
   @override
   State<ProductDetailsBottomSheet> createState() => _ProductDetailsBottomSheetState();
@@ -132,10 +141,12 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   color: Colors.grey,
                 ),
                 SizedBox(height: size.height * 0.01),
-                // Text(
-                //   'สี',
-                //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                // ),
+                colors.isEmpty
+                    ? SizedBox()
+                    : Text(
+                        'สี',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                 SizedBox(height: size.height * 0.01),
 
                 colors.isEmpty
@@ -148,6 +159,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                           (index) => _buildColorOption(colors[index]['name']!, context, colors[index]['value']!, () {
                             setState(() {
                               selectedColor = colors[index]['value'];
+                              widget.onSelectedColors(selectedColor);
                             });
                           }),
                         ),
@@ -170,10 +182,12 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   color: Colors.grey,
                 ),
                 SizedBox(height: size.height * 0.01),
-                // Text(
-                //   'ตัวเลือก',
-                //   style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
-                // ),
+                sizes.isEmpty
+                    ? SizedBox()
+                    : Text(
+                        'ตัวเลือก',
+                        style: TextStyle(fontSize: 13, color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
                 sizes.isEmpty
                     ? SizedBox()
                     : Wrap(
@@ -184,6 +198,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                           (index) => _buildSizesOption(sizes[index]['name']!, context, sizes[index]['value']!, () {
                             setState(() {
                               selectedSize = sizes[index]['value'];
+                              widget.onSelectedSizes(selectedSize);
                             });
                           }),
                         ),
@@ -198,15 +213,25 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: size.height * 0.01),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    _buildServiceOption('ตีลังไม้', 'เริ่มต้น ¥500/CBM'),
-                    _buildServiceOption('พันห่อด้วยเทป', 'เริ่มต้น ¥50/CBM'),
-                    _buildServiceOption('ตรวจ QC สินค้า', '¥25/กล่อง'),
-                  ],
-                ),
+                widget.extraService.isEmpty
+                    ? SizedBox()
+                    : Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: List.generate(
+                          widget.extraService.length,
+                          (index) => _buildServiceOption('${widget.extraService[index].name}', 'เริ่มต้น ¥${widget.extraService[index].standard_price}/CBM', widget.extraService[index]),
+                        ),
+                      ),
+                // Wrap(
+                //   spacing: 8,
+                //   runSpacing: 8,
+                //   children: [
+                //     _buildServiceOption('ตีลังไม้', 'เริ่มต้น ¥500/CBM'),
+                //     _buildServiceOption('พันห่อด้วยเทป', 'เริ่มต้น ¥50/CBM'),
+                //     _buildServiceOption('ตรวจ QC สินค้า', '¥25/กล่อง'),
+                //   ],
+                // ),
                 SizedBox(height: size.height * 0.01),
                 _buildPriceDetails(),
                 SizedBox(height: size.height * 0.06),
@@ -254,7 +279,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
             width: size.width * 0.28, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
             height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
             decoration: BoxDecoration(
-              color: selectedColor == value ? Colors.redAccent :Colors.grey[300],
+              color: selectedColor == value ? Colors.redAccent : Colors.grey[300],
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
@@ -284,7 +309,7 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
             width: size.width * 0.28, // ตัวอย่างใช้ 25% ของความกว้างหน้าจอ
             height: size.height * 0.05, // ตัวอย่างใช้ 5% ของความสูงหน้าจอ
             decoration: BoxDecoration(
-              color: selectedSize == value ? Colors.redAccent :Colors.grey[300],
+              color: selectedSize == value ? Colors.redAccent : Colors.grey[300],
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
@@ -356,13 +381,15 @@ class _ProductDetailsBottomSheetState extends State<ProductDetailsBottomSheet> {
     );
   }
 
-  Widget _buildServiceOption(String title, String price) {
+  Widget _buildServiceOption(String title, String price, ServiceTransporterById selectExtra) {
     final isSelected = selectedService == title;
 
     return GestureDetector(
       onTap: () {
         setState(() {
           selectedService = isSelected ? null : title;
+          //inspect(selectExtra);
+          widget.onSelectedExtraService(selectExtra);
         });
       },
       child: AnimatedContainer(

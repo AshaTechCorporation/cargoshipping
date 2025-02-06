@@ -10,6 +10,7 @@ class ServiceTransporterById {
   String? name;
   String? description;
   String? image;
+  int? standard_price;
   // String? status;
 
   ServiceTransporterById(
@@ -19,6 +20,7 @@ class ServiceTransporterById {
     this.name,
     this.description,
     this.image,
+    this.standard_price
     // this.status,
   );
 

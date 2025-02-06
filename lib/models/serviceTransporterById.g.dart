@@ -15,6 +15,7 @@ ServiceTransporterById _$ServiceTransporterByIdFromJson(
       json['name'] as String?,
       json['description'] as String?,
       json['image'] as String?,
+      (json['standard_price'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ServiceTransporterByIdToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$ServiceTransporterByIdToJson(
       'name': instance.name,
       'description': instance.description,
       'image': instance.image,
+      'standard_price': instance.standard_price,
     };

@@ -481,7 +481,6 @@ class HomeApi {
         'payment_term': payment_term,
         'note': note,
         'products': products,
-        'options': []
       }),
     );
 
@@ -490,6 +489,24 @@ class HomeApi {
       return data['message'];
     } else {
       final data = jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  //ดึงข้อมูลบริการเสริม
+  static Future<List<ServiceTransporterById>> getExtraService() async {
+    final url = Uri.https(publicUrl, '/api/get_add_on_services');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data'] as List;
+      return list.map((e) => ServiceTransporterById.fromJson(e)).toList();
+    } else {
+      final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
     }
   }
