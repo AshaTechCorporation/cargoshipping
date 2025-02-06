@@ -531,7 +531,7 @@ class _registerpageState extends State<registerpage> {
                           FromRegister(
                             width: size.width * 0.9,
                             controller: homeCodeOffice,
-                            hintText: 'บ้านเลขที่',
+                            hintText: 'ที่อยู่',
                             validator: (value) {
                               if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
                               return null;
@@ -551,7 +551,7 @@ class _registerpageState extends State<registerpage> {
                               selectedItem: selectedProvicesOffice,
                               // items: listProvinec,
                               items: provicesOffice,
-                              itemAsString: (item) => item.nameTH ?? '',
+                              itemAsString: (item) => item.nameEn ?? '',
                               popupProps: PopupProps.menu(
                                 constraints: BoxConstraints(maxHeight: 450),
                                 fit: FlexFit.loose,
@@ -561,7 +561,7 @@ class _registerpageState extends State<registerpage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        item.nameTH ?? '',
+                                        item.nameEn ?? '',
                                         style: TextStyle(
                                           color: Colors.black,
                                         ),
@@ -618,7 +618,7 @@ class _registerpageState extends State<registerpage> {
                                       child: DropdownSearch<Provice>(
                                         selectedItem: selecteddistrictOffice,
                                         items: districtsOffice,
-                                        itemAsString: (item) => item.nameTH ?? '',
+                                        itemAsString: (item) => item.nameEn ?? '',
                                         popupProps: PopupProps.menu(
                                           constraints: BoxConstraints(maxHeight: 450),
                                           fit: FlexFit.loose,
@@ -628,7 +628,7 @@ class _registerpageState extends State<registerpage> {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  item.nameTH ?? '',
+                                                  item.nameEn ?? '',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                   ),
@@ -684,7 +684,7 @@ class _registerpageState extends State<registerpage> {
                                       child: DropdownSearch<Provice>(
                                         selectedItem: selectedSubdistrictsOffice,
                                         items: subdistrictsOffice,
-                                        itemAsString: (item) => item.nameTH ?? '',
+                                        itemAsString: (item) => item.nameEn ?? '',
                                         popupProps: PopupProps.menu(
                                           constraints: BoxConstraints(maxHeight: 450),
                                           fit: FlexFit.loose,
@@ -694,7 +694,7 @@ class _registerpageState extends State<registerpage> {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  item.nameTH ?? '',
+                                                  item.nameEn ?? '',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                   ),
@@ -867,7 +867,7 @@ class _registerpageState extends State<registerpage> {
                 FromRegister(
                   width: size.width * 0.9,
                   controller: homeCode,
-                  hintText: 'บ้านเลขที่',
+                  hintText: 'ที่อยู่',
                   validator: (value) {
                     if (value!.isEmpty) return 'กรุณากรอกรายละเอียด';
                     return null;
@@ -887,7 +887,7 @@ class _registerpageState extends State<registerpage> {
                     selectedItem: selectedProvices,
                     // items: listProvinec,
                     items: provices,
-                    itemAsString: (item) => item.nameTH ?? '',
+                    itemAsString: (item) => item.nameEn ?? '',
                     popupProps: PopupProps.menu(
                       constraints: BoxConstraints(maxHeight: 450),
                       fit: FlexFit.loose,
@@ -897,7 +897,7 @@ class _registerpageState extends State<registerpage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              item.nameTH ?? '',
+                              item.nameEn ?? '',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
@@ -955,7 +955,7 @@ class _registerpageState extends State<registerpage> {
                               selectedItem: selecteddistrict,
                               // items: listProvinec,
                               items: districts,
-                              itemAsString: (item) => item.nameTH ?? '',
+                              itemAsString: (item) => item.nameEn ?? '',
                               popupProps: PopupProps.menu(
                                 constraints: BoxConstraints(maxHeight: 450),
                                 fit: FlexFit.loose,
@@ -965,7 +965,7 @@ class _registerpageState extends State<registerpage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        item.nameTH ?? '',
+                                        item.nameEn ?? '',
                                         style: TextStyle(
                                           color: Colors.black,
                                         ),
@@ -1023,7 +1023,7 @@ class _registerpageState extends State<registerpage> {
                               selectedItem: selectedSubdistricts,
                               // items: listProvinec,
                               items: subdistricts,
-                              itemAsString: (item) => item.nameTH ?? '',
+                              itemAsString: (item) => item.nameEn ?? '',
                               popupProps: PopupProps.menu(
                                 constraints: BoxConstraints(maxHeight: 450),
                                 fit: FlexFit.loose,
@@ -1033,7 +1033,7 @@ class _registerpageState extends State<registerpage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        item.nameTH ?? '',
+                                        item.nameEn ?? '',
                                         style: TextStyle(
                                           color: Colors.black,
                                         ),
@@ -1962,7 +1962,7 @@ class _registerpageState extends State<registerpage> {
             child: TextButton(
               onPressed: () async {
                 String? imagePro;
-                LoadingDialog.open(context);
+                // LoadingDialog.open(context);
                 if (widget.type == 'ตัวแทน') {
                   if (_selectedFile != null) {
                     imagePro = await RegisterService.addImage(file: _selectedFile, path: 'images/asset/');
