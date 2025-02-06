@@ -22,6 +22,7 @@ class User {
   String? district;
   String? sub_district;
   String? postal_code;
+  String? wallet_balance;
   String? image;
   Company? detail;
   List<Shipping>? ship_address;
@@ -43,6 +44,7 @@ class User {
     this.district,
     this.sub_district,
     this.postal_code,
+    this.wallet_balance,
     this.image,
     this.detail,
     this.ship_address,
