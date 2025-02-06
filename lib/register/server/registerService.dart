@@ -130,6 +130,57 @@ class RegisterService {
     }
   }
 
+  static Future registerImporter({
+    String? comp_name,
+    String? comp_tax,
+    bool? registered,
+    String? address,
+    String? province,
+    String? district,
+    String? sub_district,
+    String? postal_code,
+    String? authorized_person,
+    String? authorized_person_phone,
+    String? authorized_person_email,
+    String? id_card_picture,
+    String? certificate_book_file,
+    String? tax_book_file,
+    String? logo_file,
+  }) async {
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // final domain = prefs.getString('domain');
+    var headers = {'Content-Type': 'application/json'};
+    final url = Uri.https(publicUrl, '/api/register_importer');
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: convert.jsonEncode({
+        'comp_name': comp_name,
+        'comp_tax': comp_tax,
+        'registered': registered,
+        'address': address,
+        'province': province,
+        'district': district,
+        'sub_district': sub_district,
+        'postal_code': postal_code,
+        'authorized_person': authorized_person,
+        'authorized_person_phone': authorized_person_phone,
+        'authorized_person_email': authorized_person_email,
+        'id_card_picture': id_card_picture,
+        'certificate_book_file': certificate_book_file,
+        'tax_book_file': tax_book_file,
+        'logo_file': logo_file,
+      }),
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = convert.jsonDecode(response.body);
+      return data;
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
   static Future<List<RateShip>> getDataRegister({String? type}) async {
     final url = Uri.https(publicUrl, '/api/get_question_master/$type');
     var headers = {'Content-Type': 'application/json'};
@@ -185,6 +236,33 @@ class RegisterService {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = response.data['data'];
+      return data;
+    } else {
+      throw Exception('อัพโหดลไฟล์ล้มเหลว');
+    }
+  }
+
+  static Future addFile({File? file, required String path}) async {
+    const apiUrl = '$baseUrl/api/upload_file';
+    // final token = prefs.getString('token');
+    final headers = {
+      // 'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+    var formData = FormData.fromMap(
+      {
+        'file': await MultipartFile.fromFile(file!.path),
+        'path': path,
+      },
+    );
+    final response = await Dio().post(
+      apiUrl,
+      data: formData,
+      options: Options(headers: headers),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = response.data['path'];
       return data;
     } else {
       throw Exception('อัพโหดลไฟล์ล้มเหลว');
