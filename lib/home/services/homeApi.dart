@@ -481,6 +481,7 @@ class HomeApi {
         'payment_term': payment_term,
         'note': note,
         'products': products,
+        'options': []
       }),
     );
 

@@ -14,6 +14,7 @@ import 'package:cargoshipping/models/itemmodel/item_model.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/itemt1688.dart';
 import 'package:cargoshipping/models/itemtaobao.dart';
+import 'package:cargoshipping/models/serviceTransporter.dart';
 import 'package:cargoshipping/objectbox.g.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,17 @@ import 'package:provider/provider.dart';
 import 'dart:convert';
 
 class Itempage extends StatefulWidget {
-  Itempage({super.key, required this.size, required this.title, required this.price, required this.press, required this.products, required this.num_iid, required this.type, required this.name});
+  Itempage(
+      {super.key,
+      required this.size,
+      required this.title,
+      required this.price,
+      required this.press,
+      required this.products,
+      required this.num_iid,
+      required this.type,
+      required this.name,
+      required this.categorySelect});
 
   final Size size;
   final String title;
@@ -31,6 +42,7 @@ class Itempage extends StatefulWidget {
   final String num_iid;
   final String type;
   final String name;
+  final ServiceTransporter categorySelect;
 
   @override
   State<Itempage> createState() => _ItempageState();
@@ -51,10 +63,38 @@ class _ItempageState extends State<Itempage> {
     jsonBox = store.box<JsonData>(); // เปิด Box สำหรับ Map
   }
 
-  void saveJson(Map<String, dynamic> data) {
-    final jsonString = jsonEncode(data);
-    final jsonData = JsonData(json: jsonString);
-    jsonBox.put(jsonData);
+  // void saveJson(Map<String, dynamic> data, String type, String categoryName) {
+  //   final jsonString = jsonEncode(data);
+  //   final jsonData = JsonData(json: jsonString, type: type, categoryName: categoryName);
+  //   jsonBox.put(jsonData);
+  // }
+
+  void saveJson(Map<String, dynamic> data, String type, String categoryName) {
+    final jsonString = jsonEncode(data); // แปลงข้อมูล JSON เป็น String
+
+    // ค้นหาข้อมูลที่มี categoryName และ type ตรงกัน
+    final query = jsonBox.query(JsonData_.categoryName.equals(categoryName) & JsonData_.type.equals(type)).build();
+
+    final existingData = query.findFirst();
+    query.close(); // ปิด query เมื่อใช้เสร็จ
+
+    if (existingData != null) {
+      // ถ้ามีข้อมูลอยู่แล้ว -> อัปเดต List<String> json
+      List<String> updatedJsonList = List.from(existingData.jsonList)..add(jsonString);
+
+      existingData.jsonList = updatedJsonList;
+      jsonBox.put(existingData); // อัปเดตข้อมูลที่มีอยู่แล้ว
+      print(" อัปเดตข้อมูลสำเร็จ: ${existingData.jsonList.length} รายการ");
+    } else {
+      // ถ้ายังไม่มีข้อมูล -> สร้างใหม่
+      final jsonData = JsonData(
+        jsonList: [jsonString], // เก็บเป็น List<String>
+        type: type,
+        categoryName: categoryName,
+      );
+      jsonBox.put(jsonData);
+      print(" เพิ่มข้อมูลใหม่สำเร็จ");
+    }
   }
 
   void getAllJsonData() {
@@ -63,6 +103,11 @@ class _ItempageState extends State<Itempage> {
       //print(data); // แสดงผลแต่ละรายการ
       inspect(data);
     }
+  }
+
+  void deleteAllJson() {
+    final count = jsonBox.removeAll();
+    print('ลบข้อมูลทั้งหมด $count รายการ');
   }
 
   void _onItemTapped(int index) async {
@@ -158,9 +203,7 @@ class _ItempageState extends State<Itempage> {
             ),
             onPressed: () async {
               // Action when the icon is pressed
-              await context.read<HomeController>().clearProductCart();
-              final _pro = await context.read<HomeController>().productCart;
-              inspect(_pro);
+              deleteAllJson();
             },
           ),
           IconButton(
@@ -630,7 +673,7 @@ class _ItempageState extends State<Itempage> {
                             onChange: (value) {},
                             onButtonPress: () async {
                               // เก็บข้อมูล
-                              saveJson(itemTaobao!); // jsonData คือข้อมูล JSON ที่ให้มา
+                              saveJson(itemTaobao!, widget.type, widget.categorySelect.name!); // jsonData คือข้อมูล JSON ที่ให้มา
                               //await context.read<HomeController>().addProductsToCart(itemTaobao!);
                               // showDialog(
                               //   context: context,

@@ -181,22 +181,22 @@ class _ShoppingCategoriesState extends State<ShoppingCategories> {
                             price: listProducts[index]['price'].toString(),
                             detail: listProducts[index]['detail'],
                             press: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Itempage(
-                                    size: size,
-                                    title: listProducts[index]['detail'],
-                                    price: (listProducts[index]['price'] as num)
-                                        .toDouble(),
-                                    products: listProducts[index],
-                                    press: () {},
-                                    num_iid: '721593979484',
-                                    type: 'taobao',
-                                    name: 'xxx',
-                                  ),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Itempage(
+                              //       size: size,
+                              //       title: listProducts[index]['detail'],
+                              //       price: (listProducts[index]['price'] as num)
+                              //           .toDouble(),
+                              //       products: listProducts[index],
+                              //       press: () {},
+                              //       num_iid: '721593979484',
+                              //       type: 'taobao',
+                              //       name: 'xxx',
+                              //     ),
+                              //   ),
+                              // );
                             },
                           )),
                 ),

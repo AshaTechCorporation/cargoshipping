@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:4602695536737606285",
-      "lastPropertyId": "2:7332975268395568228",
+      "lastPropertyId": "5:4397235671025351682",
       "name": "JsonData",
       "properties": [
         {
@@ -15,9 +15,19 @@
           "flags": 1
         },
         {
-          "id": "2:7332975268395568228",
-          "name": "json",
+          "id": "3:3928491538435694889",
+          "name": "type",
           "type": 9
+        },
+        {
+          "id": "4:4604218066724936665",
+          "name": "categoryName",
+          "type": 9
+        },
+        {
+          "id": "5:4397235671025351682",
+          "name": "jsonList",
+          "type": 30
         }
       ],
       "relations": []
@@ -31,7 +41,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    7332975268395568228
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

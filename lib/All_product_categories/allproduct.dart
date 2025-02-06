@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cargoshipping/Itempage/itempage.dart';
 import 'package:cargoshipping/cart/cartPage.dart';
@@ -26,6 +28,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
   List<ItemSearch> item = [];
   List<ItemSearch1688> item1688 = [];
   List<ServiceTransporter> categoryProduct = [];
+  ServiceTransporter? categorySelect;
 
   @override
   void initState() {
@@ -35,10 +38,12 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     });
   }
 
-  void onTabTapped({required int index, required String name}) {
+  void onTabTapped({required int index, required String name, required ServiceTransporter categorySelect}) {
     setState(() {
       selectedIndex = index;
+      categorySelect = categorySelect;
     });
+    inspect(categorySelect);
     getlistCategoriesByName(categories_name: name);
   }
 
@@ -52,6 +57,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
       setState(() {
         //categories = _categories;
         categoryProduct = _categoryProduct;
+        categorySelect = categoryProduct[0];
       });
       getlistCategoriesByName(categories_name: categoryProduct[0].taobao!);
       //inspect(categories);
@@ -133,7 +139,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                                 physics: ClampingScrollPhysics(),
                                 children: List.generate(
                                   categoryProduct.length,
-                                  (index) => _buildTabItem('${categoryProduct[index].name}', '${categoryProduct[index].image}', index, '${categoryProduct[index].taobao}'),
+                                  (index) => _buildTabItem('${categoryProduct[index].name}', '${categoryProduct[index].image}', index, '${categoryProduct[index].taobao}', categoryProduct[index]),
                                   //_buildTabItem('${categoryProduct[index].name}', 'assets/images/noimages.jpg', index, '${categoryProduct[index].taobao}'),
                                 ),
                               ),
@@ -204,11 +210,11 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildTabItem(String title, String imagePath, int index, String search) {
+  Widget _buildTabItem(String title, String imagePath, int index, String search,ServiceTransporter categorySelect) {
     bool isSelected = selectedIndex == index;
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => onTabTapped(index: index, name: search),
+      onTap: () => onTabTapped(index: index, name: search, categorySelect: categorySelect),
       child: Container(
         height: size.height * 0.17,
         child: Stack(
@@ -333,6 +339,7 @@ class _AllproductState extends State<Allproduct> with SingleTickerProviderStateM
                                     num_iid: item.num_iid!,
                                     type: 'taobao',
                                     name: item.title!,
+                                    categorySelect: categorySelect!,
                                   )));
                     },
                     child: Column(

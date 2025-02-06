@@ -40,9 +40,9 @@ class _StoreItemState extends State<StoreItem> {
     quantities = List<int>.filled(widget.storeItems.length, 1);
 
     // ตรวจสอบให้แน่ใจว่า dropdownValues ตรงกับขนาดของ storeItems
-    dropdownValues = widget.storeItems
-        .map<String>((item) => item['color'][0] as String)
-        .toList();
+    // dropdownValues = widget.storeItems
+    //     .map<String>((item) => item['color'][0] as String)
+    //     .toList();
 
     // ตรวจสอบขนาดของ productItemsSelection
     assert(widget.productItemsSelection.length == widget.storeItems.length, 
@@ -72,7 +72,7 @@ class _StoreItemState extends State<StoreItem> {
     required ValueChanged<bool?> onSelectionChanged,
     required VoidCallback onDelete,
     required int index,
-    required List<String> colors,
+    //required List<String> colors,
   }) {
     final size = MediaQuery.of(context).size;
     return Row(
@@ -85,9 +85,18 @@ class _StoreItemState extends State<StoreItem> {
         SizedBox(
           width: size.width * 0.02,
         ),
+        // ClipRRect(
+        //   borderRadius: BorderRadius.circular(8.0),
+        //   child: Image.asset(
+        //     image,
+        //     width: size.width * 0.2,
+        //     height: size.height * 0.1,
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
+          child: Image.network(
             image,
             width: size.width * 0.2,
             height: size.height * 0.1,
@@ -122,40 +131,40 @@ class _StoreItemState extends State<StoreItem> {
                   ),
                 ],
               ),
-              Container(
-                height: size.height * 0.03,
-                width: size.width * 0.23,
-                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
-                decoration: BoxDecoration(
-                  color: background,
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: dropdownValues[index], // แสดงค่าปัจจุบันของ dropdown
-                    icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
-                    iconSize: 15,
-                    elevation: 16,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                    ),
-                    onChanged: (String? newValue) {
-                      // เมื่อมีการเลือกค่าใหม่ ให้ใช้ setState เพื่ออัปเดต dropdownValue
-                      setState(() {
-                        dropdownValues[index] = newValue!;
-                      });
-                    },
-                    items: colors.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    isDense: true,
-                  ),
-                ),
-              ),
+              // Container(
+              //   height: size.height * 0.03,
+              //   width: size.width * 0.23,
+              //   padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
+              //   decoration: BoxDecoration(
+              //     color: background,
+              //     borderRadius: BorderRadius.circular(4.0),
+              //   ),
+              //   child: DropdownButtonHideUnderline(
+              //     child: DropdownButton<String>(
+              //       value: dropdownValues[index], // แสดงค่าปัจจุบันของ dropdown
+              //       icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
+              //       iconSize: 15,
+              //       elevation: 16,
+              //       style: TextStyle(
+              //         color: Colors.black,
+              //         fontSize: 12,
+              //       ),
+              //       onChanged: (String? newValue) {
+              //         // เมื่อมีการเลือกค่าใหม่ ให้ใช้ setState เพื่ออัปเดต dropdownValue
+              //         setState(() {
+              //           dropdownValues[index] = newValue!;
+              //         });
+              //       },
+              //       items: colors.map<DropdownMenuItem<String>>((String value) {
+              //         return DropdownMenuItem<String>(
+              //           value: value,
+              //           child: Text(value),
+              //         );
+              //       }).toList(),
+              //       isDense: true,
+              //     ),
+              //   ),
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -241,8 +250,8 @@ class _StoreItemState extends State<StoreItem> {
               Divider(),
               for (int i = 0; i < widget.storeItems.length; i++)
                 _buildProductItem(
-                  image: widget.storeItems[i]['imageAssetPath'],
-                  name: widget.storeItems[i]['name'],
+                  image: 'https:${widget.storeItems[i]['pic_url']}',
+                  name: widget.storeItems[i]['title'],
                   price: widget.storeItems[i]['price'],
                   quantity: quantities[i],
                   isSelected: widget.productItemsSelection[i],
@@ -250,7 +259,7 @@ class _StoreItemState extends State<StoreItem> {
                       widget.onProductSelectionChanged(i, isSelected),
                   onDelete: () => widget.onDeleteProduct(i),
                   index: i,
-                  colors: List<String>.from(widget.storeItems[i]['color']),
+                  //colors: List<String>.from(widget.storeItems[i]['color']),
                 ),
             ],
           ),

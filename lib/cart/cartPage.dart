@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cargoshipping/Itempage/confirmorderpage.dart';
@@ -7,7 +8,6 @@ import 'package:cargoshipping/constants.dart';
 import 'package:cargoshipping/models/itemmodel/item_model.dart';
 import 'package:cargoshipping/objectbox.g.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -20,6 +20,8 @@ class _CartPageState extends State<CartPage> {
   late final Store store;
   late final Box<JsonData> jsonBox;
   List<Map<String, dynamic>> itemCart = [];
+  List<bool> _storeItemsSelection = [];
+  List<List<bool>> _productItemsSelection = [];
 
   @override
   void initState() {
@@ -47,29 +49,35 @@ class _CartPageState extends State<CartPage> {
 
     for (var data in allData) {
       if (data is JsonData) {
-        // ตรวจสอบว่าเป็น JsonData Object
-        Map<String, dynamic> jsonMap = jsonDecode(data.json); // แปลง String กลับเป็น Map
+        // แปลง List<String> jsonList เป็น List<Map<String, dynamic>>
+        List<Map<String, dynamic>> decodedList = data.jsonList.map((jsonStr) {
+          return jsonDecode(jsonStr) as Map<String, dynamic>;
+        }).toList();
 
-        Map<String, dynamic> filteredData = {};
-        jsonMap.forEach((key, value) {
-          if (value is String) {
-            // กรองเฉพาะค่าที่เป็น String
-            filteredData[key] = value;
-          }
-        });
+        // จัดรูปแบบข้อมูลให้ตรงกับที่ต้องการ
+        Map<String, dynamic> formattedData = {
+          "type": data.type,
+          "categoryName": data.categoryName,
+          "jsonList": decodedList, // เก็บเป็น List ของ Map
+        };
 
-        itemCart.add(filteredData); // เพิ่มข้อมูลที่กรองแล้วลงใน itemCart
+        itemCart.add(formattedData);
       }
-    }    
-    inspect(itemCart);
+    }
+    setState(() {
+      if (itemCart.isNotEmpty) {
+        _storeItemsSelection = List.generate(itemCart.length, (_) => false);
+        _productItemsSelection = itemCart.map((store) => List<bool>.filled(store['jsonList'].length, false)).toList();
+      }
+    });
+
+    print("✅ ข้อมูลทั้งหมดใน itemCart:");
+    print(jsonEncode(itemCart)); // แสดงผลให้อยู่ในรูป JSON
   }
 
   bool _isSelected = false;
   // final List<bool> _storeItemsSelection = List.generate(cart.length, (_) => false);
   // late final List<List<bool>> _productItemsSelection = cart.map((store) => List<bool>.filled(store['storeItems'].length, false)).toList();
-
-  final List<bool> _storeItemsSelection = List.generate(cart.length, (_) => false);
-  late final List<List<bool>> _productItemsSelection = cart.map((store) => List<bool>.filled(store['storeItems'].length, false)).toList();
 
   void _selectAll(bool? value) {
     setState(() {
@@ -199,21 +207,23 @@ class _CartPageState extends State<CartPage> {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 17),
         ),
       ),
-      body: ListView.builder(
-        itemCount: cart.length,
-        itemBuilder: (context, index) {
-          return StoreItem(
-            storeName: cart[index]['storeName'],
-            isSelected: _storeItemsSelection[index],
-            onSelectionChanged: (isSelected) => _updateStoreSelection(index, isSelected),
-            productItemsSelection: _productItemsSelection[index],
-            onProductSelectionChanged: (productIndex, isSelected) => _updateProductSelection(index, productIndex, isSelected),
-            onDeleteStore: () => _deleteStore(index),
-            onDeleteProduct: (productIndex) => _deleteProduct(index, productIndex),
-            storeItems: cart[index]['storeItems'],
-          );
-        },
-      ),
+      body: itemCart.isEmpty
+          ? SizedBox()
+          : ListView.builder(
+              itemCount: itemCart.length,
+              itemBuilder: (context, index) {
+                return StoreItem(
+                  storeName: itemCart[index]['categoryName'],
+                  isSelected: _storeItemsSelection[index],
+                  onSelectionChanged: (isSelected) => _updateStoreSelection(index, isSelected),
+                  productItemsSelection: _productItemsSelection[index],
+                  onProductSelectionChanged: (productIndex, isSelected) => _updateProductSelection(index, productIndex, isSelected),
+                  onDeleteStore: () => _deleteStore(index),
+                  onDeleteProduct: (productIndex) => _deleteProduct(index, productIndex),
+                  storeItems: itemCart[index]['jsonList'],
+                );
+              },
+            ),
       bottomNavigationBar: _buildBottomBar(context),
     );
   }

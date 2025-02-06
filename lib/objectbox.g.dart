@@ -22,7 +22,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 4602695536737606285),
       name: 'JsonData',
-      lastPropertyId: const obx_int.IdUid(2, 7332975268395568228),
+      lastPropertyId: const obx_int.IdUid(5, 4397235671025351682),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -31,9 +31,19 @@ final _entities = <obx_int.ModelEntity>[
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 7332975268395568228),
-            name: 'json',
+            id: const obx_int.IdUid(3, 3928491538435694889),
+            name: 'type',
             type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 4604218066724936665),
+            name: 'categoryName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 4397235671025351682),
+            name: 'jsonList',
+            type: 30,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -81,7 +91,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [7332975268395568228],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -97,19 +107,34 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (JsonData object, fb.Builder fbb) {
-          final jsonOffset = fbb.writeString(object.json);
-          fbb.startTable(3);
+          final typeOffset = fbb.writeString(object.type);
+          final categoryNameOffset = fbb.writeString(object.categoryName);
+          final jsonListOffset = fbb.writeList(
+              object.jsonList.map(fbb.writeString).toList(growable: false));
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(1, jsonOffset);
+          fbb.addOffset(2, typeOffset);
+          fbb.addOffset(3, categoryNameOffset);
+          fbb.addOffset(4, jsonListOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final jsonParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final object = JsonData(json: jsonParam)
+          final jsonListParam = const fb.ListReader<String>(
+                  fb.StringReader(asciiOptimization: true),
+                  lazy: false)
+              .vTableGet(buffer, rootOffset, 12, []);
+          final categoryNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 10, '');
+          final typeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = JsonData(
+              jsonList: jsonListParam,
+              categoryName: categoryNameParam,
+              type: typeParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -125,7 +150,15 @@ class JsonData_ {
   static final id =
       obx.QueryIntegerProperty<JsonData>(_entities[0].properties[0]);
 
-  /// See [JsonData.json].
-  static final json =
+  /// See [JsonData.type].
+  static final type =
       obx.QueryStringProperty<JsonData>(_entities[0].properties[1]);
+
+  /// See [JsonData.categoryName].
+  static final categoryName =
+      obx.QueryStringProperty<JsonData>(_entities[0].properties[2]);
+
+  /// See [JsonData.jsonList].
+  static final jsonList =
+      obx.QueryStringVectorProperty<JsonData>(_entities[0].properties[3]);
 }
