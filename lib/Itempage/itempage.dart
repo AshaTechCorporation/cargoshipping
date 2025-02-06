@@ -10,12 +10,15 @@ import 'package:cargoshipping/home/services/homeApi.dart';
 import 'package:cargoshipping/home/services/homeController.dart.dart';
 import 'package:cargoshipping/home/widgets/OurItem.dart';
 import 'package:cargoshipping/message/widgets/customdivider.dart';
+import 'package:cargoshipping/models/itemmodel/item_model.dart';
 import 'package:cargoshipping/models/itemsearch.dart';
 import 'package:cargoshipping/models/itemt1688.dart';
 import 'package:cargoshipping/models/itemtaobao.dart';
+import 'package:cargoshipping/objectbox.g.dart';
 import 'package:cargoshipping/widgets/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
 
 class Itempage extends StatefulWidget {
   Itempage({super.key, required this.size, required this.title, required this.price, required this.press, required this.products, required this.num_iid, required this.type, required this.name});
@@ -32,7 +35,6 @@ class Itempage extends StatefulWidget {
   @override
   State<Itempage> createState() => _ItempageState();
 }
-
 class _ItempageState extends State<Itempage> {
   int _selectedIndex = 0;
   int amount = 1;
@@ -40,8 +42,15 @@ class _ItempageState extends State<Itempage> {
   //ItemTaobao? itemTaobao;
   Map<String, dynamic>? itemTaobao;
   List<ItemSearch> item = [];
+  late final Store store;
+  late final Box<JsonData> jsonBox;
 
-  void _onItemTapped(int index) async{
+  Future<void> initObjectBox() async {
+    store = await openStore();
+    jsonBox = store.box<JsonData>();
+  }
+
+  void _onItemTapped(int index) async {
     final _pro = await context.read<HomeController>().productCart;
     setState(() {
       _selectedIndex = index;
@@ -56,11 +65,11 @@ class _ItempageState extends State<Itempage> {
     super.initState();
     print(widget.num_iid);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getDetailItem(num_iid: widget.num_iid, type: widget.type);      
+      await getDetailItem(num_iid: widget.num_iid, type: widget.type);
     });
   }
 
-   //ดูข้อมูลสินค้าตาม Category Name
+  //ดูข้อมูลสินค้าตาม Category Name
   Future<void> getlistCategoriesByName({required String categories_name}) async {
     try {
       //LoadingDialog.open(context);
@@ -124,7 +133,7 @@ class _ItempageState extends State<Itempage> {
               width: 35,
               height: 27,
             ),
-            onPressed: () async{
+            onPressed: () async {
               // Action when the icon is pressed
               await context.read<HomeController>().clearProductCart();
               final _pro = await context.read<HomeController>().productCart;
@@ -500,39 +509,39 @@ class _ItempageState extends State<Itempage> {
                     height: size.height * 0.01,
                   ),
                   item.isEmpty
-                  ?SizedBox()
-                  :Wrap(
-                    spacing: 12,
-                    runSpacing: 10,
-                    children: List.generate(
-                        item.length,
-                        (index) => Ouritem(
-                              image: item[index].pic_url!,
-                              sale: item[index].sales.toString(),
-                              send: item[index].sales.toString(),
-                              size: MediaQuery.of(context).size,
-                              price: item[index].price!,
-                              detail: item[index].title!,
-                              press: () async{
-                                await getDetailItem(num_iid: item[index].num_iid!, type: widget.type);
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => Itempage(
-                                //       size: MediaQuery.of(context).size,
-                                //       title: listProducts[index]['detail'],
-                                //       price: (listProducts[index]['price'] as num).toDouble(),
-                                //       products: listProducts[index],
-                                //       press: () {},
-                                //       num_iid: widget.num_iid,
-                                //       type: widget.type,
-                                //       name: widget.name,
-                                //     ),
-                                //   ),
-                                // );
-                              },
-                            )),
-                  ),
+                      ? SizedBox()
+                      : Wrap(
+                          spacing: 12,
+                          runSpacing: 10,
+                          children: List.generate(
+                              item.length,
+                              (index) => Ouritem(
+                                    image: item[index].pic_url!,
+                                    sale: item[index].sales.toString(),
+                                    send: item[index].sales.toString(),
+                                    size: MediaQuery.of(context).size,
+                                    price: item[index].price!,
+                                    detail: item[index].title!,
+                                    press: () async {
+                                      await getDetailItem(num_iid: item[index].num_iid!, type: widget.type);
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => Itempage(
+                                      //       size: MediaQuery.of(context).size,
+                                      //       title: listProducts[index]['detail'],
+                                      //       price: (listProducts[index]['price'] as num).toDouble(),
+                                      //       products: listProducts[index],
+                                      //       press: () {},
+                                      //       num_iid: widget.num_iid,
+                                      //       type: widget.type,
+                                      //       name: widget.name,
+                                      //     ),
+                                      //   ),
+                                      // );
+                                    },
+                                  )),
+                        ),
                 ],
               ),
       ),
@@ -595,8 +604,8 @@ class _ItempageState extends State<Itempage> {
                           return ProductDetailsBottomSheet(
                             product: itemTaobao!,
                             buttonLabel: 'เพิ่มลงรถเข็น',
-                            onChange: (value){},
-                            onButtonPress: () async{
+                            onChange: (value) {},
+                            onButtonPress: () async {
                               await context.read<HomeController>().addProductsToCart(itemTaobao!);
                               // showDialog(
                               //   context: context,
@@ -678,7 +687,7 @@ class _ItempageState extends State<Itempage> {
                           return ProductDetailsBottomSheet(
                             product: itemTaobao!, // ส่งข้อมูลสินค้า
                             buttonLabel: 'ซื้อสินค้า', // แสดงข้อความปุ่มเป็น "ซื้อสินค้า"
-                            onChange: (val){
+                            onChange: (val) {
                               setState(() {
                                 amount = val;
                               });
@@ -686,13 +695,14 @@ class _ItempageState extends State<Itempage> {
                             onButtonPress: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Confirmorderpage(
-                                  products: itemTaobao!,
-                                  name: itemTaobao!['title'],
-                                  type: widget.type,
-                                  num_iid: itemTaobao!['num_iid'],
-                                  amount: amount,
-                                )),
+                                MaterialPageRoute(
+                                    builder: (context) => Confirmorderpage(
+                                          products: itemTaobao!,
+                                          name: itemTaobao!['title'],
+                                          type: widget.type,
+                                          num_iid: itemTaobao!['num_iid'],
+                                          amount: amount,
+                                        )),
                               );
                             },
                           );
